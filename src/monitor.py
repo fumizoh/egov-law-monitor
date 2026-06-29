@@ -3,7 +3,12 @@ from egov_bulk import (
     download_update_xml,
 )
 
-from storage import extract_zip
+from storage import (
+    extract_zip,
+    find_update_csv,
+)
+
+from update_parser import load_updates
 
 
 def main():
@@ -15,6 +20,15 @@ def main():
     extract_dir = extract_zip(zip_path)
 
     print(extract_dir.resolve())
+
+    csv_path = find_update_csv(extract_dir)
+
+    updates = load_updates(csv_path)
+
+    print(f"更新件数：{len(updates)}")
+    print()
+    print("先頭データ")
+    print(updates[0])
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
-from pathlib import Path
 import zipfile
+from pathlib import Path
 
 from config import EXTRACT_DIR
 
@@ -21,3 +21,16 @@ def extract_zip(zip_path: Path) -> Path:
         zip_file.extractall(output_dir)
 
     return output_dir
+
+
+def find_update_csv(extract_dir: Path) -> Path:
+    """
+    展開フォルダから更新一覧CSVを探す。
+    """
+
+    csv_files = list(extract_dir.glob("*.csv"))
+
+    if not csv_files:
+        raise FileNotFoundError("更新一覧CSVが見つかりません。")
+
+    return csv_files[0]
