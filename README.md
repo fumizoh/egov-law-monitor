@@ -1,30 +1,17 @@
-# egov-law-monitor
+# eGov Law Monitor
 
-## 目的
+現在のバージョン
 
-e-Govの法令更新情報を毎日自動収集し、
-行政書士が短時間で改正内容を把握できる
-ダッシュボードを構築する。
+v0.1.0
 
-## 最終目標
+## 現在の機能
 
-・GitHub Actionsによる毎朝の自動実行
-・GitHub Pagesによる更新情報の公開
-・メール通知
-・AIによる改正内容・実務影響の要約
+- 更新日の取得
+- ZIPダウンロード
+- ZIP展開
+- CSV解析
+- JSON生成
 
-## アーキテクチャ図
+## 次の予定
 
-          GitHub Actions
-                 │
-                 ▼
-      更新法令XML取得
-                 │
-                 ▼
-          XML解析
-                 │
-                 ▼
-           laws.json
-          ┌────┴────┐
-          ▼         ▼
-   GitHub Pages   メール通知
+- GitHub Pages
