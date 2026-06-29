@@ -37,3 +37,5 @@ BULK_DOWNLOAD_URL = "https://laws.e-gov.go.jp/bulkdownload"
 # データ保存先
 from pathlib import Path
 DOWNLOAD_DIR = Path("data/downloads")
+
+EXTRACT_DIR = Path("data/extracted")
