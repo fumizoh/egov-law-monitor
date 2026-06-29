@@ -14,3 +14,12 @@ TIMEOUT = 30
 
 # GitHub Actionsとの互換性を考え、取得件数は定数化
 PAGE_SIZE = 100
+
+
+# 更新法令ダウンロード
+
+BULK_DOWNLOAD_URL = "https://laws.e-gov.go.jp/bulkdownload"
+
+UPDATE_DATE = "20240601"
+
+ONLY_XML = True

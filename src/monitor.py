@@ -1,24 +1,9 @@
-"""
-e-Gov Law Monitor
-メインプログラム
-"""
-
-from pprint import pprint
-from api import get_law_list
-
+from download import download_update
 
 def main():
 
-    laws = get_law_list()
+    response = download_update()
 
-    print(f"取得件数：{len(laws)}")
+    print(response.status_code)
 
-    print()
-
-    print("先頭データ")
-
-    print(laws[0])
-
-
-if __name__ == "__main__":
-    main()
+    print(response.headers["Content-Type"])
