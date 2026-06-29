@@ -1,17 +1,26 @@
-# e-Gov Law Monitor
-import requests
+"""
+e-Gov Law Monitor
+メインプログラム
+"""
 
-# e-Gov法令API Version2
-url = "https://laws.e-gov.go.jp/api/2/laws"
+from pprint import pprint
+from api import get_law_list
 
-print("APIへ接続しています...")
 
-response = requests.get(url)
+def main():
 
-print(f"ステータスコード: {response.status_code}")
+    print("法令一覧を取得しています...")
 
-if response.status_code == 200:
-    print("接続成功！")
-    print(response.text[:500])   # 最初の500文字だけ表示
-else:
-    print("接続失敗")
+    laws = get_law_list()
+
+    print(f"取得件数：{laws['total_count']}")
+
+    print()
+
+    print("\n先頭データ")
+
+    pprint(laws["laws"][0])
+
+
+if __name__ == "__main__":
+    main()
