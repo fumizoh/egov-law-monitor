@@ -9,7 +9,7 @@ def main():
 
     zip_path = download_update_xml(date)
 
-    print(zip_path)
+    print(zip_path.resolve())
 
 if __name__ == "__main__":
     main()
