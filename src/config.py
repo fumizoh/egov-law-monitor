@@ -39,3 +39,6 @@ from pathlib import Path
 DOWNLOAD_DIR = Path("data/downloads")
 
 EXTRACT_DIR = Path("data/extracted")
+
+DOCS_DIR = Path("docs")
+JSON_PATH = DOCS_DIR / "data" / "updates.json"

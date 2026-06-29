@@ -10,6 +10,8 @@ from storage import (
 
 from update_parser import load_updates
 
+from report import save_updates_json
+from config import JSON_PATH
 
 def main():
 
@@ -29,6 +31,10 @@ def main():
     print()
     print("先頭データ")
     print(updates[0])
+
+    save_updates_json(updates, JSON_PATH)
+
+    print(f"JSON保存: {JSON_PATH.resolve()}")
 
 
 if __name__ == "__main__":
