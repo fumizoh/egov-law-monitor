@@ -28,8 +28,12 @@ ONLY_XML = True
 # 一括ダウンロード
 BULK_URL = "https://laws.e-gov.go.jp/bulkdownload"
 
-# 一括ダウンロード一覧ページ
+# 一覧ページ
 BULK_PAGE_URL = "https://laws.e-gov.go.jp/bulkdownload/"
 
+# ダウンロードURL
+BULK_DOWNLOAD_URL = "https://laws.e-gov.go.jp/bulkdownload"
+
 # データ保存先
-DOWNLOAD_DIR = "data/downloads"
+from pathlib import Path
+DOWNLOAD_DIR = Path("data/downloads")
