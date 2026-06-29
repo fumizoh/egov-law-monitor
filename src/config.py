@@ -26,5 +26,10 @@ ONLY_XML = True
 
 
 # 一括ダウンロード
-
 BULK_URL = "https://laws.e-gov.go.jp/bulkdownload"
+
+# 一括ダウンロード一覧ページ
+BULK_PAGE_URL = "https://laws.e-gov.go.jp/bulkdownload/"
+
+# データ保存先
+DOWNLOAD_DIR = "data/downloads"
