@@ -9,17 +9,15 @@ from api import get_law_list
 
 def main():
 
-    print("法令一覧を取得しています...")
-
     laws = get_law_list()
 
-    print(f"取得件数：{laws['total_count']}")
+    print(f"取得件数：{len(laws)}")
 
     print()
 
-    print("\n先頭データ")
+    print("先頭データ")
 
-    pprint(laws["laws"][0])
+    print(laws[0])
 
 
 if __name__ == "__main__":

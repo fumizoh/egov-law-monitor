@@ -9,15 +9,23 @@ BASE_URL = "https://laws.e-gov.go.jp/api/2/laws"
 
 
 def get_law_list():
-    """
-    法令一覧を取得する
-
-    Returns:
-        dict: APIが返したJSON
-    """
-
+    
     response = requests.get(BASE_URL)
-
     response.raise_for_status()
 
-    return response.json()
+    data = response.json()
+
+    laws = []
+
+    for item in data["laws"]:
+
+        law = {
+            "id": item["law_info"]["law_id"],
+            "title": item["current_revision_info"]["law_title"],
+            "updated": item["current_revision_info"]["updated"],
+            "type": item["law_info"]["law_type"],
+        }
+
+        laws.append(law)
+
+    return laws
