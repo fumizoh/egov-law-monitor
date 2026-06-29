@@ -5,12 +5,15 @@ e-Gov APIとの通信を担当するモジュール
 import requests
 
 
-BASE_URL = "https://laws.e-gov.go.jp/api/2/laws"
+from config import BASE_URL, TIMEOUT
 
 
 def get_law_list():
-    
-    response = requests.get(BASE_URL)
+
+    response = requests.get(
+        BASE_URL,
+        timeout=TIMEOUT
+    )
     response.raise_for_status()
 
     data = response.json()
