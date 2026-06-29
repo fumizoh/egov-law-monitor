@@ -23,3 +23,8 @@ BULK_DOWNLOAD_URL = "https://laws.e-gov.go.jp/bulkdownload"
 UPDATE_DATE = "20240601"
 
 ONLY_XML = True
+
+
+# 一括ダウンロード
+
+BULK_URL = "https://laws.e-gov.go.jp/bulkdownload"

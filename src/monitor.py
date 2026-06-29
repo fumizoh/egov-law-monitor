@@ -1,9 +1,5 @@
-from download import download_update
+from egov_bulk import download_latest
 
 def main():
 
-    response = download_update()
-
-    print(response.status_code)
-
-    print(response.headers["Content-Type"])
+    download_latest()
