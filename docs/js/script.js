@@ -10,6 +10,39 @@ async function fetchJson(path) {
 
 }
 
+function formatDate(dateString) {
+
+    if (!dateString || dateString.length !== 8) {
+        return dateString;
+    }
+
+    return (
+        dateString.substring(0, 4) + "-" +
+        dateString.substring(4, 6) + "-" +
+        dateString.substring(6, 8)
+    );
+
+}
+
+function summarizeUpdates(updates) {
+
+    const summary = new Map();
+
+    updates.forEach(item => {
+
+        const lawName = item["法令名"];
+
+        summary.set(
+            lawName,
+            (summary.get(lawName) || 0) + 1
+        );
+
+    });
+
+    return summary;
+
+}
+
 function renderAppInfo(app) {
 
     document.getElementById("version").textContent =
@@ -51,7 +84,7 @@ async function loadAppInfo() {
 function renderStatistics(statistics) {
 
     document.getElementById("update-date").textContent =
-        statistics.last_update;
+        formatDate(statistics.last_update);
 
     document.getElementById("update-count").textContent =
         statistics.update_count;
@@ -74,13 +107,16 @@ function renderUpdates(updates) {
 
     ul.innerHTML = "";
 
-    updates.forEach(item => {
+    const summary = summarizeUpdates(updates);
 
-        const li =
-            document.createElement("li");
+    summary.forEach((count, name) => {
+
+        const li = document.createElement("li");
 
         li.textContent =
-            item["法令名"];
+            count === 1
+                ? name
+                : `${name}（${count}件）`;
 
         ul.appendChild(li);
 

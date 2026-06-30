@@ -67,3 +67,14 @@ def save_statistics(statistics):
         statistics,
         STATISTICS_JSON
     )
+
+
+def save_updates(updates):
+    """
+    updates.json を保存する。
+    """
+
+    save_json(
+        updates,
+        UPDATES_JSON
+    )

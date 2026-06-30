@@ -10,8 +10,14 @@ from storage import (
 
 from update_parser import load_updates
 
-from report import save_updates_json
-from config import JSON_PATH
+from storage import (
+    extract_zip,
+    find_update_csv,
+    save_updates,
+    save_statistics,
+)
+
+from summary import create_statistics
 
 def main():
 
@@ -27,14 +33,16 @@ def main():
 
     updates = load_updates(csv_path)
 
-    print(f"更新件数：{len(updates)}")
-    print()
-    print("先頭データ")
-    print(updates[0])
+    save_updates(updates)
 
-    save_updates_json(updates, JSON_PATH)
+    statistics = create_statistics(
+        updates,
+        date,
+    )
 
-    print(f"JSON保存: {JSON_PATH.resolve()}")
+    save_statistics(statistics)
+
+    print("JSON保存完了")
 
 
 if __name__ == "__main__":
