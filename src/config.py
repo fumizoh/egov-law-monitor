@@ -34,3 +34,6 @@ EXTRACT_DIR = Path("data/extracted")
 
 DOCS_DIR = Path("docs")
 JSON_PATH = DOCS_DIR / "data" / "updates.json"
+
+# GitHub Pages
+DOCS_DATA = Path("docs/data")
