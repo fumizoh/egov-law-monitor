@@ -46,7 +46,7 @@ h1 {
 
 .button-group {
 
-    margin-top: 20px;
+    margin-top: 12px;
 
     display: flex;
 
@@ -82,7 +82,9 @@ h1 {
 
 footer {
 
-    margin-top: 60px;
+    margin-top: 40px;
+
+    padding: 20px 0;
 
     text-align: center;
 

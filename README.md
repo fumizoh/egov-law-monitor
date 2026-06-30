@@ -1,117 +1,160 @@
 # eGov Law Monitor
 
-e-Gov法令検索で公開される法令更新情報を自動取得し、更新された法令を一覧化するPythonツールです。
+e-Gov法令検索で公開される法令更新情報を毎日自動取得し、GitHub Pagesで公開するツールです。
 
-GitHub Actionsを利用した定期実行と、GitHub Pagesによる更新情報の公開を目的として開発しています。
+日々更新される法令情報を、すばやく確認することを目的として開発しました。
 
----
-
-## About
-
-eGov Law Monitor は、e-Gov法令検索で公開される更新情報を効率的に確認するためのツールです。
-
-更新XMLの取得から法令情報の解析、JSONデータの生成までを自動化し、日々の法令改正確認を支援します。
-
-現在は行政書士業務での利用を想定して開発していますが、法務担当者や法令改正を継続的に確認する必要のある方にも活用できることを目指しています。
+GitHub Actionsにより毎日自動実行され、最新の法令更新情報を確認できます。
 
 ---
 
-## Features
+## 主な機能
 
-現在実装済みの機能
-
-- 更新日の取得
-- 更新XMLファイルのダウンロード
-- ZIPファイルの展開
-- XML解析
-- 更新法令一覧（JSON）の生成
-- GitHub Actionsによる自動実行
-
-開発中
-
-- GitHub Pagesによる公開
-- バージョン情報配信
-- 更新履歴表示
+- e-Gov法令更新情報の自動取得
+- GitHub Actionsによる毎日の自動実行
+- 更新法令一覧の生成
+- 更新件数・更新日の表示
+- 法令種別ごとの件数集計
+- e-Gov本文へのリンク
+- GitHub Pagesへの自動公開
 
 ---
 
-## Project Structure
+## 公開ページ
+
+GitHub Pages
+
+https://fumizoh.github.io/egov-law-monitor/
+
+---
+
+## 画面イメージ
+
+トップページでは更新件数や法令種別ごとの集計を確認できます。
+詳細ページでは更新された法令一覧とe-Govへのリンクを表示します。
+
+### ダッシュボード
+
+![ダッシュボード](docs/images/dashboard.png)
+
+### 更新法令一覧
+
+![更新法令一覧](docs/images/updates.png)
+
+---
+
+## ディレクトリ構成
 
 ```text
-egov-law-monitor/
-│
+.
 ├── .github/
 │   └── workflows/
+│       └── check.yml          GitHub Actions
 │
-├── docs/
+├── docs/                      GitHub Pages
 │   ├── css/
+│   │   └── style.css
+│   ├── data/
+│   │   ├── app_info.json
+│   │   ├── statistics.json
+│   │   └── updates.json
 │   ├── js/
-│   ├── assets/
-│   └── data/
+│   │   ├── script.js
+│   │   └── updates.js
+│   ├── index.html
+│   └── updates.html
 │
 ├── src/
+│   ├── config.py
+│   ├── egov_bulk.py
+│   ├── monitor.py
+│   ├── storage.py
+│   ├── summary.py
+│   └── update_parser.py
 │
-├── data/
-│
-├── README.md
 ├── CHANGELOG.md
-└── requirements.txt
+├── LICENSE
+├── README.md
+└── VERSION
 ```
 
 ---
 
-## Requirements
+## 動作イメージ
 
-- Python 3.11 以上
-
-インストール
-
-```bash
-pip install -r requirements.txt
+```text
+e-Gov
+   │
+   ▼
+GitHub Actions（毎日実行）
+   │
+   ▼
+Python
+   │
+   ▼
+updates.json / statistics.json
+   │
+   ▼
+GitHub Pages
+   │
+   ▼
+法令更新ダッシュボード
 ```
 
 ---
 
-## Usage
+## データ構成
 
-ローカルで実行
+### updates.json
 
-```bash
-python src/main.py
-```
+更新された法令一覧を保存します。
+GitHub Pagesでは更新法令一覧画面の表示に使用します。
 
-または GitHub Actions により自動実行できます。
+### statistics.json
+
+更新日・更新件数・法令種別ごとの件数を保存します。
+
+### app_info.json
+
+アプリケーションのバージョンなどの情報を保存します。
 
 ---
 
-## Roadmap
+## 自動実行
 
-### v0.1.0
+GitHub Actionsにより毎日自動実行されます。
 
-- 基本機能
+処理内容
+
+1. e-Gov更新情報取得
+2. ZIPダウンロード
+3. CSV展開
+4. JSON生成
+5. GitHubへ自動Commit
+6. GitHub Pages更新
+
+---
+
+## 使用技術
+
+- Python 3.13
 - GitHub Actions
-- JSON生成
-
-### v0.2.0
-
 - GitHub Pages
-- 公式サイト
-- バージョン情報API
-
-### v0.3.0
-
-- 自動更新確認
-
-### v0.4.0
-
-- GUI対応
-
-### v1.0.0
-
-- 正式リリース
+- HTML
+- CSS
+- JavaScript
 
 ---
 
-## License
+## 今後の予定
+
+- 法令名検索
+- 法令種別フィルター
+- スマートフォン表示の改善
+- 日付表示の改善
+
+---
+
+## ライセンス
 
 MIT License

@@ -45,7 +45,7 @@ function summarizeUpdates(updates) {
 
 function renderAppInfo(app) {
 
-    document.getElementById("version").textContent =
+    document.getElementById("app-version").textContent =
         "v" + app.latest_version;
 
     document.getElementById("release-date").textContent =
@@ -56,20 +56,6 @@ function renderAppInfo(app) {
 
     document.getElementById("release-link").href =
         app.download_url;
-
-    const ul = document.getElementById("changes");
-
-    ul.innerHTML = "";
-
-    app.changes.forEach(change => {
-
-        const li = document.createElement("li");
-
-        li.textContent = change;
-
-        ul.appendChild(li);
-
-    });
 
 }
 
