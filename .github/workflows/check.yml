@@ -1,6 +1,12 @@
-name: Check e-Gov
+name: Check e-Gov Updates
+
+permissions:
+  contents: write
 
 on:
+  schedule:
+    - cron: "0 22 * * *"
+
   workflow_dispatch:
 
 jobs:
@@ -10,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -21,3 +29,16 @@ jobs:
 
       - name: Run monitor.py
         run: python src/monitor.py
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit changes
+        run: |
+          git add docs/data/
+          git diff --cached --quiet || git commit -m "chore: update law data"
+
+      - name: Push changes
+        run: git push
