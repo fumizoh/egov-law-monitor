@@ -21,11 +21,41 @@
 
         <div class="card">
 
-            <h2>最新バージョン</h2>
+            <h2>最新の法令更新情報</h2>
+
+            <p>
+                更新日：
+                <span id="update-date">-</span>
+            </p>
+
+            <p>
+                更新件数：
+                <span id="update-count">0</span>件
+            </p>
+
+            <ul id="update-list"></ul>
+
+        </div>
+
+        <div class="card">
+
+            <h2>ツール最新バージョン</h2>
 
             <p id="version">読み込み中...</p>
 
             <p id="release-date"></p>
+
+            <div class="button-group">
+
+                <a id="repo-link" class="button" target="_blank">
+                    GitHub Repository
+                </a>
+
+                <a id="release-link" class="button" target="_blank">
+                    Latest Release
+                </a>
+
+            </div>
 
         </div>
 
@@ -38,6 +68,12 @@
         </div>
 
     </div>
+
+    <footer>
+
+        © 2026 EGOV Law Monitor
+
+    </footer>
 
     <script src="js/script.js"></script>
 
