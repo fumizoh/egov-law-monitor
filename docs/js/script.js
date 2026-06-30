@@ -89,6 +89,23 @@ function renderStatistics(statistics) {
     document.getElementById("update-count").textContent =
         statistics.update_count;
 
+    const div =
+        document.getElementById("law-type-summary");
+
+    div.innerHTML = "";
+
+    Object.entries(statistics.law_type)
+        .forEach(([name, count]) => {
+
+            const p =
+                document.createElement("p");
+
+            p.textContent =
+                `${name}：${count}件`;
+
+            div.appendChild(p);
+
+        });
 }
 
 async function loadStatistics() {

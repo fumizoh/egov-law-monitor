@@ -3,11 +3,6 @@ from egov_bulk import (
     download_update_xml,
 )
 
-from storage import (
-    extract_zip,
-    find_update_csv,
-)
-
 from update_parser import load_updates
 
 from storage import (

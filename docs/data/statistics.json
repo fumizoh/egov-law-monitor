@@ -1,4 +1,8 @@
 {
   "last_update": "20260629",
-  "update_count": 38
+  "update_count": 38,
+  "law_type": {
+    "府省令": 22,
+    "法律": 16
+  }
 }
