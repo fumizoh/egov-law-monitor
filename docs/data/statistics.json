@@ -1,7 +1,9 @@
 {
-  "last_update": "20260702",
-  "update_count": 156,
+  "last_update": "20260703",
+  "update_count": 31,
   "law_type": {
-    "法律": 156
+    "政令": 12,
+    "法律": 17,
+    "規則": 2
   }
 }
