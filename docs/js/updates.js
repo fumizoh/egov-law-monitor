@@ -54,7 +54,7 @@ function groupUpdates(updates) {
 
 }
 
-function renderUpdates(updates) {
+function renderUpdates(updates, keywords) {
 
     const container =
         document.getElementById("updates-detail");
@@ -62,8 +62,6 @@ function renderUpdates(updates) {
     container.innerHTML = "";
 
     const grouped = groupUpdates(updates);
-
-    console.log(grouped);
 
     Object.values(grouped).forEach(group => {
 
@@ -81,8 +79,7 @@ function renderUpdates(updates) {
 
                         <p>
                             <strong class="update-label">改正法令</strong><br>
-                            ${item.revisedLawName}
-                        </p>
+                        ${highlightKeywords(item.revisedLawName, keywords)}                        </p>
 
                         <p>
                             <strong class="update-label">公布日</strong>
@@ -111,7 +108,7 @@ function renderUpdates(updates) {
         card.innerHTML = `
 
             <h2>
-                ${group.lawInfo.name}
+                ${highlightKeywords(group.lawInfo.name, keywords)}
                 ${group.updates.length > 1
                 ? `（${group.updates.length}件）`
                 : ""}
@@ -157,12 +154,51 @@ function renderUpdates(updates) {
 
 }
 
+function highlightKeywords(text, keywords) {
+
+    if (!text || !keywords || keywords.length === 0) {
+        return text;
+    }
+
+    let result = text;
+
+    // 長いキーワードを優先して置換
+    const sortedKeywords = [...keywords].sort(
+        (a, b) => b.length - a.length
+    );
+
+    sortedKeywords.forEach(keyword => {
+
+        if (!keyword) {
+            return;
+        }
+
+        // 正規表現で使われる文字をエスケープ
+        const escaped = keyword.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            "\\$&"
+        );
+
+        result = result.replace(
+            new RegExp(escaped, "g"),
+            `<mark>${keyword}</mark>`
+        );
+
+    });
+
+    return result;
+
+}
+
 async function main() {
 
     const updates =
         await fetchJson("data/updates.json");
 
-    renderUpdates(updates);
+    const keywords =
+        await fetchJson("data/keywords.json");
+
+    renderUpdates(updates, keywords);
 
 }
 

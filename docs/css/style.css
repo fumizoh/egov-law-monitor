@@ -138,3 +138,17 @@ footer {
     margin-bottom: 20px;
 
 }
+
+mark {
+
+    background: #ffeb3b;
+
+    color: #000;
+
+    font-weight: bold;
+
+    padding: 0 2px;
+
+    border-radius: 2px;
+
+}
