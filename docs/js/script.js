@@ -1,15 +1,3 @@
-async function fetchJson(path) {
-
-    const response = await fetch(path);
-
-    if (!response.ok) {
-        throw new Error(`Failed to load ${path}`);
-    }
-
-    return await response.json();
-
-}
-
 function formatDate(dateString) {
 
     if (!dateString || dateString.length !== 8) {
@@ -103,7 +91,7 @@ async function loadStatistics() {
 
 }
 
-function renderUpdates(updates) {
+function renderUpdates(updates, keywords) {
 
     const ul =
         document.getElementById("update-list");
@@ -116,10 +104,10 @@ function renderUpdates(updates) {
 
         const li = document.createElement("li");
 
-        li.textContent =
+        li.innerHTML =
             count === 1
-                ? name
-                : `${name}（${count}件）`;
+                ? highlightKeywords(name, keywords)
+                : `${highlightKeywords(name, keywords)}（${count}件）`;
 
         ul.appendChild(li);
 
@@ -129,10 +117,11 @@ function renderUpdates(updates) {
 
 async function loadUpdates() {
 
-    const updates =
-        await fetchJson("data/updates.json");
+    const updates = await fetchJson("data/updates.json");
 
-    renderUpdates(updates);
+    const keywords = await fetchJson("data/keywords.json");
+
+    renderUpdates(updates, keywords);
 
 }
 
