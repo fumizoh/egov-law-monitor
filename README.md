@@ -2,9 +2,9 @@
 
 e-Gov法令検索で公開される法令更新情報を毎日自動取得し、GitHub Pagesで公開するツールです。
 
-日々更新される法令情報を、すばやく確認することを目的として開発しました。
+GitHub Actionsにより毎日自動実行され、更新された法令情報をダッシュボードとメールで確認できます。
 
-GitHub Actionsにより毎日自動実行され、最新の法令更新情報を確認できます。
+日々の法令改正を効率よく把握することを目的として開発しています。
 
 ---
 
@@ -13,10 +13,14 @@ GitHub Actionsにより毎日自動実行され、最新の法令更新情報を
 - e-Gov法令更新情報の自動取得
 - GitHub Actionsによる毎日の自動実行
 - 更新法令一覧の生成
+- 法令名ごとの更新グループ表示
 - 更新件数・更新日の表示
 - 法令種別ごとの件数集計
+- キーワードハイライト表示
 - e-Gov本文へのリンク
 - GitHub Pagesへの自動公開
+- 更新日のみメール通知
+- GitHub ActionsからのSMTPメール送信
 
 ---
 
@@ -49,24 +53,24 @@ https://fumizoh.github.io/egov-law-monitor/
 .
 ├── .github/
 │   └── workflows/
-│       └── check.yml          GitHub Actions
+│       └── check.yml
 │
-├── docs/                      GitHub Pages
+├── docs/
 │   ├── css/
-│   │   └── style.css
 │   ├── data/
-│   │   ├── app_info.json
+│   │   ├── app.json
+│   │   ├── keywords.json
 │   │   ├── statistics.json
 │   │   └── updates.json
 │   ├── js/
-│   │   ├── script.js
-│   │   └── updates.js
 │   ├── index.html
 │   └── updates.html
 │
 ├── src/
 │   ├── config.py
+│   ├── email_generator.py
 │   ├── egov_bulk.py
+│   ├── mailer.py
 │   ├── monitor.py
 │   ├── storage.py
 │   ├── summary.py
@@ -91,8 +95,9 @@ GitHub Actions（毎日実行）
    ▼
 Python
    │
-   ▼
-updates.json / statistics.json
+   ├── updates.json
+   ├── statistics.json
+   └── メール通知
    │
    ▼
 GitHub Pages
@@ -108,15 +113,22 @@ GitHub Pages
 ### updates.json
 
 更新された法令一覧を保存します。
+
 GitHub Pagesでは更新法令一覧画面の表示に使用します。
 
 ### statistics.json
 
 更新日・更新件数・法令種別ごとの件数を保存します。
 
-### app_info.json
+### keywords.json
 
-アプリケーションのバージョンなどの情報を保存します。
+ウォッチ対象となるキーワードを管理します。
+
+GitHub Pagesではハイライト表示、メール通知では強調表示に使用します。
+
+### app.json
+
+アプリケーション情報を保存します。
 
 ---
 
@@ -130,8 +142,24 @@ GitHub Actionsにより毎日自動実行されます。
 2. ZIPダウンロード
 3. CSV展開
 4. JSON生成
-5. GitHubへ自動Commit
-6. GitHub Pages更新
+5. GitHub Pages更新
+6. 更新日のみメール通知
+
+---
+
+## メール通知
+
+更新があった日のみ、法令更新メールを送信します。
+
+メールには
+
+- 更新日
+- 更新件数
+- 更新法令一覧
+- キーワード強調表示
+- GitHub Pagesへのリンク
+
+を掲載し、更新履歴として保存できます。
 
 ---
 
@@ -143,15 +171,17 @@ GitHub Actionsにより毎日自動実行されます。
 - HTML
 - CSS
 - JavaScript
+- SMTP（メール通知）
 
 ---
 
 ## 今後の予定
 
+- キーワード管理画面
 - 法令名検索
 - 法令種別フィルター
+- HTMLメール対応
 - スマートフォン表示の改善
-- 日付表示の改善
 
 ---
 

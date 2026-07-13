@@ -2,6 +2,23 @@
 
 このプロジェクトの主な変更履歴です。
 
+## v0.4.0 (2026-07-13)
+
+### Added
+
+- Email notifications for law updates
+- Keyword highlighting in email notifications
+- Automated email delivery from GitHub Actions
+
+### Changed
+
+- Redesigned updates page with grouped law cards
+- Improved law update summary display
+- Group duplicate law updates
+- Added links to GitHub Pages in email notifications
+
+---
+
 ## v0.2.0（2026-06-30）
 
 ### 追加
