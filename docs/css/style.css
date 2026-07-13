@@ -99,6 +99,12 @@ footer {
     margin-bottom: 16px;
 }
 
+.card h3 {
+    margin-top: 24px;
+    margin-bottom: 12px;
+    color: #004080;
+}
+
 .card p {
     margin: 8px 0;
 }
@@ -112,6 +118,23 @@ footer {
     width: 60px;
 }
 
+.card strong.update-label {
+    display: inline;
+    width: auto;
+}
+
 .card .button {
     margin-top: 8px;
+}
+
+.update-divider {
+
+    margin: 24px 0;
+
+}
+
+.update-item {
+
+    margin-bottom: 20px;
+
 }
