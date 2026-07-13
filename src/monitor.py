@@ -60,10 +60,20 @@ def main():
         date,
     )
 
-    send_email(
-        subject,
-        body,
-    )
+    if updates:
+
+        send_email(
+            subject,
+            body,
+        )
+
+        print("メール送信完了")
+
+    else:
+
+        print("更新なしのためメール送信をスキップ")
+
+    print("JSON保存完了")
 
 
 if __name__ == "__main__":
