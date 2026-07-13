@@ -10,9 +10,17 @@ from storage import (
     find_update_csv,
     save_updates,
     save_statistics,
+    load_json,
 )
 
 from summary import create_statistics
+
+from email_generator import (
+    create_email_subject,
+    create_email_body,
+)
+
+from config import KEYWORDS_JSON
 
 def main():
 
@@ -36,6 +44,24 @@ def main():
     )
 
     save_statistics(statistics)
+
+    keywords = load_json(KEYWORDS_JSON)
+
+    subject = create_email_subject(
+        updates,
+        date,
+    )
+
+    print(subject)
+    print()
+
+    body = create_email_body(
+        updates,
+        keywords,
+        date,
+    )
+
+    print(body)
 
     print("JSON保存完了")
 

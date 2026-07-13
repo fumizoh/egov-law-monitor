@@ -58,6 +58,15 @@ def save_json(data, output_path: Path):
         )
 
 
+def load_json(input_path: Path):
+    """
+    JSONファイルを読み込む。
+    """
+
+    with open(input_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def save_statistics(statistics):
     """
     statistics.json を保存する。

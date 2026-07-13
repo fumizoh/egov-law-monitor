@@ -37,3 +37,4 @@ JSON_PATH = DOCS_DIR / "data" / "updates.json"
 
 # GitHub Pages
 DOCS_DATA = Path("docs/data")
+KEYWORDS_JSON = DOCS_DATA / "keywords.json"
