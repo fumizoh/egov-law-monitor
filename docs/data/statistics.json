@@ -1,10 +1,7 @@
 {
-  "last_update": "20260710",
-  "update_count": 17,
+  "last_update": "20260713",
+  "update_count": 30,
   "law_type": {
-    "規則": 7,
-    "法律": 2,
-    "府省令": 7,
-    "政令": 1
+    "府省令": 30
   }
 }
