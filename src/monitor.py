@@ -22,6 +22,8 @@ from email_generator import (
 
 from config import KEYWORDS_JSON
 
+from mailer import send_email
+
 def main():
 
     date = get_latest_update_date()
@@ -52,18 +54,16 @@ def main():
         date,
     )
 
-    print(subject)
-    print()
-
     body = create_email_body(
         updates,
         keywords,
         date,
     )
 
-    print(body)
-
-    print("JSON保存完了")
+    send_email(
+        subject,
+        body,
+    )
 
 
 if __name__ == "__main__":
