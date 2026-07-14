@@ -70,14 +70,29 @@ def load_json(input_path: Path):
         return json.load(f)
 
 
-def save_statistics(statistics):
+def save_statistics(
+    source,
+    statistics,
+):
     """
-    statistics.json を保存する。
+    情報源ごとの統計を statistics.json に保存する。
     """
 
+    try:
+
+        data = load_json(
+            STATISTICS_JSON
+        )
+
+    except FileNotFoundError:
+
+        data = {}
+
+    data[source] = statistics
+
     save_json(
-        statistics,
-        STATISTICS_JSON
+        data,
+        STATISTICS_JSON,
     )
 
 
