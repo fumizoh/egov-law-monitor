@@ -16,10 +16,10 @@ from config import KEYWORDS_JSON
 from mailer import send_email
 
 
-def process(updates, date):
+def process(source, updates, date):
     """Process fetched updates."""
 
-    save_updates(updates)
+    save_updates(source, updates)
 
     statistics = create_statistics(
         updates,

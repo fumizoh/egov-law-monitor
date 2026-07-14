@@ -7,7 +7,10 @@ from config import (
     DOCS_DATA,
 )
 
-UPDATES_JSON = DOCS_DATA / "updates.json"
+UPDATE_FILES = {
+    "egov": DOCS_DATA / "egov_updates.json",
+    "public_comment": DOCS_DATA / "public_comments.json",
+}
 STATISTICS_JSON = DOCS_DATA / "statistics.json"
 APP_JSON = DOCS_DATA / "app.json"
 
@@ -78,12 +81,12 @@ def save_statistics(statistics):
     )
 
 
-def save_updates(updates):
+def save_updates(source, updates):
     """
     updates.json を保存する。
     """
 
     save_json(
         updates,
-        UPDATES_JSON
+        UPDATE_FILES[source],
     )

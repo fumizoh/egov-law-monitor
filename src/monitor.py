@@ -6,6 +6,7 @@ def main():
     updates, date = fetch_egov()
 
     process(
+        "egov",
         updates,
         date,
     )
