@@ -1,13 +1,6 @@
-from egov_bulk import (
-    get_latest_update_date,
-    download_update_xml,
-)
-
-from update_parser import load_updates
+from sources.egov import fetch
 
 from storage import (
-    extract_zip,
-    find_update_csv,
     save_updates,
     save_statistics,
     load_json,
@@ -26,17 +19,7 @@ from mailer import send_email
 
 def main():
 
-    date = get_latest_update_date()
-
-    zip_path = download_update_xml(date)
-
-    extract_dir = extract_zip(zip_path)
-
-    print(extract_dir.resolve())
-
-    csv_path = find_update_csv(extract_dir)
-
-    updates = load_updates(csv_path)
+    updates, date = fetch()
 
     save_updates(updates)
 
@@ -62,12 +45,21 @@ def main():
 
     if updates:
 
-        send_email(
-            subject,
-            body,
-        )
+        try:
 
-        print("メール送信完了")
+            send_email(
+                subject,
+                body,
+            )
+
+            print("メール送信完了")
+
+        except KeyError as e:
+
+            print(
+                f"環境変数 {e.args[0]} が設定されていないため、"
+                "メール送信をスキップ"
+            )
 
     else:
 
