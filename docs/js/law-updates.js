@@ -45,7 +45,7 @@ function renderUpdates(updates, keywords) {
                     class="button"
                     target="_blank"
                 >
-                    e-Gov本文を見る
+                    e-Govで見る
                 </a>
 
             </p>
