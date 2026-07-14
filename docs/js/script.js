@@ -18,7 +18,7 @@ function summarizeUpdates(updates) {
 
     updates.forEach(item => {
 
-        const lawName = item["法令名"];
+        const lawName = item.title;
 
         summary.set(
             lawName,
@@ -57,18 +57,23 @@ async function loadAppInfo() {
 
 function renderStatistics(statistics) {
 
+    const egov = statistics.egov;
+
+    const publicComment =
+        statistics.public_comment;
+
     document.getElementById("update-date").textContent =
-        formatDate(statistics.last_update);
+        formatDate(egov.last_update);
 
     document.getElementById("update-count").textContent =
-        statistics.update_count;
+        egov.update_count;
 
     const div =
         document.getElementById("law-type-summary");
 
     div.innerHTML = "";
 
-    Object.entries(statistics.law_type)
+    Object.entries(egov.law_type)
         .forEach(([name, count]) => {
 
             const p =
@@ -80,6 +85,51 @@ function renderStatistics(statistics) {
             div.appendChild(p);
 
         });
+
+    renderPublicCommentSummary(
+        statistics
+    );
+
+}
+
+function renderPublicCommentSummary(
+    statistics
+) {
+
+    const publicComment =
+        statistics.public_comment;
+
+    document.getElementById(
+        "public-date"
+    ).textContent =
+        publicComment.last_update;
+
+    document.getElementById(
+        "public-count"
+    ).textContent =
+        publicComment.update_count;
+
+    const div =
+        document.getElementById(
+            "public-category-summary"
+        );
+
+    div.innerHTML = "";
+
+    Object.entries(
+        publicComment.category
+    ).forEach(([name, count]) => {
+
+        const p =
+            document.createElement("p");
+
+        p.textContent =
+            `${name}：${count}件`;
+
+        div.appendChild(p);
+
+    });
+
 }
 
 async function loadStatistics() {
@@ -117,7 +167,8 @@ function renderUpdates(updates, keywords) {
 
 async function loadUpdates() {
 
-    const updates = await fetchJson("data/updates.json");
+    const updates =
+        await fetchJson("data/egov_updates.json");
 
     const keywords = await fetchJson("data/keywords.json");
 

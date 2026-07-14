@@ -1,45 +1,3 @@
-function groupUpdates(updates) {
-
-    const grouped = {};
-
-    updates.forEach(update => {
-
-        const lawName = update["法令名"];
-
-        if (!grouped[lawName]) {
-
-            grouped[lawName] = {
-
-                lawInfo: {
-
-                    name: update["法令名"],
-                    type: update["法令種別"],
-                    publishDate: update["公布日"],
-                    url: update["本文URL"]
-
-                },
-
-                updates: []
-
-            };
-
-        }
-
-        grouped[lawName].updates.push({
-
-            revisedLawName: update["改正法令名"],
-            revisedPublishDate: update["改正法令公布日"],
-            enforcementDate: update["施行日"],
-            url: update["本文URL"]
-
-        });
-
-    });
-
-    return grouped;
-
-}
-
 function renderUpdates(updates, keywords) {
 
     const container =
@@ -47,83 +5,43 @@ function renderUpdates(updates, keywords) {
 
     container.innerHTML = "";
 
-    const grouped = groupUpdates(updates);
-
-    Object.values(grouped).forEach(group => {
-
-        const updatesHtml = group.updates
-            .map((item, index) => {
-
-                const divider =
-                    index < group.updates.length - 1
-                        ? '<hr class="update-divider">'
-                        : '';
-
-                return `
-
-                    <div class="update-item">
-
-                        <p>
-                            <strong class="update-label">改正法令</strong><br>
-                        ${highlightKeywords(item.revisedLawName, keywords)}                        </p>
-
-                        <p>
-                            <strong class="update-label">公布日</strong>
-                            ${item.revisedPublishDate}
-                        </p>
-
-                        <p>
-                            <strong class="update-label">施行日</strong>
-                            ${item.enforcementDate}
-                        </p>
-
-                    </div>
-
-                    ${divider}
-
-                `;
-
-            })
-            .join("");
+    updates.forEach(update => {
 
         const card =
             document.createElement("div");
 
         card.className = "card";
 
+        const effectiveDate =
+            update.metadata.future
+                ? `${update.metadata.effective_date}（未施行）`
+                : update.metadata.effective_date;
+
         card.innerHTML = `
 
             <h2>
-                ${highlightKeywords(group.lawInfo.name, keywords)}
-                ${group.updates.length > 1
-                ? `（${group.updates.length}件）`
-                : ""}
+                ${highlightKeywords(update.title, keywords)}
             </h2>
-
-            <h3>法令情報</h3>
-
-            <hr>
 
             <p>
                 <strong>種別</strong>
-                ${group.lawInfo.type}
+                ${update.metadata.law_type}
             </p>
 
             <p>
                 <strong>公布日</strong>
-                ${group.lawInfo.publishDate}
+                ${update.metadata.published_date}
             </p>
 
-            <hr>
-
-            <h3>今回の更新</h3>
-
-            ${updatesHtml}
+            <p>
+                <strong>施行日</strong>
+                ${effectiveDate}
+            </p>
 
             <p>
 
                 <a
-                    href="${group.lawInfo.url}"
+                    href="${update.url}"
                     class="button"
                     target="_blank"
                 >
@@ -143,12 +61,19 @@ function renderUpdates(updates, keywords) {
 async function main() {
 
     const updates =
-        await fetchJson("data/updates.json");
+        await fetchJson(
+            "data/egov_updates.json"
+        );
 
     const keywords =
-        await fetchJson("data/keywords.json");
+        await fetchJson(
+            "data/keywords.json"
+        );
 
-    renderUpdates(updates, keywords);
+    renderUpdates(
+        updates,
+        keywords,
+    );
 
 }
 
