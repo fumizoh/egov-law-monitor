@@ -2,6 +2,28 @@
 
 このプロジェクトの主な変更履歴です。
 
+## [0.5.0] - 2026-07-14
+
+### Added
+
+- Added support for e-Gov Public Comment RSS.
+- Added Public Comments page to GitHub Pages.
+- Added source-specific statistics.
+
+### Changed
+
+- Introduced a common data model for all sources.
+- Refactored the processing pipeline for multi-source architecture.
+- Updated GitHub Pages to support multiple information sources.
+- Renamed dashboard and law update frontend files for consistency.
+
+### Internal
+
+- Separated source-specific JSON files.
+- Improved project structure for future source expansion.
+
+---
+
 ## [0.4.1] - 2026-07-14
 
 ### Fixed

@@ -1,49 +1,48 @@
 # eGov Law Monitor
 
-e-Gov法令検索で公開される法令更新情報を毎日自動取得し、GitHub Pagesで公開するツールです。
+eGov Law Monitor は、e-Gov の法令更新情報を継続的に監視し、
+GitHub Pages で見やすく公開するオープンソースのツールです。
 
-GitHub Actionsにより毎日自動実行され、更新された法令情報をダッシュボードとメールで確認できます。
+現在対応している情報源：
 
-日々の法令改正を効率よく把握することを目的として開発しています。
+- e-Gov 法令更新情報
+- e-Gov パブリックコメント
+
+法令更新情報を中心に、関連する行政情報もあわせて確認できるよう設計されています。
+
+また、将来的には次のような公式情報源への対応を予定しています。
+
+- e-Gov データポータル
+- 内閣法制局「最近成立した法律」 など
 
 ---
 
 ## 主な機能
 
-- e-Gov法令更新情報の自動取得
-- GitHub Actionsによる毎日の自動実行
-- 更新法令一覧の生成
-- 法令名ごとの更新グループ表示
-- 更新件数・更新日の表示
-- 法令種別ごとの件数集計
-- キーワードハイライト表示
-- e-Gov本文へのリンク
-- GitHub Pagesへの自動公開
-- 更新日のみメール通知
-- GitHub ActionsからのSMTPメール送信
+- e-Gov 法令更新情報の自動取得
+- e-Gov パブリックコメントの取得
+- GitHub Pages による更新情報の公開
+- メール通知
+- 情報源ごとの統計情報生成
+- 共通データモデルによるマルチソース対応
 
 ---
 
-## 公開ページ
+## GitHub Pages
 
-GitHub Pages
+GitHub Pages では次のページを公開しています。
 
-https://fumizoh.github.io/egov-law-monitor/
+- ダッシュボード
+- 法令更新一覧
+- パブリックコメント一覧
+
+<https://fumizoh.github.io/egov-law-monitor/>
 
 ---
 
 ## 画面イメージ
 
-トップページでは更新件数や法令種別ごとの集計を確認できます。
-詳細ページでは更新された法令一覧とe-Govへのリンクを表示します。
-
-### ダッシュボード
-
-![ダッシュボード](docs/images/dashboard.png)
-
-### 更新法令一覧
-
-![更新法令一覧](docs/images/updates.png)
+バージョンが進んだところで更新します。
 
 ---
 
@@ -59,21 +58,34 @@ https://fumizoh.github.io/egov-law-monitor/
 │   ├── css/
 │   ├── data/
 │   │   ├── app.json
+│   │   ├── egov_updates.json
 │   │   ├── keywords.json
-│   │   ├── statistics.json
-│   │   └── updates.json
+│   │   ├── public_comments.json
+│   │   └── statistics.json
+│   │
 │   ├── js/
+│   │   ├── dashboard.js
+│   │   ├── law-updates.js
+│   │   ├── public-comments.js
+│   │   └── utils.js
+│   │
 │   ├── index.html
-│   └── updates.html
+│   ├── law-updates.html
+│   └── public-comments.html
 │
 ├── src/
+│   ├── sources/
+│   │   ├── egov.py
+│   │   └── public_comment.py
+│   │
 │   ├── config.py
 │   ├── email_generator.py
 │   ├── egov_bulk.py
 │   ├── mailer.py
 │   ├── monitor.py
+│   ├── pipeline.py
+│   ├── statistics.py
 │   ├── storage.py
-│   ├── summary.py
 │   └── update_parser.py
 │
 ├── CHANGELOG.md
@@ -95,7 +107,8 @@ GitHub Actions（毎日実行）
    ▼
 Python
    │
-   ├── updates.json
+   ├── egov_updates.json
+   ├── public_comments.json
    ├── statistics.json
    └── メール通知
    │
@@ -103,32 +116,35 @@ Python
 GitHub Pages
    │
    ▼
-法令更新ダッシュボード
+ダッシュボード
+   │
+   ├── 法令更新一覧
+   └── パブリックコメント一覧
 ```
 
 ---
 
 ## データ構成
 
-### updates.json
+### egov_updates.json
 
-更新された法令一覧を保存します。
+e-Gov法令更新情報を保存します。
 
-GitHub Pagesでは更新法令一覧画面の表示に使用します。
+### public_comments.json
+
+e-Govパブリックコメントを保存します。
 
 ### statistics.json
 
-更新日・更新件数・法令種別ごとの件数を保存します。
+情報源ごとの統計情報を保存します。
 
 ### keywords.json
 
-ウォッチ対象となるキーワードを管理します。
-
-GitHub Pagesではハイライト表示、メール通知では強調表示に使用します。
+監視対象キーワードを保存します。
 
 ### app.json
 
-アプリケーション情報を保存します。
+アプリケーション情報（バージョンなど）を保存します。
 
 ---
 
@@ -138,18 +154,20 @@ GitHub Actionsにより毎日自動実行されます。
 
 処理内容
 
-1. e-Gov更新情報取得
+1. e-Gov法令更新データ取得
 2. ZIPダウンロード
-3. CSV展開
-4. JSON生成
-5. GitHub Pages更新
-6. 更新日のみメール通知
+3. CSV展開・解析
+4. パブリックコメント取得
+5. JSON生成
+6. GitHub Pages更新
+7. メール通知
 
 ---
 
 ## メール通知
 
-更新があった日のみ、法令更新メールを送信します。
+更新があった日のみ、更新通知メールを送信します。
+（※現在は法令更新情報のみ通知します。）
 
 メールには
 
@@ -177,11 +195,11 @@ GitHub Actionsにより毎日自動実行されます。
 
 ## 今後の予定
 
-- キーワード管理画面
-- 法令名検索
-- 法令種別フィルター
-- HTMLメール対応
-- スマートフォン表示の改善
+- e-Gov データポータルへの対応
+- 内閣法制局情報への対応
+- 法令更新情報の詳細表示の充実
+- Python側での同一法令グループ化
+- 改正法令名・改正法令公布日の表示
 
 ---
 
