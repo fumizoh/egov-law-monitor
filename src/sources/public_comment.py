@@ -47,6 +47,8 @@ def fetch():
 
     feed = feedparser.parse(RSS_URL)
 
+    entries = feed.entries
+
     updates = []
 
     for entry in feed.entries:
@@ -71,4 +73,10 @@ def fetch():
             }
         )
 
-    return updates, None
+    latest_date = None
+
+    if entries:
+
+        latest_date = entries[0].updated
+
+    return updates, latest_date

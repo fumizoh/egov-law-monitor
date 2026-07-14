@@ -10,11 +10,17 @@
     }
   },
   "public_comment": {
-    "last_update": null,
+    "last_update": "2026-07-13T15:00:Z",
     "update_count": 8,
     "source": {
       "public_comment": 8
     },
-    "law_type": {}
+    "category": {
+      "電気通信": 4,
+      "国民生活の安全・安心の確保": 1,
+      "厚生": 1,
+      "社会保険": 1,
+      "郵務": 1
+    }
   }
 }

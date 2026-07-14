@@ -36,8 +36,9 @@ def process(
 
     # 統計情報を作成・保存
     statistics = create_statistics(
-        updates,
-        date,
+        source=source,
+        updates=updates,
+        latest_date=date,
     )
 
     save_statistics(
