@@ -7,7 +7,7 @@ def group_updates(updates):
 
     for update in updates:
 
-        law_name = update["法令名"]
+        law_name = update["title"]
 
         if law_name not in grouped:
             grouped[law_name] = []
@@ -83,14 +83,20 @@ def create_email_body(updates, keywords, date):
 
     date = format_date(date)
 
-    grouped = group_updates(updates)
+    egov_updates = [
+        update
+        for update in updates
+        if update["source"] == "egov"
+    ]
+
+    grouped = group_updates(egov_updates)
 
     lines = []
 
     lines.append("eGov Law Monitor")
     lines.append(date)
     lines.append("")
-    lines.append(f"更新件数：{len(updates)}件")
+    lines.append(f"更新件数：{len(egov_updates)}件")
     lines.append("")
     lines.append("-" * 40)
     lines.append("")

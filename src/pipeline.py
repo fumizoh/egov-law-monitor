@@ -4,7 +4,7 @@ from storage import (
     load_json,
 )
 
-from summary import create_statistics
+from statistics import create_statistics
 
 from email_generator import (
     create_email_subject,

@@ -1,16 +1,14 @@
-from sources.egov import fetch
-
+from sources.egov import fetch as fetch_egov
 from pipeline import process
 
 def main():
 
-    updates, date = fetch()
+    updates, date = fetch_egov()
 
     process(
         updates,
         date,
     )
-
 
 if __name__ == "__main__":
     main()

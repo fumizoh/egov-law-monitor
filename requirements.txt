@@ -1,2 +1,10 @@
-requests
-beautifulsoup4
+beautifulsoup4==4.15.0
+certifi==2026.6.17
+charset-normalizer==3.4.9
+feedparser==6.0.12
+idna==3.18
+requests==2.34.2
+sgmllib3k==1.0.0
+soupsieve==2.8.4
+typing_extensions==4.16.0
+urllib3==2.7.0

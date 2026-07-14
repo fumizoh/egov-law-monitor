@@ -1,6 +1,9 @@
 {
   "last_update": "20260713",
   "update_count": 30,
+  "source": {
+    "egov": 30
+  },
   "law_type": {
     "府省令": 30
   }
