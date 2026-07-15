@@ -1,4 +1,5 @@
 import json
+import shutil
 import zipfile
 from pathlib import Path
 
@@ -13,6 +14,24 @@ UPDATE_FILES = {
 }
 STATISTICS_JSON = DOCS_DATA / "statistics.json"
 APP_JSON = DOCS_DATA / "app.json"
+
+
+def cleanup_extracted():
+    """
+    extractedディレクトリ内を空にする。
+    """
+
+    if not EXTRACT_DIR.exists():
+        return
+
+    for item in EXTRACT_DIR.iterdir():
+
+        if item.is_dir():
+            shutil.rmtree(item)
+
+        else:
+            item.unlink()
+
 
 def extract_zip(zip_path: Path) -> Path:
     """
