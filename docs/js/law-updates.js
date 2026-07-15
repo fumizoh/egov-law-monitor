@@ -9,6 +9,14 @@ function renderLaws(laws, keywords) {
 
         const latest = law.updates[0];
 
+        const pendingCount =
+            law.updates.filter(
+                update => update.pending
+            ).length;
+
+        const activeCount =
+            law.updates.length - pendingCount;
+
         const card =
             document.createElement("div");
 
@@ -24,6 +32,14 @@ function renderLaws(laws, keywords) {
             <h2>
                 ${highlightKeywords(law.law_name, keywords)}
             </h2>
+
+            <p>
+                <strong>施行済</strong>
+                ${activeCount}件
+                /
+                <strong>未施行</strong>
+                ${pendingCount}件
+            </p>
 
             <p>
                 <strong>種別</strong>

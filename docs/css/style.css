@@ -114,11 +114,6 @@ footer {
 }
 
 .card strong {
-    display: inline-block;
-    width: 60px;
-}
-
-.card strong.update-label {
     display: inline;
     width: auto;
 }
