@@ -8,7 +8,6 @@ from egov_bulk import (
 )
 
 from storage import (
-    cleanup_extracted,
     extract_zip,
     find_update_csv,
 )
@@ -18,8 +17,6 @@ from update_parser import load_updates
 
 def fetch():
     """Fetch updates from e-Gov."""
-
-    cleanup_extracted()
 
     date = get_latest_update_date()
 

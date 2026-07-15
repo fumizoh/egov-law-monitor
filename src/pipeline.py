@@ -18,8 +18,6 @@ from config import (
 
 from mailer import send_email
 
-from law_model import build_laws
-
 
 def process(
     source,
@@ -30,19 +28,16 @@ def process(
     Process updates from one source.
     """
 
-    # CSV行データから内部データモデルを構築
-    laws = build_laws(updates)
-
     # 更新情報を保存
     save_source_data(
         source=source,
-        data=laws,
+        data=updates,
     )
 
     # 統計情報を作成・保存
     statistics = create_statistics(
         source=source,
-        updates=laws,
+        updates=updates,
         latest_date=date,
     )
 
@@ -58,7 +53,7 @@ def process(
         return
 
     # 更新がなければメールを送信しない
-    if not laws:
+    if not updates:
         print("更新なしのためメール送信をスキップ")
         return
 
@@ -66,12 +61,12 @@ def process(
     keywords = load_json(KEYWORDS_JSON)
 
     subject = create_email_subject(
-        laws,
+        updates,
         date,
     )
 
     body = create_email_body(
-        laws,
+        updates,
         keywords,
         date,
     )
