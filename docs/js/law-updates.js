@@ -56,6 +56,35 @@ function renderLaws(laws, keywords) {
                 ${effectiveDate}
             </p>
 
+            <details>
+
+                <summary>
+                    改正履歴（${law.updates.length}件）
+                </summary>
+
+                ${law.updates.map(update => `
+
+                    <div class="update-history">
+
+                        <p>
+                            <strong>施行日</strong>
+                            ${update.pending
+                ? `${update.effective_date}（未施行）`
+                : update.effective_date
+            }
+                        </p>
+
+                        <p>
+                            <strong>改正法令</strong>
+                            ${update.amend_name}
+                        </p>
+
+                    </div>
+
+                `).join("")}
+
+            </details>
+
             <p>
 
                 <a

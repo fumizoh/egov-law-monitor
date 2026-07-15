@@ -147,3 +147,18 @@ mark {
     border-radius: 2px;
 
 }
+
+details {
+    margin: 1rem 0;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.update-history {
+    margin: 0.8rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid #ddd;
+}
