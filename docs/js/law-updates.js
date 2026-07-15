@@ -1,11 +1,13 @@
-function renderUpdates(updates, keywords) {
+function renderLaws(laws, keywords) {
 
     const container =
         document.getElementById("updates-detail");
 
     container.innerHTML = "";
 
-    updates.forEach(update => {
+    laws.forEach(law => {
+
+        const latest = law.updates[0];
 
         const card =
             document.createElement("div");
@@ -13,24 +15,24 @@ function renderUpdates(updates, keywords) {
         card.className = "card";
 
         const effectiveDate =
-            update.metadata.future
-                ? `${update.metadata.effective_date}（未施行）`
-                : update.metadata.effective_date;
+            latest.pending
+                ? `${latest.effective_date}（未施行）`
+                : latest.effective_date;
 
         card.innerHTML = `
 
             <h2>
-                ${highlightKeywords(update.title, keywords)}
+                ${highlightKeywords(law.law_name, keywords)}
             </h2>
 
             <p>
                 <strong>種別</strong>
-                ${update.metadata.law_type}
+                ${law.law_type}
             </p>
 
             <p>
                 <strong>公布日</strong>
-                ${update.metadata.published_date}
+                ${latest.published_date}
             </p>
 
             <p>
@@ -41,7 +43,7 @@ function renderUpdates(updates, keywords) {
             <p>
 
                 <a
-                    href="${update.url}"
+                    href="${law.url}"
                     class="button"
                     target="_blank"
                 >
@@ -60,9 +62,9 @@ function renderUpdates(updates, keywords) {
 
 async function main() {
 
-    const updates =
+    const laws =
         await fetchJson(
-            "data/egov_updates.json"
+            "data/laws.json"
         );
 
     const keywords =
@@ -70,8 +72,8 @@ async function main() {
             "data/keywords.json"
         );
 
-    renderUpdates(
-        updates,
+    renderLaws(
+        laws,
         keywords,
     );
 
