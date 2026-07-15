@@ -10,20 +10,19 @@ def create_law_view(
 ) -> list[Law]:
     """
     Create a Law view from events.
-
-    Currently converts one Event into one Law.
-    Grouping by law_id will be added later.
+    Events with the same law_id are grouped into one Law.
     """
 
-    laws: list[Law] = []
+    laws: dict[str, Law] = {}
 
     for event in events:
 
-        # e-Gov法令更新以外は対象外
+        # e-Gov法令更新のみ対象
         if event["type"] != "law_update":
             continue
 
         metadata = event["metadata"]
+        law_id = metadata["law_id"]
 
         update: Update = {
             "published_date": metadata["published_date"],
@@ -35,15 +34,17 @@ def create_law_view(
             "pending": metadata["future"],
         }
 
-        law: Law = {
-            "law_id": metadata["law_id"],
-            "law_no": metadata["law_number"],
-            "law_name": event["title"],
-            "law_type": metadata["law_type"],
-            "url": event["url"],
-            "updates": [update],
-        }
+        if law_id not in laws:
 
-        laws.append(law)
+            laws[law_id] = {
+                "law_id": law_id,
+                "law_no": metadata["law_number"],
+                "law_name": event["title"],
+                "law_type": metadata["law_type"],
+                "url": event["url"],
+                "updates": [],
+            }
 
-    return laws
+        laws[law_id]["updates"].append(update)
+
+    return list(laws.values())
