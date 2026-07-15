@@ -43,10 +43,15 @@ def fetch():
                 "date": date,
                 "summary": "",
                 "metadata": {
+                    "law_id": row["法令ID"],
                     "law_type": row["法令種別"],
                     "law_number": row["法令番号"],
                     "published_date": row["公布日"],
                     "effective_date": row["施行日"],
+                    "effective_comment": row["施行日備考"],
+                    "amend_name": row["改正法令名"],
+                    "amend_number": row["改正法令番号"],
+                    "amend_published_date": row["改正法令公布日"],
                     "future": row["未施行"] == "○",
                 },
             }
