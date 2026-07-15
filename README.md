@@ -1,52 +1,54 @@
 # eGov Law Monitor
 
-eGov Law Monitor は、e-Gov の法令更新情報を継続的に監視し、
-GitHub Pages で見やすく公開するオープンソースのツールです。
+eGov Law Monitor is an open-source project that monitors official Japanese legal information, transforms it into a canonical data model, and publishes structured JSON data through GitHub Pages.
 
-現在対応している情報源：
+Currently supported sources:
 
-- e-Gov 法令更新情報
-- e-Gov パブリックコメント
+- e-Gov Law Updates
+- e-Gov Public Comments
 
-法令更新情報を中心に、関連する行政情報もあわせて確認できるよう設計されています。
+The project is designed around a common Event model, making it easy to integrate additional official government information sources in the future.
 
-また、将来的には次のような公式情報源への対応を予定しています。
+Planned future sources include:
 
-- e-Gov データポータル
-- 内閣法制局「最近成立した法律」 など
+- e-Gov Data Portal
+- Cabinet Legislation Bureau ("Recently Enacted Laws")
+- Other official legal information services
 
 ---
 
-## 主な機能
+## Features
 
-- e-Gov 法令更新情報の自動取得
-- e-Gov パブリックコメントの取得
-- GitHub Pages による更新情報の公開
-- メール通知
-- 情報源ごとの統計情報生成
-- 共通データモデルによるマルチソース対応
+- Automatic monitoring of e-Gov Law Updates
+- Automatic retrieval of e-Gov Public Comments
+- GitHub Pages dashboard
+- Email notifications
+- Source-specific statistics
+- Canonical Event model
+- Public Law model (`laws.json`)
+- Multi-source architecture
 
 ---
 
 ## GitHub Pages
 
-GitHub Pages では次のページを公開しています。
+The published website currently provides:
 
-- ダッシュボード
-- 法令更新一覧
-- パブリックコメント一覧
+- Dashboard
+- Law Updates
+- Public Comments
 
-<https://fumizoh.github.io/egov-law-monitor/>
-
----
-
-## 画面イメージ
-
-バージョンが進んだところで更新します。
+https://fumizoh.github.io/egov-law-monitor/
 
 ---
 
-## ディレクトリ構成
+## Screenshots
+
+Screenshots will be updated in a future release.
+
+---
+
+## Directory Structure
 
 ```text
 .
@@ -60,6 +62,7 @@ GitHub Pages では次のページを公開しています。
 │   │   ├── app.json
 │   │   ├── egov_updates.json
 │   │   ├── keywords.json
+│   │   ├── laws.json
 │   │   ├── public_comments.json
 │   │   └── statistics.json
 │   │
@@ -81,7 +84,9 @@ GitHub Pages では次のページを公開しています。
 │   ├── config.py
 │   ├── email_generator.py
 │   ├── egov_bulk.py
+│   ├── law_view.py
 │   ├── mailer.py
+│   ├── models.py
 │   ├── monitor.py
 │   ├── pipeline.py
 │   ├── statistics.py
@@ -96,92 +101,78 @@ GitHub Pages では次のページを公開しています。
 
 ---
 
-## 動作イメージ
+## Architecture
 
 ```text
-e-Gov
-   │
-   ▼
-GitHub Actions（毎日実行）
-   │
-   ▼
-Python
-   │
-   ├── egov_updates.json
-   ├── public_comments.json
-   ├── statistics.json
-   └── メール通知
-   │
-   ▼
-GitHub Pages
-   │
-   ▼
-ダッシュボード
-   │
-   ├── 法令更新一覧
-   └── パブリックコメント一覧
+Official Sources
+        │
+        ▼
+  Canonical Event Model
+        │
+        ├── Statistics
+        ├── Email Notification
+        ├── JSON Export
+        │
+        ▼
+   Public Law Model
+        │
+        ▼
+ GitHub Pages / External Applications
 ```
 
 ---
 
-## データ構成
+## Public Data
 
-### egov_updates.json
+The project publishes structured JSON data under `docs/data`.
 
-e-Gov法令更新情報を保存します。
+| File | Description |
+|------|-------------|
+| `app.json` | Application metadata |
+| `statistics.json` | Dashboard statistics |
+| `egov_updates.json` | Canonical Event data for e-Gov law updates |
+| `public_comments.json` | Canonical Event data for Public Comments |
+| `laws.json` | Public Law model for GitHub Pages and external applications |
+| `keywords.json` | Highlight keywords |
 
-### public_comments.json
+The Event model is the canonical internal representation.
 
-e-Govパブリックコメントを保存します。
-
-### statistics.json
-
-情報源ごとの統計情報を保存します。
-
-### keywords.json
-
-監視対象キーワードを保存します。
-
-### app.json
-
-アプリケーション情報（バージョンなど）を保存します。
+The Law model is generated from Event data and is intended for GitHub Pages, WordPress, and future external integrations.
 
 ---
 
-## 自動実行
+## Workflow
 
-GitHub Actionsにより毎日自動実行されます。
+GitHub Actions runs every day and performs:
 
-処理内容
-
-1. e-Gov法令更新データ取得
-2. ZIPダウンロード
-3. CSV展開・解析
-4. パブリックコメント取得
-5. JSON生成
-6. GitHub Pages更新
-7. メール通知
-
----
-
-## メール通知
-
-更新があった日のみ、更新通知メールを送信します。
-（※現在は法令更新情報のみ通知します。）
-
-メールには
-
-- 更新日
-- 更新件数
-- 更新法令一覧
-- キーワード強調表示
-- GitHub Pagesへのリンク
-
-を掲載し、更新履歴として保存できます。
+1. Download e-Gov Law Updates
+2. Extract ZIP archive
+3. Parse CSV
+4. Retrieve Public Comments
+5. Build canonical Event data
+6. Generate public JSON files
+7. Publish GitHub Pages
+8. Send email notifications
 
 ---
 
-## 使用技術
+## Email Notifications
+
+Notification emails are sent only when updates are available.
+
+(Currently only e-Gov Law Updates trigger notifications.)
+
+Each email includes:
+
+- Update date
+- Number of updates
+- Updated laws
+- Keyword highlighting
+- GitHub Pages link
+
+---
+
+## Technologies
 
 - Python 3.13
 - GitHub Actions
@@ -189,20 +180,21 @@ GitHub Actionsにより毎日自動実行されます。
 - HTML
 - CSS
 - JavaScript
-- SMTP（メール通知）
+- SMTP
 
 ---
 
-## 今後の予定
+## Roadmap
 
-- e-Gov データポータルへの対応
-- 内閣法制局情報への対応
-- 法令更新情報の詳細表示の充実
-- Python側での同一法令グループ化
-- 改正法令名・改正法令公布日の表示
+- e-Gov Data Portal support
+- Cabinet Legislation Bureau integration
+- Richer law metadata
+- Improved Law UI
+- Search and filtering
+- Additional official information sources
 
 ---
 
-## ライセンス
+## License
 
 MIT License

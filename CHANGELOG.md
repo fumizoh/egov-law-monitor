@@ -2,6 +2,34 @@
 
 このプロジェクトの主な変更履歴です。
 
+## [0.6.0] - 2026-07-15
+
+### Added
+
+- Introduced the Public Law model (`laws.json`)
+- Added expandable law update history on GitHub Pages
+- Added grouped law view generated from the canonical Event model
+
+### Changed
+
+- Refactored the processing pipeline around a canonical Event model
+- Migrated the Law Updates page to use `laws.json`
+- Improved the GitHub Pages UI for law updates
+
+### Improved
+
+- Group multiple updates for the same law into a single Law model
+- Display update status (active / pending)
+- Publish a reusable public data model for external applications
+
+### Internal
+
+- Added `models.py`
+- Added `law_view.py`
+- Refactored data storage for canonical Event and public Law models
+
+---
+
 ## [0.5.0] - 2026-07-14
 
 ### Added
