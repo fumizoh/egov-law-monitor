@@ -5,6 +5,7 @@ from pathlib import Path
 from config import (
     EXTRACT_DIR,
     DOCS_DATA,
+    LAWS_JSON,
 )
 
 UPDATE_FILES = {
@@ -108,9 +109,19 @@ def save_source_data(source, data):
     )
 
 
-# Compatibility wrapper
 def save_updates(source, updates):
     save_source_data(
         source,
         updates,
+    )
+
+
+def save_laws(laws):
+    """
+    Save Law view as laws.json.
+    """
+
+    save_json(
+        laws,
+        LAWS_JSON,
     )

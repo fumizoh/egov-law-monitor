@@ -1,5 +1,8 @@
+from law_view import create_law_view
+
 from storage import (
     save_source_data,
+    save_laws,
     save_statistics,
     load_json,
 )
@@ -34,6 +37,13 @@ def process(
         data=updates,
     )
 
+    # Law View を公開データとして保存
+    if source == "egov":
+
+        laws = create_law_view(updates)
+
+        save_laws(laws)
+
     # 統計情報を作成・保存
     statistics = create_statistics(
         source=source,
@@ -46,7 +56,7 @@ def process(
         statistics=statistics,
     )
 
-    print(f"{source}: 保存・統計更新完了")
+    print(f"{source}: データ保存・統計更新完了")
 
     # メール通知対象以外はここで終了
     if source not in NOTIFY_SOURCES:

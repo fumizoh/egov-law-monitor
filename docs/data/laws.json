@@ -1,0 +1,875 @@
+[
+  {
+    "law_id": "418M60001C00001",
+    "law_no": "平成十八年経済産業省・国土交通省・環境省令第一号",
+    "law_name": "特定特殊自動車排出ガスの規制等に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/418M60001C00001/20260701_508M60001C00001",
+    "updates": [
+      {
+        "published_date": "平成十八年三月二十八日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "特定特殊自動車排出ガスの規制等に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和八年経済産業省・国土交通省・環境省令第一号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "503M60000100017",
+    "law_no": "令和三年厚生労働省令第十七号",
+    "law_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律第十四条第八項に規定する医薬品又は医薬部外品の製造工程の区分を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/503M60000100017/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "令和三年一月二十九日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "414M60001000028",
+    "law_no": "平成十四年環境省令第二十八号",
+    "law_name": "鳥獣の保護及び管理並びに狩猟の適正化に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/414M60001000028/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成十四年十二月二十六日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "346M50000100035",
+    "law_no": "昭和四十六年厚生省令第三十五号",
+    "law_name": "廃棄物の処理及び清掃に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/346M50000100035/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "昭和四十六年九月二十三日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      },
+      {
+        "published_date": "昭和四十六年九月二十三日",
+        "effective_date": "令和九年四月一日",
+        "effective_comment": "",
+        "amend_name": "廃棄物の処理及び清掃に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和七年環境省令第十五号",
+        "amend_published_date": "令和七年四月二十二日",
+        "pending": true
+      },
+      {
+        "published_date": "昭和四十六年九月二十三日",
+        "effective_date": "令和九年四月一日",
+        "effective_comment": "",
+        "amend_name": "廃棄物の処理及び清掃に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和八年環境省令第十号",
+        "amend_published_date": "令和八年三月三十日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "420M60003FFA001",
+    "law_no": "平成二十年内閣府・総務省・法務省・外務省・財務省・文部科学省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省・防衛省令第一号",
+    "law_name": "地球温暖化対策の推進に関する法律第二十二条第三項の規定に基づく主務大臣の権限の委任に関する命令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/420M60003FFA001/20260701_508M60003FFA002",
+    "updates": [
+      {
+        "published_date": "平成二十年六月十三日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "温室効果ガス算定排出量等の報告等に関する命令及び地球温暖化対策の推進に関する法律第二十二条第三項の規定に基づく主務大臣の権限の委任に関する命令の一部を改正する命令",
+        "amend_no": "令和八年内閣府・総務省・法務省・外務省・財務省・文部科学省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省・防衛省令第二号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "327M50000800056",
+    "law_no": "昭和二十七年運輸省令第五十六号",
+    "law_name": "航空法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/327M50000800056/20280401_507M60000800058",
+    "updates": [
+      {
+        "published_date": "昭和二十七年七月三十一日",
+        "effective_date": "令和十年四月一日",
+        "effective_comment": "",
+        "amend_name": "航空法施行規則の一部を改正する省令",
+        "amend_no": "令和七年国土交通省令第五十八号",
+        "amend_published_date": "令和七年四月二十一日",
+        "pending": true
+      },
+      {
+        "published_date": "昭和二十七年七月三十一日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "航空法施行規則の一部を改正する省令",
+        "amend_no": "令和八年国土交通省令第六十五号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "424M60001E80002",
+    "law_no": "平成二十四年文部科学省・農林水産省・経済産業省・国土交通省・環境省令第二号",
+    "law_name": "環境教育等による環境保全の取組の促進に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/424M60001E80002/20260701_508M60001E80001",
+    "updates": [
+      {
+        "published_date": "平成二十四年六月二十九日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境教育等による環境保全の取組の促進に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和八年文部科学省・農林水産省・経済産業省・国土交通省・環境省令第一号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "323M40000100050",
+    "law_no": "昭和二十三年厚生省令第五十号",
+    "law_name": "医療法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/323M40000100050/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "昭和二十三年十一月五日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      },
+      {
+        "published_date": "昭和二十三年十一月五日",
+        "effective_date": "令和十一年四月一日",
+        "effective_comment": "",
+        "amend_name": "医療法施行規則の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第二十七号",
+        "amend_published_date": "令和八年三月十九日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "427M60001000005",
+    "law_no": "平成二十七年環境省令第五号",
+    "law_name": "環境省関係地域自然資産区域における自然環境の保全及び持続可能な利用の推進に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/427M60001000005/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成二十七年三月六日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "427M60001000038",
+    "law_no": "平成二十七年環境省令第三十八号",
+    "law_name": "水銀による環境の汚染の防止に関する法律第二十九条第二項の規定に基づく権限の委任に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/427M60001000038/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成二十七年十二月七日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "504M60001000015",
+    "law_no": "令和四年環境省令第十五号",
+    "law_name": "地球温暖化対策の推進に関する法律第六十四条第四項の規定により地方環境局長に委任する権限を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/504M60001000015/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "令和四年四月一日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "506M60001A00001",
+    "law_no": "令和六年農林水産省・国土交通省・環境省令第一号",
+    "law_name": "地域における生物の多様性の増進のための活動の促進等に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/506M60001A00001/20260701_508M60001A00001",
+    "updates": [
+      {
+        "published_date": "令和六年十二月十八日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "地域における生物の多様性の増進のための活動の促進等に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和八年農林水産省・国土交通省・環境省令第一号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "506M60001000033",
+    "law_no": "令和六年環境省令第三十三号",
+    "law_name": "地域における生物の多様性の増進のための活動の促進等に関する法律第三十五条第三項の規定により地方環境局長に委任する権限を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/506M60001000033/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "令和六年十二月十八日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416AC0000000112",
+    "law_no": "平成十六年法律第百十二号",
+    "law_name": "武力攻撃事態等における国民の保護のための措置に関する法律",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/416AC0000000112/20270520_507AC0000000037",
+    "updates": [
+      {
+        "published_date": "平成十六年六月十八日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律",
+        "amend_no": "令和七年法律第三十七号",
+        "amend_published_date": "令和七年五月二十一日",
+        "pending": true
+      },
+      {
+        "published_date": "平成十六年六月十八日",
+        "effective_date": "令和九年六月四日",
+        "effective_comment": "公布の日から起算して一年を超えない範囲内において政令で定める日",
+        "amend_name": "健康保険法等の一部を改正する法律",
+        "amend_no": "令和八年法律第三十一号",
+        "amend_published_date": "令和八年六月五日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "414M60001000023",
+    "law_no": "平成十四年環境省令第二十三号",
+    "law_name": "土壌汚染対策法に基づく指定調査機関及び指定支援法人に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/414M60001000023/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成十四年十一月十五日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "417M60001000025",
+    "law_no": "平成十七年環境省令第二十五号",
+    "law_name": "農用地の土壌の汚染防止等に関する法律第十六条の二第二項の規定により地方環境局長に委任する権限を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/417M60001000025/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成十七年九月二十日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "428AC1000000009",
+    "law_no": "平成二十八年法律第九号",
+    "law_name": "重要施設の周辺地域の上空における小型無人機等の飛行の禁止に関する法律",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/428AC1000000009/20260714_508AC0000000047",
+    "updates": [
+      {
+        "published_date": "平成二十八年三月十八日",
+        "effective_date": "令和八年七月十四日",
+        "effective_comment": "",
+        "amend_name": "重要施設の周辺地域の上空における小型無人機等の飛行の禁止に関する法律の一部を改正する法律",
+        "amend_no": "令和八年法律第四十七号",
+        "amend_published_date": "令和八年六月二十四日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "406M50000002025",
+    "law_no": "平成六年総理府令第二十五号",
+    "law_name": "特定水道利水障害の防止のための水道水源水域の水質の保全に関する特別措置法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/406M50000002025/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成六年五月九日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "423M60001F48001",
+    "law_no": "平成二十三年総務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第一号",
+    "law_name": "地域資源を活用した農林漁業者等による新事業の創出等及び地域の農林水産物の利用促進に関する法律に基づく研究開発・成果利用事業計画の認定等に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/423M60001F48001/20260701_508M60001F48001",
+    "updates": [
+      {
+        "published_date": "平成二十三年二月二十八日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "地域資源を活用した農林漁業者等による新事業の創出等及び地域の農林水産物の利用促進に関する法律に基づく研究開発・成果利用事業計画の認定等に関する省令の一部を改正する省令",
+        "amend_no": "令和八年総務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第一号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "503M60001F40003",
+    "law_no": "令和三年財務省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第三号",
+    "law_name": "食品循環資源の再生利用等の促進に関する法律第二十四条第一項及び第三項の規定による立入検査の際に携帯する職員の身分を示す証明書の様式の特例に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/503M60001F40003/20260701_508M60001F40002",
+    "updates": [
+      {
+        "published_date": "令和三年十月二十二日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "食品循環資源の再生利用等の促進に関する法律第二十四条第一項及び第三項の規定による立入検査をする職員の携帯する身分を示す証明書の様式を定める省令及び食品循環資源の再生利用等の促進に関する法律第二十四条第一項及び第三項の規定による立入検査の際に携帯する職員の身分を示す証明書の様式の特例に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第二号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "503M60001600001",
+    "law_no": "令和三年農林水産省・経済産業省・環境省令第一号",
+    "law_name": "食品循環資源の再生利用等の促進に関する法律第二十四条第二項の規定による立入検査の際に携帯する職員の身分を示す証明書の様式の特例に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/503M60001600001/20260701_508M60001600001",
+    "updates": [
+      {
+        "published_date": "令和三年十月二十二日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "食品循環資源の再生利用等の促進に関する法律第二十四条第二項の規定による立入検査をする職員の携帯する身分を示す証明書の様式を定める省令及び食品循環資源の再生利用等の促進に関する法律第二十四条第二項の規定による立入検査の際に携帯する職員の身分を示す証明書の様式の特例に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省・経済産業省・環境省令第一号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "418M60001000003",
+    "law_no": "平成十八年環境省令第三号",
+    "law_name": "環境省関係石綿による健康被害の救済に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/418M60001000003/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成十八年三月十日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "326M50010000032",
+    "law_no": "昭和二十六年農林省令第三十二号",
+    "law_name": "農産物検査法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/326M50010000032/20260630_508M60000200049",
+    "updates": [
+      {
+        "published_date": "昭和二十六年五月十九日",
+        "effective_date": "令和八年六月三十日",
+        "effective_comment": "",
+        "amend_name": "農産物検査法施行規則の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第四十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60001000023",
+    "law_no": "平成十三年環境省令第二十三号",
+    "law_name": "ポリ塩化ビフェニル廃棄物の適正な処理の推進に関する特別措置法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60001000023/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成十三年六月二十二日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "346M50010002002",
+    "law_no": "昭和四十六年総理府・農林省令第二号",
+    "law_name": "農薬取締法第二十九条の規定による報告及び検査に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/346M50010002002/20260701_508M60001200004",
+    "updates": [
+      {
+        "published_date": "昭和四十六年七月一日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "農薬取締法第二十九条の規定による報告及び検査に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省・環境省令第四号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "414M60001000029",
+    "law_no": "平成十四年環境省令第二十九号",
+    "law_name": "土壌汚染対策法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/414M60001000029/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成十四年十二月二十六日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "334M50000002055",
+    "law_no": "昭和三十四年総理府令第五十五号",
+    "law_name": "危険物の規制に関する規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/334M50000002055/20260630_508M60000008083",
+    "updates": [
+      {
+        "published_date": "昭和三十四年九月二十九日",
+        "effective_date": "令和八年六月三十日",
+        "effective_comment": "",
+        "amend_name": "危険物の規制に関する規則の一部を改正する省令",
+        "amend_no": "令和八年総務省令第八十三号",
+        "amend_published_date": "令和八年六月二十九日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "417M60001000022",
+    "law_no": "平成十七年環境省令第二十二号",
+    "law_name": "下水道法第四十条第二項の規定により地方環境局長に委任する権限を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/417M60001000022/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成十七年九月二十日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "417M60001000026",
+    "law_no": "平成十七年環境省令第二十六号",
+    "law_name": "農薬取締法第四十四条第二項の規定により地方環境局長に委任する権限を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/417M60001000026/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成十七年九月二十日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "336M50000100005",
+    "law_no": "昭和三十六年厚生省令第五号",
+    "law_name": "薬剤師法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/336M50000100005/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "昭和三十六年二月一日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "503M60001200005",
+    "law_no": "令和三年農林水産省・環境省令第五号",
+    "law_name": "農薬取締法の規定に基づく立入検査等の際に携帯する職員の身分を示す証明書の様式の特例に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/503M60001200005/20260701_508M60001200005",
+    "updates": [
+      {
+        "published_date": "令和三年十月二十二日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "農薬取締法の規定に基づく立入検査等の際に携帯する職員の身分を示す証明書の様式の特例に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省・環境省令第五号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "339M50000100003",
+    "law_no": "昭和三十九年厚生省令第三号",
+    "law_name": "薬局並びに店舗販売業、登録受渡業及び配置販売業の業務を行う体制を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/339M50000100003/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "昭和三十九年二月三日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "505M60001200002",
+    "law_no": "令和五年農林水産省・環境省令第二号",
+    "law_name": "農薬取締法第四条第一項第十一号の農林水産省令・環境省令で定める場合を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/505M60001200002/20260701_508M60001200006",
+    "updates": [
+      {
+        "published_date": "令和五年四月四日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "農薬取締法第四条第一項第十一号の農林水産省令・環境省令で定める場合を定める省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省・環境省令第六号",
+        "amend_published_date": "令和八年七月一日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "336M50000100002",
+    "law_no": "昭和三十六年厚生省令第二号",
+    "law_name": "薬局等構造設備規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/336M50000100002/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "昭和三十六年二月一日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "409M50000100021",
+    "law_no": "平成九年厚生省令第二十一号",
+    "law_name": "医薬品の安全性に関する非臨床試験の実施の基準に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/409M50000100021/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "平成九年三月二十六日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "361M50000100054",
+    "law_no": "昭和六十一年厚生省令第五十四号",
+    "law_name": "厚生労働省関係化学物質の審査及び製造等の規制に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/361M50000100054/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "昭和六十一年十一月二十八日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "417M60001000024",
+    "law_no": "平成十七年環境省令第二十四号",
+    "law_name": "化学物質の審査及び製造等の規制に関する法律第五十四条の規定により地方環境局長に委任する権限を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/417M60001000024/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成十七年九月二十日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "412M50000100063",
+    "law_no": "平成十二年厚生省令第六十三号",
+    "law_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律関係手数料規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/412M50000100063/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "平成十二年三月三十日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "404M50000040068",
+    "law_no": "平成四年大蔵省令第六十八号",
+    "law_name": "証券取引等監視委員会の職員が検査及び犯則事件の調査をするときに携帯すべき証票等の様式を定める内閣府令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/404M50000040068/20260710_508M60000002059",
+    "updates": [
+      {
+        "published_date": "平成四年七月二十日",
+        "effective_date": "令和八年七月十日",
+        "effective_comment": "",
+        "amend_name": "証券取引等監視委員会の職員が検査及び犯則事件の調査をするときに携帯すべき証票等の様式を定める内閣府令の一部を改正する内閣府令",
+        "amend_no": "令和八年内閣府令第五十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "409M50000100028",
+    "law_no": "平成九年厚生省令第二十八号",
+    "law_name": "医薬品の臨床試験の実施の基準に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/409M50000100028/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "平成九年三月二十七日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "348M50000002061",
+    "law_no": "昭和四十八年総理府令第六十一号",
+    "law_name": "瀬戸内海環境保全特別措置法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/348M50000002061/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "昭和四十八年十月二十九日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416M60000100179",
+    "law_no": "平成十六年厚生労働省令第百七十九号",
+    "law_name": "医薬品及び医薬部外品の製造管理及び品質管理の基準に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/416M60000100179/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "平成十六年十二月二十四日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "411M50000002067",
+    "law_no": "平成十一年総理府令第六十七号",
+    "law_name": "ダイオキシン類対策特別措置法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/411M50000002067/20260701_508M60001000019",
+    "updates": [
+      {
+        "published_date": "平成十一年十二月二十七日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+        "amend_no": "令和八年環境省令第十九号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "426M60000100093",
+    "law_no": "平成二十六年厚生労働省令第九十三号",
+    "law_name": "再生医療等製品の製造管理及び品質管理の基準に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/426M60000100093/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "平成二十六年八月六日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "417M60001200002",
+    "law_no": "平成十七年農林水産省・環境省令第二号",
+    "law_name": "特定外来生物による生態系等に係る被害の防止に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/417M60001200002/20260701_508M60001200003",
+    "updates": [
+      {
+        "published_date": "平成十七年五月二十五日",
+        "effective_date": "令和八年七月一日",
+        "effective_comment": "",
+        "amend_name": "特定外来生物による生態系等に係る被害の防止に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和八年農林水産省・環境省令第三号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416M60000100169",
+    "law_no": "平成十六年厚生労働省令第百六十九号",
+    "law_name": "医療機器及び体外診断用医薬品の製造管理及び品質管理の基準に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/416M60000100169/20270520_508M60000100110",
+    "updates": [
+      {
+        "published_date": "平成十六年十二月十七日",
+        "effective_date": "令和九年五月二十日",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amend_published_date": "令和八年六月三十日",
+        "pending": true
+      }
+    ]
+  }
+]

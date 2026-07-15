@@ -28,16 +28,16 @@ DATA_DIR = "data"
 OUTPUT_DIR = "output"
 
 from pathlib import Path
+
 DOWNLOAD_DIR = Path("data/downloads")
 
 EXTRACT_DIR = Path("data/extracted")
 
 DOCS_DIR = Path("docs")
-JSON_PATH = DOCS_DIR / "data" / "updates.json"
 
-# GitHub Pages
 DOCS_DATA = Path("docs/data")
 KEYWORDS_JSON = DOCS_DATA / "keywords.json"
+LAWS_JSON = DOCS_DATA / "laws.json"
 
 NOTIFY_SOURCES = {
     "egov",
