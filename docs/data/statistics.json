@@ -11,17 +11,16 @@
     }
   },
   "public_comment": {
-    "last_update": "2026-07-13T15:00:Z",
-    "update_count": 8,
+    "last_update": "2026-07-14T15:00:Z",
+    "update_count": 6,
     "source": {
-      "public_comment": 8
+      "public_comment": 6
     },
     "category": {
-      "電気通信": 4,
-      "国民生活の安全・安心の確保": 1,
-      "厚生": 1,
-      "社会保険": 1,
-      "郵務": 1
+      "国民生活の安全・安心の確保": 2,
+      "電気通信": 1,
+      "厚生": 2,
+      "社会保険": 1
     }
   }
 }

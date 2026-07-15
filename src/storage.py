@@ -96,12 +96,20 @@ def save_statistics(
     )
 
 
-def save_updates(source, updates):
+def save_source_data(source, data):
     """
-    updates.json を保存する。
+    Save source data as JSON.
     """
 
     save_json(
-        updates,
+        data,
         UPDATE_FILES[source],
+    )
+
+
+# Compatibility wrapper
+def save_updates(source, updates):
+    save_source_data(
+        source,
+        updates,
     )
