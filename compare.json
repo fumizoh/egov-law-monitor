@@ -1,0 +1,4094 @@
+{
+  "result": {
+    "success": true,
+    "Compare_Data": {
+      "LawId": "406AC0000000113",
+      "NewLawInfo": {
+        "-LawDataId": 637593,
+        "-Revision": "637593",
+        "-SubRevision": "1",
+        "-EnforcementDate": null,
+        "-ScheduledEnforcementDate": "2027-07-14",
+        "-EnforcementComment": "公布の日から起算して一年を超えない範囲内において政令で定める日",
+        "LawNum": "平成六年法律第百十三号"
+      },
+      "OldLawInfo": {
+        "-LawDataId": 637590,
+        "-Revision": "637590",
+        "-SubRevision": "1",
+        "-EnforcementDate": "2026-07-15",
+        "-ScheduledEnforcementDate": null,
+        "-EnforcementComment": null,
+        "LawNum": "平成六年法律第百十三号"
+      },
+      "CompareInfo": {
+        "CompareBlock": [
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC",
+              "#text": "目次",
+              "-ObjectId": "#TOC",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC",
+              "#text": "目次",
+              "-ObjectId": "#TOC",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[1]",
+              "#text": "第一章　総則（第一条―第三条）",
+              "-ObjectId": "#TOC-TCh_1",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[1]",
+              "#text": "第一章　総則（第一条―第三条）",
+              "-ObjectId": "#TOC-TCh_1",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]",
+              "#text": "第二章　米穀の需給及び価格の安定を図るための措置",
+              "-ObjectId": "#TOC-TCh_2",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]",
+              "#text": "第二章　米穀の需給及び価格の安定を図るための措置",
+              "-ObjectId": "#TOC-TCh_2",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[1]",
+              "#text": "第一節　基本指針（第四条）",
+              "-ObjectId": "#TOC-TCh_2-TSe_1",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[1]",
+              "#text": "第一節　基本指針（第四条）",
+              "-ObjectId": "#TOC-TCh_2-TSe_1",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[2]",
+              "#text": "<em class=\"delete\">第二節　適正かつ円滑な流通の確保に関する措置</em>",
+              "-ObjectId": "#TOC-TCh_2-TSe_2",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[2]/TOCSubsection[1]",
+              "#text": "<em class=\"delete\">第一款　生産調整方針（第五条―第七条）</em>",
+              "-ObjectId": "#TOC-TCh_2-TSe_2-TSs_1",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[2]",
+              "#text": "<em class=\"insert\">第二節　生産者による需要に応じた生産（第五条）</em>",
+              "-ObjectId": "#TOC-TCh_2-TSe_2",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[3]",
+              "#text": "<em class=\"insert\">第三節　適正かつ円滑な流通の確保に関する措置</em>",
+              "-ObjectId": "#TOC-TCh_2-TSe_3",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[3]/TOCSubsection[1]",
+              "#text": "第一款　米穀の出荷又は販売の事業を行う者の遵守事項（第<em class=\"modify\">六</em>条・第七条）",
+              "-ObjectId": "#TOC-TCh_2-TSe_3-TSs_1",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[2]/TOCSubsection[2]",
+              "#text": "第一款<em class=\"delete\">の二</em>　米穀の出荷又は販売の事業を行う者の遵守事項（第<em class=\"modify\">七</em>条<em class=\"delete\">の二</em>・第七条<em class=\"delete\">の三</em>）",
+              "-ObjectId": "#TOC-TCh_2-TSe_2-TSs_1_2",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[2]/TOCSubsection[3]",
+              "#text": "<em class=\"delete\">第二款　米穀安定供給確保支援機構（第八条―第十七条）</em>",
+              "-ObjectId": "#TOC-TCh_2-TSe_2-TSs_2",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[3]/TOCSubsection[2]",
+              "#text": "<em class=\"insert\">第二款　米穀等取扱事業を行う者による米穀の円滑な流通の確保に資する措置等（第八条―第十二条）</em>",
+              "-ObjectId": "#TOC-TCh_2-TSe_3-TSs_2",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[3]/TOCSubsection[3]",
+              "#text": "第三款　米穀<em class=\"modify\">安定供給確保支援機構</em>（第十<em class=\"modify\">三</em>条―第二十八条）",
+              "-ObjectId": "#TOC-TCh_2-TSe_3-TSs_3",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[2]/TOCSubsection[4]",
+              "#text": "第三款　米穀<em class=\"modify\">価格形成センター</em>（第十<em class=\"modify\">八</em>条―第二十八条）",
+              "-ObjectId": "#TOC-TCh_2-TSe_2-TSs_3",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[4]",
+              "#text": "第<em class=\"modify\">四</em>節　政府の買入れ及び売渡し（第二十九条―第三十三条）",
+              "-ObjectId": "#TOC-TCh_2-TSe_4",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[3]",
+              "#text": "第<em class=\"modify\">三</em>節　政府の買入れ及び売渡し（第二十九条―第三十三条）",
+              "-ObjectId": "#TOC-TCh_2-TSe_3",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[5]",
+              "#text": "<em class=\"insert\">第五節　民間備蓄（第三十三条の二―第三十三条の八）</em>",
+              "-ObjectId": "#TOC-TCh_2-TSe_5",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[6]",
+              "#text": "第<em class=\"modify\">六</em>節　政府以外の者の行う輸入及び輸出（第三十四条―第三十六条）",
+              "-ObjectId": "#TOC-TCh_2-TSe_6",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[4]",
+              "#text": "第<em class=\"modify\">四</em>節　政府以外の者の行う輸入及び輸出（第三十四条―第三十六条）",
+              "-ObjectId": "#TOC-TCh_2-TSe_4",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[7]",
+              "#text": "第<em class=\"modify\">七</em>節　緊急時の措置（第三十七条―第四十条）",
+              "-ObjectId": "#TOC-TCh_2-TSe_7",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[2]/TOCSection[5]",
+              "#text": "第<em class=\"modify\">五</em>節　緊急時の措置（第三十七条―第四十条）",
+              "-ObjectId": "#TOC-TCh_2-TSe_5",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[3]",
+              "#text": "第三章　麦その他主要食糧の需給及び価格の安定を図るための措置（第四十一条―第四十六条）",
+              "-ObjectId": "#TOC-TCh_3",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[3]",
+              "#text": "第三章　麦その他主要食糧の需給及び価格の安定を図るための措置（第四十一条―第四十六条）",
+              "-ObjectId": "#TOC-TCh_3",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[4]",
+              "#text": "第四章　雑則（第四十七条―第五十四条）",
+              "-ObjectId": "#TOC-TCh_4",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[4]",
+              "#text": "第四章　雑則（第四十七条―第五十四条）",
+              "-ObjectId": "#TOC-TCh_4",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[5]",
+              "#text": "第五章　罰則（第五十五条―第六十二条）",
+              "-ObjectId": "#TOC-TCh_5",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCChapter[5]",
+              "#text": "第五章　罰則（第五十五条―第六十二条）",
+              "-ObjectId": "#TOC-TCh_5",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCSupplProvision",
+              "#text": "附則",
+              "-ObjectId": "#TOC-TOCSupplProvision",
+              "-TocObjectId": "TOC"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/TOC/TOCSupplProvision",
+              "#text": "附則",
+              "-ObjectId": "#TOC-TOCSupplProvision",
+              "-TocObjectId": "TOC"
+            },
+            "-TocObjectId": "TOC"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[1]",
+              "#text": "（目的）",
+              "-ObjectId": "#Mp-Ch_1-At_1",
+              "-TocObjectId": "Mp-Ch_1-At_1"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[1]",
+              "#text": "（目的）",
+              "-ObjectId": "#Mp-Ch_1-At_1",
+              "-TocObjectId": "Mp-Ch_1-At_1"
+            },
+            "-TocObjectId": "Mp-Ch_1-At_1"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[1]/Paragraph[1]",
+              "#text": "第一条　この法律は、主要な食糧である米穀及び麦が主食としての役割を果たし、かつ、重要な農産物としての地位を占めていることに<em class=\"modify\">鑑み</em>、米穀の<em class=\"insert\">需要に応じた</em>生産<em class=\"insert\">を推進するとともに、米穀の生産</em>者から消費者までの適正かつ円滑な流通を確保するための措置並びに政府による主要食糧の買入れ、輸入及び売渡しの措置<em class=\"insert\">等</em>を総合的に講ずることにより、主要食糧の需給<em class=\"insert\">の安定を図り、</em>及び<em class=\"insert\">これを通じてその</em>価格の安定<em class=\"insert\">化</em>を図り、もって国民生活と国民経済の安定に資することを目的とする。",
+              "-ObjectId": "#Mp-Ch_1-At_1-Pr_1",
+              "-TocObjectId": "Mp-Ch_1-At_1"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[1]/Paragraph[1]",
+              "#text": "第一条　この法律は、主要な食糧である米穀及び麦が主食としての役割を果たし、かつ、重要な農産物としての地位を占めていることに<em class=\"modify\">かんがみ</em>、米穀の生産者から消費者までの適正かつ円滑な流通を確保するための措置並びに政府による主要食糧の買入れ、輸入及び売渡しの措置を総合的に講ずることにより、主要食糧の需給及び価格の安定を図り、もって国民生活と国民経済の安定に資することを目的とする。",
+              "-ObjectId": "#Mp-Ch_1-At_1-Pr_1",
+              "-TocObjectId": "Mp-Ch_1-At_1"
+            },
+            "-TocObjectId": "Mp-Ch_1-At_1"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[2]",
+              "#text": "<em class=\"delete\">（主要食糧の需給及び価格の安定を図るための基本方針）</em>",
+              "-ObjectId": "#Mp-Ch_1-At_2",
+              "-TocObjectId": "Mp-Ch_1-At_2"
+            },
+            "-TocObjectId": "Mp-Ch_1-At_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[2]",
+              "#text": "<em class=\"insert\">（基本方針）</em>",
+              "-ObjectId": "#Mp-Ch_1-At_2",
+              "-TocObjectId": "Mp-Ch_1-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_1-At_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[2]/Paragraph[1]",
+              "#text": "第二条　政府は、米穀の需給<em class=\"insert\">の安定を図り、</em>及び<em class=\"insert\">これを通じてその</em>価格の安定<em class=\"insert\">化</em>を図るため、米穀の需給の適確な見通しを策定し、<em class=\"modify\">公表するものとし</em>、<em class=\"modify\">これ</em>を<em class=\"modify\">踏まえ</em>、米穀の供給が不足する事態に備えた<em class=\"insert\">米穀の</em>備蓄の機動的な運営及び消費者が必要とする米穀の適正かつ円滑な流通の確保を図るとともに、米穀の適切な買入れ、輸入及び売渡しを行うものとする。",
+              "-ObjectId": "#Mp-Ch_1-At_2-Pr_1",
+              "-TocObjectId": "Mp-Ch_1-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[2]/Paragraph[1]",
+              "#text": "第二条　政府は、米穀の需給及び価格の安定を図るため、米穀の需給の適確な見通しを策定し、<em class=\"modify\">これに基づき、整合性をもって</em>、<em class=\"modify\">米穀の需給の均衡</em>を<em class=\"modify\">図るための生産調整の円滑な推進</em>、米穀の供給が不足する事態に備えた備蓄の機動的な運営及び消費者が必要とする米穀の適正かつ円滑な流通の確保を図るとともに、米穀の適切な買入れ、輸入及び売渡しを行うものとする。",
+              "-ObjectId": "#Mp-Ch_1-At_2-Pr_1",
+              "-TocObjectId": "Mp-Ch_1-At_2"
+            },
+            "-TocObjectId": "Mp-Ch_1-At_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[2]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　政府は、前項に規定する生産調整の円滑な推進に関する施策を講ずるに当たっては、生産者の自主的な努力を支援することを旨とするとともに、水田における稲以外の作物の生産の振興に関する施策その他関連施策との有機的な連携を図りつつ、地域の特性に応じて、これを行うよう努めなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_1-At_2-Pr_2",
+              "-TocObjectId": "Mp-Ch_1-At_2"
+            },
+            "-TocObjectId": "Mp-Ch_1-At_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[2]/Paragraph[2]",
+              "#text": "<em class=\"insert\">２　政府は、前項の規定により米穀の備蓄の機動的な運営を図るに当たっては、第十一条第一項及び第二項の規定による報告に基づき米穀の生産者から消費者までの流通の状況を継続的かつ適確に把握してその運営を行うとともに、第三十三条の二第一項に規定する民間備蓄は政府による米穀の備蓄を補完するものであることを旨とするものとする。</em>",
+              "-ObjectId": "#Mp-Ch_1-At_2-Pr_2",
+              "-TocObjectId": "Mp-Ch_1-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_1-At_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[2]/Paragraph[3]",
+              "#text": "３　政府は、麦の需給<em class=\"insert\">の安定を図り、</em>及び<em class=\"insert\">これを通じてその</em>価格の安定<em class=\"insert\">化</em>を図るため、麦の需給の適確な見通しを策定し、これに基づき、麦の供給が不足する事態に備えた備蓄の円滑な運営を図るとともに、麦の適切な輸入及び売渡しを行うものとする。",
+              "-ObjectId": "#Mp-Ch_1-At_2-Pr_3",
+              "-TocObjectId": "Mp-Ch_1-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[2]/Paragraph[3]",
+              "#text": "３　政府は、麦の需給及び価格の安定を図るため、麦の需給の適確な見通しを策定し、これに基づき、麦の供給が不足する事態に備えた備蓄の円滑な運営を図るとともに、麦の適切な輸入及び売渡しを行うものとする。",
+              "-ObjectId": "#Mp-Ch_1-At_2-Pr_3",
+              "-TocObjectId": "Mp-Ch_1-At_2"
+            },
+            "-TocObjectId": "Mp-Ch_1-At_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[1]",
+              "#text": "第四条　農林水産大臣は、米穀の需給<em class=\"insert\">の安定を図り、</em>及び<em class=\"insert\">これを通じてその</em>価格の安定<em class=\"insert\">化</em>を図るため、政令で定めるところにより、毎年、米穀の需給の安定に関する基本指針（以下「基本指針」という。）を定めるものとする。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[1]",
+              "#text": "第四条　農林水産大臣は、米穀の需給及び価格の安定を図るため、政令で定めるところにより、毎年、米穀の需給<em class=\"delete\">及び価格</em>の安定に関する基本指針（以下「基本指針」という。）を定めるものとする。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]",
+              "#text": "２　基本指針においては、次に掲げる事項を定めるものとする。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]",
+              "#text": "２　基本指針においては、次に掲げる事項を定めるものとする。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]/Item[1]",
+              "#text": "一　米穀の需給の安定に関する基本方針",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2-It_1",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]/Item[1]",
+              "#text": "一　米穀の需給<em class=\"delete\">及び価格</em>の安定に関する基本方針",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2-It_1",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]/Item[2]",
+              "#text": "二　米穀の需給の見通しに関する事項",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2-It_2",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]/Item[2]",
+              "#text": "二　米穀の需給の見通しに関する事項",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2-It_2",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]/Item[3]",
+              "#text": "三　米穀の備蓄の目標数量その他米穀の備蓄の運営に関する事項",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2-It_3",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]/Item[3]",
+              "#text": "三　米穀の備蓄の目標数量その他米穀の備蓄の運営に関する事項",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2-It_3",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]/Item[4]",
+              "#text": "四　米穀の輸入数量及びその種類別の数量に関する事項",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2-It_4",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]/Item[4]",
+              "#text": "四　米穀の輸入数量及びその種類別の数量に関する事項",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2-It_4",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]/Item[5]",
+              "#text": "五　その他米穀の需給の安定に関する重要事項",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2-It_5",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[2]/Item[5]",
+              "#text": "五　その他米穀の需給<em class=\"delete\">及び価格</em>の安定に関する重要事項",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_2-It_5",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[3]",
+              "#text": "３　農林水産大臣は、前項第二号に掲げる事項を定めるため必要があるときは、都道府県知事に対し、資料の提出その他必要な協力を求めることができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[3]",
+              "#text": "３　農林水産大臣は、前項第二号に掲げる事項を定めるため必要があるときは、都道府県知事に対し、資料の提出その他必要な協力を求めることができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[4]",
+              "#text": "４　農林水産大臣は、基本指針を定めようとするときは、食料・農業・農村政策審議会の意見を聴かなければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_4",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[4]",
+              "#text": "４　農林水産大臣は、基本指針を定めようとするときは、食料・農業・農村政策審議会の意見を聴かなければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_4",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[5]",
+              "#text": "５　農林水産大臣は、基本指針を定めたときは、遅滞なく、これを公表しなければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_5",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[5]",
+              "#text": "５　農林水産大臣は、基本指針を定めたときは、遅滞なく、これを公表しなければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_5",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[6]",
+              "#text": "６　農林水産大臣は、米穀の需給事情その他の経済事情に変動が生じた場合において、特に必要があると認めるときは、基本指針を変更することができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_6",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[6]",
+              "#text": "６　農林水産大臣は、米穀の需給事情その他の経済事情に変動が生じた場合において、特に必要があると認めるときは、基本指針を変更することができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_6",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[7]",
+              "#text": "７　第三項から第五項までの規定は、前項の規定による基本指針の変更について準用する。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_7",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[1]/Article[1]/Paragraph[7]",
+              "#text": "７　第三項から第五項までの規定は、前項の規定による基本指針の変更について準用する。",
+              "-ObjectId": "#Mp-Ch_2-Se_1-At_4-Pr_7",
+              "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_1-At_4"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]",
+              "#text": "<em class=\"delete\">第二節　適正かつ円滑な流通の確保に関する措置</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2",
+              "-TocObjectId": "#Mp-Ch_2-Se_2"
+            },
+            "-TocObjectId": "#Mp-Ch_2-Se_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]",
+              "#text": "<em class=\"insert\">第二節　生産者による需要に応じた生産</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2",
+              "-TocObjectId": "#Mp-Ch_2-Se_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "#Mp-Ch_2-Se_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Article[1]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第五条　米穀の生産者は、米穀の生産を行うに当たっては、主体的に第二条第一項に規定する見通しその他の情報を踏まえて需要に応じた生産を行うよう努めるものとする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-At_5-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-At_5"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Article[1]/Paragraph[2]",
+              "#text": "<em class=\"insert\">２　米穀の生産者又は出荷の事業を行う者の組織する団体は、その直接又は間接の構成員たる米穀の生産者が行う米穀の需要に応じた生産に関し、必要な助言、協力その他の援助を行うよう努めるものとする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-At_5-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-At_5"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Article[1]/Paragraph[3]",
+              "#text": "<em class=\"insert\">３　地方公共団体は、その区域の特性に応じ、米穀の生産者が主体的に需要に応じた生産を行うことができるよう、当該区域内で生産される米穀の需給の見通しその他の当該区域における米穀の生産者による需要に応じた生産に資する情報の提供を行うよう努めるものとする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-At_5-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_2-At_5"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Article[1]/Paragraph[4]",
+              "#text": "<em class=\"insert\">４　政府は、米穀の生産者による需要に応じた生産が可能となるよう、米穀の新たな需要の開拓に関する施策、米穀の輸出の促進に関する施策、米穀に係る農業の生産性の向上に関する施策その他関連施策を講ずることにより、米穀の生産の持続的な発展を図るものとする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-At_5-Pr_4",
+              "-TocObjectId": "Mp-Ch_2-Se_2-At_5"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]",
+              "#text": "<em class=\"delete\">第一款　生産調整方針</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1",
+              "-TocObjectId": "#Mp-Ch_2-Se_2-Ss_1"
+            },
+            "-TocObjectId": "#Mp-Ch_2-Se_2-Ss_1"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[1]",
+              "#text": "<em class=\"delete\">（生産調整方針の認定）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_5",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[1]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第五条　米穀の生産者又は出荷の事業を行う者の組織する団体その他政令で定める者（以下「生産出荷団体等」という。）は、農林水産省令で定めるところにより、米穀の生産調整に関する方針（以下「生産調整方針」という。）を作成し、当該生産調整方針が適当である旨の農林水産大臣の認定を受けることができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_5-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[1]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　生産調整方針においては、次に掲げる事項を定めるものとする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_5-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[1]/Paragraph[2]/Item[1]",
+              "#text": "<em class=\"delete\">一　生産調整方針に従って米穀の生産を行う者に係る米穀の生産数量の目標（以下「生産数量目標」という。）の設定方針</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_5-Pr_2-It_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[1]/Paragraph[2]/Item[2]",
+              "#text": "<em class=\"delete\">二　生産数量目標を達成するためとるべき措置（天候その他の自然的条件の変化により生産数量目標を上回って生産された数量の米穀に係る措置を含む。）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_5-Pr_2-It_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[1]/Paragraph[3]",
+              "#text": "<em class=\"delete\">３　農林水産大臣は、第一項の認定の申請が次の各号のすべてに該当するときは、同項の認定をするものとする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_5-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[1]/Paragraph[3]/Item[1]",
+              "#text": "<em class=\"delete\">一　生産調整方針の内容が基本指針に照らして適切なものであること。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_5-Pr_3-It_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[1]/Paragraph[3]/Item[2]",
+              "#text": "<em class=\"delete\">二　前項第二号に掲げる事項が生産数量目標を確実に達成するために適切なものであること。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_5-Pr_3-It_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[1]/Paragraph[3]/Item[3]",
+              "#text": "<em class=\"delete\">三　その他農林水産省令で定める基準に適合するものであること。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_5-Pr_3-It_3",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[1]/Paragraph[4]",
+              "#text": "<em class=\"delete\">４　前三項に規定するもののほか、生産調整方針の認定及びその取消しに関し必要な事項は、政令で定める。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_5-Pr_4",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[2]",
+              "#text": "<em class=\"delete\">（生産調整方針に関する助言及び指導）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_6",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_6"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_6"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[2]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第六条　国は、生産出荷団体等に対し、生産調整方針の作成及びその適切な運用のために必要な助言及び指導を行うように努めるものとする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_6-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_6"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_6"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[3]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第七条　生産出荷団体等は、生産調整方針の作成及びその適切な運用のため、地方公共団体に対し、必要な協力を求めることができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_7-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_7"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_7"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[1]/Article[3]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　地方公共団体は、前項の規定により協力を求められた場合において、生産調整方針の作成及びその適切な運用がその地方公共団体の区域の特性に応じた農業の振興に資すると認めるときは、必要な助言及び指導を行うように努めるものとする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1-At_7-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_7"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1-At_7"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]",
+              "#text": "<em class=\"insert\">第三節　適正かつ円滑な流通の確保に関する措置</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3",
+              "-TocObjectId": "#Mp-Ch_2-Se_3"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "#Mp-Ch_2-Se_3"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[1]",
+              "#text": "第一款　米穀の出荷又は販売の事業を行う者の遵守事項",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_1",
+              "-TocObjectId": "#Mp-Ch_2-Se_3-Ss_1"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[2]",
+              "#text": "第一款<em class=\"delete\">の二</em>　米穀の出荷又は販売の事業を行う者の遵守事項",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1_2",
+              "-TocObjectId": "#Mp-Ch_2-Se_2-Ss_1_2"
+            },
+            "-TocObjectId": "#Mp-Ch_2-Se_3-Ss_1"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[1]/Article[1]",
+              "#text": "（遵守事項）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_1-At_6",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_6"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[1]/Article[1]",
+              "#text": "（遵守事項）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_1-At_6",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_6"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_6"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[1]/Article[1]/Paragraph[1]",
+              "#text": "第<em class=\"modify\">六</em>条　農林水産大臣は、米穀の適正かつ円滑な流通を確保するため、農林水産省令で、米穀の用途別の管理の方法その他の米穀の出荷又は販売の事業を行う者がその業務の方法に関し遵守すべき事項を定めることができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_1-At_6-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_6"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[2]/Article[1]/Paragraph[1]",
+              "#text": "第<em class=\"modify\">七</em>条<em class=\"delete\">の二</em>　農林水産大臣は、米穀の適正かつ円滑な流通を確保するため、農林水産省令で、米穀の用途別の管理の方法その他の米穀の出荷又は販売の事業を行う者がその業務の方法に関し遵守すべき事項を定めることができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1_2-At_7_2-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1_2-At_7_2"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_6"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[1]/Article[2]",
+              "#text": "（勧告及び命令）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_1-At_7",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_7"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[1]/Article[2]",
+              "#text": "（勧告及び命令）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_1-At_7",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_7"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_7"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[1]/Article[2]/Paragraph[1]",
+              "#text": "第七条　農林水産大臣は、米穀の出荷又は販売の事業を行う者が前条の農林水産省令で定める事項を遵守していないと認めるときは、その者に対し、期限を定めて、その業務の方法を改善すべきことを勧告することができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_1-At_7-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_7"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[2]/Article[2]/Paragraph[1]",
+              "#text": "第七条<em class=\"delete\">の三</em>　農林水産大臣は、米穀の出荷又は販売の事業を行う者が前条の農林水産省令で定める事項を遵守していないと認めるときは、その者に対し、期限を定めて、その業務の方法を改善すべきことを勧告することができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_1_2-At_7_3-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_1_2-At_7_3"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_7"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[1]/Article[2]/Paragraph[2]",
+              "#text": "２　農林水産大臣は、前項の規定による勧告を受けた者が、正当な理由がなくてその勧告に従わないときは、その者に対し、期限を定めて、その勧告に係る措置をとるべきことを命ずることができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_1-At_7-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_7"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[1]/Article[2]/Paragraph[2]",
+              "#text": "２　農林水産大臣は、前項の規定による勧告を受けた者が、正当な理由がなくてその勧告に従わないときは、その者に対し、期限を定めて、その勧告に係る措置をとるべきことを命ずることができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_1-At_7-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_7"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_1-At_7"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]",
+              "#text": "<em class=\"delete\">第二款　米穀安定供給確保支援機構</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2",
+              "-TocObjectId": "#Mp-Ch_2-Se_2-Ss_2"
+            },
+            "-TocObjectId": "#Mp-Ch_2-Se_2-Ss_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[1]",
+              "#text": "<em class=\"delete\">（指定）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_8",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_8"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_8"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[1]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第八条　農林水産大臣は、米穀の安定供給の確保を支援することを目的とする一般社団法人、一般財団法人その他営利を目的としない法人であって、次条に規定する業務を適正かつ確実に行うことができると認められるものを、その申請により、全国を通じて一個に限り、米穀安定供給確保支援機構（以下「機構」という。）として指定することができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_8-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_8"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_8"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[1]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　農林水産大臣は、前項の規定による指定をしたときは、機構の名称、住所及び事務所の所在地を官報で公示しなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_8-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_8"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_8"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[1]/Paragraph[3]",
+              "#text": "<em class=\"delete\">３　機構は、その名称、住所又は事務所の所在地を変更しようとするときは、あらかじめ、その旨を農林水産大臣に届け出なければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_8-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_8"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_8"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[1]/Paragraph[4]",
+              "#text": "<em class=\"delete\">４　農林水産大臣は、前項の規定による届出があったときは、その旨を官報で公示しなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_8-Pr_4",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_8"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_8"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]",
+              "#text": "<em class=\"insert\">第二款　米穀等取扱事業を行う者による米穀の円滑な流通の確保に資する措置等</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2",
+              "-TocObjectId": "#Mp-Ch_2-Se_3-Ss_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "#Mp-Ch_2-Se_3-Ss_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[1]",
+              "#text": "<em class=\"insert\">（米穀等取扱事業を行う者による米穀の円滑な流通の確保に資する措置）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_8",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_8"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_8"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[1]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第八条　米穀の出荷若しくは販売又は米穀を原材料とする飲食料品（医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律（昭和三十五年法律第百四十五号）に規定する医薬品、医薬部外品及び再生医療等製品を除く。以下同じ。）であって政令で定めるものの加工、製造若しくは調製の事業（以下「米穀等取扱事業」という。）を行う者は、当該米穀等取扱事業を行うに当たっては、この法律の規定を遵守するとともに、米穀の品質を保持するための必要な措置、米穀の持続的な供給に資する取引の実施その他の米穀の円滑な流通の確保に資する措置を講ずるよう努めなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_8-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_8"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_8"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[2]",
+              "#text": "（<em class=\"modify\">届出</em>）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_9",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[2]",
+              "#text": "（<em class=\"modify\">業務</em>）",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_9",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_9"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[2]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第九条　機構は、次に掲げる業務を行うものとする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_9-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_9"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[2]/Paragraph[1]/Item[1]",
+              "#text": "<em class=\"delete\">一　第五条第一項の認定に係る生産調整方針に従って米穀の生産を行う者に対し、当該認定に係る生産調整方針に基づき同条第二項第二号に規定する米穀を在庫として保有する措置の実施のために必要な資金に充てるための無利子の資金の貸付けを行うこと。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_9-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_9"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[2]/Paragraph[1]/Item[2]",
+              "#text": "<em class=\"delete\">二　米穀の安定供給の確保に資する売買取引に係る米穀の買受けに係る債務（当該債務の履行に必要な資金の借入れに係る債務を含む。）を保証すること。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_9-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_9"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[2]/Paragraph[1]/Item[3]",
+              "#text": "<em class=\"delete\">三　前二号に掲げる業務に附帯する業務を行うこと。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_9-Pr_1-It_3",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_9"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[3]",
+              "#text": "<em class=\"delete\">（業務の委託）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_10",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_10"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_10"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[3]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第十条　機構は、農林水産大臣の認可を受けて、前条第一号に掲げる業務（貸付けの決定を除く。）及び同条第二号に掲げる業務（債務の保証の決定を除く。）の一部を金融機関に委託することができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_10-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_10"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_10"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[3]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　金融機関は、他の法律の規定にかかわらず、前項の規定による委託を受け、当該業務を行うことができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_10-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_10"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_10"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[4]",
+              "#text": "<em class=\"delete\">（業務規程の認可）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_11",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_11"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_11"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[4]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第十一条　機構は、第九条第一号及び第二号に掲げる業務（以下「貸付等業務」という。）を行うときは、貸付等業務の開始前に、貸付等業務の実施に関する規程（以下この款において「業務規程」という。）を作成し、農林水産大臣の認可を受けなければならない。これを変更しようとするときも、同様とする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_11-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_11"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_11"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[4]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　農林水産大臣は、前項の認可をした業務規程が貸付等業務の適正かつ確実な実施上不適当となったと認めるときは、その業務規程を変更すべきことを命ずることができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_11-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_11"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_11"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[4]/Paragraph[3]",
+              "#text": "<em class=\"delete\">３　業務規程に記載すべき事項及び第一項の認可の基準については、農林水産省令で定める。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_11-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_11"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_11"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[5]",
+              "#text": "<em class=\"delete\">（事業計画等）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_12",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_12"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_12"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[5]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第十二条　機構は、毎事業年度、農林水産省令で定めるところにより、事業計画及び収支予算を作成し、農林水産大臣の認可を受けなければならない。これを変更しようとするときも、同様とする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_12-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_12"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_12"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[5]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　機構は、農林水産省令で定めるところにより、毎事業年度終了後、事業報告書、貸借対照表、収支決算書及び財産目録を作成し、農林水産大臣に提出し、その承認を受けなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_12-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_12"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_12"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[6]",
+              "#text": "<em class=\"delete\">（区分経理）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_13",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_13"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_13"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[6]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第十三条　機構は、第九条第一号に掲げる業務（これに附帯する業務を含む。）に係る経理、同条第二号に掲げる業務（これに附帯する業務を含む。）に係る経理及びその他の業務に係る経理をそれぞれ区分して整理しなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_13-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_13"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_13"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[7]",
+              "#text": "<em class=\"delete\">（農林水産省令への委任）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_14",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_14"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_14"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[7]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第十四条　前二条に定めるもののほか、機構が貸付等業務を行う場合における機構の財務及び会計に関し必要な事項は、農林水産省令で定める。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_14-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_14"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_14"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[8]",
+              "#text": "<em class=\"delete\">（改善命令）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_15",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_15"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_15"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[8]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第十五条　農林水産大臣は、第九条各号に掲げる業務の運営に関し改善が必要であると認めるときは、機構に対し、その改善に必要な措置をとるべきことを命ずることができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_15-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_15"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_15"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[2]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第九条　米穀等取扱事業を行おうとする者であって、主務省令で定める期間にその事業の用に供する米穀の数量が特定規模（地域における米穀の供給の相当部分を占めるものとして事業の種類ごとに主務省令で定める規模をいう。以下同じ。）以上であるものは、主務省令で定めるところにより、次に掲げる事項を主務大臣に届け出なければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_9-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[2]/Paragraph[1]/Item[1]",
+              "#text": "<em class=\"insert\">一　商号、名称又は氏名及び住所</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_9-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[2]/Paragraph[1]/Item[2]",
+              "#text": "<em class=\"insert\">二　法人である場合においては、その代表者の氏名</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_9-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[2]/Paragraph[1]/Item[3]",
+              "#text": "<em class=\"insert\">三　主たる事務所の所在地</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_9-Pr_1-It_3",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[2]/Paragraph[1]/Item[4]",
+              "#text": "<em class=\"insert\">四　届出の日の属する年の米穀の出荷予定数量、販売予定数量又は買入予定数量及び当該年の前年の米穀の出荷数量、販売数量又は買入数量</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_9-Pr_1-It_4",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[2]/Paragraph[1]/Item[5]",
+              "#text": "<em class=\"insert\">五　その事業の用に供する施設の内容</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_9-Pr_1-It_5",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[2]/Paragraph[1]/Item[6]",
+              "#text": "<em class=\"insert\">六　その他主務省令で定める事項</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_9-Pr_1-It_6",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[2]/Paragraph[2]",
+              "#text": "<em class=\"insert\">２　前項の規定による届出をした者（以下「届出事業者」という。）は、同項各号に掲げる事項に変更があったときは、遅滞なく、その旨を主務大臣に届け出なければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_9-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[2]/Paragraph[3]",
+              "#text": "<em class=\"insert\">３　届出事業者は、当該届出に係る事業を廃止したときは、遅滞なく、その旨を主務大臣に届け出なければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_9-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_9"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[3]",
+              "#text": "（<em class=\"modify\">帳簿</em>の<em class=\"modify\">備付け</em>）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_10",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_10"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[9]",
+              "#text": "（<em class=\"modify\">指定</em>の<em class=\"modify\">取消し</em>）",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_16",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_10"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[9]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第十六条　農林水産大臣は、機構が次の各号のいずれかに該当するときは、第八条第一項の規定による指定（以下この条において「指定」という。）を取り消すことができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_16-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[9]/Paragraph[1]/Item[1]",
+              "#text": "<em class=\"delete\">一　第九条各号に掲げる業務を適正かつ確実に実施することができないと認められるとき。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_16-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[9]/Paragraph[1]/Item[2]",
+              "#text": "<em class=\"delete\">二　指定に関し不正の行為があったとき。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_16-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[9]/Paragraph[1]/Item[3]",
+              "#text": "<em class=\"delete\">三　この款の規定又は当該規定に基づく命令若しくは処分に違反したとき。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_16-Pr_1-It_3",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[9]/Paragraph[1]/Item[4]",
+              "#text": "<em class=\"delete\">四　第十一条第一項の認可を受けた業務規程によらないで貸付等業務を行ったとき。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_16-Pr_1-It_4",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[9]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　農林水産大臣は、前項の規定により指定を取り消したときは、その旨を官報で公示しなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_16-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_16"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[10]",
+              "#text": "<em class=\"delete\">（資金の貸付け）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_17",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_17"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_17"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[10]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第十七条　政府は、機構に対し、第九条第一号に掲げる業務に要する資金の一部を無利子で貸し付けることができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_17-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_17"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_17"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[3]/Article[10]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　前項の規定による貸付金の償還方法は、政令で定める。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_2-At_17-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_17"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_2-At_17"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[3]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第十条　届出事業者は、主務省令で定めるところにより、帳簿を備え、その業務に関し主務省令で定める事項を記載し、これを保存しなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_10-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_10"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_10"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[4]",
+              "#text": "<em class=\"insert\">（定期報告）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_11",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_11"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_11"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[4]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第十一条　米穀の出荷又は販売の事業を行う者であって、農林水産省令で定める期間にその事業の用に供する米穀の数量が特定規模以上であるものは、米穀の在庫数量及び出荷数量又は販売数量その他農林水産省令で定める事項について、毎年、これらの数量の増減が見込まれる米穀の収穫又は作付けの時期その他の事情を勘案して農林水産省令で定める時期ごとに、農林水産省令で定めるところにより、農林水産大臣に報告しなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_11-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_11"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_11"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[4]/Paragraph[2]",
+              "#text": "<em class=\"insert\">２　米穀を原材料とする飲食料品の加工、製造又は調製の事業を行う者であって、主務省令で定める期間にその事業の用に供する米穀の数量が特定規模以上であるものは、米穀の在庫数量及び買入数量その他主務省令で定める事項について、毎年、米穀の供給が減少するおそれがあると見込まれる時期その他の事情を勘案して主務省令で定める時期ごとに、主務省令で定めるところにより、主務大臣に報告しなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_11-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_11"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_11"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[4]/Paragraph[3]",
+              "#text": "<em class=\"insert\">３　農林水産大臣又は主務大臣は、それぞれ、第一項又は前項の規定による報告の結果を取りまとめ、その概要を公表するものとする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_11-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_11"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_11"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[5]",
+              "#text": "<em class=\"insert\">（助言又は指導）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_12",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_12"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_12"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[2]/Article[5]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第十二条　主務大臣は、届出事業者に対し、米穀の適正かつ円滑な流通の確保を図る観点から、必要な助言又は指導を行うことができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_2-At_12-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_12"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_2-At_12"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]",
+              "#text": "第三款　米穀<em class=\"modify\">安定供給確保支援機構</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3",
+              "-TocObjectId": "#Mp-Ch_2-Se_3-Ss_3"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]",
+              "#text": "第三款　米穀<em class=\"modify\">価格形成センター</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3",
+              "-TocObjectId": "#Mp-Ch_2-Se_2-Ss_3"
+            },
+            "-TocObjectId": "#Mp-Ch_2-Se_3-Ss_3"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[1]",
+              "#text": "（指定）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_13",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[1]",
+              "#text": "（指定）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_13",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[1]/Paragraph[1]",
+              "#text": "第十<em class=\"modify\">三</em>条　農林水産大臣は、米穀の<em class=\"modify\">安定供給</em>の<em class=\"modify\">確保</em>を<em class=\"modify\">支援する</em>ことを目的とする一般社団法人、一般財団法人その他営利を目的としない法人であって、次条に規定する業務を適正かつ確実に行うことができると認められるものを、その申請により、<em class=\"insert\">全国を通じて一個に限り、</em>米穀<em class=\"modify\">安定供給確保支援機構</em>（以下「<em class=\"modify\">機構</em>」という。）として指定することができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_13-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[1]/Paragraph[1]",
+              "#text": "第十<em class=\"modify\">八</em>条　農林水産大臣は、米穀の<em class=\"modify\">取引の指標とすべき適正な価格</em>の<em class=\"modify\">形成</em>を<em class=\"modify\">図り、もってその円滑な取引に資する</em>ことを目的とする一般社団法人、一般財団法人その他営利を目的としない法人であって、次条に規定する業務を適正かつ確実に行うことができると認められるものを、その申請により、米穀<em class=\"modify\">価格形成センター</em>（以下「<em class=\"modify\">センター</em>」という。）として指定することができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_18-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_18"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[1]/Paragraph[2]",
+              "#text": "２　農林水産大臣は、前項の規定による指定をしたときは、<em class=\"modify\">機構</em>の名称、住所及び事務所の所在地を官報で公示しなければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_13-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[1]/Paragraph[2]",
+              "#text": "２　農林水産大臣は、前項の規定による指定をしたときは、<em class=\"modify\">当該センター</em>の名称、住所及び事務所の所在地を官報で公示しなければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_18-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_18"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[1]/Paragraph[3]",
+              "#text": "３　<em class=\"modify\">機構</em>は、その名称、住所又は事務所の所在地を変更しようとするときは、あらかじめ、その旨を農林水産大臣に届け出なければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_13-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[1]/Paragraph[3]",
+              "#text": "３　<em class=\"modify\">センター</em>は、その名称、住所又は事務所の所在地を変更しようとするときは、あらかじめ、その旨を農林水産大臣に届け出なければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_18-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_18"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[1]/Paragraph[4]",
+              "#text": "４　農林水産大臣は、前項の規定による届出があったときは、その旨を官報で公示しなければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_13-Pr_4",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[1]/Paragraph[4]",
+              "#text": "４　農林水産大臣は、前項の規定による届出があったときは、その旨を官報で公示しなければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_13-Pr_4",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_13"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[2]",
+              "#text": "（業務）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_14",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_14"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[2]",
+              "#text": "（業務）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_14",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_14"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_14"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[2]/Paragraph[1]",
+              "#text": "第十<em class=\"modify\">四</em>条　<em class=\"modify\">機構</em>は、次に掲げる業務を行うものとする。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_14-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_14"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[2]/Paragraph[1]",
+              "#text": "第十<em class=\"modify\">九</em>条　<em class=\"modify\">センター</em>は、次に掲げる業務を行うものとする。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_19-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_19"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_14"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[2]/Paragraph[1]/Item[1]",
+              "#text": "<em class=\"delete\">一　米穀の取引の指標とすべき価格の形成に必要なその売買取引を行うための施設（以下「価格形成施設」という。）を開設すること。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_19-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_19"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_19"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[2]/Paragraph[1]/Item[1]",
+              "#text": "<em class=\"insert\">一　米穀の安定供給の確保に資する売買取引に係る米穀の買受けに係る債務（当該債務の履行に必要な資金の借入れに係る債務を含む。）を保証すること。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_14-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_14"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_14"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[2]/Paragraph[1]/Item[2]",
+              "#text": "二　前号に掲げる業務に附帯する業務を行うこと。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_14-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_14"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[2]/Paragraph[1]/Item[2]",
+              "#text": "二　前号に掲げる業務に附帯する業務を行うこと。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_14-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_14"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_14"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[3]",
+              "#text": "（業務の<em class=\"modify\">委託</em>）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_15",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_15"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[3]",
+              "#text": "（業務<em class=\"delete\">規程</em>の<em class=\"modify\">認可</em>）",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_20",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_20"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_15"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[3]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第二十条　センターは、前条第一号に掲げる業務を行うときは、当該業務の開始前に、当該業務の実施に関する規程（以下この款において「業務規程」という。）を作成し、農林水産大臣の認可を受けなければならない。これを変更しようとするときも、同様とする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_20-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_20"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_20"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[3]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　農林水産大臣は、前項の認可をした業務規程が前条第一号に掲げる業務の適正かつ確実な実施上不適当となったと認めるときは、その業務規程を変更すべきことを命ずることができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_20-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_20"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_20"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[3]/Paragraph[3]",
+              "#text": "<em class=\"delete\">３　業務規程に記載すべき事項及び第一項の認可の基準については、農林水産省令で定める。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_20-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_20"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_20"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[4]",
+              "#text": "<em class=\"delete\">（売買取引を行うことができる者）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_21",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_21"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_21"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[4]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第二十一条　価格形成施設における米穀の売買取引（以下「売買取引」という。）を行うことができる者は、米穀の買入れ又は売渡しの業務を適確に遂行するに足りる資力信用を有しない者その他の業務規程で定める者以外の者とする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_21-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_21"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_21"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[5]",
+              "#text": "<em class=\"delete\">（売買取引）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_22",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_22"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_22"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[5]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第二十二条　売買取引は、入札の方法その他業務規程で定める方法によらなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_22-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_22"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_22"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[5]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　センターは、売買取引において、不正な行為が行われ、又は不当な価格が形成されていると認めるときは、業務規程で定めるところにより、売買取引を行う者に対し、売買取引の制限をすることができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_22-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_22"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_22"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[5]/Paragraph[3]",
+              "#text": "<em class=\"delete\">３　センターは、前項の規定により売買取引の制限をしたときは、速やかに、その旨を農林水産大臣に報告しなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_22-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_22"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_22"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[6]",
+              "#text": "<em class=\"delete\">（売買取引数量等の公表）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_23",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_23"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_23"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[6]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第二十三条　センターは、売買取引が行われたときは、売買取引の数量及び価格その他農林水産省令で定める事項を公表しなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_23-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_23"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_23"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[3]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第十五条　機構は、農林水産大臣の認可を受けて、前条第一号に掲げる業務（債務の保証の決定を除く。）の一部を金融機関に委託することができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_15-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_15"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_15"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[3]/Paragraph[2]",
+              "#text": "<em class=\"insert\">２　金融機関は、他の法律の規定にかかわらず、前項の規定による委託を受け、当該業務を行うことができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_15-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_15"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_15"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[4]",
+              "#text": "<em class=\"insert\">（業務規程の認可）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_16",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_16"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_16"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[4]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第十六条　機構は、第十四条第一号に掲げる業務（以下「債務保証業務」という。）を行うときは、債務保証業務の開始前に、債務保証業務の実施に関する規程（以下この款において「業務規程」という。）を作成し、農林水産大臣の認可を受けなければならない。これを変更しようとするときも、同様とする。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_16-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_16"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_16"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[4]/Paragraph[2]",
+              "#text": "<em class=\"insert\">２　農林水産大臣は、前項の認可をした業務規程が債務保証業務の適正かつ確実な実施上不適当となったと認めるときは、その業務規程を変更すべきことを命ずることができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_16-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_16"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_16"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[4]/Paragraph[3]",
+              "#text": "<em class=\"insert\">３　業務規程に記載すべき事項及び第一項の認可の基準については、農林水産省令で定める。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_16-Pr_3",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_16"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_16"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[5]",
+              "#text": "（事業計画等）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_17",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_17"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[5]",
+              "#text": "（事業計画等）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_17",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_17"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_17"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[5]/Paragraph[1]",
+              "#text": "第十<em class=\"modify\">七</em>条　<em class=\"modify\">機構</em>は、毎事業年度、農林水産省令で定めるところにより、事業計画及び収支予算を作成し、農林水産大臣の認可を受けなければならない。これを変更しようとするときも、同様とする。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_17-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_17"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[7]/Paragraph[1]",
+              "#text": "第<em class=\"delete\">二</em>十<em class=\"modify\">四</em>条　<em class=\"modify\">センター</em>は、毎事業年度、農林水産省令で定めるところにより、事業計画及び収支予算を作成し、農林水産大臣の認可を受けなければならない。これを変更しようとするときも、同様とする。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_24-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_24"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_17"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[5]/Paragraph[2]",
+              "#text": "２　<em class=\"modify\">機構</em>は、農林水産省令で定めるところにより、毎事業年度終了後、事業報告書<em class=\"modify\">、貸借対照表、</em>収支決算書<em class=\"insert\">及び財産目録</em>を作成し、農林水産大臣に提出し<em class=\"insert\">、その承認を受け</em>なければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_17-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_17"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[7]/Paragraph[2]",
+              "#text": "２　<em class=\"modify\">センター</em>は、農林水産省令で定めるところにより、毎事業年度終了後、事業報告書<em class=\"modify\">及び</em>収支決算書を作成し、農林水産大臣に提出しなければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_24-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_24"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_17"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[8]",
+              "#text": "<em class=\"delete\">（役員の選任及び解任）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_25",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_25"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_25"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[8]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第二十五条　センターの役員の選任及び解任は、農林水産大臣の認可を受けなければ、その効力を生じない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_25-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_25"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_25"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[8]/Paragraph[2]",
+              "#text": "<em class=\"delete\">２　センターの役員が、この款の規定（当該規定に基づく命令及び処分を含む。）若しくは第二十条第一項の認可を受けた業務規程に違反する行為をしたとき、又は第十九条第一号に掲げる業務に関し著しく不適当な行為をしたときは、農林水産大臣は、センターに対し、その役員を解任すべきことを命ずることができる。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_25-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_25"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_25"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[9]",
+              "#text": "<em class=\"delete\">（秘密保持義務）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_26",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_26"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_26"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[9]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第二十六条　センターの役員若しくは職員又はこれらの職にあった者は、第十九条第一号に掲げる業務に関して知り得た秘密を漏らしてはならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_26-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_26"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_26"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[6]",
+              "#text": "<em class=\"insert\">（区分経理）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_18",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_18"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_18"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[6]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第十八条　機構は、債務保証業務（これに附帯する業務を含む。）に係る経理及びその他の業務に係る経理をそれぞれ区分して整理しなければならない。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_18-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_18"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_18"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[7]",
+              "#text": "<em class=\"insert\">（農林水産省令への委任）</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_19",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_19"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_19"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[7]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第十九条　前二条に定めるもののほか、機構が債務保証業務を行う場合における機構の財務及び会計に関し必要な事項は、農林水産省令で定める。</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_19-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_19"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_19"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[8]",
+              "#text": "（改善命令）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_20",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_20"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[8]",
+              "#text": "（改善命令）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_20",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_20"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_20"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[8]/Paragraph[1]",
+              "#text": "第二十条　農林水産大臣は、第十<em class=\"modify\">四</em>条各号に掲げる業務の運営に関し改善が必要であると認めるときは、<em class=\"modify\">機構</em>に対し、その改善に必要な措置をとるべきことを命ずることができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_20-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_20"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[10]/Paragraph[1]",
+              "#text": "第二十<em class=\"delete\">七</em>条　農林水産大臣は、第十<em class=\"modify\">九</em>条各号に掲げる業務の運営に関し改善が必要であると認めるときは、<em class=\"modify\">センター</em>に対し、その改善に必要な措置をとるべきことを命ずることができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_27-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_27"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_20"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[9]",
+              "#text": "（指定の取消し）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_21",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[9]",
+              "#text": "（指定の取消し）",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_21",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[9]/Paragraph[1]",
+              "#text": "第二十<em class=\"modify\">一</em>条　農林水産大臣は、<em class=\"modify\">機構</em>が次の各号のいずれかに該当するときは、第十<em class=\"modify\">三</em>条第一項の規定による指定（以下この条において「指定」という。）を取り消すことができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_21-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[11]/Paragraph[1]",
+              "#text": "第二十<em class=\"modify\">八</em>条　農林水産大臣は、<em class=\"modify\">センター</em>が次の各号のいずれかに該当するときは、第十<em class=\"modify\">八</em>条第一項の規定による指定（以下この条において「指定」という。）を取り消すことができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_28-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_28"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[9]/Paragraph[1]/Item[1]",
+              "#text": "一　第十<em class=\"modify\">四</em>条各号に掲げる業務を適正かつ確実に実施することができないと認められるとき。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_21-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[11]/Paragraph[1]/Item[1]",
+              "#text": "一　第十<em class=\"modify\">九</em>条各号に掲げる業務を適正かつ確実に実施することができないと認められるとき。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_28-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_28"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[9]/Paragraph[1]/Item[2]",
+              "#text": "二　指定に関し不正の行為があったとき。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_21-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[9]/Paragraph[1]/Item[2]",
+              "#text": "二　指定に関し不正の行為があったとき。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_21-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[9]/Paragraph[1]/Item[3]",
+              "#text": "三　この款の規定又は当該規定に基づく命令若しくは処分に違反したとき。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_21-Pr_1-It_3",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[9]/Paragraph[1]/Item[3]",
+              "#text": "三　この款の規定又は当該規定に基づく命令若しくは処分に違反したとき。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_21-Pr_1-It_3",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[9]/Paragraph[1]/Item[4]",
+              "#text": "四　第<em class=\"modify\">十六</em>条第一項の認可を受けた業務規程によらないで<em class=\"modify\">債務保証</em>業務を行ったとき。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_21-Pr_1-It_4",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[2]/Subsection[4]/Article[11]/Paragraph[1]/Item[4]",
+              "#text": "四　第<em class=\"modify\">二十</em>条第一項の認可を受けた業務規程によらないで<em class=\"modify\">第十九条第一号に掲げる</em>業務を行ったとき。",
+              "-ObjectId": "#Mp-Ch_2-Se_2-Ss_3-At_28-Pr_1-It_4",
+              "-TocObjectId": "Mp-Ch_2-Se_2-Ss_3-At_28"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[9]/Paragraph[2]",
+              "#text": "２　農林水産大臣は、前項の規定により指定を取り消したときは、その旨を官報で公示しなければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_21-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[9]/Paragraph[2]",
+              "#text": "２　農林水産大臣は、前項の規定により指定を取り消したときは、その旨を官報で公示しなければならない。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_21-Pr_2",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_21"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Subsection[3]/Article[10]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第二十二条から第二十八条まで　削除</em>",
+              "-ObjectId": "#Mp-Ch_2-Se_3-Ss_3-At_22:28-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_22:28"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_3-Ss_3-At_22:28"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[4]",
+              "#text": "第<em class=\"modify\">四</em>節　政府の買入れ及び売渡し",
+              "-ObjectId": "#Mp-Ch_2-Se_4",
+              "-TocObjectId": "#Mp-Ch_2-Se_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]",
+              "#text": "第<em class=\"modify\">三</em>節　政府の買入れ及び売渡し",
+              "-ObjectId": "#Mp-Ch_2-Se_3",
+              "-TocObjectId": "#Mp-Ch_2-Se_3"
+            },
+            "-TocObjectId": "#Mp-Ch_2-Se_4"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[4]/Article[1]",
+              "#text": "（米穀の政府買入れ及び政府売渡し）",
+              "-ObjectId": "#Mp-Ch_2-Se_4-At_29",
+              "-TocObjectId": "Mp-Ch_2-Se_4-At_29"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[4]/Article[1]",
+              "#text": "（米穀の政府買入れ及び政府売渡し）",
+              "-ObjectId": "#Mp-Ch_2-Se_4-At_29",
+              "-TocObjectId": "Mp-Ch_2-Se_4-At_29"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_4-At_29"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[4]/Article[1]/Paragraph[1]",
+              "#text": "第二十九条　政府は、米穀の備蓄の円滑な運営を図るため、農林水産省令で定める手続に従い、基本指針に即して、国内産米穀の買入れを行い、及び<em class=\"insert\">届出事業者、</em>第四十七条第<em class=\"modify\">一</em>項<em class=\"modify\">の</em>規定<em class=\"modify\">による</em>届出<em class=\"modify\">をした</em>者その他農林水産省令で定める者（以下「買受資格者」という。）に対し当該米穀の売渡しを行うものとする。",
+              "-ObjectId": "#Mp-Ch_2-Se_4-At_29-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_4-At_29"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[3]/Article[1]/Paragraph[1]",
+              "#text": "第二十九条　政府は、米穀の備蓄の円滑な運営を図るため、農林水産省令で定める手続に従い、基本指針に即して、国内産米穀の買入れを行い、及び第四十七条第<em class=\"modify\">二</em>項<em class=\"modify\">に</em>規定<em class=\"modify\">する</em>届出<em class=\"modify\">事業</em>者その他農林水産省令で定める者（以下「買受資格者」という。）に対し当該米穀の売渡しを行うものとする。",
+              "-ObjectId": "#Mp-Ch_2-Se_3-At_29-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_3-At_29"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_4-At_29"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[5]",
+              "#text": "第<em class=\"modify\">六</em>節　政府以外の者の行う輸入及び輸出",
+              "-ObjectId": "#Mp-Ch_2-Se_6",
+              "-TocObjectId": "#Mp-Ch_2-Se_6"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[4]",
+              "#text": "第<em class=\"modify\">四</em>節　政府以外の者の行う輸入及び輸出",
+              "-ObjectId": "#Mp-Ch_2-Se_4",
+              "-TocObjectId": "#Mp-Ch_2-Se_4"
+            },
+            "-TocObjectId": "#Mp-Ch_2-Se_6"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[6]",
+              "#text": "第<em class=\"modify\">七</em>節　緊急時の措置",
+              "-ObjectId": "#Mp-Ch_2-Se_7",
+              "-TocObjectId": "#Mp-Ch_2-Se_7"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[5]",
+              "#text": "第<em class=\"modify\">五</em>節　緊急時の措置",
+              "-ObjectId": "#Mp-Ch_2-Se_5",
+              "-TocObjectId": "#Mp-Ch_2-Se_5"
+            },
+            "-TocObjectId": "#Mp-Ch_2-Se_7"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[6]/Article[2]",
+              "#text": "（米穀<em class=\"modify\">等取扱</em>事業を行う者に対する命令）",
+              "-ObjectId": "#Mp-Ch_2-Se_7-At_38",
+              "-TocObjectId": "Mp-Ch_2-Se_7-At_38"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[5]/Article[2]",
+              "#text": "（米穀<em class=\"modify\">の出荷又は販売の</em>事業を行う者に対する命令）",
+              "-ObjectId": "#Mp-Ch_2-Se_5-At_38",
+              "-TocObjectId": "Mp-Ch_2-Se_5-At_38"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_7-At_38"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[6]/Article[2]/Paragraph[1]",
+              "#text": "第三十八条　<em class=\"modify\">主務</em>大臣は、前条第一項に規定する事態に対処するため、基本指針に即して、米穀<em class=\"modify\">等取扱</em>事業を行う者に対し、その保有する米穀の譲渡、移動又は保管に関し、地域又は時期の指定、数量又は価格の制限に服すべきことを命ずることができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_7-At_38-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_7-At_38"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[2]/Section[5]/Article[2]/Paragraph[1]",
+              "#text": "第三十八条　<em class=\"modify\">農林水産</em>大臣は、前条第一項に規定する事態に対処するため、基本指針に即して、米穀<em class=\"modify\">の出荷又は販売の</em>事業を行う者に対し、その保有する米穀の譲渡、移動又は保管に関し、地域又は時期の指定、数量又は価格の制限に服すべきことを命ずることができる。",
+              "-ObjectId": "#Mp-Ch_2-Se_5-At_38-Pr_1",
+              "-TocObjectId": "Mp-Ch_2-Se_5-At_38"
+            },
+            "-TocObjectId": "Mp-Ch_2-Se_7-At_38"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]",
+              "#text": "（麦の需給見通し）",
+              "-ObjectId": "#Mp-Ch_3-At_41",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]",
+              "#text": "（麦の需給見通し）",
+              "-ObjectId": "#Mp-Ch_3-At_41",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "-TocObjectId": "Mp-Ch_3-At_41"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[1]",
+              "#text": "第四十一条　農林水産大臣は、麦の需給<em class=\"insert\">の安定を図り、</em>及び<em class=\"insert\">これを通じてその</em>価格の安定<em class=\"insert\">化</em>を図るため、政令で定めるところにより、毎年、麦の需給に関する見通し（以下「需給見通し」という。）を定めるものとする。",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_1",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[1]",
+              "#text": "第四十一条　農林水産大臣は、麦の需給及び価格の安定を図るため、政令で定めるところにより、毎年、麦の需給に関する見通し（以下「需給見通し」という。）を定めるものとする。",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_1",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "-TocObjectId": "Mp-Ch_3-At_41"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[2]",
+              "#text": "２　需給見通しにおいては、次に掲げる事項を定めるものとする。",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_2",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[2]",
+              "#text": "２　需給見通しにおいては、次に掲げる事項を定めるものとする。",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_2",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "-TocObjectId": "Mp-Ch_3-At_41"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[2]/Item[1]",
+              "#text": "一　麦の種類別需要数量に関する事項",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_2-It_1",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[2]/Item[1]",
+              "#text": "一　麦の種類別需要数量に関する事項",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_2-It_1",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "-TocObjectId": "Mp-Ch_3-At_41"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[2]/Item[2]",
+              "#text": "二　前号の種類別需要数量に対応する麦の生産数量及び輸入数量に関する事項",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_2-It_2",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[2]/Item[2]",
+              "#text": "二　前号の種類別需要数量に対応する麦の生産数量及び輸入数量に関する事項",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_2-It_2",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "-TocObjectId": "Mp-Ch_3-At_41"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[2]/Item[3]",
+              "#text": "三　麦の備蓄の種類別目標数量その他麦の備蓄の運営に関する事項",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_2-It_3",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[2]/Item[3]",
+              "#text": "三　麦の備蓄の種類別目標数量その他麦の備蓄の運営に関する事項",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_2-It_3",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "-TocObjectId": "Mp-Ch_3-At_41"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[2]/Item[4]",
+              "#text": "四　その他麦の需給の安定に関する重要事項",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_2-It_4",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[2]/Item[4]",
+              "#text": "四　その他麦の需給の安定に関する重要事項",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_2-It_4",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "-TocObjectId": "Mp-Ch_3-At_41"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[3]",
+              "#text": "３　第四条第三項から第七項までの規定は、需給見通しについて準用する。この場合において、同条第三項中「前項第二号」とあるのは「第四十一条第二項第一号及び第二号」と、同条第六項中「米穀」とあるのは「麦」と読み替えるものとする。",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_3",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[3]/Article[1]/Paragraph[3]",
+              "#text": "３　第四条第三項から第七項までの規定は、需給見通しについて準用する。この場合において、同条第三項中「前項第二号」とあるのは「第四十一条第二項第一号及び第二号」と、同条第六項中「米穀」とあるのは「麦」と読み替えるものとする。",
+              "-ObjectId": "#Mp-Ch_3-At_41-Pr_3",
+              "-TocObjectId": "Mp-Ch_3-At_41"
+            },
+            "-TocObjectId": "Mp-Ch_3-At_41"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]",
+              "#text": "（米穀の出荷又は販売の事業の届出）",
+              "-ObjectId": "#Mp-Ch_4-At_47",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]",
+              "#text": "（米穀の出荷又は販売の事業の届出）",
+              "-ObjectId": "#Mp-Ch_4-At_47",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_47"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[1]",
+              "#text": "第四十七条　米穀の出荷又は販売の事業<em class=\"insert\">を行おうとする者</em>（その事業の規模が農林水産省令で定める規模未満である<em class=\"modify\">者及び第九条</em>第<em class=\"modify\">一項の規定による届出をしなければならない者を除く。）</em>は、農林水産省令で定めるところにより、あらかじめ、次に掲げる事項を農林水産大臣に届け出なければならない。",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_1",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[1]",
+              "#text": "第四十七条　米穀の出荷又は販売の事業（その事業の規模が農林水産省令で定める規模未満である<em class=\"modify\">ものを除く。</em>第<em class=\"modify\">五十九条において同じ。）を行おうとする者</em>は、農林水産省令で定めるところにより、あらかじめ、次に掲げる事項を農林水産大臣に届け出なければならない。",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_1",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_47"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[1]/Item[1]",
+              "#text": "一　商号、名称又は氏名及び住所",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[1]/Item[1]",
+              "#text": "一　商号、名称又は氏名及び住所",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_47"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[1]/Item[2]",
+              "#text": "二　法人である場合においては、その代表者の氏名",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[1]/Item[2]",
+              "#text": "二　法人である場合においては、その代表者の氏名",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_47"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[1]/Item[3]",
+              "#text": "三　主たる事務所の所在地",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_1-It_3",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[1]/Item[3]",
+              "#text": "三　主たる事務所の所在地",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_1-It_3",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_47"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[1]/Item[4]",
+              "#text": "四　その他農林水産省令で定める事項",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_1-It_4",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[1]/Item[4]",
+              "#text": "四　その他農林水産省令で定める事項",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_1-It_4",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_47"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[2]",
+              "#text": "２　前項の規定による届出をした者は、同項各号に掲げる事項に変更があったときは、遅滞なく、その旨を農林水産大臣に届け出なければならない。",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_2",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[2]",
+              "#text": "２　前項の規定による届出をした者<em class=\"delete\">（以下「届出事業者」という。）</em>は、同項各号に掲げる事項に変更があったときは、遅滞なく、その旨を農林水産大臣に届け出なければならない。",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_2",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_47"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[3]",
+              "#text": "３　<em class=\"insert\">第一項の規定による</em>届出<em class=\"modify\">をした</em>者は、当該届出に係る事業を廃止したときは、遅滞なく、その旨を農林水産大臣に届け出なければならない。",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_3",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[1]/Paragraph[3]",
+              "#text": "３　届出<em class=\"modify\">事業</em>者は、当該届出に係る事業を廃止したときは、遅滞なく、その旨を農林水産大臣に届け出なければならない。",
+              "-ObjectId": "#Mp-Ch_4-At_47-Pr_3",
+              "-TocObjectId": "Mp-Ch_4-At_47"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_47"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[2]",
+              "#text": "（帳簿の備付け）",
+              "-ObjectId": "#Mp-Ch_4-At_48",
+              "-TocObjectId": "Mp-Ch_4-At_48"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[2]",
+              "#text": "（帳簿の備付け）",
+              "-ObjectId": "#Mp-Ch_4-At_48",
+              "-TocObjectId": "Mp-Ch_4-At_48"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_48"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[2]/Paragraph[1]",
+              "#text": "第四十八条　<em class=\"insert\">前条第一項の規定による</em>届出<em class=\"modify\">をした</em>者は、農林水産省令で定めるところにより、帳簿を備え、その業務に関し農林水産省令で定める事項を記載し、これを保存しなければならない。",
+              "-ObjectId": "#Mp-Ch_4-At_48-Pr_1",
+              "-TocObjectId": "Mp-Ch_4-At_48"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[2]/Paragraph[1]",
+              "#text": "第四十八条　届出<em class=\"modify\">事業</em>者は、農林水産省令で定めるところにより、帳簿を備え、その業務に関し農林水産省令で定める事項を記載し、これを保存しなければならない。",
+              "-ObjectId": "#Mp-Ch_4-At_48-Pr_1",
+              "-TocObjectId": "Mp-Ch_4-At_48"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_48"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[5]",
+              "#text": "（調査）",
+              "-ObjectId": "#Mp-Ch_4-At_51",
+              "-TocObjectId": "Mp-Ch_4-At_51"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[5]",
+              "#text": "（調査）",
+              "-ObjectId": "#Mp-Ch_4-At_51",
+              "-TocObjectId": "Mp-Ch_4-At_51"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_51"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[5]/Paragraph[1]",
+              "#text": "第五十一条　農林水産大臣は、主要食糧の需給<em class=\"insert\">の安定を図り、</em>及び<em class=\"insert\">これを通じてその</em>価格の安定<em class=\"insert\">化</em>を図るため、農林水産省令で定めるところにより、主要食糧の生産、流通及び消費の状況に関する調査を行うことができる。",
+              "-ObjectId": "#Mp-Ch_4-At_51-Pr_1",
+              "-TocObjectId": "Mp-Ch_4-At_51"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[5]/Paragraph[1]",
+              "#text": "第五十一条　農林水産大臣は、主要食糧の需給及び価格の安定を図るため、農林水産省令で定めるところにより、主要食糧の生産、流通及び消費の状況に関する調査を行うことができる。",
+              "-ObjectId": "#Mp-Ch_4-At_51-Pr_1",
+              "-TocObjectId": "Mp-Ch_4-At_51"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_51"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[6]",
+              "#text": "（報告及び立入検査）",
+              "-ObjectId": "#Mp-Ch_4-At_52",
+              "-TocObjectId": "Mp-Ch_4-At_52"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[6]",
+              "#text": "（報告及び立入検査）",
+              "-ObjectId": "#Mp-Ch_4-At_52",
+              "-TocObjectId": "Mp-Ch_4-At_52"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_52"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[6]/Paragraph[1]",
+              "#text": "第五十二条　<em class=\"modify\">主務</em>大臣は、この法律の施行に必要な限度において、業として主要食糧の出荷、販売、輸入、加工若しくは製造<em class=\"insert\">若しくは米穀</em>を<em class=\"insert\">原材料とする飲食料品の加工、製造若しくは調製（加工又は製造にあっては、主要食糧の加工又は製造を除く。）を</em>行う者に対し、その業務若しくは資産の状況に関し報告をさせ、又はその職員に、これらの者の事務所、営業所、販売所、事業所、倉庫若しくは工場に立ち入り、業務の状況若しくは帳簿、書類その他の物件を検査させ、若しくは関係者に質問させることができる。",
+              "-ObjectId": "#Mp-Ch_4-At_52-Pr_1",
+              "-TocObjectId": "Mp-Ch_4-At_52"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[6]/Paragraph[1]",
+              "#text": "第五十二条　<em class=\"modify\">農林水産</em>大臣は、この法律の施行に必要な限度において、<em class=\"delete\">機構若しくはセンターその他</em>業として主要食糧の出荷、販売、輸入、加工若しくは製造を行う者に対し、その業務若しくは資産の状況に関し報告をさせ、又はその職員に、これらの者の事務所、営業所、販売所、事業所、倉庫若しくは工場に立ち入り、業務の状況若しくは帳簿、書類その他の物件を検査させ、若しくは関係者に質問させることができる。",
+              "-ObjectId": "#Mp-Ch_4-At_52-Pr_1",
+              "-TocObjectId": "Mp-Ch_4-At_52"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_52"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[6]/Paragraph[2]",
+              "#text": "<em class=\"insert\">２　農林水産大臣は、この法律の施行に必要な限度において、機構に対し、その業務若しくは資産の状況に関し報告をさせ、又はその職員に、機構の事務所に立ち入り、業務の状況若しくは帳簿、書類その他の物件を検査させ、若しくは関係者に質問させることができる。</em>",
+              "-ObjectId": "#Mp-Ch_4-At_52-Pr_2",
+              "-TocObjectId": "Mp-Ch_4-At_52"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_4-At_52"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[6]/Paragraph[3]",
+              "#text": "<em class=\"modify\">３</em>　<em class=\"modify\">前二項</em>の規定により立入検査をする職員は、その身分を示す証明書を携帯し、関係者に提示しなければならない。",
+              "-ObjectId": "#Mp-Ch_4-At_52-Pr_3",
+              "-TocObjectId": "Mp-Ch_4-At_52"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[6]/Paragraph[2]",
+              "#text": "<em class=\"modify\">２</em>　<em class=\"modify\">前項</em>の規定により立入検査をする職員は、その身分を示す証明書を携帯し、関係者に提示しなければならない。",
+              "-ObjectId": "#Mp-Ch_4-At_52-Pr_2",
+              "-TocObjectId": "Mp-Ch_4-At_52"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_52"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[6]/Paragraph[4]",
+              "#text": "<em class=\"modify\">４</em>　第一項<em class=\"insert\">及び第二項</em>の規定による立入検査の権限は、犯罪捜査のために認められたものと解釈してはならない。",
+              "-ObjectId": "#Mp-Ch_4-At_52-Pr_4",
+              "-TocObjectId": "Mp-Ch_4-At_52"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[6]/Paragraph[3]",
+              "#text": "<em class=\"modify\">３</em>　第一項の規定による立入検査の権限は、犯罪捜査のために認められたものと解釈してはならない。",
+              "-ObjectId": "#Mp-Ch_4-At_52-Pr_3",
+              "-TocObjectId": "Mp-Ch_4-At_52"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_52"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[7]",
+              "#text": "<em class=\"delete\">（都道府県が処理する事務等）</em>",
+              "-ObjectId": "#Mp-Ch_4-At_53",
+              "-TocObjectId": "Mp-Ch_4-At_53"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_53"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[7]",
+              "#text": "<em class=\"insert\">（主務大臣等）</em>",
+              "-ObjectId": "#Mp-Ch_4-At_52_2",
+              "-TocObjectId": "Mp-Ch_4-At_52_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_4-At_52_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[7]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第五十二条の二　この法律における主務大臣は、農林水産大臣とする。ただし、米穀を原材料とする酒類の製造の事業に係る事項については、財務大臣及び農林水産大臣とする。</em>",
+              "-ObjectId": "#Mp-Ch_4-At_52_2-Pr_1",
+              "-TocObjectId": "Mp-Ch_4-At_52_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_4-At_52_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[7]/Paragraph[2]",
+              "#text": "<em class=\"insert\">２　この法律における主務省令は、主務大臣の発する命令とする。</em>",
+              "-ObjectId": "#Mp-Ch_4-At_52_2-Pr_2",
+              "-TocObjectId": "Mp-Ch_4-At_52_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_4-At_52_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[8]",
+              "#text": "<em class=\"insert\">（権限の委任等）</em>",
+              "-ObjectId": "#Mp-Ch_4-At_53",
+              "-TocObjectId": "Mp-Ch_4-At_53"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_4-At_53"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[8]/Paragraph[1]",
+              "#text": "第五十三条　この法律に規定する<em class=\"modify\">財務</em>大臣の権限<em class=\"modify\">の全部又は</em>一部は、政令で定めるところにより、<em class=\"modify\">国税庁長官に委任</em>することができる。",
+              "-ObjectId": "#Mp-Ch_4-At_53-Pr_1",
+              "-TocObjectId": "Mp-Ch_4-At_53"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[7]/Paragraph[1]",
+              "#text": "第五十三条　この法律に規定する<em class=\"modify\">農林水産</em>大臣の権限<em class=\"modify\">に属する事務の</em>一部は、政令で定めるところにより、<em class=\"modify\">都道府県知事が行うことと</em>することができる。",
+              "-ObjectId": "#Mp-Ch_4-At_53-Pr_1",
+              "-TocObjectId": "Mp-Ch_4-At_53"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_53"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[8]/Paragraph[2]",
+              "#text": "<em class=\"insert\">２　この法律に規定する農林水産大臣の権限に属する事務の一部は、政令で定めるところにより、都道府県知事が行うこととすることができる。</em>",
+              "-ObjectId": "#Mp-Ch_4-At_53-Pr_2",
+              "-TocObjectId": "Mp-Ch_4-At_53"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_4-At_53"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[8]/Paragraph[3]",
+              "#text": "<em class=\"modify\">３</em>　この法律に規定する農林水産大臣の権限<em class=\"insert\">及び第一項の規定により国税庁長官に委任された権限</em>は、<em class=\"modify\">主務省令</em>で定めるところにより、その一部を<em class=\"modify\">地方支分部局の</em>長に委任することができる。",
+              "-ObjectId": "#Mp-Ch_4-At_53-Pr_3",
+              "-TocObjectId": "Mp-Ch_4-At_53"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[4]/Article[7]/Paragraph[2]",
+              "#text": "<em class=\"modify\">２</em>　この法律に規定する農林水産大臣の権限は、<em class=\"modify\">農林水産省令</em>で定めるところにより、その一部を<em class=\"modify\">地方農政局長又は北海道農政事務所</em>長に委任することができる。",
+              "-ObjectId": "#Mp-Ch_4-At_53-Pr_2",
+              "-TocObjectId": "Mp-Ch_4-At_53"
+            },
+            "-TocObjectId": "Mp-Ch_4-At_53"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[2]/Paragraph[1]",
+              "#text": "第五十六条　<em class=\"modify\">次</em>の<em class=\"modify\">各号のいずれかに該当する場合には、当該違反行為を</em>した者は、一年以下の拘禁刑又は百万円以下の罰金に処する。",
+              "-ObjectId": "#Mp-Ch_5-At_56-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_56"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[2]/Paragraph[1]",
+              "#text": "第五十六条　<em class=\"modify\">第七条</em>の<em class=\"modify\">三第二項又は第三十八条の規定による命令に違反</em>した者は、一年以下の拘禁刑又は百万円以下の罰金に処する。",
+              "-ObjectId": "#Mp-Ch_5-At_56-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_56"
+            },
+            "-TocObjectId": "Mp-Ch_5-At_56"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[2]/Paragraph[1]/Item[1]",
+              "#text": "<em class=\"insert\">一　第七条第二項、第三十三条の六第二項、第三十三条の七第六項又は第三十八条の規定による命令に違反したとき。</em>",
+              "-ObjectId": "#Mp-Ch_5-At_56-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_5-At_56"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_5-At_56"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[3]/Paragraph[1]",
+              "#text": "<em class=\"delete\">第五十七条　第二十六条の規定に違反した者は、一年以下の拘禁刑又は五十万円以下の罰金に処する。</em>",
+              "-ObjectId": "#Mp-Ch_5-At_57-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_57"
+            },
+            "-TocObjectId": "Mp-Ch_5-At_57"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[2]/Paragraph[1]/Item[2]",
+              "#text": "<em class=\"modify\">二</em>　第五十二条第一項の規定による報告をせず、若しくは虚偽の報告をし、又は同項の規定による検査を拒み、妨げ、若しくは忌避し、若しくは<em class=\"insert\">同項の規定による</em>質問に対して答弁をせず、若しくは虚偽の答弁をした<em class=\"modify\">とき</em>。",
+              "-ObjectId": "#Mp-Ch_5-At_56-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_5-At_56"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[4]/Paragraph[1]",
+              "#text": "<em class=\"modify\">第五十八条</em>　第五十二条第一項の規定による報告をせず、若しくは虚偽の報告をし、又は同項の規定による検査を拒み、妨げ、若しくは忌避し、若しくは質問に対して答弁をせず、若しくは虚偽の答弁をした<em class=\"modify\">者は、六月以下の拘禁刑又は五十万円以下の罰金に処する</em>。",
+              "-ObjectId": "#Mp-Ch_5-At_58-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_58"
+            },
+            "-TocObjectId": "Mp-Ch_5-At_56"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[3]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第五十七条　第五十二条第二項の規定による報告をせず、若しくは虚偽の報告をし、又は同項の規定による検査を拒み、妨げ、若しくは忌避し、若しくは同項の規定による質問に対して答弁をせず、若しくは虚偽の答弁をした者は、六月以下の拘禁刑又は五十万円以下の罰金に処する。</em>",
+              "-ObjectId": "#Mp-Ch_5-At_57-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_57"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_5-At_57"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[4]/Paragraph[1]",
+              "#text": "第五十<em class=\"modify\">八</em>条　第十<em class=\"modify\">一</em>条第一項<em class=\"insert\">又は第二項</em>の規定による<em class=\"modify\">報告</em>をせず、又は虚偽の<em class=\"modify\">報告</em>をした者は、<em class=\"modify\">百</em>万円以下の罰金に処する。",
+              "-ObjectId": "#Mp-Ch_5-At_58-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_58"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[5]/Paragraph[1]",
+              "#text": "第五十<em class=\"modify\">九</em>条　第<em class=\"delete\">四</em>十<em class=\"modify\">七</em>条第一項の規定による<em class=\"modify\">届出</em>をせず、又は虚偽の<em class=\"modify\">届出</em>をし<em class=\"delete\">て米穀の出荷又は販売の事業を行っ</em>た者は、<em class=\"modify\">五十</em>万円以下の罰金に処する。",
+              "-ObjectId": "#Mp-Ch_5-At_59-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_59"
+            },
+            "-TocObjectId": "Mp-Ch_5-At_58"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[5]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第五十九条　次の各号のいずれかに該当する場合には、当該違反行為をした者は、五十万円以下の罰金に処する。</em>",
+              "-ObjectId": "#Mp-Ch_5-At_59-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_59"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_5-At_59"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[5]/Paragraph[1]/Item[1]",
+              "#text": "<em class=\"insert\">一　第九条第一項の規定による届出をせず、又は虚偽の届出をして米穀等取扱事業を行ったとき。</em>",
+              "-ObjectId": "#Mp-Ch_5-At_59-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_5-At_59"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_5-At_59"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[5]/Paragraph[1]/Item[2]",
+              "#text": "<em class=\"insert\">二　第九条第二項若しくは第三項又は第四十七条第二項若しくは第三項の規定による届出をせず、又は虚偽の届出をしたとき。</em>",
+              "-ObjectId": "#Mp-Ch_5-At_59-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_5-At_59"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_5-At_59"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[5]/Paragraph[1]/Item[3]",
+              "#text": "<em class=\"insert\">三　</em>",
+              "-ObjectId": "#Mp-Ch_5-At_59-Pr_1-It_3",
+              "-TocObjectId": "Mp-Ch_5-At_59"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_5-At_59"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[5]/Paragraph[1]/Item[4]",
+              "#text": "<em class=\"insert\">四　第四十七条第一項の規定による届出をせず、又は虚偽の届出をして米穀の出荷又は販売の事業を行ったとき。</em>",
+              "-ObjectId": "#Mp-Ch_5-At_59-Pr_1-It_4",
+              "-TocObjectId": "Mp-Ch_5-At_59"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_5-At_59"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[6]/Paragraph[1]",
+              "#text": "第六十条　法人の代表者又は法人若しくは人の代理人、使用人その他の従業者が、その法人又は人の業務に関し、次の各号に掲げる規定の違反行為をしたときは、行為者を罰するほか、その法人に対して当該各号に定める罰金刑を、その人に対して各本条の罰金刑を科する。",
+              "-ObjectId": "#Mp-Ch_5-At_60-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_60"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[6]/Paragraph[1]",
+              "#text": "第六十条　法人の代表者又は法人若しくは人の代理人、使用人その他の従業者が、その法人又は人の業務に関し、次の各号に掲げる規定の違反行為をしたときは、行為者を罰するほか、その法人に対して当該各号に定める罰金刑を、その人に対して各本条の罰金刑を科する。",
+              "-ObjectId": "#Mp-Ch_5-At_60-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_60"
+            },
+            "-TocObjectId": "Mp-Ch_5-At_60"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[6]/Paragraph[1]/Item[1]",
+              "#text": "一　第五十六条<em class=\"modify\">第一号（第</em>三<em class=\"modify\">十八条</em>に係る部分<em class=\"modify\">を除く</em>。）　一億円以下の罰金刑",
+              "-ObjectId": "#Mp-Ch_5-At_60-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_5-At_60"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[6]/Paragraph[1]/Item[1]",
+              "#text": "一　第五十六条<em class=\"modify\">（第七条の</em>三<em class=\"modify\">第二項</em>に係る部分<em class=\"modify\">に限る</em>。）　一億円以下の罰金刑",
+              "-ObjectId": "#Mp-Ch_5-At_60-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_5-At_60"
+            },
+            "-TocObjectId": "Mp-Ch_5-At_60"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[6]/Paragraph[1]/Item[2]",
+              "#text": "二　第五十五条、第五十六条<em class=\"modify\">第一号（第</em>三<em class=\"modify\">十八条</em>に係る部分<em class=\"modify\">に限る</em>。）<em class=\"insert\">若しくは第二号</em>又は前三条　各本条の罰金刑",
+              "-ObjectId": "#Mp-Ch_5-At_60-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_5-At_60"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[6]/Paragraph[1]/Item[2]",
+              "#text": "二　第五十五条、第五十六条<em class=\"modify\">（第七条の</em>三<em class=\"modify\">第二項</em>に係る部分<em class=\"modify\">を除く</em>。）又は前三条　各本条の罰金刑",
+              "-ObjectId": "#Mp-Ch_5-At_60-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_5-At_60"
+            },
+            "-TocObjectId": "Mp-Ch_5-At_60"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[8]/Paragraph[1]",
+              "#text": "第六十二条　次の各号のいずれかに該当する者は、二十万円以下の過料に処する。",
+              "-ObjectId": "#Mp-Ch_5-At_62-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_62"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[8]/Paragraph[1]",
+              "#text": "第六十二条　次の各号のいずれかに該当する者は、二十万円以下の過料に処する。",
+              "-ObjectId": "#Mp-Ch_5-At_62-Pr_1",
+              "-TocObjectId": "Mp-Ch_5-At_62"
+            },
+            "-TocObjectId": "Mp-Ch_5-At_62"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[8]/Paragraph[1]/Item[1]",
+              "#text": "<em class=\"delete\">一　第三十五条、第三十六条又は第四十七条第二項若しくは第三項の規定による届出をせず、又は虚偽の届出をした者</em>",
+              "-ObjectId": "#Mp-Ch_5-At_62-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_5-At_62"
+            },
+            "-TocObjectId": "Mp-Ch_5-At_62"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[8]/Paragraph[1]/Item[1]",
+              "#text": "<em class=\"modify\">一</em>　第<em class=\"insert\">十条又は第</em>四十八条の規定に違反して、帳簿を備えず、帳簿に記載せず、若しくは虚偽の記載をし、又は帳簿を保存しなかった者",
+              "-ObjectId": "#Mp-Ch_5-At_62-Pr_1-It_1",
+              "-TocObjectId": "Mp-Ch_5-At_62"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[8]/Paragraph[1]/Item[2]",
+              "#text": "<em class=\"modify\">二</em>　第四十八条の規定に違反して、帳簿を備えず、帳簿に記載せず、若しくは虚偽の記載をし、又は帳簿を保存しなかった者",
+              "-ObjectId": "#Mp-Ch_5-At_62-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_5-At_62"
+            },
+            "-TocObjectId": "Mp-Ch_5-At_62"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[5]/Article[8]/Paragraph[1]/Item[2]",
+              "#text": "<em class=\"insert\">二　第三十五条又は第三十六条の規定による届出をせず、又は虚偽の届出をした者</em>",
+              "-ObjectId": "#Mp-Ch_5-At_62-Pr_1-It_2",
+              "-TocObjectId": "Mp-Ch_5-At_62"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "Mp-Ch_5-At_62"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]",
+              "#text": "附　則　（令和八年七月一五日法律第五五号）　抄",
+              "-ObjectId": "#508AC0000000055-Sp",
+              "-TocObjectId": "508AC0000000055-Sp"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]",
+              "#text": "附　則　（令和八年七月一五日法律第五五号）　抄",
+              "-ObjectId": "#508AC0000000055-Sp",
+              "-TocObjectId": "508AC0000000055-Sp"
+            },
+            "-TocObjectId": "508AC0000000055-Sp"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]",
+              "#text": "（施行期日）",
+              "-ObjectId": "#508AC0000000055-Sp-At_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]",
+              "#text": "（施行期日）",
+              "-ObjectId": "#508AC0000000055-Sp-At_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_1"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]/Paragraph[1]",
+              "#text": "第一条　この法律は、公布の日から起算して一年を超えない範囲内において政令で定める日から施行する。ただし、次の各号に掲げる規定は、当該各号に定める日から施行する。",
+              "-ObjectId": "#508AC0000000055-Sp-At_1-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]/Paragraph[1]",
+              "#text": "第一条　この法律は、公布の日から起算して一年を超えない範囲内において政令で定める日から施行する。ただし、次の各号に掲げる規定は、当該各号に定める日から施行する。",
+              "-ObjectId": "#508AC0000000055-Sp-At_1-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_1"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]/Paragraph[1]/Item[1]",
+              "#text": "一　第三条第二項の改正規定並びに次条並びに附則第三条及び第七条の規定　公布の日",
+              "-ObjectId": "#508AC0000000055-Sp-At_1-Pr_1-It_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]/Paragraph[1]/Item[1]",
+              "#text": "一　第三条第二項の改正規定並びに次条並びに附則第三条及び第七条の規定　公布の日",
+              "-ObjectId": "#508AC0000000055-Sp-At_1-Pr_1-It_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_1"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]/Paragraph[1]/Item[2]",
+              "#text": "二　第二章中第四節の次に一節を加える改正規定、第四十八条の次に一条を加える改正規定及び第五十九条に各号を加える改正規定（第三号に係る部分に限る。）　公布の日から起算して二年を超えない範囲内において政令で定める日",
+              "-ObjectId": "#508AC0000000055-Sp-At_1-Pr_1-It_2",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]/Paragraph[1]/Item[2]",
+              "#text": "二　第二章中第四節の次に一節を加える改正規定、第四十八条の次に一条を加える改正規定及び第五十九条に各号を加える改正規定（第三号に係る部分に限る。）　公布の日から起算して二年を超えない範囲内において政令で定める日",
+              "-ObjectId": "#508AC0000000055-Sp-At_1-Pr_1-It_2",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_1"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]",
+              "#text": "（米穀等取扱事業の届出に関する準備行為）",
+              "-ObjectId": "#508AC0000000055-Sp-At_2",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]",
+              "#text": "（米穀等取扱事業の届出に関する準備行為）",
+              "-ObjectId": "#508AC0000000055-Sp-At_2",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_2"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]/Paragraph[1]",
+              "#text": "第二条　この法律（前条各号に掲げる規定を除く。以下この条並びに附則第四条及び第六条において同じ。）による改正後の主要食糧の需給及び価格の安定に関する法律（附則第五条において「新法」という。）第九条第一項の規定による届出をしなければならない者は、この法律の施行の日（以下「施行日」という。）の六月前の日又はこの法律の公布の日（次条において「公布日」という。）のいずれか遅い日から施行日の前日までの間においても、同項の規定の例により主務大臣に届出をすることができる。この場合において、当該届出をした者は、施行日において同項の規定による届出をしたものとみなす。",
+              "-ObjectId": "#508AC0000000055-Sp-At_2-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]/Paragraph[1]",
+              "#text": "第二条　この法律（前条各号に掲げる規定を除く。以下この条並びに附則第四条及び第六条において同じ。）による改正後の主要食糧の需給及び価格の安定に関する法律（附則第五条において「新法」という。）第九条第一項の規定による届出をしなければならない者は、この法律の施行の日（以下「施行日」という。）の六月前の日又はこの法律の公布の日（次条において「公布日」という。）のいずれか遅い日から施行日の前日までの間においても、同項の規定の例により主務大臣に届出をすることができる。この場合において、当該届出をした者は、施行日において同項の規定による届出をしたものとみなす。",
+              "-ObjectId": "#508AC0000000055-Sp-At_2-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_2"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]/Paragraph[2]",
+              "#text": "２　前項に規定する主務大臣は、農林水産大臣とする。ただし、米穀を原材料とする酒類の製造に係る事項については、財務大臣及び農林水産大臣とする。",
+              "-ObjectId": "#508AC0000000055-Sp-At_2-Pr_2",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]/Paragraph[2]",
+              "#text": "２　前項に規定する主務大臣は、農林水産大臣とする。ただし、米穀を原材料とする酒類の製造に係る事項については、財務大臣及び農林水産大臣とする。",
+              "-ObjectId": "#508AC0000000055-Sp-At_2-Pr_2",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_2"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]/Paragraph[3]",
+              "#text": "３　前項の規定による財務大臣の権限は、政令で定めるところにより、国税庁長官に委任することができる。",
+              "-ObjectId": "#508AC0000000055-Sp-At_2-Pr_3",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]/Paragraph[3]",
+              "#text": "３　前項の規定による財務大臣の権限は、政令で定めるところにより、国税庁長官に委任することができる。",
+              "-ObjectId": "#508AC0000000055-Sp-At_2-Pr_3",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_2"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[3]",
+              "#text": "（基準保有量の届出に関する準備行為）",
+              "-ObjectId": "#508AC0000000055-Sp-At_3",
+              "-TocObjectId": "508AC0000000055-Sp-At_3"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[3]",
+              "#text": "（基準保有量の届出に関する準備行為）",
+              "-ObjectId": "#508AC0000000055-Sp-At_3",
+              "-TocObjectId": "508AC0000000055-Sp-At_3"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_3"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[3]/Paragraph[1]",
+              "#text": "第三条　附則第一条第二号に掲げる規定の施行の日（以下「第二号施行日」という。）において同号に掲げる規定による改正後の主要食糧の需給及び価格の安定に関する法律第三十三条の二第一項に規定する民間備蓄事業者に該当する者は、第二号施行日の三月前の日又は公布日のいずれか遅い日から第二号施行日の前日までの間においても、同項の規定の例により農林水産大臣に届出をすることができる。この場合において、当該届出をした者は、第二号施行日において同項の規定による届出をしたものとみなす。",
+              "-ObjectId": "#508AC0000000055-Sp-At_3-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_3"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[3]/Paragraph[1]",
+              "#text": "第三条　附則第一条第二号に掲げる規定の施行の日（以下「第二号施行日」という。）において同号に掲げる規定による改正後の主要食糧の需給及び価格の安定に関する法律第三十三条の二第一項に規定する民間備蓄事業者に該当する者は、第二号施行日の三月前の日又は公布日のいずれか遅い日から第二号施行日の前日までの間においても、同項の規定の例により農林水産大臣に届出をすることができる。この場合において、当該届出をした者は、第二号施行日において同項の規定による届出をしたものとみなす。",
+              "-ObjectId": "#508AC0000000055-Sp-At_3-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_3"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_3"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[4]",
+              "#text": "<em class=\"insert\">（秘密保持義務に関する経過措置）</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_4",
+              "-TocObjectId": "508AC0000000055-Sp-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_4"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[4]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第四条　この法律による改正前の主要食糧の需給及び価格の安定に関する法律第十八条第一項に規定するセンターの役員又は職員であった者に係る同法第十九条第一号に掲げる業務に関して知り得た秘密を漏らしてはならない義務については、施行日以後も、なお従前の例による。</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_4-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_4"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_4"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[5]",
+              "#text": "<em class=\"insert\">（罰則の適用に関する経過措置）</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_5",
+              "-TocObjectId": "508AC0000000055-Sp-At_5"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[5]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第五条　施行日から第二号施行日の前日までの間における新法第五十六条第一号の規定の適用については、同号中「、第三十三条の六第二項、第三十三条の七第六項又は第三十八条」とあるのは、「又は第三十八条」とする。</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_5-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_5"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_5"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[6]",
+              "#text": "<em class=\"insert\">（罰則に関する経過措置）</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_6",
+              "-TocObjectId": "508AC0000000055-Sp-At_6"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_6"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[6]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第六条　この法律の施行前にした行為及び附則第四条の規定によりなお従前の例によることとされる場合におけるこの法律の施行後にした行為に対する罰則の適用については、なお従前の例による。</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_6-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_6"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_6"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[7]",
+              "#text": "（政令への委任）",
+              "-ObjectId": "#508AC0000000055-Sp-At_7",
+              "-TocObjectId": "508AC0000000055-Sp-At_7"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[7]",
+              "#text": "（政令への委任）",
+              "-ObjectId": "#508AC0000000055-Sp-At_7",
+              "-TocObjectId": "508AC0000000055-Sp-At_7"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_7"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[7]/Paragraph[1]",
+              "#text": "第七条　附則第二条から前条までに定めるもののほか、この法律の施行に関し必要な経過措置（罰則に関する経過措置を含む。）は、政令で定める。",
+              "-ObjectId": "#508AC0000000055-Sp-At_7-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_7"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[7]/Paragraph[1]",
+              "#text": "第七条　附則第二条から前条までに定めるもののほか、この法律の施行に関し必要な経過措置（罰則に関する経過措置を含む。）は、政令で定める。",
+              "-ObjectId": "#508AC0000000055-Sp-At_7-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_7"
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_7"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[8]",
+              "#text": "<em class=\"insert\">（検討）</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_8",
+              "-TocObjectId": "508AC0000000055-Sp-At_8"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_8"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[8]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第八条　政府は、この法律の施行後四年を目途として、この法律による改正後の規定の施行の状況について検討を加え、その結果に基づいて必要な措置を講ずるものとする。</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_8-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_8"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_8"
+          }
+        ]
+      }
+    }
+  }
+}

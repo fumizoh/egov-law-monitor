@@ -2,6 +2,8 @@
 Application data models.
 """
 
+from dataclasses import dataclass
+
 from typing import Any, TypedDict
 
 
@@ -41,3 +43,50 @@ class Law(TypedDict):
     url: str
 
     updates: list[Update]
+
+
+@dataclass(slots=True)
+class CompareBlock:
+    """Normalized Compare API block."""
+
+    change_type: str
+
+    xpath: str
+
+    object_id: str
+
+    toc_object_id: str
+
+    old_text: str | None
+
+    new_text: str | None
+
+
+@dataclass(slots=True)
+class LawRevision:
+
+    law_data_id: int
+
+    revision: str
+
+    sub_revision: str
+
+    law_num: str
+
+    enforcement_date: str | None
+
+    scheduled_enforcement_date: str | None
+
+    enforcement_comment: str | None
+
+
+@dataclass(slots=True)
+class CompareResult:
+
+    law_id: str
+
+    old: LawRevision
+
+    new: LawRevision
+
+    blocks: list[CompareBlock]

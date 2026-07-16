@@ -1,3 +1,4 @@
+from pathlib import Path
 import json
 from pprint import pprint
 
@@ -88,3 +89,18 @@ for i, item in enumerate(history):
 
     print(f"  Date        : {date}")
     print()
+
+
+compare = response.json()
+
+Path("compare.json").write_text(
+    json.dumps(
+        compare,
+        ensure_ascii=False,
+        indent=2,
+    ),
+    encoding="utf-8",
+)
+
+print()
+print("Saved : compare.json")
