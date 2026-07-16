@@ -60,11 +60,26 @@ print()
 print("=== First CompareBlock ===")
 pprint(compare_blocks[0])
 
+article = next(
+    block
+    for block in compare_blocks
+    if "/Article" in (
+        block["NewLawBlock"].get("-Xpath", "")
+        or block["OldLawBlock"].get("-Xpath", "")
+    )
+)
+
+print()
+print("=== First Article ===")
+
+pprint(article)
+
 counter = Counter(
     block["-differential"]
     for block in compare_blocks
 )
 
+print()
 print(counter)
 
 different = [

@@ -1,8 +1,15 @@
 from pathlib import Path
+import sys
 import json
 from pprint import pprint
 
 import requests
+
+sys.path.append(
+    str(Path(__file__).resolve().parents[1] / "src")
+)
+
+from sources.compare_api import fetch_compare
 
 from sel_text_list import SEL_TEXT_LIST
 
@@ -11,11 +18,6 @@ LAW_ID = "406AC0000000113"
 REVISION_URL = (
     "https://laws.e-gov.go.jp/internal-api/"
     "SelectLawRevisionData.json"
-)
-
-COMPARE_URL = (
-    "https://laws.e-gov.go.jp/internal-api/"
-    "SelectLawCompareData.json"
 )
 
 payload = {
@@ -45,25 +47,17 @@ history = data["result"]["Amendment_History"]
 
 selected = history[1]
 
-compare_payload = {
-    "new_law_data_id": selected["LawDataId"],
-    "new_subRevision": selected["SubRevision"],
-    "selTextList": SEL_TEXT_LIST,
-}
-
-response = requests.post(
-    COMPARE_URL,
-    json=compare_payload,
-    headers=headers,
-    timeout=30,
+compare = fetch_compare(
+    new_law_data_id=selected["LawDataId"],
+    new_sub_revision=selected["SubRevision"],
+    sel_text_list=SEL_TEXT_LIST,
 )
 
 print()
 print("=== Compare API ===")
-print(response.status_code)
-print(response.headers.get("Content-Type"))
 print()
-print(response.text[:500])
+
+print(compare)
 
 print(f"Found {len(history)} revisions")
 
@@ -89,9 +83,6 @@ for i, item in enumerate(history):
 
     print(f"  Date        : {date}")
     print()
-
-
-compare = response.json()
 
 Path("compare.json").write_text(
     json.dumps(

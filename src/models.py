@@ -90,3 +90,43 @@ class CompareResult:
     new: LawRevision
 
     blocks: list[CompareBlock]
+
+
+@dataclass(slots=True)
+class Paragraph:
+
+    num: str
+
+    text: str
+
+
+@dataclass(slots=True)
+class LawTextResult:
+
+    object_id: str
+
+    kind: str
+
+    title: str | None
+
+    caption: str | None
+
+    paragraphs: list[Paragraph]
+
+
+@dataclass(slots=True)
+class LawChange:
+
+    object_id: str
+
+    kind: str
+
+    title: str | None
+
+    caption: str | None
+
+    change_type: str
+
+    before: str | None
+
+    after: str | None
