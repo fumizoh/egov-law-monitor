@@ -1,28 +1,26 @@
 {
   "egov": {
-    "last_update": "20260715",
-    "update_count": 77,
+    "last_update": "20260716",
+    "update_count": 4,
     "source": {
-      "egov": 77
+      "egov": 4
     },
     "law_type": {
-      "府省令": 67,
-      "法律": 5,
-      "政令": 1,
-      "規則": 4
+      "府省令": 3,
+      "政令": 1
     }
   },
   "public_comment": {
-    "last_update": "2026-07-14T15:00:Z",
+    "last_update": "2026-07-15T15:00:Z",
     "update_count": 6,
     "source": {
       "public_comment": 6
     },
     "category": {
-      "国民生活の安全・安心の確保": 2,
+      "国民生活の安全・安心の確保": 3,
+      "社会福祉": 1,
       "電気通信": 1,
-      "厚生": 2,
-      "社会保険": 1
+      "厚生": 1
     }
   }
 }
