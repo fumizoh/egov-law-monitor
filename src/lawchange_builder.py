@@ -7,18 +7,13 @@ from models import (
 
 def build_law_change(
     compare: CompareBlock,
-    index: dict[str, LawTextResult],
-) -> LawChange | None:
-    """Build one LawChange."""
-
-    lawtext = index.get(compare.object_id)
-
-    if lawtext is None:
-        return None
+    lawtext: LawTextResult,
+) -> LawChange:
+    """Build one law change."""
 
     after = "\n".join(
-        p.text
-        for p in lawtext.paragraphs
+        paragraph.text
+        for paragraph in lawtext.paragraphs
     )
 
     return LawChange(
