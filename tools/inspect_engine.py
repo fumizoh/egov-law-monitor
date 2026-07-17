@@ -144,6 +144,98 @@ def main():
     print(f"Item      : {item}")
     print(f"Other     : {other}")
 
+    print()
+    print("===== Unmatched CompareBlocks =====")
+
+    from collections import Counter
+
+    counter = Counter()
+
+    for block in compare_result.blocks:
+
+        if block.object_id in index.article_lookup:
+            continue
+
+        key = block.xpath.split("/")[3] if len(block.xpath.split("/")) > 3 else block.xpath
+        counter[key] += 1
+
+    for name, count in counter.most_common():
+        print(f"{name:20} : {count}")
+
+    print()
+    print("===== Unmatched ObjectIds =====")
+
+    for block in compare_result.blocks:
+
+        if block.object_id in index.article_lookup:
+            continue
+
+        print(block.object_id)
+        print(block.xpath)
+        print()
+
+    '''
+    print()
+    print("===== Article 5 =====")
+
+    for article in results:
+        if article.object_id == "#Mp-Ch_2-Se_2-Ss_1-At_5":
+            print(article)
+            break
+    else:
+        print("Not found")
+
+    print(len(SEL_TEXT_LIST))
+    print(SEL_TEXT_LIST[:20])
+
+    print("#Mp-Ch_2-Se_2-Ss_1-At_5" in SEL_TEXT_LIST)
+    '''
+
+    print()
+    print("===== Compare Articles =====")
+
+    compare_articles = set()
+
+    for block in compare_result.blocks:
+
+        if "/Article[" not in block.xpath:
+            continue
+
+        compare_articles.add(block.object_id)
+
+    for object_id in sorted(compare_articles):
+        print(object_id)
+
+    print()
+    print("===== LawText Articles =====")
+
+    lawtext_articles = {}
+
+    for article in results:
+
+        lawtext_articles[article.object_id] = article
+
+    for object_id in sorted(lawtext_articles):
+
+        title = lawtext_articles[object_id].title or ""
+
+        print(f"{object_id:<40} {title}")
+
+    print()
+    print("===== Compare Only =====")
+
+    for object_id in sorted(compare_articles - set(lawtext_articles)):
+        print(object_id)
+
+    print()
+    print("===== LawText Only =====")
+
+    for object_id in sorted(set(lawtext_articles) - compare_articles):
+
+        title = lawtext_articles[object_id].title or ""
+
+        print(f"{object_id:<40} {title}")
+
 
 if __name__ == "__main__":
     main()

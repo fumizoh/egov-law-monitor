@@ -131,12 +131,40 @@ class LawTextResult:
 
 
 @dataclass(slots=True)
+class Location:
+    """Display location of a law change."""
+
+    article_object_id: str
+
+    article: str
+
+    paragraph: str | None = None
+
+    item: str | None = None
+
+    @property
+    def label(self) -> str:
+        """Human-readable label."""
+
+        parts = [self.article]
+
+        if self.paragraph:
+            parts.append(self.paragraph)
+
+        if self.item:
+            parts.append(self.item)
+
+        return " ".join(parts)
+
+
+@dataclass(slots=True)
 class LawTextIndex:
-    """Indexed LawText data."""
 
     articles: dict[str, LawTextResult]
 
     article_lookup: dict[str, str]
+
+    location_lookup: dict[str, Location]
 
 
 @dataclass(slots=True)
@@ -146,12 +174,14 @@ class LawChange:
 
     kind: str
 
-    title: str | None
+    title: str
 
     caption: str | None
-
+'''
+    location: Location
+'''
     change_type: str
 
     before: str | None
 
-    after: str | None
+    after: str
