@@ -1,6 +1,5 @@
 from pathlib import Path
 import sys
-from pprint import pprint
 
 import requests
 
@@ -9,17 +8,14 @@ sys.path.append(
 )
 
 from comparison import parse_compare_result
+from lawchange_builder import build_law_changes
+from lawtext_parser import (
+    build_lawtext_index,
+    parse_lawtext_results,
+)
+from sel_text_list import SEL_TEXT_LIST
 from sources.compare_api import fetch_compare
 from sources.lawtext import fetch_law_text
-
-from sel_text_list import SEL_TEXT_LIST
-
-from lawtext_parser import (
-    parse_law_text_result,
-    build_lawtext_index,
-)
-
-from lawchange_builder import build_law_change
 
 LAW_ID = "406AC0000000113"
 
@@ -33,82 +29,121 @@ HEADERS = {
     "User-Agent": "eGov Law Monitor",
 }
 
-payload = {
-    "law_id": LAW_ID,
-}
 
-response = requests.post(
-    REVISION_URL,
-    json=payload,
-    headers=HEADERS,
-    timeout=30,
-)
+def count_compare_blocks(compare_result):
+    """Count CompareBlock types."""
 
-response.raise_for_status()
+    article = 0
+    paragraph = 0
+    item = 0
+    other = 0
 
-revision = response.json()
+    for block in compare_result.blocks:
 
-history = revision["result"]["Amendment_History"]
+        xpath = block.xpath
 
-selected = history[1]
+        if "/Item[" in xpath:
+            item += 1
+        elif "/Paragraph[" in xpath:
+            paragraph += 1
+        elif "/Article[" in xpath:
+            article += 1
+        else:
+            other += 1
 
-compare_json = fetch_compare(
-    new_law_data_id=selected["LawDataId"],
-    new_sub_revision=selected["SubRevision"],
-    sel_text_list=SEL_TEXT_LIST,
-)
+    return article, paragraph, item, other
 
-compare_result = parse_compare_result(
-    compare_json
-)
 
-print(compare_result.new)
+def main():
 
-lawtext_json = fetch_law_text(
-    law_id=compare_result.law_id,
-    law_data_id=compare_result.new.law_data_id,
-    sub_revision=compare_result.new.sub_revision,
-    occasion=compare_result.new.scheduled_enforcement_date,
-    sel_text_list=SEL_TEXT_LIST,
-)
+    payload = {
+        "law_id": LAW_ID,
+    }
 
-print()
-print(type(lawtext_json))
+    response = requests.post(
+        REVISION_URL,
+        json=payload,
+        headers=HEADERS,
+        timeout=30,
+    )
 
-print(lawtext_json.keys())
+    response.raise_for_status()
 
-results = [
-    parse_law_text_result(item)
-    for item in lawtext_json["result"]["searchResult_array"]
-    if item["Type"] == "Article"
-]
+    revision = response.json()
 
-index = build_lawtext_index(results)
+    history = revision["result"]["Amendment_History"]
 
-print()
-print(len(index))
+    selected = history[1]
 
-print()
-print(index["#Mp-Ch_1-At_1"])
+    compare_json = fetch_compare(
+        new_law_data_id=selected["LawDataId"],
+        new_sub_revision=selected["SubRevision"],
+        sel_text_list=SEL_TEXT_LIST,
+    )
 
-compare_block = next(
-    block
-    for block in compare_result.blocks
-    if block.object_id == "#Mp-Ch_1-At_1"
-)
+    compare_result = parse_compare_result(compare_json)
 
-lawtext = index.get(compare_block.object_id)
+    lawtext_json = fetch_law_text(
+        law_id=compare_result.law_id,
+        law_data_id=compare_result.new.law_data_id,
+        sub_revision=compare_result.new.sub_revision,
+        occasion=compare_result.new.scheduled_enforcement_date,
+        sel_text_list=SEL_TEXT_LIST,
+    )
 
-print()
-print(compare_block)
+    search_result_array = (
+        lawtext_json["result"]["searchResult_array"]
+    )
 
-print()
-print(lawtext)
+    results = parse_lawtext_results(
+        search_result_array
+    )
 
-change = build_law_change(
-    compare_block,
-    lawtext,
-)
+    index = build_lawtext_index(results)
 
-print()
-print(change)
+    changes = build_law_changes(
+        compare_result,
+        index,
+    )
+
+    matched = sum(
+        1
+        for block in compare_result.blocks
+        if block.object_id in index.article_lookup
+    )
+
+    article, paragraph, item, other = (
+        count_compare_blocks(compare_result)
+    )
+
+    print()
+    print("===== Summary =====")
+    print()
+
+    print(
+        f"Compare blocks : {len(compare_result.blocks)}"
+    )
+
+    print("LawText index")
+    print(len(index.articles))
+    print(len(index.article_lookup))
+
+    print(
+        f"LawChanges     : {len(changes)}"
+    )
+    print(
+        f"Matched IDs    : {matched}"
+    )
+
+    print()
+    print("===== CompareBlock Types =====")
+    print()
+
+    print(f"Article   : {article}")
+    print(f"Paragraph : {paragraph}")
+    print(f"Item      : {item}")
+    print(f"Other     : {other}")
+
+
+if __name__ == "__main__":
+    main()

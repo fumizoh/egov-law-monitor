@@ -93,11 +93,27 @@ class CompareResult:
 
 
 @dataclass(slots=True)
-class Paragraph:
+class Item:
+    """Law text item."""
+
+    object_id: str
 
     num: str
 
     text: str
+
+
+@dataclass(slots=True)
+class Paragraph:
+    """Law text paragraph."""
+
+    object_id: str
+
+    num: str
+
+    text: str
+
+    items: list[Item]
 
 
 @dataclass(slots=True)
@@ -112,6 +128,15 @@ class LawTextResult:
     caption: str | None
 
     paragraphs: list[Paragraph]
+
+
+@dataclass(slots=True)
+class LawTextIndex:
+    """Indexed LawText data."""
+
+    articles: dict[str, LawTextResult]
+
+    article_lookup: dict[str, str]
 
 
 @dataclass(slots=True)

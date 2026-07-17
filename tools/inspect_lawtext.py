@@ -50,6 +50,7 @@ results = [
     result,
 ]
 
+'''
 index = build_lawtext_index(results)
 
 print()
@@ -57,4 +58,18 @@ print(index)
 
 print()
 print(index["#Mp-Ch_1-At_1"])
+'''
 
+print("--additional inspection--")
+
+for result in results:
+
+    if result.object_id is None:
+        continue
+
+    if "-Sp" in result.object_id:
+
+        print(result.object_id)
+        print(result.title)
+        print(result.caption)
+        print()

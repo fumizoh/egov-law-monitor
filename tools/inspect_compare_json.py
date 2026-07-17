@@ -123,3 +123,9 @@ print(result.new)
 print(len(result.blocks))
 
 print(result.blocks[0])
+
+print("--Sp--")
+for block in compare_blocks:
+    if block["NewLawBlock"]["-ObjectId"] == "#508AC0000000055-Sp-At_1":
+        pprint(block)
+        break
