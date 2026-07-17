@@ -10,7 +10,6 @@ sys.path.append(
 from comparison import parse_compare_result
 from lawchange_builder import build_law_changes
 from lawtext_parser import (
-    build_lawtext_index,
     parse_lawtext_results,
 )
 from sel_text_list import SEL_TEXT_LIST
@@ -99,143 +98,36 @@ def main():
         search_result_array
     )
 
-    index = build_lawtext_index(results)
-
-    changes = build_law_changes(
-        compare_result,
-        index,
-    )
-
-    matched = sum(
-        1
-        for block in compare_result.blocks
-        if block.object_id in index.article_lookup
-    )
-
-    article, paragraph, item, other = (
-        count_compare_blocks(compare_result)
-    )
+    index = parse_lawtext_results(search_result_array)
 
     print()
-    print("===== Summary =====")
+    print("===== LawText =====")
     print()
 
-    print(
-        f"Compare blocks : {len(compare_result.blocks)}"
-    )
-
-    print("LawText index")
-    print(len(index.articles))
-    print(len(index.article_lookup))
-
-    print(
-        f"LawChanges     : {len(changes)}"
-    )
-    print(
-        f"Matched IDs    : {matched}"
-    )
+    print(f"Articles        : {len(index.articles)}")
+    print(f"Article lookup  : {len(index.article_lookup)}")
+    print(f"Location lookup : {len(index.location_lookup)}")
 
     print()
-    print("===== CompareBlock Types =====")
+    print("===== Location Sample =====")
     print()
 
-    print(f"Article   : {article}")
-    print(f"Paragraph : {paragraph}")
-    print(f"Item      : {item}")
-    print(f"Other     : {other}")
+    for object_id in [
+        "#Mp-Ch_3-At_41",
+        "#Mp-Ch_3-At_41-Pr_2",
+        "#Mp-Ch_3-At_41-Pr_2-It_1",
+    ]:
+        location = index.location_lookup.get(object_id)
 
-    print()
-    print("===== Unmatched CompareBlocks =====")
+        print(object_id)
 
-    from collections import Counter
+        if location:
+            print(location)
+            print(location.label)
+        else:
+            print("Not found")
 
-    counter = Counter()
-
-    for block in compare_result.blocks:
-
-        if block.object_id in index.article_lookup:
-            continue
-
-        key = block.xpath.split("/")[3] if len(block.xpath.split("/")) > 3 else block.xpath
-        counter[key] += 1
-
-    for name, count in counter.most_common():
-        print(f"{name:20} : {count}")
-
-    print()
-    print("===== Unmatched ObjectIds =====")
-
-    for block in compare_result.blocks:
-
-        if block.object_id in index.article_lookup:
-            continue
-
-        print(block.object_id)
-        print(block.xpath)
         print()
-
-    '''
-    print()
-    print("===== Article 5 =====")
-
-    for article in results:
-        if article.object_id == "#Mp-Ch_2-Se_2-Ss_1-At_5":
-            print(article)
-            break
-    else:
-        print("Not found")
-
-    print(len(SEL_TEXT_LIST))
-    print(SEL_TEXT_LIST[:20])
-
-    print("#Mp-Ch_2-Se_2-Ss_1-At_5" in SEL_TEXT_LIST)
-    '''
-
-    print()
-    print("===== Compare Articles =====")
-
-    compare_articles = set()
-
-    for block in compare_result.blocks:
-
-        if "/Article[" not in block.xpath:
-            continue
-
-        compare_articles.add(block.object_id)
-
-    for object_id in sorted(compare_articles):
-        print(object_id)
-
-    print()
-    print("===== LawText Articles =====")
-
-    lawtext_articles = {}
-
-    for article in results:
-
-        lawtext_articles[article.object_id] = article
-
-    for object_id in sorted(lawtext_articles):
-
-        title = lawtext_articles[object_id].title or ""
-
-        print(f"{object_id:<40} {title}")
-
-    print()
-    print("===== Compare Only =====")
-
-    for object_id in sorted(compare_articles - set(lawtext_articles)):
-        print(object_id)
-
-    print()
-    print("===== LawText Only =====")
-
-    for object_id in sorted(set(lawtext_articles) - compare_articles):
-
-        title = lawtext_articles[object_id].title or ""
-
-        print(f"{object_id:<40} {title}")
-
 
 if __name__ == "__main__":
     main()

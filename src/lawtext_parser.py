@@ -3,8 +3,10 @@ from models import (
     LawTextIndex,
     LawTextResult,
     Paragraph,
+    Location,
 )
 
+import pprint
 
 def collect_sentences(node: dict) -> list[dict]:
     """Collect Sentence nodes."""
@@ -102,87 +104,101 @@ def parse_law_text_result(raw: dict) -> LawTextResult:
     )
 
 
-def build_lawtext_index(
-    results: list[LawTextResult],
-) -> LawTextIndex:
-    """Build ObjectId index."""
-
-    articles = {}
-    article_lookup = {}
-
-    for article in results:
-
-        articles[article.object_id] = article
-
-        article_lookup[article.object_id] = article.object_id
-
-        for paragraph in article.paragraphs:
-            article_lookup[
-                paragraph.object_id
-            ] = article.object_id
-
-        for item in paragraph.items:
-            article_lookup[
-                item.object_id
-            ] = article.object_id
-
-    return LawTextIndex(
-        articles=articles,
-        article_lookup=article_lookup,
-    )
-
-
-def parse_suppl_provision(item: dict) -> list[LawTextResult]:
+def parse_suppl_provision(
+    item: dict,
+) -> list[LawTextResult]:
     """Parse supplementary provision."""
 
     articles = item["Content"].get("Article", [])
 
     return [
-        parse_law_text_result(article)
+        parse_article(
+            article,
+            object_id=article["-ObjectId"],
+            kind="EnactSupplProvision",
+        )
         for article in articles
     ]
 
 
-def parse_lawtext_results(
-    search_result_array: list[dict],
-) -> list[LawTextResult]:
-    """Parse LawText search results."""
+def build_article_lookup(
+    articles: dict[str, LawTextResult],
+) -> dict[str, str]:
 
-    results: list[LawTextResult] = []
+    lookup: dict[str, str] = {}
+
+    for article in articles.values():
+
+        lookup[article.object_id] = article.object_id
+
+        for paragraph in article.paragraphs:
+
+            lookup[paragraph.object_id] = article.object_id
+
+            for item in paragraph.items:
+
+                lookup[item.object_id] = article.object_id
+
+    return lookup
+
+
+def build_location_lookup(
+    articles: dict[str, LawTextResult],
+) -> dict[str, Location]:
+
+    lookup: dict[str, Location] = {}
+
+    for article in articles.values():
+
+        lookup[article.object_id] = Location(
+            article_object_id=article.object_id,
+            article=article.title,
+        )
+
+        for paragraph in article.paragraphs:
+
+            lookup[paragraph.object_id] = Location(
+                article_object_id=article.object_id,
+                article=article.title,
+                paragraph=paragraph.num,
+            )
+
+            for item in paragraph.items:
+
+                lookup[item.object_id] = Location(
+                    article_object_id=article.object_id,
+                    article=article.title,
+                    paragraph=paragraph.num,
+                    item=item.num,
+                )
+
+    return lookup
+
+
+def parse_lawtext_results(
+    contents: list[dict],
+) -> LawTextIndex:
+    """Parse LawText API response."""
 
     articles: dict[str, LawTextResult] = {}
 
-    article_lookup: dict[str, str] = {}
+    for content in contents:
 
-    for item in search_result_array:
+        match content["Type"]:
 
-        item_type = item["Type"]
-
-        if item_type == "Article":
-
-            result = parse_law_text_result(item)
-
-            results.append(result)
-
-            articles[result.object_id] = result
-            article_lookup[result.object_id] = result.object_id
-
-        elif item_type in (
-            "EnactSupplProvision",
-            "AmendSupplProvision",
-        ):
-
-            for article in item["Content"].get("Article", []):
-
-                result = parse_article(
-                    article,
-                    object_id=article["-ObjectId"],
-                    kind="Article",
-                )
-
-                results.append(result)
-
+            case "Article":
+                result = parse_law_text_result(content)
                 articles[result.object_id] = result
-                article_lookup[result.object_id] = result.object_id
 
-    return results
+            case "EnactSupplProvision":
+                for supplementary in parse_suppl_provision(content):
+                    articles[supplementary.object_id] = supplementary
+
+    article_lookup = build_article_lookup(articles)
+    location_lookup = build_location_lookup(articles)
+
+    return LawTextIndex(
+        articles=articles,
+        article_lookup=article_lookup,
+        location_lookup=location_lookup,
+    )

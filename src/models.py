@@ -177,9 +177,7 @@ class LawChange:
     title: str
 
     caption: str | None
-'''
-    location: Location
-'''
+
     change_type: str
 
     before: str | None
