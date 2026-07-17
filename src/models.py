@@ -169,17 +169,10 @@ class LawTextIndex:
 
 @dataclass(slots=True)
 class LawChange:
-
     object_id: str
 
-    kind: str
+    location: Location
 
-    title: str
+    lawtext: LawTextResult
 
-    caption: str | None
-
-    change_type: str
-
-    before: str | None
-
-    after: str
+    compare_block: CompareBlock

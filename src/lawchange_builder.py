@@ -1,36 +1,31 @@
 from models import (
     CompareBlock,
-    LawChange,
-    LawTextResult,
     CompareResult,
+    LawChange,
+    LawTextIndex,
+    LawTextResult,
+    Location,
 )
 
 
 def build_law_change(
     compare: CompareBlock,
+    location: Location,
     lawtext: LawTextResult,
 ) -> LawChange:
     """Build one law change."""
 
-    after = "\n".join(
-        paragraph.text
-        for paragraph in lawtext.paragraphs
-    )
-
     return LawChange(
         object_id=compare.object_id,
-        kind=lawtext.kind,
-        title=lawtext.title,
-        caption=lawtext.caption,
-        change_type=compare.change_type,
-        before=compare.old_text,
-        after=after,
+        location=location,
+        lawtext=lawtext,
+        compare_block=compare,
     )
 
 
 def build_law_changes(
     compare_result: CompareResult,
-    index: dict[str, LawTextResult],
+    index: LawTextIndex,
 ) -> list[LawChange]:
     """Build law changes."""
 
@@ -38,18 +33,21 @@ def build_law_changes(
 
     for block in compare_result.blocks:
 
-        article_id = index.article_lookup.get(
+        location = index.location_lookup.get(
             block.object_id
         )
 
-        if article_id is None:
+        if location is None:
             continue
 
-        lawtext = index.articles[article_id]
+        lawtext = index.articles[
+            location.article_object_id
+        ]
 
         changes.append(
             build_law_change(
                 block,
+                location,
                 lawtext,
             )
         )
