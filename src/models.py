@@ -64,6 +64,7 @@ class CompareBlock:
 
 @dataclass(slots=True)
 class LawRevision:
+    """Revision metadata."""
 
     law_data_id: int
 
@@ -82,6 +83,7 @@ class LawRevision:
 
 @dataclass(slots=True)
 class CompareResult:
+    """Normalized Compare API result."""
 
     law_id: str
 
@@ -118,6 +120,7 @@ class Paragraph:
 
 @dataclass(slots=True)
 class LawTextResult:
+    """One article (or supplementary provision article)."""
 
     object_id: str
 
@@ -159,6 +162,7 @@ class Location:
 
 @dataclass(slots=True)
 class LawTextIndex:
+    """Lookup indexes for parsed law text."""
 
     articles: dict[str, LawTextResult]
 
@@ -169,6 +173,8 @@ class LawTextIndex:
 
 @dataclass(slots=True)
 class LawChange:
+    """One normalized law change."""
+
     object_id: str
 
     location: Location

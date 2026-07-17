@@ -6,7 +6,6 @@ from models import (
     Location,
 )
 
-import pprint
 
 def collect_sentences(node: dict) -> list[dict]:
     """Collect Sentence nodes."""
@@ -124,6 +123,7 @@ def parse_suppl_provision(
 def build_article_lookup(
     articles: dict[str, LawTextResult],
 ) -> dict[str, str]:
+    """Build ObjectId to article ObjectId lookup."""
 
     lookup: dict[str, str] = {}
 
@@ -145,6 +145,7 @@ def build_article_lookup(
 def build_location_lookup(
     articles: dict[str, LawTextResult],
 ) -> dict[str, Location]:
+    """Build ObjectId to display location lookup."""
 
     lookup: dict[str, Location] = {}
 

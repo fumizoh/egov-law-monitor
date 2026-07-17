@@ -2,6 +2,10 @@ import requests
 
 URL = "https://laws.e-gov.go.jp/internal-api/SelectLawTextData.json"
 
+HEADERS = {
+    "Content-Type": "application/json",
+    "User-Agent": "eGov Law Monitor",
+}
 
 def fetch_law_text(
     law_id: str,
@@ -20,15 +24,10 @@ def fetch_law_text(
         "selTextList": sel_text_list,
     }
 
-    headers = {
-        "Content-Type": "application/json",
-        "User-Agent": "eGov Law Monitor",
-    }
-
     response = requests.post(
         URL,
         json=payload,
-        headers=headers,
+        headers=HEADERS,
         timeout=30,
     )
 

@@ -29,30 +29,6 @@ HEADERS = {
 }
 
 
-def count_compare_blocks(compare_result):
-    """Count CompareBlock types."""
-
-    article = 0
-    paragraph = 0
-    item = 0
-    other = 0
-
-    for block in compare_result.blocks:
-
-        xpath = block.xpath
-
-        if "/Item[" in xpath:
-            item += 1
-        elif "/Paragraph[" in xpath:
-            paragraph += 1
-        elif "/Article[" in xpath:
-            article += 1
-        else:
-            other += 1
-
-    return article, paragraph, item, other
-
-
 def main():
 
     payload = {
@@ -92,10 +68,6 @@ def main():
 
     search_result_array = (
         lawtext_json["result"]["searchResult_array"]
-    )
-
-    results = parse_lawtext_results(
-        search_result_array
     )
 
     index = parse_lawtext_results(search_result_array)

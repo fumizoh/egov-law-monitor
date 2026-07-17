@@ -43,6 +43,7 @@ def detect_change_type(
 
 
 def normalize_compare_block(raw: dict) -> CompareBlock:
+    """Normalize one CompareBlock."""
 
     old = raw["OldLawBlock"]
     new = raw["NewLawBlock"]
