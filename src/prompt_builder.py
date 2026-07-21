@@ -1,43 +1,67 @@
-from models import SummaryInput
+"""Build structured prompts for AI summaries."""
+
+from models import (
+    PromptDocument,
+    PromptSection,
+    SummaryArticle,
+    SummaryChange,
+    SummaryInput,
+)
 
 
-def build_prompt(summary: SummaryInput) -> str:
-    """Build prompt for AI summary."""
+def build_change_body(change: SummaryChange) -> str:
+    """Build prompt body for one change."""
 
     lines: list[str] = []
 
-    lines.append("あなたは法令改正を要約する専門家です。")
-    lines.append("")
-    lines.append("以下の法令改正を簡潔に要約してください。")
-    lines.append("")
-    lines.append(f"法令名: {summary.law_name}")
-    lines.append(f"法令番号: {summary.law_num}")
-    lines.append("")
+    header = change.change_type
+    if change.paragraph:
+        header += f" (Paragraph {change.paragraph})"
 
-    for article in summary.articles:
+    lines.append(header)
 
-        lines.append(f"## {article.article}")
+    if change.before:
+        lines.append("")
+        lines.append("Before:")
+        lines.append(change.before)
 
-        for change in article.changes:
-
-            paragraph = (
-                f" 第{change.paragraph}項"
-                if change.paragraph
-                else ""
-            )
-
-            lines.append(
-                f"- {change.change_type}{paragraph}"
-            )
-
-            if change.before:
-                lines.append("Before:")
-                lines.append(change.before)
-
-            if change.after:
-                lines.append("After:")
-                lines.append(change.after)
-
-            lines.append("")
+    if change.after:
+        lines.append("")
+        lines.append("After:")
+        lines.append(change.after)
 
     return "\n".join(lines)
+
+
+def build_section(article: SummaryArticle) -> PromptSection:
+    """Build one prompt section."""
+
+    body = "\n\n".join(
+        build_change_body(change)
+        for change in article.changes
+    )
+
+    return PromptSection(
+        title=article.article,
+        body=body,
+    )
+
+
+def build_prompt_document(
+    summary: SummaryInput,
+) -> PromptDocument:
+    """Build a structured prompt document."""
+
+    sections = [
+        build_section(article)
+        for article in summary.articles
+    ]
+
+    return PromptDocument(
+        title=f"{summary.law_name} 改正要約",
+        system=(
+            "あなたは法令改正を要約する専門家です。"
+            "法令改正の内容を正確かつ簡潔に要約してください。"
+        ),
+        sections=sections,
+    )
