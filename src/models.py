@@ -195,3 +195,26 @@ class ChangeType(str, Enum):
     DELETED = "deleted"
     MODIFIED = "modified"
     SAME = "same"
+
+
+@dataclass(slots=True)
+class SummaryChange:
+    """Input for AI summary."""
+
+    article: str
+    paragraph: str | None
+
+    change_type: str
+
+    before: str | None
+    after: str | None
+
+
+@dataclass(slots=True)
+class SummaryInput:
+    """AI summary request."""
+
+    law_name: str
+    law_num: str
+
+    changes: list[SummaryChange]
