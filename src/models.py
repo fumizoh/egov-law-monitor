@@ -228,3 +228,20 @@ class SummaryInput:
     law_num: str
 
     articles: list[SummaryArticle]
+
+
+@dataclass(slots=True)
+class PromptSection:
+    """One section of a prompt."""
+
+    title: str
+    body: str
+
+
+@dataclass(slots=True)
+class PromptDocument:
+    """Structured prompt for an LLM."""
+
+    title: str
+    system: str
+    sections: list[PromptSection]
