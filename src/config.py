@@ -48,3 +48,8 @@ CHANGE_ADDED = "added"
 CHANGE_REMOVED = "removed"
 CHANGE_MODIFIED = "modified"
 CHANGE_SAME = "same"
+
+# Gemini
+PROJECT_ID = "project-9dc19b38-12b0-40dd-871"
+LOCATION = "us-central1"
+MODEL_NAME = "gemini-2.5-flash"

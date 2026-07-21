@@ -1,7 +1,3 @@
-from models import SummaryResult
+from gemini_client import summarize
 
-
-def summarize(prompt: str) -> SummaryResult:
-    """Generate an AI summary."""
-
-    raise NotImplementedError
+__all__ = ["summarize"]

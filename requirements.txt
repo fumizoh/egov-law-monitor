@@ -8,3 +8,6 @@ sgmllib3k==1.0.0
 soupsieve==2.8.4
 typing_extensions==4.16.0
 urllib3==2.7.0
+openai>=2.0.0
+google-genai
+google-cloud-aiplatform

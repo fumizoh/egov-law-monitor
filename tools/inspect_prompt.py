@@ -95,18 +95,18 @@ print("--document--")
 print(document)
 
 document = build_prompt_document(summary)
-
 prompt = render_prompt(document)
 
-print()
-print("--prompt--")
+print("-- Prompt ------------------------")
 print(prompt)
 
 print()
-print("--summary result--")
-try:
-    result = summarize(prompt)
-    print(result)
+print("-- AI Summary --------------------")
 
-except NotImplementedError:
-    print("AI client is not implemented yet.")
+result = summarize(prompt)
+
+if result.title:
+    print(result.title)
+    print()
+
+print(result.summary)
