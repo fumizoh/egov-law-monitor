@@ -211,10 +211,20 @@ class SummaryChange:
 
 
 @dataclass(slots=True)
+class SummaryArticle:
+    """AI summary input for one article."""
+
+    article: str
+
+    changes: list[SummaryChange]
+
+
+@dataclass(slots=True)
 class SummaryInput:
     """AI summary request."""
 
     law_name: str
+
     law_num: str
 
-    changes: list[SummaryChange]
+    articles: list[SummaryArticle]
