@@ -13,6 +13,7 @@ from lawchange_builder import build_law_changes
 from lawtext_parser import parse_lawtext_results
 from summary_builder import build_summary_input
 from prompt_builder import build_prompt_document
+from prompt_renderer import render_prompt
 
 from sources.compare_api import fetch_compare
 from sources.lawtext import fetch_law_text
@@ -91,3 +92,11 @@ document = build_prompt_document(summary)
 print()
 print("--document--")
 print(document)
+
+document = build_prompt_document(summary)
+
+prompt = render_prompt(document)
+
+print()
+print("--prompt--")
+print(prompt)
