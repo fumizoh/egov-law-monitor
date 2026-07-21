@@ -1,3 +1,5 @@
+from detector import detect_new_updates
+
 from law_view import create_law_view
 
 from storage import (
@@ -31,11 +33,16 @@ def process(
     Process updates from one source.
     """
 
-    # 更新情報を保存
-    save_source_data(
-        source=source,
-        data=updates,
-    )
+    all_updates = updates
+
+    if source == "egov":
+        new_updates = detect_new_updates(source, all_updates)
+    else:
+        new_updates = all_updates
+
+    save_source_data(source, all_updates)
+
+    updates = new_updates
 
     # Law View を公開データとして保存
     if source == "egov":

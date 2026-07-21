@@ -1,31 +1,24 @@
 {
   "egov": {
     "last_update": "20260717",
-    "update_count": 221,
-    "source": {
-      "egov": 221
-    },
-    "law_type": {
-      "政令": 7,
-      "法律": 209,
-      "府省令": 5
-    }
+    "update_count": 0,
+    "source": {},
+    "law_type": {}
   },
   "public_comment": {
-    "last_update": "2026-07-17T15:00:Z",
+    "last_update": "2026-07-20T15:00:Z",
     "update_count": 10,
     "source": {
       "public_comment": 10
     },
     "category": {
+      "環境保全": 3,
+      "国民生活の安全・安心の確保": 2,
       "厚生": 1,
       "地方財政、地方税": 1,
       "電気通信": 1,
       "経済財政政策": 1,
-      "国民生活の安全・安心の確保": 3,
-      "工業": 1,
-      "陸運": 1,
-      "外国為替、貿易": 1
+      "工業": 1
     }
   }
 }
