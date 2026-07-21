@@ -8,6 +8,13 @@ from models import (
 
 TAG_RE = re.compile(r"<[^>]+>")
 
+from config import (
+    CHANGE_ADDED,
+    CHANGE_MODIFIED,
+    CHANGE_REMOVED,
+    CHANGE_SAME,
+)
+
 
 def strip_html(text: str | None) -> str | None:
     """Remove HTML tags."""
@@ -29,17 +36,17 @@ def detect_change_type(
     if old_text and new_text:
 
         if old_text == new_text:
-            return "same"
+            return CHANGE_SAME
 
-        return "modified"
+        return CHANGE_MODIFIED
 
     if old_text:
-        return "removed"
+        return CHANGE_REMOVED
 
     if new_text:
-        return "added"
+        return CHANGE_ADDED
 
-    return "same"
+    return CHANGE_SAME
 
 
 def normalize_compare_block(raw: dict) -> CompareBlock:

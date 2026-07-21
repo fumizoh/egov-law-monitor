@@ -18,8 +18,10 @@ def build_law_change(
     return LawChange(
         object_id=compare.object_id,
         location=location,
-        lawtext=lawtext,
-        compare_block=compare,
+        change_type=compare.change_type,
+        before=compare.old_text,
+        after=compare.new_text,
+        article_text=lawtext,
     )
 
 

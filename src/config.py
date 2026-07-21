@@ -42,3 +42,9 @@ LAWS_JSON = DOCS_DATA / "laws.json"
 NOTIFY_SOURCES = {
     "egov",
 }
+
+# Change types
+CHANGE_ADDED = "added"
+CHANGE_REMOVED = "removed"
+CHANGE_MODIFIED = "modified"
+CHANGE_SAME = "same"

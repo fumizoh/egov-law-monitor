@@ -6,6 +6,8 @@ from dataclasses import dataclass
 
 from typing import Any, TypedDict
 
+from enum import Enum
+
 
 class Event(TypedDict):
     """Common event model."""
@@ -173,12 +175,23 @@ class LawTextIndex:
 
 @dataclass(slots=True)
 class LawChange:
-    """One normalized law change."""
+    """Normalized law change."""
 
     object_id: str
 
     location: Location
 
-    lawtext: LawTextResult
+    change_type: str
 
-    compare_block: CompareBlock
+    before: str | None
+
+    after: str | None
+
+    article_text: LawTextResult
+
+
+class ChangeType(str, Enum):
+    ADDED = "added"
+    DELETED = "deleted"
+    MODIFIED = "modified"
+    SAME = "same"
