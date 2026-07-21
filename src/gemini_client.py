@@ -1,12 +1,12 @@
 from google import genai
 from google.genai.types import HttpOptions
 
-from models import SummaryResult
+from models import Summary
 
 from config import LOCATION, MODEL_NAME, PROJECT_ID
 
 
-def summarize(prompt: str) -> SummaryResult:
+def summarize(prompt: str) -> Summary:
     client = genai.Client(
         vertexai=True,
         project=PROJECT_ID,
@@ -19,7 +19,7 @@ def summarize(prompt: str) -> SummaryResult:
         contents=prompt,
     )
 
-    return SummaryResult(
+    return Summary(
         title="",
         summary=response.text.strip(),
     )

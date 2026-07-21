@@ -46,6 +46,7 @@ class Law(TypedDict):
 
     updates: list[Update]
 
+    summary: Summary | None = None
 
 @dataclass(slots=True)
 class CompareBlock:
@@ -250,8 +251,8 @@ class PromptDocument:
 
 
 @dataclass(slots=True)
-class SummaryResult:
-    """AI-generated summary."""
+class Summary:
+    """AI-generated summary of a law."""
 
     title: str
     summary: str
