@@ -14,6 +14,7 @@ from lawtext_parser import parse_lawtext_results
 from summary_builder import build_summary_input
 from prompt_builder import build_prompt_document
 from prompt_renderer import render_prompt
+from ai_client import summarize
 
 from sources.compare_api import fetch_compare
 from sources.lawtext import fetch_law_text
@@ -100,3 +101,12 @@ prompt = render_prompt(document)
 print()
 print("--prompt--")
 print(prompt)
+
+print()
+print("--summary result--")
+try:
+    result = summarize(prompt)
+    print(result)
+
+except NotImplementedError:
+    print("AI client is not implemented yet.")

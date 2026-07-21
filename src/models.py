@@ -245,3 +245,11 @@ class PromptDocument:
     title: str
     system: str
     sections: list[PromptSection]
+
+
+@dataclass(slots=True)
+class SummaryResult:
+    """AI-generated summary."""
+
+    title: str
+    summary: str
