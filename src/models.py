@@ -240,10 +240,12 @@ class PromptSection:
 
 @dataclass(slots=True)
 class PromptDocument:
-    """Structured prompt for an LLM."""
+    """Complete prompt document for an LLM."""
 
     title: str
     system: str
+    role: str
+    task: str
     sections: list[PromptSection]
 
 

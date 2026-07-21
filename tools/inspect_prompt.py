@@ -94,7 +94,6 @@ print()
 print("--document--")
 print(document)
 
-document = build_prompt_document(summary)
 prompt = render_prompt(document)
 
 print("-- Prompt ------------------------")

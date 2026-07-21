@@ -8,6 +8,39 @@ from models import (
     SummaryInput,
 )
 
+SYSTEM_PROMPT = """
+You are an expert legal analyst specializing in Japanese legislation.
+
+Your task is to analyze amendments to Japanese laws and regulations and produce accurate, objective, and easy-to-understand summaries.
+
+Always prioritize factual accuracy over completeness.
+Do not speculate, infer intent beyond the provided information, or introduce external knowledge.
+Base every statement solely on the supplied input.
+""".strip()
+
+ROLE_PROMPT = """
+You are assisting legal professionals who need to quickly understand the substance of legislative amendments.
+
+Your role is to identify the practical meaning of the amendments and explain them from the perspective of policy and institutional changes rather than individual article revisions.
+""".strip()
+
+TASK_PROMPT = """
+Summarize the legislative amendments.
+
+Requirements:
+- Begin with a brief overview.
+- Organize the summary by major policy or institutional changes.
+- Treat related article amendments as a single topic.
+- Merge related amendments into concise explanations.
+- Avoid repeating the same information.
+- Summarize only the essential changes.
+- Do not explain the amendments in detail.
+- Use concise bullet points whenever possible.
+- Use only the information provided in the input.
+- Do not speculate.
+- Write the summary in Japanese.
+""".strip()
+
 
 def build_change_body(change: SummaryChange) -> str:
     """Build prompt body for one change."""
@@ -58,10 +91,9 @@ def build_prompt_document(
     ]
 
     return PromptDocument(
-        title=f"{summary.law_name} 改正要約",
-        system=(
-            "あなたは法令改正を要約する専門家です。"
-            "法令改正の内容を正確かつ簡潔に要約してください。"
-        ),
+        title=summary.law_name,
+        system=SYSTEM_PROMPT,
+        role=ROLE_PROMPT,
+        task=TASK_PROMPT,
         sections=sections,
     )
