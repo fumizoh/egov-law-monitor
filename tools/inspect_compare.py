@@ -42,9 +42,9 @@ data = response.json()
 
 print("=== Response ===")
 
-'''
+
 pprint(data)
-'''
+
 
 history = data["result"]["Amendment_History"]
 

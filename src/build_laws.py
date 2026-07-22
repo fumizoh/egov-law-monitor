@@ -2,10 +2,20 @@
 Build public Law models.
 """
 
+from pathlib import Path
+import sys
+sys.path.append(
+    str(Path(__file__).resolve().parents[1] / "src")
+)
+
+from sources.revision_api import fetch_revisions
+
 from models import (
     Law,
     LawGroup,
 )
+
+from comparison import parse_revision_history
 
 from law_builder import create_law
 
@@ -13,9 +23,18 @@ from law_builder import create_law
 def build_law(
     group: LawGroup,
 ) -> Law:
-    """
-    Build one public Law model.
-    """
+
+    # Fetch revision history
+    raw = fetch_revisions(group.law_id)
+    revisions = parse_revision_history(raw)
+
+    current = next(
+        revision
+        for revision in revisions
+        if revision.is_current
+    )
+
+    latest = revisions[0]
 
     return create_law(group)
 

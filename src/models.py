@@ -88,6 +88,27 @@ class CompareBlock:
 
 
 @dataclass(slots=True)
+class RevisionHistory:
+    """Revision history from Revision API."""
+
+    law_data_id: int
+
+    sub_revision: str
+
+    amendment_id: str
+
+    amendment_num: str
+
+    enforcement_date: str | None
+
+    scheduled_enforcement_date: str |None
+
+    enforcement_comment: str | None
+
+    is_current: bool
+
+
+@dataclass(slots=True)
 class LawRevision:
     """Revision metadata."""
 

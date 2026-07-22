@@ -4,6 +4,7 @@ from models import (
     CompareBlock,
     CompareResult,
     LawRevision,
+    RevisionHistory,
 )
 
 TAG_RE = re.compile(r"<[^>]+>")
@@ -98,15 +99,30 @@ def parse_law_revision(raw: dict) -> LawRevision:
     )
 
 
+def parse_revision_history_item(
+    raw: dict,
+) -> RevisionHistory:
+
+    return RevisionHistory(
+        law_data_id=raw["LawDataId"],
+        sub_revision=raw["SubRevision"],
+        amendment_id=raw["AmendmentId"],
+        amendment_num=raw["AmendmentNum"],
+        enforcement_date=raw["EnforcementDate"],
+        scheduled_enforcement_date=raw["ScheduledEnforcementDate"],
+        enforcement_comment=raw["EnforcementComment"],
+        is_current=raw["IsCurrentEnforcement"],
+    )
+
+
 def parse_revision_history(
     raw: dict,
-) -> list[LawRevision]:
-    """Parse revision history."""
+) -> list[RevisionHistory]:
 
     history = raw["result"]["Amendment_History"]
 
     return [
-        parse_law_revision(item)
+        parse_revision_history_item(item)
         for item in history
     ]
 
