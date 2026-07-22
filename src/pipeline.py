@@ -4,8 +4,6 @@ from law_group import group_by_law
 
 from law_change import build_law_changes
 
-from law_view import create_law_view
-
 from build_laws import build_laws
 
 from storage import (

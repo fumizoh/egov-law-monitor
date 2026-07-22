@@ -1,10 +1,13 @@
 """
-Build public law models.
+Build public Law models.
 """
 
-from models import Law, LawGroup
+from models import (
+    Law,
+    LawGroup,
+)
 
-from law_view import create_law_view
+from law_builder import create_law
 
 
 def build_laws(
@@ -14,4 +17,9 @@ def build_laws(
     Build public Law models.
     """
 
-    return create_law_view(law_groups)
+    laws: list[Law] = []
+
+    for group in law_groups:
+        laws.append(create_law(group))
+
+    return laws

@@ -15,7 +15,8 @@
         "amend_published_date": "令和八年七月一日",
         "pending": false
       }
-    ]
+    ],
+    "summary": null
   },
   {
     "law_id": "425AC0000000086",
@@ -33,7 +34,8 @@
         "amend_published_date": "令和八年七月一日",
         "pending": false
       }
-    ]
+    ],
+    "summary": null
   },
   {
     "law_id": "327M50004000025",
@@ -51,6 +53,7 @@
         "amend_published_date": "令和八年四月一日",
         "pending": false
       }
-    ]
+    ],
+    "summary": null
   }
 ]
