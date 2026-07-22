@@ -9,7 +9,7 @@ sys.path.append(
     str(Path(__file__).resolve().parents[1] / "src")
 )
 
-from sources.compare_api import fetch_compare
+from sources.compare_api import fetch_compare_ex
 
 from sel_text_list import SEL_TEXT_LIST
 
@@ -41,49 +41,102 @@ response.raise_for_status()
 data = response.json()
 
 print("=== Response ===")
+
+'''
 pprint(data)
+'''
 
 history = data["result"]["Amendment_History"]
 
-selected = history[1]
-
-compare = fetch_compare(
-    new_law_data_id=selected["LawDataId"],
-    new_sub_revision=selected["SubRevision"],
-    sel_text_list=SEL_TEXT_LIST,
-)
+# ------------------------------------------------------------------
+# DEBUG START
+# ------------------------------------------------------------------
 
 print()
-print("=== Compare API ===")
+print("=== Compare Test ===")
 print()
 
-print(compare)
+current = next(x for x in history if x["IsCurrentEnforcement"])
+latest = history[0]
 
-print(f"Found {len(history)} revisions")
+targets = [
+    (
+        "Current → Current",
+        current,
+        current,
+    ),
+    (
+        "Current → Latest",
+        current,
+        latest,
+    ),
+]
 
-print()
+for name, old_revision, new_revision in targets:
 
-for i, item in enumerate(history):
+    print("=" * 60)
+    print(name)
+    print("=" * 60)
 
-    if item["IsCurrentEnforcement"]:
-        status = "Current"
-    elif item["ScheduledEnforcementDate"]:
-        status = "Future"
-    else:
-        status = "Past"
+    print("Old")
+    print(f"  LawDataId   : {old_revision['LawDataId']}")
+    print(f"  SubRevision : {old_revision['SubRevision']}")
 
-    print(f"[{i}] {status}")
-    print(f"  LawDataId   : {item['LawDataId']}")
-    print(f"  SubRevision : {item['SubRevision']}")
+    print("New")
+    print(f"  LawDataId   : {new_revision['LawDataId']}")
+    print(f"  SubRevision : {new_revision['SubRevision']}")
 
-    date = (
-        item["EnforcementDate"]
-        or item["ScheduledEnforcementDate"]
+    compare = fetch_compare_ex(
+        old_law_data_id=old_revision["LawDataId"],
+        old_sub_revision=old_revision["SubRevision"],
+        new_law_data_id=new_revision["LawDataId"],
+        new_sub_revision=new_revision["SubRevision"],
+        sel_text_list=SEL_TEXT_LIST,
     )
 
-    print(f"  Date        : {date}")
     print()
+    print("=" * 60)
+    print("Response")
+    print("=" * 60)
 
+    pprint(compare["result"]["Compare_Data"]["OldLawInfo"])
+    print()
+    pprint(compare["result"]["Compare_Data"]["NewLawInfo"])
+
+    '''
+    pprint(compare)
+    '''
+
+    '''
+    blocks = compare["result"]["CompareInfo"]["CompareBlock"]
+
+    different = [
+        block
+        for block in blocks
+        if block["CompareResult"] == "different"
+    ]
+
+    print(f"CompareBlock : {len(blocks)}")
+    print(f"Differences  : {len(different)}")
+
+    print()
+    print("Changed blocks")
+    print("-" * 40)
+
+    for block in different[:30]:
+
+        print(
+            f'{block["Tag"]} '
+            f'{block.get("Num", "")}'
+        )
+
+    print()
+    '''
+
+# ------------------------------------------------------------------
+# DEBUG END
+# ------------------------------------------------------------------
+'''
 Path("compare.json").write_text(
     json.dumps(
         compare,
@@ -95,3 +148,4 @@ Path("compare.json").write_text(
 
 print()
 print("Saved : compare.json")
+'''

@@ -1,0 +1,302 @@
+{
+  "result": {
+    "success": true,
+    "Compare_Data": {
+      "LawId": "406AC0000000113",
+      "NewLawInfo": {
+        "-LawDataId": 637590,
+        "-Revision": "637590",
+        "-SubRevision": "1",
+        "-EnforcementDate": "2026-07-15",
+        "-ScheduledEnforcementDate": null,
+        "-EnforcementComment": null,
+        "LawNum": "平成六年法律第百十三号"
+      },
+      "OldLawInfo": {
+        "-LawDataId": 606570,
+        "-Revision": "606570",
+        "-SubRevision": "1",
+        "-EnforcementDate": "2025-06-01",
+        "-ScheduledEnforcementDate": null,
+        "-EnforcementComment": null,
+        "LawNum": "平成六年法律第百十三号"
+      },
+      "CompareInfo": {
+        "CompareBlock": [
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[3]",
+              "#text": "（定義）",
+              "-ObjectId": "#Mp-Ch_1-At_3",
+              "-TocObjectId": "Mp-Ch_1-At_3"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[3]",
+              "#text": "（定義）",
+              "-ObjectId": "#Mp-Ch_1-At_3",
+              "-TocObjectId": "Mp-Ch_1-At_3"
+            },
+            "-TocObjectId": "Mp-Ch_1-At_3"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[3]/Paragraph[1]",
+              "#text": "第三条　この法律において「主要食糧」とは、米穀、麦（小麦、大麦及びはだか麦をいう。以下同じ。）その他政令で定める食糧（これらを加工し、又は調製したものであって政令で定めるものを含む。）をいう。",
+              "-ObjectId": "#Mp-Ch_1-At_3-Pr_1",
+              "-TocObjectId": "Mp-Ch_1-At_3"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[3]/Paragraph[1]",
+              "#text": "第三条　この法律において「主要食糧」とは、米穀、麦（小麦、大麦及びはだか麦をいう。以下同じ。）その他政令で定める食糧（これらを加工し、又は調製したものであって政令で定めるものを含む。）をいう。",
+              "-ObjectId": "#Mp-Ch_1-At_3-Pr_1",
+              "-TocObjectId": "Mp-Ch_1-At_3"
+            },
+            "-TocObjectId": "Mp-Ch_1-At_3"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[3]/Paragraph[2]",
+              "#text": "２　この法律において「米穀の備蓄」とは、米穀の供給が不足する事態に備え、必要な数量の米穀を在庫として保有することをいう。",
+              "-ObjectId": "#Mp-Ch_1-At_3-Pr_2",
+              "-TocObjectId": "Mp-Ch_1-At_3"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[3]/Paragraph[2]",
+              "#text": "２　この法律において「米穀の備蓄」とは、米穀の<em class=\"delete\">生産量の減少によりその</em>供給が不足する事態に備え、必要な数量の米穀を在庫として保有することをいう。",
+              "-ObjectId": "#Mp-Ch_1-At_3-Pr_2",
+              "-TocObjectId": "Mp-Ch_1-At_3"
+            },
+            "-TocObjectId": "Mp-Ch_1-At_3"
+          },
+          {
+            "-differential": "same",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[3]/Paragraph[3]",
+              "#text": "３　この法律において「麦の備蓄」とは、麦の輸入の途絶等によりその供給が不足する事態に備え、必要な数量の麦を在庫として保有することをいう。",
+              "-ObjectId": "#Mp-Ch_1-At_3-Pr_3",
+              "-TocObjectId": "Mp-Ch_1-At_3"
+            },
+            "OldLawBlock": {
+              "-Xpath": "/Law/LawBody/MainProvision/Chapter[1]/Article[3]/Paragraph[3]",
+              "#text": "３　この法律において「麦の備蓄」とは、麦の輸入の途絶等によりその供給が不足する事態に備え、必要な数量の麦を在庫として保有することをいう。",
+              "-ObjectId": "#Mp-Ch_1-At_3-Pr_3",
+              "-TocObjectId": "Mp-Ch_1-At_3"
+            },
+            "-TocObjectId": "Mp-Ch_1-At_3"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]",
+              "#text": "<em class=\"insert\">附　則　（令和八年七月一五日法律第五五号）　抄</em>",
+              "-ObjectId": "#508AC0000000055-Sp",
+              "-TocObjectId": "508AC0000000055-Sp"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]",
+              "#text": "<em class=\"insert\">（施行期日）</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_1"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第一条　この法律は、公布の日から起算して一年を超えない範囲内において政令で定める日から施行する。ただし、次の各号に掲げる規定は、当該各号に定める日から施行する。</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_1-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_1"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]/Paragraph[1]/Item[1]",
+              "#text": "<em class=\"insert\">一　第三条第二項の改正規定並びに次条並びに附則第三条及び第七条の規定　公布の日</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_1-Pr_1-It_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_1"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[1]/Paragraph[1]/Item[2]",
+              "#text": "<em class=\"insert\">二　第二章中第四節の次に一節を加える改正規定、第四十八条の次に一条を加える改正規定及び第五十九条に各号を加える改正規定（第三号に係る部分に限る。）　公布の日から起算して二年を超えない範囲内において政令で定める日</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_1-Pr_1-It_2",
+              "-TocObjectId": "508AC0000000055-Sp-At_1"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_1"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]",
+              "#text": "<em class=\"insert\">（米穀等取扱事業の届出に関する準備行為）</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_2",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第二条　この法律（前条各号に掲げる規定を除く。以下この条並びに附則第四条及び第六条において同じ。）による改正後の主要食糧の需給及び価格の安定に関する法律（附則第五条において「新法」という。）第九条第一項の規定による届出をしなければならない者は、この法律の施行の日（以下「施行日」という。）の六月前の日又はこの法律の公布の日（次条において「公布日」という。）のいずれか遅い日から施行日の前日までの間においても、同項の規定の例により主務大臣に届出をすることができる。この場合において、当該届出をした者は、施行日において同項の規定による届出をしたものとみなす。</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_2-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]/Paragraph[2]",
+              "#text": "<em class=\"insert\">２　前項に規定する主務大臣は、農林水産大臣とする。ただし、米穀を原材料とする酒類の製造に係る事項については、財務大臣及び農林水産大臣とする。</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_2-Pr_2",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[2]/Paragraph[3]",
+              "#text": "<em class=\"insert\">３　前項の規定による財務大臣の権限は、政令で定めるところにより、国税庁長官に委任することができる。</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_2-Pr_3",
+              "-TocObjectId": "508AC0000000055-Sp-At_2"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_2"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[3]",
+              "#text": "<em class=\"insert\">（基準保有量の届出に関する準備行為）</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_3",
+              "-TocObjectId": "508AC0000000055-Sp-At_3"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_3"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[3]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第三条　附則第一条第二号に掲げる規定の施行の日（以下「第二号施行日」という。）において同号に掲げる規定による改正後の主要食糧の需給及び価格の安定に関する法律第三十三条の二第一項に規定する民間備蓄事業者に該当する者は、第二号施行日の三月前の日又は公布日のいずれか遅い日から第二号施行日の前日までの間においても、同項の規定の例により農林水産大臣に届出をすることができる。この場合において、当該届出をした者は、第二号施行日において同項の規定による届出をしたものとみなす。</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_3-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_3"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_3"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[4]",
+              "#text": "<em class=\"insert\">（政令への委任）</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_7",
+              "-TocObjectId": "508AC0000000055-Sp-At_7"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_7"
+          },
+          {
+            "-differential": "different",
+            "NewLawBlock": {
+              "-Xpath": "/Law/LawBody/SupplProvision[15]/Article[4]/Paragraph[1]",
+              "#text": "<em class=\"insert\">第七条　附則第二条から前条までに定めるもののほか、この法律の施行に関し必要な経過措置（罰則に関する経過措置を含む。）は、政令で定める。</em>",
+              "-ObjectId": "#508AC0000000055-Sp-At_7-Pr_1",
+              "-TocObjectId": "508AC0000000055-Sp-At_7"
+            },
+            "OldLawBlock": {
+              "-Xpath": "",
+              "#text": "",
+              "-ObjectId": "",
+              "-TocObjectId": ""
+            },
+            "-TocObjectId": "508AC0000000055-Sp-At_7"
+          }
+        ]
+      }
+    }
+  }
+}
