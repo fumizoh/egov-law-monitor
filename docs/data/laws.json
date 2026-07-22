@@ -1,56 +1,493 @@
 [
   {
-    "law_id": "335AC0000000105",
-    "law_no": "昭和三十五年法律第百五号",
-    "law_name": "道路交通法",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/335AC0000000105/20260721_508AC0000000052",
-    "updates": [
-      {
-        "published_date": "昭和三十五年六月二十五日",
-        "effective_date": "令和八年七月二十一日",
-        "effective_comment": "",
-        "amend_name": "自動車の運転により人を死傷させる行為等の処罰に関する法律及び道路交通法の一部を改正する法律",
-        "amend_no": "令和八年法律第五十二号",
-        "amend_published_date": "令和八年七月一日",
-        "pending": false
-      }
-    ],
-    "summary": null
-  },
-  {
-    "law_id": "425AC0000000086",
-    "law_no": "平成二十五年法律第八十六号",
-    "law_name": "自動車の運転により人を死傷させる行為等の処罰に関する法律",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/425AC0000000086/20260721_508AC0000000052",
-    "updates": [
-      {
-        "published_date": "平成二十五年十一月二十七日",
-        "effective_date": "令和八年七月二十一日",
-        "effective_comment": "",
-        "amend_name": "自動車の運転により人を死傷させる行為等の処罰に関する法律及び道路交通法の一部を改正する法律",
-        "amend_no": "令和八年法律第五十二号",
-        "amend_published_date": "令和八年七月一日",
-        "pending": false
-      }
-    ],
-    "summary": null
-  },
-  {
-    "law_id": "327M50004000025",
-    "law_no": "昭和二十七年建設省令第二十五号",
-    "law_name": "道路法施行規則",
+    "law_id": "323M40000100002",
+    "law_no": "昭和二十三年厚生省令第二号",
+    "law_name": "栄養士法施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/327M50004000025/20260401_508M60000800038",
+    "url": "https://laws.e-gov.go.jp/law/323M40000100002/20261001_508M60000100107",
     "updates": [
       {
-        "published_date": "昭和二十七年八月一日",
-        "effective_date": "令和八年四月一日",
+        "published_date": "昭和二十三年一月十六日",
+        "effective_date": "令和八年十月一日",
         "effective_comment": "",
-        "amend_name": "道路法施行規則及び特定車両停留施設の構造及び設備の基準を定める省令の一部を改正する省令",
-        "amend_no": "令和八年国土交通省令第三十八号",
-        "amend_published_date": "令和八年四月一日",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "333M50000100046",
+    "law_no": "昭和三十三年厚生省令第四十六号",
+    "law_name": "調理師法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/333M50000100046/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和三十三年十二月十三日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "341M50000100045",
+    "law_no": "昭和四十一年厚生省令第四十五号",
+    "law_name": "製菓衛生師法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/341M50000100045/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和四十一年十二月二十六日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "346M50000100002",
+    "law_no": "昭和四十六年厚生省令第二号",
+    "law_name": "建築物における衛生的環境の確保に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/346M50000100002/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和四十六年一月二十一日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "410M50000100004",
+    "law_no": "平成十年厚生省令第四号",
+    "law_name": "理容師法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/410M50000100004/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "平成十年一月二十七日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "410M50000100007",
+    "law_no": "平成十年厚生省令第七号",
+    "law_name": "美容師法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/410M50000100007/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "平成十年一月二十七日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "323M40000100047",
+    "law_no": "昭和二十三年厚生省令第四十七号",
+    "law_name": "医師法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/323M40000100047/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和二十三年十月二十七日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "362M50000100047",
+    "law_no": "昭和六十二年厚生省令第四十七号",
+    "law_name": "外国医師等が行う臨床修練等に係る医師法第十七条等の特例等に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/362M50000100047/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和六十二年十月三十一日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "326M50000100033",
+    "law_no": "昭和二十六年厚生省令第三十三号",
+    "law_name": "診療放射線技師法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/326M50000100033/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和二十六年八月九日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "333M50000100024",
+    "law_no": "昭和三十三年厚生省令第二十四号",
+    "law_name": "臨床検査技師等に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/333M50000100024/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和三十三年七月二十一日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "363M50000100019",
+    "law_no": "昭和六十三年厚生省令第十九号",
+    "law_name": "臨床工学技士法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/363M50000100019/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和六十三年三月二十八日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "340M50000100047",
+    "law_no": "昭和四十年厚生省令第四十七号",
+    "law_name": "理学療法士及び作業療法士法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/340M50000100047/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和四十年十月二十日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "346M50000100028",
+    "law_no": "昭和四十六年厚生省令第二十八号",
+    "law_name": "視能訓練士法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/346M50000100028/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和四十六年七月十九日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "363M50000100020",
+    "law_no": "昭和六十三年厚生省令第二十号",
+    "law_name": "義肢装具士法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/363M50000100020/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和六十三年三月二十八日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "403M50000100044",
+    "law_no": "平成三年厚生省令第四十四号",
+    "law_name": "救急救命士法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/403M50000100044/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "平成三年八月十四日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "323M40000100048",
+    "law_no": "昭和二十三年厚生省令第四十八号",
+    "law_name": "歯科医師法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/323M40000100048/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和二十三年十月二十七日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "401M50000100046",
+    "law_no": "平成元年厚生省令第四十六号",
+    "law_name": "歯科衛生士法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/401M50000100046/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "平成元年十月三十一日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "330M50000100023",
+    "law_no": "昭和三十年厚生省令第二十三号",
+    "law_name": "歯科技工士法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/330M50000100023/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和三十年九月二十二日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "326M50000100034",
+    "law_no": "昭和二十六年厚生省令第三十四号",
+    "law_name": "保健師助産師看護師法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/326M50000100034/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "昭和二十六年八月十一日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "402M50000100019",
+    "law_no": "平成二年厚生省令第十九号",
+    "law_name": "あん摩マツサージ指圧師、はり師、きゆう師等に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/402M50000100019/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "平成二年三月二十九日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "402M50000100020",
+    "law_no": "平成二年厚生省令第二十号",
+    "law_name": "柔道整復師法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/402M50000100020/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "平成二年三月二十九日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "410M50000100074",
+    "law_no": "平成十年厚生省令第七十四号",
+    "law_name": "言語聴覚士法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/410M50000100074/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "平成十年八月二十八日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "414M60000100158",
+    "law_no": "平成十四年厚生労働省令第百五十八号",
+    "law_name": "医師法第十六条の二第一項に規定する臨床研修に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/414M60000100158/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "平成十四年十二月十一日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "417M60000100103",
+    "law_no": "平成十七年厚生労働省令第百三号",
+    "law_name": "歯科医師法第十六条の二第一項に規定する臨床研修に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/417M60000100103/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "平成十七年六月二十八日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "416M60000100130",
+    "law_no": "平成十六年厚生労働省令第百三十号",
+    "law_name": "武力攻撃事態等における国民の保護のための措置に関する法律第九十一条第一項の規定による許可を受けようとする外国医療関係者が厚生労働大臣に提出しなければならない書面等を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/416M60000100130/20261001_508M60000100107",
+    "updates": [
+      {
+        "published_date": "平成十六年九月十七日",
+        "effective_date": "令和八年十月一日",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amend_published_date": "令和八年六月二十五日",
+        "pending": true
+      }
+    ],
+    "summary": null
+  },
+  {
+    "law_id": "508M60000400060",
+    "law_no": "令和八年経済産業省令第六十号",
+    "law_name": "ニッケル系ステンレス冷延鋼帯及び冷延鋼板に対して課する暫定的な不当廉売関税に関する政令第一条第二項に規定する特定国等において熱延鋼帯について冷間圧延をする工程を経て製造されていない旨の証明書の発給に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/508M60000400060/20260709_000000000000000",
+    "updates": [
+      {
+        "published_date": "令和八年七月八日",
+        "effective_date": "令和八年七月九日",
+        "effective_comment": "",
+        "amend_name": "",
+        "amend_no": "",
+        "amend_published_date": "令和八年七月八日",
         "pending": false
       }
     ],
