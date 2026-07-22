@@ -98,6 +98,19 @@ def parse_law_revision(raw: dict) -> LawRevision:
     )
 
 
+def parse_revision_history(
+    raw: dict,
+) -> list[LawRevision]:
+    """Parse revision history."""
+
+    history = raw["result"]["Amendment_History"]
+
+    return [
+        parse_law_revision(item)
+        for item in history
+    ]
+
+
 def parse_compare_result(raw: dict) -> CompareResult:
     """Parse Compare API response."""
 
