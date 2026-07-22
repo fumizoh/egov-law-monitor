@@ -21,6 +21,19 @@ class Event(TypedDict):
     metadata: dict[str, Any]
 
 
+@dataclass(slots=True)
+class LawGroup:
+    """Events grouped by law."""
+
+    law_id: str
+    law_no: str
+    law_name: str
+    law_type: str
+    url: str
+
+    events: list[Event]
+
+
 class Update(TypedDict):
     """Law update."""
 
@@ -35,6 +48,14 @@ class Update(TypedDict):
     pending: bool
 
 
+@dataclass(slots=True)
+class Summary:
+    """AI-generated summary of a law."""
+
+    title: str
+    summary: str
+
+
 class Law(TypedDict):
     """Law."""
 
@@ -46,7 +67,8 @@ class Law(TypedDict):
 
     updates: list[Update]
 
-    summary: Summary | None = None
+    summary: Summary | None
+
 
 @dataclass(slots=True)
 class CompareBlock:
@@ -248,11 +270,3 @@ class PromptDocument:
     role: str
     task: str
     sections: list[PromptSection]
-
-
-@dataclass(slots=True)
-class Summary:
-    """AI-generated summary of a law."""
-
-    title: str
-    summary: str

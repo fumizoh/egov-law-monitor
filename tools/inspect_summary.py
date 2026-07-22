@@ -12,6 +12,8 @@ from comparison import parse_compare_result
 from lawchange_builder import build_law_changes
 from lawtext_parser import parse_lawtext_results
 from summary_builder import build_summary_input
+from summary_generator import generate_summary
+from models import Law
 
 from sources.compare_api import fetch_compare
 from sources.lawtext import fetch_law_text
@@ -75,30 +77,18 @@ changes = build_law_changes(
     index,
 )
 
-summary = build_summary_input(
+summary = generate_summary(
     law_name=LAW_NAME,
-    law_num=compare_result.new.law_num,
+    law_no=compare_result.new.law_num,
     changes=changes,
 )
 
 print()
-print("=== SummaryInput ===")
+print("=== AI Summary ===")
 print()
 
-print(f"Law Name : {summary.law_name}")
-print(f"Law Num  : {summary.law_num}")
-print()
-
-print(f"Article Count: {len(summary.articles)}")
-print()
-
-for article in summary.articles:
-
-    print(article.article)
-    print(f"Changes: {len(article.changes)}")
+if summary.title:
+    print(summary.title)
     print()
 
-    for change in article.changes:
-        pprint(change, indent=4)
-
-    print("-" * 80)
+print(summary.summary)

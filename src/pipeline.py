@@ -1,5 +1,7 @@
 from detector import detect_new_updates
 
+from law_group import group_by_law
+
 from law_view import create_law_view
 
 from storage import (
@@ -42,12 +44,12 @@ def process(
 
     save_source_data(source, all_updates)
 
-    updates = new_updates
-
     # Law View を公開データとして保存
     if source == "egov":
 
-        laws = create_law_view(updates)
+        law_groups = group_by_law(all_updates)
+
+        laws = create_law_view(law_groups)
 
         save_laws(laws)
 

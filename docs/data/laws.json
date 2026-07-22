@@ -1,1 +1,56 @@
-[]
+[
+  {
+    "law_id": "335AC0000000105",
+    "law_no": "昭和三十五年法律第百五号",
+    "law_name": "道路交通法",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/335AC0000000105/20260721_508AC0000000052",
+    "updates": [
+      {
+        "published_date": "昭和三十五年六月二十五日",
+        "effective_date": "令和八年七月二十一日",
+        "effective_comment": "",
+        "amend_name": "自動車の運転により人を死傷させる行為等の処罰に関する法律及び道路交通法の一部を改正する法律",
+        "amend_no": "令和八年法律第五十二号",
+        "amend_published_date": "令和八年七月一日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "425AC0000000086",
+    "law_no": "平成二十五年法律第八十六号",
+    "law_name": "自動車の運転により人を死傷させる行為等の処罰に関する法律",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/425AC0000000086/20260721_508AC0000000052",
+    "updates": [
+      {
+        "published_date": "平成二十五年十一月二十七日",
+        "effective_date": "令和八年七月二十一日",
+        "effective_comment": "",
+        "amend_name": "自動車の運転により人を死傷させる行為等の処罰に関する法律及び道路交通法の一部を改正する法律",
+        "amend_no": "令和八年法律第五十二号",
+        "amend_published_date": "令和八年七月一日",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "327M50004000025",
+    "law_no": "昭和二十七年建設省令第二十五号",
+    "law_name": "道路法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/327M50004000025/20260401_508M60000800038",
+    "updates": [
+      {
+        "published_date": "昭和二十七年八月一日",
+        "effective_date": "令和八年四月一日",
+        "effective_comment": "",
+        "amend_name": "道路法施行規則及び特定車両停留施設の構造及び設備の基準を定める省令の一部を改正する省令",
+        "amend_no": "令和八年国土交通省令第三十八号",
+        "amend_published_date": "令和八年四月一日",
+        "pending": false
+      }
+    ]
+  }
+]
