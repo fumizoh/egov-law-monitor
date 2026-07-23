@@ -222,8 +222,7 @@ class ChangeType(str, Enum):
 class SummaryChange:
     """Input for AI summary."""
 
-    article: str
-    paragraph: str | None
+    location: Location
 
     change_type: str
 

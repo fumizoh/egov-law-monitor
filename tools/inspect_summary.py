@@ -10,13 +10,12 @@ sys.path.append(
 
 from comparison import parse_compare_result
 from lawchange_builder import build_law_changes
-from lawtext_parser import parse_lawtext_results
-from summary_builder import build_summary_input
+from toc_parser import parse_toc
 from summary_generator import generate_summary
 from models import Law
 
 from sources.compare_api import fetch_compare
-from sources.lawtext import fetch_law_text
+from sources.toc_api import fetch_law_toc
 
 from sel_text_list import SEL_TEXT_LIST
 
@@ -55,21 +54,17 @@ selected = history[1]
 compare_json = fetch_compare(
     new_law_data_id=selected["LawDataId"],
     new_sub_revision=selected["SubRevision"],
-    sel_text_list=SEL_TEXT_LIST,
 )
 
 compare_result = parse_compare_result(compare_json)
 
-lawtext_json = fetch_law_text(
-    law_id=compare_result.law_id,
+toc_json = fetch_law_toc(
     law_data_id=compare_result.new.law_data_id,
     sub_revision=compare_result.new.sub_revision,
-    occasion="new",
-    sel_text_list=SEL_TEXT_LIST,
 )
 
-index = parse_lawtext_results(
-    lawtext_json["result"]["searchResult_array"]
+index = parse_toc(
+    toc_json["result"]["Toc_Data"]["TocBody"]
 )
 
 changes = build_law_changes(

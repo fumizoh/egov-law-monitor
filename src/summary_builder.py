@@ -19,8 +19,7 @@ def build_summary_changes(
 
         summary_changes.append(
             SummaryChange(
-                article=change.location.article,
-                paragraph=change.location.paragraph,
+                location=change.location,
                 change_type=change.change_type,
                 before=change.before,
                 after=change.after,
@@ -38,7 +37,10 @@ def build_summary_articles(
     grouped: dict[str, list[SummaryChange]] = {}
 
     for change in changes:
-        grouped.setdefault(change.article, []).append(change)
+        grouped.setdefault(
+            change.location.article,
+            [],
+        ).append(change)
 
     return [
         SummaryArticle(

@@ -47,20 +47,16 @@ def build_change_body(change: SummaryChange) -> str:
 
     lines: list[str] = []
 
-    header = change.change_type
-    if change.paragraph:
-        header += f" (Paragraph {change.paragraph})"
-
-    lines.append(header)
+    lines.append(f"【{change.location.label}】")
 
     if change.before:
         lines.append("")
-        lines.append("Before:")
+        lines.append("＜改正前＞")
         lines.append(change.before)
 
     if change.after:
         lines.append("")
-        lines.append("After:")
+        lines.append("＜改正後＞")
         lines.append(change.after)
 
     return "\n".join(lines)
