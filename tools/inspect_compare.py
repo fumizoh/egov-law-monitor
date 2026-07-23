@@ -9,7 +9,7 @@ sys.path.append(
     str(Path(__file__).resolve().parents[1] / "src")
 )
 
-from sources.compare_api import fetch_compare_ex
+from sources.compare_api import fetch_compare
 
 from sel_text_list import SEL_TEXT_LIST
 
@@ -86,12 +86,9 @@ for name, old_revision, new_revision in targets:
     print(f"  LawDataId   : {new_revision['LawDataId']}")
     print(f"  SubRevision : {new_revision['SubRevision']}")
 
-    compare = fetch_compare_ex(
-        old_law_data_id=old_revision["LawDataId"],
-        old_sub_revision=old_revision["SubRevision"],
+    compare = fetch_compare(
         new_law_data_id=new_revision["LawDataId"],
         new_sub_revision=new_revision["SubRevision"],
-        sel_text_list=SEL_TEXT_LIST,
     )
 
     print()

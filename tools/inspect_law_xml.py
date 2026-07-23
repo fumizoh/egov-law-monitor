@@ -3,7 +3,7 @@ from pathlib import Path
 import requests
 
 
-LAW_DATA_ID = 637590
+LAW_DATA_ID = 637593
 
 URL = (
     "https://laws.e-gov.go.jp/api/1/lawdata/"

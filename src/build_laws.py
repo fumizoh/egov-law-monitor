@@ -9,6 +9,7 @@ sys.path.append(
 )
 
 from sources.revision_api import fetch_revisions
+from sources.compare_api import fetch_compare
 
 from models import (
     Law,
@@ -24,7 +25,6 @@ def build_law(
     group: LawGroup,
 ) -> Law:
 
-    # Fetch revision history
     raw = fetch_revisions(group.law_id)
     revisions = parse_revision_history(raw)
 
@@ -35,6 +35,14 @@ def build_law(
     )
 
     latest = revisions[0]
+
+    raw_compare = fetch_compare(
+        latest.law_data_id,
+        latest.sub_revision,
+        SEL_TEXT_LIST,
+    )
+
+    compare_result = parse_compare_result(raw_compare)
 
     return create_law(group)
 
