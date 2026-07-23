@@ -238,8 +238,6 @@ class LawChange:
 
     after: str | None
 
-    article_text: LawTextResult
-
 
 class ChangeType(str, Enum):
     ADDED = "added"
