@@ -218,6 +218,15 @@ class LawTextIndex:
 
 
 @dataclass(slots=True)
+class TocIndex:
+    """Parsed TOC information."""
+
+    sel_text_list: list[str]
+
+    location_lookup: dict[str, Location]
+
+
+@dataclass(slots=True)
 class LawChange:
     """Normalized law change."""
 
