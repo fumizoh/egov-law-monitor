@@ -32,6 +32,21 @@ data = fetch_law_toc(
     sub_revision="1",
 )
 
+print(data)
+
+toc_body = data["result"]["Toc_Data"]["TocBody"]
+
+index = parse_toc(toc_body)
+
+print()
+print(index.location_lookup["Mp-Ch_2-Se_1-At_4"])
+print(index.location_lookup["Mp-Ch_2-Se_1-At_4-Pr_2"])
+print(index.location_lookup["Mp-Ch_2-Se_1-At_4-Pr_2-It_3"])
+
+print(len(index.sel_text_list))
+print(len(index.location_lookup))
+
+'''
 toc_body = data["result"]["Toc_Data"]["TocBody"]
 
 index = parse_toc(toc_body)
@@ -55,3 +70,4 @@ print(index.sel_text_list[-10:])
 for object_id in index.sel_text_list:
     if "508AC0000000055" in object_id:
         print(repr(object_id))
+'''

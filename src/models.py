@@ -183,8 +183,6 @@ class LawTextResult:
 class Location:
     """Display location of a law change."""
 
-    article_object_id: str
-
     article: str
 
     paragraph: str | None = None
