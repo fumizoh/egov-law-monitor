@@ -99,8 +99,6 @@ def _walk(
 def _is_target(object_id: str) -> bool:
     """Return True if ObjectId should be sent to Compare API."""
 
-    object_id = object_id.lstrip("#")
-
     # Compare APIへ送らないコンテナノード
     if object_id in {
         "MainProvision",

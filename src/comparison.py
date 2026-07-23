@@ -70,15 +70,11 @@ def normalize_compare_block(raw: dict) -> CompareBlock:
             or ""
         ),
         object_id=(
-            new.get("-ObjectId")
-            or old.get("-ObjectId")
-            or ""
-        ),
-        toc_object_id=(
-            raw.get("-TocObjectId")
-            or new.get("-TocObjectId")
-            or old.get("-TocObjectId")
-            or ""
+            (
+                new.get("-ObjectId")
+                or old.get("-ObjectId")
+                or ""
+            ).lstrip("#")
         ),
         old_text=old_text,
         new_text=new_text,

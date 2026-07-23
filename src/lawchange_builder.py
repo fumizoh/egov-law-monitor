@@ -14,7 +14,7 @@ def build_law_change(
     """Build one law change."""
 
     return LawChange(
-        object_id=compare.object_id.lstrip("#"),
+        object_id=compare.object_id,
         location=location,
         change_type=compare.change_type,
         before=compare.old_text,
@@ -32,9 +32,7 @@ def build_law_changes(
 
     for block in compare_result.blocks:
 
-        object_id = block.object_id.lstrip("#")
-
-        location = index.location_lookup.get(object_id)
+        location = index.location_lookup.get(block.object_id)
 
         if location is None:
             continue

@@ -80,8 +80,6 @@ class CompareBlock:
 
     object_id: str
 
-    toc_object_id: str
-
     old_text: str | None
 
     new_text: str | None
@@ -165,21 +163,6 @@ class Paragraph:
 
 
 @dataclass(slots=True)
-class LawTextResult:
-    """One article (or supplementary provision article)."""
-
-    object_id: str
-
-    kind: str
-
-    title: str | None
-
-    caption: str | None
-
-    paragraphs: list[Paragraph]
-
-
-@dataclass(slots=True)
 class Location:
     """Display location of a law change."""
 
@@ -202,17 +185,6 @@ class Location:
             parts.append(self.item)
 
         return " ".join(parts)
-
-
-@dataclass(slots=True)
-class LawTextIndex:
-    """Lookup indexes for parsed law text."""
-
-    articles: dict[str, LawTextResult]
-
-    article_lookup: dict[str, str]
-
-    location_lookup: dict[str, Location]
 
 
 @dataclass(slots=True)
