@@ -1,3 +1,4 @@
+from dataclasses import asdict, is_dataclass
 import json
 import zipfile
 from pathlib import Path
@@ -48,18 +49,29 @@ def find_update_csv(extract_dir: Path) -> Path:
     return csv_files[0]
 
 
+def json_default(obj):
+    """Convert unsupported objects to JSON-serializable values."""
+
+    if is_dataclass(obj):
+        return asdict(obj)
+
+    raise TypeError(
+        f"Object of type {type(obj).__name__} is not JSON serializable."
+    )
+
+
 def save_json(data, output_path: Path):
     """
-    JSONファイルとして保存する。
+    Save as JSON.
     """
 
     with open(output_path, "w", encoding="utf-8") as f:
-
         json.dump(
             data,
             f,
             ensure_ascii=False,
-            indent=2
+            indent=2,
+            default=json_default,
         )
 
 

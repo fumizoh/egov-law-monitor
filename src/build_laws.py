@@ -2,14 +2,7 @@
 Build public Law models.
 """
 
-from pathlib import Path
-import sys
-sys.path.append(
-    str(Path(__file__).resolve().parents[1] / "src")
-)
-
 from sources.revision_api import fetch_revisions
-from sources.compare_api import fetch_compare
 
 from models import (
     Law,
@@ -35,14 +28,6 @@ def build_law(
     )
 
     latest = revisions[0]
-
-    raw_compare = fetch_compare(
-        latest.law_data_id,
-        latest.sub_revision,
-        SEL_TEXT_LIST,
-    )
-
-    compare_result = parse_compare_result(raw_compare)
 
     return create_law(group)
 

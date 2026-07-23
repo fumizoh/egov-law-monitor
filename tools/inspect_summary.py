@@ -86,4 +86,4 @@ if summary.title:
     print(summary.title)
     print()
 
-print(summary.summary)
+print(summary.body)

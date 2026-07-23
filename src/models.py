@@ -53,7 +53,7 @@ class Summary:
     """AI-generated summary of a law."""
 
     title: str
-    summary: str
+    body: str
 
 
 class Law(TypedDict):
