@@ -21,5 +21,5 @@ def summarize(prompt: str) -> Summary:
 
     return Summary(
         title="",
-        summary=response.text.strip(),
+        body=response.text.strip(),
     )

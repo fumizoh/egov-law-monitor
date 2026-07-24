@@ -8,18 +8,17 @@ sys.path.append(
     str(Path(__file__).resolve().parents[1] / "src")
 )
 
+from sources.compare_api import fetch_compare
+
 from comparison import parse_compare_result
 from lawchange_builder import build_law_changes
 from lawtext_parser import parse_lawtext_results
-from summary_builder import build_summary_input
-from prompt_builder import build_prompt_document
-from prompt_renderer import render_prompt
-from ai_client import summarize
 
-from sources.compare_api import fetch_compare
-from sources.lawtext import fetch_law_text
+from summary.builder import build_summary_input
+from summary.prompt import build_prompt_document
+from summary.prompt_renderer import render_prompt
+from summary.ai_client import summarize
 
-from sel_text_list import SEL_TEXT_LIST
 
 LAW_ID = "406AC0000000113"
 
@@ -56,22 +55,15 @@ selected = history[1]
 compare_json = fetch_compare(
     new_law_data_id=selected["LawDataId"],
     new_sub_revision=selected["SubRevision"],
-    sel_text_list=SEL_TEXT_LIST,
 )
 
 compare_result = parse_compare_result(compare_json)
 
-lawtext_json = fetch_law_text(
-    law_id=compare_result.law_id,
-    law_data_id=compare_result.new.law_data_id,
-    sub_revision=compare_result.new.sub_revision,
-    occasion="new",
-    sel_text_list=SEL_TEXT_LIST,
-)
 
-index = parse_lawtext_results(
-    lawtext_json["result"]["searchResult_array"]
-)
+
+
+
+
 
 changes = build_law_changes(
     compare_result,

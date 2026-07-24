@@ -8,20 +8,21 @@ sys.path.append(
     str(Path(__file__).resolve().parents[1] / "src")
 )
 
-from comparison import parse_compare_result
-from lawchange_builder import build_law_changes
-from toc_parser import parse_toc
-from summary_generator import generate_summary
-from models import Law
-
 from sources.compare_api import fetch_compare
 from sources.toc_api import fetch_law_toc
 
-from sel_text_list import SEL_TEXT_LIST
+from models import Law
 
-LAW_ID = "406AC0000000113"
+from comparison import parse_compare_result
+from lawchange_builder import build_law_changes
+from toc_parser import parse_toc
 
-LAW_NAME = "主要食糧の需給及び価格の安定に関する法律"
+from summary.generator import generate_summary
+
+
+LAW_ID = "423AC0000000081"
+
+LAW_NAME = "あああああ"
 
 REVISION_URL = (
     "https://laws.e-gov.go.jp/internal-api/"

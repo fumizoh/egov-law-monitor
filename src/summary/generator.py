@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import logging
 
-from ai_client import summarize
 from models import Law, Summary
-from prompt_builder import build_prompt_document
-from prompt_renderer import render_prompt
-from summary_builder import build_summary_input
+
+from summary.builder import build_summary_input
+from summary.prompt import build_prompt_document
+from summary.prompt_renderer import render_prompt
+from summary.ai_client import summarize
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +38,11 @@ def generate_summaries(laws: list[Law]) -> None:
 
     for law in laws:
         try:
-            law.summary = generate_summary(law)
+            law.summary = generate_summary(
+                law_name=law.name,
+                law_no=law.law_num,
+                changes=law.changes,
+            )
         except Exception:
             logger.exception(
                 "Failed to generate AI summary for %s (%s).",

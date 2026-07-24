@@ -14,7 +14,7 @@ from comparison import parse_revision_history
 from law_builder import create_law
 
 # DEBUG
-import time
+# import time
 # DEBUG
 
 def build_law(
@@ -22,7 +22,7 @@ def build_law(
 ) -> Law:
 
     # DEBUG
-    print(group.law_no, group.law_name)
+    # print(group.law_no, group.law_name)
     # DEBUG
 
     raw = fetch_revisions(group.law_id)

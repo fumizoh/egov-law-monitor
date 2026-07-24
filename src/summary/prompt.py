@@ -1,12 +1,13 @@
 """Build structured prompts for AI summaries."""
 
-from models import (
-    PromptDocument,
-    PromptSection,
-    SummaryArticle,
+from summary.input import (
     SummaryChange,
+    SummaryArticle,
     SummaryInput,
+    PromptSection,
+    PromptDocument,
 )
+
 
 SYSTEM_PROMPT = """
 You are an expert legal analyst specializing in Japanese legislation.
@@ -42,7 +43,7 @@ Requirements:
 """.strip()
 
 
-def build_change_body(change: SummaryChange) -> str:
+def _build_change_body(change: SummaryChange) -> str:
     """Build prompt body for one change."""
 
     lines: list[str] = []
@@ -62,11 +63,11 @@ def build_change_body(change: SummaryChange) -> str:
     return "\n".join(lines)
 
 
-def build_section(article: SummaryArticle) -> PromptSection:
+def _build_section(article: SummaryArticle) -> PromptSection:
     """Build one prompt section."""
 
     body = "\n\n".join(
-        build_change_body(change)
+        _build_change_body(change)
         for change in article.changes
     )
 
@@ -82,7 +83,7 @@ def build_prompt_document(
     """Build a structured prompt document."""
 
     sections = [
-        build_section(article)
+        _build_section(article)
         for article in summary.articles
     ]
 

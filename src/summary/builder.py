@@ -1,12 +1,15 @@
-from models import (
-    LawChange,
+"""Build AI summary input."""
+
+from models import LawChange
+
+from summary.input import (
     SummaryChange,
     SummaryArticle,
     SummaryInput,
 )
 
 
-def build_summary_changes(
+def _build_summary_changes(
     changes: list[LawChange],
 ) -> list[SummaryChange]:
     """Build summary changes from law changes."""
@@ -29,7 +32,7 @@ def build_summary_changes(
     return summary_changes
 
 
-def build_summary_articles(
+def _build_summary_articles(
     changes: list[SummaryChange],
 ) -> list[SummaryArticle]:
     """Group summary changes by article."""
@@ -58,9 +61,9 @@ def build_summary_input(
 ) -> SummaryInput:
     """Build AI summary input."""
 
-    summary_changes = build_summary_changes(changes)
+    summary_changes = _build_summary_changes(changes)
 
-    summary_articles = build_summary_articles(summary_changes)
+    summary_articles = _build_summary_articles(summary_changes)
 
     return SummaryInput(
         law_name=law_name,

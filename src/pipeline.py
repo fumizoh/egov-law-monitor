@@ -6,6 +6,8 @@ from law_change import build_law_changes
 
 from build_laws import build_laws
 
+from summary.generator import generate_summaries
+
 from storage import (
     save_source_data,
     save_laws,
@@ -40,18 +42,45 @@ def process(
     all_updates = updates
 
     if source == "egov":
+
+        # DEBUG
+        print("--detect new updates--")
+        # DEBUG
+
         new_updates = detect_new_updates(source, all_updates)
     else:
         new_updates = all_updates
+
+    # DEBUG
+    print("--save source data--")
+    # DEBUG
 
     save_source_data(source, all_updates)
 
     # Law View を公開データとして保存
     if source == "egov":
 
+        # DEBUG
+        print("--group by law--")
+        # DEBUG
+
         law_groups = group_by_law(all_updates)
 
+        # DEBUG
+        print("--build laws--")
+        # DEBUG
+
         laws = build_laws(law_groups)
+
+        # DEBUG
+        print("--generate summaries--")
+        # DEBUG
+
+        generate_summaries(laws)
+
+        # DEBUG
+        print("--save laws--")
+        # DEBUG
 
         save_laws(laws)
 
