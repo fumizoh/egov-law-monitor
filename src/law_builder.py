@@ -11,6 +11,7 @@ from models import (
 
 def create_law(
     group: LawGroup,
+    revisions: list[LawRevision],
 ) -> Law:
     """
     Create one Law from a LawGroup.

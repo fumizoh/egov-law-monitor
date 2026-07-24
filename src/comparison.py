@@ -50,6 +50,52 @@ def detect_change_type(
     return CHANGE_SAME
 
 
+def parse_law_revision(raw: dict) -> LawRevision:
+    """Parse law revision."""
+
+    return LawRevision(
+        law_data_id=raw["-LawDataId"],
+        revision=raw["-Revision"],
+        sub_revision=raw["-SubRevision"],
+        law_num=raw["LawNum"],
+        enforcement_date=raw["-EnforcementDate"],
+        scheduled_enforcement_date=raw["-ScheduledEnforcementDate"],
+        enforcement_comment=raw["-EnforcementComment"],
+    )
+
+
+def parse_revision_history_item(
+    raw: dict,
+) -> RevisionHistory:
+
+    return RevisionHistory(
+        law_data_id=raw["LawDataId"],
+        sub_revision=raw["SubRevision"],
+
+        amendment_id=raw["AmendmentId"],
+        amendment_name=raw["AmendmentLawTitle"],
+        amendment_num=raw["AmendmentNum"],
+
+        enforcement_date=raw["EnforcementDate"],
+        scheduled_enforcement_date=raw["ScheduledEnforcementDate"],
+        enforcement_comment=raw["EnforcementComment"],
+
+        is_current=raw["IsCurrentEnforcement"],
+    )
+
+
+def parse_revision_history(
+    raw: dict,
+) -> list[RevisionHistory]:
+
+    history = raw["result"]["Amendment_History"]
+
+    return [
+        parse_revision_history_item(item)
+        for item in history
+    ]
+
+
 def normalize_compare_block(raw: dict) -> CompareBlock:
     """Normalize one CompareBlock."""
 
@@ -79,48 +125,6 @@ def normalize_compare_block(raw: dict) -> CompareBlock:
         old_text=old_text,
         new_text=new_text,
     )
-
-
-def parse_law_revision(raw: dict) -> LawRevision:
-    """Parse law revision."""
-
-    return LawRevision(
-        law_data_id=raw["-LawDataId"],
-        revision=raw["-Revision"],
-        sub_revision=raw["-SubRevision"],
-        law_num=raw["LawNum"],
-        enforcement_date=raw["-EnforcementDate"],
-        scheduled_enforcement_date=raw["-ScheduledEnforcementDate"],
-        enforcement_comment=raw["-EnforcementComment"],
-    )
-
-
-def parse_revision_history_item(
-    raw: dict,
-) -> RevisionHistory:
-
-    return RevisionHistory(
-        law_data_id=raw["LawDataId"],
-        sub_revision=raw["SubRevision"],
-        amendment_id=raw["AmendmentId"],
-        amendment_num=raw["AmendmentNum"],
-        enforcement_date=raw["EnforcementDate"],
-        scheduled_enforcement_date=raw["ScheduledEnforcementDate"],
-        enforcement_comment=raw["EnforcementComment"],
-        is_current=raw["IsCurrentEnforcement"],
-    )
-
-
-def parse_revision_history(
-    raw: dict,
-) -> list[RevisionHistory]:
-
-    history = raw["result"]["Amendment_History"]
-
-    return [
-        parse_revision_history_item(item)
-        for item in history
-    ]
 
 
 def parse_compare_result(raw: dict) -> CompareResult:

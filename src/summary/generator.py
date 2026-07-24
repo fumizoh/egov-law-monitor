@@ -16,10 +16,15 @@ logger = logging.getLogger(__name__)
 
 def generate_summary(
     law_name: str,
-    law_no: str,
-    changes: list[LawChange],
-) -> Summary:
-    """Generate an AI summary for a law."""
+    revisions: list[LawRevision],
+) -> Summary | None:
+
+    previous = revisions[1]
+
+    compare_json = fetch_compare(
+        new_law_data_id=previous.law_data_id,
+        new_sub_revision=previous.sub_revision,
+    )
 
     summary_input = build_summary_input(
         law_name=law_name,
@@ -33,6 +38,7 @@ def generate_summary(
     return summarize(prompt)
 
 
+'''
 def generate_summaries(laws: list[Law]) -> None:
     """Generate AI summaries for multiple laws."""
 
@@ -50,3 +56,4 @@ def generate_summaries(laws: list[Law]) -> None:
                 law.name,
             )
             law.summary = None
+'''

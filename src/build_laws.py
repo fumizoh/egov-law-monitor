@@ -29,15 +29,10 @@ def build_law(
 
     revisions = parse_revision_history(raw)
 
-    current = next(
-        revision
-        for revision in revisions
-        if revision.is_current
+    return create_law(
+        group,
+        revisions,
     )
-
-    latest = revisions[0]
-
-    return create_law(group)
 
 
 def build_laws(
