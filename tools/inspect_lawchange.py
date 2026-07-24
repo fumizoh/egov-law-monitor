@@ -15,9 +15,7 @@ from toc_parser import parse_toc
 from sources.compare_api import fetch_compare
 from sources.toc_api import fetch_law_toc
 
-from sel_text_list import SEL_TEXT_LIST
-
-LAW_ID = "406AC0000000113"
+LAW_ID = "423AC0000000125"
 
 REVISION_URL = (
     "https://laws.e-gov.go.jp/internal-api/"

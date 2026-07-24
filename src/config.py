@@ -5,8 +5,15 @@
 # e-Gov API
 BASE_URL = "https://laws.e-gov.go.jp/api/2/laws"
 
+
 # API設定
 TIMEOUT = 30
+
+
+# Revision API エラー回避
+REVISION_API_MAX_RETRIES = 3
+REVISION_API_RETRY_WAIT = 300  # seconds
+
 
 # GitHub Actionsとの互換性を考え、取得件数は定数化
 PAGE_SIZE = 100

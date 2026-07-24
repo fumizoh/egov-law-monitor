@@ -13,12 +13,20 @@ from comparison import parse_revision_history
 
 from law_builder import create_law
 
+# DEBUG
+import time
+# DEBUG
 
 def build_law(
     group: LawGroup,
 ) -> Law:
 
+    # DEBUG
+    print(group.law_no, group.law_name)
+    # DEBUG
+
     raw = fetch_revisions(group.law_id)
+
     revisions = parse_revision_history(raw)
 
     current = next(
