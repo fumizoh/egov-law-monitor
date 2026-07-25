@@ -24,7 +24,9 @@ def build_law(
 
     raw = fetch_revisions(group.law_id)
 
-    revisions = parse_revision_history(raw)
+    revisions = parse_revision_history(
+        raw["result"]["Amendment_History"]
+    )
 
     return create_law(
         group,

@@ -1,6 +1,5 @@
 from pathlib import Path
 import sys
-from pprint import pprint
 
 import requests
 
@@ -8,17 +7,21 @@ sys.path.append(
     str(Path(__file__).resolve().parents[1] / "src")
 )
 
-from sources.compare_api import fetch_compare
-from sources.toc_api import fetch_law_toc
-
-from models import Law
-
-from comparison import parse_compare_result
-from lawchange_builder import build_law_changes
-from toc_parser import parse_toc
+from comparison import parse_revision_history
 
 from summary.generator import generate_summary
 
+'''
+from sources.compare_api import fetch_compare
+from comparison import parse_compare_result
+from sources.toc_api import fetch_law_toc
+from toc_parser import parse_toc
+from lawchange_builder import build_law_changes
+from summary.builder import build_summary_input
+from summary.prompt import build_prompt_document
+from summary.prompt_renderer import render_prompt
+from summary.gemini_client import summarize
+'''
 
 LAW_ID = "322AC0000000003"
 
@@ -47,57 +50,74 @@ response = requests.post(
 
 response.raise_for_status()
 
-revisions = response.json()["result"]["Amendment_History"]
+history = response.json()["result"]["Amendment_History"]
 
-print(LAW_NAME)
-print(len(revisions))
+revisions = parse_revision_history(history)
 
+print("law_id:", LAW_ID)
+print("law_name:", LAW_NAME)
+print(len(revisions), "revisions")
+
+revision = revisions[0]
+
+print(type(revision))
+print(revision)
+
+summary = generate_summary(
+    law_name=LAW_NAME,
+    revision=revision,
+)
+
+'''
 # 最新の改正を選択
 selected = revisions[0]
 
-print("--selected revision--")
+print("selected revision:")
 print(selected)
 
+# print("--fetch compare--")
 compare_json = fetch_compare(
     new_law_data_id=selected["LawDataId"],
     new_sub_revision=selected["SubRevision"],
 )
 
-print("--fetch compare--")
-
+# print("--parse compare--")
 compare_result = parse_compare_result(compare_json)
 
-print("--parse compare--")
+# print(compare_result)
 
+# print("--fetch law toc--")
 toc_json = fetch_law_toc(
     law_data_id=compare_result.new.law_data_id,
     sub_revision=compare_result.new.sub_revision,
 )
 
-print("--fetch law toc--")
-
+# print("--parse toc--")
 index = parse_toc(
     toc_json["result"]["Toc_Data"]["TocBody"]
 )
 
-print("--parse toc--")
-
+# print("--build law changes--")
 changes = build_law_changes(
     compare_result,
     index,
 )
 
-print("--build law changes--")
-print(len(changes))
-print(changes)
+print(len(changes), "changes from previous")
 
-'''
-
-summary = generate_summary(
+# print("--build summary input--")
+summary_input = build_summary_input(
     law_name=LAW_NAME,
-    law_no=compare_result.new.law_num,
+    law_num=compare_result.new.law_num,
     changes=changes,
 )
+
+print("generating summary...")
+prompt_document = build_prompt_document(summary_input)
+prompt = render_prompt(prompt_document)
+
+summary = summarize(prompt)
+'''
 
 print()
 print("=== AI Summary ===")
@@ -108,4 +128,3 @@ if summary.title:
     print()
 
 print(summary.body)
-'''

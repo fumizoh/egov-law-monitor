@@ -4,31 +4,50 @@ from __future__ import annotations
 
 import logging
 
-from models import Law, Summary
+from models import RevisionHistory, Summary
 
+from sources.compare_api import fetch_compare
+from comparison import parse_compare_result
+from sources.toc_api import fetch_law_toc
+from toc_parser import parse_toc
+from lawchange_builder import build_law_changes
 from summary.builder import build_summary_input
 from summary.prompt import build_prompt_document
 from summary.prompt_renderer import render_prompt
-from summary.ai_client import summarize
+from summary.gemini_client import summarize
 
 logger = logging.getLogger(__name__)
 
 
 def generate_summary(
     law_name: str,
-    revisions: list[LawRevision],
+    revision: RevisionHistory,
 ) -> Summary | None:
 
-    previous = revisions[1]
-
     compare_json = fetch_compare(
-        new_law_data_id=previous.law_data_id,
-        new_sub_revision=previous.sub_revision,
+        new_law_data_id=revision.law_data_id,
+        new_sub_revision=revision.sub_revision,
+    )
+
+    compare_result = parse_compare_result(compare_json)
+
+    toc_json = fetch_law_toc(
+        law_data_id=compare_result.new.law_data_id,
+        sub_revision=compare_result.new.sub_revision,
+    )
+
+    index = parse_toc(
+        toc_json["result"]["Toc_Data"]["TocBody"]
+    )
+
+    changes = build_law_changes(
+        compare_result,
+        index,
     )
 
     summary_input = build_summary_input(
         law_name=law_name,
-        law_num=law_no,
+        law_num=compare_result.new.law_num,
         changes=changes,
     )
 
@@ -36,24 +55,3 @@ def generate_summary(
     prompt = render_prompt(prompt_document)
 
     return summarize(prompt)
-
-
-'''
-def generate_summaries(laws: list[Law]) -> None:
-    """Generate AI summaries for multiple laws."""
-
-    for law in laws:
-        try:
-            law.summary = generate_summary(
-                law_name=law.name,
-                law_no=law.law_num,
-                changes=law.changes,
-            )
-        except Exception:
-            logger.exception(
-                "Failed to generate AI summary for %s (%s).",
-                law.law_num,
-                law.name,
-            )
-            law.summary = None
-'''

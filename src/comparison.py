@@ -85,10 +85,8 @@ def parse_revision_history_item(
 
 
 def parse_revision_history(
-    raw: dict,
+    history: list[dict],
 ) -> list[RevisionHistory]:
-
-    history = raw["result"]["Amendment_History"]
 
     return [
         parse_revision_history_item(item)
@@ -143,3 +141,15 @@ def parse_compare_result(raw: dict) -> CompareResult:
         new=parse_law_revision(compare_data["NewLawInfo"]),
         blocks=blocks,
     )
+
+
+def find_revision(
+    amendment_num: str,
+    revisions: list[RevisionHistory],
+) -> RevisionHistory | None:
+
+    for revision in revisions:
+        if revision.amendment_num == amendment_num:
+            return revision
+
+    return None
