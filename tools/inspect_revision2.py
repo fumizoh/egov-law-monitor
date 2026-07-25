@@ -5,7 +5,7 @@ sys.path.append(
     str(Path(__file__).resolve().parents[1] / "src")
 )
 
-from sources.egov import fetch
+from sources.egov import fetch as fetch_egov
 from sources.revision_api import fetch_revisions
 from sources.compare_api import fetch_compare
 from sources.toc_api import fetch_law_toc
@@ -14,8 +14,14 @@ from revision import find_revision
 from toc_parser import parse_toc
 from lawchange_builder import build_law_changes
 
-updates, date = fetch()
+updates, date = fetch_egov()
 
+print(len(updates))
+
+for update in updates:
+    print(update["title"])
+
+'''
 update = updates[0]
 
 print(update)
@@ -79,3 +85,4 @@ for block in compare.blocks:
         missing += 1
         print(block.object_id)
         continue
+'''
