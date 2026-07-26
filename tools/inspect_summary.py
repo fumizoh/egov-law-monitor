@@ -58,14 +58,9 @@ print("law_id:", LAW_ID)
 print("law_name:", LAW_NAME)
 print(len(revisions), "revisions")
 
-revision = revisions[0]
-
-print(type(revision))
-print(revision)
-
 summary = generate_law_summary(
     law_name=LAW_NAME,
-    revisions=[revision],
+    revisions=revisions,
 )
 
 '''

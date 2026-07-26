@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import logging
 
+from datetime import date
+
 from models import RevisionHistory, Summary
 from summary.input import AmendmentSummaryInput
-
 from sources.compare_api import fetch_compare
 from comparison import parse_compare_result
 from sources.toc_api import fetch_law_toc
@@ -54,21 +55,37 @@ def build_amendment_summary(
     return(amendment_summary_input)
 
 
+def is_effective(
+    revision: RevisionHistory,
+) -> bool:
+    """Return True if the revision is effective today."""
+
+    if revision.enforcement_date is None:
+        return False
+
+    return (
+        date.fromisoformat(revision.enforcement_date)
+        <= date.today()
+    )
+
+
 def generate_law_summary(
     law_name: str,
     revisions: list[RevisionHistory],
 ) -> Summary | None:
 
-    revision = revisions[0]
-
-    amendment = build_amendment_summary(
-        law_name,
-        revision,
-    )
+    amendments = [
+        build_amendment_summary(
+            law_name,
+            revision,
+        )
+        for revision in revisions
+        if is_effective(revision)
+    ]
 
     summary_input = build_summary_input(
         law_name=law_name,
-        amendments=[amendment],
+        amendments=amendments,
     )
 
     prompt_document = build_prompt_document(summary_input)

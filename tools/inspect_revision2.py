@@ -10,7 +10,6 @@ from sources.revision_api import fetch_revisions
 from sources.compare_api import fetch_compare
 from sources.toc_api import fetch_law_toc
 from comparison import parse_revision_history, parse_compare_result
-from revision import find_revision
 from toc_parser import parse_toc
 from lawchange_builder import build_law_changes
 
@@ -18,13 +17,15 @@ updates, date = fetch_egov()
 
 print(len(updates))
 
+'''
 for update in updates:
     print(update["title"])
-
 '''
+
 update = updates[0]
 
 print(update)
+
 
 revisions = parse_revision_history(
     fetch_revisions(
@@ -32,6 +33,7 @@ revisions = parse_revision_history(
     )
 )
 
+'''
 revision = find_revision(
     update["metadata"]["amend_number"],
     revisions,

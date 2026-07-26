@@ -10,7 +10,7 @@ from sources.revision_api import fetch_revisions
 from pprint import pprint
 
 
-LAW_ID = "423AC0000000125"
+LAW_ID = "322AC0000000003"
 
 raw = fetch_revisions(LAW_ID)
 
