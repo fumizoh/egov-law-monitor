@@ -9,7 +9,7 @@ sys.path.append(
 
 from comparison import parse_revision_history
 
-from summary.generator import generate_summary
+from summary.generator import generate_summary, generate_law_summary
 
 '''
 from sources.compare_api import fetch_compare
@@ -63,9 +63,9 @@ revision = revisions[0]
 print(type(revision))
 print(revision)
 
-summary = generate_summary(
+summary = generate_law_summary(
     law_name=LAW_NAME,
-    revision=revision,
+    revisions=[revision],
 )
 
 '''
