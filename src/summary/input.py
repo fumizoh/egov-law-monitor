@@ -24,6 +24,20 @@ class SummaryArticle:
 
 
 @dataclass(slots=True)
+class AmendmentSummaryInput:
+    """AI summary input for one amendment event."""
+
+    amendment_name: str
+    amendment_num: str
+
+    enforcement_date: str | None
+    scheduled_enforcement_date: str | None
+    enforcement_comment: str | None
+
+    articles: list[SummaryArticle]
+
+
+@dataclass(slots=True)
 class SummaryInput:
     """AI summary request."""
 
@@ -31,7 +45,7 @@ class SummaryInput:
 
     law_num: str
 
-    articles: list[SummaryArticle]
+    amendments: list[AmendmentSummaryInput]
 
 
 @dataclass(slots=True)

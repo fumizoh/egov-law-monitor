@@ -5,6 +5,7 @@ from models import LawChange
 from summary.input import (
     SummaryChange,
     SummaryArticle,
+    AmendmentSummaryInput,
     SummaryInput,
 )
 
@@ -57,6 +58,7 @@ def _build_summary_articles(
 def build_summary_input(
     law_name: str,
     law_num: str,
+    revision: RevisionHistory,
     changes: list[LawChange],
 ) -> SummaryInput:
     """Build AI summary input."""
@@ -65,8 +67,17 @@ def build_summary_input(
 
     summary_articles = _build_summary_articles(summary_changes)
 
+    amendment = AmendmentSummaryInput(
+        amendment_name=revision.amendment_name,
+        amendment_num=revision.amendment_num,
+        enforcement_date=revision.enforcement_date,
+        scheduled_enforcement_date=revision.scheduled_enforcement_date,
+        enforcement_comment=revision.enforcement_comment,
+        articles=summary_articles,
+    )
+
     return SummaryInput(
         law_name=law_name,
         law_num=law_num,
-        articles=summary_articles,
+        amendments=[amendment],
     )

@@ -48,6 +48,7 @@ def generate_summary(
     summary_input = build_summary_input(
         law_name=law_name,
         law_num=compare_result.new.law_num,
+        revision=revision,
         changes=changes,
     )
 

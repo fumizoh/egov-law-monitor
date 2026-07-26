@@ -82,9 +82,11 @@ def build_prompt_document(
 ) -> PromptDocument:
     """Build a structured prompt document."""
 
+    amendment = summary.amendments[0]
+
     sections = [
         _build_section(article)
-        for article in summary.articles
+        for article in amendment.articles
     ]
 
     return PromptDocument(

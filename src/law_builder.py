@@ -1,10 +1,11 @@
 """
-Law view.
+Create Law.
 """
 
 from models import (
     Law,
     LawGroup,
+    LawRevision,
     Update,
 )
 
