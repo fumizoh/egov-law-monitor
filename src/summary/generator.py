@@ -5,13 +5,14 @@ from __future__ import annotations
 import logging
 
 from models import RevisionHistory, Summary
+from summary.input import AmendmentSummaryInput
 
 from sources.compare_api import fetch_compare
 from comparison import parse_compare_result
 from sources.toc_api import fetch_law_toc
 from toc_parser import parse_toc
 from lawchange_builder import build_law_changes
-from summary.builder import build_summary_input
+from summary.builder import build_amendment_summary_input, build_summary_input
 from summary.prompt import build_prompt_document
 from summary.prompt_renderer import render_prompt
 from summary.gemini_client import summarize
@@ -19,12 +20,10 @@ from summary.gemini_client import summarize
 logger = logging.getLogger(__name__)
 
 
-def generate_law_summary(
+def build_amendment_summary(
     law_name: str,
-    revisions: list[RevisionHistory],
-) -> Summary | None:
-
-    revision = revisions[0]
+    revision: RevisionHistory,
+) -> AmendmentSummaryInput:
 
     compare_json = fetch_compare(
         new_law_data_id=revision.law_data_id,
@@ -47,11 +46,29 @@ def generate_law_summary(
         index,
     )
 
-    summary_input = build_summary_input(
-        law_name=law_name,
-        law_num=compare_result.new.law_num,
+    amendment_summary_input = build_amendment_summary_input(
         revision=revision,
         changes=changes,
+    )
+
+    return(amendment_summary_input)
+
+
+def generate_law_summary(
+    law_name: str,
+    revisions: list[RevisionHistory],
+) -> Summary | None:
+
+    revision = revisions[0]
+
+    amendment = build_amendment_summary(
+        law_name,
+        revision,
+    )
+
+    summary_input = build_summary_input(
+        law_name=law_name,
+        amendments=[amendment],
     )
 
     prompt_document = build_prompt_document(summary_input)

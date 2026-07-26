@@ -43,8 +43,6 @@ class SummaryInput:
 
     law_name: str
 
-    law_num: str
-
     amendments: list[AmendmentSummaryInput]
 
 

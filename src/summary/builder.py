@@ -55,19 +55,16 @@ def _build_summary_articles(
     ]
 
 
-def build_summary_input(
-    law_name: str,
-    law_num: str,
+def build_amendment_summary_input(
     revision: RevisionHistory,
     changes: list[LawChange],
-) -> SummaryInput:
-    """Build AI summary input."""
+) -> AmendmentSummaryInput:
 
     summary_changes = _build_summary_changes(changes)
 
     summary_articles = _build_summary_articles(summary_changes)
 
-    amendment = AmendmentSummaryInput(
+    return AmendmentSummaryInput(
         amendment_name=revision.amendment_name,
         amendment_num=revision.amendment_num,
         enforcement_date=revision.enforcement_date,
@@ -76,8 +73,14 @@ def build_summary_input(
         articles=summary_articles,
     )
 
+
+def build_summary_input(
+    law_name: str,
+    amendments: list[AmendmentSummaryInput],
+) -> SummaryInput:
+    """Build AI summary input."""
+
     return SummaryInput(
         law_name=law_name,
-        law_num=law_num,
-        amendments=[amendment],
+        amendments=amendments,
     )
