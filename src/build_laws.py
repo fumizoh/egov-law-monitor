@@ -7,6 +7,7 @@ from sources.revision_api import fetch_revisions
 from models import (
     Law,
     LawGroup,
+    LawRevision,
 )
 
 from comparison import parse_revision_history
