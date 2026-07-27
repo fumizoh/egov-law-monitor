@@ -125,14 +125,21 @@ def normalize_compare_block(raw: dict) -> CompareBlock:
     )
 
 
-def parse_compare_result(raw: dict) -> CompareResult:
+def parse_compare_result(
+    raw: dict
+) -> CompareResult | None:
     """Parse Compare API response."""
 
     compare_data = raw["result"]["Compare_Data"]
 
+    blocks = compare_data["CompareInfo"].get("CompareBlock")
+
+    if not blocks:
+        return None
+
     blocks = [
         normalize_compare_block(block)
-        for block in compare_data["CompareInfo"]["CompareBlock"]
+        for block in blocks
     ]
 
     return CompareResult(

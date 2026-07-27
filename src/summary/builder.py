@@ -1,6 +1,6 @@
 """Build AI summary input."""
 
-from models import LawChange
+from models import LawChange, RevisionHistory
 
 from summary.input import (
     SummaryChange,
@@ -18,6 +18,11 @@ def _build_summary_changes(
     summary_changes: list[SummaryChange] = []
 
     for change in changes:
+
+        # DEBUG
+        # print(change.location.article, change.change_type)
+        # DEBUG
+
         if change.change_type == "same":
             continue
 
@@ -70,6 +75,7 @@ def build_amendment_summary_input(
         enforcement_date=revision.enforcement_date,
         scheduled_enforcement_date=revision.scheduled_enforcement_date,
         enforcement_comment=revision.enforcement_comment,
+        is_effective=True,
         articles=summary_articles,
     )
 

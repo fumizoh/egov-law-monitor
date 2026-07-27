@@ -9,8 +9,6 @@ from models import (
     Update,
 )
 
-from comparison import find_revision
-from summary.generator import generate_summary
 
 def create_law(
     group: LawGroup,
@@ -38,20 +36,6 @@ def create_law(
 
         updates.append(update)
 
-    summary = None
-
-    if updates:
-        revision = find_revision(
-            updates[0]["amend_no"],
-            revisions,
-        )
-
-        if revision is not None:
-            summary = generate_summary(
-                law_name=group.law_name,
-                revision=revision,
-            )
-
     return {
         "law_id": group.law_id,
         "law_no": group.law_no,
@@ -59,5 +43,5 @@ def create_law(
         "law_type": group.law_type,
         "url": group.url,
         "updates": updates,
-        "summary": summary,
+        "summary": None,
     }

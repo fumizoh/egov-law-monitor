@@ -3,6 +3,7 @@
 from summary.input import (
     SummaryChange,
     SummaryArticle,
+    AmendmentSummaryInput,
     SummaryInput,
     PromptSection,
     PromptDocument,
@@ -41,6 +42,35 @@ Requirements:
 - Do not speculate.
 - Write the summary in Japanese.
 """.strip()
+
+
+def _build_amendment_section(
+    amendment: AmendmentSummaryInput,
+) -> PromptSection:
+    """Build amendment section."""
+
+    title = amendment.amendment_num
+
+    lines = []
+
+    if amendment.amendment_name:
+        lines.append(f"改正法: {amendment.amendment_name}")
+
+    if amendment.enforcement_date:
+        lines.append(
+            (
+                f"施行済: {amendment.enforcement_date}"
+                if amendment.is_effective
+                else f"施行予定: {amendment.enforcement_date}"
+            )
+        )
+
+    body = "\n".join(lines)
+
+    return PromptSection(
+        title=title,
+        body=body,
+    )
 
 
 def _build_change_body(change: SummaryChange) -> str:
@@ -82,12 +112,17 @@ def build_prompt_document(
 ) -> PromptDocument:
     """Build a structured prompt document."""
 
-    amendment = summary.amendments[0]
+    sections: list[PromptSection] = []
 
-    sections = [
-        _build_section(article)
-        for article in amendment.articles
-    ]
+    for amendment in summary.amendments:
+        sections.append(
+            _build_amendment_section(amendment)
+        )
+
+        sections.extend(
+            _build_section(article)
+            for article in amendment.articles
+        )
 
     return PromptDocument(
         title=summary.law_name,

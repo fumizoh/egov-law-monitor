@@ -33,6 +33,7 @@ class AmendmentSummaryInput:
     enforcement_date: str | None
     scheduled_enforcement_date: str | None
     enforcement_comment: str | None
+    is_effective: bool
 
     articles: list[SummaryArticle]
 

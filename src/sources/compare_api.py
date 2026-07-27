@@ -13,33 +13,11 @@ HEADERS = {
 }
 
 
-def fetch_compare(
-    new_law_data_id: int,
-    new_sub_revision: str,
-) -> dict:
-    """Fetch compare data."""
-
-    toc = fetch_law_toc(
-        new_law_data_id,
-        new_sub_revision,
-    )
-
-    toc_body = toc["result"]["Toc_Data"]["TocBody"]
-
-    sel_text_list = build_sel_text_list(toc_body)
-
-    return _request_compare(
-        new_law_data_id,
-        new_sub_revision,
-        sel_text_list,
-    )
-
-
 def _request_compare(
     new_law_data_id: int,
     new_sub_revision: str,
     sel_text_list: list[str],
-) -> dict:
+) -> dict | None:
     """Fetch Compare API response."""
 
     payload = {
@@ -57,4 +35,39 @@ def _request_compare(
 
     response.raise_for_status()
 
-    return response.json()
+    raw = response.json()
+
+    if not raw["result"]["success"]:
+
+        # DEBUG
+        print(
+            "Compare API:",
+            raw["result"]["errorMessage"],
+        )
+        # DEBUG
+
+        return None
+
+    return raw
+
+
+def fetch_compare(
+    new_law_data_id: int,
+    new_sub_revision: str,
+) -> dict | None:
+    """Fetch compare data."""
+
+    toc = fetch_law_toc(
+        new_law_data_id,
+        new_sub_revision,
+    )
+
+    toc_body = toc["result"]["Toc_Data"]["TocBody"]
+
+    sel_text_list = build_sel_text_list(toc_body)
+
+    return _request_compare(
+        new_law_data_id,
+        new_sub_revision,
+        sel_text_list,
+    )
