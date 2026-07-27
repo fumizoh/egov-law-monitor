@@ -50,10 +50,12 @@ def build_laws(
 
         law, revisions = build_law(group)
 
+        '''
         law["summary"] = generate_law_summary(
             law_name=law["law_name"],
             revisions=revisions,
-       )
+        )
+        '''
 
         laws.append(law)
 

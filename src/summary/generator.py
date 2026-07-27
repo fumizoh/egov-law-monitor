@@ -103,14 +103,15 @@ def build_amendment_summary(
 def _should_include_summary(
     revision: RevisionHistory,
 ) -> bool:
-    """Return True if the revision is effective today."""
+    """Return True if the revision should be included in the future summary."""
 
+    # Include revisions with no enforcement date yet.
     if revision.enforcement_date is None:
-        return False
+        return True
 
     return (
         date.fromisoformat(revision.enforcement_date)
-        <= date.today()
+        > date.today()
     )
 
 

@@ -12,9 +12,9 @@ from comparison import parse_revision_history
 from summary.generator import generate_summary, generate_law_summary
 
 
-LAW_ID = "415AC0000000057"
+LAW_ID = "322AC0000000003"
 
-LAW_NAME = "個人情報の保護に関する法律"
+LAW_NAME = "皇室典範"
 
 REVISION_URL = (
     "https://laws.e-gov.go.jp/internal-api/"
@@ -53,7 +53,7 @@ summary = generate_law_summary(
 )
 
 print()
-print("=== AI Summary ===")
+print("=== Future Summary ===")
 print()
 
 if summary.title:

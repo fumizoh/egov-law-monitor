@@ -21,24 +21,26 @@ Base every statement solely on the supplied input.
 """.strip()
 
 ROLE_PROMPT = """
-You are assisting legal professionals who need to quickly understand the substance of legislative amendments.
+You are assisting legal professionals who need to quickly understand how the current law will change through future legislative amendments.
 
-Your role is to identify the practical meaning of the amendments and explain them from the perspective of policy and institutional changes rather than individual article revisions.
+Your role is to explain the practical impact of upcoming amendments from the perspective of policy and institutional changes rather than individual article revisions.
 """.strip()
 
 TASK_PROMPT = """
-Summarize the legislative amendments.
+Summarize how the current law will change through the upcoming legislative amendments.
 
 Requirements:
 - Begin with a brief overview.
 - Organize the summary by major policy or institutional changes.
 - Treat related article amendments as a single topic.
 - Merge related amendments into concise explanations.
+- Explain how the current law will change after the upcoming amendments take effect.
 - Avoid repeating the same information.
 - Summarize only the essential changes.
 - Do not explain the amendments in detail.
 - Use concise bullet points whenever possible.
 - Use only the information provided in the input.
+- If the enforcement date of an amendment has not been determined, clearly state that it is not yet determined.
 - Do not speculate.
 - Write the summary in Japanese.
 """.strip()
@@ -57,13 +59,9 @@ def _build_amendment_section(
         lines.append(f"改正法: {amendment.amendment_name}")
 
     if amendment.enforcement_date:
-        lines.append(
-            (
-                f"施行済: {amendment.enforcement_date}"
-                if amendment.is_effective
-                else f"施行予定: {amendment.enforcement_date}"
-            )
-        )
+        lines.append(f"施行日: {amendment.enforcement_date}")
+    else:
+        lines.append("施行日: 未定")
 
     body = "\n".join(lines)
 
