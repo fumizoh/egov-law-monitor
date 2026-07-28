@@ -9,6 +9,8 @@ from config import (
     LAWS_JSON,
 )
 
+from summary.revision import SummaryRevisionKey
+
 UPDATE_FILES = {
     "egov": DOCS_DATA / "egov_updates.json",
     "public_comment": DOCS_DATA / "public_comments.json",
@@ -137,3 +139,25 @@ def save_laws(laws):
         laws,
         LAWS_JSON,
     )
+
+
+def load_laws() -> dict[str, Law]:
+    """
+    Load previous Law view.
+    """
+
+    if not LAWS_JSON.exists():
+        return {}
+
+    laws: list[Law] = load_json(LAWS_JSON)
+
+    for law in laws:
+        law["summary_revision_keys"] = [
+            SummaryRevisionKey(**key)
+            for key in law["summary_revision_keys"]
+        ]
+
+    return {
+        law["law_id"]: law
+        for law in laws
+    }

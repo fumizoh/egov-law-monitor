@@ -6,13 +6,12 @@ from law_change import build_law_changes
 
 from build_laws import build_laws
 
-from summary.generator import generate_summary
-
 from storage import (
     save_source_data,
     save_laws,
     save_statistics,
     load_json,
+    load_laws,
 )
 
 from statistics import create_statistics
@@ -53,9 +52,16 @@ def process(
 
         law_groups = group_by_law(all_updates)
 
-        laws = build_laws(law_groups)
+        previous_laws = load_laws()
 
+        laws = build_laws(
+            law_groups,
+            previous_laws=previous_laws,
+        )
+
+        # DEBUG
         print(len(laws))
+        # DEBUG
 
         save_laws(laws)
 

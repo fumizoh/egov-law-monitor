@@ -9,7 +9,7 @@ sys.path.append(
 
 from comparison import parse_revision_history
 
-from summary.generator import generate_summary, generate_law_summary
+from summary.service import build_future_summary
 
 
 LAW_ID = "322AC0000000003"
@@ -47,7 +47,9 @@ print("law_id:", LAW_ID)
 print("law_name:", LAW_NAME)
 print(len(revisions), "revisions")
 
-summary = generate_law_summary(
+# summary_revisions = get_summary_revisions(revisions)
+
+summary, revision_keys = build_future_summary(
     law_name=LAW_NAME,
     revisions=revisions,
 )
@@ -61,3 +63,4 @@ if summary.title:
     print()
 
 print(summary.body)
+print(revision_keys)

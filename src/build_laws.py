@@ -13,7 +13,7 @@ from models import (
 from comparison import parse_revision_history
 
 from law_builder import create_law
-from summary.generator import generate_law_summary
+from summary.service import build_future_summary
 
 
 def build_law(
@@ -40,6 +40,7 @@ def build_law(
 
 def build_laws(
     law_groups: list[LawGroup],
+    previous_laws: dict[str, Law],
 ) -> list[Law]:
     """
     Build public Law models.
@@ -49,14 +50,18 @@ def build_laws(
 
     for group in law_groups:
 
+        previous_law = previous_laws.get(group.law_id)
+
         law, revisions = build_law(group)
 
-        '''
-        law["summary"] = generate_law_summary(
+        summary, revision_keys = build_future_summary(
             law_name=law["law_name"],
             revisions=revisions,
+            previous_law=previous_law,
         )
-        '''
+
+        law["summary"] = summary
+        law["summary_revision_keys"] = revision_keys
 
         laws.append(law)
 

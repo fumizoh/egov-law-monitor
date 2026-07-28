@@ -25,7 +25,8 @@
         "pending": false
       }
     ],
-    "summary": null
+    "summary": null,
+    "summary_revision_keys": []
   },
   {
     "law_id": "337M50000008017",
@@ -53,7 +54,8 @@
         "pending": false
       }
     ],
-    "summary": null
+    "summary": null,
+    "summary_revision_keys": []
   },
   {
     "law_id": "341M50002000023",
@@ -90,121 +92,20 @@
         "pending": true
       }
     ],
-    "summary": null
-  },
-  {
-    "law_id": "423AC0000000117",
-    "law_no": "平成二十三年法律第百十七号",
-    "law_name": "東日本大震災からの復興のための施策を実施するために必要な財源の確保に関する特別措置法",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/423AC0000000117/20280101_508AC0000000012",
-    "updates": [
+    "summary": {
+      "title": "",
+      "body": "以下に、労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律施行規則の今後の改正による変更点をまとめます。\n\n---\n\n### 概要\n\n本規則は、二つの省令改正により、外国人雇用状況届出制度における届出事項および確認方法の見直しが行われるとともに、親法（労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律）の改正に伴う参照条文の整理が実施されます。\n\n### 主要な政策・制度変更点\n\n1.  **外国人雇用状況届出制度の見直し（2027年4月1日施行）**\n    *   **届出事項の簡素化:**\n        *   事業主が外国人の雇入れまたは離職時に届け出る事項から、特定技能の在留資格を持つ外国人の「特定産業分野」および特定活動の在留資格を持つ外国人の「特に指定する活動」に関する情報が削除されます。\n        *   報酬活動許可者（在留資格を有しないが報酬を受ける活動の許可を得ている者）の区分に関する情報は、引き続き届出が必要となります。\n        *   雇用保険被保険者の有無や報酬活動許可者の区分に応じて、届出が必要な事項のリストが変更されます。\n    *   **確認方法の変更:**\n        *   特定技能の在留資格を持つ外国人に関する指定書を用いた特定産業分野の確認規定が削除されます。\n        *   報酬活動許可者の区分に関する事項を、当該外国人の区分に応じた書類により事業主が確認することが義務付けられます。\n    *   **経過措置:** 施行日前に雇入れまたは離職した外国人に関する届出については、なお従前の例によります。\n\n2.  **労働施策総合推進法の改正に伴う参照条文の整理（2026年10月1日施行）**\n    *   親法である「労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律等の一部を改正する法律」の施行に伴い、本規則内で引用されている法律の条文番号が一括して変更されます。\n    *   具体的には、以下に関する規定における参照条文番号が新たなものに修正されます。\n        *   雇用の分野における男女の均等な機会及び待遇の確保等に関する法律施行規則を準用する調停手続。\n        *   地方公共団体の長からの要請およびこれに係る厚生労働大臣の権限。\n        *   厚生労働大臣による事業主への報告命令。\n        *   厚生労働大臣の権限を都道府県労働局長に委任する規定。\n    *   **経過措置:** 施行時に現存する旧様式による書類は新様式とみなされ、旧様式用紙は当分の間使用が認められます。"
+    },
+    "summary_revision_keys": [
       {
-        "published_date": "平成二十三年十二月二日",
-        "effective_date": "令和十年一月一日",
-        "effective_comment": "次号に掲げる規定の施行の日の属する年の翌年の一月一日",
-        "amend_name": "所得税法等の一部を改正する法律",
-        "amend_no": "令和八年法律第十二号",
-        "amend_published_date": "令和八年三月三十一日",
-        "pending": true
-      }
-    ],
-    "summary": null
-  },
-  {
-    "law_id": "409CO0000000363",
-    "law_no": "平成九年政令第三百六十三号",
-    "law_name": "内国税の適正な課税の確保を図るための国外送金等に係る調書の提出等に関する法律施行令",
-    "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/409CO0000000363/20280101_508CO0000000100",
-    "updates": [
+        "law_data_id": 638394,
+        "sub_revision": "1"
+      },
       {
-        "published_date": "平成九年十二月十七日",
-        "effective_date": "令和十年一月一日",
-        "effective_comment": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行の日の属する年の翌年の一月一日",
-        "amend_name": "内国税の適正な課税の確保を図るための国外送金等に係る調書の提出等に関する法律施行令の一部を改正する政令",
-        "amend_no": "令和八年政令第百号",
-        "amend_published_date": "令和八年三月三十一日",
-        "pending": true
+        "law_data_id": 630895,
+        "sub_revision": "4"
       }
-    ],
-    "summary": null
-  },
-  {
-    "law_id": "423AC0100000113",
-    "law_no": "平成二十三年法律第百十三号",
-    "law_name": "株式会社東日本大震災事業者再生支援機構法",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/423AC0100000113/20260904_508AC0000000029",
-    "updates": [
-      {
-        "published_date": "平成二十三年十一月二十八日",
-        "effective_date": "令和八年九月四日",
-        "effective_comment": "公布の日から起算して三月を超えない範囲内において政令で定める日",
-        "amend_name": "経済社会情勢の変化を踏まえた企業の事業活動の持続的な発展を図るための産業競争力強化法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二十九号",
-        "amend_published_date": "令和八年六月五日",
-        "pending": true
-      }
-    ],
-    "summary": null
-  },
-  {
-    "law_id": "340M50000040011",
-    "law_no": "昭和四十年大蔵省令第十一号",
-    "law_name": "所得税法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/340M50000040011/20280101_508M60000040017",
-    "updates": [
-      {
-        "published_date": "昭和四十年三月三十一日",
-        "effective_date": "令和十年一月一日",
-        "effective_comment": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行の日の属する年の翌年の一月一日",
-        "amend_name": "所得税法施行規則の一部を改正する省令",
-        "amend_no": "令和八年財務省令第十七号",
-        "amend_published_date": "令和八年三月三十一日",
-        "pending": true
-      }
-    ],
-    "summary": null
-  },
-  {
-    "law_id": "340M50000040049",
-    "law_no": "昭和四十年大蔵省令第四十九号",
-    "law_name": "国税質問検査章規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/340M50000040049/20280101_508M60000040028",
-    "updates": [
-      {
-        "published_date": "昭和四十年八月十三日",
-        "effective_date": "令和十年一月一日",
-        "effective_comment": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行の日の属する年の翌年の一月一日",
-        "amend_name": "国税質問検査章規則の一部を改正する省令",
-        "amend_no": "令和八年財務省令第二十八号",
-        "amend_published_date": "令和八年三月三十一日",
-        "pending": true
-      }
-    ],
-    "summary": null
-  },
-  {
-    "law_id": "344M50000048001",
-    "law_no": "昭和四十四年大蔵省・自治省令第一号",
-    "law_name": "租税条約等の実施に伴う所得税法、法人税法及び地方税法の特例等に関する法律の施行に関する省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/344M50000048001/20280101_508M60000048003",
-    "updates": [
-      {
-        "published_date": "昭和四十四年六月十七日",
-        "effective_date": "令和十年一月一日",
-        "effective_comment": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行の日の属する年の翌年の一月一日",
-        "amend_name": "租税条約等の実施に伴う所得税法、法人税法及び地方税法の特例等に関する法律の施行に関する省令の一部を改正する省令",
-        "amend_no": "令和八年総務省・財務省令第三号",
-        "amend_published_date": "令和八年三月三十一日",
-        "pending": true
-      }
-    ],
-    "summary": null
+    ]
   },
   {
     "law_id": "413M60000800021",
@@ -223,7 +124,8 @@
         "pending": false
       }
     ],
-    "summary": null
+    "summary": null,
+    "summary_revision_keys": []
   },
   {
     "law_id": "421M60002000005",
@@ -242,26 +144,8 @@
         "pending": false
       }
     ],
-    "summary": null
-  },
-  {
-    "law_id": "322AC0000000003",
-    "law_no": "昭和二十二年法律第三号",
-    "law_name": "皇室典範",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/322AC0000000003/20261024_508AC0000000066",
-    "updates": [
-      {
-        "published_date": "昭和二十二年一月十六日",
-        "effective_date": "令和八年十月二十四日",
-        "effective_comment": "",
-        "amend_name": "皇室典範等の一部を改正する法律",
-        "amend_no": "令和八年法律第六十六号",
-        "amend_published_date": "令和八年七月二十四日",
-        "pending": true
-      }
-    ],
-    "summary": null
+    "summary": null,
+    "summary_revision_keys": []
   },
   {
     "law_id": "425M60080000002",
@@ -280,7 +164,8 @@
         "pending": false
       }
     ],
-    "summary": null
+    "summary": null,
+    "summary_revision_keys": []
   },
   {
     "law_id": "353M50000400077",
@@ -299,7 +184,8 @@
         "pending": false
       }
     ],
-    "summary": null
+    "summary": null,
+    "summary_revision_keys": []
   },
   {
     "law_id": "332M50000002083",
@@ -318,7 +204,8 @@
         "pending": false
       }
     ],
-    "summary": null
+    "summary": null,
+    "summary_revision_keys": []
   },
   {
     "law_id": "346M50000002010",
@@ -337,7 +224,8 @@
         "pending": false
       }
     ],
-    "summary": null
+    "summary": null,
+    "summary_revision_keys": []
   },
   {
     "law_id": "412M50000002122",
@@ -356,7 +244,8 @@
         "pending": false
       }
     ],
-    "summary": null
+    "summary": null,
+    "summary_revision_keys": []
   },
   {
     "law_id": "428M60400000009",
@@ -375,6 +264,7 @@
         "pending": false
       }
     ],
-    "summary": null
+    "summary": null,
+    "summary_revision_keys": []
   }
 ]

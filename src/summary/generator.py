@@ -100,33 +100,24 @@ def build_amendment_summary(
     return(amendment_summary_input)
 
 
-def _should_include_summary(
-    revision: RevisionHistory,
-) -> bool:
-    """Return True if the revision should be included in the future summary."""
-
-    # Include revisions with no enforcement date yet.
-    if revision.enforcement_date is None:
-        return True
-
-    return (
-        date.fromisoformat(revision.enforcement_date)
-        > date.today()
-    )
-
-
-def generate_law_summary(
+def generate_future_summary(
     law_name: str,
     revisions: list[RevisionHistory],
 ) -> Summary | None:
+
+    # DEBUG
+    print(len(revisions), "summary revisions")
+    # DEBUG
 
     amendments: list[AmendmentSummaryInput] = []
 
     # for revision in revisions:
     for i, revision in enumerate(revisions, start=1):
 
+        '''
         if not _should_include_summary(revision):
             continue
+        '''
 
         # DEBUG
         print(
@@ -168,6 +159,7 @@ def generate_law_summary(
     return summarize(prompt)
 
 
+'''
 def generate_summary(
     law_name: str,
     revision: RevisionHistory,
@@ -205,3 +197,4 @@ def generate_summary(
     prompt = render_prompt(prompt_document)
 
     return summarize(prompt)
+'''

@@ -8,6 +8,8 @@ from typing import Any, TypedDict
 
 from enum import Enum
 
+from summary.revision import SummaryRevisionKey
+
 
 class Event(TypedDict):
     """Common event model."""
@@ -68,6 +70,8 @@ class Law(TypedDict):
     updates: list[Update]
 
     summary: Summary | None
+
+    summary_revision_keys: list[SummaryRevisionKey]
 
 
 @dataclass(slots=True)
