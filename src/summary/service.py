@@ -2,15 +2,20 @@
 
 from datetime import date
 
-from models import Law, RevisionHistory
+from models import (
+    Law,
+    RevisionHistory,
+    Summary,
+)
 
-from summary.generator import generate_future_summary
 from summary.revision import (
     SummaryRevisionKey,
     SummaryAction,
     SummaryReason,
     SummaryDecision,
 )
+
+from summary.generator import generate_future_summary
 
 
 def _should_include_summary(
