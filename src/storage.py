@@ -9,6 +9,7 @@ from config import (
     LAWS_JSON,
 )
 
+from models import Law
 from summary.revision import SummaryRevisionKey
 
 UPDATE_FILES = {
