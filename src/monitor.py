@@ -6,7 +6,7 @@ from pipeline import process
 
 def main():
 
-    print("--egov update--")
+    print("=== egov update ===")
 
     updates, date = fetch_egov()
 
@@ -16,7 +16,8 @@ def main():
         date=date,
     )
 
-    print("--public comment--")
+    print()
+    print("=== public comment ===")
 
     public_updates, public_date = fetch_public_comment()
 

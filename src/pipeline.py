@@ -2,8 +2,6 @@ from detector import detect_new_updates
 
 from law_group import group_by_law
 
-from law_change import build_law_changes
-
 from build_laws import build_laws
 
 from storage import (
@@ -60,7 +58,7 @@ def process(
         )
 
         # DEBUG
-        print(len(laws))
+        print("Total:", len(laws), "laws")
         # DEBUG
 
         save_laws(laws)

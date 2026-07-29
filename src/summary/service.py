@@ -114,10 +114,10 @@ def build_future_summary(
     )
 
     # DEBUG
-    if previous_law is not None:
-        print(revision_keys)
-        print(previous_law["summary_revision_keys"])
-        print(revision_keys == previous_law["summary_revision_keys"])
+    # if previous_law is not None:
+    #    print(revision_keys)
+    #    print(previous_law["summary_revision_keys"])
+    #    print(revision_keys == previous_law["summary_revision_keys"])
     # DEBUG
 
     decision = needs_summary(
