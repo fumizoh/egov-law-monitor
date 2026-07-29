@@ -82,7 +82,7 @@ class SummaryLog:
     law_name: str
     action: SummaryAction
     reason: SummaryReason
-    usage: SummaryUsage | None
+    usage: SummaryUsage | None = None
 
 
 class Law(TypedDict):
