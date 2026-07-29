@@ -1,30 +1,32 @@
 {
   "egov": {
-    "last_update": "20260727",
-    "update_count": 15,
+    "last_update": "20260728",
+    "update_count": 80,
     "source": {
-      "egov": 15
+      "egov": 80
     },
     "law_type": {
-      "府省令": 13,
-      "規則": 2
+      "法律": 59,
+      "府省令": 15,
+      "政令": 6
     }
   },
   "public_comment": {
     "last_update": "2026-07-27T15:00:Z",
-    "update_count": 21,
+    "update_count": 24,
     "source": {
-      "public_comment": 21
+      "public_comment": 24
     },
     "category": {
       "その他": 3,
+      "金融、保険": 2,
+      "厚生": 2,
       "産業一般": 1,
       "国民生活の安全・安心の確保": 3,
       "経済財政政策": 1,
       "環境保全": 2,
       "民事": 1,
       "教育": 1,
-      "金融、保険": 1,
       "警察": 1,
       "農業": 4,
       "社会福祉": 2,
