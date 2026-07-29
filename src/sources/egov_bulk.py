@@ -40,7 +40,7 @@ def get_latest_update_date():
     return date
 
 
-def create_download_url(date: str) -> str:
+def _create_download_url(date: str) -> str:
 
     return (
         f"{BULK_DOWNLOAD_URL}"
@@ -57,7 +57,7 @@ def download_update_xml(date: str) -> Path:
         exist_ok=True
     )
 
-    url = create_download_url(date)
+    url = _create_download_url(date)
 
     response = requests.get(url, timeout=30)
     response.raise_for_status()

@@ -2,7 +2,7 @@
 e-Gov law update source.
 """
 
-from egov_bulk import (
+from sources.egov_bulk import (
     get_latest_update_date,
     download_update_xml,
 )
