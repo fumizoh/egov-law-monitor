@@ -166,7 +166,7 @@ class CompareResult:
 
     blocks: list[CompareBlock]
 
-
+'''
 @dataclass(slots=True)
 class Item:
     """Law text item."""
@@ -189,7 +189,7 @@ class Paragraph:
     text: str
 
     items: list[Item]
-
+'''
 
 @dataclass(slots=True)
 class Location:
@@ -239,9 +239,10 @@ class LawChange:
 
     after: str | None
 
-
+'''
 class ChangeType(str, Enum):
     ADDED = "added"
     DELETED = "deleted"
     MODIFIED = "modified"
     SAME = "same"
+'''

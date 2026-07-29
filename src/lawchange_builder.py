@@ -28,7 +28,7 @@ def build_law_changes(
 ) -> list[LawChange]:
     """Build law changes."""
 
-    changes = []
+    changes: list[LawChange] = []
 
     for block in compare_result.blocks:
 
