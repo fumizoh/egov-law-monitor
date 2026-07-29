@@ -6,7 +6,7 @@ import logging
 
 from datetime import date
 
-from models import RevisionHistory, Summary
+from models import RevisionHistory, SummaryResponse
 from summary.input import AmendmentSummaryInput
 from sources.compare_api import fetch_compare
 from comparison import parse_compare_result
@@ -103,7 +103,7 @@ def build_amendment_summary(
 def generate_future_summary(
     law_name: str,
     revisions: list[RevisionHistory],
-) -> Summary | None:
+) -> SummaryResponse | None:
 
     # DEBUG
     print(len(revisions), "summary revisions")

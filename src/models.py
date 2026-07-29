@@ -3,6 +3,7 @@ Application data models.
 """
 
 from dataclasses import dataclass
+from datetime import datetime
 
 from typing import Any, TypedDict
 
@@ -56,6 +57,32 @@ class Summary:
 
     title: str
     body: str
+
+
+@dataclass(slots=True)
+class SummaryUsage:
+    model: str
+    prompt_tokens: int
+    output_tokens: int
+    thoughts_tokens: int
+    total_tokens: int
+    elapsed_seconds: float
+    response_id: str
+
+
+@dataclass(slots=True)
+class SummaryResponse:
+    summary: Summary
+    usage: SummaryUsage
+
+
+@dataclass(slots=True)
+class SummaryLog:
+    generated_at: datetime
+    law_name: str
+    action: SummaryAction
+    reason: SummaryReason
+    usage: SummaryUsage | None
 
 
 class Law(TypedDict):

@@ -1,11 +1,12 @@
 """Summary service."""
 
-from datetime import date
+from datetime import date, datetime, UTC
 
 from models import (
     Law,
     RevisionHistory,
     Summary,
+    SummaryLog,
 )
 
 from summary.revision import (
@@ -16,6 +17,7 @@ from summary.revision import (
 )
 
 from summary.generator import generate_future_summary
+from summary.logger import append_summary_log
 
 
 def _should_include_summary(
@@ -129,15 +131,46 @@ def build_future_summary(
     )
 
     if decision.action is SummaryAction.REUSE:
+
+        append_summary_log(
+            SummaryLog(
+                generated_at=datetime.now(UTC),
+                law_name=law_name,
+                action=decision.action,
+                reason=decision.reason,
+            )
+        )
+
         return (
             previous_law["summary"],
             previous_law["summary_revision_keys"],
         )
 
-    summary = generate_future_summary(
+    response = generate_future_summary(
         law_name=law_name,
         revisions=summary_revisions,
     )
+
+    summary = response.summary
+    usage = response.usage
+
+    append_summary_log(
+        SummaryLog(
+            generated_at=datetime.now(UTC),
+            law_name=law_name,
+            action=decision.action,
+            reason=decision.reason,
+            usage=usage,
+        )
+    )
+
+    # DEBUG
+    print(
+        f"AI Usage: "
+        f"{usage.total_tokens} tokens "
+        f"({usage.elapsed_seconds:.2f}s)"
+    )
+    # DEBUG
 
     return (
         summary,
