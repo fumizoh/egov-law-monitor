@@ -14,17 +14,17 @@ from storage import (
 
 from statistics import create_statistics
 
-from email_generator import (
-    create_email_subject,
-    create_email_body,
-)
-
 from config import (
     KEYWORDS_JSON,
     NOTIFY_SOURCES,
 )
 
-from mailer import send_email
+from notification.generator import (
+    create_email_subject,
+    create_email_body,
+)
+
+from notification.mailer import send_email
 
 
 def process(
