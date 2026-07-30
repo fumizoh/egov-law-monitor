@@ -2,7 +2,7 @@ from detector import detect_new_updates
 
 from law_group import group_by_law
 
-from build_laws import build_laws
+import law_builder
 
 from storage import (
     save_source_data,
@@ -64,7 +64,7 @@ def process(
 
         previous_laws = load_laws()
 
-        laws = build_laws(
+        laws = law_builder.build_laws(
             law_groups,
             previous_laws=previous_laws,
         )
