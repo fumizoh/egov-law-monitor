@@ -9,12 +9,11 @@ import summary.service as summary_service
 from models import Law, LawGroup, LawRevision, Update
 
 
-def create_law(
+def _create_updates(
     group: LawGroup,
-    revisions: list[LawRevision],
-) -> Law:
+) -> list[Update]:
     """
-    Create one Law from a LawGroup.
+    Create updates from a LawGroup.
     """
 
     updates: list[Update] = []
@@ -23,17 +22,27 @@ def create_law(
 
         metadata = event["metadata"]
 
-        update: Update = {
-            "published_date": metadata["published_date"],
-            "effective_date": metadata["effective_date"],
-            "effective_comment": metadata["effective_comment"],
-            "amend_name": metadata["amend_name"],
-            "amend_no": metadata["amend_number"],
-            "amend_published_date": metadata["amend_published_date"],
-            "pending": metadata["future"],
-        }
+        updates.append(
+            {
+                "published_date": metadata["published_date"],
+                "effective_date": metadata["effective_date"],
+                "effective_comment": metadata["effective_comment"],
+                "amend_name": metadata["amend_name"],
+                "amend_no": metadata["amend_number"],
+                "amend_published_date": metadata["amend_published_date"],
+                "pending": metadata["future"],
+            }
+        )
 
-        updates.append(update)
+    return updates
+
+
+def create_law(
+    group: LawGroup,
+) -> Law:
+    """
+    Create one Law from a LawGroup.
+    """
 
     return {
         "law_id": group.law_id,
@@ -41,7 +50,7 @@ def create_law(
         "law_name": group.law_name,
         "law_type": group.law_type,
         "url": group.url,
-        "updates": updates,
+        "updates": _create_updates(group),
         "summary": None,
     }
 
@@ -60,10 +69,7 @@ def build_law(
         raw["result"]["Amendment_History"]
     )
 
-    law = create_law(
-        group,
-        revisions,
-    )
+    law = create_law(group)
 
     return law, revisions
 
