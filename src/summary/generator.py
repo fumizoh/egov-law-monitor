@@ -48,10 +48,6 @@ def build_amendment_summary(
         new_sub_revision=revision.sub_revision,
     )
 
-    # DEBUG
-    # print(json.dumps(compare_json, indent=2)[:1000])
-    # DEBUG
-
     if compare_json is None:
 
         # DEBUG
@@ -91,8 +87,8 @@ def build_amendment_summary(
     )
 
     # DEBUG
-    counter = Counter(change.change_type for change in changes)
-    print(f"{revision.amendment_num}: {counter}")
+    # counter = Counter(change.change_type for change in changes)
+    # print(f"{revision.amendment_num}: {counter}")
     # DEBUG
 
     amendment_summary_input = build_amendment_summary_input(
@@ -118,10 +114,10 @@ def generate_future_summary(
     for i, revision in enumerate(revisions, start=1):
 
         # DEBUG
-        print(
-            f"[{i}/{len(revisions)}] "
-            f"{revision.amendment_num}"
-        )
+        # print(
+        #     f"[{i}/{len(revisions)}] "
+        #     f"{revision.amendment_num}"
+        # )
         # DEBUG
 
         amendment = build_amendment_summary(

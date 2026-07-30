@@ -44,11 +44,19 @@ def get_summary_revisions(
 ) -> list[RevisionHistory]:
     """Return revisions included in the future summary."""
 
-    return [
+    summary_revisions = [
         revision
         for revision in revisions
         if _should_include_summary(revision)
     ]
+
+    return sorted(
+        summary_revisions,
+        key=lambda revision: (
+            revision.enforcement_date is None,
+            revision.enforcement_date or "",
+        ),
+    )
 
 
 def build_summary_revision_keys(
