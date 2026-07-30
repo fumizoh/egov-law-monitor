@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import logging
-
 from datetime import date
+
+import law_change
 
 from models import RevisionHistory, SummaryResponse
 from summary.input import AmendmentSummaryInput
@@ -12,7 +13,6 @@ from sources.compare_api import fetch_compare
 from comparison import parse_compare_result
 from sources.toc_api import fetch_law_toc
 from toc_parser import parse_toc
-from lawchange_builder import build_law_changes
 from summary.builder import build_amendment_summary_input, build_summary_input
 from summary.prompt import build_prompt_document
 from summary.prompt_renderer import render_prompt
@@ -85,7 +85,7 @@ def build_amendment_summary(
         toc_json["result"]["Toc_Data"]["TocBody"]
     )
 
-    changes = build_law_changes(
+    changes = law_change.build_law_changes(
         compare_result,
         index,
     )

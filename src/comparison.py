@@ -7,8 +7,6 @@ from models import (
     RevisionHistory,
 )
 
-TAG_RE = re.compile(r"<[^>]+>")
-
 from config import (
     CHANGE_ADDED,
     CHANGE_MODIFIED,
@@ -16,55 +14,10 @@ from config import (
     CHANGE_SAME,
 )
 
-
-def strip_html(text: str | None) -> str | None:
-    """Remove HTML tags."""
-
-    if not text:
-        return None
-
-    text = TAG_RE.sub("", text).strip()
-
-    return text or None
+TAG_RE = re.compile(r"<[^>]+>")
 
 
-def detect_change_type(
-    old_text: str | None,
-    new_text: str | None,
-) -> str:
-    """Detect change type."""
-
-    if old_text and new_text:
-
-        if old_text == new_text:
-            return CHANGE_SAME
-
-        return CHANGE_MODIFIED
-
-    if old_text:
-        return CHANGE_REMOVED
-
-    if new_text:
-        return CHANGE_ADDED
-
-    return CHANGE_SAME
-
-
-def parse_law_revision(raw: dict) -> LawRevision:
-    """Parse law revision."""
-
-    return LawRevision(
-        law_data_id=raw["-LawDataId"],
-        revision=raw["-Revision"],
-        sub_revision=raw["-SubRevision"],
-        law_num=raw["LawNum"],
-        enforcement_date=raw["-EnforcementDate"],
-        scheduled_enforcement_date=raw["-ScheduledEnforcementDate"],
-        enforcement_comment=raw["-EnforcementComment"],
-    )
-
-
-def parse_revision_history_item(
+def _parse_revision_history_item(
     raw: dict,
 ) -> RevisionHistory:
 
@@ -89,22 +42,55 @@ def parse_revision_history(
 ) -> list[RevisionHistory]:
 
     return [
-        parse_revision_history_item(item)
+        _parse_revision_history_item(item)
         for item in history
     ]
 
 
-def normalize_compare_block(raw: dict) -> CompareBlock:
-    """Normalize one CompareBlock."""
+def _strip_html(text: str | None) -> str | None:
+    """Remove HTML tags."""
+
+    if not text:
+        return None
+
+    text = TAG_RE.sub("", text).strip()
+
+    return text or None
+
+
+def _detect_change_type(
+    old_text: str | None,
+    new_text: str | None,
+) -> str:
+    """Detect change type."""
+
+    if old_text and new_text:
+
+        if old_text == new_text:
+            return CHANGE_SAME
+
+        return CHANGE_MODIFIED
+
+    if old_text:
+        return CHANGE_REMOVED
+
+    if new_text:
+        return CHANGE_ADDED
+
+    return CHANGE_SAME
+
+
+def _parse_compare_block(raw: dict) -> CompareBlock:
+    """Parse one CompareBlock."""
 
     old = raw["OldLawBlock"]
     new = raw["NewLawBlock"]
 
-    old_text = strip_html(old.get("#text"))
-    new_text = strip_html(new.get("#text"))
+    old_text = _strip_html(old.get("#text"))
+    new_text = _strip_html(new.get("#text"))
 
     return CompareBlock(
-        change_type=detect_change_type(
+        change_type=_detect_change_type(
             old_text,
             new_text,
         ),
@@ -125,6 +111,20 @@ def normalize_compare_block(raw: dict) -> CompareBlock:
     )
 
 
+def _parse_law_revision(raw: dict) -> LawRevision:
+    """Parse law revision."""
+
+    return LawRevision(
+        law_data_id=raw["-LawDataId"],
+        revision=raw["-Revision"],
+        sub_revision=raw["-SubRevision"],
+        law_num=raw["LawNum"],
+        enforcement_date=raw["-EnforcementDate"],
+        scheduled_enforcement_date=raw["-ScheduledEnforcementDate"],
+        enforcement_comment=raw["-EnforcementComment"],
+    )
+
+
 def parse_compare_result(
     raw: dict
 ) -> CompareResult | None:
@@ -138,25 +138,13 @@ def parse_compare_result(
         return None
 
     blocks = [
-        normalize_compare_block(block)
+        _parse_compare_block(block)
         for block in blocks
     ]
 
     return CompareResult(
         law_id=compare_data["LawId"],
-        old=parse_law_revision(compare_data["OldLawInfo"]),
-        new=parse_law_revision(compare_data["NewLawInfo"]),
+        old=_parse_law_revision(compare_data["OldLawInfo"]),
+        new=_parse_law_revision(compare_data["NewLawInfo"]),
         blocks=blocks,
     )
-
-
-def find_revision(
-    amendment_num: str,
-    revisions: list[RevisionHistory],
-) -> RevisionHistory | None:
-
-    for revision in revisions:
-        if revision.amendment_num == amendment_num:
-            return revision
-
-    return None
