@@ -4,7 +4,14 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
-from models import SummaryLog
+from datetime import datetime
+
+from models import (
+    SummaryAction,
+    SummaryLog,
+    SummaryReason,
+    SummaryUsage,
+)
 
 LOG_PATH = Path("data/logs/summary.jsonl")
 
@@ -24,3 +31,35 @@ def append_summary_log(log: SummaryLog) -> None:
     with LOG_PATH.open("a", encoding="utf-8") as fp:
         json.dump(record, fp, ensure_ascii=False)
         fp.write("\n")
+
+
+def load_summary_logs() -> list[SummaryLog]:
+    if not LOG_PATH.exists():
+        return []
+
+    logs: list[SummaryLog] = []
+
+    with LOG_PATH.open(encoding="utf-8") as fp:
+        for line in fp:
+            line = line.strip()
+
+            if not line:
+                continue
+
+            record = json.loads(line)
+
+            usage = None
+            if record["usage"] is not None:
+                usage = SummaryUsage(**record["usage"])
+
+            logs.append(
+                SummaryLog(
+                    generated_at=datetime.fromisoformat(record["generated_at"]),
+                    law_name=record["law_name"],
+                    action=SummaryAction[record["action"]],
+                    reason=SummaryReason[record["reason"]],
+                    usage=usage,
+                )
+            )
+
+    return logs

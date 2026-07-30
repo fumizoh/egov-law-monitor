@@ -10,7 +10,11 @@ from storage import (
     save_statistics,
     load_json,
     load_laws,
+    save_ai_statistics,
 )
+
+from summary.logger import load_summary_logs
+from statistics import create_ai_statistics
 
 from statistics import create_statistics
 
@@ -62,6 +66,13 @@ def process(
         # DEBUG
 
         save_laws(laws)
+
+        # AI Summary ログ集計
+        logs = load_summary_logs()
+
+        ai_statistics = create_ai_statistics(logs)
+
+        save_ai_statistics(ai_statistics)
 
     # 統計情報を作成・保存
     statistics = create_statistics(

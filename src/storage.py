@@ -9,7 +9,11 @@ from config import (
     LAWS_JSON,
 )
 
-from models import Law
+from models import (
+    Law,
+    AiStatistics,
+)
+
 from summary.revision import SummaryRevisionKey
 
 UPDATE_FILES = {
@@ -18,6 +22,7 @@ UPDATE_FILES = {
 }
 STATISTICS_JSON = DOCS_DATA / "statistics.json"
 APP_JSON = DOCS_DATA / "app.json"
+AI_STATISTICS_JSON = DOCS_DATA / "ai_statistics.json"
 
 
 def extract_zip(zip_path: Path) -> Path:
@@ -162,3 +167,14 @@ def load_laws() -> dict[str, Law]:
         law["law_id"]: law
         for law in laws
     }
+
+
+def save_ai_statistics(statistics: AiStatistics):
+    """
+    Save AI statistics as ai_statistics.json.
+    """
+
+    save_json(
+        statistics,
+        AI_STATISTICS_JSON,
+    )

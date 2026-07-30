@@ -9,7 +9,11 @@ from typing import Any, TypedDict
 
 from enum import Enum
 
-from summary.revision import SummaryRevisionKey
+from summary.revision import (
+    SummaryRevisionKey,
+    SummaryAction,
+    SummaryReason,
+)
 
 
 class Event(TypedDict):
@@ -166,30 +170,6 @@ class CompareResult:
 
     blocks: list[CompareBlock]
 
-'''
-@dataclass(slots=True)
-class Item:
-    """Law text item."""
-
-    object_id: str
-
-    num: str
-
-    text: str
-
-
-@dataclass(slots=True)
-class Paragraph:
-    """Law text paragraph."""
-
-    object_id: str
-
-    num: str
-
-    text: str
-
-    items: list[Item]
-'''
 
 @dataclass(slots=True)
 class Location:
@@ -239,10 +219,18 @@ class LawChange:
 
     after: str | None
 
-'''
-class ChangeType(str, Enum):
-    ADDED = "added"
-    DELETED = "deleted"
-    MODIFIED = "modified"
-    SAME = "same"
-'''
+
+@dataclass(slots=True)
+class AiStatistics:
+    """Aggregated AI summary statistics."""
+
+    generated: int
+    reused: int
+
+    prompt_tokens: int
+    output_tokens: int
+    thoughts_tokens: int
+    total_tokens: int
+
+    elapsed_seconds: float
+    
