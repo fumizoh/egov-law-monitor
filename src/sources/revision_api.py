@@ -4,13 +4,7 @@ import requests
 
 import time
 
-from config import (
-    TIMEOUT,
-    REVISION_API_MAX_RETRIES,
-    REVISION_API_RETRY_WAIT,
-)
-
-URL = (
+REVISION_URL = (
     "https://laws.e-gov.go.jp/internal-api/"
     "SelectLawRevisionData.json"
 )
@@ -19,6 +13,10 @@ HEADERS = {
     "Content-Type": "application/json",
     "User-Agent": "eGov Law Monitor",
 }
+
+# Revision API エラー回避
+REVISION_API_MAX_RETRIES = 3
+REVISION_API_RETRY_WAIT = 300  # seconds
 
 
 def _is_rate_limited(response: requests.Response) -> bool:
@@ -35,10 +33,10 @@ def fetch_revisions(law_id: str) -> dict:
 
     for attempt in range(REVISION_API_MAX_RETRIES):
         response = requests.post(
-            URL,
+            REVISION_URL,
             json=payload,
             headers=HEADERS,
-            timeout=TIMEOUT,
+            timeout=30,
         )
 
         response.raise_for_status()

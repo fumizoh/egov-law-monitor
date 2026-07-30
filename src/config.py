@@ -2,59 +2,44 @@
 プロジェクト共通設定
 """
 
-# e-Gov API
-BASE_URL = "https://laws.e-gov.go.jp/api/2/laws"
-
-
-# API設定
-TIMEOUT = 30
-
-
-# Revision API エラー回避
-REVISION_API_MAX_RETRIES = 3
-REVISION_API_RETRY_WAIT = 300  # seconds
-
-
-# GitHub Actionsとの互換性を考え、取得件数は定数化
-PAGE_SIZE = 100
-
-
-# 更新法令ダウンロード
-UPDATE_DATE = "20240601"
-ONLY_XML = True
-
-
-# 一括ダウンロード
-BULK_URL = "https://laws.e-gov.go.jp/bulkdownload"
-BULK_PAGE_URL = "https://laws.e-gov.go.jp/bulkdownload/"
-BULK_DOWNLOAD_URL = "https://laws.e-gov.go.jp/bulkdownload"
-
-
-# ディレクトリ
-DATA_DIR = "data"
-OUTPUT_DIR = "output"
-
 from pathlib import Path
 
-DOWNLOAD_DIR = Path("data/downloads")
-
-EXTRACT_DIR = Path("data/extracted")
-
-DOCS_DIR = Path("docs")
-
-DOCS_DATA = Path("docs/data")
-KEYWORDS_JSON = DOCS_DATA / "keywords.json"
-LAWS_JSON = DOCS_DATA / "laws.json"
-
+# Sources
 NOTIFY_SOURCES = {
     "egov",
 }
+
+
+# Directories
+DOWNLOAD_DIR = Path("data/downloads")
+EXTRACT_DIR = Path("data/extracted")
+
+DOCS_DATA = Path("docs/data")
+
+LOGS_DATA = Path("data/logs")
+
+
+# JSON
+LAWS_JSON = DOCS_DATA / "laws.json"
+STATISTICS_JSON = DOCS_DATA / "statistics.json"
+AI_STATISTICS_JSON = DOCS_DATA / "ai_statistics.json"
+APP_JSON = DOCS_DATA / "app.json"
+KEYWORDS_JSON = DOCS_DATA / "keywords.json"
+
+AI_SUMMARY_LOG_JSON = LOGS_DATA / "ai_summary_log.jsonl"
+
+SOURCE_DATA_FILES = {
+    "egov": DOCS_DATA / "egov_updates.json",
+    "public_comment": DOCS_DATA / "public_comments.json",
+}
+
 
 # Change types
 CHANGE_ADDED = "added"
 CHANGE_REMOVED = "removed"
 CHANGE_MODIFIED = "modified"
 CHANGE_SAME = "same"
+
 
 # Gemini
 PROJECT_ID = "project-9dc19b38-12b0-40dd-871"
@@ -66,3 +51,7 @@ GEMINI_INPUT_PRICE_USD_PER_MILLION = 0.30
 GEMINI_OUTPUT_PRICE_USD_PER_MILLION = 2.50
 
 USD_TO_JPY_RATE = 150.0
+
+
+# Pagination
+PAGE_SIZE = 100

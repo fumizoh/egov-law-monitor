@@ -3,12 +3,6 @@ import json
 import zipfile
 from pathlib import Path
 
-from config import (
-    EXTRACT_DIR,
-    DOCS_DATA,
-    LAWS_JSON,
-)
-
 from models import (
     Law,
     AiStatistics,
@@ -16,13 +10,15 @@ from models import (
 
 from summary.revision import SummaryRevisionKey
 
-UPDATE_FILES = {
-    "egov": DOCS_DATA / "egov_updates.json",
-    "public_comment": DOCS_DATA / "public_comments.json",
-}
-STATISTICS_JSON = DOCS_DATA / "statistics.json"
-APP_JSON = DOCS_DATA / "app.json"
-AI_STATISTICS_JSON = DOCS_DATA / "ai_statistics.json"
+from config import (
+    EXTRACT_DIR,
+    DOCS_DATA,
+    SOURCE_DATA_FILES,
+    LAWS_JSON,
+    STATISTICS_JSON,
+    AI_STATISTICS_JSON,
+    APP_JSON,
+)
 
 
 def extract_zip(zip_path: Path) -> Path:
@@ -125,7 +121,7 @@ def save_source_data(source, data):
 
     save_json(
         data,
-        UPDATE_FILES[source],
+        SOURCE_DATA_FILES[source],
     )
 
 

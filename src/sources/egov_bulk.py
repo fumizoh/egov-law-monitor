@@ -6,13 +6,12 @@ import requests
 
 from bs4 import BeautifulSoup
 
-from config import (
-    BULK_PAGE_URL,
-    BULK_DOWNLOAD_URL,
-    DOWNLOAD_DIR,
-)
-
 from pathlib import Path
+
+from config import DOWNLOAD_DIR
+
+BULK_PAGE_URL = "https://laws.e-gov.go.jp/bulkdownload/"
+BULK_DOWNLOAD_URL = "https://laws.e-gov.go.jp/bulkdownload"
 
 
 def get_latest_update_date():

@@ -5,7 +5,7 @@ from toc_parser import build_sel_text_list
 
 import requests
 
-URL = "https://laws.e-gov.go.jp/internal-api/SelectLawCompareData.json"
+COMPARE_URL = "https://laws.e-gov.go.jp/internal-api/SelectLawCompareData.json"
 
 HEADERS = {
     "Content-Type": "application/json",
@@ -27,7 +27,7 @@ def _request_compare(
     }
 
     response = requests.post(
-        URL,
+        COMPARE_URL,
         json=payload,
         headers=HEADERS,
         timeout=30,

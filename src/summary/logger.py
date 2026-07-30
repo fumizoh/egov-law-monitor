@@ -4,7 +4,7 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
-from datetime import datetime, UTC
+from datetime import datetime
 
 from models import (
     SummaryAction,
@@ -13,11 +13,17 @@ from models import (
     SummaryUsage,
 )
 
-LOG_PATH = Path("data/logs/summary.jsonl")
+from config import AI_SUMMARY_LOG_JSON
+
+
+def reset_summary_logs() -> None:
+    """Clear summary logs."""
+    AI_SUMMARY_LOG_JSON.parent.mkdir(parents=True, exist_ok=True)
+    AI_SUMMARY_LOG_JSON.write_text("", encoding="utf-8")
 
 
 def append_summary_log(log: SummaryLog) -> None:
-    LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    AI_SUMMARY_LOG_JSON.parent.mkdir(parents=True, exist_ok=True)
 
     record = asdict(log)
 
@@ -28,7 +34,7 @@ def append_summary_log(log: SummaryLog) -> None:
     # datetime を ISO8601 文字列へ
     record["generated_at"] = log.generated_at.isoformat()
 
-    with LOG_PATH.open("a", encoding="utf-8") as fp:
+    with AI_SUMMARY_LOG_JSON.open("a", encoding="utf-8") as fp:
         json.dump(record, fp, ensure_ascii=False)
         fp.write("\n")
 
@@ -40,7 +46,7 @@ def log_summary(
 ) -> None:
     append_summary_log(
         SummaryLog(
-            generated_at=datetime.now(UTC),
+            generated_at=datetime.now().astimezone(),
             law_name=law_name,
             action=decision.action,
             reason=decision.reason,
@@ -50,12 +56,12 @@ def log_summary(
 
 
 def load_summary_logs() -> list[SummaryLog]:
-    if not LOG_PATH.exists():
+    if not AI_SUMMARY_LOG_JSON.exists():
         return []
 
     logs: list[SummaryLog] = []
 
-    with LOG_PATH.open(encoding="utf-8") as fp:
+    with AI_SUMMARY_LOG_JSON.open(encoding="utf-8") as fp:
         for line in fp:
             line = line.strip()
 

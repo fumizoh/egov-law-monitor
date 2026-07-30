@@ -13,10 +13,15 @@ from storage import (
     save_ai_statistics,
 )
 
-from summary.logger import load_summary_logs
-from statistics import create_ai_statistics
+from summary.logger import (
+    reset_summary_logs,
+    load_summary_logs,
+)
 
-from statistics import create_statistics
+from statistics import(
+    create_statistics,
+    create_ai_statistics,
+)
 
 from config import (
     KEYWORDS_JSON,
@@ -51,6 +56,9 @@ def process(
 
     # Law View を公開データとして保存
     if source == "egov":
+
+        # AI Summary ログ消去
+        reset_summary_logs()
 
         law_groups = group_by_law(all_updates)
 

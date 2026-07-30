@@ -4,9 +4,17 @@ from time import perf_counter
 from google import genai
 from google.genai.types import HttpOptions
 
-from models import Summary, SummaryResponse, SummaryUsage
+from models import (
+    Summary,
+    SummaryResponse,
+    SummaryUsage,
+)
 
-from config import PROJECT_ID, LOCATION, MODEL_NAME
+from config import (
+    PROJECT_ID,
+    LOCATION,
+    MODEL_NAME,
+)
 
 
 def summarize(prompt: str) -> SummaryResponse:
