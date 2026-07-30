@@ -115,9 +115,9 @@ def build_future_summary(
 
     # DEBUG
     # if previous_law is not None:
-    #    print(revision_keys)
-    #    print(previous_law["summary_revision_keys"])
-    #    print(revision_keys == previous_law["summary_revision_keys"])
+    #     print(revision_keys)
+    #     print(previous_law["summary_revision_keys"])
+    #     print(revision_keys == previous_law["summary_revision_keys"])
     # DEBUG
 
     decision = needs_summary(
@@ -125,10 +125,12 @@ def build_future_summary(
         revision_keys=revision_keys,
     )
 
-    print(
-        f"Summary: {decision.action.name} "
-        f"({decision.reason.name})"
-    )
+    # DEBUG
+    # print(
+    #     f"Summary: {decision.action.name} "
+    #     f"({decision.reason.name})"
+    # )
+    # DEBUG
 
     if decision.action is SummaryAction.REUSE:
 
@@ -157,11 +159,11 @@ def build_future_summary(
     )
 
     # DEBUG
-    print(
-        f"AI Usage: "
-        f"{usage.total_tokens} tokens "
-        f"({usage.elapsed_seconds:.2f}s)"
-    )
+    # print(
+    #     f"AI Usage: "
+    #     f"{usage.total_tokens} tokens "
+    #     f"({usage.elapsed_seconds:.2f}s)"
+    # )
     # DEBUG
 
     return (

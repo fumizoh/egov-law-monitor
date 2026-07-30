@@ -4,11 +4,6 @@
 
 from pathlib import Path
 
-# Sources
-NOTIFY_SOURCES = {
-    "egov",
-}
-
 
 # Directories
 DOWNLOAD_DIR = Path("data/downloads")

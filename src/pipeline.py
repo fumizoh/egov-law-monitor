@@ -1,5 +1,3 @@
-from detector import detect_new_updates
-
 from law_group import group_by_law
 
 import law_builder
@@ -23,66 +21,14 @@ from statistics import(
     create_ai_statistics,
 )
 
-from config import (
-    KEYWORDS_JSON,
-    NOTIFY_SOURCES,
-)
 
-from notification.generator import (
-    create_email_subject,
-    create_email_body,
-)
-
-from notification.mailer import send_email
-
-
-def process(
-    source,
+def _save_statistics(
+    source: str,
     updates,
     date,
-):
-    """
-    Process updates from one source.
-    """
+) -> None:
+    """Create and save statistics."""
 
-    all_updates = updates
-
-    if source == "egov":
-        new_updates = detect_new_updates(source, all_updates)
-    else:
-        new_updates = all_updates
-
-    save_source_data(source, all_updates)
-
-    # Law View を公開データとして保存
-    if source == "egov":
-
-        # AI Summary ログ消去
-        reset_summary_logs()
-
-        law_groups = group_by_law(all_updates)
-
-        previous_laws = load_laws()
-
-        laws = law_builder.build_laws(
-            law_groups,
-            previous_laws=previous_laws,
-        )
-
-        # DEBUG
-        print("Total:", len(laws), "laws")
-        # DEBUG
-
-        save_laws(laws)
-
-        # AI Summary ログ集計
-        logs = load_summary_logs()
-
-        ai_statistics = create_ai_statistics(logs)
-
-        save_ai_statistics(ai_statistics)
-
-    # 統計情報を作成・保存
     statistics = create_statistics(
         source=source,
         updates=updates,
@@ -96,40 +42,55 @@ def process(
 
     print(f"{source}: データ保存・統計更新完了")
 
-    # メール通知対象以外はここで終了
-    if source not in NOTIFY_SOURCES:
-        return
 
-    # 更新がなければメールを送信しない
-    if not updates:
-        print("更新なしのためメール送信をスキップ")
-        return
+def process_egov(
+    updates,
+    date,
+):
+    """Process e-Gov updates."""
 
-    # メール本文を生成
-    keywords = load_json(KEYWORDS_JSON)
+    save_source_data("egov", updates)
 
-    subject = create_email_subject(
+    # Law View を公開データとして保存
+    reset_summary_logs()
+
+    law_groups = group_by_law(updates)
+
+    previous_laws = load_laws()
+
+    laws = law_builder.build_laws(
+        law_groups,
+        previous_laws=previous_laws,
+    )
+
+    print("Total:", len(laws), "laws")
+
+    save_laws(laws)
+
+    # AI Summary ログ集計
+    logs = load_summary_logs()
+
+    ai_statistics = create_ai_statistics(logs)
+
+    save_ai_statistics(ai_statistics)
+
+    _save_statistics(
+        "egov",
         updates,
         date,
     )
 
-    body = create_email_body(
+
+def process_public_comment(
+    updates,
+    date,
+):
+    """Process public comment updates."""
+
+    save_source_data("public_comment", updates)
+
+    _save_statistics(
+        "public_comment",
         updates,
-        keywords,
         date,
     )
-
-    # メール送信
-    try:
-        send_email(
-            subject,
-            body,
-        )
-
-        print("メール送信完了")
-
-    except KeyError as e:
-        print(
-            f"環境変数 {e.args[0]} が設定されていないため、"
-            "メール送信をスキップ"
-        )
