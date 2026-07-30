@@ -4,7 +4,7 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
-from datetime import datetime
+from datetime import datetime, UTC
 
 from models import (
     SummaryAction,
@@ -31,6 +31,22 @@ def append_summary_log(log: SummaryLog) -> None:
     with LOG_PATH.open("a", encoding="utf-8") as fp:
         json.dump(record, fp, ensure_ascii=False)
         fp.write("\n")
+
+
+def log_summary(
+    law_name: str,
+    decision: SummaryDecision,
+    usage: SummaryUsage | None = None,
+) -> None:
+    append_summary_log(
+        SummaryLog(
+            generated_at=datetime.now(UTC),
+            law_name=law_name,
+            action=decision.action,
+            reason=decision.reason,
+            usage=usage,
+        )
+    )
 
 
 def load_summary_logs() -> list[SummaryLog]:

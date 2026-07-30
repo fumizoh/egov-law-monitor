@@ -224,6 +224,8 @@ class LawChange:
 class AiStatistics:
     """Aggregated AI summary statistics."""
 
+    model: str
+
     generated: int
     reused: int
 
@@ -233,4 +235,7 @@ class AiStatistics:
     total_tokens: int
 
     elapsed_seconds: float
-    
+
+    estimated_cost_usd: float
+    estimated_cost_jpy: float
+    average_cost_jpy: float

@@ -6,7 +6,7 @@ from google.genai.types import HttpOptions
 
 from models import Summary, SummaryResponse, SummaryUsage
 
-from config import LOCATION, MODEL_NAME, PROJECT_ID
+from config import PROJECT_ID, LOCATION, MODEL_NAME
 
 
 def summarize(prompt: str) -> SummaryResponse:

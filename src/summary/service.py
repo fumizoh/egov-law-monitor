@@ -1,6 +1,6 @@
 """Summary service."""
 
-from datetime import date, datetime, UTC
+from datetime import date, datetime
 
 from models import (
     Law,
@@ -17,7 +17,7 @@ from summary.revision import (
 )
 
 from summary.generator import generate_future_summary
-from summary.logger import append_summary_log
+from summary.logger import log_summary
 
 
 def _should_include_summary(
@@ -132,13 +132,9 @@ def build_future_summary(
 
     if decision.action is SummaryAction.REUSE:
 
-        append_summary_log(
-            SummaryLog(
-                generated_at=datetime.now(UTC),
-                law_name=law_name,
-                action=decision.action,
-                reason=decision.reason,
-            )
+        log_summary(
+            law_name=law_name,
+            decision=decision,
         )
 
         return (
@@ -154,14 +150,10 @@ def build_future_summary(
     summary = response.summary
     usage = response.usage
 
-    append_summary_log(
-        SummaryLog(
-            generated_at=datetime.now(UTC),
-            law_name=law_name,
-            action=decision.action,
-            reason=decision.reason,
-            usage=usage,
-        )
+    log_summary(
+        law_name=law_name,
+        decision=decision,
+        usage=usage,
     )
 
     # DEBUG

@@ -4,6 +4,12 @@ from models import (
     SummaryLog,
 )
 
+from config import (
+    MODEL_NAME,
+    GEMINI_INPUT_PRICE_USD_PER_MILLION,
+    GEMINI_OUTPUT_PRICE_USD_PER_MILLION,
+    USD_TO_JPY_RATE,
+)
 
 def create_statistics(
     source,
@@ -128,7 +134,29 @@ def create_ai_statistics(
         total_tokens += log.usage.total_tokens
         elapsed_seconds += log.usage.elapsed_seconds
 
+    input_cost_usd = (
+        prompt_tokens
+        / 1_000_000
+        * GEMINI_INPUT_PRICE_USD_PER_MILLION
+    )
+
+    output_cost_usd = (
+        (output_tokens + thoughts_tokens)
+        / 1_000_000
+        * GEMINI_OUTPUT_PRICE_USD_PER_MILLION
+    )
+
+    estimated_cost_usd = input_cost_usd + output_cost_usd
+    estimated_cost_jpy = estimated_cost_usd * USD_TO_JPY_RATE
+
+    average_cost_jpy = (
+        estimated_cost_jpy / generated
+        if generated
+        else 0.0
+    )
+
     return AiStatistics(
+        model=MODEL_NAME,
         generated=generated,
         reused=reused,
         prompt_tokens=prompt_tokens,
@@ -136,4 +164,7 @@ def create_ai_statistics(
         thoughts_tokens=thoughts_tokens,
         total_tokens=total_tokens,
         elapsed_seconds=round(elapsed_seconds, 2),
+        estimated_cost_usd=round(estimated_cost_usd, 3),
+        estimated_cost_jpy=round(estimated_cost_jpy, 1),
+        average_cost_jpy=round(average_cost_jpy, 1),
     )
