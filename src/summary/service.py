@@ -20,7 +20,7 @@ from summary.generator import generate_future_summary
 from summary.logger import log_summary
 
 
-def _should_include_summary(
+def _should_include_future_summary(
     revision: RevisionHistory,
 ) -> bool:
     """Return True if the revision should be included in the future summary."""
@@ -39,7 +39,7 @@ def _should_include_summary(
     )
 
 
-def get_summary_revisions(
+def get_future_summary_revisions(
     revisions: list[RevisionHistory],
 ) -> list[RevisionHistory]:
     """Return revisions included in the future summary."""
@@ -47,7 +47,7 @@ def get_summary_revisions(
     summary_revisions = [
         revision
         for revision in revisions
-        if _should_include_summary(revision)
+        if _should_include_future_summary(revision)
     ]
 
     return sorted(
@@ -112,7 +112,7 @@ def build_summary(
 ) -> tuple[Summary | None, list[SummaryRevisionKey]]:
     """Build the future summary."""
 
-    summary_revisions = get_summary_revisions(revisions)
+    summary_revisions = get_future_summary_revisions(revisions)
 
     if not summary_revisions:
         return None, []
