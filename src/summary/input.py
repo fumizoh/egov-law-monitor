@@ -39,6 +39,26 @@ class AmendmentSummaryInput:
 
 
 @dataclass(slots=True)
+class NewLawArticle:
+    """AI summary input for one article."""
+
+    article: str
+    text: str
+
+
+@dataclass(slots=True)
+class NewLawSummaryInput:
+    """AI summary input for one new law."""
+
+    enforcement_date: str | None
+    scheduled_enforcement_date: str | None
+    enforcement_comment: str | None
+    is_effective: bool
+
+    articles: list[NewLawArticle]
+
+
+@dataclass(slots=True)
 class SummaryInput:
     """AI summary request."""
 

@@ -99,6 +99,20 @@ def build_amendment_summary(
     return(amendment_summary_input)
 
 
+def build_new_law_summary(
+    law_name: str,
+    revision: RevisionHistory,
+) -> SummaryResponse | None:
+    """Generate AI summary for a newly enacted law."""
+
+    logger.info(
+        "Generating new law summary: %s",
+        law_name,
+    )
+
+    raise NotImplementedError
+
+
 def generate_future_summary(
     law_name: str,
     revisions: list[RevisionHistory],

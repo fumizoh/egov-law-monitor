@@ -80,6 +80,14 @@ def build_amendment_summary_input(
     )
 
 
+def build_new_law_summary_input(
+    revision: RevisionHistory,
+) -> NewLawSummaryInput:
+    """Build AI summary input for a new law."""
+
+    raise NotImplementedError
+
+
 def build_summary_input(
     law_name: str,
     amendments: list[AmendmentSummaryInput],

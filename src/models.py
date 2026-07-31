@@ -128,15 +128,20 @@ class RevisionHistory:
 
     sub_revision: str
 
-    amendment_id: str
-    amendment_name: str
-    amendment_num: str
+    amendment_id: str | None
+    amendment_name: str | None
+    amendment_num: str | None
 
     enforcement_date: str | None
     scheduled_enforcement_date: str | None
     enforcement_comment: str | None
 
     is_current: bool
+
+    @property
+    def is_new_law(self) -> bool:
+        """True if this revision is the initial enactment."""
+        return self.amendment_id is None
 
 
 @dataclass(slots=True)
