@@ -10,6 +10,8 @@ from summary.input import (
 )
 
 
+# Update Law
+
 SYSTEM_PROMPT = """
 You are an expert legal analyst specializing in Japanese legislation.
 
@@ -20,11 +22,13 @@ Do not speculate, infer intent beyond the provided information, or introduce ext
 Base every statement solely on the supplied input.
 """.strip()
 
+
 ROLE_PROMPT = """
 You are assisting legal professionals who need to quickly understand how the current law will change through future legislative amendments.
 
 Your role is to explain the practical impact of upcoming amendments from the perspective of policy and institutional changes rather than individual article revisions.
 """.strip()
+
 
 TASK_PROMPT = """
 Summarize how the current law will change through the upcoming legislative amendments.
@@ -41,6 +45,37 @@ Requirements:
 - Use concise bullet points whenever possible.
 - Use only the information provided in the input.
 - If the enforcement date of an amendment has not been determined, clearly state that it is not yet determined.
+- Do not speculate.
+- Write the summary in Japanese.
+""".strip()
+
+
+# New Law
+
+NEW_LAW_SYSTEM_PROMPT = """
+You are an expert legal analyst specializing in Japanese legislation.
+
+Always prioritize factual accuracy over completeness.
+Do not speculate or introduce external knowledge.
+Base every statement solely on the supplied law text.
+""".strip()
+
+
+NEW_LAW_ROLE_PROMPT = """
+You are assisting legal professionals who need to quickly understand newly enacted Japanese laws.
+""".strip()
+
+
+NEW_LAW_TASK_PROMPT = """
+Summarize the newly enacted law.
+
+Requirements:
+- Begin with a brief overview of the purpose of the law.
+- Organize the summary by major topics rather than by article number.
+- Explain the main制度, obligations, procedures, and important provisions.
+- Do not summarize every article individually.
+- Omit minor procedural details unless essential.
+- Use only the supplied law text.
 - Do not speculate.
 - Write the summary in Japanese.
 """.strip()
@@ -127,5 +162,36 @@ def build_prompt_document(
         system=SYSTEM_PROMPT,
         role=ROLE_PROMPT,
         task=TASK_PROMPT,
+        sections=sections,
+    )
+
+
+def _build_new_law_section(
+    article: NewLawArticle,
+) -> PromptSection:
+    """Build one prompt section for a new law."""
+
+    return PromptSection(
+        title=article.article,
+        body=article.text,
+    )
+
+
+def build_new_law_prompt_document(
+    law_name: str,
+    summary: NewLawSummaryInput,
+) -> PromptDocument:
+    """Build structured prompt for a new law."""
+
+    sections = [
+        _build_new_law_section(article)
+        for article in summary.articles
+    ]
+
+    return PromptDocument(
+        title=law_name,
+        system=NEW_LAW_SYSTEM_PROMPT,
+        role=NEW_LAW_ROLE_PROMPT,
+        task=NEW_LAW_TASK_PROMPT,
         sections=sections,
     )

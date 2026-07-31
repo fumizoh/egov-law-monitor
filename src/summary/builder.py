@@ -1,11 +1,15 @@
 """Build AI summary input."""
 
+from sources.lawtext_api import fetch_law_text
+from lawtext_parser import parse_law_text
+
 from models import LawChange, RevisionHistory
 
 from summary.input import (
     SummaryChange,
     SummaryArticle,
     AmendmentSummaryInput,
+    NewLawSummaryInput,
     SummaryInput,
 )
 
@@ -81,11 +85,25 @@ def build_amendment_summary_input(
 
 
 def build_new_law_summary_input(
+    law_id: str,
     revision: RevisionHistory,
 ) -> NewLawSummaryInput:
     """Build AI summary input for a new law."""
 
-    raise NotImplementedError
+    raw = fetch_law_text(
+        law_id=law_id,
+        law_data_id=revision.law_data_id,
+        sub_revision=revision.sub_revision,
+    )
+
+    articles = parse_law_text(raw)
+
+    return NewLawSummaryInput(
+        enforcement_date=revision.enforcement_date,
+        scheduled_enforcement_date=revision.scheduled_enforcement_date,
+        enforcement_comment=revision.enforcement_comment,
+        articles=articles,
+    )
 
 
 def build_summary_input(

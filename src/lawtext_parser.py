@@ -1,4 +1,19 @@
+import re
+
 from summary.input import NewLawArticle
+
+TAG_RE = re.compile(r"<[^>]+>")
+
+
+def _strip_html(text: str | None) -> str | None:
+    """Remove HTML tags."""
+
+    if not text:
+        return None
+
+    text = TAG_RE.sub("", text).strip()
+
+    return text or None
 
 
 def parse_law_text(raw: dict) -> list[NewLawArticle]:
@@ -67,7 +82,7 @@ def _parse_sentence(sentence: dict) -> str:
         children = [children]
 
     for child in children:
-        text = child.get("#text")
+        text = _strip_html(child.get("#text"))
         if text:
             texts.append(text)
 

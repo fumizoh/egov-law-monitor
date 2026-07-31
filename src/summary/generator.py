@@ -13,8 +13,8 @@ from sources.compare_api import fetch_compare
 from comparison import parse_compare_result
 from sources.toc_api import fetch_law_toc
 from toc_parser import parse_toc
-from summary.builder import build_amendment_summary_input, build_summary_input
-from summary.prompt import build_prompt_document
+from summary.builder import build_amendment_summary_input, build_summary_input, build_new_law_summary_input
+from summary.prompt import build_prompt_document, build_new_law_prompt_document
 from summary.prompt_renderer import render_prompt
 from summary.gemini_client import summarize
 
@@ -28,7 +28,7 @@ import json
 logger = logging.getLogger(__name__)
 
 
-def build_amendment_summary(
+def generate_amendment_summary(
     law_name: str,
     revision: RevisionHistory,
 ) -> AmendmentSummaryInput | None:
@@ -99,18 +99,37 @@ def build_amendment_summary(
     return(amendment_summary_input)
 
 
-def build_new_law_summary(
+def generate_new_law_summary(
+    law_id: str,
     law_name: str,
     revision: RevisionHistory,
-) -> SummaryResponse | None:
-    """Generate AI summary for a newly enacted law."""
+) -> SummaryResponse:
 
     logger.info(
         "Generating new law summary: %s",
         law_name,
     )
 
-    raise NotImplementedError
+    summary_input = build_new_law_summary_input(
+        law_id=law_id,
+        revision=revision,
+    )
+
+    prompt_document = build_new_law_prompt_document(
+        law_name=law_name,
+        summary=summary_input,
+    )
+
+    prompt = render_prompt(prompt_document)
+
+    # DEBUG
+    Path("prompt.md").write_text(
+        prompt,
+        encoding="utf-8",
+    )
+    # DEBUG
+
+    return summarize(prompt)
 
 
 def generate_future_summary(
@@ -134,7 +153,7 @@ def generate_future_summary(
         # )
         # DEBUG
 
-        amendment = build_amendment_summary(
+        amendment = generate_amendment_summary(
             law_name,
             revision,
         )
