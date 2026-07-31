@@ -1,13 +1,13 @@
 {
   "model": "gemini-2.5-flash",
-  "generated": 1,
+  "generated": 28,
   "reused": 0,
-  "prompt_tokens": 96757,
-  "output_tokens": 1391,
-  "thoughts_tokens": 7197,
-  "total_tokens": 105345,
-  "elapsed_seconds": 55.73,
-  "estimated_cost_usd": 0.05,
-  "estimated_cost_jpy": 7.6,
-  "average_cost_jpy": 7.6
+  "prompt_tokens": 487629,
+  "output_tokens": 20773,
+  "thoughts_tokens": 98273,
+  "total_tokens": 606675,
+  "elapsed_seconds": 727.28,
+  "estimated_cost_usd": 0.444,
+  "estimated_cost_jpy": 66.6,
+  "average_cost_jpy": 2.4
 }
