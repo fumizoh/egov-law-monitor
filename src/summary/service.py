@@ -105,7 +105,7 @@ def needs_summary(
     )
 
 
-def build_future_summary(
+def build_summary(
     law_name: str,
     revisions: list[RevisionHistory],
     previous_law: Law | None = None,
@@ -156,6 +156,13 @@ def build_future_summary(
         law_name=law_name,
         revisions=summary_revisions,
     )
+
+    if response is None:
+        log_summary(
+            law_name=law_name,
+            decision=decision,
+        )
+        return None, revision_keys
 
     summary = response.summary
     usage = response.usage
