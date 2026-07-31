@@ -5,6 +5,8 @@ from summary.input import (
     SummaryArticle,
     AmendmentSummaryInput,
     SummaryInput,
+    NewLawArticle,
+    NewLawSummaryInput,
     PromptSection,
     PromptDocument,
 )
