@@ -8,7 +8,7 @@ from datetime import date
 import law_change
 
 from models import RevisionHistory, SummaryResponse
-from summary.input import AmendmentSummaryInput
+from summary.input import AmendmentSummaryInput, PromptDocument
 from sources.compare_api import fetch_compare
 from comparison import parse_compare_result
 from sources.toc_api import fetch_law_toc
@@ -28,20 +28,9 @@ import json
 logger = logging.getLogger(__name__)
 
 
-def generate_amendment_summary(
-    law_name: str,
+def _build_amendment_summary_input(
     revision: RevisionHistory,
 ) -> AmendmentSummaryInput | None:
-
-    # DEBUG
-    print(
-        "Summary:",
-        revision.amendment_num,
-        revision.enforcement_date,
-        revision.law_data_id,
-        revision.sub_revision,
-    )
-    # DEBUG
 
     compare_json = fetch_compare(
         new_law_data_id=revision.law_data_id,
@@ -56,7 +45,6 @@ def generate_amendment_summary(
             f"{revision.amendment_num} "
             f"{revision.enforcement_date}"
         )
-        # DEBUG
 
         return None
 
@@ -70,7 +58,6 @@ def generate_amendment_summary(
             f"({revision.enforcement_date})"
         )
         return None
-        # DEBUG
 
     toc_json = fetch_law_toc(
         law_data_id=compare_result.new.law_data_id,
@@ -89,14 +76,57 @@ def generate_amendment_summary(
     # DEBUG
     # counter = Counter(change.change_type for change in changes)
     # print(f"{revision.amendment_num}: {counter}")
-    # DEBUG
 
     amendment_summary_input = build_amendment_summary_input(
         revision=revision,
         changes=changes,
     )
 
-    return(amendment_summary_input)
+    return (amendment_summary_input)
+
+
+def _generate_summary(
+    prompt_document: PromptDocument,
+) -> SummaryResponse:
+
+    prompt = render_prompt(prompt_document)
+
+    # DEBUG
+    Path("prompt.md").write_text(
+        prompt,
+        encoding="utf-8",
+    )
+
+    return summarize(prompt)
+
+
+def generate_amendment_summary(
+    law_name: str,
+    revision: RevisionHistory,
+) -> SummaryResponse | None:
+
+    # DEBUG
+    print(
+        "Summary:",
+        revision.amendment_num,
+        revision.enforcement_date,
+        revision.law_data_id,
+        revision.sub_revision,
+    )
+
+    amendment_summary_input = _build_amendment_summary_input(revision)
+
+    # DEBUG
+    print("Generating Gemini summary...")
+
+    summary_input = build_summary_input(
+        law_name=law_name,
+        amendments=[amendment_summary_input],
+    )
+
+    prompt_document = build_prompt_document(summary_input)
+
+    return _generate_summary(prompt_document)
 
 
 def generate_new_law_summary(
@@ -110,6 +140,9 @@ def generate_new_law_summary(
         law_name,
     )
 
+    # DEBUG
+    print("Generating Gemini summary...")
+
     summary_input = build_new_law_summary_input(
         law_id=law_id,
         revision=revision,
@@ -120,16 +153,7 @@ def generate_new_law_summary(
         summary=summary_input,
     )
 
-    prompt = render_prompt(prompt_document)
-
-    # DEBUG
-    Path("prompt.md").write_text(
-        prompt,
-        encoding="utf-8",
-    )
-    # DEBUG
-
-    return summarize(prompt)
+    return _generate_summary(prompt_document)
 
 
 def generate_future_summary(
@@ -139,7 +163,6 @@ def generate_future_summary(
 
     # DEBUG
     print(len(revisions), "summary revisions")
-    # DEBUG
 
     amendments: list[AmendmentSummaryInput] = []
 
@@ -151,12 +174,8 @@ def generate_future_summary(
         #     f"[{i}/{len(revisions)}] "
         #     f"{revision.amendment_num}"
         # )
-        # DEBUG
 
-        amendment = generate_amendment_summary(
-            law_name,
-            revision,
-        )
+        amendment = _build_amendment_summary_input(revision)
 
         if amendment is not None:
             amendments.append(amendment)
@@ -166,7 +185,6 @@ def generate_future_summary(
 
     # DEBUG
     print("Generating Gemini summary...")
-    # DEBUG
 
     summary_input = build_summary_input(
         law_name=law_name,
@@ -174,13 +192,5 @@ def generate_future_summary(
     )
 
     prompt_document = build_prompt_document(summary_input)
-    prompt = render_prompt(prompt_document)
 
-    # DEBUG
-    Path("prompt.md").write_text(
-        prompt,
-        encoding="utf-8",
-    )
-    # DEBUG
-
-    return summarize(prompt)
+    return _generate_summary(prompt_document)
