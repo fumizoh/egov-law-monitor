@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from enum import Enum, auto
 
-import models
+from models import RevisionHistory
 
 class SummaryType(Enum):
     NEW_LAW = auto()
@@ -22,7 +22,7 @@ class SummaryRevisionKey:
 class SummaryRevision:
     revision: RevisionHistory
     summary_type: SummaryType
-    key: models.SummaryRevisionKey
+    key: SummaryRevisionKey
 
 
 class SummaryAction(Enum):

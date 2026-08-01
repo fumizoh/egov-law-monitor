@@ -11,6 +11,7 @@ from models import (
 
 from summary.revision import (
     SummaryRevisionKey,
+    SummaryRevision,
     SummaryAction,
     SummaryReason,
     SummaryDecision,
@@ -18,6 +19,34 @@ from summary.revision import (
 
 from summary.generator import generate_future_summary
 from summary.logger import log_summary
+
+
+def plan_summary_revisions(
+    revisions: list[RevisionHistory],
+) -> list[SummaryRevision]:
+
+    summary_revisions = [
+        revision
+        for revision in revisions
+        if _should_include_future_summary(revision)
+    ]
+
+    summary_revisions = sorted(
+        summary_revisions,
+        key=lambda revision: (
+            revision.enforcement_date is None,
+            revision.enforcement_date or "",
+        ),
+    )
+
+    return [
+        SummaryRevision(
+            revision=revision,
+            summary_type=SummaryType.FUTURE,
+            key=build_summary_revision_key(revision),
+        )
+        for revision in summary_revisions
+    ]
 
 
 def _should_include_future_summary(
@@ -59,15 +88,23 @@ def get_future_summary_revisions(
     )
 
 
+def build_summary_revision_key(
+    revision: RevisionHistory,
+) -> SummaryRevisionKey:
+    """Build a summary revision key from one revision."""
+    
+    return SummaryRevisionKey(
+        law_data_id=revision.law_data_id,
+        sub_revision=revision.sub_revision,
+    )
+
+
 def build_summary_revision_keys(
     revisions: list[RevisionHistory],
 ) -> list[SummaryRevisionKey]:
 
     return [
-        SummaryRevisionKey(
-            law_data_id=revision.law_data_id,
-            sub_revision=revision.sub_revision,
-        )
+        build_summary_revision_key(revision)
         for revision in revisions
     ]
 
