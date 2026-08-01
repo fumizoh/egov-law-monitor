@@ -2,6 +2,13 @@ from dataclasses import dataclass
 
 from enum import Enum, auto
 
+import models
+
+class SummaryType(Enum):
+    NEW_LAW = auto()
+    AMENDMENT = auto()
+    FUTURE = auto()
+
 
 @dataclass(slots=True, frozen=True)
 class SummaryRevisionKey:
@@ -9,6 +16,13 @@ class SummaryRevisionKey:
 
     law_data_id: int
     sub_revision: str
+
+
+@dataclass(frozen=True, slots=True)
+class SummaryRevision:
+    revision: RevisionHistory
+    summary_type: SummaryType
+    key: models.SummaryRevisionKey
 
 
 class SummaryAction(Enum):
