@@ -158,22 +158,25 @@ def generate_new_law_summary(
 
 def generate_future_summary(
     law_name: str,
-    revisions: list[RevisionHistory],
+    summary_revisions: list[SummaryRevision],
 ) -> SummaryResponse | None:
 
     # DEBUG
-    print(len(revisions), "summary revisions")
+    print(len(summary_revisions), "summary revisions")
 
     amendments: list[AmendmentSummaryInput] = []
 
-    # for revision in revisions:
-    for i, revision in enumerate(revisions, start=1):
+    for summary_revision in summary_revisions:
 
-        # DEBUG
+    # DEBUG
+    # for i, summary_revision in enumerate(summary_revisions, start=1):
+
         # print(
         #     f"[{i}/{len(revisions)}] "
         #     f"{revision.amendment_num}"
         # )
+
+        revision = summary_revision.revision
 
         amendment = _build_amendment_summary_input(revision)
 

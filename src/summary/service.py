@@ -193,10 +193,7 @@ def build_summary(
 
     response = generate_future_summary(
         law_name=law_name,
-        revisions=[
-            summary_revision.revision
-            for summary_revision in summary_revisions
-        ],
+        summary_revisions=summary_revisions,
     )
 
     if response is None:
