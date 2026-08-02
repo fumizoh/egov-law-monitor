@@ -9,7 +9,7 @@ sys.path.append(
 
 from comparison import parse_revision_history
 
-from summary.generator import generate_future_summary
+from summary.service import build_summary
 
 
 LAW_ID = "322AC0000000003"
@@ -46,7 +46,7 @@ revisions = parse_revision_history(history)
 print("law_id:", LAW_ID)
 print("law_name:", LAW_NAME)
 
-response = generate_future_summary(
+summary, summary_revision_keys = build_summary(
     law_name=LAW_NAME,
     revisions=revisions,
 )
@@ -55,8 +55,8 @@ print()
 print("=== Future Summary ===")
 print()
 
-if response.summary.title:
-    print(response.summary.title)
+if summary.title:
+    print(summary.title)
     print()
 
-print(response.summary.body)
+print(summary.body)

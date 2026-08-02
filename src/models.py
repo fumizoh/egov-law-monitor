@@ -10,6 +10,7 @@ from typing import Any, TypedDict
 from enum import Enum
 
 from summary.revision import (
+    SummaryType,
     SummaryRevisionKey,
     SummaryAction,
     SummaryReason,
@@ -142,6 +143,13 @@ class RevisionHistory:
     def is_new_law(self) -> bool:
         """True if this revision is the initial enactment."""
         return self.amendment_id is None
+
+
+@dataclass(frozen=True, slots=True)
+class SummaryRevision:
+    revision: RevisionHistory
+    summary_type: SummaryType
+    key: SummaryRevisionKey
 
 
 @dataclass(slots=True)

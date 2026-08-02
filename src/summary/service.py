@@ -5,13 +5,14 @@ from datetime import date, datetime
 from models import (
     Law,
     RevisionHistory,
+    SummaryRevision,
     Summary,
     SummaryLog,
 )
 
 from summary.revision import (
+    SummaryType,
     SummaryRevisionKey,
-    SummaryRevision,
     SummaryAction,
     SummaryReason,
     SummaryDecision,
@@ -149,14 +150,15 @@ def build_summary(
 ) -> tuple[Summary | None, list[SummaryRevisionKey]]:
     """Build the future summary."""
 
-    summary_revisions = get_future_summary_revisions(revisions)
+    summary_revisions = plan_summary_revisions(revisions)
 
     if not summary_revisions:
         return None, []
 
-    revision_keys = build_summary_revision_keys(
-        summary_revisions,
-    )
+    revision_keys = [
+        summary_revision.key
+        for summary_revision in summary_revisions
+    ]
 
     # DEBUG
     # if previous_law is not None:
@@ -191,7 +193,10 @@ def build_summary(
 
     response = generate_future_summary(
         law_name=law_name,
-        revisions=summary_revisions,
+        revisions=[
+            summary_revision.revision
+            for summary_revision in summary_revisions
+        ],
     )
 
     if response is None:
