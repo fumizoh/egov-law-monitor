@@ -69,26 +69,6 @@ def _should_include_future_summary(
     )
 
 
-def get_future_summary_revisions(
-    revisions: list[RevisionHistory],
-) -> list[RevisionHistory]:
-    """Return revisions included in the future summary."""
-
-    summary_revisions = [
-        revision
-        for revision in revisions
-        if _should_include_future_summary(revision)
-    ]
-
-    return sorted(
-        summary_revisions,
-        key=lambda revision: (
-            revision.enforcement_date is None,
-            revision.enforcement_date or "",
-        ),
-    )
-
-
 def build_summary_revision_key(
     revision: RevisionHistory,
 ) -> SummaryRevisionKey:
@@ -98,16 +78,6 @@ def build_summary_revision_key(
         law_data_id=revision.law_data_id,
         sub_revision=revision.sub_revision,
     )
-
-
-def build_summary_revision_keys(
-    revisions: list[RevisionHistory],
-) -> list[SummaryRevisionKey]:
-
-    return [
-        build_summary_revision_key(revision)
-        for revision in revisions
-    ]
 
 
 def needs_summary(
