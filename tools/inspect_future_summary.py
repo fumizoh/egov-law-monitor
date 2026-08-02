@@ -9,7 +9,7 @@ sys.path.append(
 
 from comparison import parse_revision_history
 
-from summary.service import build_law_summary
+from summary.future_service import build_future_summary
 
 
 LAW_ID = "322AC0000000003"
@@ -46,7 +46,7 @@ revisions = parse_revision_history(history)
 print("law_id:", LAW_ID)
 print("law_name:", LAW_NAME)
 
-summary, summary_revision_keys = build_law_summary(
+summary, summary_revision_keys = build_future_summary(
     law_name=LAW_NAME,
     revisions=revisions,
 )

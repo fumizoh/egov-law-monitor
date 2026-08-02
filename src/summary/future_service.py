@@ -1,4 +1,4 @@
-"""Summary service."""
+"""Future summary service."""
 
 from datetime import date, datetime
 
@@ -22,14 +22,14 @@ from summary.generator import generate_law_summary
 from summary.logger import log_summary
 
 
-def plan_law_summary_revisions(
+def _select_future_summary_revisions(
     revisions: list[RevisionHistory],
 ) -> list[SummaryRevision]:
 
     summary_revisions = [
         revision
         for revision in revisions
-        if _should_include_future_summary(revision)
+        if _is_future_summary_revision(revision)
     ]
 
     summary_revisions = sorted(
@@ -43,14 +43,13 @@ def plan_law_summary_revisions(
     return [
         SummaryRevision(
             revision=revision,
-            summary_type=SummaryType.FUTURE,
             key=build_summary_revision_key(revision),
         )
         for revision in summary_revisions
     ]
 
 
-def _should_include_future_summary(
+def _is_future_summary_revision(
     revision: RevisionHistory,
 ) -> bool:
     """Return True if the revision should be included in the future summary."""
@@ -113,14 +112,14 @@ def needs_summary(
     )
 
 
-def build_law_summary(
+def build_future_summary(
     law_name: str,
     revisions: list[RevisionHistory],
     previous_law: Law | None = None,
 ) -> tuple[Summary | None, list[SummaryRevisionKey]]:
     """Build the future summary."""
 
-    summary_revisions = plan_law_summary_revisions(revisions)
+    summary_revisions = _select_future_summary_revisions(revisions)
 
     if not summary_revisions:
         return None, []

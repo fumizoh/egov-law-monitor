@@ -148,7 +148,6 @@ class RevisionHistory:
 @dataclass(frozen=True, slots=True)
 class SummaryRevision:
     revision: RevisionHistory
-    summary_type: SummaryType
     key: SummaryRevisionKey
 
 

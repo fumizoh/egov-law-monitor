@@ -4,7 +4,7 @@ Law Builder.
 
 import comparison
 import sources.revision_api as revision_api
-import summary.service as summary_service
+import summary.future_service as future_service
 
 from models import Law, LawGroup, LawRevision, Update
 
@@ -90,7 +90,7 @@ def build_laws(
 
         law, revisions = build_law(group)
 
-        summary, revision_keys = summary_service.build_law_summary(
+        summary, revision_keys = future_service.build_future_summary(
             law_name=law["law_name"],
             revisions=revisions,
             previous_law=previous_law,

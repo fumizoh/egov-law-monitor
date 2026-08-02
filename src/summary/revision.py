@@ -6,7 +6,6 @@ from enum import Enum, auto
 class SummaryType(Enum):
     NEW_LAW = auto()
     AMENDMENT = auto()
-    FUTURE = auto()
 
 
 @dataclass(slots=True, frozen=True)
