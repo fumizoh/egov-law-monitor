@@ -43,7 +43,7 @@ def _select_future_summary_revisions(
     return [
         SummaryRevision(
             revision=revision,
-            key=build_summary_revision_key(revision),
+            key=_build_summary_revision_key(revision),
         )
         for revision in summary_revisions
     ]
@@ -68,7 +68,7 @@ def _is_future_summary_revision(
     )
 
 
-def build_summary_revision_key(
+def _build_summary_revision_key(
     revision: RevisionHistory,
 ) -> SummaryRevisionKey:
     """Build a summary revision key from one revision."""
