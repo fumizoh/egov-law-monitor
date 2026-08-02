@@ -151,6 +151,17 @@ class SummaryRevision:
     key: SummaryRevisionKey
 
 
+@dataclass(frozen=True, slots=True)
+class LawSummaryTarget:
+    """One Law Summary generation target."""
+
+    revisions: list[RevisionHistory]
+
+    summary_type: SummaryType
+
+    revision_keys: list[SummaryRevisionKey]
+
+
 @dataclass(slots=True)
 class LawRevision:
     """Revision metadata."""
