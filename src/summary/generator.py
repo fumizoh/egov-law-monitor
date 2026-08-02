@@ -156,7 +156,7 @@ def generate_new_law_summary(
     return _generate_summary(prompt_document)
 
 
-def generate_future_summary(
+def generate_law_summary(
     law_name: str,
     summary_revisions: list[SummaryRevision],
 ) -> SummaryResponse | None:

@@ -18,11 +18,11 @@ from summary.revision import (
     SummaryDecision,
 )
 
-from summary.generator import generate_future_summary
+from summary.generator import generate_law_summary
 from summary.logger import log_summary
 
 
-def plan_summary_revisions(
+def plan_law_summary_revisions(
     revisions: list[RevisionHistory],
 ) -> list[SummaryRevision]:
 
@@ -113,14 +113,14 @@ def needs_summary(
     )
 
 
-def build_summary(
+def build_law_summary(
     law_name: str,
     revisions: list[RevisionHistory],
     previous_law: Law | None = None,
 ) -> tuple[Summary | None, list[SummaryRevisionKey]]:
     """Build the future summary."""
 
-    summary_revisions = plan_summary_revisions(revisions)
+    summary_revisions = plan_law_summary_revisions(revisions)
 
     if not summary_revisions:
         return None, []
@@ -161,7 +161,7 @@ def build_summary(
             previous_law["summary_revision_keys"],
         )
 
-    response = generate_future_summary(
+    response = generate_law_summary(
         law_name=law_name,
         summary_revisions=summary_revisions,
     )
