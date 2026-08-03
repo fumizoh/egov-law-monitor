@@ -6,7 +6,6 @@ from models import (
     LawSummaryInput,
 )
 
-
 # DEBUG
 from pprint import pprint
 
@@ -36,6 +35,7 @@ def build_daily_summary_input(
         metadata = event["metadata"]
 
         amend_number = metadata["amend_number"]
+        effective_date = metadata["effective_date"]
 
         if amend_number:
 
@@ -43,7 +43,38 @@ def build_daily_summary_input(
                 revision
                 for revision in revisions
                 if revision.amendment_num == amend_number
+                and revision.enforcement_date == effective_date
             )
+
+            '''
+            # DEBUG
+            matching = [
+                revision
+                for revision in revisions
+                if revision.amendment_num == amend_number
+            ]
+
+            print("CSV:", repr(effective_date))
+
+            for revision in matching:
+                print(
+                    repr(revision.enforcement_date),
+                    revision.enforcement_date == effective_date,
+                )
+
+            print(
+                amend_number,
+                len(matching),
+            )
+
+            for revision in matching:
+                print(
+                    revision.law_data_id,
+                    revision.sub_revision,
+                    revision.enforcement_date,
+                    revision.amendment_num,
+                )
+            '''
 
         else:
 
@@ -51,6 +82,7 @@ def build_daily_summary_input(
                 revision
                 for revision in revisions
                 if revision.is_new_law
+                and revision.enforcement_date == effective_date
             )
 
     return LawSummaryInput(

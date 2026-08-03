@@ -150,6 +150,7 @@ def generate_law_summary(
     revisions = summary_input.revisions
 
     # DEBUG
+    print(law_name)
     print(len(revisions), "summary revisions")
 
     amendments: list[AmendmentSummaryInput] = []

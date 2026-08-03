@@ -82,6 +82,14 @@ class SummaryResponse:
 
 
 @dataclass(slots=True)
+class DailySummaryResponse:
+    """Daily AI summary response."""
+
+    summary: Summary
+    usage: SummaryUsage
+
+
+@dataclass(slots=True)
 class SummaryLog:
     generated_at: datetime
     law_name: str
