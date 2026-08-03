@@ -90,7 +90,7 @@ def build_laws(
 
         law, revisions = build_law(group)
 
-        summary, revision_keys = future_service.build_future_summary(
+        summary, revision_keys = future_service.generate_future_summary(
             law_name=law["law_name"],
             revisions=revisions,
             previous_law=previous_law,

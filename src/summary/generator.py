@@ -107,7 +107,7 @@ def generate_amendment_summary(
         revisions=[revision],
     )
 
-    return generate_law_summary_response(summary_input)
+    return generate_law_summary(summary_input)
 
 
 def generate_new_law_summary(
@@ -137,7 +137,7 @@ def generate_new_law_summary(
     return _generate_summary(prompt_document)
 
 
-def generate_law_summary_response(
+def generate_law_summary(
     summary_input: LawSummaryInput,
 ) -> SummaryResponse | None:
 

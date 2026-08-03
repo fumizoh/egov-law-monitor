@@ -1,9 +1,14 @@
 """Build AI summary input."""
 
 from sources.lawtext_api import fetch_law_text
+
 from lawtext_parser import parse_law_text
 
-from models import LawChange, RevisionHistory
+from models import (
+    LawChange,
+    RevisionHistory,
+    LawSummaryInput,
+)
 
 from summary.input import (
     SummaryChange,
@@ -12,6 +17,14 @@ from summary.input import (
     NewLawSummaryInput,
     SummaryInput,
 )
+
+
+import comparison
+import sources.revision_api as revision_api
+
+
+# DEBUG
+from pprint import pprint
 
 
 def _build_summary_changes(
@@ -115,4 +128,56 @@ def build_summary_input(
     return SummaryInput(
         law_name=law_name,
         amendments=amendments,
+    )
+
+
+def _get_revision_history(
+    law_id: str,
+) -> list[RevisionHistory]:
+    """Fetch and parse revision history."""
+
+    raw = revision_api.fetch_revisions(law_id)
+
+    return comparison.parse_revision_history(
+        raw["result"]["Amendment_History"]
+    )
+
+
+def build_law_summary_input(
+    law_group: LawGroup,
+) -> LawSummaryInput:
+
+    revisions = _get_revision_history(law_group.law_id)
+
+    summary_revisions: list[RevisionHistory] = []
+
+    for event in law_group.events:
+
+        metadata = event["metadata"]
+
+        amend_number = metadata["amend_number"]
+        effective_date = metadata["effective_date"]
+
+        if amend_number:
+
+            summary_revisions.extend(
+                revision
+                for revision in revisions
+                if revision.amendment_num == amend_number
+                and revision.enforcement_date == effective_date
+            )
+
+        else:
+
+            summary_revisions.extend(
+                revision
+                for revision in revisions
+                if revision.is_new_law
+                and revision.enforcement_date == effective_date
+            )
+
+    return LawSummaryInput(
+        law_id=law_group.law_id,
+        law_name=law_group.law_name,
+        revisions=summary_revisions,
     )
