@@ -145,6 +145,17 @@ class RevisionHistory:
         return self.amendment_id is None
 
 
+@dataclass(slots=True)
+class LawSummaryInput:
+    """Input for Law Summary Service."""
+
+    law_id: str
+
+    law_name: str
+
+    revisions: list[RevisionHistory]
+
+
 @dataclass(frozen=True, slots=True)
 class SummaryRevision:
     revision: RevisionHistory

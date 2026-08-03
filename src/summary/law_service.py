@@ -1,47 +1,60 @@
-from models import RevisionHistory, LawSummaryTarget
-from summary.revision import (
-    SummaryType,
-    SummaryRevisionKey,
+import comparison
+import sources.revision_api as revision_api
+
+from models import (
+    RevisionHistory,
+    LawSummaryInput,
 )
 
 
-def _build_summary_revision_key(
-    revision: RevisionHistory,
-) -> SummaryRevisionKey:
-    """Build a summary revision key from one revision."""
-    
-    return SummaryRevisionKey(
-        law_data_id=revision.law_data_id,
-        sub_revision=revision.sub_revision,
+# DEBUG
+from pprint import pprint
+
+
+def _get_revision_history(
+    law_id: str,
+) -> list[RevisionHistory]:
+    """Fetch and parse revision history."""
+
+    raw = revision_api.fetch_revisions(law_id)
+
+    return comparison.parse_revision_history(
+        raw["result"]["Amendment_History"]
     )
 
 
-def _build_law_summary_target(
-    revision: RevisionHistory,
-) -> LawSummaryTarget:
+def build_daily_summary_input(
+    law_group: LawGroup,
+) -> LawSummaryInput:
 
-    return LawSummaryTarget(
-        revisions=[revision],
-        summary_type=SummaryType.NEW_LAW,
-        revision_keys=[
-            _build_summary_revision_key(revision),
-        ],
+    revisions = _get_revision_history(law_group.law_id)
+
+    summary_revisions: list[RevisionHistory] = []
+
+    for event in law_group.events:
+
+        metadata = event["metadata"]
+
+        amend_number = metadata["amend_number"]
+
+        if amend_number:
+
+            summary_revisions.extend(
+                revision
+                for revision in revisions
+                if revision.amendment_num == amend_number
+            )
+
+        else:
+
+            summary_revisions.extend(
+                revision
+                for revision in revisions
+                if revision.is_new_law
+            )
+
+    return LawSummaryInput(
+        law_id=law_group.law_id,
+        law_name=law_group.law_name,
+        revisions=summary_revisions,
     )
-
-
-def select_law_summary_targets(
-    revisions: list[RevisionHistory],
-) -> list[LawSummaryTarget]:
-
-    targets: list[LawSummaryTarget] = []
-
-    for revision in revisions:
-
-        if not revision.is_new_law:
-            continue
-
-        targets.append(
-            _build_law_summary_target(revision)
-        )
-
-    return targets

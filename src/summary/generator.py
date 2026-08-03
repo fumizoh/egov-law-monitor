@@ -7,7 +7,7 @@ from datetime import date
 
 import law_change
 
-from models import RevisionHistory, SummaryResponse
+from models import RevisionHistory, LawSummaryInput, SummaryResponse
 from summary.input import AmendmentSummaryInput, PromptDocument
 from sources.compare_api import fetch_compare
 from comparison import parse_compare_result
@@ -101,32 +101,18 @@ def _generate_summary(
 
 
 def generate_amendment_summary(
+    law_id: str,
     law_name: str,
     revision: RevisionHistory,
 ) -> SummaryResponse | None:
 
-    # DEBUG
-    print(
-        "Summary:",
-        revision.amendment_num,
-        revision.enforcement_date,
-        revision.law_data_id,
-        revision.sub_revision,
-    )
-
-    amendment_summary_input = _build_amendment_summary_input(revision)
-
-    # DEBUG
-    print("Generating Gemini summary...")
-
-    summary_input = build_summary_input(
+    summary_input = LawSummaryInput(
+        law_id=law_id,
         law_name=law_name,
-        amendments=[amendment_summary_input],
+        revisions=[revision],
     )
 
-    prompt_document = build_prompt_document(summary_input)
-
-    return _generate_summary(prompt_document)
+    return generate_law_summary(summary_input)
 
 
 def generate_new_law_summary(
@@ -157,26 +143,26 @@ def generate_new_law_summary(
 
 
 def generate_law_summary(
-    law_name: str,
-    summary_revisions: list[SummaryRevision],
+    summary_input: LawSummaryInput,
 ) -> SummaryResponse | None:
 
+    law_name = summary_input.law_name
+    revisions = summary_input.revisions
+
     # DEBUG
-    print(len(summary_revisions), "summary revisions")
+    print(len(revisions), "summary revisions")
 
     amendments: list[AmendmentSummaryInput] = []
 
-    for summary_revision in summary_revisions:
+    for revision in revisions:
 
     # DEBUG
-    # for i, summary_revision in enumerate(summary_revisions, start=1):
+    # for i, revision in enumerate(revisions, start=1):
 
         # print(
         #     f"[{i}/{len(revisions)}] "
         #     f"{revision.amendment_num}"
         # )
-
-        revision = summary_revision.revision
 
         amendment = _build_amendment_summary_input(revision)
 
@@ -189,11 +175,11 @@ def generate_law_summary(
     # DEBUG
     print("Generating Gemini summary...")
 
-    summary_input = build_summary_input(
+    prompt_input = build_summary_input(
         law_name=law_name,
         amendments=amendments,
     )
 
-    prompt_document = build_prompt_document(summary_input)
+    prompt_document = build_prompt_document(prompt_input)
 
     return _generate_summary(prompt_document)

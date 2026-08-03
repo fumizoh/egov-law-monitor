@@ -8,6 +8,7 @@ sys.path.append(
 from sources.revision_api import fetch_revisions
 
 import comparison
+import summary.law_service as law_service
 
 from pprint import pprint
 
@@ -29,6 +30,10 @@ revisions = comparison.parse_revision_history(
     raw["result"]["Amendment_History"]
 )
 
+law_service.build_law_summary_inputs(revisions)
+
+'''
 for revision in revisions:
     print(revision)
     print(f"is_new_law = {revision.is_new_law}")
+'''
