@@ -95,21 +95,6 @@ def _generate_summary(
     return summarize(prompt)
 
 
-def generate_amendment_summary(
-    law_id: str,
-    law_name: str,
-    revision: RevisionHistory,
-) -> SummaryResponse | None:
-
-    summary_input = LawSummaryInput(
-        law_id=law_id,
-        law_name=law_name,
-        revisions=[revision],
-    )
-
-    return generate_law_summary(summary_input)
-
-
 def generate_new_law_summary(
     law_id: str,
     law_name: str,
