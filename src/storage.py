@@ -15,6 +15,7 @@ from config import (
     DOCS_DATA,
     SOURCE_DATA_FILES,
     LAWS_JSON,
+    DAILY_SUMMARY_JSON,
     STATISTICS_JSON,
     AI_STATISTICS_JSON,
     APP_JSON,
@@ -140,6 +141,17 @@ def save_laws(laws):
     save_json(
         laws,
         LAWS_JSON,
+    )
+
+
+def save_daily_summary(
+    summary: DailySummaryResponse,
+):
+    """Save Daily Summary."""
+
+    save_json(
+        summary,
+        DAILY_SUMMARY_JSON,
     )
 
 

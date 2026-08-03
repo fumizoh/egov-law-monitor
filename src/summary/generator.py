@@ -23,7 +23,6 @@ from pathlib import Path
 from collections import Counter
 from pprint import pprint
 import json
-# DEBUG
 
 logger = logging.getLogger(__name__)
 
@@ -73,10 +72,6 @@ def _build_amendment_summary_input(
         index,
     )
 
-    # DEBUG
-    # counter = Counter(change.change_type for change in changes)
-    # print(f"{revision.amendment_num}: {counter}")
-
     amendment_summary_input = build_amendment_summary_input(
         revision=revision,
         changes=changes,
@@ -112,7 +107,7 @@ def generate_amendment_summary(
         revisions=[revision],
     )
 
-    return generate_law_summary(summary_input)
+    return generate_law_summary_response(summary_input)
 
 
 def generate_new_law_summary(
@@ -142,7 +137,7 @@ def generate_new_law_summary(
     return _generate_summary(prompt_document)
 
 
-def generate_law_summary(
+def generate_law_summary_response(
     summary_input: LawSummaryInput,
 ) -> SummaryResponse | None:
 
@@ -156,14 +151,6 @@ def generate_law_summary(
     amendments: list[AmendmentSummaryInput] = []
 
     for revision in revisions:
-
-    # DEBUG
-    # for i, revision in enumerate(revisions, start=1):
-
-        # print(
-        #     f"[{i}/{len(revisions)}] "
-        #     f"{revision.amendment_num}"
-        # )
 
         amendment = _build_amendment_summary_input(revision)
 

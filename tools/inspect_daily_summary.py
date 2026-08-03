@@ -14,9 +14,9 @@ from datetime import date
 
 from sources.egov import fetch
 from law_group import group_by_law
-from summary.law_service import build_daily_summary_input
-from summary.generator import generate_law_summary
-from summary.daily_service import generate_daily_summary_response
+from summary.law_service import build_law_summary_input
+from summary.generator import generate_law_summary_response
+from summary.daily_service import generate_daily_summary
 
 
 def main():
@@ -29,17 +29,17 @@ def main():
 
     for law_group in law_groups:
 
-        summary_input = build_daily_summary_input(
+        law_summary_input = build_law_summary_input(
             law_group,
         )
 
-        response = generate_law_summary(
-            summary_input,
+        response = generate_law_summary_response(
+            law_summary_input,
         )
 
         responses.append(response)
 
-    daily = generate_daily_summary_response(
+    daily = generate_daily_summary(
         date,
         responses,
     )

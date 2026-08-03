@@ -18,7 +18,7 @@ from summary.revision import (
     SummaryDecision,
 )
 
-from summary.generator import generate_law_summary
+from summary.generator import generate_law_summary_response
 from summary.logger import log_summary
 
 
@@ -160,7 +160,7 @@ def build_future_summary(
             previous_law["summary_revision_keys"],
         )
 
-    response = generate_law_summary(
+    response = generate_law_summary_response(
         law_name=law_name,
         summary_revisions=summary_revisions,
     )

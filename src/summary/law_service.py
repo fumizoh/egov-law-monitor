@@ -22,7 +22,7 @@ def _get_revision_history(
     )
 
 
-def build_daily_summary_input(
+def build_law_summary_input(
     law_group: LawGroup,
 ) -> LawSummaryInput:
 
@@ -45,36 +45,6 @@ def build_daily_summary_input(
                 if revision.amendment_num == amend_number
                 and revision.enforcement_date == effective_date
             )
-
-            '''
-            # DEBUG
-            matching = [
-                revision
-                for revision in revisions
-                if revision.amendment_num == amend_number
-            ]
-
-            print("CSV:", repr(effective_date))
-
-            for revision in matching:
-                print(
-                    repr(revision.enforcement_date),
-                    revision.enforcement_date == effective_date,
-                )
-
-            print(
-                amend_number,
-                len(matching),
-            )
-
-            for revision in matching:
-                print(
-                    revision.law_data_id,
-                    revision.sub_revision,
-                    revision.enforcement_date,
-                    revision.amendment_num,
-                )
-            '''
 
         else:
 

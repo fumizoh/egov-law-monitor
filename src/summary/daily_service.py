@@ -3,11 +3,11 @@ from models import (
     SummaryResponse,
 )
 from summary.daily_builder import build_daily_summary_input
-from summary.daily_generator import generate_daily_summary
+from summary.daily_generator import generate_daily_summary_response
 from summary.usage import merge_usage
 
 
-def generate_daily_summary_response(
+def generate_daily_summary(
     date: str,
     responses: list[SummaryResponse],
 ) -> DailySummaryResponse:
@@ -18,7 +18,7 @@ def generate_daily_summary_response(
         responses=responses,
     )
 
-    response = generate_daily_summary(
+    response = generate_daily_summary_response(
         daily_input,
     )
 

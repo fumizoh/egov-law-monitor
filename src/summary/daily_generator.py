@@ -19,7 +19,7 @@ def _generate_summary(
     return summarize(prompt)
 
 
-def generate_daily_summary(
+def generate_daily_summary_response(
     summary_input: DailySummaryInput,
 ) -> SummaryResponse:
     """Generate Daily Summary."""
