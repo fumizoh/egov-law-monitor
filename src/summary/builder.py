@@ -1,10 +1,13 @@
 """Build AI summary input."""
 
+from __future__ import annotations
+
 from sources.lawtext_api import fetch_law_text
 
 from lawtext_parser import parse_law_text
 
 from models import (
+    LawGroup,
     LawChange,
     RevisionHistory,
     LawSummaryInput,
