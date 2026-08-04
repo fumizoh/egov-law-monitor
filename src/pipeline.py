@@ -1,26 +1,21 @@
 from law_group import group_by_law
 
 import law_builder
+import summary.daily_service as daily_service
+import summary.statistics as summary_statistics
 
 from storage import (
     save_source_data,
     save_laws,
     save_statistics,
-    load_json,
-    load_laws,
-    save_ai_statistics,
     save_daily_summary,
     save_law_summaries,
-)
-
-from summary.logger import (
-    reset_summary_logs,
-    load_summary_logs,
+    append_ai_summary_logs,
+    save_ai_statistics,
 )
 
 from statistics import(
-    create_statistics,
-    create_ai_statistics,
+    create_source_statistics,
 )
 
 
@@ -31,7 +26,7 @@ def _save_statistics(
 ) -> None:
     """Create and save statistics."""
 
-    statistics = create_statistics(
+    statistics = create_source_statistics(
         source=source,
         updates=updates,
         latest_date=date,
@@ -54,39 +49,37 @@ def process_egov(
     save_source_data("egov", updates)
 
     # Law を公開データとして保存
-    reset_summary_logs()
-
     law_groups = group_by_law(updates)
 
-    previous_laws = load_laws()
-
-    laws = law_builder.build_laws(
-        law_groups,
-        previous_laws=previous_laws,
-    )
+    laws = law_builder.build_laws(law_groups)
 
     # DEBUG
     print("Total:", len(laws), "laws")
 
     save_laws(laws)
 
-    # Daily summary
-    daily_summary, law_summaries = daily_service.generate(
+    # Daily Summary
+    daily_summary, law_summaries, logs = daily_service.generate(
         date,
         law_groups,
     )
 
-    save_law_summaries(law_summaries)
-
     save_daily_summary(daily_summary)
 
-    # AI Summary ログ集計
-    logs = load_summary_logs()
+    save_law_summaries(law_summaries)
 
-    ai_statistics = create_ai_statistics(logs)
+    append_ai_summary_logs(logs)
 
-    save_ai_statistics(ai_statistics)
+    # AI Summary Statistics
+    statistics = summary_statistics.create_statistics(
+        law_summaries,
+        daily_summary,
+        logs,
+    )
 
+    save_ai_statistics(statistics)
+
+    # Save Statistics
     _save_statistics(
         "egov",
         updates,
@@ -102,6 +95,7 @@ def process_public_comment(
 
     save_source_data("public_comment", updates)
 
+    # Save Statistics
     _save_statistics(
         "public_comment",
         updates,

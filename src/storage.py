@@ -14,6 +14,7 @@ from models import (
     AiStatistics,
     DailySummaryResponse,
     LawSummary,
+    AiSummaryLog,
 )
 
 from config import (
@@ -25,6 +26,7 @@ from config import (
     DAILY_SUMMARY_JSON,
     STATISTICS_JSON,
     AI_STATISTICS_JSON,
+    AI_SUMMARY_LOG_JSON,
     APP_JSON,
 )
 
@@ -170,6 +172,32 @@ def save_laws(laws):
     )
 
 
+def save_statistics(
+    source,
+    statistics,
+):
+    """
+    情報源ごとの統計を statistics.json に保存する。
+    """
+
+    try:
+
+        data = load_json(
+            STATISTICS_JSON
+        )
+
+    except FileNotFoundError:
+
+        data = {}
+
+    data[source] = statistics
+
+    save_json(
+        data,
+        STATISTICS_JSON,
+    )
+
+
 def load_law_summaries() -> dict[str, LawSummary]:
     """Load cached law summaries."""
 
@@ -220,32 +248,6 @@ def save_daily_summary(
     )
 
 
-def save_statistics(
-    source,
-    statistics,
-):
-    """
-    情報源ごとの統計を statistics.json に保存する。
-    """
-
-    try:
-
-        data = load_json(
-            STATISTICS_JSON
-        )
-
-    except FileNotFoundError:
-
-        data = {}
-
-    data[source] = statistics
-
-    save_json(
-        data,
-        STATISTICS_JSON,
-    )
-
-
 def save_ai_statistics(statistics: AiStatistics):
     """
     Save AI statistics as ai_statistics.json.
@@ -255,3 +257,28 @@ def save_ai_statistics(statistics: AiStatistics):
         statistics,
         AI_STATISTICS_JSON,
     )
+
+
+def append_ai_summary_logs(
+    logs: list[AiSummaryLog],
+):
+    """
+    Append AI summary logs.
+    """
+
+    with open(
+        AI_SUMMARY_LOG_JSON,
+        "a",
+        encoding="utf-8",
+    ) as f:
+
+        for log in logs:
+
+            json.dump(
+                log,
+                f,
+                ensure_ascii=False,
+                default=json_default,
+            )
+
+            f.write("\n")

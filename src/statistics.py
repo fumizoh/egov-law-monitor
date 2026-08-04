@@ -11,7 +11,7 @@ from config import (
     USD_TO_JPY_RATE,
 )
 
-def create_statistics(
+def create_source_statistics(
     source,
     updates,
     latest_date,
@@ -105,6 +105,7 @@ def create_public_comment_statistics(
     }
 
 
+'''
 def create_ai_statistics(
     logs: list[SummaryLog],
 ) -> AiStatistics:
@@ -168,3 +169,4 @@ def create_ai_statistics(
         estimated_cost_jpy=round(estimated_cost_jpy, 1),
         average_cost_jpy=round(average_cost_jpy, 1),
     )
+'''

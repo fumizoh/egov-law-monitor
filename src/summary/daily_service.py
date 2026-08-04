@@ -1,6 +1,7 @@
 import summary.builder as builder
 import summary.generator as generator
 import storage
+import summary.log as log
 
 from summary.daily_builder import build_daily_summary_input
 from summary.daily_generator import generate_daily_summary_response
@@ -57,6 +58,7 @@ def generate(
 ) -> tuple[
     DailySummaryResponse,
     list[LawSummary],
+    list[AiSummaryLog],
 ]:
 
     cached_summaries = storage.load_law_summaries()
@@ -64,6 +66,8 @@ def generate(
     summary_responses: list[SummaryResponse] = []
 
     law_summaries: list[LawSummary] = []
+
+    logs: list[AiSummaryLog] = []
 
     for law_group in law_groups:
 
@@ -75,20 +79,12 @@ def generate(
             summary_input.law_id,
         )
 
-        # DEBUG
-        print(previous_summary is None)
-
-        if previous_summary is not None:
-            print(previous_summary.summary_input == summary_input)
-
-            print(type(previous_summary.summary_input))
-            print(type(previous_summary.summary_input.revisions[0]))
-            print(type(summary_input.revisions[0]))
-
-        if (
+        reused = (
             previous_summary is not None
             and previous_summary.summary_input == summary_input
-        ):
+        )
+
+        if reused:
             # DEBUG
             print(f"Reuse summary: {summary_input.law_name}")
 
@@ -118,12 +114,28 @@ def generate(
             law_summary,
         )
 
+        logs.append(
+            log.create_law_summary_log(
+                date=date,
+                law_summary=law_summary,
+                reused=reused,
+            )
+        )
+
     daily_summary = generate_daily_summary(
         date,
         summary_responses,
     )
 
+    logs.append(
+        log.create_daily_summary_log(
+            date=date,
+            response=daily_summary,
+        )
+    )
+
     return (
         daily_summary,
         law_summaries,
+        logs,
     )

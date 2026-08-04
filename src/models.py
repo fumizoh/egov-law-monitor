@@ -76,17 +76,6 @@ class Summary:
 
 
 @dataclass(slots=True)
-class SummaryUsage:
-    model: str
-    prompt_tokens: int
-    output_tokens: int
-    thoughts_tokens: int
-    total_tokens: int
-    elapsed_seconds: float
-    response_id: str
-
-
-@dataclass(slots=True)
 class SummaryResponse:
     summary: Summary
     usage: SummaryUsage
@@ -109,6 +98,7 @@ class LawSummary:
     response: SummaryResponse
 
 
+# Delete
 @dataclass(slots=True)
 class SummaryLog:
     generated_at: datetime
@@ -261,7 +251,30 @@ class LawChange:
 
 
 @dataclass(slots=True)
-class AiStatistics:
+class SummaryUsage:
+    model: str
+    prompt_tokens: int
+    output_tokens: int
+    thoughts_tokens: int
+    total_tokens: int
+    elapsed_seconds: float
+    response_id: str
+
+
+@dataclass(slots=True)
+class AiSummaryLog:
+    """AI summary execution log."""
+
+    date: str
+    service: str
+    target: str | None
+    reused: bool
+
+    usage: SummaryUsage | None
+
+
+@dataclass(slots=True)
+class SummaryStatistics:
     """Aggregated AI summary statistics."""
 
     model: str
@@ -279,3 +292,14 @@ class AiStatistics:
     estimated_cost_usd: float
     estimated_cost_jpy: float
     average_cost_jpy: float
+
+
+@dataclass(slots=True)
+class AiStatistics:
+    """Aggregated AI statistics."""
+
+    law_summary: SummaryStatistics
+
+    daily_summary: SummaryStatistics
+
+    total: SummaryStatistics
