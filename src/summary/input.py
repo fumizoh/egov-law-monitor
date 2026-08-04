@@ -1,6 +1,11 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 
-from models import Location
+from models import (
+    Location,
+    Summary,
+)
 
 @dataclass(slots=True)
 class SummaryChange:
