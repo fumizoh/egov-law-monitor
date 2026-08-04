@@ -1,16 +1,16 @@
 {
   "law_summary": {
     "model": "gemini-2.5-flash",
-    "generated": 11,
-    "reused": 0,
-    "prompt_tokens": 237952,
-    "output_tokens": 3920,
-    "thoughts_tokens": 30451,
-    "total_tokens": 272323,
-    "elapsed_seconds": 387.96,
-    "estimated_cost_usd": 0.157,
-    "estimated_cost_jpy": 23.6,
-    "average_cost_jpy": 2.1
+    "generated": 0,
+    "reused": 11,
+    "prompt_tokens": 0,
+    "output_tokens": 0,
+    "thoughts_tokens": 0,
+    "total_tokens": 0,
+    "elapsed_seconds": 0.0,
+    "estimated_cost_usd": 0.0,
+    "estimated_cost_jpy": 0.0,
+    "average_cost_jpy": 0.0
   },
   "daily_summary": {
     "model": "gemini-2.5-flash",
@@ -20,22 +20,22 @@
     "output_tokens": 3920,
     "thoughts_tokens": 30451,
     "total_tokens": 272323,
-    "elapsed_seconds": 423.04,
+    "elapsed_seconds": 415.15,
     "estimated_cost_usd": 0.157,
     "estimated_cost_jpy": 23.6,
     "average_cost_jpy": 23.6
   },
   "total": {
     "model": "gemini-2.5-flash",
-    "generated": 12,
-    "reused": 0,
-    "prompt_tokens": 475904,
-    "output_tokens": 7840,
-    "thoughts_tokens": 60902,
-    "total_tokens": 544646,
-    "elapsed_seconds": 811.0,
-    "estimated_cost_usd": 0.314,
-    "estimated_cost_jpy": 47.2,
-    "average_cost_jpy": 3.9
+    "generated": 1,
+    "reused": 11,
+    "prompt_tokens": 237952,
+    "output_tokens": 3920,
+    "thoughts_tokens": 30451,
+    "total_tokens": 272323,
+    "elapsed_seconds": 415.15,
+    "estimated_cost_usd": 0.157,
+    "estimated_cost_jpy": 23.6,
+    "average_cost_jpy": 23.6
   }
 }
