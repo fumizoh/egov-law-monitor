@@ -1,10 +1,17 @@
-from models import (
-    DailySummaryResponse,
-    SummaryResponse,
-)
+import summary.builder as builder
+import summary.generator as generator
+import storage
+
 from summary.daily_builder import build_daily_summary_input
 from summary.daily_generator import generate_daily_summary_response
 from summary.usage import merge_usage
+
+from models import (
+    LawGroup,
+    SummaryResponse,
+    DailySummaryResponse,
+    LawSummary,
+)
 
 
 def generate_daily_summary(
@@ -41,4 +48,82 @@ def generate_daily_summary(
     return DailySummaryResponse(
         summary=response.summary,
         usage=usage,
+    )
+
+
+def generate(
+    date: str,
+    law_groups: list[LawGroup],
+) -> tuple[
+    DailySummaryResponse,
+    list[LawSummary],
+]:
+
+    cached_summaries = storage.load_law_summaries()
+
+    summary_responses: list[SummaryResponse] = []
+
+    law_summaries: list[LawSummary] = []
+
+    for law_group in law_groups:
+
+        summary_input = builder.build_law_summary_input(
+            law_group,
+        )
+
+        previous_summary = cached_summaries.get(
+            summary_input.law_id,
+        )
+
+        # DEBUG
+        print(previous_summary is None)
+
+        if previous_summary is not None:
+            print(previous_summary.summary_input == summary_input)
+
+            print(type(previous_summary.summary_input))
+            print(type(previous_summary.summary_input.revisions[0]))
+            print(type(summary_input.revisions[0]))
+
+        if (
+            previous_summary is not None
+            and previous_summary.summary_input == summary_input
+        ):
+            # DEBUG
+            print(f"Reuse summary: {summary_input.law_name}")
+
+            law_summary = previous_summary
+
+        else:
+            # DEBUG
+            print(f"Generate summary: {summary_input.law_name}")
+
+            response = generator.generate_law_summary(
+                summary_input,
+            )
+
+            if response is None:
+                continue
+
+            law_summary = LawSummary(
+                summary_input=summary_input,
+                response=response,
+            )
+
+        summary_responses.append(
+            law_summary.response,
+        )
+
+        law_summaries.append(
+            law_summary,
+        )
+
+    daily_summary = generate_daily_summary(
+        date,
+        summary_responses,
+    )
+
+    return (
+        daily_summary,
+        law_summaries,
     )

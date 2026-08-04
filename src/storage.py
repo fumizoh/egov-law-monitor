@@ -1,20 +1,27 @@
-from dataclasses import asdict, is_dataclass
+import os
 import json
 import zipfile
+
+from dataclasses import asdict, is_dataclass
 from pathlib import Path
+
+from summary.revision import SummaryRevisionKey
+
+from utils.dataclass import from_dict
 
 from models import (
     Law,
     AiStatistics,
+    DailySummaryResponse,
+    LawSummary,
 )
-
-from summary.revision import SummaryRevisionKey
 
 from config import (
     EXTRACT_DIR,
     DOCS_DATA,
     SOURCE_DATA_FILES,
     LAWS_JSON,
+    LAW_SUMMARIES_JSON,
     DAILY_SUMMARY_JSON,
     STATISTICS_JSON,
     AI_STATISTICS_JSON,
@@ -65,12 +72,28 @@ def json_default(obj):
     )
 
 
-def save_json(data, output_path: Path):
+def load_json(input_path: Path):
     """
-    Save as JSON.
+    Loas JSON.
     """
 
-    with open(output_path, "w", encoding="utf-8") as f:
+    with open(input_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_json(
+    data,
+    output_path: Path,
+):
+    """
+    Save as JSON atomically.
+    """
+
+    tmp_path = output_path.with_suffix(
+        output_path.suffix + ".tmp"
+    )
+
+    with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(
             data,
             f,
@@ -79,14 +102,122 @@ def save_json(data, output_path: Path):
             default=json_default,
         )
 
+    os.replace(
+        tmp_path,
+        output_path,
+    )
 
-def load_json(input_path: Path):
+
+def save_source_data(source, data):
     """
-    JSONファイルを読み込む。
+    Save source data as JSON.
     """
 
-    with open(input_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+    save_json(
+        data,
+        SOURCE_DATA_FILES[source],
+    )
+
+
+def save_updates(source, updates):
+
+    save_source_data(
+        source,
+        updates,
+    )
+
+
+def load_laws() -> dict[str, Law]:
+    """
+    Load previous Law view.
+    """
+
+    if not LAWS_JSON.exists():
+        return {}
+
+    try:
+        laws = load_json(
+            LAWS_JSON,
+        )
+
+    except json.JSONDecodeError:
+        logger.exception(
+            "Failed to load %s",
+            LAWS_JSON,
+        )
+        return {}
+
+    for law in laws:
+        law["summary_revision_keys"] = [
+            SummaryRevisionKey(**key)
+            for key in law["summary_revision_keys"]
+        ]
+
+    return {
+        law["law_id"]: law
+        for law in laws
+    }
+
+
+def save_laws(laws):
+    """
+    Save Law view as laws.json.
+    """
+
+    save_json(
+        laws,
+        LAWS_JSON,
+    )
+
+
+def load_law_summaries() -> dict[str, LawSummary]:
+    """Load cached law summaries."""
+
+    if not LAW_SUMMARIES_JSON.exists():
+        return {}
+
+    try:
+        data = load_json(
+            LAW_SUMMARIES_JSON,
+        )
+
+    except json.JSONDecodeError:
+        logger.exception(
+            "Failed to load %s",
+            LAW_SUMMARIES_JSON,
+        )
+        return {}
+
+    summaries = [
+        from_dict(LawSummary, item)
+        for item in data
+    ]
+
+    return {
+        summary.summary_input.law_id: summary
+        for summary in summaries
+    }
+
+
+def save_law_summaries(
+    summaries: list[LawSummary],
+) -> None:
+
+    save_json(
+        summaries,
+        LAW_SUMMARIES_JSON,
+    )
+
+
+def save_daily_summary(
+    summary: DailySummaryResponse,
+):
+    """Save Daily Summary."""
+
+    save_json(
+        summary,
+        DAILY_SUMMARY_JSON,
+    )
 
 
 def save_statistics(
@@ -113,68 +244,6 @@ def save_statistics(
         data,
         STATISTICS_JSON,
     )
-
-
-def save_source_data(source, data):
-    """
-    Save source data as JSON.
-    """
-
-    save_json(
-        data,
-        SOURCE_DATA_FILES[source],
-    )
-
-
-def save_updates(source, updates):
-    save_source_data(
-        source,
-        updates,
-    )
-
-
-def save_laws(laws):
-    """
-    Save Law view as laws.json.
-    """
-
-    save_json(
-        laws,
-        LAWS_JSON,
-    )
-
-
-def save_daily_summary(
-    summary: DailySummaryResponse,
-):
-    """Save Daily Summary."""
-
-    save_json(
-        summary,
-        DAILY_SUMMARY_JSON,
-    )
-
-
-def load_laws() -> dict[str, Law]:
-    """
-    Load previous Law view.
-    """
-
-    if not LAWS_JSON.exists():
-        return {}
-
-    laws: list[Law] = load_json(LAWS_JSON)
-
-    for law in laws:
-        law["summary_revision_keys"] = [
-            SummaryRevisionKey(**key)
-            for key in law["summary_revision_keys"]
-        ]
-
-    return {
-        law["law_id"]: law
-        for law in laws
-    }
 
 
 def save_ai_statistics(statistics: AiStatistics):

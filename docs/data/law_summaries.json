@@ -1,0 +1,466 @@
+[
+  {
+    "summary_input": {
+      "law_id": "322AC0000000120",
+      "law_name": "国家公務員法",
+      "revisions": [
+        {
+          "law_data_id": 623384,
+          "sub_revision": "5",
+          "amendment_id": "507AC0000000043",
+          "amendment_name": "重要電子計算機に対する不正な行為による被害の防止に関する法律の施行に伴う関係法律の整備等に関する法律",
+          "amendment_num": "令和七年法律第四十三号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 626484,
+          "sub_revision": "4",
+          "amendment_id": "507AC0000000070",
+          "amendment_name": "日本学術会議法",
+          "amendment_num": "令和七年法律第七十号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 636657,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000028",
+          "amendment_name": "国家情報会議設置法",
+          "amendment_num": "令和八年法律第二十八号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "国家公務員法は、国家情報会議設置法の施行に伴い、特別職の対象となる幹部職員の範囲が変更されます。\n\n**主要な政策・制度変更**\n\n*   **特別職の対象範囲の変更**\n    *   国家情報局長が、国家公務員法の定める特別職に追加されます。\n    *   内閣情報官が、国家公務員法の定める特別職の対象から削除されます。\n\nこれらの改正は、2026年7月31日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 827,
+        "output_tokens": 114,
+        "thoughts_tokens": 1747,
+        "total_tokens": 2688,
+        "elapsed_seconds": 19.68965079999907,
+        "response_id": "g3JxaqHBFvaQqMgPyvWJqAI"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "325AC0000000226",
+      "law_name": "地方税法",
+      "revisions": [
+        {
+          "law_data_id": 631200,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000002",
+          "amendment_name": "地方税法等の一部を改正する法律",
+          "amendment_num": "令和八年法律第二号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "**概要**\n今回の法改正は、法人の道府県民税及び市町村民税に関する特例措置について、租税特別措置法の改正に伴う参照条項の更新や、新たな特例の追加、それに伴う条項番号の変更など、技術的な調整を中心に行われます。\n\n**主な改正点**\n\n*   **新たな法人税額控除に係る道府県民税及び市町村民税の特例の追加**\n    *   租税特別措置法第42条の12の7の規定により法人税額から控除された金額がある中小企業者等について、法人の道府県民税及び市町村民税の計算における特例措置（附則第8条第14項及び第15項）が新たに設けられます。\n    *   これらの規定の施行日は、現時点では未定です。\n*   **既存の特例措置における条項番号の更新**\n    *   上記の新たな特例措置の追加に伴い、地方税法附則第8条の既存の特例規定（特定医療法人等に関する規定を含む）の条項番号が順次繰り下げられ、それに伴う条文中の参照先（項番号）も更新されます。これは実質的な制度変更ではなく、条文構成の変更による技術的な調整です。\n*   **法人税額控除に係る参照条項の技術的調整**\n    *   租税特別措置法上の各種法人税額控除（第42条の4、第42条の12の5、第42条の12の6など）が適用される場合の法人の道府県民税及び市町村民税に関する特例について、地方税法における参照条項（号、項）の記載が、租税特別措置法の改正内容に合わせて更新されます。これは、既存の特例措置の適用関係を明確化するための技術的な変更です。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 5999,
+        "output_tokens": 412,
+        "thoughts_tokens": 2314,
+        "total_tokens": 8725,
+        "elapsed_seconds": 19.48766980000073,
+        "response_id": "lnJxap34Nc6AtrIP1cLimAM"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "340CO0000000097",
+      "law_name": "法人税法施行令",
+      "revisions": [
+        {
+          "law_data_id": 636227,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000094",
+          "amendment_name": "法人税法施行令及び法人税法施行令及び法人税法施行令等の一部を改正する政令の一部を改正する政令の一部を改正する政令",
+          "amendment_num": "令和八年政令第九十四号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "今後の法人税法施行令の改正について、以下の情報が提供されていますが、具体的な改正内容に関する記述がないため、現行法が将来的にどのように変更されるかについて、政策や制度の観点から要約することはできません。\n\n### 示されている情報\n\n*   **改正法**: 法人税法施行令及び法人税法施行令及び法人税法施行令等の一部を改正する政令の一部を改正する政令の一部を改正する政令\n*   **施行日**: 2026年7月31日"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 357,
+        "output_tokens": 109,
+        "thoughts_tokens": 1299,
+        "total_tokens": 1765,
+        "elapsed_seconds": 12.883000400001038,
+        "response_id": "r3JxarzWJMqQqMgP86PgOQ"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "332CO0000000043",
+      "law_name": "租税特別措置法施行令",
+      "revisions": [
+        {
+          "law_data_id": 636253,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000098",
+          "amendment_name": "租税特別措置法施行令の一部を改正する政令",
+          "amendment_num": "令和八年政令第九十八号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "## 概要\n\n租税特別措置法施行令の改正は、主に新たな税制優遇措置として「特定生産性向上設備等を取得した場合の特別償却又は税額控除」を創設するものです。これにより、個人および法人事業者の生産性向上に資する設備投資が促進されることを目的としています。また、これに伴い既存の税額控除制度との連携や経過措置が整備されます。本改正は2026年7月31日に施行されます。\n\n## 主要な政策・制度変更\n\n*   **特定生産性向上設備等への税制優遇措置の創設**\n    *   個人および法人事業者が、生産性向上に資する「特定生産性向上設備等」を取得した場合に、特別償却または税額控除の適用を受けることができる制度が新設されます。\n    *   この制度の対象となる設備等は、機械及び装置、工具、器具及び備品、建物、建物附属設備及び構築物、ソフトウェアが挙げられ、それぞれ政令で定める取得価額以上のものに限定されます。\n    *   特別控除額は、所得税額および法人税額の計算において、他の控除額との適用順序が明確化されます。\n    *   本特例の適用要件に関連し、雇用者給与等の支給額の維持・増加に関する基準や、基準所得金額の定義、恒久的施設を有する非居住者や外国法人に関する特例などが新たに規定されます。\n    *   法人税の特例においては、連結納税制度における特例の適用に関する規定も設けられます。\n\n*   **既存の税額控除制度との連携の強化**\n    *   試験研究を行った場合の所得税額の特別控除の計算において、新たに創設される「特定生産性向上設備等を取得した場合の所得税額の特別控除」が考慮されるようになります。\n    *   法人税の額から控除される特別控除額の特例においても、同様に新たな制度が考慮されるように、参照条項が追加されます。\n\n*   **経過措置の導入**\n    *   「特定生産性向上設備等を取得した場合の所得税額の特別控除」に関して、2026年12月31日までの間、一部の規定の読み替えが適用される経過措置が設けられます。\n\n*   **産業競争力強化法参照条項の修正**\n    *   特定事業活動として特別新事業開拓事業者の株式の取得をした場合の課税の特例において、参照する産業競争力強化法の条項番号が変更されます（第二十七項から第二十八項へ）。これは形式的な修正です。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 8016,
+        "output_tokens": 576,
+        "thoughts_tokens": 2657,
+        "total_tokens": 11249,
+        "elapsed_seconds": 21.491266400000313,
+        "response_id": "wXJxaruFGPivqMgP2bew2QY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "422CO0000000067",
+      "law_name": "租税特別措置の適用状況の透明化等に関する法律施行令",
+      "revisions": [
+        {
+          "law_data_id": 636261,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000101",
+          "amendment_name": "租税特別措置の適用状況の透明化等に関する法律施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第百一号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "## 租税特別措置の適用状況の透明化等に関する法律施行令の改正概要\n\n### 概要\n本改正により、租税特別措置の適用状況の透明化等に関する法律施行令が改正され、適用額明細書の提出義務の対象となる法人税関係特別措置の範囲が変更されます。\n\n### 主要な政策・制度変更\n\n*   **適用額明細書提出義務の対象拡大**\n    *   租税特別措置法第四十二条の十二の七に規定される特別措置が、適用額明細書の提出義務の対象に追加されます。\n    *   これにより、当該特別措置の適用を受ける法人は、適用額明細書の提出が必要となります。\n\n### 施行日\n2026年7月31日"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 795,
+        "output_tokens": 165,
+        "thoughts_tokens": 991,
+        "total_tokens": 1951,
+        "elapsed_seconds": 9.23445670000001,
+        "response_id": "2HJxavyzDe7QqMgPr42C0Ao"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "324AC0000000252",
+      "law_name": "特別職の職員の給与に関する法律",
+      "revisions": [
+        {
+          "law_data_id": 636658,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000028",
+          "amendment_name": "国家情報会議設置法",
+          "amendment_num": "令和八年法律第二十八号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "## 特別職の職員の給与に関する法律 改正概要\n\n本改正は、国家情報会議設置法の施行に伴い、「特別職の職員の給与に関する法律」の適用対象となる官職の範囲を変更するものです。\n\n### 主な変更点\n\n*   **特別職の対象となる官職の追加**\n    *   国家情報局長が、新たに特別職の職員として「特別職の職員の給与に関する法律」の適用対象となります。\n*   **特別職の対象となる官職からの削除**\n    *   内閣情報官が、「特別職の職員の給与に関する法律」の適用対象から外れます。\n\n### 施行日\n\n本改正は、2026年7月31日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 560,
+        "output_tokens": 161,
+        "thoughts_tokens": 1529,
+        "total_tokens": 2250,
+        "elapsed_seconds": 13.006623799999943,
+        "response_id": "5XJxarP3KYnP28sPmKXveQ"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "322AC0000000005",
+      "law_name": "内閣法",
+      "revisions": [
+        {
+          "law_data_id": 636659,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000028",
+          "amendment_name": "国家情報会議設置法",
+          "amendment_num": "令和八年法律第二十八号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "内閣法は、国家情報会議設置法（令和八年法律第二十八号）の施行に伴い、2026年7月31日に以下のとおり改正されます。\n\n本改正は、内閣官房に新たな組織として「国家情報局」を設置し、これまで内閣情報官が担っていた機能の一部を含め、情報関連業務の体制を再編することを目的としています。\n\n### 主要な政策・制度変更点\n\n*   **国家情報局の新設**\n    *   内閣官房に国家情報局が新たに設置されます。\n    *   国家情報局は、国家情報会議設置法に規定される重要情報活動及び外国情報活動への対処、特定秘密の保護に関する法律に基づく特定秘密の保護、ならびに国家情報会議に関する事務などを掌理します。\n    *   国家情報局には国家情報局長が置かれ、内閣官房長官及び内閣官房副長官を助け、局務を掌理します。\n\n*   **内閣情報官の廃止と機能移管**\n    *   内閣官房に置かれていた内閣情報官が廃止されます。\n    *   内閣情報官が掌理していた特定秘密の保護や情報収集・分析に関する事務の一部は、新設される国家情報局へ移管されます。\n\n*   **各職務の所掌範囲の再編**\n    *   内閣官房副長官補が掌理する事務の範囲から、内閣情報官の所掌が除外され、国家情報局の所掌が除外されるよう変更されます。\n    *   感染症の発生及びまん延の防止に関する事務、国家安全保障に関する外交・防衛・経済政策の基本方針等に関する事務、サイバーセキュリティに関する事務などにおいて、これまで内閣情報官の所掌とされていた情報関連業務の調整・連携対象が、新設される国家情報局へと変更されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 2261,
+        "output_tokens": 422,
+        "thoughts_tokens": 1912,
+        "total_tokens": 4595,
+        "elapsed_seconds": 16.780682000000525,
+        "response_id": "-HJxatDqCMPx7bEP_5zrqQI"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "339AC0000000170",
+      "law_name": "電気事業法",
+      "revisions": [
+        {
+          "law_data_id": 636781,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000068",
+          "amendment_name": "電気事業法の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十八号",
+          "enforcement_date": "2026-08-03",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "## 電気事業法改正に関する要約\n\n電気事業法の一部が改正され、2026年8月3日に施行されます。\n\n### 制度改正の概要\n\n*   **電気の供給拒否に係る制裁対象範囲の明確化・拡大**\n    *   現行法では、正当な理由なく「発電」および電気の供給を拒否した場合が制裁の対象とされていますが、改正後は「発電**又は放電**」および電気の供給を拒否した場合も制裁の対象となります。\n    *   これにより、蓄電池などからの「放電」による電気の供給義務違反も、発電と同様に、第二十七条の二十八の規定に違反する行為として明確に位置づけられ、制裁の対象となる範囲が拡充されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 415,
+        "output_tokens": 172,
+        "thoughts_tokens": 830,
+        "total_tokens": 1417,
+        "elapsed_seconds": 10.925734099997499,
+        "response_id": "DHNxarW1Mu3i-O4P_pbj0Qc"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "422M60000040022",
+      "law_name": "租税特別措置の適用状況の透明化等に関する法律施行規則",
+      "revisions": [
+        {
+          "law_data_id": 637943,
+          "sub_revision": "1",
+          "amendment_id": "508M60000040041",
+          "amendment_name": "租税特別措置の適用状況の透明化等に関する法律施行規則の一部を改正する省令",
+          "amendment_num": "令和八年財務省令第四十一号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "## 租税特別措置の適用状況の透明化等に関する法律施行規則の改正について\n\n### 概要\n\n本改正は、2026年7月31日に施行され、租税特別措置の適用状況の透明化に関する規則を改定するものです。これにより、特定の租税特別措置の適用額が新たに透明化の対象に追加され、関連する適用額明細書の提出が求められるようになります。\n\n### 主要な政策・制度変更点\n\n*   **新たな租税特別措置の適用状況の透明化**\n    *   租税特別措置法第42条の12の7に規定される、特定生産性向上設備等を取得した場合の特別償却や法人税額の特別控除に関する適用額が、新たに透明化の対象に追加されます。これにより、当該措置の適用状況がより詳細に把握されるようになります。\n*   **適用額明細書の改定と適用時期**\n    *   上記の新設される規定（租税特別措置法第42条の12の7）に関連する適用額明細書の提出が求められるようになります。\n    *   また、特定生産性向上設備等を取得した場合の特別償却および法人税額の特別控除に関する適用額明細書についても、新しい様式での提出が必要となります。\n    *   これらの規定および適用額明細書は、法人税法に定める日以後に終了する事業年度に係る法人税の申告から適用されます。\n*   **既存の特別償却等に関する項目の整理**\n    *   新規追加に伴い、既存の複数の特別償却等に関する条文の項目番号が繰り下げられます。これは内容の変更ではなく、形式的な整理です。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1551,
+        "output_tokens": 374,
+        "thoughts_tokens": 1389,
+        "total_tokens": 3314,
+        "elapsed_seconds": 13.504311000000598,
+        "response_id": "GnNxao4fw_HtsQ__nOupAg"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "340M50000040012",
+      "law_name": "法人税法施行規則",
+      "revisions": [
+        {
+          "law_data_id": 637949,
+          "sub_revision": "1",
+          "amendment_id": "508M60000040039",
+          "amendment_name": "法人税法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年財務省令第三十九号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "与えられた情報には、法人税法施行規則の改正内容に関する具体的な記述がございません。\n\nしたがって、本省令が法人税法施行規則にどのような政策的または制度的な変更をもたらすかについて、現時点ではご説明できません。\n\n**概要:**\n法人税法施行規則の一部を改正する省令は、2026年7月31日に施行される予定です。\n\n*   **施行日:** 2026年7月31日\n\n上記以外に、改正の内容に関する情報は提供されておりません。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 339,
+        "output_tokens": 115,
+        "thoughts_tokens": 664,
+        "total_tokens": 1118,
+        "elapsed_seconds": 8.314279199999874,
+        "response_id": "LHNxaq_qFYys1t8PhvvswAw"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "430M60001000012",
+      "law_name": "特定有害廃棄物等の輸出入等の規制に関する法律に基づく特定有害廃棄物等の範囲等を定める省令",
+      "revisions": [
+        {
+          "law_data_id": 640862,
+          "sub_revision": "1",
+          "amendment_id": "508M60001000019",
+          "amendment_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
+          "amendment_num": "令和八年環境省令第十九号",
+          "enforcement_date": "2026-07-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "「特定有害廃棄物等の輸出入等の規制に関する法律に基づく特定有害廃棄物等の範囲等を定める省令」が改正され、環境省の組織再編に伴い、環境大臣の権限委任先が変更されます。\n\n主要な変更点は以下のとおりです。\n\n*   **環境大臣の権限委任先の変更**\n    *   環境大臣から地方環境事務所長に委任されていた一部の権限は、改正後は地方環境局長に委任されることになります。これは、環境省の地方機関の名称変更に伴う制度的な変更です。\n\n現在の省令では環境大臣の権限の委任先が地方環境事務所長と定められていますが、改正後はその委任先が地方環境局長へと変更されます。\n\nこの改正の施行日は2026年7月1日です。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 526,
+        "output_tokens": 178,
+        "thoughts_tokens": 1826,
+        "total_tokens": 2530,
+        "elapsed_seconds": 14.284977899998921,
+        "response_id": "OHNxat__Du2r28sPsZnniA4"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "410CO0000000005",
+      "law_name": "精神保健福祉士法施行令",
+      "revisions": [
+        {
+          "law_data_id": 641271,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000229",
+          "amendment_name": "社会福祉士及び介護福祉士法施行令及び精神保健福祉士法施行令の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百二十九号",
+          "enforcement_date": "2026-07-18",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "**概要**\n\n本改正により、精神保健福祉士試験の受験手数料が改定されます。\n\n**主要な政策・制度の変更点**\n\n*   **精神保健福祉士試験の受験手数料の引き上げ**\n    *   精神保健福祉士試験の受験手数料が、現行の24,140円から28,910円に引き上げられます。\n    *   科目の免除等により厚生労働省令で受験手数料が定められる場合も、この28,910円を超えない範囲内となります。\n\nこの改正は、令和8年7月18日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 556,
+        "output_tokens": 138,
+        "thoughts_tokens": 548,
+        "total_tokens": 1242,
+        "elapsed_seconds": 9.64437949999774,
+        "response_id": "THNxarmRDuLh-O4Pjt_s2AY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "362CO0000000402",
+      "law_name": "社会福祉士及び介護福祉士法施行令",
+      "revisions": [
+        {
+          "law_data_id": 641272,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000229",
+          "amendment_name": "社会福祉士及び介護福祉士法施行令及び精神保健福祉士法施行令の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百二十九号",
+          "enforcement_date": "2026-07-18",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "### 概要\n\n本改正は、社会福祉士及び介護福祉士の国家試験に関する受験手数料について、その額を改定するものです。\n\n### 主な変更点\n\n*   **受験手数料の引き上げ**\n    *   社会福祉士試験の受験手数料は、現行の19,370円から24,300円に引き上げられます。科目免除等の規定が適用される場合の厚生労働省令で定める額の上限も、これに伴い24,300円に引き上げられます。\n    *   介護福祉士試験の受験手数料は、現行の18,380円から20,510円に引き上げられます。\n\n### 施行日\n\n2026年7月18日"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 652,
+        "output_tokens": 170,
+        "thoughts_tokens": 661,
+        "total_tokens": 1483,
+        "elapsed_seconds": 7.827986199998122,
+        "response_id": "V3NxaoqOMJ_ZqMgPrZ6ykQU"
+      }
+    }
+  }
+]

@@ -57,6 +57,17 @@ class Update(TypedDict):
 
 
 @dataclass(slots=True)
+class LawSummaryInput:
+    """Input for Law Summary Service."""
+
+    law_id: str
+
+    law_name: str
+
+    revisions: list[RevisionHistory]
+
+
+@dataclass(slots=True)
 class Summary:
     """AI-generated summary of a law."""
 
@@ -87,6 +98,15 @@ class DailySummaryResponse:
 
     summary: Summary
     usage: SummaryUsage
+
+
+@dataclass(slots=True)
+class LawSummary:
+    """Cached law summary."""
+
+    summary_input: LawSummaryInput
+
+    response: SummaryResponse
 
 
 @dataclass(slots=True)
@@ -153,32 +173,10 @@ class RevisionHistory:
         return self.amendment_id is None
 
 
-@dataclass(slots=True)
-class LawSummaryInput:
-    """Input for Law Summary Service."""
-
-    law_id: str
-
-    law_name: str
-
-    revisions: list[RevisionHistory]
-
-
 @dataclass(frozen=True, slots=True)
 class SummaryRevision:
     revision: RevisionHistory
     key: SummaryRevisionKey
-
-
-@dataclass(frozen=True, slots=True)
-class LawSummaryTarget:
-    """One Law Summary generation target."""
-
-    revisions: list[RevisionHistory]
-
-    summary_type: SummaryType
-
-    revision_keys: list[SummaryRevisionKey]
 
 
 @dataclass(slots=True)

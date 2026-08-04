@@ -9,6 +9,8 @@ from storage import (
     load_json,
     load_laws,
     save_ai_statistics,
+    save_daily_summary,
+    save_law_summaries,
 )
 
 from summary.logger import (
@@ -51,7 +53,7 @@ def process_egov(
 
     save_source_data("egov", updates)
 
-    # Law View を公開データとして保存
+    # Law を公開データとして保存
     reset_summary_logs()
 
     law_groups = group_by_law(updates)
@@ -63,9 +65,20 @@ def process_egov(
         previous_laws=previous_laws,
     )
 
+    # DEBUG
     print("Total:", len(laws), "laws")
 
     save_laws(laws)
+
+    # Daily summary
+    daily_summary, law_summaries = daily_service.generate(
+        date,
+        law_groups,
+    )
+
+    save_law_summaries(law_summaries)
+
+    save_daily_summary(daily_summary)
 
     # AI Summary ログ集計
     logs = load_summary_logs()

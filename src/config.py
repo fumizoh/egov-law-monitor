@@ -16,6 +16,7 @@ LOGS_DATA = Path("data/logs")
 
 # JSON
 LAWS_JSON = DOCS_DATA / "laws.json"
+LAW_SUMMARIES_JSON = DOCS_DATA / "law_summaries.json"
 DAILY_SUMMARY_JSON = DOCS_DATA / "daily_summary.json"
 
 STATISTICS_JSON = DOCS_DATA / "statistics.json"

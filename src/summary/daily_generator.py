@@ -8,6 +8,9 @@ from summary.daily_prompt import build_daily_prompt_document
 from summary.prompt_renderer import render_prompt
 from summary.gemini_client import summarize
 
+# DEBUG
+from pathlib import Path
+
 
 def _generate_summary(
     prompt_document: PromptDocument,
@@ -15,6 +18,12 @@ def _generate_summary(
     """Generate summary from prompt."""
 
     prompt = render_prompt(prompt_document)
+
+    # DEBUG
+    Path("daily_prompt.md").write_text(
+        prompt,
+        encoding="utf-8",
+    )
 
     return summarize(prompt)
 
