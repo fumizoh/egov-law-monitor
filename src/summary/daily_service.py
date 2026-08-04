@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import summary.builder as builder
 import summary.generator as generator
 import storage
@@ -12,6 +14,7 @@ from models import (
     SummaryResponse,
     DailySummaryResponse,
     LawSummary,
+    AiSummaryLog,
 )
 
 
