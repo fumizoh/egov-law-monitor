@@ -1,8 +1,9 @@
-from time import perf_counter
+from time import perf_counter, sleep
 # from pprint import pprint
 
 from google import genai
 from google.genai.types import HttpOptions
+from google.genai.errors import ClientError
 
 from models import (
     Summary,
@@ -27,10 +28,31 @@ def summarize(prompt: str) -> SummaryResponse:
 
     start = perf_counter()
 
-    response = client.models.generate_content(
-        model=MODEL_NAME,
-        contents=prompt,
-    )
+    for attempt in range(3):
+
+        try:
+
+            response = client.models.generate_content(
+                model=MODEL_NAME,
+                contents=prompt,
+            )
+
+            break
+
+        except ClientError as e:
+
+            if e.code != 429 or attempt == 2:
+                raise
+
+            wait = 10 * (2**attempt)
+
+            print(
+                f"[Retry {attempt + 1}/3] "
+                f"Gemini rate limit reached. "
+                f"Retry in {wait} seconds..."
+            )
+
+            sleep(wait)
 
     elapsed = perf_counter() - start
 

@@ -1,38 +1,225 @@
 [
   {
     "summary_input": {
-      "law_id": "322AC0000000120",
-      "law_name": "国家公務員法",
+      "law_id": "325M50000400088",
+      "law_name": "火薬類取締法施行規則",
       "revisions": [
         {
-          "law_data_id": 623384,
-          "sub_revision": "5",
-          "amendment_id": "507AC0000000043",
-          "amendment_name": "重要電子計算機に対する不正な行為による被害の防止に関する法律の施行に伴う関係法律の整備等に関する法律",
-          "amendment_num": "令和七年法律第四十三号",
-          "enforcement_date": "2026-10-01",
+          "law_data_id": 574048,
+          "sub_revision": "1",
+          "amendment_id": "429M60000400004",
+          "amendment_name": null,
+          "amendment_num": "平成二十九年経済産業省令第四号",
+          "enforcement_date": "2017-04-01",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": false
         },
         {
-          "law_data_id": 626484,
-          "sub_revision": "4",
-          "amendment_id": "507AC0000000070",
-          "amendment_name": "日本学術会議法",
-          "amendment_num": "令和七年法律第七十号",
-          "enforcement_date": "2026-10-01",
+          "law_data_id": 580813,
+          "sub_revision": "1",
+          "amendment_id": "431M60000400001",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "平成三十一年経済産業省令第一号",
+          "enforcement_date": "2019-01-08",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": false
         },
         {
-          "law_data_id": 636657,
+          "law_data_id": 585186,
           "sub_revision": "1",
-          "amendment_id": "508AC0000000028",
-          "amendment_name": "国家情報会議設置法",
-          "amendment_num": "令和八年法律第二十八号",
-          "enforcement_date": "2026-07-31",
+          "amendment_id": "501M60000400017",
+          "amendment_name": "不正競争防止法等の一部を改正する法律の施行に伴う経済産業省関係省令の整備に関する省令",
+          "amendment_num": "令和元年経済産業省令第十七号",
+          "enforcement_date": "2019-07-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 585927,
+          "sub_revision": "1",
+          "amendment_id": "501M60000400036",
+          "amendment_name": "成年被後見人等の権利の制限に係る措置の適正化等を図るための関係法律の整備に関する法律の施行に伴う経済産業省関係省令の整備に関する省令",
+          "amendment_num": "令和元年経済産業省令第三十六号",
+          "enforcement_date": "2019-09-14",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 587398,
+          "sub_revision": "1",
+          "amendment_id": "501M60000400055",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "令和元年経済産業省令第五十五号",
+          "enforcement_date": "2019-12-23",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 587692,
+          "sub_revision": "1",
+          "amendment_id": "502M60000400004",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "令和二年経済産業省令第四号",
+          "enforcement_date": "2020-01-21",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 590052,
+          "sub_revision": "1",
+          "amendment_id": "502M60000400037",
+          "amendment_name": "火薬類取締法施行規則等の一部を改正する省令",
+          "amendment_num": "令和二年経済産業省令第三十七号",
+          "enforcement_date": "2020-04-10",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 590873,
+          "sub_revision": "1",
+          "amendment_id": "502M60000400060",
+          "amendment_name": "火薬類取締法施行規則等の一部を改正する省令",
+          "amendment_num": "令和二年経済産業省令第六十号",
+          "enforcement_date": "2020-06-26",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 593436,
+          "sub_revision": "1",
+          "amendment_id": "502M60000400092",
+          "amendment_name": "押印を求める手続の見直し等のための経済産業省関係省令の一部を改正する省令",
+          "amendment_num": "令和二年経済産業省令第九十二号",
+          "enforcement_date": "2020-12-28",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 595699,
+          "sub_revision": "1",
+          "amendment_id": "503M60000400009",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "令和三年経済産業省令第九号",
+          "enforcement_date": "2021-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 596218,
+          "sub_revision": "1",
+          "amendment_id": "503M60000400039",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "令和三年経済産業省令第三十九号",
+          "enforcement_date": "2021-04-05",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 598937,
+          "sub_revision": "1",
+          "amendment_id": "430M60000400035",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "平成三十年経済産業省令第三十五号",
+          "enforcement_date": "2019-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 600311,
+          "sub_revision": "1",
+          "amendment_id": "503M60000400073",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "令和三年経済産業省令第七十三号",
+          "enforcement_date": "2022-01-15",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 612548,
+          "sub_revision": "1",
+          "amendment_id": "505M60000400011",
+          "amendment_name": "安定的なエネルギー需給構造の確立を図るためのエネルギーの使用の合理化等に関する法律等の一部を改正する法律の施行に伴う関係省令の整備等に関する省令",
+          "amendment_num": "令和五年経済産業省令第十一号",
+          "enforcement_date": "2023-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 613845,
+          "sub_revision": "1",
+          "amendment_id": "505M60000400032",
+          "amendment_name": "火薬類取締法施行規則等の一部を改正する省令",
+          "amendment_num": "令和五年経済産業省令第三十二号",
+          "enforcement_date": "2023-06-09",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 618859,
+          "sub_revision": "1",
+          "amendment_id": "506M60000400018",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "令和六年経済産業省令第十八号",
+          "enforcement_date": "2024-04-29",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 620573,
+          "sub_revision": "1",
+          "amendment_id": "506M60000400039",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "令和六年経済産業省令第三十九号",
+          "enforcement_date": "2024-07-28",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 622617,
+          "sub_revision": "1",
+          "amendment_id": "506M60000400090",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "令和六年経済産業省令第九十号",
+          "enforcement_date": "2025-01-26",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 626880,
+          "sub_revision": "1",
+          "amendment_id": "507M60000400047",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "令和七年経済産業省令第四十七号",
+          "enforcement_date": "2025-06-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 638386,
+          "sub_revision": "1",
+          "amendment_id": "508M60000400055",
+          "amendment_name": "火薬類取締法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年経済産業省令第五十五号",
+          "enforcement_date": "2026-06-01",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": true
@@ -42,31 +229,31 @@
     "response": {
       "summary": {
         "title": "",
-        "body": "国家公務員法は、国家情報会議設置法の施行に伴い、特別職の対象となる幹部職員の範囲が変更されます。\n\n**主要な政策・制度変更**\n\n*   **特別職の対象範囲の変更**\n    *   国家情報局長が、国家公務員法の定める特別職に追加されます。\n    *   内閣情報官が、国家公務員法の定める特別職の対象から削除されます。\n\nこれらの改正は、2026年7月31日に施行されます。"
+        "body": "## 火薬類取締法施行規則 改正の概要\n\n火薬類取締法施行規則の複数回にわたる改正は、火薬類に関する保安基準、製造・貯蔵・消費の方法、検査制度、資格試験制度、届出・申請手続きなどを合理化、明確化、または緩和することを目的としています。技術の進歩やリスク評価の進展を踏まえ、過度な規制を是正しつつ、安全性の確保をより効果的な方法で行うことを目指した変更が含まれています。\n\n### 主要な政策・制度変更\n\n*   **保安基準の合理化・明確化**\n    *   火薬類製造所（定置式・移動式）の技術基準が原則化され、一部緩和されました。特に、爆発・発火・盗難防止措置や静電気対策に関する規定が、より包括的かつ明確な表現に見直されました（第四条、第四条の二、第五条、第五条の二）。\n    *   火薬庫の構造・設備基準において、盗難防止措置、防火措置、爆発・発火防止措置に関する記述が明確化され、屋根の建築材料や床面、換気孔などに関する規定が合理化されました（第二十四条、第二十四条の二、第二十五条、第二十五条の二、第二十六条、第二十七条、第二十七条の二、第二十七条の三、第二十七条の四、第二十八条、第二十九条）。\n    *   土堤および簡易土堤の設置基準が詳細化され、補強方法に応じた勾配規制の緩和、高さ・厚さに関する規定の具体化、軽量飛散物化の目的の明確化が行われました（第三十一条、第三十一条の二）。\n    *   火薬庫内での電流により作動する機構を持つ火工品取扱時の電波を発する機器の携行が制限されました（第二十一条）。\n    *   火薬類取扱所および火工所の設置・運用基準が明確化・簡素化され、見張り人配置義務が盗難防止措置等に緩和されました（第五十二条、第五十二条の二）。\n    *   発破作業における装塡方法、危険区域への立ち入り制限、点火方法に関する規定が詳細化・明確化されました（第五十三条、第五十四条、第五十四条の二、第五十四条の三）。\n    *   不発処理作業における安全確保措置が詳細化されました（第五十五条）。\n    *   火薬類の廃棄方法について、より原則的な規定に見直されました（第六十七条）。\n    *   模型ロケット、煙火、コンクリート破砕器の消費方法に関する規定が詳細化・明確化されました（第五十六条の二、第五十六条の三の二、第五十六条の四）。\n\n*   **手続きの簡素化・柔軟化**\n    *   軽微な変更の工事の範囲が拡大され、LED照明への変更や床材の取替えなどが届出で済むようになりました（第八条、第十四条）。\n    *   特定の国際・全国規模の運動競技会の審判員による射的練習のための実包製造に、無許可数量の特例が導入されました（第三条）。\n    *   受験願書に添付する写真の要件が「旅券法施行規則」に準拠するように変更されました（第七十八条）。\n    *   災害時等における火薬類製造保安責任者試験の実施（第七十二条、第七十三条）や保安検査（第四十四条の二）の中止・延期等の告知、または実施・申請期限に関する柔軟化措置が追加されました。\n    *   定期自主検査の検査報告において、保安責任者の押印が不要となりました（第六十七条の十一）。\n    *   定期自主検査の頻度について、常時監視システム等がある場合は検査項目の一部を年1回以上とすることが可能となり、検査のタイミングも柔軟化されました（第六十七条の九）。\n    *   火薬類製造所及び貯蔵施設に対する保安検査の義務について、認定保安検査実施者による自主検査が明確に位置づけられ、休止施設等の保安検査の要件が緩和されました。また、認定事業者に対する保安検査申請期限が緩和されました（第四十四条の二）。\n    *   危害予防規程における製造施設の保安に係る事項から「巡視」が削除され、「点検」に簡素化されました（第六条）。\n\n*   **火薬類の種類・取扱いに関する特例・定義の明確化**\n    *   精神の機能の障害により業務を適正に行えない者を、火薬類の製造・販売の許可を受けられない者として明確化しました（第三条の二）。\n    *   第三種保安物件の対象に「蓄電所」が追加され、保安距離を確保すべき施設の範囲が拡大されました（第一条）。\n    *   過塩素酸アンモニウムなどを主とする特定コンポジット推進薬およびその火工品について、爆薬への換算規定と火薬庫貯蔵に関する特例が新設されました（第一条の六、第二十条）。\n    *   特定硝安油剤爆薬等およびその火工品について、爆薬への換算に関する特例が新設されました（第一条の七）。\n    *   無線による点火回路の誤作動防止措置や、半導体集積回路を組み込んだ電気雷管（電子雷管）の運搬時・試験時の特例が追加され、電気雷管の安全性が強化されました（第五十一条、第五十四条）。\n    *   信号または観賞用煙火、演出用煙火の無許可消費数量が緩和されました（第四十九条）。\n\n*   **安定度試験制度の合理化**\n    *   安定度試験の対象を硝酸エステルまたはこれを含有する火薬・爆薬に限定し、硝酸エステルを含有しない爆薬に対する加熱試験が廃止されました。\n    *   遊離酸試験および耐熱試験の方法が日本産業規格（JIS）準拠に簡素化されました。\n    *   安定度試験の頻度に関して、ベルクマン・ユンク試験を用いる場合の緩和措置が追加されました（第五十七条、第五十八条、第五十九条、第六十条、第六十一条、第六十二条、第六十三条）。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 827,
-        "output_tokens": 114,
-        "thoughts_tokens": 1747,
-        "total_tokens": 2688,
-        "elapsed_seconds": 19.68965079999907,
-        "response_id": "g3JxaqHBFvaQqMgPyvWJqAI"
+        "prompt_tokens": 223024,
+        "output_tokens": 1392,
+        "thoughts_tokens": 17041,
+        "total_tokens": 241457,
+        "elapsed_seconds": 192.4084696,
+        "response_id": "LmZyaoikJuWar8kPmuCiqQ0"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "325AC0000000226",
-      "law_name": "地方税法",
+      "law_id": "429AC0000000063",
+      "law_name": "天皇の退位等に関する皇室典範特例法",
       "revisions": [
         {
-          "law_data_id": 631200,
+          "law_data_id": 583703,
           "sub_revision": "1",
-          "amendment_id": "508AC0000000002",
-          "amendment_name": "地方税法等の一部を改正する法律",
-          "amendment_num": "令和八年法律第二号",
-          "enforcement_date": "2026-07-31",
+          "amendment_id": "501AC0000000010",
+          "amendment_name": "国会議事堂、内閣総理大臣官邸その他の国の重要な施設等、外国公館等及び原子力事業所の周辺地域の上空における小型無人機等の飛行の禁止に関する法律等の一部を改正する法律",
+          "amendment_num": "令和元年法律第十号",
+          "enforcement_date": "2019-06-13",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": true
@@ -76,336 +263,64 @@
     "response": {
       "summary": {
         "title": "",
-        "body": "**概要**\n今回の法改正は、法人の道府県民税及び市町村民税に関する特例措置について、租税特別措置法の改正に伴う参照条項の更新や、新たな特例の追加、それに伴う条項番号の変更など、技術的な調整を中心に行われます。\n\n**主な改正点**\n\n*   **新たな法人税額控除に係る道府県民税及び市町村民税の特例の追加**\n    *   租税特別措置法第42条の12の7の規定により法人税額から控除された金額がある中小企業者等について、法人の道府県民税及び市町村民税の計算における特例措置（附則第8条第14項及び第15項）が新たに設けられます。\n    *   これらの規定の施行日は、現時点では未定です。\n*   **既存の特例措置における条項番号の更新**\n    *   上記の新たな特例措置の追加に伴い、地方税法附則第8条の既存の特例規定（特定医療法人等に関する規定を含む）の条項番号が順次繰り下げられ、それに伴う条文中の参照先（項番号）も更新されます。これは実質的な制度変更ではなく、条文構成の変更による技術的な調整です。\n*   **法人税額控除に係る参照条項の技術的調整**\n    *   租税特別措置法上の各種法人税額控除（第42条の4、第42条の12の5、第42条の12の6など）が適用される場合の法人の道府県民税及び市町村民税に関する特例について、地方税法における参照条項（号、項）の記載が、租税特別措置法の改正内容に合わせて更新されます。これは、既存の特例措置の適用関係を明確化するための技術的な変更です。"
+        "body": "## 天皇の退位等に関する皇室典範特例法の改正点\n\n本改正は、他の法律の名称変更に伴い、天皇の退位等に関する皇室典範特例法において引用されている法律名を形式的に修正するものです。\n\n### 主要な変更点\n\n*   **引用法律名の変更**\n    *   上皇の御所を小型無人機等の飛行禁止対象施設とみなす規定（第四条第三項）において引用されている「国会議事堂、内閣総理大臣官邸その他の国の重要な施設等、外国公館等及び原子力事業所の周辺地域の上空における小型無人機等の飛行の禁止に関する法律」の名称が「重要施設の周辺地域の上空における小型無人機等の飛行の禁止に関する法律」に変更されます。\n    *   この変更は、参照される法律の題名改正に伴うものであり、上皇の御所が小型無人機等の飛行禁止対象施設とみなされるという実質的な内容は変更されません。\n\n**施行日:** 2019年6月13日"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 5999,
-        "output_tokens": 412,
-        "thoughts_tokens": 2314,
-        "total_tokens": 8725,
-        "elapsed_seconds": 19.48766980000073,
-        "response_id": "lnJxap34Nc6AtrIP1cLimAM"
+        "prompt_tokens": 564,
+        "output_tokens": 230,
+        "thoughts_tokens": 1112,
+        "total_tokens": 1906,
+        "elapsed_seconds": 11.456453199999942,
+        "response_id": "8WZyatOfA-Lh-O4Pjt_s2AY"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "340CO0000000097",
-      "law_name": "法人税法施行令",
+      "law_id": "337M50004000022",
+      "law_name": "建築物用地下水の採取の規制に関する法律施行規則",
       "revisions": [
         {
-          "law_data_id": 636227,
+          "law_data_id": 641273,
           "sub_revision": "1",
-          "amendment_id": "508CO0000000094",
-          "amendment_name": "法人税法施行令及び法人税法施行令及び法人税法施行令等の一部を改正する政令の一部を改正する政令の一部を改正する政令",
-          "amendment_num": "令和八年政令第九十四号",
-          "enforcement_date": "2026-07-31",
+          "amendment_id": "508M60001000020",
+          "amendment_name": "建築物用地下水の採取の規制に関する法律施行規則の一部を改正する省令",
+          "amendment_num": "令和八年環境省令第二十号",
+          "enforcement_date": "2027-09-01",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
-          "is_current": true
+          "is_current": false
         }
       ]
     },
     "response": {
       "summary": {
         "title": "",
-        "body": "今後の法人税法施行令の改正について、以下の情報が提供されていますが、具体的な改正内容に関する記述がないため、現行法が将来的にどのように変更されるかについて、政策や制度の観点から要約することはできません。\n\n### 示されている情報\n\n*   **改正法**: 法人税法施行令及び法人税法施行令及び法人税法施行令等の一部を改正する政令の一部を改正する政令の一部を改正する政令\n*   **施行日**: 2026年7月31日"
+        "body": "**概要**\n「建築物用地下水の採取の規制に関する法律施行規則の一部を改正する省令」が2027年9月1日に施行されます。\n\n**主な政策的・制度的変更点**\n提供された情報からは、具体的な改正内容が示されていないため、現行法がどのように変更され、どのような政策的または制度的な影響が生じるかについて特定することはできません。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 357,
-        "output_tokens": 109,
-        "thoughts_tokens": 1299,
-        "total_tokens": 1765,
-        "elapsed_seconds": 12.883000400001038,
-        "response_id": "r3JxarzWJMqQqMgP86PgOQ"
+        "prompt_tokens": 353,
+        "output_tokens": 84,
+        "thoughts_tokens": 867,
+        "total_tokens": 1304,
+        "elapsed_seconds": 55.651654999999664,
+        "response_id": "LWdyaruOFcPx7bEP_5zrqQI"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "332CO0000000043",
-      "law_name": "租税特別措置法施行令",
+      "law_id": "410M50000100011",
+      "law_name": "精神保健福祉士法施行規則",
       "revisions": [
         {
-          "law_data_id": 636253,
+          "law_data_id": 641274,
           "sub_revision": "1",
-          "amendment_id": "508CO0000000098",
-          "amendment_name": "租税特別措置法施行令の一部を改正する政令",
-          "amendment_num": "令和八年政令第九十八号",
-          "enforcement_date": "2026-07-31",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "",
-        "body": "## 概要\n\n租税特別措置法施行令の改正は、主に新たな税制優遇措置として「特定生産性向上設備等を取得した場合の特別償却又は税額控除」を創設するものです。これにより、個人および法人事業者の生産性向上に資する設備投資が促進されることを目的としています。また、これに伴い既存の税額控除制度との連携や経過措置が整備されます。本改正は2026年7月31日に施行されます。\n\n## 主要な政策・制度変更\n\n*   **特定生産性向上設備等への税制優遇措置の創設**\n    *   個人および法人事業者が、生産性向上に資する「特定生産性向上設備等」を取得した場合に、特別償却または税額控除の適用を受けることができる制度が新設されます。\n    *   この制度の対象となる設備等は、機械及び装置、工具、器具及び備品、建物、建物附属設備及び構築物、ソフトウェアが挙げられ、それぞれ政令で定める取得価額以上のものに限定されます。\n    *   特別控除額は、所得税額および法人税額の計算において、他の控除額との適用順序が明確化されます。\n    *   本特例の適用要件に関連し、雇用者給与等の支給額の維持・増加に関する基準や、基準所得金額の定義、恒久的施設を有する非居住者や外国法人に関する特例などが新たに規定されます。\n    *   法人税の特例においては、連結納税制度における特例の適用に関する規定も設けられます。\n\n*   **既存の税額控除制度との連携の強化**\n    *   試験研究を行った場合の所得税額の特別控除の計算において、新たに創設される「特定生産性向上設備等を取得した場合の所得税額の特別控除」が考慮されるようになります。\n    *   法人税の額から控除される特別控除額の特例においても、同様に新たな制度が考慮されるように、参照条項が追加されます。\n\n*   **経過措置の導入**\n    *   「特定生産性向上設備等を取得した場合の所得税額の特別控除」に関して、2026年12月31日までの間、一部の規定の読み替えが適用される経過措置が設けられます。\n\n*   **産業競争力強化法参照条項の修正**\n    *   特定事業活動として特別新事業開拓事業者の株式の取得をした場合の課税の特例において、参照する産業競争力強化法の条項番号が変更されます（第二十七項から第二十八項へ）。これは形式的な修正です。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 8016,
-        "output_tokens": 576,
-        "thoughts_tokens": 2657,
-        "total_tokens": 11249,
-        "elapsed_seconds": 21.491266400000313,
-        "response_id": "wXJxaruFGPivqMgP2bew2QY"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "422CO0000000067",
-      "law_name": "租税特別措置の適用状況の透明化等に関する法律施行令",
-      "revisions": [
-        {
-          "law_data_id": 636261,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000101",
-          "amendment_name": "租税特別措置の適用状況の透明化等に関する法律施行令等の一部を改正する政令",
-          "amendment_num": "令和八年政令第百一号",
-          "enforcement_date": "2026-07-31",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "",
-        "body": "## 租税特別措置の適用状況の透明化等に関する法律施行令の改正概要\n\n### 概要\n本改正により、租税特別措置の適用状況の透明化等に関する法律施行令が改正され、適用額明細書の提出義務の対象となる法人税関係特別措置の範囲が変更されます。\n\n### 主要な政策・制度変更\n\n*   **適用額明細書提出義務の対象拡大**\n    *   租税特別措置法第四十二条の十二の七に規定される特別措置が、適用額明細書の提出義務の対象に追加されます。\n    *   これにより、当該特別措置の適用を受ける法人は、適用額明細書の提出が必要となります。\n\n### 施行日\n2026年7月31日"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 795,
-        "output_tokens": 165,
-        "thoughts_tokens": 991,
-        "total_tokens": 1951,
-        "elapsed_seconds": 9.23445670000001,
-        "response_id": "2HJxavyzDe7QqMgPr42C0Ao"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "324AC0000000252",
-      "law_name": "特別職の職員の給与に関する法律",
-      "revisions": [
-        {
-          "law_data_id": 636658,
-          "sub_revision": "1",
-          "amendment_id": "508AC0000000028",
-          "amendment_name": "国家情報会議設置法",
-          "amendment_num": "令和八年法律第二十八号",
-          "enforcement_date": "2026-07-31",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "",
-        "body": "## 特別職の職員の給与に関する法律 改正概要\n\n本改正は、国家情報会議設置法の施行に伴い、「特別職の職員の給与に関する法律」の適用対象となる官職の範囲を変更するものです。\n\n### 主な変更点\n\n*   **特別職の対象となる官職の追加**\n    *   国家情報局長が、新たに特別職の職員として「特別職の職員の給与に関する法律」の適用対象となります。\n*   **特別職の対象となる官職からの削除**\n    *   内閣情報官が、「特別職の職員の給与に関する法律」の適用対象から外れます。\n\n### 施行日\n\n本改正は、2026年7月31日に施行されます。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 560,
-        "output_tokens": 161,
-        "thoughts_tokens": 1529,
-        "total_tokens": 2250,
-        "elapsed_seconds": 13.006623799999943,
-        "response_id": "5XJxarP3KYnP28sPmKXveQ"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "322AC0000000005",
-      "law_name": "内閣法",
-      "revisions": [
-        {
-          "law_data_id": 636659,
-          "sub_revision": "1",
-          "amendment_id": "508AC0000000028",
-          "amendment_name": "国家情報会議設置法",
-          "amendment_num": "令和八年法律第二十八号",
-          "enforcement_date": "2026-07-31",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "",
-        "body": "内閣法は、国家情報会議設置法（令和八年法律第二十八号）の施行に伴い、2026年7月31日に以下のとおり改正されます。\n\n本改正は、内閣官房に新たな組織として「国家情報局」を設置し、これまで内閣情報官が担っていた機能の一部を含め、情報関連業務の体制を再編することを目的としています。\n\n### 主要な政策・制度変更点\n\n*   **国家情報局の新設**\n    *   内閣官房に国家情報局が新たに設置されます。\n    *   国家情報局は、国家情報会議設置法に規定される重要情報活動及び外国情報活動への対処、特定秘密の保護に関する法律に基づく特定秘密の保護、ならびに国家情報会議に関する事務などを掌理します。\n    *   国家情報局には国家情報局長が置かれ、内閣官房長官及び内閣官房副長官を助け、局務を掌理します。\n\n*   **内閣情報官の廃止と機能移管**\n    *   内閣官房に置かれていた内閣情報官が廃止されます。\n    *   内閣情報官が掌理していた特定秘密の保護や情報収集・分析に関する事務の一部は、新設される国家情報局へ移管されます。\n\n*   **各職務の所掌範囲の再編**\n    *   内閣官房副長官補が掌理する事務の範囲から、内閣情報官の所掌が除外され、国家情報局の所掌が除外されるよう変更されます。\n    *   感染症の発生及びまん延の防止に関する事務、国家安全保障に関する外交・防衛・経済政策の基本方針等に関する事務、サイバーセキュリティに関する事務などにおいて、これまで内閣情報官の所掌とされていた情報関連業務の調整・連携対象が、新設される国家情報局へと変更されます。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 2261,
-        "output_tokens": 422,
-        "thoughts_tokens": 1912,
-        "total_tokens": 4595,
-        "elapsed_seconds": 16.780682000000525,
-        "response_id": "-HJxatDqCMPx7bEP_5zrqQI"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "339AC0000000170",
-      "law_name": "電気事業法",
-      "revisions": [
-        {
-          "law_data_id": 636781,
-          "sub_revision": "1",
-          "amendment_id": "508AC0000000068",
-          "amendment_name": "電気事業法の一部を改正する法律",
-          "amendment_num": "令和八年法律第六十八号",
-          "enforcement_date": "2026-08-03",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "",
-        "body": "## 電気事業法改正に関する要約\n\n電気事業法の一部が改正され、2026年8月3日に施行されます。\n\n### 制度改正の概要\n\n*   **電気の供給拒否に係る制裁対象範囲の明確化・拡大**\n    *   現行法では、正当な理由なく「発電」および電気の供給を拒否した場合が制裁の対象とされていますが、改正後は「発電**又は放電**」および電気の供給を拒否した場合も制裁の対象となります。\n    *   これにより、蓄電池などからの「放電」による電気の供給義務違反も、発電と同様に、第二十七条の二十八の規定に違反する行為として明確に位置づけられ、制裁の対象となる範囲が拡充されます。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 415,
-        "output_tokens": 172,
-        "thoughts_tokens": 830,
-        "total_tokens": 1417,
-        "elapsed_seconds": 10.925734099997499,
-        "response_id": "DHNxarW1Mu3i-O4P_pbj0Qc"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "422M60000040022",
-      "law_name": "租税特別措置の適用状況の透明化等に関する法律施行規則",
-      "revisions": [
-        {
-          "law_data_id": 637943,
-          "sub_revision": "1",
-          "amendment_id": "508M60000040041",
-          "amendment_name": "租税特別措置の適用状況の透明化等に関する法律施行規則の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第四十一号",
-          "enforcement_date": "2026-07-31",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "",
-        "body": "## 租税特別措置の適用状況の透明化等に関する法律施行規則の改正について\n\n### 概要\n\n本改正は、2026年7月31日に施行され、租税特別措置の適用状況の透明化に関する規則を改定するものです。これにより、特定の租税特別措置の適用額が新たに透明化の対象に追加され、関連する適用額明細書の提出が求められるようになります。\n\n### 主要な政策・制度変更点\n\n*   **新たな租税特別措置の適用状況の透明化**\n    *   租税特別措置法第42条の12の7に規定される、特定生産性向上設備等を取得した場合の特別償却や法人税額の特別控除に関する適用額が、新たに透明化の対象に追加されます。これにより、当該措置の適用状況がより詳細に把握されるようになります。\n*   **適用額明細書の改定と適用時期**\n    *   上記の新設される規定（租税特別措置法第42条の12の7）に関連する適用額明細書の提出が求められるようになります。\n    *   また、特定生産性向上設備等を取得した場合の特別償却および法人税額の特別控除に関する適用額明細書についても、新しい様式での提出が必要となります。\n    *   これらの規定および適用額明細書は、法人税法に定める日以後に終了する事業年度に係る法人税の申告から適用されます。\n*   **既存の特別償却等に関する項目の整理**\n    *   新規追加に伴い、既存の複数の特別償却等に関する条文の項目番号が繰り下げられます。これは内容の変更ではなく、形式的な整理です。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 1551,
-        "output_tokens": 374,
-        "thoughts_tokens": 1389,
-        "total_tokens": 3314,
-        "elapsed_seconds": 13.504311000000598,
-        "response_id": "GnNxao4fw_HtsQ__nOupAg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "340M50000040012",
-      "law_name": "法人税法施行規則",
-      "revisions": [
-        {
-          "law_data_id": 637949,
-          "sub_revision": "1",
-          "amendment_id": "508M60000040039",
-          "amendment_name": "法人税法施行規則の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第三十九号",
-          "enforcement_date": "2026-07-31",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "",
-        "body": "与えられた情報には、法人税法施行規則の改正内容に関する具体的な記述がございません。\n\nしたがって、本省令が法人税法施行規則にどのような政策的または制度的な変更をもたらすかについて、現時点ではご説明できません。\n\n**概要:**\n法人税法施行規則の一部を改正する省令は、2026年7月31日に施行される予定です。\n\n*   **施行日:** 2026年7月31日\n\n上記以外に、改正の内容に関する情報は提供されておりません。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 339,
-        "output_tokens": 115,
-        "thoughts_tokens": 664,
-        "total_tokens": 1118,
-        "elapsed_seconds": 8.314279199999874,
-        "response_id": "LHNxaq_qFYys1t8PhvvswAw"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "430M60001000012",
-      "law_name": "特定有害廃棄物等の輸出入等の規制に関する法律に基づく特定有害廃棄物等の範囲等を定める省令",
-      "revisions": [
-        {
-          "law_data_id": 640862,
-          "sub_revision": "1",
-          "amendment_id": "508M60001000019",
-          "amendment_name": "環境省設置法の一部を改正する法律の施行に伴う環境省関係省令の整備に関する省令",
-          "amendment_num": "令和八年環境省令第十九号",
-          "enforcement_date": "2026-07-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "",
-        "body": "「特定有害廃棄物等の輸出入等の規制に関する法律に基づく特定有害廃棄物等の範囲等を定める省令」が改正され、環境省の組織再編に伴い、環境大臣の権限委任先が変更されます。\n\n主要な変更点は以下のとおりです。\n\n*   **環境大臣の権限委任先の変更**\n    *   環境大臣から地方環境事務所長に委任されていた一部の権限は、改正後は地方環境局長に委任されることになります。これは、環境省の地方機関の名称変更に伴う制度的な変更です。\n\n現在の省令では環境大臣の権限の委任先が地方環境事務所長と定められていますが、改正後はその委任先が地方環境局長へと変更されます。\n\nこの改正の施行日は2026年7月1日です。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 526,
-        "output_tokens": 178,
-        "thoughts_tokens": 1826,
-        "total_tokens": 2530,
-        "elapsed_seconds": 14.284977899998921,
-        "response_id": "OHNxat__Du2r28sPsZnniA4"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "410CO0000000005",
-      "law_name": "精神保健福祉士法施行令",
-      "revisions": [
-        {
-          "law_data_id": 641271,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000229",
-          "amendment_name": "社会福祉士及び介護福祉士法施行令及び精神保健福祉士法施行令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百二十九号",
+          "amendment_id": "508M60000100114",
+          "amendment_name": "社会福祉士及び介護福祉士法施行規則及び精神保健福祉士法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年厚生労働省令第百十四号",
           "enforcement_date": "2026-07-18",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
@@ -416,30 +331,30 @@
     "response": {
       "summary": {
         "title": "",
-        "body": "**概要**\n\n本改正により、精神保健福祉士試験の受験手数料が改定されます。\n\n**主要な政策・制度の変更点**\n\n*   **精神保健福祉士試験の受験手数料の引き上げ**\n    *   精神保健福祉士試験の受験手数料が、現行の24,140円から28,910円に引き上げられます。\n    *   科目の免除等により厚生労働省令で受験手数料が定められる場合も、この28,910円を超えない範囲内となります。\n\nこの改正は、令和8年7月18日に施行されます。"
+        "body": "## 精神保健福祉士法施行規則 改正概要\n\nこの省令改正により、精神保健福祉士試験に係る厚生労働省令で定める額が改定されます。\n\n### 主要な政策・制度変更\n\n*   **精神保健福祉士試験に係る手数料の変更**\n    *   精神保健福祉士試験の科目を免除された場合の金額が、18,820円から22,950円に変更されます。\n    *   前項に規定する場合の金額が、19,520円から23,300円に変更されます。\n\n**施行日:** 2026年7月18日"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 556,
-        "output_tokens": 138,
-        "thoughts_tokens": 548,
-        "total_tokens": 1242,
-        "elapsed_seconds": 9.64437949999774,
-        "response_id": "THNxarmRDuLh-O4Pjt_s2AY"
+        "prompt_tokens": 548,
+        "output_tokens": 142,
+        "thoughts_tokens": 682,
+        "total_tokens": 1372,
+        "elapsed_seconds": 8.683111800000006,
+        "response_id": "OGdyapDwHpaar8kPpo2r8A8"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "362CO0000000402",
-      "law_name": "社会福祉士及び介護福祉士法施行令",
+      "law_id": "362M50000100049",
+      "law_name": "社会福祉士及び介護福祉士法施行規則",
       "revisions": [
         {
-          "law_data_id": 641272,
+          "law_data_id": 641275,
           "sub_revision": "1",
-          "amendment_id": "508CO0000000229",
-          "amendment_name": "社会福祉士及び介護福祉士法施行令及び精神保健福祉士法施行令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百二十九号",
+          "amendment_id": "508M60000100114",
+          "amendment_name": "社会福祉士及び介護福祉士法施行規則及び精神保健福祉士法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年厚生労働省令第百十四号",
           "enforcement_date": "2026-07-18",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
@@ -450,16 +365,220 @@
     "response": {
       "summary": {
         "title": "",
-        "body": "### 概要\n\n本改正は、社会福祉士及び介護福祉士の国家試験に関する受験手数料について、その額を改定するものです。\n\n### 主な変更点\n\n*   **受験手数料の引き上げ**\n    *   社会福祉士試験の受験手数料は、現行の19,370円から24,300円に引き上げられます。科目免除等の規定が適用される場合の厚生労働省令で定める額の上限も、これに伴い24,300円に引き上げられます。\n    *   介護福祉士試験の受験手数料は、現行の18,380円から20,510円に引き上げられます。\n\n### 施行日\n\n2026年7月18日"
+        "body": "社会福祉士及び介護福祉士法施行規則は、令和8年7月18日に以下の変更が施行されます。\n\n### 概要\n本改正は、社会福祉士の資格取得に関する実習科目の名称変更と、社会福祉士試験の受験手数料の改定を主な内容としています。\n\n### 主な変更点\n\n*   **社会福祉士資格取得のための実習科目名称の変更**\n    *   社会福祉士の資格取得要件とされる大学等における実習科目の名称が、「相談援助実習指導及び相談援助実習」から「ソーシャルワーク実習指導及びソーシャルワーク実習」に改められます。これにより、実習科目の名称がより現代的かつ国際的なソーシャルワークの概念に統一されます。\n\n*   **社会福祉士試験の受験手数料の改定**\n    *   社会福祉士試験の受験手数料が引き上げられます。\n        *   科目免除を受ける場合の受験手数料が、16,230円から20,460円に変更されます。\n        *   科目免除を受けない場合の受験手数料が、16,840円から21,720円に変更されます。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 652,
-        "output_tokens": 170,
-        "thoughts_tokens": 661,
-        "total_tokens": 1483,
-        "elapsed_seconds": 7.827986199998122,
-        "response_id": "V3NxaoqOMJ_ZqMgPrZ6ykQU"
+        "prompt_tokens": 1079,
+        "output_tokens": 259,
+        "thoughts_tokens": 1017,
+        "total_tokens": 2355,
+        "elapsed_seconds": 10.61818889999995,
+        "response_id": "RGdyaoLqBJaar8kPpo2r8A8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "418M60000002047",
+      "law_name": "投資法人の計算に関する規則",
+      "revisions": [
+        {
+          "law_data_id": 641276,
+          "sub_revision": "1",
+          "amendment_id": "508M60000002062",
+          "amendment_name": "投資法人の計算に関する規則の一部を改正する内閣府令",
+          "amendment_num": "令和八年内閣府令第六十二号",
+          "enforcement_date": "2026-07-17",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "### 投資法人の計算に関する規則の改正について\n\n**施行日: 2026年7月17日**\n\n本改正は、投資法人が投資主に対して行う計算書類等の提供方法に関する規則を変更するものです。\n\n主な改正点は以下のとおりです。\n\n*   **提供書類の名称変更**:\n    *   投資主へ提供する書類の総称が「提供計算書類」から「提供計算書類等」に変更されます。この「提供計算書類等」には、計算書類、資産運用報告、金銭の分配に係る計算書、および会計監査報告が含まれます。\n*   **電磁的方法による提供の擬制の導入**:\n    *   投資法人は、規約に定めがある場合、提供すべき事項に係る情報を5年間継続して電磁的方法（インターネットによる自動公衆送信装置を使用する方法）により投資主が提供を受けられる状態に置く措置を講じることで、投資主への提供義務を果たしたものとみなされるようになります。\n*   **電磁的方法による提供時の通知義務**:\n    *   上記の新設された電磁的方法による提供を行う場合、執行役員は、投資主に対し、当該情報にアクセスするための文字、記号、その他の符号（URL等）を通知する義務を負います。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1149,
+        "output_tokens": 274,
+        "thoughts_tokens": 1685,
+        "total_tokens": 3108,
+        "elapsed_seconds": 19.479176800000005,
+        "response_id": "UWdyarncBLKDqMgPjdvdiAI"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "415M60000800102",
+      "law_name": "独立行政法人鉄道建設・運輸施設整備支援機構に関する省令",
+      "revisions": [
+        {
+          "law_data_id": 641300,
+          "sub_revision": "1",
+          "amendment_id": "508M60000800068",
+          "amendment_name": "独立行政法人鉄道建設・運輸施設整備支援機構に関する省令の一部を改正する省令",
+          "amendment_num": "令和八年国土交通省令第六十八号",
+          "enforcement_date": "2026-07-21",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "**概要**\n独立行政法人鉄道建設・運輸施設整備支援機構に関する省令の改正により、業務方法書の記載事項の一部が変更され、また新幹線鉄道施設に関する会計処理において使用される勘定科目名称が改められます。本改正は、令和8年7月21日に施行されます。\n\n**主要な変更点**\n\n*   **業務範囲の明確化**\n    *   地域公共交通の活性化及び再生に関する法律に基づく業務の範囲が明確化され、同法の準用規定により行われる業務も業務方法書の記載事項に含まれることが明記されます。\n\n*   **新幹線鉄道施設に関する会計処理の勘定科目名称の変更**\n    *   新幹線鉄道施設に係る会計処理において使用される「新幹線資産見返負債」という勘定科目名が、新たに「繰延収益（新幹線資産）」に変更されます。\n    *   この変更に伴い、関連する会計処理である「新幹線資産見返負債戻入」の名称も「繰延収益（新幹線資産）戻入」に改められます。\n    *   また、特例業務勘定繰入金見返負債の処理において、新幹線鉄道施設の建設に関する債務の償還時に負債の部に計上される科目も、「新幹線資産見返負債」から「繰延収益（新幹線資産）」に変更されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1406,
+        "output_tokens": 303,
+        "thoughts_tokens": 1554,
+        "total_tokens": 3263,
+        "elapsed_seconds": 14.137597100000221,
+        "response_id": "ZmdyaovWEsPx7bEP_5zrqQI"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "341RJNJ17000000",
+      "law_name": "人事院規則一七―〇（管理職員等の範囲）",
+      "revisions": [
+        {
+          "law_data_id": 641307,
+          "sub_revision": "1",
+          "amendment_id": "508RJNJ17000153",
+          "amendment_name": "人事院規則一七―〇（管理職員等の範囲）の一部を改正する人事院規則",
+          "amendment_num": "令和八年人事院規則一七―〇―一五三",
+          "enforcement_date": "2026-07-22",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "人事院規則一七―〇（管理職員等の範囲）の改正について、提供された情報に基づき要約します。\n\n### 概要\n\n人事院規則一七―〇（管理職員等の範囲）の一部が改正される予定です。\n\n### 変更点\n\n提供された情報には、改正の具体的な内容や、それによる政策的・制度的な変更に関する詳細が含まれておりません。そのため、現時点では、改正によって現在の法制度がどのように変わるのかについて、具体的な説明をすることはできません。\n\n### 施行日\n\n*   本改正は、2026年7月22日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 363,
+        "output_tokens": 132,
+        "thoughts_tokens": 766,
+        "total_tokens": 1261,
+        "elapsed_seconds": 10.612203099999988,
+        "response_id": "dmdyas6wH7bPqMgP8Z_dOA"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "419M60400000006",
+      "law_name": "遺失物法施行規則",
+      "revisions": [
+        {
+          "law_data_id": 641308,
+          "sub_revision": "1",
+          "amendment_id": "508M60400000016",
+          "amendment_name": "遺失物法施行規則の一部を改正する規則",
+          "amendment_num": "令和八年国家公安委員会規則第十六号",
+          "enforcement_date": "2026-07-22",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "本改正は、遺失物法施行規則における各種手続きのデジタル化を推進し、遺失物の返還や引渡しにおける本人確認方法を多様化するとともに、特例施設占有者による拾得者への通知や受領に関する手続きを効率化することを目的としています。\n\n本規則は**2026年7月22日**に施行されます。\n\n主な変更点は以下のとおりです。\n\n*   **本人確認手続きのデジタル化の推進**\n    *   警察署および特例施設占有者において、遺失物の返還を求める者や拾得物の引渡しを求める者の本人確認に、従来の書面提示に加え、電磁的記録の提示や、番号利用法に基づく「特定電磁的記録」の送信・確認が新たな選択肢として導入されます。\n*   **遺失物に関する通知・受領手続きのデジタル化**\n    *   特例施設占有者から拾得者への各種通知（遺失者が判明しない場合の通知等）について、書面による交付に加え、電磁的記録による提供が可能となります。\n    *   遺失物に関する受領書や引渡し時の書面についても、電磁的記録で作成し、これを以てやり取りすることが認められるようになります。\n*   **電磁的記録媒体による提出手続きの簡素化**\n    *   電磁的記録媒体で書類を提出する際、これまで必要とされていた特定の提出票が不要になります。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 2985,
+        "output_tokens": 320,
+        "thoughts_tokens": 2208,
+        "total_tokens": 5513,
+        "elapsed_seconds": 17.49416659999997,
+        "response_id": "g2dyatC7O-7QqMgPr42C0Ao"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "420M60000002083",
+      "law_name": "職員の退職管理に関する内閣官房令",
+      "revisions": [
+        {
+          "law_data_id": 641339,
+          "sub_revision": "1",
+          "amendment_id": "508M60000001008",
+          "amendment_name": "職員の退職管理に関する内閣官房令及び行政執行法人の役員の退職管理に関する内閣官房令の一部を改正する内閣官房令",
+          "amendment_num": "令和八年内閣官房令第八号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "## 職員の退職管理に関する内閣官房令の改正の概要\n\n職員の退職管理に関する内閣官房令が改正され、退職職員が営利企業以外の団体に再就職する際に内閣総理大臣への届出が不要となる報酬額の基準が変更されます。\n\n### 主な変更点\n\n*   **再就職時の内閣総理大臣への届出が不要となる報酬額の明確化**\n    *   これまでは、営利企業以外の事業の団体の地位に就いた場合や事業に従事した場合に、内閣総理大臣への事後の届出が不要となる報酬額は、所得税法等に定める給与所得控除額や基礎控除額を合算する複雑な計算式で算出されていました。\n    *   改正後は、当該報酬額が年間一律160万円に明確化されます。これにより、退職職員が再就職する際の届出義務の判断基準がより簡素化され、分かりやすくなります。\n\n### 施行日\n\n2026年10月1日"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 694,
+        "output_tokens": 239,
+        "thoughts_tokens": 855,
+        "total_tokens": 1788,
+        "elapsed_seconds": 8.599447999999938,
+        "response_id": "l2dyaqSaHJaar8kPpo2r8A8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "411M50000008015",
+      "law_name": "地方特例交付金に関する省令",
+      "revisions": [
+        {
+          "law_data_id": 641341,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008093",
+          "amendment_name": "地方特例交付金に関する省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第九十三号",
+          "enforcement_date": "2026-07-24",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "",
+        "body": "令和八年総務省令第九十三号により「地方特例交付金に関する省令」が改正され、2026年7月24日に施行されます。\n今回の改正は、主に地方特例交付金制度における減収補塡の対象税目を拡充し、関連する算定方法や手続きを整備するものです。\n\n主要な政策・制度変更点は以下のとおりです。\n\n*   **新たな減収補塡特例交付金制度の導入**\n    *   定額減税に係る減収補塡特例交付金に関する規定が廃止されます。\n    *   代わりに、以下の税目に関する新たな減収補塡特例交付金が導入され、それぞれの算定方法が規定されます。\n        *   軽油引取税減収補塡特例交付金\n        *   自動車税減収補塡特例交付金（自動車税環境性能割の廃止に伴うもの）\n        *   軽自動車税減収補塡特例交付金（軽自動車税環境性能割の廃止に伴うもの）\n        *   地方揮発油譲与税減収補塡特例交付金\n*   **個人住民税関連交付金の名称変更と整理**\n    *   現行の「住宅借入金等特別税額控除減収補塡特例交付金」が「個人住民税減収補塡特例交付金」に名称変更されます。\n    *   これに伴い、関連する地方税法附則の参照条項が整理されます。\n*   **地方公共団体による資料提出義務の拡充**\n    *   都道府県知事、市町村長及び特別区の長が総務大臣等に提出する地方特例交付金算定用資料に、新設される「軽油引取税減収見込額」「自動車税減収見込額」「軽自動車税減収見込額」「地方揮発油譲与税減収見込額」が追加されます。\n*   **交付額算定の錯誤に対する調整措置の対象拡大**\n    *   交付すべき額の算定に誤りがあった場合の調整措置の対象交付金に、新設された各種減収補塡特例交付金が追加されます。\n*   **参照条文の変更**\n    *   地方公共団体の廃置分合や境界変更があった場合の交付金算定における根拠条文が、「法第五条第五項」から「法第五条第四項」に変更されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 5787,
+        "output_tokens": 545,
+        "thoughts_tokens": 2664,
+        "total_tokens": 8996,
+        "elapsed_seconds": 38.819456400000036,
+        "response_id": "o2dyarzjCvnK28sPoOiJwQ4"
       }
     }
   }
