@@ -1,387 +1,108 @@
 [
   {
-    "law_id": "325M50000400088",
-    "law_no": "昭和二十五年通商産業省令第八十八号",
-    "law_name": "火薬類取締法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/325M50000400088/20170401_429M60000400004",
-    "updates": [
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2017-04-01",
-        "effective_comment": "",
-        "amend_name": "",
-        "amend_no": "平成二十九年経済産業省令第四号",
-        "amend_published_date": "2017-01-25",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2019-01-08",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "平成三十一年経済産業省令第一号",
-        "amend_published_date": "2019-01-08",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2019-07-01",
-        "effective_comment": "",
-        "amend_name": "不正競争防止法等の一部を改正する法律の施行に伴う経済産業省関係省令の整備に関する省令",
-        "amend_no": "令和元年経済産業省令第十七号",
-        "amend_published_date": "2019-07-01",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2019-09-14",
-        "effective_comment": "",
-        "amend_name": "成年被後見人等の権利の制限に係る措置の適正化等を図るための関係法律の整備に関する法律の施行に伴う経済産業省関係省令の整備に関する省令",
-        "amend_no": "令和元年経済産業省令第三十六号",
-        "amend_published_date": "2019-09-11",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2019-12-23",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "令和元年経済産業省令第五十五号",
-        "amend_published_date": "2019-12-23",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2020-01-21",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "令和二年経済産業省令第四号",
-        "amend_published_date": "2020-01-21",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2020-04-10",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則等の一部を改正する省令",
-        "amend_no": "令和二年経済産業省令第三十七号",
-        "amend_published_date": "2020-04-10",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2020-06-26",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則等の一部を改正する省令",
-        "amend_no": "令和二年経済産業省令第六十号",
-        "amend_published_date": "2020-06-26",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2020-12-28",
-        "effective_comment": "",
-        "amend_name": "押印を求める手続の見直し等のための経済産業省関係省令の一部を改正する省令",
-        "amend_no": "令和二年経済産業省令第九十二号",
-        "amend_published_date": "2020-12-28",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2021-04-01",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "令和三年経済産業省令第九号",
-        "amend_published_date": "2021-03-01",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2021-04-05",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "令和三年経済産業省令第三十九号",
-        "amend_published_date": "2021-04-05",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2019-04-01",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "平成三十年経済産業省令第三十五号",
-        "amend_published_date": "2018-06-15",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2022-01-15",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "令和三年経済産業省令第七十三号",
-        "amend_published_date": "2021-10-15",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2023-04-01",
-        "effective_comment": "",
-        "amend_name": "安定的なエネルギー需給構造の確立を図るためのエネルギーの使用の合理化等に関する法律等の一部を改正する法律の施行に伴う関係省令の整備等に関する省令",
-        "amend_no": "令和五年経済産業省令第十一号",
-        "amend_published_date": "2023-03-28",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2023-06-09",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則等の一部を改正する省令",
-        "amend_no": "令和五年経済産業省令第三十二号",
-        "amend_published_date": "2023-06-09",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2024-04-29",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "令和六年経済産業省令第十八号",
-        "amend_published_date": "2024-03-29",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2024-07-28",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "令和六年経済産業省令第三十九号",
-        "amend_published_date": "2024-06-28",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2025-01-26",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "令和六年経済産業省令第九十号",
-        "amend_published_date": "2024-12-26",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2025-06-01",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "令和七年経済産業省令第四十七号",
-        "amend_published_date": "2025-05-30",
-        "pending": false
-      },
-      {
-        "published_date": "1950-10-31",
-        "effective_date": "2026-06-01",
-        "effective_comment": "",
-        "amend_name": "火薬類取締法施行規則の一部を改正する省令",
-        "amend_no": "令和八年経済産業省令第五十五号",
-        "amend_published_date": "2026-06-01",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "429AC0000000063",
-    "law_no": "平成二十九年法律第六十三号",
-    "law_name": "天皇の退位等に関する皇室典範特例法",
+    "law_id": "328AC1000000238",
+    "law_no": "昭和二十八年法律第二百三十八号",
+    "law_name": "高等学校の定時制教育及び通信教育の振興等に関する法律",
     "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/429AC0000000063/20170616_000000000000000",
+    "url": "https://laws.e-gov.go.jp/law/328AC1000000238/20270401_508AC0000000037",
     "updates": [
       {
-        "published_date": "2017-06-16",
-        "effective_date": "2017-06-16",
+        "published_date": "1953-08-18",
+        "effective_date": "2027-04-01",
         "effective_comment": "",
-        "amend_name": "",
-        "amend_no": "",
-        "amend_published_date": "2017-06-16",
+        "amend_name": "学校教育法等の一部を改正する法律",
+        "amend_no": "令和八年法律第三十七号",
+        "amend_published_date": "2026-06-17",
+        "pending": true
+      },
+      {
+        "published_date": "1953-08-18",
+        "effective_date": "2026-07-23",
+        "effective_comment": "",
+        "amend_name": "高等学校の定時制教育及び通信教育振興法の一部を改正する法律",
+        "amend_no": "令和八年法律第六十三号",
+        "amend_published_date": "2026-07-23",
         "pending": false
       },
       {
-        "published_date": "2017-06-16",
-        "effective_date": "2019-04-30",
+        "published_date": "1953-08-18",
+        "effective_date": "2027-01-23",
         "effective_comment": "",
-        "amend_name": "",
-        "amend_no": "",
-        "amend_published_date": "2017-06-16",
-        "pending": false
-      },
-      {
-        "published_date": "2017-06-16",
-        "effective_date": "2019-06-13",
-        "effective_comment": "",
-        "amend_name": "国会議事堂、内閣総理大臣官邸その他の国の重要な施設等、外国公館等及び原子力事業所の周辺地域の上空における小型無人機等の飛行の禁止に関する法律等の一部を改正する法律",
-        "amend_no": "令和元年法律第十号",
-        "amend_published_date": "2019-05-24",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "337M50004000022",
-    "law_no": "昭和三十七年建設省令第二十二号",
-    "law_name": "建築物用地下水の採取の規制に関する法律施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/337M50004000022/20270901_508M60001000020",
-    "updates": [
-      {
-        "published_date": "1962-08-27",
-        "effective_date": "2027-09-01",
-        "effective_comment": "",
-        "amend_name": "建築物用地下水の採取の規制に関する法律施行規則の一部を改正する省令",
-        "amend_no": "令和八年環境省令第二十号",
-        "amend_published_date": "2026-07-17",
+        "amend_name": "高等学校の定時制教育及び通信教育振興法の一部を改正する法律",
+        "amend_no": "令和八年法律第六十三号",
+        "amend_published_date": "2026-07-23",
         "pending": true
       }
     ]
   },
   {
-    "law_id": "410M50000100011",
-    "law_no": "平成十年厚生省令第十一号",
-    "law_name": "精神保健福祉士法施行規則",
+    "law_id": "410M50000200086",
+    "law_no": "平成十年農林水産省令第八十六号",
+    "law_name": "品種登録規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/410M50000100011/20260718_508M60000100114",
+    "url": "https://laws.e-gov.go.jp/law/410M50000200086/20260521_508M60000200038",
     "updates": [
       {
-        "published_date": "1998-01-30",
-        "effective_date": "2026-07-18",
+        "published_date": "1998-12-11",
+        "effective_date": "2026-05-21",
         "effective_comment": "",
-        "amend_name": "社会福祉士及び介護福祉士法施行規則及び精神保健福祉士法施行規則の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第百十四号",
-        "amend_published_date": "2026-07-17",
+        "amend_name": "品種登録規則等の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第三十八号",
+        "amend_published_date": "2026-05-14",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "362M50000100049",
-    "law_no": "昭和六十二年厚生省令第四十九号",
-    "law_name": "社会福祉士及び介護福祉士法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/362M50000100049/20260718_508M60000100114",
+    "law_id": "409CO0000000346",
+    "law_no": "平成九年政令第三百四十六号",
+    "law_name": "環境影響評価法施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/409CO0000000346/20270401_508CO0000000230",
     "updates": [
       {
-        "published_date": "1987-12-15",
-        "effective_date": "2026-07-18",
+        "published_date": "1997-12-03",
+        "effective_date": "2027-04-01",
         "effective_comment": "",
-        "amend_name": "社会福祉士及び介護福祉士法施行規則及び精神保健福祉士法施行規則の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第百十四号",
-        "amend_published_date": "2026-07-17",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "418M60000002047",
-    "law_no": "平成十八年内閣府令第四十七号",
-    "law_name": "投資法人の計算に関する規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/418M60000002047/20260717_508M60000002062",
-    "updates": [
-      {
-        "published_date": "2006-04-20",
-        "effective_date": "2026-07-17",
-        "effective_comment": "",
-        "amend_name": "投資法人の計算に関する規則の一部を改正する内閣府令",
-        "amend_no": "令和八年内閣府令第六十二号",
-        "amend_published_date": "2026-07-17",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "415M60000800102",
-    "law_no": "平成十五年国土交通省令第百二号",
-    "law_name": "独立行政法人鉄道建設・運輸施設整備支援機構に関する省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/415M60000800102/20260721_508M60000800068",
-    "updates": [
-      {
-        "published_date": "2003-10-01",
-        "effective_date": "2026-07-21",
-        "effective_comment": "",
-        "amend_name": "独立行政法人鉄道建設・運輸施設整備支援機構に関する省令の一部を改正する省令",
-        "amend_no": "令和八年国土交通省令第六十八号",
-        "amend_published_date": "2026-07-21",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "341RJNJ17000000",
-    "law_no": "昭和四十一年人事院規則一七―〇",
-    "law_name": "人事院規則一七―〇（管理職員等の範囲）",
-    "law_type": "規則",
-    "url": "https://laws.e-gov.go.jp/law/341RJNJ17000000/20260722_508RJNJ17000153",
-    "updates": [
-      {
-        "published_date": "1966-07-09",
-        "effective_date": "2026-07-22",
-        "effective_comment": "",
-        "amend_name": "人事院規則一七―〇（管理職員等の範囲）の一部を改正する人事院規則",
-        "amend_no": "令和八年人事院規則一七―〇―一五三",
-        "amend_published_date": "2026-07-22",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "419M60400000006",
-    "law_no": "平成十九年国家公安委員会規則第六号",
-    "law_name": "遺失物法施行規則",
-    "law_type": "規則",
-    "url": "https://laws.e-gov.go.jp/law/419M60400000006/20260722_508M60400000016",
-    "updates": [
-      {
-        "published_date": "2007-03-27",
-        "effective_date": "2026-07-22",
-        "effective_comment": "",
-        "amend_name": "遺失物法施行規則の一部を改正する規則",
-        "amend_no": "令和八年国家公安委員会規則第十六号",
-        "amend_published_date": "2026-07-22",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "420M60000002083",
-    "law_no": "平成二十年内閣府令第八十三号",
-    "law_name": "職員の退職管理に関する内閣官房令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/420M60000002083/20261001_508M60000001008",
-    "updates": [
-      {
-        "published_date": "2008-12-25",
-        "effective_date": "2026-10-01",
-        "effective_comment": "",
-        "amend_name": "職員の退職管理に関する内閣官房令及び行政執行法人の役員の退職管理に関する内閣官房令の一部を改正する内閣官房令",
-        "amend_no": "令和八年内閣官房令第八号",
-        "amend_published_date": "2026-07-24",
+        "amend_name": "環境影響評価法施行令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百三十号",
+        "amend_published_date": "2026-07-23",
         "pending": true
       }
     ]
   },
   {
-    "law_id": "411M50000008015",
-    "law_no": "平成十一年自治省令第十五号",
-    "law_name": "地方特例交付金に関する省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/411M50000008015/20260724_508M60000008093",
+    "law_id": "326CO0000000377",
+    "law_no": "昭和二十六年政令第三百七十七号",
+    "law_name": "検疫法施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/326CO0000000377/20260730_508CO0000000231",
     "updates": [
       {
-        "published_date": "1999-03-31",
-        "effective_date": "2026-07-24",
+        "published_date": "1951-12-14",
+        "effective_date": "2026-07-30",
         "effective_comment": "",
-        "amend_name": "地方特例交付金に関する省令の一部を改正する省令",
-        "amend_no": "令和八年総務省令第九十三号",
-        "amend_published_date": "2026-07-24",
+        "amend_name": "検疫法施行令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百三十一号",
+        "amend_published_date": "2026-07-23",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "508M60000002063",
+    "law_no": "令和八年内閣府令第六十三号",
+    "law_name": "日本学術会議の成立時総会の招集の通知に関する内閣府令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/508M60000002063/20260727_000000000000000",
+    "updates": [
+      {
+        "published_date": "2026-07-27",
+        "effective_date": "2026-07-27",
+        "effective_comment": "",
+        "amend_name": "",
+        "amend_no": "",
+        "amend_published_date": "2026-07-27",
         "pending": false
       }
     ]
