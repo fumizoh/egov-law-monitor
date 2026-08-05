@@ -53,7 +53,6 @@ def create_law(
         "law_type": group.law_type,
         "url": group.url,
         "updates": _create_updates(group),
-        "summary": None,
     }
 
 

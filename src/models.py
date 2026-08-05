@@ -151,8 +151,7 @@ class SummaryStatistics:
 
     model: str
 
-    generated: int
-    reused: int
+    count: int
 
     prompt_tokens: int
     output_tokens: int
@@ -163,6 +162,7 @@ class SummaryStatistics:
 
     estimated_cost_usd: float
     estimated_cost_jpy: float
+
     average_cost_jpy: float
 
 
@@ -259,14 +259,13 @@ class DailySummaryResponse:
 
 @dataclass(slots=True)
 class AiSummaryLog:
-    """AI summary execution log."""
+    """AI summary generation log."""
 
-    date: str
+    timestamp: str
     service: str
     target: str | None
-    reused: bool
 
-    usage: SummaryUsage | None
+    usage: SummaryUsage
 
 
 @dataclass(slots=True)

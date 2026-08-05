@@ -1,17 +1,11 @@
 from models import (
     SummaryUsage,
     SummaryStatistics,
-    LawSummary,
     AiSummaryLog,
-    DailySummaryResponse,
     AiStatistics,
 )
 
-from config import (
-    GEMINI_INPUT_PRICE_USD_PER_MILLION,
-    GEMINI_OUTPUT_PRICE_USD_PER_MILLION,
-    USD_TO_JPY_RATE,
-)
+from summary import cost
 
 from summary.constants import (
     LAW_SUMMARY,
@@ -19,33 +13,9 @@ from summary.constants import (
 )
 
 
-def _count_actions(
-    logs: list[AiSummaryLog],
-    service: str,
-) -> tuple[int, int]:
-    """Count generated and reused summaries."""
-
-    generated = 0
-    reused = 0
-
-    for log in logs:
-
-        if log.service != service:
-            continue
-
-        if log.reused:
-            reused += 1
-        else:
-            generated += 1
-
-    return generated, reused
-
-
 def _create_summary_statistics(
     model: str,
     usages: list[SummaryUsage],
-    generated: int,
-    reused: int,
 ) -> SummaryStatistics:
     """Create aggregated statistics from SummaryUsage."""
 
@@ -56,6 +26,9 @@ def _create_summary_statistics(
 
     elapsed_seconds = 0.0
 
+    estimated_cost_usd = 0.0
+    estimated_cost_jpy = 0.0
+
     for usage in usages:
         prompt_tokens += usage.prompt_tokens
         output_tokens += usage.output_tokens
@@ -64,31 +37,24 @@ def _create_summary_statistics(
 
         elapsed_seconds += usage.elapsed_seconds
 
-    input_cost_usd = (
-        prompt_tokens
-        / 1_000_000
-        * GEMINI_INPUT_PRICE_USD_PER_MILLION
-    )
+        cost_usd, cost_jpy = cost.calculate_cost(
+            usage,
+        )
 
-    output_cost_usd = (
-        (output_tokens + thoughts_tokens)
-        / 1_000_000
-        * GEMINI_OUTPUT_PRICE_USD_PER_MILLION
-    )
+        estimated_cost_usd += cost_usd
+        estimated_cost_jpy += cost_jpy
 
-    estimated_cost_usd = input_cost_usd + output_cost_usd
-    estimated_cost_jpy = estimated_cost_usd * USD_TO_JPY_RATE
+    count = len(usages)
 
     average_cost_jpy = (
-        estimated_cost_jpy / generated
-        if generated
+        estimated_cost_jpy / count
+        if count
         else 0.0
     )
 
     return SummaryStatistics(
         model=model,
-        generated=generated,
-        reused=reused,
+        count=count,
         prompt_tokens=prompt_tokens,
         output_tokens=output_tokens,
         thoughts_tokens=thoughts_tokens,
@@ -101,52 +67,38 @@ def _create_summary_statistics(
 
 
 def _create_law_summary_statistics(
-    law_summaries: list[LawSummary],
     logs: list[AiSummaryLog],
 ) -> SummaryStatistics:
-
-    model = ""
-
-    if law_summaries:
-        model = law_summaries[0].response.usage.model
 
     usages = [
         log.usage
         for log in logs
-        if (
-            log.service == LAW_SUMMARY
-            and log.usage is not None
-        )
+        if log.service == LAW_SUMMARY
     ]
 
-    generated, reused = _count_actions(
-        logs,
-        LAW_SUMMARY,
-    )
+    model = usages[0].model if usages else ""
 
     return _create_summary_statistics(
         model=model,
         usages=usages,
-        generated=generated,
-        reused=reused,
     )
 
 
 def _create_daily_summary_statistics(
-    daily_summary: DailySummaryResponse,
     logs: list[AiSummaryLog],
 ) -> SummaryStatistics:
 
-    generated, reused = _count_actions(
-        logs,
-        DAILY_SUMMARY,
-    )
+    usages = [
+        log.usage
+        for log in logs
+        if log.service == DAILY_SUMMARY
+    ]
+
+    model = usages[0].model if usages else ""
 
     return _create_summary_statistics(
-        model=daily_summary.usage.model,
-        usages=[daily_summary.usage],
-        generated=generated,
-        reused=reused,
+        model=model,
+        usages=usages,
     )
 
 
@@ -155,10 +107,11 @@ def _create_total_statistics(
     daily: SummaryStatistics,
 ) -> SummaryStatistics:
 
+    count = law.count + daily.count
+
     return SummaryStatistics(
         model=law.model if law.model == daily.model else "",
-        generated=law.generated + daily.generated,
-        reused=law.reused + daily.reused,
+        count=count,
         prompt_tokens=law.prompt_tokens + daily.prompt_tokens,
         output_tokens=law.output_tokens + daily.output_tokens,
         thoughts_tokens=law.thoughts_tokens + daily.thoughts_tokens,
@@ -179,40 +132,31 @@ def _create_total_statistics(
             (
                 law.estimated_cost_jpy
                 + daily.estimated_cost_jpy
-            )
-            / (law.generated + daily.generated),
+            ) / count,
             1,
-        )
-        if (law.generated + daily.generated)
-        else 0.0,
+        ) if count else 0.0,
     )
 
 
 def create_statistics(
-    law_summaries: list[LawSummary],
-    daily_summary: DailySummaryResponse,
     logs: list[AiSummaryLog],
 ) -> AiStatistics:
 
     law_summary = _create_law_summary_statistics(
-        law_summaries,
         logs,
     )
 
-    daily_summary_statistics = (
-        _create_daily_summary_statistics(
-            daily_summary,
-            logs,
-        )
+    daily_summary = _create_daily_summary_statistics(
+        logs,
     )
 
     total = _create_total_statistics(
         law_summary,
-        daily_summary_statistics,
+        daily_summary,
     )
 
     return AiStatistics(
         law_summary=law_summary,
-        daily_summary=daily_summary_statistics,
+        daily_summary=daily_summary,
         total=total,
     )

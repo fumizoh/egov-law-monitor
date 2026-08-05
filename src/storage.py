@@ -257,6 +257,46 @@ def reset_ai_summary_logs() -> None:
     AI_SUMMARY_LOG_JSONL.write_text("", encoding="utf-8")
 
 
+def load_ai_summary_logs() -> list[AiSummaryLog]:
+    """
+    Load AI summary logs.
+    """
+
+    if not AI_SUMMARY_LOG_JSONL.exists():
+        return []
+
+    logs: list[AiSummaryLog] = []
+
+    with open(
+        AI_SUMMARY_LOG_JSONL,
+        "r",
+        encoding="utf-8",
+    ) as f:
+
+        for line in f:
+
+            line = line.strip()
+
+            if not line:
+                continue
+
+            try:
+
+                logs.append(
+                    from_dict(
+                        AiSummaryLog,
+                        json.loads(line),
+                    )
+                )
+
+            except json.JSONDecodeError as e:
+                raise RuntimeError(
+                    f"Invalid JSONL: {AI_SUMMARY_LOG_JSONL}"
+                ) from e
+
+    return logs
+
+
 def append_ai_summary_logs(
     logs: list[AiSummaryLog],
 ):

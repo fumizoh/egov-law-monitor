@@ -1,22 +1,11 @@
-from law_group import group_by_law
-
+import law_group
 import law_builder
+import storage
+
 import summary.daily_service as daily_service
 import summary.statistics as summary_statistics
 
-from storage import (
-    save_source_data,
-    save_laws,
-    save_statistics,
-    save_daily_summary,
-    save_law_summaries,
-    append_ai_summary_logs,
-    save_ai_statistics,
-)
-
-from statistics import(
-    create_source_statistics,
-)
+from statistics import create_source_statistics
 
 
 def _save_statistics(
@@ -32,7 +21,7 @@ def _save_statistics(
         latest_date=date,
     )
 
-    save_statistics(
+    storage.save_statistics(
         source=source,
         statistics=statistics,
     )
@@ -46,17 +35,17 @@ def process_egov(
 ):
     """Process e-Gov updates."""
 
-    save_source_data("egov", updates)
+    storage.save_source_data("egov", updates)
 
     # Law を公開データとして保存
-    law_groups = group_by_law(updates)
+    law_groups = law_group.group_by_law(updates)
 
     laws = law_builder.build_laws(law_groups)
 
     # DEBUG
     print("Total:", len(laws), "laws")
 
-    save_laws(laws)
+    storage.save_laws(laws)
 
     # Daily Summary
     daily_summary, law_summaries, logs = daily_service.generate(
@@ -64,20 +53,23 @@ def process_egov(
         law_groups,
     )
 
-    save_daily_summary(daily_summary)
+    storage.save_daily_summary(daily_summary)
 
-    save_law_summaries(law_summaries)
+    storage.save_law_summaries(law_summaries)
 
-    append_ai_summary_logs(logs)
+    # Tool: Delete All AI Summary Log
+    # storage.reset_ai_summary_logs()
 
-    # AI Summary Statistics
+    storage.append_ai_summary_logs(logs)
+
+    # AI Statistics
+    all_logs = storage.load_ai_summary_logs()
+
     statistics = summary_statistics.create_statistics(
-        law_summaries,
-        daily_summary,
-        logs,
+        all_logs,
     )
 
-    save_ai_statistics(statistics)
+    storage.save_ai_statistics(statistics)
 
     # Save Statistics
     _save_statistics(
@@ -93,7 +85,7 @@ def process_public_comment(
 ):
     """Process public comment updates."""
 
-    save_source_data("public_comment", updates)
+    storage.save_source_data("public_comment", updates)
 
     # Save Statistics
     _save_statistics(

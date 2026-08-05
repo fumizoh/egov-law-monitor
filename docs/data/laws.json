@@ -186,8 +186,7 @@
         "amend_published_date": "2026-06-01",
         "pending": false
       }
-    ],
-    "summary": null
+    ]
   },
   {
     "law_id": "429AC0000000063",
@@ -223,8 +222,7 @@
         "amend_published_date": "2019-05-24",
         "pending": false
       }
-    ],
-    "summary": null
+    ]
   },
   {
     "law_id": "337M50004000022",
@@ -242,8 +240,7 @@
         "amend_published_date": "2026-07-17",
         "pending": true
       }
-    ],
-    "summary": null
+    ]
   },
   {
     "law_id": "410M50000100011",
@@ -261,8 +258,7 @@
         "amend_published_date": "2026-07-17",
         "pending": false
       }
-    ],
-    "summary": null
+    ]
   },
   {
     "law_id": "362M50000100049",
@@ -280,8 +276,7 @@
         "amend_published_date": "2026-07-17",
         "pending": false
       }
-    ],
-    "summary": null
+    ]
   },
   {
     "law_id": "418M60000002047",
@@ -299,8 +294,7 @@
         "amend_published_date": "2026-07-17",
         "pending": false
       }
-    ],
-    "summary": null
+    ]
   },
   {
     "law_id": "415M60000800102",
@@ -318,8 +312,7 @@
         "amend_published_date": "2026-07-21",
         "pending": false
       }
-    ],
-    "summary": null
+    ]
   },
   {
     "law_id": "341RJNJ17000000",
@@ -337,8 +330,7 @@
         "amend_published_date": "2026-07-22",
         "pending": false
       }
-    ],
-    "summary": null
+    ]
   },
   {
     "law_id": "419M60400000006",
@@ -356,8 +348,7 @@
         "amend_published_date": "2026-07-22",
         "pending": false
       }
-    ],
-    "summary": null
+    ]
   },
   {
     "law_id": "420M60000002083",
@@ -375,8 +366,7 @@
         "amend_published_date": "2026-07-24",
         "pending": true
       }
-    ],
-    "summary": null
+    ]
   },
   {
     "law_id": "411M50000008015",
@@ -394,7 +384,6 @@
         "amend_published_date": "2026-07-24",
         "pending": false
       }
-    ],
-    "summary": null
+    ]
   }
 ]

@@ -1,0 +1,5 @@
+timestamp,service,target,model,prompt_tokens,output_tokens,thoughts_tokens,total_tokens,elapsed_seconds,estimated_cost_usd,estimated_cost_jpy,response_id
+2026-08-05T14:21:23+09:00,daily_summary,,gemini-2.5-flash,237952,3920,30451,272323,411.08,0.157,23.6,Pchyas_pMJaar8kPpo2r8A8
+2026-08-05T14:26:12+09:00,daily_summary,,gemini-2.5-flash,237952,3920,30451,272323,428.07,0.157,23.6,TclyatWUDc2EtrIPm_PJkAw
+2026-08-05T14:27:49+09:00,daily_summary,,gemini-2.5-flash,237952,3920,30451,272323,403.56,0.157,23.6,xslyasqQIeWar8kPmuCiqQ0
+2026-08-05T14:47:46+09:00,daily_summary,,gemini-2.5-flash,237952,3920,30451,272323,405.74,0.157,23.6,cs5yaqO2FuWar8kPmuCiqQ0

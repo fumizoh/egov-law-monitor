@@ -1,4 +1,4 @@
-import summary.constants as constants
+from datetime import datetime
 
 from models import (
     LawSummary,
@@ -6,31 +6,42 @@ from models import (
     AiSummaryLog,
 )
 
+import summary.constants as constants
+
 
 def create_law_summary_log(
-    date: str,
     law_summary: LawSummary,
-    reused: bool,
 ) -> AiSummaryLog:
 
+    timestamp = (
+        datetime.now()
+        .astimezone()
+        .replace(microsecond=0)
+        .isoformat()
+    )
+
     return AiSummaryLog(
-        date=date,
+        timestamp=timestamp,
         service=constants.LAW_SUMMARY,
         target=law_summary.summary_input.law_name,
-        reused=reused,
         usage=None if reused else law_summary.response.usage,
     )
 
 
 def create_daily_summary_log(
-    date: str,
-    response: DailySummaryResponse,
+    daily_summary: DailySummaryResponse,
 ) -> AiSummaryLog:
 
+    timestamp = (
+        datetime.now()
+        .astimezone()
+        .replace(microsecond=0)
+        .isoformat()
+    )
+
     return AiSummaryLog(
-        date=date,
+        timestamp=timestamp,
         service=constants.DAILY_SUMMARY,
         target=None,
-        reused=False,
-        usage=response.usage,
+        usage=daily_summary.usage,
     )

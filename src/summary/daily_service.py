@@ -109,20 +109,18 @@ def generate(
                 response=response,
             )
 
+            logs.append(
+                log.create_law_summary_log(
+                    law_summary=law_summary,
+                )
+            )            
+
         summary_responses.append(
             law_summary.response,
         )
 
         law_summaries.append(
             law_summary,
-        )
-
-        logs.append(
-            log.create_law_summary_log(
-                date=date,
-                law_summary=law_summary,
-                reused=reused,
-            )
         )
 
     # DEBUG
@@ -135,8 +133,7 @@ def generate(
 
     logs.append(
         log.create_daily_summary_log(
-            date=date,
-            response=daily_summary,
+            daily_summary=daily_summary,
         )
     )
 
