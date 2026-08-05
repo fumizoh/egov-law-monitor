@@ -25,7 +25,7 @@ AI_STATISTICS_JSON = DOCS_DATA / "ai_statistics.json"
 APP_JSON = DOCS_DATA / "app.json"
 KEYWORDS_JSON = DOCS_DATA / "keywords.json"
 
-AI_SUMMARY_LOG_JSON = DOCS_DATA / "ai_summary_log.jsonl"
+AI_SUMMARY_LOG_JSONL = DOCS_DATA / "ai_summary_log.jsonl"
 
 SOURCE_DATA_FILES = {
     "egov": DOCS_DATA / "egov_updates.json",

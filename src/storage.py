@@ -5,8 +5,6 @@ import zipfile
 from dataclasses import asdict, is_dataclass
 from pathlib import Path
 
-from summary.revision import SummaryRevisionKey
-
 from utils.dataclass import from_dict
 
 from models import (
@@ -26,7 +24,7 @@ from config import (
     DAILY_SUMMARY_JSON,
     STATISTICS_JSON,
     AI_STATISTICS_JSON,
-    AI_SUMMARY_LOG_JSON,
+    AI_SUMMARY_LOG_JSONL,
     APP_JSON,
 )
 
@@ -149,12 +147,6 @@ def load_laws() -> dict[str, Law]:
         )
         return {}
 
-    for law in laws:
-        law["summary_revision_keys"] = [
-            SummaryRevisionKey(**key)
-            for key in law["summary_revision_keys"]
-        ]
-
     return {
         law["law_id"]: law
         for law in laws
@@ -259,6 +251,12 @@ def save_ai_statistics(statistics: AiStatistics):
     )
 
 
+def reset_ai_summary_logs() -> None:
+    """Clear AI summary logs."""
+    AI_SUMMARY_LOG_JSONL.parent.mkdir(parents=True, exist_ok=True)
+    AI_SUMMARY_LOG_JSONL.write_text("", encoding="utf-8")
+
+
 def append_ai_summary_logs(
     logs: list[AiSummaryLog],
 ):
@@ -267,7 +265,7 @@ def append_ai_summary_logs(
     """
 
     with open(
-        AI_SUMMARY_LOG_JSON,
+        AI_SUMMARY_LOG_JSONL,
         "a",
         encoding="utf-8",
     ) as f:

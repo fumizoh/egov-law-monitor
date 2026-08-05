@@ -11,13 +11,6 @@ from typing import Any, TypedDict
 
 from enum import Enum
 
-from summary.revision import (
-    SummaryType,
-    SummaryRevisionKey,
-    SummaryAction,
-    SummaryReason,
-)
-
 
 class Event(TypedDict):
     """Common event model."""
@@ -29,19 +22,6 @@ class Event(TypedDict):
     date: str
     summary: str
     metadata: dict[str, Any]
-
-
-@dataclass(slots=True)
-class LawGroup:
-    """Events grouped by law."""
-
-    law_id: str
-    law_no: str
-    law_name: str
-    law_type: str
-    url: str
-
-    events: list[Event]
 
 
 class Update(TypedDict):
@@ -59,59 +39,8 @@ class Update(TypedDict):
 
 
 @dataclass(slots=True)
-class LawSummaryInput:
-    """Input for Law Summary Service."""
-
-    law_id: str
-
-    law_name: str
-
-    revisions: list[RevisionHistory]
-
-
-@dataclass(slots=True)
-class Summary:
-    """AI-generated summary of a law."""
-
-    title: str
-    body: str
-
-
-@dataclass(slots=True)
-class SummaryResponse:
-    summary: Summary
-    usage: SummaryUsage
-
-
-@dataclass(slots=True)
-class DailySummaryResponse:
-    """Daily AI summary response."""
-
-    summary: Summary
-    usage: SummaryUsage
-
-
-@dataclass(slots=True)
-class LawSummary:
-    """Cached law summary."""
-
-    summary_input: LawSummaryInput
-
-    response: SummaryResponse
-
-
-# Delete
-@dataclass(slots=True)
-class SummaryLog:
-    generated_at: datetime
-    law_name: str
-    action: SummaryAction
-    reason: SummaryReason
-    usage: SummaryUsage | None = None
-
-
-class Law(TypedDict):
-    """Law."""
+class LawGroup:
+    """Events grouped by law."""
 
     law_id: str
     law_no: str
@@ -119,11 +48,7 @@ class Law(TypedDict):
     law_type: str
     url: str
 
-    updates: list[Update]
-
-    summary: Summary | None
-
-    summary_revision_keys: list[SummaryRevisionKey]
+    events: list[Event]
 
 
 @dataclass(slots=True)
@@ -165,12 +90,6 @@ class RevisionHistory:
         return self.amendment_id is None
 
 
-@dataclass(frozen=True, slots=True)
-class SummaryRevision:
-    revision: RevisionHistory
-    key: SummaryRevisionKey
-
-
 @dataclass(slots=True)
 class LawRevision:
     """Revision metadata."""
@@ -188,19 +107,6 @@ class LawRevision:
     scheduled_enforcement_date: str | None
 
     enforcement_comment: str | None
-
-
-@dataclass(slots=True)
-class CompareResult:
-    """Normalized Compare API result."""
-
-    law_id: str
-
-    old: LawRevision
-
-    new: LawRevision
-
-    blocks: list[CompareBlock]
 
 
 @dataclass(slots=True)
@@ -229,30 +135,6 @@ class Location:
 
 
 @dataclass(slots=True)
-class TocIndex:
-    """Parsed TOC information."""
-
-    sel_text_list: list[str]
-
-    location_lookup: dict[str, Location]
-
-
-@dataclass(slots=True)
-class LawChange:
-    """Normalized law change."""
-
-    object_id: str
-
-    location: Location
-
-    change_type: str
-
-    before: str | None
-
-    after: str | None
-
-
-@dataclass(slots=True)
 class SummaryUsage:
     model: str
     prompt_tokens: int
@@ -261,18 +143,6 @@ class SummaryUsage:
     total_tokens: int
     elapsed_seconds: float
     response_id: str
-
-
-@dataclass(slots=True)
-class AiSummaryLog:
-    """AI summary execution log."""
-
-    date: str
-    service: str
-    target: str | None
-    reused: bool
-
-    usage: SummaryUsage | None
 
 
 @dataclass(slots=True)
@@ -294,6 +164,109 @@ class SummaryStatistics:
     estimated_cost_usd: float
     estimated_cost_jpy: float
     average_cost_jpy: float
+
+
+@dataclass(slots=True)
+class Summary:
+    """AI-generated summary of a law."""
+
+    title: str
+    body: str
+
+
+class Law(TypedDict):
+    """Law."""
+
+    law_id: str
+    law_no: str
+    law_name: str
+    law_type: str
+    url: str
+
+    updates: list[Update]
+
+
+@dataclass(slots=True)
+class CompareResult:
+    """Normalized Compare API result."""
+
+    law_id: str
+
+    old: LawRevision
+
+    new: LawRevision
+
+    blocks: list[CompareBlock]
+
+
+@dataclass(slots=True)
+class LawChange:
+    """Normalized law change."""
+
+    object_id: str
+
+    location: Location
+
+    change_type: str
+
+    before: str | None
+
+    after: str | None
+
+
+@dataclass(slots=True)
+class TocIndex:
+    """Parsed TOC information."""
+
+    sel_text_list: list[str]
+
+    location_lookup: dict[str, Location]
+
+
+@dataclass(slots=True)
+class LawSummaryInput:
+    """Input for Law Summary Service."""
+
+    law_id: str
+
+    law_name: str
+
+    revisions: list[RevisionHistory]
+
+
+@dataclass(slots=True)
+class SummaryResponse:
+    summary: Summary
+    usage: SummaryUsage
+
+
+@dataclass(slots=True)
+class LawSummary:
+    """Cached law summary."""
+
+    summary_input: LawSummaryInput
+
+    response: SummaryResponse
+
+
+@dataclass(slots=True)
+class DailySummaryResponse:
+    """Daily AI summary response."""
+
+    summary: Summary
+    usage: SummaryUsage
+
+
+@dataclass(slots=True)
+class AiSummaryLog:
+    """AI summary execution log."""
+
+    date: str
+    service: str
+    target: str | None
+    reused: bool
+
+    usage: SummaryUsage | None
 
 
 @dataclass(slots=True)

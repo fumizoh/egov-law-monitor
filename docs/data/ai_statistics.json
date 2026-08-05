@@ -20,7 +20,7 @@
     "output_tokens": 3920,
     "thoughts_tokens": 30451,
     "total_tokens": 272323,
-    "elapsed_seconds": 415.15,
+    "elapsed_seconds": 408.07,
     "estimated_cost_usd": 0.157,
     "estimated_cost_jpy": 23.6,
     "average_cost_jpy": 23.6
@@ -33,7 +33,7 @@
     "output_tokens": 3920,
     "thoughts_tokens": 30451,
     "total_tokens": 272323,
-    "elapsed_seconds": 415.15,
+    "elapsed_seconds": 408.07,
     "estimated_cost_usd": 0.157,
     "estimated_cost_jpy": 23.6,
     "average_cost_jpy": 23.6

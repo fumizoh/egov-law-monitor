@@ -125,6 +125,9 @@ def generate(
             )
         )
 
+    # DEBUG
+    print(f"Generate daily summary: {date}")
+
     daily_summary = generate_daily_summary(
         date,
         summary_responses,
