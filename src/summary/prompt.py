@@ -35,7 +35,13 @@ Your role is to explain the practical impact of upcoming amendments from the per
 TASK_PROMPT = """
 Summarize how the current law will change through the upcoming legislative amendments.
 
-Requirements:
+Produce the following fields:
+
+title:
+- A concise Japanese title describing the main amendment.
+- About 20–40 Japanese characters.
+
+body:
 - Begin with a brief overview.
 - Organize the summary by major policy or institutional changes.
 - Treat related article amendments as a single topic.
@@ -45,6 +51,7 @@ Requirements:
 - Summarize only the essential changes.
 - Do not explain the amendments in detail.
 - Use concise bullet points whenever possible.
+- Use plain Japanese text with short paragraphs and "・" for lists.
 - Use only the information provided in the input.
 - If the enforcement date of an amendment has not been determined, clearly state that it is not yet determined.
 - Do not speculate.

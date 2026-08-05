@@ -24,7 +24,7 @@ def create_law_summary_log(
         timestamp=timestamp,
         service=constants.LAW_SUMMARY,
         target=law_summary.summary_input.law_name,
-        usage=None if reused else law_summary.response.usage,
+        usage=law_summary.response.usage,
     )
 
 

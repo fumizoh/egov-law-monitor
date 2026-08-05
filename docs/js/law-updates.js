@@ -1,11 +1,27 @@
-function renderLaws(laws, keywords) {
+function renderLaws(
+    laws,
+    lawSummaries,
+    keywords,
+) {
 
     const container =
         document.getElementById("updates-detail");
 
     container.innerHTML = "";
 
+    const summaryMap = new Map(
+        lawSummaries.map(summary => [
+            summary.summary_input.law_id,
+            summary,
+        ])
+    );
+
     laws.forEach(law => {
+
+        const summary =
+            summaryMap.get(
+                law.law_id,
+            );
 
         const latest = law.updates[0];
 
@@ -55,6 +71,22 @@ function renderLaws(laws, keywords) {
                 <strong>施行日</strong>
                 ${effectiveDate}
             </p>
+
+            ${summary ? `
+
+                <div class="ai-summary">
+
+                    <h3>
+                        🤖 ${summary.response.summary.title}
+                    </h3>
+
+                    <p>
+                        ${summary.response.summary.body}
+                    </p>
+
+                </div>
+
+            ` : ""}
 
             <details>
 
@@ -107,18 +139,19 @@ function renderLaws(laws, keywords) {
 
 async function main() {
 
-    const laws =
-        await fetchJson(
-            "data/laws.json"
-        );
-
-    const keywords =
-        await fetchJson(
-            "data/keywords.json"
-        );
+    const [
+        laws,
+        lawSummaries,
+        keywords,
+    ] = await Promise.all([
+        fetchJson("data/laws.json"),
+        fetchJson("data/law_summaries.json"),
+        fetchJson("data/keywords.json"),
+    ]);
 
     renderLaws(
         laws,
+        lawSummaries,
         keywords,
     );
 

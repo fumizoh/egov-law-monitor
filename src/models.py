@@ -5,11 +5,14 @@ Application data models.
 from __future__ import annotations
 
 from dataclasses import dataclass
+
 from datetime import datetime
 
 from typing import Any, TypedDict
 
 from enum import Enum
+
+from pydantic import BaseModel
 
 
 class Event(TypedDict):
@@ -232,6 +235,13 @@ class LawSummaryInput:
     law_name: str
 
     revisions: list[RevisionHistory]
+
+
+class SummarySchema(BaseModel):
+    """Structured output schema for Gemini."""
+
+    title: str
+    body: str
 
 
 @dataclass(slots=True)

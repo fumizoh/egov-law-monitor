@@ -2,11 +2,15 @@ from time import perf_counter, sleep
 # from pprint import pprint
 
 from google import genai
-from google.genai.types import HttpOptions
+from google.genai.types import (
+    HttpOptions,
+    GenerateContentConfig,
+)
 from google.genai.errors import ClientError
 
 from models import (
     Summary,
+    SummarySchema,
     SummaryResponse,
     SummaryUsage,
 )
@@ -35,6 +39,10 @@ def summarize(prompt: str) -> SummaryResponse:
             response = client.models.generate_content(
                 model=MODEL_NAME,
                 contents=prompt,
+                config=GenerateContentConfig(
+                    response_mime_type="application/json",
+                    response_schema=SummarySchema,
+                ),
             )
 
             break
@@ -58,12 +66,17 @@ def summarize(prompt: str) -> SummaryResponse:
 
     # pprint(response)
 
+    result = response.parsed
+
+    if result is None:
+        raise RuntimeError("Gemini returned no structured response.")
+
     usage = response.usage_metadata
 
     return SummaryResponse(
         summary=Summary(
-            title="",
-            body=response.text.strip(),
+            title=result.title,
+            body=result.body,
         ),
         usage=SummaryUsage(
             model=response.model_version,
