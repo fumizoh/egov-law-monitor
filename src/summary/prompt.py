@@ -38,24 +38,25 @@ Summarize how the current law will change through the upcoming legislative amend
 Produce the following fields:
 
 title:
-- A concise Japanese title describing the main amendment.
-- About 20–40 Japanese characters.
+- A concise Japanese title describing the main change.
+- About 15–30 Japanese characters.
+- Focus on what changes, not the law name.
+- Do not repeat the law name unless necessary for clarity.
+- Describe the change itself rather than the affected object.
 
 body:
 - Begin with a brief overview.
-- Organize the summary by major policy or institutional changes.
-- Treat related article amendments as a single topic.
-- Merge related amendments into concise explanations.
-- Explain how the current law will change after the upcoming amendments take effect.
-- Avoid repeating the same information.
+- Organize the summary by major policy or institutional changes, grouping related article amendments into a single topic.
+- Explain how the current law will change after the amendments take effect.
 - Summarize only the essential changes.
-- Do not explain the amendments in detail.
-- Use concise bullet points whenever possible.
-- Use plain Japanese text with short paragraphs and "・" for lists.
+- Focus on the practical effect of the amendment rather than the amendment process.
+- Avoid reproducing statutory wording unless necessary.
+- Avoid repeating the same information.
 - Use only the information provided in the input.
 - If the enforcement date of an amendment has not been determined, clearly state that it is not yet determined.
 - Do not speculate.
-- Write the summary in Japanese.
+- Write the summary in natural Japanese.
+- Do not use Markdown formatting.
 """.strip()
 
 

@@ -21,7 +21,7 @@ def main() -> None:
 
     law_groups = group_by_law(updates)
 
-    law_group = law_groups[1]
+    law_group = law_groups[4]
 
     print(law_group.law_id)
     print(law_group.law_name)

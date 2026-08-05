@@ -1,4 +1,4 @@
-# 天皇の退位等に関する皇室典範特例法
+# 社会福祉士及び介護福祉士法施行規則
 
 ## System
 
@@ -23,38 +23,59 @@ Summarize how the current law will change through the upcoming legislative amend
 Produce the following fields:
 
 title:
-- A concise Japanese title describing the main amendment.
-- About 20–40 Japanese characters.
+- A concise Japanese title describing the main change.
+- About 15–30 Japanese characters.
+- Focus on what changes, not the law name.
+- Do not repeat the law name unless necessary for clarity.
+- Describe the change itself rather than the affected object.
 
 body:
 - Begin with a brief overview.
-- Organize the summary by major policy or institutional changes.
-- Treat related article amendments as a single topic.
-- Merge related amendments into concise explanations.
-- Explain how the current law will change after the upcoming amendments take effect.
-- Avoid repeating the same information.
+- Organize the summary by major policy or institutional changes, grouping related article amendments into a single topic.
+- Explain how the current law will change after the amendments take effect.
 - Summarize only the essential changes.
-- Do not explain the amendments in detail.
-- Use concise bullet points whenever possible.
-- Use plain Japanese text with short paragraphs and "・" for lists.
+- Focus on the practical effect of the amendment rather than the amendment process.
+- Avoid reproducing statutory wording unless necessary.
+- Avoid repeating the same information.
 - Use only the information provided in the input.
 - If the enforcement date of an amendment has not been determined, clearly state that it is not yet determined.
 - Do not speculate.
-- Write the summary in Japanese.
+- Write the summary in natural Japanese.
+- Do not use Markdown formatting.
 
 ## Input
 
-### 令和元年法律第十号
+### 令和八年厚生労働省令第百十四号
 
-改正法: 国会議事堂、内閣総理大臣官邸その他の国の重要な施設等、外国公館等及び原子力事業所の周辺地域の上空における小型無人機等の飛行の禁止に関する法律等の一部を改正する法律
-施行日: 2019-06-13
+改正法: 社会福祉士及び介護福祉士法施行規則及び精神保健福祉士法施行規則の一部を改正する省令
+施行日: 2026-07-18
 
-### 第四条（上皇に関する他の法令の適用）
+### 第一条の三（厚生労働省令で定める者の範囲）
 
-【第四条（上皇に関する他の法令の適用） 第三項】
+【第一条の三（厚生労働省令で定める者の範囲） 第一項 第二号】
 
 ＜改正前＞
-３　上皇の御所は、国会議事堂、内閣総理大臣官邸その他の国の重要な施設等、外国公館等及び原子力事業所の周辺地域の上空における小型無人機等の飛行の禁止に関する法律（平成二十八年法律第九号）の規定の適用については、同法第二条第一項第一号ホに掲げる施設とみなす。
+二　学校教育法による大学において指定科目（相談援助実習指導及び相談援助実習の科目（以下この号、次号、第五号及び第七号並びに第四項及び第七項において「実習科目」という。）を除く。）を修めて卒業した者であつて、その後、学校教育法による大学、大学院、短期大学又は専修学校の専門課程（修業年限二年以上のものに限る。）（以下「大学等」という。）において実習科目を修めたもの
 
 ＜改正後＞
-３　上皇の御所は、重要施設の周辺地域の上空における小型無人機等の飛行の禁止に関する法律（平成二十八年法律第九号）の規定の適用については、同法第二条第一項第一号ホに掲げる施設とみなす。
+二　学校教育法による大学において指定科目（ソーシャルワーク実習指導及びソーシャルワーク実習の科目（以下この号、次号、第五号及び第七号並びに第四項及び第七項において「実習科目」という。）を除く。）を修めて卒業した者であつて、その後、学校教育法による大学、大学院、短期大学又は専修学校の専門課程（修業年限二年以上のものに限る。）（以下「大学等」という。）において実習科目を修めたもの
+
+### 第六条の二（令第十二条第一項の厚生労働省令で定める場合及び厚生労働省令で定める額）
+
+【第六条の二（令第十二条第一項の厚生労働省令で定める場合及び厚生労働省令で定める額） 第二項】
+
+＜改正前＞
+２　令第十二条第一項の厚生労働省令で定める額は、第五条の二の規定により社会福祉士試験の科目を免除された場合にあつては一万六千二百三十円とし、前項に規定する場合にあつては一万六千八百四十円とする。
+
+＜改正後＞
+２　令第十二条第一項の厚生労働省令で定める額は、第五条の二の規定により社会福祉士試験の科目を免除された場合にあつては二万四百六十円とし、前項に規定する場合にあつては二万千七百二十円とする。
+
+### 第十九条（厚生労働省令で定める者の範囲）
+
+【第十九条（厚生労働省令で定める者の範囲） 第一項 第二号】
+
+＜改正前＞
+二　学校教育法による大学において指定科目（相談援助実習指導及び相談援助実習の科目（以下この号、次号、第五号及び第七号において「実習科目」という。）を除く。）を修めて卒業した者（当該科目を修めて同法による専門職大学の前期課程を修了した者を含む。）であつて、その後、大学等において実習科目を修めたもの
+
+＜改正後＞
+二　学校教育法による大学において指定科目（ソーシャルワーク実習指導及びソーシャルワーク実習の科目（以下この号、次号、第五号及び第七号において「実習科目」という。）を除く。）を修めて卒業した者（当該科目を修めて同法による専門職大学の前期課程を修了した者を含む。）であつて、その後、大学等において実習科目を修めたもの
