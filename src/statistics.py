@@ -1,9 +1,4 @@
-from config import (
-    MODEL_NAME,
-    GEMINI_INPUT_PRICE_USD_PER_MILLION,
-    GEMINI_OUTPUT_PRICE_USD_PER_MILLION,
-    USD_TO_JPY_RATE,
-)
+from config import LAW_TYPE_ORDER
 
 def create_source_statistics(
     source,
@@ -41,12 +36,6 @@ def create_egov_statistics(
     Create statistics for e-Gov.
     """
 
-    LAW_TYPE_ORDER = [
-        "法律",
-        "政令",
-        "府省令",
-        "規則",
-]
     source_counts = {}
     law_type_counts = {}
 

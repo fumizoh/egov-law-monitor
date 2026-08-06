@@ -2,13 +2,13 @@
 Law Builder.
 """
 
-import sources.revision_api as revision_api
-
 from models import (
     Law,
     LawGroup,
     Update,
 )
+
+from config import LAW_TYPE_ORDER
 
 
 def _create_updates(
@@ -59,17 +59,6 @@ def create_law(
     }
 
 
-def build_law(
-    group: LawGroup,
-) -> Law:
-
-    raw = revision_api.fetch_revisions(group.law_id)
-
-    law = create_law(group)
-
-    return law
-
-
 def build_laws(
     law_groups: list[LawGroup],
 ) -> list[Law]:
@@ -77,20 +66,13 @@ def build_laws(
     Build public Law models.
     """
 
-    LAW_TYPE_ORDER = {
-        "法律": 0,
-        "政令": 1,
-        "府省令": 2,
-        "規則": 3,
-    }
-
     laws: list[Law] = []
 
     for group in law_groups:
 
-        law = build_law(group)
-
-        laws.append(law)
+        laws.append(
+            create_law(group)
+        )
 
     laws.sort(
         key=lambda law: (

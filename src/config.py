@@ -33,6 +33,15 @@ SOURCE_DATA_FILES = {
 }
 
 
+# Sorting order
+LAW_TYPE_ORDER = {
+    "法律": 0,
+    "政令": 1,
+    "府省令": 2,
+    "規則": 3,
+}
+
+
 # Change types
 CHANGE_ADDED = "added"
 CHANGE_REMOVED = "removed"

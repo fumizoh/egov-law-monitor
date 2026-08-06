@@ -13,26 +13,26 @@
   },
   "daily_summary": {
     "model": "gemini-2.5-flash",
-    "count": 18,
-    "prompt_tokens": 1969991,
-    "output_tokens": 43784,
-    "thoughts_tokens": 377314,
-    "total_tokens": 2391089,
-    "elapsed_seconds": 4176.89,
-    "estimated_cost_usd": 1.644,
-    "estimated_cost_jpy": 246.6,
-    "average_cost_jpy": 13.7
+    "count": 22,
+    "prompt_tokens": 1997015,
+    "output_tokens": 48552,
+    "thoughts_tokens": 442914,
+    "total_tokens": 2488481,
+    "elapsed_seconds": 4681.31,
+    "estimated_cost_usd": 1.828,
+    "estimated_cost_jpy": 274.2,
+    "average_cost_jpy": 12.5
   },
   "total": {
     "model": "gemini-2.5-flash",
-    "count": 55,
-    "prompt_tokens": 2466623,
-    "output_tokens": 55545,
-    "thoughts_tokens": 482556,
-    "total_tokens": 3004724,
-    "elapsed_seconds": 5073.04,
-    "estimated_cost_usd": 2.085,
-    "estimated_cost_jpy": 312.8,
-    "average_cost_jpy": 5.7
+    "count": 59,
+    "prompt_tokens": 2493647,
+    "output_tokens": 60313,
+    "thoughts_tokens": 548156,
+    "total_tokens": 3102116,
+    "elapsed_seconds": 5577.46,
+    "estimated_cost_usd": 2.269,
+    "estimated_cost_jpy": 340.4,
+    "average_cost_jpy": 5.8
   }
 }

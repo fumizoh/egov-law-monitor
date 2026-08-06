@@ -14,7 +14,7 @@ def main():
 
     updates, date = fetch_egov()
 
-    process_egov(
+    laws = process_egov(
         updates=updates,
         date=date,
     )
@@ -31,8 +31,9 @@ def main():
     print("=== notification ===")
 
     notification_service.send_update_notification(
-        updates + public_updates,
-        date,
+        laws=laws,
+        update_count=len(updates),
+        date=date,
     )
 
 

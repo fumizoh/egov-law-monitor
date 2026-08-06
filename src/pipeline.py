@@ -7,6 +7,8 @@ import summary.statistics as summary_statistics
 
 from statistics import create_source_statistics
 
+from models import Law
+
 
 def _save_statistics(
     source: str,
@@ -32,7 +34,7 @@ def _save_statistics(
 def process_egov(
     updates,
     date,
-):
+) -> list[Law]:
     """Process e-Gov updates."""
 
     law_groups = law_group.group_by_law(updates)
@@ -75,6 +77,8 @@ def process_egov(
         updates,
         date,
     )
+
+    return laws
 
 
 def process_public_comment(
