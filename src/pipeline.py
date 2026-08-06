@@ -35,9 +35,6 @@ def process_egov(
 ):
     """Process e-Gov updates."""
 
-    storage.save_source_data("egov", updates)
-
-    # Law を公開データとして保存
     law_groups = law_group.group_by_law(updates)
 
     laws = law_builder.build_laws(law_groups)
@@ -45,6 +42,7 @@ def process_egov(
     # DEBUG
     print("Total:", len(laws), "laws")
 
+    # laws.json を公開データとして保存
     storage.save_laws(laws)
 
     # Daily Summary

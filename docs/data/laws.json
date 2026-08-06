@@ -36,19 +36,19 @@
     ]
   },
   {
-    "law_id": "410M50000200086",
-    "law_no": "平成十年農林水産省令第八十六号",
-    "law_name": "品種登録規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/410M50000200086/20260521_508M60000200038",
+    "law_id": "326CO0000000377",
+    "law_no": "昭和二十六年政令第三百七十七号",
+    "law_name": "検疫法施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/326CO0000000377/20260730_508CO0000000231",
     "updates": [
       {
-        "published_date": "1998-12-11",
-        "effective_date": "2026-05-21",
+        "published_date": "1951-12-14",
+        "effective_date": "2026-07-30",
         "effective_comment": "",
-        "amend_name": "品種登録規則等の一部を改正する省令",
-        "amend_no": "令和八年農林水産省令第三十八号",
-        "amend_published_date": "2026-05-14",
+        "amend_name": "検疫法施行令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百三十一号",
+        "amend_published_date": "2026-07-23",
         "pending": false
       }
     ]
@@ -72,19 +72,19 @@
     ]
   },
   {
-    "law_id": "326CO0000000377",
-    "law_no": "昭和二十六年政令第三百七十七号",
-    "law_name": "検疫法施行令",
-    "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/326CO0000000377/20260730_508CO0000000231",
+    "law_id": "410M50000200086",
+    "law_no": "平成十年農林水産省令第八十六号",
+    "law_name": "品種登録規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/410M50000200086/20260521_508M60000200038",
     "updates": [
       {
-        "published_date": "1951-12-14",
-        "effective_date": "2026-07-30",
+        "published_date": "1998-12-11",
+        "effective_date": "2026-05-21",
         "effective_comment": "",
-        "amend_name": "検疫法施行令の一部を改正する政令",
-        "amend_no": "令和八年政令第二百三十一号",
-        "amend_published_date": "2026-07-23",
+        "amend_name": "品種登録規則等の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第三十八号",
+        "amend_published_date": "2026-05-14",
         "pending": false
       }
     ]
@@ -100,7 +100,7 @@
         "published_date": "2026-07-27",
         "effective_date": "2026-07-27",
         "effective_comment": "",
-        "amend_name": "",
+        "amend_name": "新規制定",
         "amend_no": "",
         "amend_published_date": "2026-07-27",
         "pending": false

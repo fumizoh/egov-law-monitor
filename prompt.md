@@ -30,6 +30,7 @@ body:
 - Omit minor procedural details unless essential.
 - Use only the supplied law text.
 - Write the summary in natural Japanese.
+- Separate major topics into short paragraphs.
 - Do not use Markdown formatting.
 - Do not speculate.
 

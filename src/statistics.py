@@ -41,6 +41,12 @@ def create_egov_statistics(
     Create statistics for e-Gov.
     """
 
+    LAW_TYPE_ORDER = [
+        "法律",
+        "政令",
+        "府省令",
+        "規則",
+]
     source_counts = {}
     law_type_counts = {}
 
@@ -58,11 +64,17 @@ def create_egov_statistics(
             law_type_counts.get(law_type, 0) + 1
         )
 
+    ordered_law_type_counts = {
+        law_type: law_type_counts[law_type]
+        for law_type in LAW_TYPE_ORDER
+        if law_type in law_type_counts
+    }
+
     return {
         "last_update": latest_date,
         "update_count": len(updates),
         "source": source_counts,
-        "law_type": law_type_counts,
+        "law_type": ordered_law_type_counts,
     }
 
 

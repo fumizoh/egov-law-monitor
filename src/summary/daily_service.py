@@ -33,7 +33,7 @@ def generate_daily_summary(
         daily_input,
     )
 
-    response.summary.title = f"{date} 法令改正サマリー"
+    response.summary.title = f"{date[:4]}-{date[4:6]}-{date[6:]} 法令改正サマリー"
 
     usage = merge_usage(
         usages=[

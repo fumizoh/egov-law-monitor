@@ -55,6 +55,8 @@ body:
 - If the enforcement date of an amendment has not been determined, clearly state that it is not yet determined.
 - Do not speculate.
 - Write the summary in natural Japanese.
+- Separate major topics into short paragraphs.
+- Insert a blank line between paragraphs.
 - Do not use Markdown formatting.
 """.strip()
 
@@ -91,6 +93,8 @@ body:
 - Omit minor procedural details unless essential.
 - Use only the supplied law text.
 - Write the summary in natural Japanese.
+- Separate major topics into short paragraphs.
+- Insert a blank line between paragraphs.
 - Do not use Markdown formatting.
 - Do not speculate.
 """.strip()

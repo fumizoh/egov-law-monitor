@@ -39,6 +39,8 @@ Requirements:
 - Group related legal changes into major topics whenever appropriate.
 - Avoid repeating the same information.
 - Keep the summary concise (about 200–300 Japanese characters).
+- Separate major topics into short paragraphs.
+- Insert a blank line between paragraphs.
 - Use only the supplied law summaries.
 - Write the summary in natural Japanese.
 - Do not use Markdown formatting.
@@ -68,7 +70,7 @@ def build_daily_prompt_document(
     ]
 
     return PromptDocument(
-        title=f"{summary.date} 法令改正サマリー",
+        title="",
         system=SYSTEM_PROMPT,
         role=ROLE_PROMPT,
         task=TASK_PROMPT,

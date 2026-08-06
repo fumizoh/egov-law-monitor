@@ -50,26 +50,8 @@ function renderLaws(
             </h2>
 
             <p>
-                <strong>施行済</strong>
-                ${activeCount}件
-                /
-                <strong>未施行</strong>
-                ${pendingCount}件
-            </p>
-
-            <p>
                 <strong>種別</strong>
                 ${law.law_type}
-            </p>
-
-            <p>
-                <strong>公布日</strong>
-                ${latest.published_date}
-            </p>
-
-            <p>
-                <strong>施行日</strong>
-                ${effectiveDate}
             </p>
 
             ${summary ? `
@@ -80,9 +62,9 @@ function renderLaws(
                         🤖 ${summary.response.summary.title}
                     </h3>
 
-                    <p>
+                    <div class="summary-body">
                         ${summary.response.summary.body}
-                    </p>
+                    </div>
 
                 </div>
 
@@ -91,15 +73,22 @@ function renderLaws(
             <details>
 
                 <summary>
-                    改正履歴（${law.updates.length}件）
+                    今回の更新（${law.updates.length}件）
                 </summary>
+
+                <p>
+                    <strong>施行済</strong>
+                    ${activeCount}件
+                    /
+                    <strong>未施行</strong>
+                    ${pendingCount}件
+                </p>
 
                 ${law.updates.map(update => `
 
                     <div class="update-history">
 
                         <p>
-                            <strong>施行日</strong>
                             ${update.pending
                 ? `${update.effective_date}（未施行）`
                 : update.effective_date
@@ -107,7 +96,6 @@ function renderLaws(
                         </p>
 
                         <p>
-                            <strong>改正法令</strong>
                             ${update.amend_name}
                         </p>
 

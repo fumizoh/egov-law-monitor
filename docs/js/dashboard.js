@@ -12,25 +12,6 @@ function formatDate(dateString) {
 
 }
 
-function summarizeUpdates(updates) {
-
-    const summary = new Map();
-
-    updates.forEach(item => {
-
-        const lawName = item.title;
-
-        summary.set(
-            lawName,
-            (summary.get(lawName) || 0) + 1
-        );
-
-    });
-
-    return summary;
-
-}
-
 function renderAppInfo(app) {
 
     document.getElementById("app-version").textContent =
@@ -62,8 +43,8 @@ function renderStatistics(statistics) {
     const publicComment =
         statistics.public_comment;
 
-    document.getElementById("update-date").textContent =
-        formatDate(egov.last_update);
+    //    document.getElementById("update-date").textContent =
+    //        formatDate(egov.last_update);
 
     document.getElementById("update-count").textContent =
         egov.update_count;
@@ -86,50 +67,6 @@ function renderStatistics(statistics) {
 
         });
 
-    renderPublicCommentSummary(
-        statistics
-    );
-
-}
-
-function renderPublicCommentSummary(
-    statistics
-) {
-
-    const publicComment =
-        statistics.public_comment;
-
-    document.getElementById(
-        "public-date"
-    ).textContent =
-        publicComment.last_update;
-
-    document.getElementById(
-        "public-count"
-    ).textContent =
-        publicComment.update_count;
-
-    const div =
-        document.getElementById(
-            "public-category-summary"
-        );
-
-    div.innerHTML = "";
-
-    Object.entries(
-        publicComment.category
-    ).forEach(([name, count]) => {
-
-        const p =
-            document.createElement("p");
-
-        p.textContent =
-            `${name}：${count}件`;
-
-        div.appendChild(p);
-
-    });
-
 }
 
 async function loadStatistics() {
@@ -141,23 +78,56 @@ async function loadStatistics() {
 
 }
 
-function renderUpdates(updates, keywords) {
+function renderDailySummary(summary) {
+
+    document.getElementById(
+        "daily-summary-title"
+    ).textContent =
+        summary.summary.title;
+
+    document.getElementById(
+        "daily-summary-body"
+    ).textContent =
+        summary.summary.body;
+
+}
+
+async function loadDailySummary() {
+
+    const summary =
+        await fetchJson(
+            "data/daily_summary.json"
+        );
+
+    renderDailySummary(summary);
+
+}
+
+function renderLaws(laws, keywords) {
 
     const ul =
         document.getElementById("update-list");
 
     ul.innerHTML = "";
 
-    const summary = summarizeUpdates(updates);
+    laws.forEach((law) => {
 
-    summary.forEach((count, name) => {
+        const li =
+            document.createElement("li");
 
-        const li = document.createElement("li");
+        const count =
+            law.updates.length;
 
         li.innerHTML =
             count === 1
-                ? highlightKeywords(name, keywords)
-                : `${highlightKeywords(name, keywords)}（${count}件）`;
+                ? highlightKeywords(
+                    law.law_name,
+                    keywords,
+                )
+                : `${highlightKeywords(
+                    law.law_name,
+                    keywords,
+                )}（${count}件）`;
 
         ul.appendChild(li);
 
@@ -165,14 +135,22 @@ function renderUpdates(updates, keywords) {
 
 }
 
-async function loadUpdates() {
+async function loadLaws() {
 
-    const updates =
-        await fetchJson("data/egov_updates.json");
+    const laws =
+        await fetchJson(
+            "data/laws.json"
+        );
 
-    const keywords = await fetchJson("data/keywords.json");
+    const keywords =
+        await fetchJson(
+            "data/keywords.json"
+        );
 
-    renderUpdates(updates, keywords);
+    renderLaws(
+        laws,
+        keywords,
+    );
 
 }
 
@@ -182,7 +160,9 @@ async function main() {
 
     await loadStatistics();
 
-    await loadUpdates();
+    await loadDailySummary();
+
+    await loadLaws();
 
 }
 

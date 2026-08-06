@@ -29,7 +29,10 @@ def _create_updates(
                 "published_date": metadata["published_date"],
                 "effective_date": metadata["effective_date"],
                 "effective_comment": metadata["effective_comment"],
-                "amend_name": metadata["amend_name"],
+                "amend_name": (
+                    metadata["amend_name"]
+                    or "新規制定"
+                ),
                 "amend_no": metadata["amend_number"],
                 "amend_published_date": metadata["amend_published_date"],
                 "pending": metadata["future"],
@@ -74,6 +77,13 @@ def build_laws(
     Build public Law models.
     """
 
+    LAW_TYPE_ORDER = {
+        "法律": 0,
+        "政令": 1,
+        "府省令": 2,
+        "規則": 3,
+    }
+
     laws: list[Law] = []
 
     for group in law_groups:
@@ -81,5 +91,15 @@ def build_laws(
         law = build_law(group)
 
         laws.append(law)
+
+    laws.sort(
+        key=lambda law: (
+            LAW_TYPE_ORDER.get(
+                law["law_type"],
+                99,
+            ),
+            law["law_name"],
+        )
+    )
 
     return laws

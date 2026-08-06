@@ -122,6 +122,10 @@ footer {
     margin-top: 8px;
 }
 
+#law-type-summary p {
+    margin: 4px 0;
+}
+
 .update-divider {
 
     margin: 24px 0;
@@ -161,4 +165,16 @@ summary {
     margin: 0.8rem 0;
     padding-left: 1rem;
     border-left: 3px solid #ddd;
+}
+
+.ai-summary {
+    margin: 1rem 0;
+}
+
+.summary-title {
+    margin-bottom: 0.5rem;
+}
+
+.summary-body {
+    white-space: pre-line;
 }
