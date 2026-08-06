@@ -13,7 +13,6 @@ from summary.input import (
 
 
 # Update Law
-
 SYSTEM_PROMPT = """
 You are an expert legal analyst specializing in Japanese legislation.
 
@@ -61,7 +60,6 @@ body:
 
 
 # New Law
-
 NEW_LAW_SYSTEM_PROMPT = """
 You are an expert legal analyst specializing in Japanese legislation.
 
@@ -77,17 +75,24 @@ You are assisting legal professionals who need to quickly understand newly enact
 
 
 NEW_LAW_TASK_PROMPT = """
-Summarize the newly enacted law.
+Produce the following fields:
 
-Requirements:
+title:
+- A concise Japanese title describing the main purpose or subject of the law.
+- About 15–30 Japanese characters.
+- Focus on the substance of the law, not the law name.
+- Do not repeat the law name unless necessary for clarity.
+
+body:
 - Begin with a brief overview of the purpose of the law.
 - Organize the summary by major topics rather than by article number.
-- Explain the main制度, obligations, procedures, and important provisions.
+- Explain the main systems, obligations, procedures, and other important provisions.
 - Do not summarize every article individually.
 - Omit minor procedural details unless essential.
 - Use only the supplied law text.
+- Write the summary in natural Japanese.
+- Do not use Markdown formatting.
 - Do not speculate.
-- Write the summary in Japanese.
 """.strip()
 
 

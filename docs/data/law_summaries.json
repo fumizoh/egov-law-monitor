@@ -156,5 +156,39 @@
         "response_id": "zZtzatbYCJSM88AP3vOL0AQ"
       }
     }
+  },
+  {
+    "summary_input": {
+      "law_id": "508M60000002063",
+      "law_name": "日本学術会議の成立時総会の招集の通知に関する内閣府令",
+      "revisions": [
+        {
+          "law_data_id": 641342,
+          "sub_revision": "1",
+          "amendment_id": null,
+          "amendment_name": null,
+          "amendment_num": null,
+          "enforcement_date": "2026-07-27",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "日本学術会議の成立時総会の招集の通知に関する内閣府令の概要",
+        "body": "本府令は、日本学術会議の成立時総会の招集に関する通知の方法について定めるものです。日本学術会議法附則第二十二条第二項に規定する当該通知は、原則として、電子情報処理組織を使用する方法その他の情報通信の技術を利用する方法による電磁的方法により行われます。ただし、特定の会員予定者又は日本学術会議会員（その任期が令和八年九月三十日までの者を除く。）から求めがあった場合には、書面により通知を行うことが認められています。この通知には、定められた事項を記載し、又は記録する必要があります。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 399,
+        "output_tokens": 159,
+        "thoughts_tokens": 766,
+        "total_tokens": 1324,
+        "elapsed_seconds": 7.226213500000085,
+        "response_id": "9PJzauKHPJHztPUP96GggAg"
+      }
+    }
   }
 ]

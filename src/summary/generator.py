@@ -101,13 +101,8 @@ def generate_new_law_summary(
     revision: RevisionHistory,
 ) -> SummaryResponse:
 
-    logger.info(
-        "Generating new law summary: %s",
-        law_name,
-    )
-
     # DEBUG
-    print("Generating Gemini summary...")
+    print("Generating new law summary...")
 
     summary_input = build_new_law_summary_input(
         law_id=law_id,
@@ -130,8 +125,18 @@ def generate_law_summary(
     revisions = summary_input.revisions
 
     # DEBUG
-    # print(law_name)
     # print(len(revisions), "summary revisions")
+
+    # New law
+    if (
+        len(revisions) == 1
+        and revisions[0].is_new_law
+    ):
+        return generate_new_law_summary(
+            law_id=summary_input.law_id,
+            law_name=law_name,
+            revision=revisions[0],
+        )
 
     amendments: list[AmendmentSummaryInput] = []
 
