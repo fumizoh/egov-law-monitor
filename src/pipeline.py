@@ -2,7 +2,7 @@ import law_group
 import law_builder
 import storage
 
-import summary.daily_service as daily_service
+from summary import generator
 import summary.statistics as summary_statistics
 
 from statistics import create_source_statistics
@@ -49,13 +49,8 @@ def process_egov(
     # laws.json を公開データとして保存
     storage.save_laws(laws)
 
-    # Daily Summary
-    daily_summary, law_summaries, logs = daily_service.generate(
-        date,
-        law_groups,
-    )
-
-    storage.save_daily_summary(daily_summary)
+    # Daily service
+    law_summaries, logs = generator.generate(law_groups)
 
     storage.save_law_summaries(law_summaries)
 
