@@ -125,11 +125,7 @@ def generate_law_summary(
     revisions = summary_input.revisions
 
     # DEBUG
-    print(
-        summary_input.law_name,
-        len(revisions),
-        "summary revisions"
-    )
+    # print(len(revisions), "summary revisions")
 
     # New law
     if (
@@ -155,7 +151,7 @@ def generate_law_summary(
         return None
 
     # DEBUG
-    print("Generating Gemini summary...")
+    print("Generating law summary...")
 
     prompt_input = build_summary_input(
         law_name=law_name,

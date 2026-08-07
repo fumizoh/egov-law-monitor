@@ -1,7 +1,6 @@
 function renderLaws(
     laws,
     lawSummaries,
-    keywords,
 ) {
 
     const container =
@@ -48,7 +47,7 @@ function renderLaws(
         card.innerHTML = `
 
             <h2>
-                ${highlightKeywords(law.law_name, keywords)}
+                ${law.law_name}
             </h2>
 
             <p>
@@ -90,14 +89,27 @@ function renderLaws(
 
                     <div class="update-history">
 
-                        <p>
-                            ${update.pending
+                        <div class="effective-info">
+
+                            <span class="effective-date">
+                                ${update.pending
                 ? `${update.effective_date}（未施行）`
                 : update.effective_date
             }
-                        </p>
+                            </span>
 
-                        <p>
+                            ${update.effective_comment
+                ? `
+                                    <span class="effective-comment">
+                                        ${update.effective_comment}
+                                    </span>
+                                    `
+                : ""
+            }
+
+                        </div>
+
+                        <p class="amend-name">
                             ${update.amend_name}
                         </p>
 
@@ -172,17 +184,14 @@ async function main() {
     const [
         laws,
         lawSummaries,
-        keywords,
     ] = await Promise.all([
         fetchJson("data/laws.json"),
         fetchJson("data/law_summaries.json"),
-        fetchJson("data/keywords.json"),
     ]);
 
     renderLaws(
         laws,
         lawSummaries,
-        keywords,
     );
 
 }

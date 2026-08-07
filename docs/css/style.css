@@ -161,12 +161,6 @@ summary {
     font-weight: bold;
 }
 
-.update-history {
-    margin: 0.8rem 0;
-    padding-left: 1rem;
-    border-left: 3px solid #ddd;
-}
-
 .ai-summary {
     margin: 1rem 0;
 }
@@ -228,5 +222,60 @@ summary {
         background-color: white;
 
     }
+
+}
+
+
+/* --------------------------------------------------
+   Update history
+-------------------------------------------------- */
+
+.update-history {
+
+    border-left: 3px solid #ddd;
+
+    padding-left: 1rem;
+
+    margin: 0.75rem 0;
+
+}
+
+.effective-info {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: baseline;
+
+    gap: 0.75rem;
+
+    margin-bottom: 0.1rem;
+
+}
+
+.effective-date {
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+}
+
+.effective-comment {
+
+    color: #666;
+
+    font-size: 0.9rem;
+
+    font-style: italic;
+
+}
+
+.amend-name {
+
+    margin: 0;
+
+    line-height: 1.5;
 
 }

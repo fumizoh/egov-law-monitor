@@ -152,7 +152,7 @@ def build_law_summary_input(
 
     revisions = _get_revision_history(law_group.law_id)
 
-    summary_revisions: list[RevisionHistory] = []
+    selected_law_data_ids: set[int] = set()
 
     for event in law_group.events:
 
@@ -165,12 +165,15 @@ def build_law_summary_input(
 
         if not amend_number:
 
-            summary_revisions.extend(
-                revision
-                for revision in revisions
-                if revision.is_new_law
-                and revision.enforcement_date == effective_date
-            )
+            for revision in revisions:
+
+                if (
+                    revision.is_new_law
+                    and revision.enforcement_date == effective_date
+                ):
+                    selected_law_data_ids.add(
+                        revision.law_data_id,
+                    )
 
             continue
 
@@ -216,11 +219,23 @@ def build_law_summary_input(
                     reverse=True,
                 )
 
-                summary_revisions.append(matches[0])
+                selected_law_data_ids.add(
+                    matches[0].law_data_id,
+                )
 
         else:
 
-            summary_revisions.extend(matches)
+            for revision in matches:
+
+                selected_law_data_ids.add(
+                    revision.law_data_id,
+                )
+
+    summary_revisions = [
+        revision
+        for revision in revisions
+        if revision.law_data_id in selected_law_data_ids
+    ]
 
     return LawSummaryInput(
         law_id=law_group.law_id,

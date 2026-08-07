@@ -11,6 +11,7 @@ from pprint import pprint
 
 from sources import egov
 from law_group import group_by_law
+from law_builder import sort_law_groups
 from summary import builder
 from summary import generator
 
@@ -21,7 +22,9 @@ def main() -> None:
 
     law_groups = group_by_law(updates)
 
-    law_group = law_groups[4]
+    law_groups = sort_law_groups(law_groups)
+
+    law_group = law_groups[0]
 
     print(law_group.law_id)
     print(law_group.law_name)
