@@ -13,29 +13,6 @@
   },
   "daily_summary": {
     "model": "gemini-2.5-flash",
-<<<<<<< HEAD
-    "count": 24,
-    "prompt_tokens": 2120809,
-    "output_tokens": 54678,
-    "thoughts_tokens": 489856,
-    "total_tokens": 2665343,
-    "elapsed_seconds": 5025.04,
-    "estimated_cost_usd": 1.998,
-    "estimated_cost_jpy": 299.6,
-    "average_cost_jpy": 12.5
-  },
-  "total": {
-    "model": "gemini-2.5-flash",
-    "count": 70,
-    "prompt_tokens": 2679338,
-    "output_tokens": 69502,
-    "thoughts_tokens": 618569,
-    "total_tokens": 3367409,
-    "elapsed_seconds": 6074.6,
-    "estimated_cost_usd": 2.524,
-    "estimated_cost_jpy": 378.6,
-    "average_cost_jpy": 5.4
-=======
     "count": 30,
     "prompt_tokens": 2516947,
     "output_tokens": 75437,
@@ -57,6 +34,5 @@
     "estimated_cost_usd": 3.208,
     "estimated_cost_jpy": 481.2,
     "average_cost_jpy": 5.9
->>>>>>> a25d5f7 (Improve revision matching for AI summaries)
   }
 }
