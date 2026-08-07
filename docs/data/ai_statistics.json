@@ -13,26 +13,26 @@
   },
   "daily_summary": {
     "model": "gemini-2.5-flash",
-    "count": 23,
-    "prompt_tokens": 2058912,
-    "output_tokens": 51615,
-    "thoughts_tokens": 466385,
-    "total_tokens": 2576912,
-    "elapsed_seconds": 4856.79,
-    "estimated_cost_usd": 1.913,
-    "estimated_cost_jpy": 286.9,
+    "count": 24,
+    "prompt_tokens": 2120809,
+    "output_tokens": 54678,
+    "thoughts_tokens": 489856,
+    "total_tokens": 2665343,
+    "elapsed_seconds": 5025.04,
+    "estimated_cost_usd": 1.998,
+    "estimated_cost_jpy": 299.6,
     "average_cost_jpy": 12.5
   },
   "total": {
     "model": "gemini-2.5-flash",
-    "count": 69,
-    "prompt_tokens": 2617441,
-    "output_tokens": 66439,
-    "thoughts_tokens": 595098,
-    "total_tokens": 3278978,
-    "elapsed_seconds": 5906.35,
-    "estimated_cost_usd": 2.439,
-    "estimated_cost_jpy": 365.9,
-    "average_cost_jpy": 5.3
+    "count": 70,
+    "prompt_tokens": 2679338,
+    "output_tokens": 69502,
+    "thoughts_tokens": 618569,
+    "total_tokens": 3367409,
+    "elapsed_seconds": 6074.6,
+    "estimated_cost_usd": 2.524,
+    "estimated_cost_jpy": 378.6,
+    "average_cost_jpy": 5.4
   }
 }
