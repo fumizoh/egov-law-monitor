@@ -178,3 +178,55 @@ summary {
 .summary-body {
     white-space: pre-line;
 }
+
+#update-list li {
+    margin-bottom: 16px;
+}
+
+.law-summary-title {
+
+    margin-top: 4px;
+    margin-left: 18px;
+
+    font-size: 0.92rem;
+
+    color: #555;
+
+    line-height: 1.5;
+}
+
+#update-list a {
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+}
+
+#update-list a:hover {
+
+    text-decoration: underline;
+
+}
+
+.card.target {
+
+    animation: highlight 3s ease;
+
+}
+
+@keyframes highlight {
+
+    from {
+
+        background-color: #fff7cc;
+
+    }
+
+    to {
+
+        background-color: white;
+
+    }
+
+}

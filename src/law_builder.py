@@ -74,14 +74,23 @@ def build_laws(
             create_law(group)
         )
 
-    laws.sort(
-        key=lambda law: (
+    return laws
+
+
+def sort_law_groups(
+    law_groups: list[LawGroup],
+) -> list[LawGroup]:
+    """
+    Sort LawGroups in public display order.
+    """
+
+    return sorted(
+        law_groups,
+        key=lambda group: (
             LAW_TYPE_ORDER.get(
-                law["law_type"],
+                group.law_type,
                 99,
             ),
-            law["law_name"],
-        )
+            group.law_name,
+        ),
     )
-
-    return laws

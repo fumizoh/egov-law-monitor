@@ -38,6 +38,8 @@ function renderLaws(
 
         card.className = "card";
 
+        card.id = `law-${law.law_id}`;
+
         const effectiveDate =
             latest.pending
                 ? `${latest.effective_date}（未施行）`
@@ -122,6 +124,46 @@ function renderLaws(
         container.appendChild(card);
 
     });
+
+    const hash =
+        window.location.hash;
+
+    if (hash) {
+
+        const target =
+            document.querySelector(hash);
+
+        if (target) {
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+
+        }
+
+        const details =
+            target.querySelector("details");
+
+        if (details) {
+
+            details.open = true;
+
+        }
+
+        setTimeout(() => {
+
+            target.classList.add("target");
+
+            setTimeout(() => {
+
+                target.classList.remove("target");
+
+            }, 3000);
+
+        }, 500);
+
+    }
 
 }
 

@@ -43,9 +43,6 @@ function renderStatistics(statistics) {
     const publicComment =
         statistics.public_comment;
 
-    //    document.getElementById("update-date").textContent =
-    //        formatDate(egov.last_update);
-
     document.getElementById("update-count").textContent =
         egov.update_count;
 
@@ -78,37 +75,26 @@ async function loadStatistics() {
 
 }
 
-function renderDailySummary(summary) {
-
-    document.getElementById(
-        "daily-summary-title"
-    ).textContent =
-        summary.summary.title;
-
-    document.getElementById(
-        "daily-summary-body"
-    ).textContent =
-        summary.summary.body;
-
-}
-
-async function loadDailySummary() {
-
-    const summary =
-        await fetchJson(
-            "data/daily_summary.json"
-        );
-
-    renderDailySummary(summary);
-
-}
-
-function renderLaws(laws, keywords) {
+function renderLaws(
+    laws,
+    summaries,
+) {
 
     const ul =
         document.getElementById("update-list");
 
     ul.innerHTML = "";
+
+    const summaryMap = new Map();
+
+    summaries.forEach(summary => {
+
+        summaryMap.set(
+            summary.summary_input.law_id,
+            summary.response.summary,
+        );
+
+    });
 
     laws.forEach((law) => {
 
@@ -118,16 +104,38 @@ function renderLaws(laws, keywords) {
         const count =
             law.updates.length;
 
-        li.innerHTML =
+        const link =
+            document.createElement("a");
+
+        link.href =
+            `law-updates.html#law-${law.law_id}`;
+
+        link.textContent =
             count === 1
-                ? highlightKeywords(
-                    law.law_name,
-                    keywords,
-                )
-                : `${highlightKeywords(
-                    law.law_name,
-                    keywords,
-                )}（${count}件）`;
+                ? law.law_name
+                : `${law.law_name}（${count}件）`;
+
+        li.appendChild(link);
+
+        const summary =
+            summaryMap.get(
+                law.law_id,
+            );
+
+        if (summary) {
+
+            const p =
+                document.createElement("p");
+
+            p.className =
+                "law-summary-title";
+
+            p.textContent =
+                summary.title;
+
+            li.appendChild(p);
+
+        }
 
         ul.appendChild(li);
 
@@ -142,14 +150,14 @@ async function loadLaws() {
             "data/laws.json"
         );
 
-    const keywords =
+    const summaries =
         await fetchJson(
-            "data/keywords.json"
+            "data/law_summaries.json"
         );
 
     renderLaws(
         laws,
-        keywords,
+        summaries,
     );
 
 }
@@ -159,8 +167,6 @@ async function main() {
     await loadAppInfo();
 
     await loadStatistics();
-
-    await loadDailySummary();
 
     await loadLaws();
 

@@ -39,6 +39,8 @@ def process_egov(
 
     law_groups = law_group.group_by_law(updates)
 
+    law_groups = law_builder.sort_law_groups(law_groups)
+
     laws = law_builder.build_laws(law_groups)
 
     # DEBUG
