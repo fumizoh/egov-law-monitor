@@ -117,6 +117,17 @@
       "law_name": "予防接種法",
       "revisions": [
         {
+          "law_data_id": 623527,
+          "sub_revision": "3",
+          "amendment_id": "507AC0000000037",
+          "amendment_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律",
+          "amendment_num": "令和七年法律第三十七号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2028-05-20",
+          "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
+          "is_current": false
+        },
+        {
           "law_data_id": 624473,
           "sub_revision": "1",
           "amendment_id": "507AC0000000087",
@@ -125,6 +136,28 @@
           "enforcement_date": "2027-04-01",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 624491,
+          "sub_revision": "2",
+          "amendment_id": "507AC0000000087",
+          "amendment_name": "医療法等の一部を改正する法律",
+          "amendment_num": "令和七年法律第八十七号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2027-12-11",
+          "enforcement_comment": "公布の日から起算して二年を超えない範囲内において政令で定める日",
+          "is_current": false
+        },
+        {
+          "law_data_id": 624502,
+          "sub_revision": "2",
+          "amendment_id": "507AC0000000087",
+          "amendment_name": "医療法等の一部を改正する法律",
+          "amendment_num": "令和七年法律第八十七号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2028-12-11",
+          "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
           "is_current": false
         },
         {
@@ -137,22 +170,144 @@
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": false
+        },
+        {
+          "law_data_id": 637470,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000046",
+          "amendment_name": "民法等の一部を改正する法律の施行に伴う関係法律の整備等に関する法律",
+          "amendment_num": "令和八年法律第四十六号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2028-12-23",
+          "enforcement_comment": "民法等の一部を改正する法律（令和八年法律第四十五号）の施行の日",
+          "is_current": false
         }
       ]
     },
     "response": {
       "summary": {
-        "title": "予防接種情報の仮名利用制度創設",
-        "body": "本改正により、予防接種法に新たな情報利用制度が導入されます。\n\n具体的には、予防接種等に関連する情報を仮名化した「仮名予防接種等関連情報」の利用及び提供に関する規定が新設されます。これにより、個人が特定されない形で予防接種データの活用が可能となり、公衆衛生の向上や予防接種施策の検討に資することが期待されます。\n\nこの改正は、令和九年四月一日から施行されます。"
+        "title": "仮名予防接種情報活用開始と関連規定整備",
+        "body": "予防接種法では、今後の複数回の法改正を通じて、予防接種関連情報の活用範囲を拡大し、他の法令との整合性を図るための改正が予定されています。\n\n国民保健の向上のため、厚生労働大臣が「仮名予防接種等関連情報」を利用・提供できる新たな制度が導入されます。この仮名情報は、本人を識別できないように加工された予防接種関連情報で、国の行政機関や地方公共団体による施策の企画立案、大学等の研究機関による公衆衛生に関する研究、民間事業者による医療分野の研究開発などに利用されます。また、他の仮名化された医療情報と連結して利用することも可能となります。仮名予防接種等関連情報の提供を受ける者に対しては、利用目的や方法の制限が課され、厚生労働大臣による立入検査や是正命令の対象となります。関連業務は医療情報基盤・診療報酬審査支払機構等へ委託可能となり、提供を受ける際には手数料が発生します。この制度の施行日は未定です。\n\n民法改正に伴い、「保護者」の定義が見直されます。現行の「後見人」は「未成年後見人及び特定補助人」に変更され、また、予防接種の勧奨や努力義務の対象となる「成年被後見人」が「特定補助人を付する処分の審判を受けた者」に変わります。これにより、予防接種に関する保護者の責務が、民法改正後の成年後見制度等に合致するように調整されます。この改正の施行日は未定です。\n\n市町村長や都道府県知事が医療に関する給付事務を委託する際、共同で委託できる対象が拡大されます。現行の「法令の規定により医療に関する給付その他の事務を行う者」に加え、「その他厚生労働省令で定める者」が追加されることで、行政運営の柔軟性が向上します。この改正の施行日は未定です。\n\n特定医薬品製造販売業者に関する規定が変更され、「医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律」における外国製造業者の「認定」が「登録」に改められます。これは関連法規との用語の整合性を図るための技術的な改正です。この改正の施行日は未定です。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 4073,
-        "output_tokens": 125,
-        "thoughts_tokens": 2295,
-        "total_tokens": 6493,
-        "elapsed_seconds": 13.721498361000016,
-        "response_id": "tAJ1aqXtDfGbr8kPutKUqQo"
+        "prompt_tokens": 9343,
+        "output_tokens": 512,
+        "thoughts_tokens": 5759,
+        "total_tokens": 15614,
+        "elapsed_seconds": 38.26989429999958,
+        "response_id": "pDN1arK_G_3L1t8Pk46_6Qc"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "342AC0000000035",
+      "law_name": "登録免許税法",
+      "revisions": [
+        {
+          "law_data_id": 623560,
+          "sub_revision": "6",
+          "amendment_id": "507AC0000000037",
+          "amendment_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律",
+          "amendment_num": "令和七年法律第三十七号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2028-05-20",
+          "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
+          "is_current": false
+        },
+        {
+          "law_data_id": 626285,
+          "sub_revision": "3",
+          "amendment_id": "507AC0000000057",
+          "amendment_name": "譲渡担保契約及び所有権留保契約に関する法律の施行に伴う関係法律の整備等に関する法律",
+          "amendment_num": "令和七年法律第五十七号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2027-12-05",
+          "enforcement_comment": "譲渡担保契約及び所有権留保契約に関する法律（令和七年法律第五十六号）の施行の日",
+          "is_current": false
+        },
+        {
+          "law_data_id": 627018,
+          "sub_revision": "1",
+          "amendment_id": "507AC0000000074",
+          "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
+          "amendment_num": "令和七年法律第七十四号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2030-06-19",
+          "enforcement_comment": "公布の日から起算して五年を超えない範囲内において政令で定める日",
+          "is_current": false
+        },
+        {
+          "law_data_id": 627136,
+          "sub_revision": "2",
+          "amendment_id": "507AC1000000060",
+          "amendment_name": "貨物自動車運送事業法の一部を改正する法律",
+          "amendment_num": "令和七年法律第六十号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2028-06-10",
+          "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
+          "is_current": false
+        },
+        {
+          "law_data_id": 636831,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000075",
+          "amendment_name": "建築物のエネルギー消費性能の向上等に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第七十五号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2027-07-30",
+          "enforcement_comment": "公布の日から起算して一年を超えない範囲内において政令で定める日",
+          "is_current": false
+        },
+        {
+          "law_data_id": 636836,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000075",
+          "amendment_name": "建築物のエネルギー消費性能の向上等に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第七十五号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2028-07-30",
+          "enforcement_comment": "公布の日から起算して二年を超えない範囲内において政令で定める日",
+          "is_current": false
+        },
+        {
+          "law_data_id": 637505,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000046",
+          "amendment_name": "民法等の一部を改正する法律の施行に伴う関係法律の整備等に関する法律",
+          "amendment_num": "令和八年法律第四十六号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2028-12-23",
+          "enforcement_comment": "民法等の一部を改正する法律（令和八年法律第四十五号）の施行の日",
+          "is_current": false
+        },
+        {
+          "law_data_id": 637558,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000051",
+          "amendment_name": "社会福祉法等の一部を改正する法律",
+          "amendment_num": "令和八年法律第五十一号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2029-06-24",
+          "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "登録免許税に関する経過措置の適用変更",
+        "body": "この度の法改正により、登録免許税の適用に関する特定の経過措置が設けられます。これらの変更は、旧石炭鉱業年金基金の清算期間中、および建築物のエネルギー消費性能認証機関の登録に関する準備行為の期間中に、登録免許税法の特定の規定がどのように適用されるかを定めます。本改正の施行日は、現時点では未定です。\n\n旧石炭鉱業年金基金については、清算結了の登記が完了するまでの間、登録免許税法別表第三の十四の項を含む特定の規定が、改正前の状態のまま引き続き適用されます。これにより、当該基金の清算プロセスにおいて、登録免許税に関する既存の規定が維持されることになります。\n\n建築物環境性能認証機関の登録に関しては、一部の改正規定の施行日から本則の施行日の前日までの特定の期間において、登録免許税法別表第一第百五十五号の二（三）に規定される登録について、その参照条文が特定の新法の附則に定める準備行為の登録として読み替えられます。これは、新たな認証機関の登録に関する準備段階における登録免許税の取り扱いを明確にするための措置です。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 2070,
+        "output_tokens": 279,
+        "thoughts_tokens": 2361,
+        "total_tokens": 4710,
+        "elapsed_seconds": 14.480755900000077,
+        "response_id": "1TN1aqmmJ7iOtPUPj_OpyAY"
       }
     }
   },
@@ -218,6 +373,17 @@
           "is_current": false
         },
         {
+          "law_data_id": 631148,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000012",
+          "amendment_name": "所得税法等の一部を改正する法律",
+          "amendment_num": "令和八年法律第十二号",
+          "enforcement_date": "2028-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
           "law_data_id": 631151,
           "sub_revision": "1",
           "amendment_id": "508AC0000000012",
@@ -254,17 +420,51 @@
     },
     "response": {
       "summary": {
-        "title": "生産性向上設備への投資促進税制の新設",
-        "body": "来る令和8年7月31日に施行される法改正により、個人および法人が特定の生産性向上設備等を取得した場合に適用される新たな税制優遇措置が創設されます。この新制度は、特定生産性向上設備等の取得に対して特別償却または税額控除のいずれかの適用を認めるものです。\n\n具体的には、2026年7月31日から2029年3月31日までの期間内に、経済社会情勢の変化に対応した企業の持続的な発展を図るために必要な特定生産性向上設備等を取得し、事業の用に供した場合に、その取得価額に応じた特別償却または取得価額の7%（建物、建物附属設備、構築物の場合は4%）の税額控除を受けることができます。ただし、中小企業者等以外の個人や法人が本制度を適用するためには、継続雇用者給与等支給額の増加率や収益性に対する投資額の割合など、財務省令で定める要件を満たす必要があります。\n\n既存の地域経済牽引事業、中小企業の経営力向上、生産工程効率化等設備に関する特別償却や税額控除制度との関係では、新たに導入される特定生産性向上設備等への投資促進税制との重複適用を避けるための調整が行われます。具体的には、既存の各制度の適用期間から、特定生産性向上設備等の投資計画期間に該当する期間が除外されるように文言が修正されています。これにより、同じ設備について複数の税制優遇措置を重複して適用することはできなくなります。\n\nまた、産業競争力強化法の一部改正に伴い、同法内の定義の項番号が変更されたことを受け、「特定事業活動」および「特定創業支援等事業」に関する租税特別措置法上の参照条項が、新たな項番号に合わせて修正されます。これは、関連法の定義変更に合わせた形式的な修正です。"
+        "title": "特定生産性向上設備等投資促進税制の創設と既存制度の調整",
+        "body": "令和8年7月31日に施行される改正により、特定生産性向上設備等への投資を促進するための新たな税制優遇措置が導入されます。これに伴い、既存の設備投資促進税制についても重複適用を避けるための調整が行われます。また、一部の消費税に関する規定も変更されます。\n\n個人および法人を対象に、特定生産性向上設備等への投資促進のため、新たな特別償却または税額控除の優遇措置が導入されます。この優遇措置は、経済社会情勢の変化を踏まえた企業の事業活動の持続的な発展を図るための産業競争力強化法等の一部を改正する法律（令和8年法律第 号、法律番号は未定）の施行の日から令和11年3月31日までの間に確認を受けた、機械装置、建物、ソフトウェアなどの特定生産性向上設備等を取得し、確認日から5年以内に事業の用に供した場合に適用されます。特別償却では、取得価額の全額を供用年に償却費として計上できます。税額控除では、取得価額の7%（建物等は4%）が所得税額または法人税額から控除され、控除額は調整前所得税額または法人税額の20%が上限となります。\n\n特定の国際経済事情激変事業適応計画に基づき投資を行う企業については、税額控除の繰越が3年間可能となります。ただし、中小企業者以外の法人および個人事業主に対しては、給与総額の増加割合や投資総額に対する研究開発費の割合など、特定の要件を満たす場合に限り、これらの優遇措置が適用されます。\n\nこの新たな特定生産性向上設備等投資促進税制の導入に伴い、地域経済牽引事業の促進、中小企業者等の経営力向上、生産工程効率化設備に関する既存の特別償却または税額控除の規定は、新たな制度と重複して適用することができなくなります。これは、同じ設備に対して複数の優遇措置が適用されることを防ぐための措置であり、令和8年7月31日から施行されます。\n\nその他、消費税の納税義務免除の規定において、被災事業者である適格請求書発行事業者に関する適用関係が一部見直されます。具体的には、消費税法の参照条項の文言が調整されます。この変更は、令和10年4月1日から施行されます。\n\nまた、産業競争力強化法における定義の参照条項が変更されたことに伴い、新事業開拓事業者への投資優遇や創業支援等事業による登記税率の軽減に関する規定の文言が調整されます。これらの技術的な調整は、令和8年7月31日から適用されます。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 23693,
-        "output_tokens": 438,
-        "thoughts_tokens": 2466,
-        "total_tokens": 26597,
-        "elapsed_seconds": 18.616699223000012,
-        "response_id": "1gJ1au2WHrTPqMgPgaONmA4"
+        "prompt_tokens": 24307,
+        "output_tokens": 627,
+        "thoughts_tokens": 6731,
+        "total_tokens": 31665,
+        "elapsed_seconds": 42.658414900000025,
+        "response_id": "4xZ1aonaLLiOtPUPj_OpyAY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "332CO0000000043",
+      "law_name": "租税特別措置法施行令",
+      "revisions": [
+        {
+          "law_data_id": 636251,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000098",
+          "amendment_name": "租税特別措置法施行令の一部を改正する政令",
+          "amendment_num": "令和八年政令第九十八号",
+          "enforcement_date": "2028-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "個人事業者の中間申告等特例、改正見当たらず",
+        "body": "2028年4月1日に施行される改正において、租税特別措置法施行令第四十六条の二第二項について、提供された改正前と改正後の条文内容を比較した結果、実質的な変更点は確認されませんでした。このため、当該条項における個人事業者に係る中間申告等の特例に関する現行の規定に変更はありません。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1474,
+        "output_tokens": 108,
+        "thoughts_tokens": 3494,
+        "total_tokens": 5076,
+        "elapsed_seconds": 19.87943439999981,
+        "response_id": "ERd1atasAoPY1t8Plr_luAw"
       }
     }
   },

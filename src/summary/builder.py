@@ -161,16 +161,9 @@ def build_law_summary_input(
         amend_number = metadata["amend_number"]
         effective_date = metadata["effective_date"]
 
-        if amend_number:
+        # New law
 
-            summary_revisions.extend(
-                revision
-                for revision in revisions
-                if revision.amendment_num == amend_number
-                and revision.enforcement_date == effective_date
-            )
-
-        else:
+        if not amend_number:
 
             summary_revisions.extend(
                 revision
@@ -178,6 +171,56 @@ def build_law_summary_input(
                 if revision.is_new_law
                 and revision.enforcement_date == effective_date
             )
+
+            continue
+
+        # Amendment
+
+        # まずは改正法令番号＋施行日（予定施行日を含む）で一致
+        matches = [
+            revision
+            for revision in revisions
+            if (
+                revision.amendment_num == amend_number
+                and (
+                    revision.enforcement_date
+                    or revision.scheduled_enforcement_date
+                ) == effective_date
+            )
+        ]
+
+        # フォールバック
+        if not matches:
+
+            print(
+                f"Fallback Revision Match: "
+                f"{law_group.law_name} "
+                f"{amend_number} "
+                f"{effective_date}"
+            )
+
+            matches = [
+                revision
+                for revision in revisions
+                if revision.amendment_num == amend_number
+            ]
+
+            if matches:
+
+                matches.sort(
+                    key=lambda revision: (
+                        revision.enforcement_date
+                        or revision.scheduled_enforcement_date
+                        or ""
+                    ),
+                    reverse=True,
+                )
+
+                summary_revisions.append(matches[0])
+
+        else:
+
+            summary_revisions.extend(matches)
 
     return LawSummaryInput(
         law_id=law_group.law_id,

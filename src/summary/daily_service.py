@@ -103,6 +103,12 @@ def generate(
                 summary_input,
             )
 
+            # DEBUG
+            if response is None:
+                print(f"FAILED: {summary_input.law_name}")
+            else:
+                print(f"OK: {summary_input.law_name}")
+
             if response is None:
                 continue
 
