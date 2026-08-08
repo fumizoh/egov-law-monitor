@@ -1,36 +1,36 @@
-from sources.egov import fetch as fetch_egov
-from sources.public_comment import fetch as fetch_public_comment
+""" monitor.py """
 
-from pipeline import (
-    process_egov,
-    process_public_comment,
-)
+from sources import egov
+import pipeline
+from sources import public_comment
+from notification import service
 
-import notification.service as notification_service
 
 def main():
 
     print("=== egov update ===")
 
-    updates, date = fetch_egov()
+    updates, date = egov.fetch()
 
-    laws = process_egov(
+    laws = pipeline.process_egov(
         updates=updates,
         date=date,
     )
 
+    """
     print("=== public comment ===")
 
-    public_updates, public_date = fetch_public_comment()
+    public_updates, public_date = public_comment.fetch()
 
-    process_public_comment(
+    pipeline.process_public_comment(
         updates=public_updates,
         date=public_date,
     )
+    """
 
     print("=== notification ===")
 
-    notification_service.send_update_notification(
+    service.send_update_notification(
         laws=laws,
         update_count=len(updates),
         date=date,

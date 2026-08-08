@@ -1,3 +1,5 @@
+"""Create AI summary statistics."""
+
 from models import (
     SummaryUsage,
     SummaryStatistics,
@@ -7,10 +9,7 @@ from models import (
 
 from summary import cost
 
-from summary.constants import (
-    LAW_SUMMARY,
-    DAILY_SUMMARY,
-)
+from summary.constants import LAW_SUMMARY
 
 
 def _create_summary_statistics(
@@ -30,6 +29,7 @@ def _create_summary_statistics(
     estimated_cost_jpy = 0.0
 
     for usage in usages:
+
         prompt_tokens += usage.prompt_tokens
         output_tokens += usage.output_tokens
         thoughts_tokens += usage.thoughts_tokens
@@ -59,16 +59,29 @@ def _create_summary_statistics(
         output_tokens=output_tokens,
         thoughts_tokens=thoughts_tokens,
         total_tokens=total_tokens,
-        elapsed_seconds=round(elapsed_seconds, 2),
-        estimated_cost_usd=round(estimated_cost_usd, 3),
-        estimated_cost_jpy=round(estimated_cost_jpy, 1),
-        average_cost_jpy=round(average_cost_jpy, 1),
+        elapsed_seconds=round(
+            elapsed_seconds,
+            2,
+        ),
+        estimated_cost_usd=round(
+            estimated_cost_usd,
+            3,
+        ),
+        estimated_cost_jpy=round(
+            estimated_cost_jpy,
+            1,
+        ),
+        average_cost_jpy=round(
+            average_cost_jpy,
+            1,
+        ),
     )
 
 
-def _create_law_summary_statistics(
+def create_statistics(
     logs: list[AiSummaryLog],
-) -> SummaryStatistics:
+) -> AiStatistics:
+    """Create AI summary statistics."""
 
     usages = [
         log.usage
@@ -78,85 +91,11 @@ def _create_law_summary_statistics(
 
     model = usages[0].model if usages else ""
 
-    return _create_summary_statistics(
+    law_summary = _create_summary_statistics(
         model=model,
         usages=usages,
-    )
-
-
-def _create_daily_summary_statistics(
-    logs: list[AiSummaryLog],
-) -> SummaryStatistics:
-
-    usages = [
-        log.usage
-        for log in logs
-        if log.service == DAILY_SUMMARY
-    ]
-
-    model = usages[0].model if usages else ""
-
-    return _create_summary_statistics(
-        model=model,
-        usages=usages,
-    )
-
-
-def _create_total_statistics(
-    law: SummaryStatistics,
-    daily: SummaryStatistics,
-) -> SummaryStatistics:
-
-    count = law.count + daily.count
-
-    return SummaryStatistics(
-        model=law.model if law.model == daily.model else "",
-        count=count,
-        prompt_tokens=law.prompt_tokens + daily.prompt_tokens,
-        output_tokens=law.output_tokens + daily.output_tokens,
-        thoughts_tokens=law.thoughts_tokens + daily.thoughts_tokens,
-        total_tokens=law.total_tokens + daily.total_tokens,
-        elapsed_seconds=round(
-            law.elapsed_seconds + daily.elapsed_seconds,
-            2,
-        ),
-        estimated_cost_usd=round(
-            law.estimated_cost_usd + daily.estimated_cost_usd,
-            3,
-        ),
-        estimated_cost_jpy=round(
-            law.estimated_cost_jpy + daily.estimated_cost_jpy,
-            1,
-        ),
-        average_cost_jpy=round(
-            (
-                law.estimated_cost_jpy
-                + daily.estimated_cost_jpy
-            ) / count,
-            1,
-        ) if count else 0.0,
-    )
-
-
-def create_statistics(
-    logs: list[AiSummaryLog],
-) -> AiStatistics:
-
-    law_summary = _create_law_summary_statistics(
-        logs,
-    )
-
-    daily_summary = _create_daily_summary_statistics(
-        logs,
-    )
-
-    total = _create_total_statistics(
-        law_summary,
-        daily_summary,
     )
 
     return AiStatistics(
         law_summary=law_summary,
-        daily_summary=daily_summary,
-        total=total,
     )

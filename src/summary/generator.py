@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from datetime import date
-
 import law_change
 import comparison
 import toc_parser
@@ -23,7 +21,6 @@ from models import (
     RevisionHistory,
     LawSummaryInput,
     SummaryResponse,
-    DailySummaryResponse,
     LawSummary,
     AiSummaryLog,
 )
@@ -35,15 +32,9 @@ from summary.input import (
 
 # DEBUG
 from pathlib import Path
-from collections import Counter
-from pprint import pprint
-import json
-import logging
-
-logger = logging.getLogger(__name__)
 
 
-def build_amendment_summary_input(
+def _build_amendment_input(
     revision: RevisionHistory,
 ) -> AmendmentSummaryInput | None:
 
@@ -93,7 +84,7 @@ def build_amendment_summary_input(
         changes=changes,
     )
 
-    return (amendment_summary_input)
+    return amendment_summary_input
 
 
 def _generate_summary(
@@ -158,7 +149,7 @@ def _generate_law_summary(
 
     for revision in revisions:
 
-        amendment = build_amendment_summary_input(revision)
+        amendment = _build_amendment_input(revision)
 
         if amendment is not None:
             amendments.append(amendment)
@@ -187,8 +178,6 @@ def generate(
 ]:
 
     cached_summaries = storage.load_law_summaries()
-
-    summary_responses: list[SummaryResponse] = []
 
     law_summaries: list[LawSummary] = []
 
@@ -242,10 +231,6 @@ def generate(
                     law_summary=law_summary,
                 )
             )            
-
-        summary_responses.append(
-            law_summary.response,
-        )
 
         law_summaries.append(
             law_summary,

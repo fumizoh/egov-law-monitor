@@ -263,14 +263,6 @@ class LawSummary:
 
 
 @dataclass(slots=True)
-class DailySummaryResponse:
-    """Daily AI summary response."""
-
-    summary: Summary
-    usage: SummaryUsage
-
-
-@dataclass(slots=True)
 class AiSummaryLog:
     """AI summary generation log."""
 
@@ -286,7 +278,3 @@ class AiStatistics:
     """Aggregated AI statistics."""
 
     law_summary: SummaryStatistics
-
-    daily_summary: SummaryStatistics
-
-    total: SummaryStatistics

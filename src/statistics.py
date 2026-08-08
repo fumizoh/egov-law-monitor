@@ -1,34 +1,9 @@
+""" statistics.py """
+
 from config import LAW_TYPE_ORDER
 
-def create_source_statistics(
-    source,
-    updates,
-    latest_date,
-):
-    """
-    Create statistics for one source.
-    """
 
-    if source == "egov":
-
-        return create_egov_statistics(
-            updates=updates,
-            latest_date=latest_date,
-        )
-
-    if source == "public_comment":
-
-        return create_public_comment_statistics(
-            updates=updates,
-            latest_date=latest_date,
-        )
-
-    raise ValueError(
-        f"Unknown source: {source}"
-    )
-
-
-def create_egov_statistics(
+def _create_egov_statistics(
     updates,
     latest_date,
 ):
@@ -67,7 +42,7 @@ def create_egov_statistics(
     }
 
 
-def create_public_comment_statistics(
+def _create_public_comment_statistics(
     updates,
     latest_date,
 ):
@@ -98,3 +73,31 @@ def create_public_comment_statistics(
         "source": source_counts,
         "category": category_counts,
     }
+
+
+def create_source_statistics(
+    source,
+    updates,
+    latest_date,
+):
+    """
+    Create statistics for one source.
+    """
+
+    if source == "egov":
+
+        return _create_egov_statistics(
+            updates=updates,
+            latest_date=latest_date,
+        )
+
+    if source == "public_comment":
+
+        return _create_public_comment_statistics(
+            updates=updates,
+            latest_date=latest_date,
+        )
+
+    raise ValueError(
+        f"Unknown source: {source}"
+    )

@@ -1,12 +1,13 @@
-from datetime import datetime
+""" summary/log.py """
 
 from models import (
     LawSummary,
-    DailySummaryResponse,
     AiSummaryLog,
 )
 
-import summary.constants as constants
+from datetime import datetime
+
+from summary.constants import LAW_SUMMARY
 
 
 def create_law_summary_log(
@@ -25,23 +26,4 @@ def create_law_summary_log(
         service=constants.LAW_SUMMARY,
         target=law_summary.summary_input.law_name,
         usage=law_summary.response.usage,
-    )
-
-
-def create_daily_summary_log(
-    daily_summary: DailySummaryResponse,
-) -> AiSummaryLog:
-
-    timestamp = (
-        datetime.now()
-        .astimezone()
-        .replace(microsecond=0)
-        .isoformat()
-    )
-
-    return AiSummaryLog(
-        timestamp=timestamp,
-        service=constants.DAILY_SUMMARY,
-        target=None,
-        usage=daily_summary.usage,
     )

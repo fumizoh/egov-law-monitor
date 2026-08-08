@@ -1,3 +1,5 @@
+""" storage.py """
+
 import os
 import json
 import zipfile
@@ -10,7 +12,6 @@ from utils.dataclass import from_dict
 from models import (
     Law,
     AiStatistics,
-    DailySummaryResponse,
     LawSummary,
     AiSummaryLog,
 )
@@ -21,7 +22,6 @@ from config import (
     SOURCE_DATA_FILES,
     LAWS_JSON,
     LAW_SUMMARIES_JSON,
-    DAILY_SUMMARY_JSON,
     STATISTICS_JSON,
     AI_STATISTICS_JSON,
     AI_SUMMARY_LOG_JSONL,
@@ -226,17 +226,6 @@ def save_law_summaries(
     save_json(
         summaries,
         LAW_SUMMARIES_JSON,
-    )
-
-
-def save_daily_summary(
-    summary: DailySummaryResponse,
-):
-    """Save Daily Summary."""
-
-    save_json(
-        summary,
-        DAILY_SUMMARY_JSON,
     )
 
 

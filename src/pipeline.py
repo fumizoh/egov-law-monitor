@@ -1,13 +1,14 @@
+""" pipeline.py """
+
+from models import Law
+
 import law_group
 import law_builder
 import storage
-
 from summary import generator
 import summary.statistics as summary_statistics
 
 from statistics import create_source_statistics
-
-from models import Law
 
 
 def _save_statistics(

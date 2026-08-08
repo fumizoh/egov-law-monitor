@@ -10,29 +10,5 @@
     "estimated_cost_usd": 0.868,
     "estimated_cost_jpy": 130.2,
     "average_cost_jpy": 1.8
-  },
-  "daily_summary": {
-    "model": "gemini-2.5-flash",
-    "count": 33,
-    "prompt_tokens": 2721494,
-    "output_tokens": 86552,
-    "thoughts_tokens": 763985,
-    "total_tokens": 3572031,
-    "elapsed_seconds": 7010.36,
-    "estimated_cost_usd": 2.943,
-    "estimated_cost_jpy": 441.4,
-    "average_cost_jpy": 13.4
-  },
-  "total": {
-    "model": "gemini-2.5-flash",
-    "count": 107,
-    "prompt_tokens": 3547655,
-    "output_tokens": 111449,
-    "thoughts_tokens": 987188,
-    "total_tokens": 4646292,
-    "elapsed_seconds": 8702.94,
-    "estimated_cost_usd": 3.811,
-    "estimated_cost_jpy": 571.6,
-    "average_cost_jpy": 5.3
   }
 }
