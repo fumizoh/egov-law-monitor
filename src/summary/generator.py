@@ -111,7 +111,7 @@ def _generate_summary(
     return gemini_client.summarize(prompt)
 
 
-def generate_new_law_summary(
+def _generate_new_law_summary(
     law_id: str,
     law_name: str,
     revision: RevisionHistory,
@@ -133,7 +133,7 @@ def generate_new_law_summary(
     return _generate_summary(prompt_document)
 
 
-def generate_law_summary(
+def _generate_law_summary(
     summary_input: LawSummaryInput,
 ) -> SummaryResponse | None:
 
@@ -148,7 +148,7 @@ def generate_law_summary(
         len(revisions) == 1
         and revisions[0].is_new_law
     ):
-        return generate_new_law_summary(
+        return _generate_new_law_summary(
             law_id=summary_input.law_id,
             law_name=law_name,
             revision=revisions[0],
@@ -219,7 +219,7 @@ def generate(
             # DEBUG
             print(f"Generate summary: {summary_input.law_name}")
 
-            response = generator.generate_law_summary(
+            response = _generate_law_summary(
                 summary_input,
             )
 
