@@ -31,7 +31,7 @@ def main() -> None:
 
     summary_input = builder.build_law_summary_input(law_group)
 
-    result = generator.generate_law_summary(summary_input)
+    result = generator._generate_law_summary(summary_input)
 
     print("=== Title ===")
     print(result.summary.title)

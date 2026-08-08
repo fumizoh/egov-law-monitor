@@ -72,15 +72,6 @@ class SummaryInput:
 
 
 @dataclass(slots=True)
-class DailySummaryInput:
-    """Input for Daily Summary."""
-
-    date: str
-
-    summaries: list[Summary]
-
-
-@dataclass(slots=True)
 class PromptSection:
     """One section of a prompt."""
 

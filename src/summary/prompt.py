@@ -46,6 +46,9 @@ title:
 body:
 - Begin with a brief overview.
 - Organize the summary by major policy or institutional changes, grouping related article amendments into a single topic.
+- Each major topic must be written as a separate paragraph.
+- Keep each paragraph focused on a single major topic.
+- Insert exactly one blank line between paragraphs.
 - Explain how the current law will change after the amendments take effect.
 - Summarize only the essential changes.
 - Focus on the practical effect of the amendment rather than the amendment process.
@@ -55,8 +58,6 @@ body:
 - If the enforcement date of an amendment has not been determined, clearly state that it is not yet determined.
 - Do not speculate.
 - Write the summary in natural Japanese.
-- Separate major topics into short paragraphs.
-- Insert a blank line between paragraphs.
 - Do not use Markdown formatting.
 """.strip()
 

@@ -21,9 +21,9 @@ from summary.input import (
     SummaryInput,
 )
 
+from sources.revision import get_revision_history
 
-import comparison
-import sources.revision_api as revision_api
+from law_group import match_revisions
 
 
 # DEBUG
@@ -38,10 +38,6 @@ def _build_summary_changes(
     summary_changes: list[SummaryChange] = []
 
     for change in changes:
-
-        # DEBUG
-        # print(change.location.article, change.change_type)
-        # DEBUG
 
         if change.change_type == "same":
             continue
@@ -134,108 +130,18 @@ def build_summary_input(
     )
 
 
-def _get_revision_history(
-    law_id: str,
-) -> list[RevisionHistory]:
-    """Fetch and parse revision history."""
-
-    raw = revision_api.fetch_revisions(law_id)
-
-    return comparison.parse_revision_history(
-        raw["result"]["Amendment_History"]
-    )
-
-
 def build_law_summary_input(
     law_group: LawGroup,
 ) -> LawSummaryInput:
 
-    revisions = _get_revision_history(law_group.law_id)
+    revisions = get_revision_history(
+        law_group.law_id,
+    )
 
-    selected_law_data_ids: set[int] = set()
-
-    for event in law_group.events:
-
-        metadata = event["metadata"]
-
-        amend_number = metadata["amend_number"]
-        effective_date = metadata["effective_date"]
-
-        # New law
-
-        if not amend_number:
-
-            for revision in revisions:
-
-                if (
-                    revision.is_new_law
-                    and revision.enforcement_date == effective_date
-                ):
-                    selected_law_data_ids.add(
-                        revision.law_data_id,
-                    )
-
-            continue
-
-        # Amendment
-
-        # まずは改正法令番号＋施行日（予定施行日を含む）で一致
-        matches = [
-            revision
-            for revision in revisions
-            if (
-                revision.amendment_num == amend_number
-                and (
-                    revision.enforcement_date
-                    or revision.scheduled_enforcement_date
-                ) == effective_date
-            )
-        ]
-
-        # フォールバック
-        if not matches:
-
-            print(
-                f"Fallback Revision Match: "
-                f"{law_group.law_name} "
-                f"{amend_number} "
-                f"{effective_date}"
-            )
-
-            matches = [
-                revision
-                for revision in revisions
-                if revision.amendment_num == amend_number
-            ]
-
-            if matches:
-
-                matches.sort(
-                    key=lambda revision: (
-                        revision.enforcement_date
-                        or revision.scheduled_enforcement_date
-                        or ""
-                    ),
-                    reverse=True,
-                )
-
-                selected_law_data_ids.add(
-                    matches[0].law_data_id,
-                )
-
-        else:
-
-            for revision in matches:
-
-                selected_law_data_ids.add(
-                    revision.law_data_id,
-                )
-
-    summary_revisions = [
-        revision
-        for revision in revisions
-        if revision.law_data_id in selected_law_data_ids
-    ]
+    summary_revisions = match_revisions(
+        law_group,
+        revisions,
+    )
 
     return LawSummaryInput(
         law_id=law_group.law_id,

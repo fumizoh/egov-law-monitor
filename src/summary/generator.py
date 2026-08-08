@@ -43,7 +43,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def _build_amendment_summary_input(
+def build_amendment_summary_input(
     revision: RevisionHistory,
 ) -> AmendmentSummaryInput | None:
 
@@ -158,7 +158,7 @@ def _generate_law_summary(
 
     for revision in revisions:
 
-        amendment = _build_amendment_summary_input(revision)
+        amendment = build_amendment_summary_input(revision)
 
         if amendment is not None:
             amendments.append(amendment)

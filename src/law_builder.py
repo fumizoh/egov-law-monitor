@@ -2,13 +2,16 @@
 Law Builder.
 """
 
+from config import LAW_TYPE_ORDER
+
 from models import (
     Law,
     LawGroup,
     Update,
 )
 
-from config import LAW_TYPE_ORDER
+from sources.revision import get_revision_history
+from law_group import match_revisions
 
 
 def _create_updates(
@@ -18,14 +21,58 @@ def _create_updates(
     Create updates from a LawGroup.
     """
 
+    revisions = get_revision_history(
+        group.law_id,
+    )
+
+    matched_revisions = match_revisions(
+        group,
+        revisions,
+    )
+
     updates: list[Update] = []
 
-    for event in group.events:
+    for revision in matched_revisions:
 
-        metadata = event["metadata"]
+        effective_date = (
+            revision.enforcement_date
+            or revision.scheduled_enforcement_date
+        )
+
+        if revision.is_new_law:
+
+            matches = [
+                event
+                for event in group.events
+                if (
+                    not event["metadata"]["amend_number"]
+                    and event["metadata"]["effective_date"]
+                    == effective_date
+                )
+            ]
+
+        else:
+
+            matches = [
+                event
+                for event in group.events
+                if (
+                    event["metadata"]["amend_number"]
+                    == revision.amendment_num
+                    and event["metadata"]["effective_date"]
+                    == effective_date
+                )
+            ]
+
+        if not matches:
+            continue
+
+        metadata = matches[0]["metadata"]
 
         updates.append(
             {
+                "law_data_id": revision.law_data_id,
+                "sub_revision": revision.sub_revision,
                 "published_date": metadata["published_date"],
                 "effective_date": metadata["effective_date"],
                 "effective_comment": metadata["effective_comment"],
@@ -34,7 +81,9 @@ def _create_updates(
                     or "新規制定"
                 ),
                 "amend_no": metadata["amend_number"],
-                "amend_published_date": metadata["amend_published_date"],
+                "amend_published_date": metadata[
+                    "amend_published_date"
+                ],
                 "pending": metadata["future"],
             }
         )

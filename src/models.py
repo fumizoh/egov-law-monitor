@@ -30,13 +30,16 @@ class Event(TypedDict):
 class Update(TypedDict):
     """Law update."""
 
-    published_date: str
-    effective_date: str
-    effective_comment: str
+    law_data_id: int
+    sub_revision: str
+
+    published_date: str | None
+    effective_date: str | None
+    effective_comment: str | None
 
     amend_name: str
-    amend_no: str
-    amend_published_date: str
+    amend_no: str | None
+    amend_published_date: str | None
 
     pending: bool
 
