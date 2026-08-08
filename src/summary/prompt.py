@@ -106,8 +106,6 @@ def _build_amendment_section(
 ) -> PromptSection:
     """Build amendment section."""
 
-    title = amendment.amendment_num
-
     lines = []
 
     if amendment.amendment_name:
@@ -115,14 +113,21 @@ def _build_amendment_section(
 
     if amendment.enforcement_date:
         lines.append(f"施行日: {amendment.enforcement_date}")
+    elif amendment.scheduled_enforcement_date:
+        lines.append(
+            f"施行予定日: {amendment.scheduled_enforcement_date}"
+        )
     else:
         lines.append("施行日: 未定")
 
-    body = "\n".join(lines)
+    if amendment.enforcement_comment:
+        lines.append(
+            f"施行日備考: {amendment.enforcement_comment}"
+        )
 
     return PromptSection(
-        title=title,
-        body=body,
+        title=amendment.amendment_num,
+        body="\n".join(lines),
     )
 
 

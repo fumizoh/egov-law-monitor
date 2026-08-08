@@ -30,9 +30,6 @@ from summary.input import (
     PromptDocument,
 )
 
-# DEBUG
-from pathlib import Path
-
 
 def _build_amendment_input(
     revision: RevisionHistory,
@@ -63,6 +60,7 @@ def _build_amendment_input(
             f"Skip summary: {revision.amendment_num} "
             f"({revision.enforcement_date})"
         )
+        
         return None
 
     toc_json = toc_api.fetch_law_toc(
@@ -92,12 +90,6 @@ def _generate_summary(
 ) -> SummaryResponse:
 
     prompt = prompt_renderer.render_prompt(prompt_document)
-
-    # DEBUG
-    Path("prompt.md").write_text(
-        prompt,
-        encoding="utf-8",
-    )
 
     return gemini_client.summarize(prompt)
 

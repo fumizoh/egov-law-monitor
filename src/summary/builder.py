@@ -86,7 +86,6 @@ def build_amendment_summary_input(
         enforcement_date=revision.enforcement_date,
         scheduled_enforcement_date=revision.scheduled_enforcement_date,
         enforcement_comment=revision.enforcement_comment,
-        is_effective=True,
         articles=summary_articles,
     )
 

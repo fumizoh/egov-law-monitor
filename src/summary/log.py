@@ -23,7 +23,7 @@ def create_law_summary_log(
 
     return AiSummaryLog(
         timestamp=timestamp,
-        service=constants.LAW_SUMMARY,
+        service=LAW_SUMMARY,
         target=law_summary.summary_input.law_name,
         usage=law_summary.response.usage,
     )

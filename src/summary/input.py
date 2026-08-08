@@ -2,10 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from models import (
-    Location,
-    Summary,
-)
+from models import Location
+
 
 @dataclass(slots=True)
 class SummaryChange:
@@ -38,7 +36,6 @@ class AmendmentSummaryInput:
     enforcement_date: str | None
     scheduled_enforcement_date: str | None
     enforcement_comment: str | None
-    is_effective: bool
 
     articles: list[SummaryArticle]
 
