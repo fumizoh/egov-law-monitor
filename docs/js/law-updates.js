@@ -85,37 +85,53 @@ function renderLaws(
                     ${pendingCount}件
                 </p>
 
-                ${law.updates.map(update => `
+                ${law.updates.map(update => {
 
-                    <div class="update-history">
+            const effectiveDate =
+                update.effective_date
+                    ? update.effective_date.replaceAll("-", "")
+                    : null;
 
-                        <div class="effective-info">
+            const compareUrl =
+                update.amendment_id && effectiveDate
+                    ? `https://laws.e-gov.go.jp/law/${law.law_id}/${effectiveDate}_${update.amendment_id}?occasion_date=${effectiveDate}&tab=compare`
+                    : null;
 
-                            <span class="effective-date">
-                                ${update.pending
-                ? `${update.effective_date}（未施行）`
-                : update.effective_date
-            }
-                            </span>
+            return `
 
-                            ${update.effective_comment
-                ? `
-                                    <span class="effective-comment">
-                                        ${update.effective_comment}
-                                    </span>
+                        <div class="update-history">
+
+                            <div class="effective-info">
+
+                                <span class="effective-date">
+                                    ${update.pending
+                    ? `${update.effective_date}（未施行）`
+                    : update.effective_date
+                }
+                                </span>
+
+                                ${update.effective_comment
+                    ? `
+                                        <span class="effective-comment">
+                                            ${update.effective_comment}
+                                        </span>
                                     `
-                : ""
-            }
+                    : ""
+                }
+
+                            </div>
+
+                            <p class="amend-name">
+                                ${compareUrl
+                    ? `<a href="${compareUrl}" target="_blank" rel="noopener noreferrer">${update.amend_name}　条文比較</a>`
+                    : update.amend_name
+                }
+                            </p>
 
                         </div>
 
-                        <p class="amend-name">
-                            ${update.amend_name}
-                        </p>
-
-                    </div>
-
-                `).join("")}
+                    `;
+        }).join("")}
 
             </details>
 

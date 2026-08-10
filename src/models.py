@@ -39,6 +39,7 @@ class Update(TypedDict):
 
     amend_name: str
     amend_no: str | None
+    amendment_id: str | None
     amend_published_date: str | None
 
     pending: bool

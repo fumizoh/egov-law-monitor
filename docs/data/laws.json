@@ -14,6 +14,7 @@
         "effective_comment": "民法等の一部を改正する法律（令和八年法律第四十五号）の施行の日",
         "amend_name": "民法等の一部を改正する法律の施行に伴う関係法律の整備等に関する法律",
         "amend_no": "令和八年法律第四十六号",
+        "amendment_id": "508AC0000000046",
         "amend_published_date": "2026-06-24",
         "pending": true
       },
@@ -25,6 +26,7 @@
         "effective_comment": "公布の日から起算して五年を超えない範囲内において政令で定める日",
         "amend_name": "刑事訴訟法等の一部を改正する法律",
         "amend_no": "令和五年法律第二十八号",
+        "amendment_id": "505AC0000000028",
         "amend_published_date": "2023-05-17",
         "pending": true
       },
@@ -36,6 +38,7 @@
         "effective_comment": "公布の日から起算して一年を超えない範囲内において政令で定める日",
         "amend_name": "刑事訴訟法の一部を改正する法律",
         "amend_no": "令和八年法律第六十七号",
+        "amendment_id": "508AC0000000067",
         "amend_published_date": "2026-07-24",
         "pending": true
       }
@@ -56,6 +59,7 @@
         "effective_comment": "",
         "amend_name": "新規制定",
         "amend_no": "",
+        "amendment_id": null,
         "amend_published_date": "2026-07-24",
         "pending": true
       }
@@ -76,6 +80,7 @@
         "effective_comment": "",
         "amend_name": "国家情報会議設置法の施行に伴う関係政令の整備等に関する政令",
         "amend_no": "令和八年政令第二百三十四号",
+        "amendment_id": "508CO0000000234",
         "amend_published_date": "2026-07-29",
         "pending": false
       }
@@ -96,6 +101,7 @@
         "effective_comment": "",
         "amend_name": "厚生労働省組織規則の一部を改正する省令",
         "amend_no": "令和八年厚生労働省令第百十五号",
+        "amendment_id": "508M60000100115",
         "amend_published_date": "2026-07-23",
         "pending": false
       }
@@ -116,6 +122,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則の一部を改正する省令",
         "amend_no": "令和八年総務省令第四十七号",
+        "amendment_id": "508M60000008047",
         "amend_published_date": "2026-03-31",
         "pending": true
       },
@@ -127,6 +134,7 @@
         "effective_comment": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行の日の属する年の翌々年の一月一日",
         "amend_name": "地方税法施行規則の一部を改正する省令",
         "amend_no": "令和八年総務省令第八十九号",
+        "amendment_id": "508M60000008089",
         "amend_published_date": "2026-07-21",
         "pending": true
       },
@@ -138,6 +146,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
         "amend_no": "令和八年総務省令第四十四号",
+        "amendment_id": "508M60000008044",
         "amend_published_date": "2026-03-31",
         "pending": true
       },
@@ -149,6 +158,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則の一部を改正する省令",
         "amend_no": "令和八年総務省令第八十九号",
+        "amendment_id": "508M60000008089",
         "amend_published_date": "2026-07-21",
         "pending": true
       },
@@ -160,6 +170,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
         "amend_no": "令和八年総務省令第四十四号",
+        "amendment_id": "508M60000008044",
         "amend_published_date": "2026-03-31",
         "pending": true
       },
@@ -171,6 +182,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
         "amend_no": "令和八年総務省令第四十四号",
+        "amendment_id": "508M60000008044",
         "amend_published_date": "2026-03-31",
         "pending": true
       },
@@ -182,6 +194,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
         "amend_no": "令和八年総務省令第四十四号",
+        "amendment_id": "508M60000008044",
         "amend_published_date": "2026-03-31",
         "pending": true
       },
@@ -193,6 +206,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則の一部を改正する省令",
         "amend_no": "令和七年総務省令第三十号",
+        "amendment_id": "507M60000008030",
         "amend_published_date": "2025-03-31",
         "pending": true
       },
@@ -204,6 +218,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則の一部を改正する省令",
         "amend_no": "令和八年総務省令第八十九号",
+        "amendment_id": "508M60000008089",
         "amend_published_date": "2026-07-21",
         "pending": true
       },
@@ -215,6 +230,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
         "amend_no": "令和八年総務省令第四十四号",
+        "amendment_id": "508M60000008044",
         "amend_published_date": "2026-03-31",
         "pending": true
       },
@@ -226,6 +242,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則等の一部を改正する省令",
         "amend_no": "令和七年総務省令第六十七号",
+        "amendment_id": "507M60000008067",
         "amend_published_date": "2025-07-22",
         "pending": true
       },
@@ -237,6 +254,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則の一部を改正する省令",
         "amend_no": "令和五年総務省令第三十七号",
+        "amendment_id": "505M60000008037",
         "amend_published_date": "2023-03-31",
         "pending": true
       },
@@ -248,6 +266,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
         "amend_no": "令和八年総務省令第四十四号",
+        "amendment_id": "508M60000008044",
         "amend_published_date": "2026-03-31",
         "pending": true
       },
@@ -259,6 +278,7 @@
         "effective_comment": "都市再生特別措置法等の一部を改正する法律（令和八年法律第二十三号）の施行の日",
         "amend_name": "地方税法施行規則の一部を改正する省令",
         "amend_no": "令和八年総務省令第四十六号",
+        "amendment_id": "508M60000008046",
         "amend_published_date": "2026-03-31",
         "pending": true
       },
@@ -270,6 +290,7 @@
         "effective_comment": "物資の流通の効率化に関する法律の一部を改正する法律（令和八年法律第二十一号）の施行の日",
         "amend_name": "地方税法施行規則の一部を改正する省令",
         "amend_no": "令和八年総務省令第四十五号",
+        "amendment_id": "508M60000008045",
         "amend_published_date": "2026-03-31",
         "pending": true
       },
@@ -281,6 +302,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則の一部を改正する省令",
         "amend_no": "令和八年総務省令第八十九号",
+        "amendment_id": "508M60000008089",
         "amend_published_date": "2026-07-21",
         "pending": true
       },
@@ -292,6 +314,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
         "amend_no": "令和八年総務省令第四十四号",
+        "amendment_id": "508M60000008044",
         "amend_published_date": "2026-03-31",
         "pending": true
       },
@@ -303,6 +326,7 @@
         "effective_comment": "",
         "amend_name": "地方税法施行規則の一部を改正する省令",
         "amend_no": "令和八年総務省令第八十九号",
+        "amendment_id": "508M60000008089",
         "amend_published_date": "2026-07-21",
         "pending": false
       }
@@ -323,6 +347,7 @@
         "effective_comment": "",
         "amend_name": "技術士法施行規則の一部を改正する省令",
         "amend_no": "令和八年文部科学省令第二十六号",
+        "amendment_id": "508M60000080026",
         "amend_published_date": "2026-07-23",
         "pending": true
       }
@@ -343,6 +368,7 @@
         "effective_comment": "",
         "amend_name": "無線局（基幹放送局を除く。）の開設の根本的基準等の一部を改正する省令",
         "amend_no": "令和八年総務省令第九十号",
+        "amendment_id": "508M60000008090",
         "amend_published_date": "2026-07-23",
         "pending": false
       }
@@ -363,6 +389,7 @@
         "effective_comment": "",
         "amend_name": "電波法施行規則等の一部を改正する省令",
         "amend_no": "令和八年総務省令第五十三号",
+        "amendment_id": "508M60000008053",
         "amend_published_date": "2026-04-01",
         "pending": true
       },
@@ -374,6 +401,7 @@
         "effective_comment": "",
         "amend_name": "電波法施行規則等の一部を改正する省令",
         "amend_no": "令和八年総務省令第二号",
+        "amendment_id": "508M60000008002",
         "amend_published_date": "2026-01-14",
         "pending": true
       },
@@ -385,6 +413,7 @@
         "effective_comment": "",
         "amend_name": "無線局（基幹放送局を除く。）の開設の根本的基準等の一部を改正する省令",
         "amend_no": "令和八年総務省令第九十号",
+        "amendment_id": "508M60000008090",
         "amend_published_date": "2026-07-23",
         "pending": false
       }
@@ -405,6 +434,7 @@
         "effective_comment": "",
         "amend_name": "無線局（基幹放送局を除く。）の開設の根本的基準等の一部を改正する省令",
         "amend_no": "令和八年総務省令第九十号",
+        "amendment_id": "508M60000008090",
         "amend_published_date": "2026-07-23",
         "pending": false
       }
@@ -425,6 +455,7 @@
         "effective_comment": "",
         "amend_name": "無線局（基幹放送局を除く。）の開設の根本的基準等の一部を改正する省令",
         "amend_no": "令和八年総務省令第九十号",
+        "amendment_id": "508M60000008090",
         "amend_published_date": "2026-07-23",
         "pending": false
       }
@@ -445,6 +476,7 @@
         "effective_comment": "",
         "amend_name": "無線局（基幹放送局を除く。）の開設の根本的基準等の一部を改正する省令",
         "amend_no": "令和八年総務省令第九十号",
+        "amendment_id": "508M60000008090",
         "amend_published_date": "2026-07-23",
         "pending": false
       }
@@ -465,6 +497,7 @@
         "effective_comment": "",
         "amend_name": "電波法施行規則等の一部を改正する省令",
         "amend_no": "令和八年総務省令第二号",
+        "amendment_id": "508M60000008002",
         "amend_published_date": "2026-01-14",
         "pending": true
       },
@@ -476,6 +509,7 @@
         "effective_comment": "",
         "amend_name": "無線局（基幹放送局を除く。）の開設の根本的基準等の一部を改正する省令",
         "amend_no": "令和八年総務省令第九十号",
+        "amendment_id": "508M60000008090",
         "amend_published_date": "2026-07-23",
         "pending": false
       }

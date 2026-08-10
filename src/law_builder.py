@@ -81,6 +81,7 @@ def _create_updates(
                     or "新規制定"
                 ),
                 "amend_no": metadata["amend_number"],
+                "amendment_id": revision.amendment_id,
                 "amend_published_date": metadata[
                     "amend_published_date"
                 ],
