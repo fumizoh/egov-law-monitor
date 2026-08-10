@@ -59,12 +59,6 @@ compare_json = fetch_compare(
 
 compare_result = parse_compare_result(compare_json)
 
-
-
-
-
-
-
 changes = build_law_changes(
     compare_result,
     index,

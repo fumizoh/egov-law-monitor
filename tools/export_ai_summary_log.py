@@ -12,7 +12,7 @@ import storage
 from summary import cost
 
 
-CSV_PATH = Path("data") / "ai_summary_log.csv"
+CSV_PATH = Path("data/logs") / "ai_summary_log.csv"
 
 
 def main() -> None:
