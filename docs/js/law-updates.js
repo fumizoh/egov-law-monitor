@@ -142,7 +142,7 @@ function renderLaws(
                     class="button"
                     target="_blank"
                 >
-                    現行法を見る
+                    法令を見る
                 </a>
 
             </p>
