@@ -80,6 +80,18 @@ h1 {
 
 }
 
+@media (max-width: 600px) {
+
+    .container {
+        padding: 20px 16px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+}
+
 footer {
 
     margin-top: 40px;

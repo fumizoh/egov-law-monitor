@@ -40,6 +40,9 @@ function renderStatistics(statistics) {
 
     const egov = statistics.egov;
 
+    document.getElementById("update-date").textContent =
+        formatDate(egov.last_update);
+
     document.getElementById("update-count").textContent =
         egov.update_count;
 
