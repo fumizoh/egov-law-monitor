@@ -77,19 +77,3 @@ def process_egov(
     )
 
     return laws
-
-
-def process_public_comment(
-    updates,
-    date,
-):
-    """Process public comment updates."""
-
-    storage.save_source_data("public_comment", updates)
-
-    # Save Statistics
-    _save_statistics(
-        "public_comment",
-        updates,
-        date,
-    )

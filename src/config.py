@@ -26,11 +26,6 @@ KEYWORDS_JSON = DOCS_DATA / "keywords.json"
 
 AI_SUMMARY_LOG_JSONL = DOCS_DATA / "ai_summary_log.jsonl"
 
-SOURCE_DATA_FILES = {
-    # "egov": DOCS_DATA / "egov_updates.json",
-    "public_comment": DOCS_DATA / "public_comments.json",
-}
-
 
 # Sorting order
 LAW_TYPE_ORDER = {

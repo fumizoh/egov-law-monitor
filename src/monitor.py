@@ -2,7 +2,6 @@
 
 from sources import egov
 import pipeline
-from sources import public_comment
 from notification import service
 
 
@@ -16,17 +15,6 @@ def main():
         updates=updates,
         date=date,
     )
-
-    """
-    print("=== public comment ===")
-
-    public_updates, public_date = public_comment.fetch()
-
-    pipeline.process_public_comment(
-        updates=public_updates,
-        date=public_date,
-    )
-    """
 
     print("=== notification ===")
 

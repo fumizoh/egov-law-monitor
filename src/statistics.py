@@ -42,39 +42,6 @@ def _create_egov_statistics(
     }
 
 
-def _create_public_comment_statistics(
-    updates,
-    latest_date,
-):
-    """
-    Create statistics for Public Comment.
-    """
-
-    source_counts = {}
-    category_counts = {}
-
-    for update in updates:
-
-        src = update["source"]
-
-        source_counts[src] = (
-            source_counts.get(src, 0) + 1
-        )
-
-        category = update["metadata"]["category"]
-
-        category_counts[category] = (
-            category_counts.get(category, 0) + 1
-        )
-
-    return {
-        "last_update": latest_date,
-        "update_count": len(updates),
-        "source": source_counts,
-        "category": category_counts,
-    }
-
-
 def create_source_statistics(
     source,
     updates,
@@ -87,13 +54,6 @@ def create_source_statistics(
     if source == "egov":
 
         return _create_egov_statistics(
-            updates=updates,
-            latest_date=latest_date,
-        )
-
-    if source == "public_comment":
-
-        return _create_public_comment_statistics(
             updates=updates,
             latest_date=latest_date,
         )

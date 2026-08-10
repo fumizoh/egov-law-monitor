@@ -40,9 +40,6 @@ function renderStatistics(statistics) {
 
     const egov = statistics.egov;
 
-    const publicComment =
-        statistics.public_comment;
-
     document.getElementById("update-count").textContent =
         egov.update_count;
 

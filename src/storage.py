@@ -19,7 +19,6 @@ from models import (
 from config import (
     EXTRACT_DIR,
     DOCS_DATA,
-    SOURCE_DATA_FILES,
     LAWS_JSON,
     LAW_SUMMARIES_JSON,
     STATISTICS_JSON,
@@ -105,25 +104,6 @@ def save_json(
     os.replace(
         tmp_path,
         output_path,
-    )
-
-
-def save_source_data(source, data):
-    """
-    Save source data as JSON.
-    """
-
-    save_json(
-        data,
-        SOURCE_DATA_FILES[source],
-    )
-
-
-def save_updates(source, updates):
-
-    save_source_data(
-        source,
-        updates,
     )
 
 
