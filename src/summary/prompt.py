@@ -45,18 +45,15 @@ title:
 
 body:
 - Begin with a brief overview.
-- Organize the summary by major policy or institutional changes, grouping related article amendments into a single topic.
-- Each major topic must be written as a separate paragraph.
-- Keep each paragraph focused on a single major topic.
-- Insert exactly one blank line between paragraphs.
+- Organize the summary by major policy or institutional changes, grouping related amendments into a single topic.
+- Write each major topic as a separate paragraph, with exactly one blank line between paragraphs.
 - Explain how the current law will change after the amendments take effect.
-- Summarize only the essential changes.
-- Focus on the practical effect of the amendment rather than the amendment process.
+- Summarize only the essential changes and focus on their practical effect.
 - Avoid reproducing statutory wording unless necessary.
 - Avoid repeating the same information.
+- If table changes are listed, mention the affected supplementary tables. Do not infer or describe the content or practical effect of a table change unless provided in the input.
 - Use only the information provided in the input.
 - If the enforcement date of an amendment has not been determined, clearly state that it is not yet determined.
-- Do not speculate.
 - Write the summary in natural Japanese.
 - Do not use Markdown formatting.
 """.strip()
@@ -124,6 +121,12 @@ def _build_amendment_section(
         lines.append(
             f"施行日備考: {amendment.enforcement_comment}"
         )
+
+    if amendment.table_changes:
+        lines.append("")
+        lines.append("別表変更:")
+        for table_change in amendment.table_changes:
+            lines.append(f"- {table_change.name}")
 
     return PromptSection(
         title=amendment.amendment_num,

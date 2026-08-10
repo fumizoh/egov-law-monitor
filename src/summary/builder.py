@@ -74,6 +74,7 @@ def _build_summary_articles(
 def build_amendment_summary_input(
     revision: RevisionHistory,
     changes: list[LawChange],
+    table_changes: list[TableChange],
 ) -> AmendmentSummaryInput:
 
     summary_changes = _build_summary_changes(changes)
@@ -87,6 +88,7 @@ def build_amendment_summary_input(
         scheduled_enforcement_date=revision.scheduled_enforcement_date,
         enforcement_comment=revision.enforcement_comment,
         articles=summary_articles,
+        table_changes=table_changes,
     )
 
 

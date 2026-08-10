@@ -221,12 +221,21 @@ class LawChange:
 
 
 @dataclass(slots=True)
+class TableChange:
+    """Detected change to a supplementary table."""
+
+    name: str
+
+
+@dataclass(slots=True)
 class TocIndex:
     """Parsed TOC information."""
 
     sel_text_list: list[str]
 
     location_lookup: dict[str, Location]
+
+    table_lookup: dict[str, str]
 
 
 @dataclass(slots=True)

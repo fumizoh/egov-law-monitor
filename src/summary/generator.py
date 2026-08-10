@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import law_change
+import table_change
 import comparison
 import toc_parser
 import storage
@@ -77,9 +78,15 @@ def _build_amendment_input(
         index,
     )
 
+    table_changes = table_change.build_table_changes(
+        compare_result,
+        index,
+    )
+
     amendment_summary_input = builder.build_amendment_summary_input(
         revision=revision,
         changes=changes,
+        table_changes=table_changes,
     )
 
     return amendment_summary_input

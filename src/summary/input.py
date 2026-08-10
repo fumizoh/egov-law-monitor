@@ -38,6 +38,7 @@ class AmendmentSummaryInput:
     enforcement_comment: str | None
 
     articles: list[SummaryArticle]
+    table_changes: list[TableChange]
 
 
 @dataclass(slots=True)

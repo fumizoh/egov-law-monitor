@@ -10,16 +10,19 @@ def parse_toc(toc_body: dict) -> TocIndex:
 
     sel_text_list: list[str] = ["LawTitle"]
     location_lookup: dict[str, Location] = {}
+    table_lookup: dict[str, str] = {}
 
     _walk(
         toc_body,
         sel_text_list,
         location_lookup,
+        table_lookup,
     )
 
     return TocIndex(
         sel_text_list=sel_text_list,
         location_lookup=location_lookup,
+        table_lookup=table_lookup,
     )
 
 
@@ -31,6 +34,7 @@ def _walk(
     node: Any,
     sel_text_list: list[str],
     location_lookup: dict[str, Location],
+    table_lookup: dict[str, str],
     article: str | None = None,
     paragraph: str | None = None,
     item: str | None = None,
@@ -46,6 +50,9 @@ def _walk(
         next_article = article
         next_paragraph = paragraph
         next_item = item
+
+        if "/AppdxTable[" in xpath and label:
+            table_lookup[xpath] = label
 
         if "/Item[" in xpath:
             next_item = label
@@ -63,7 +70,7 @@ def _walk(
 
             object_id = object_id.lstrip("#")
 
-            if next_article:
+            if next_article and "/AppdxTable[" not in xpath:
                 location_lookup[object_id] = Location(
                     article=next_article,
                     paragraph=next_paragraph,
@@ -78,6 +85,7 @@ def _walk(
                 value,
                 sel_text_list,
                 location_lookup,
+                table_lookup,
                 next_article,
                 next_paragraph,
                 next_item,
@@ -90,6 +98,7 @@ def _walk(
                 child,
                 sel_text_list,
                 location_lookup,
+                table_lookup,
                 article,
                 paragraph,
                 item,
