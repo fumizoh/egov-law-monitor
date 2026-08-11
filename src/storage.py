@@ -3,6 +3,7 @@
 import os
 import json
 import zipfile
+import csv
 
 from dataclasses import asdict, is_dataclass
 from pathlib import Path
@@ -58,6 +59,23 @@ def find_update_csv(extract_dir: Path) -> Path:
         raise FileNotFoundError("更新一覧CSVが見つかりません。")
 
     return csv_files[0]
+
+
+def load_updates(csv_path: Path) -> list[dict]:
+    """
+    更新法令CSVを読み込む。
+    """
+
+    updates = []
+
+    with open(csv_path, encoding="utf-8-sig") as f:
+
+        reader = csv.DictReader(f)
+
+        for row in reader:
+            updates.append(row)
+
+    return updates
 
 
 def json_default(obj):

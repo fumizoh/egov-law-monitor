@@ -12,7 +12,7 @@ from storage import (
     find_update_csv,
 )
 
-from update_parser import load_updates
+from storage import load_updates
 
 from utils.date import normalize_date
 
