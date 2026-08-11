@@ -23,6 +23,13 @@ def create_email_subject(
 
     date = format_date(date)
 
+    if update_count == 0:
+        return (
+            f"[eGov Law Monitor] "
+            f"{date} "
+            f"新しい法令更新はありません"
+        )
+
     return (
         f"[eGov Law Monitor] "
         f"{date} "
@@ -40,6 +47,19 @@ def create_email_body(
     """
 
     date = format_date(date)
+
+    if update_count == 0:
+        return "\n".join(
+            [
+                "eGov Law Monitor",
+                date,
+                "",
+                "新しい法令更新はありませんでした。",
+                "",
+                "詳細はこちら",
+                "https://fumizoh.github.io/egov-law-monitor/",
+            ]
+        )
 
     lines = []
 

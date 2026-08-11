@@ -144,6 +144,20 @@ def save_laws(laws):
     )
 
 
+def load_statistics() -> dict:
+    """
+    Load statistics from statistics.json.
+    """
+
+    if not STATISTICS_JSON.exists():
+        return {}
+
+    try:
+        return load_json(STATISTICS_JSON)
+    except json.JSONDecodeError:
+        return {}
+
+
 def save_statistics(
     source,
     statistics,

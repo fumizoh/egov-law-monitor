@@ -12,10 +12,6 @@ def send_update_notification(
 ) -> None:
     """Send update notification."""
 
-    if not laws:
-        print("更新なしのためメール送信をスキップ")
-        return
-
     subject = create_email_subject(
         update_count,
         date,
