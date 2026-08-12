@@ -138,7 +138,7 @@ def main() -> None:
         if change.location.paragraph or change.location.item:
             continue
 
-        caption, provision_text = egov_xml.get_provision_context(
+        caption, provision_text = egov_xml.get_provision_text(
             xml_path,
             change.location,
         )

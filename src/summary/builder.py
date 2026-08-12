@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from models import (
     LawGroup,
     LawChange,
@@ -24,6 +26,8 @@ from lawtext_parser import parse_law_text
 
 from law_group import match_revisions
 
+from sources import egov_xml
+
 
 def _build_summary_changes(
     changes: list[LawChange],
@@ -43,10 +47,32 @@ def _build_summary_changes(
                 change_type=change.change_type,
                 before=change.before,
                 after=change.after,
+                provision_text=None,
             )
         )
 
     return summary_changes
+
+
+def _enrich_summary_changes(
+    changes: list[SummaryChange],
+    xml_path: Path,
+) -> None:
+    """Enrich summary changes with XML provision text."""
+
+    for change in changes:
+        if change.change_type != "added":
+            continue
+
+        if change.location.paragraph or change.location.item:
+            continue
+
+        _, provision_text = egov_xml.get_provision_text(
+            xml_path,
+            change.location,
+        )
+
+        change.provision_text = provision_text
 
 
 def _build_summary_articles(
@@ -76,6 +102,7 @@ def build_amendment_summary_input(
     changes: list[LawChange],
     table_changes: list[TableChange],
 ) -> AmendmentSummaryInput:
+    """Build AI summary input for one amendment."""
 
     summary_changes = _build_summary_changes(changes)
 
@@ -89,6 +116,30 @@ def build_amendment_summary_input(
         enforcement_comment=revision.enforcement_comment,
         articles=summary_articles,
         table_changes=table_changes,
+    )
+
+
+def enrich_amendment_summary_input(
+    law_id: str,
+    revision: RevisionHistory,
+    amendment: AmendmentSummaryInput,
+) -> None:
+    """Enrich amendment summary input with XML provision text."""
+
+    xml_path = egov_xml.find_xml(
+        law_id,
+        revision,
+    )
+
+    changes = [
+        change
+        for article in amendment.articles
+        for change in article.changes
+    ]
+
+    _enrich_summary_changes(
+        changes,
+        xml_path,
     )
 
 

@@ -31,6 +31,8 @@ from summary.input import (
     PromptDocument,
 )
 
+MAX_XML_CHANGES = 50
+
 
 def _build_amendment_input(
     revision: RevisionHistory,
@@ -145,16 +147,44 @@ def _generate_law_summary(
         )
 
     amendments: list[AmendmentSummaryInput] = []
+    amendment_revisions: list[RevisionHistory] = []
 
     for revision in revisions:
 
-        amendment = _build_amendment_input(revision)
+        amendment = _build_amendment_input(
+            revision=revision,
+        )
 
         if amendment is not None:
             amendments.append(amendment)
+            amendment_revisions.append(revision)
 
     if not amendments:
         return None
+
+    change_count = sum(
+        len(article.changes)
+        for amendment in amendments
+        for article in amendment.articles
+    )
+
+    # DEBUG
+    print(
+        f"XML check: {law_name}, "
+        f"changes={change_count}, "
+        f"max={MAX_XML_CHANGES}"
+    )
+
+    if change_count <= MAX_XML_CHANGES:
+        for revision, amendment in zip(
+            amendment_revisions,
+            amendments,
+        ):
+            builder.enrich_amendment_summary_input(
+                law_id=summary_input.law_id,
+                revision=revision,
+                amendment=amendment,
+            )
 
     # DEBUG
     print("Generating law summary...")

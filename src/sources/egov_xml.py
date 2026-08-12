@@ -220,7 +220,7 @@ def find_item(
     return None
 
 
-def get_provision_context(
+def get_provision_text(
     xml_path: Path,
     location: Location,
 ) -> tuple[str | None, str | None]:

@@ -151,6 +151,11 @@ def _build_change_body(change: SummaryChange) -> str:
         lines.append("＜改正後＞")
         lines.append(change.after)
 
+    if change.provision_text:
+        lines.append("")
+        lines.append("＜条文本文＞")
+        lines.append(change.provision_text)
+
     return "\n".join(lines)
 
 

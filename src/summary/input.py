@@ -15,6 +15,7 @@ class SummaryChange:
 
     before: str | None
     after: str | None
+    provision_text: str | None
 
 
 @dataclass(slots=True)
