@@ -1,35 +1,103 @@
 [
   {
     "summary_input": {
-      "law_id": "333AC0000000079",
-      "law_name": "下水道法",
+      "law_id": "406AC0000000077",
+      "law_name": "不動産特定共同事業法",
       "revisions": [
         {
-          "law_data_id": 636825,
+          "law_data_id": 637704,
           "sub_revision": "1",
-          "amendment_id": "508AC0000000065",
-          "amendment_name": "下水道法等の一部を改正する法律",
-          "amendment_num": "令和八年法律第六十五号",
-          "enforcement_date": "2026-08-17",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
-          "is_current": false
+          "is_current": true
         }
       ]
     },
     "response": {
       "summary": {
-        "title": "都道府県による災害時下水道復旧代行",
-        "body": "本改正により、災害発生時における公共下水道の復旧に関する都道府県の役割が明確化され、関連規定が整備されます。施行日は2026年8月17日です。\n\n災害が発生し市町村からの要請があった場合、流域下水道を管理する都道府県は、市町村の実施体制等を勘案して適切と認められれば、市町村が管理する公共下水道の復旧工事を代わって実施できるようになります。この際、都道府県は当該公共下水道の管理者としての権限を行使し、工事費用は原則として都道府県が負担します。国は当該市町村が自ら復旧工事を施行した場合に交付すべき負担金等を都道府県に交付し、残額を市町村が負担する形となります。\n\nまた、公共下水道管理者以外の者が公共下水道の施設に関する工事や維持を行うことができる例外規定として、新たに都道府県による復旧工事の代行に関する規定が追加され、第三十一条の五および道路法第二十条の三の規定も参照されるようになります。"
+        "title": "改正法における罰則の経過措置を規定",
+        "body": "金融商品取引法及び資金決済に関する法律の一部を改正する法律の施行に伴い、罰則の適用に関する経過措置が新たに規定されます。本改正は、2026年8月12日に施行されます。\n\n具体的には、同法律第八十条第三号の罪に関し没収された債権等について、金融商品取引法第二百九条の五第一項及び第二項、並びに第二百九条の六の規定が準用され、没収された債権等の処分や、登記又は登録を要する財産の権利移転の嘱託に関する手続きが定められます。\n\nまた、改正法の施行前にした行為、および改正法の附則の規定によりなお従前の例によることとされる場合における施行後にした行為に対する罰則の適用については、従来の規定が引き続き適用される経過措置が設けられます。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 1414,
+        "prompt_tokens": 749,
+        "output_tokens": 208,
+        "thoughts_tokens": 6771,
+        "total_tokens": 7728,
+        "elapsed_seconds": 56.01448727600007,
+        "response_id": "1dF8at7KOZq81t8Pyemt-QY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "324AC0000000181",
+      "law_name": "中小企業等協同組合法",
+      "revisions": [
+        {
+          "law_data_id": 637702,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則適用に関する経過措置規定の導入",
+        "body": "中小企業等協同組合法第八十九条は、改正法の施行に伴い、その規定内容が全面的に変更されます。これまで吸収合併の登記に関する手続きを定めていた本条は削除され、代わりに罰則の適用に関する経過措置が新たに導入されます。\n\n改正後の第八十九条は、金融商品取引法及び資金決済に関する法律の一部を改正する法律の施行前に行われた行為や、同法の附則の規定によりなお従前の例によることとされる施行後の行為に対する罰則の適用について、引き続き従前の例によることを定めています。これにより、新たな罰則規定が適用される際の混乱を避けるための措置が講じられます。この改正は、令和8年8月12日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 677,
+        "output_tokens": 182,
+        "thoughts_tokens": 2670,
+        "total_tokens": 3529,
+        "elapsed_seconds": 20.13307238499999,
+        "response_id": "ENJ8at3AFvC2trIPu5i7gAw"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "417AC0000000086",
+      "law_name": "会社法",
+      "revisions": [
+        {
+          "law_data_id": 637718,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "金融商品取引法関係犯罪に係る取締役の資格要件見直し",
+        "body": "本改正により、会社法の取締役の資格に関する規定が、金融商品取引法の一部改正に伴い見直されます。また、罰則に関する経過措置が定められます。\n\n現行法では、金融商品取引法第197条の規定に違反し刑に処せられた者が取締役の欠格事由とされていますが、改正後は、同条第1項第1号から第4号の2まで、第5号若しくは第6号又は第2項に違反し刑に処せられた者が欠格事由の対象となります。これにより、金融商品取引法上の特定の犯罪行為を犯した者に対する取締役の資格制限の範囲が拡大され、より幅広い金融関連犯罪が取締役の欠格事由に該当することになります。\n\n本改正の施行日（2026年8月12日）前にした行為、および附則の規定によりなお従前の例によることとされる場合における施行日後にした行為に対する罰則の適用については、改正前の規定が引き続き適用されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1691,
         "output_tokens": 253,
-        "thoughts_tokens": 3088,
-        "total_tokens": 4755,
-        "elapsed_seconds": 30.915674634,
-        "response_id": "8Ct6aoCPCZCenMwP2IOs6Ak"
+        "thoughts_tokens": 1760,
+        "total_tokens": 3704,
+        "elapsed_seconds": 13.807756447999964,
+        "response_id": "JtJ8aoe7BoSQtPUPpcbMyQ4"
       }
     }
   },
@@ -39,159 +107,12 @@
       "law_name": "住民基本台帳法",
       "revisions": [
         {
-          "law_data_id": 628861,
-          "sub_revision": "2",
-          "amendment_id": "507AC0000000082",
-          "amendment_name": "更生保護制度の充実を図るための保護司法等の一部を改正する法律",
-          "amendment_num": "令和七年法律第八十二号",
-          "enforcement_date": "2027-06-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "更生保護制度充実で住民基本台帳法の別表改正",
-        "body": "本改正は、更生保護制度の充実を図ることを目的とした法律改正に伴い、住民基本台帳法における変更を定めます。\n\n具体的には、住民基本台帳法別表第一が改正されます。この改正は、第三十条の九、第三十条の二十三、第三十条の二十八、第三十条の三十、第三十条の四十四、第三十条の四十四の十二、および第三十条の四十四の十三に関連するものです。本改正は、2027年6月1日に施行されます。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 534,
-        "output_tokens": 154,
-        "thoughts_tokens": 1279,
-        "total_tokens": 1967,
-        "elapsed_seconds": 10.530172781000005,
-        "response_id": "ECx6aurSJ5nY88AP5azA8Ao"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "325AC0000000204",
-      "law_name": "保護司法",
-      "revisions": [
-        {
-          "law_data_id": 628862,
+          "law_data_id": 637723,
           "sub_revision": "1",
-          "amendment_id": "507AC0000000082",
-          "amendment_name": "更生保護制度の充実を図るための保護司法等の一部を改正する法律",
-          "amendment_num": "令和七年法律第八十二号",
-          "enforcement_date": "2026-12-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "保護司の役割拡充と活動環境整備",
-        "body": "この改正法は、更生保護制度の充実を図るため、保護司の使命の拡張、任期の延長、選任要件の見直し、活動範囲の拡大、および活動を支える環境整備を進めるものです。施行日は2026年12月1日です。\n\n保護司の使命は、犯罪予防活動において、世論の啓発に加え、社会環境の改善や地域住民の活動促進を通じて、安心して暮らせる安全な地域社会の実現に寄与することへと拡大されます。また、保護司の選任にあたっては、人格識見や協働への意欲、職務に必要な時間の確保が重視され、多様な人材の確保に配慮するよう保護観察所の長に義務付けられます。\n\n保護司の任期は、これまでの2年から3年に延長されます。職務の遂行においては、特別な必要がある場合に限り、保護区外でも活動できるようになり、その際の報告義務が新設されます。さらに、犯罪予防のための活動において、地方公共団体の施策への協力も職務の範囲に含まれるようになります。\n\n保護司会および保護司会連合会は、保護司の職務に関する研修機会の提供や更生保護サポートセンターの運営といった新たな任務を担います。これらの組織に対しては、保護観察所の長が情報の提供や助言などの必要な支援を行うことが明記されます。また、国は保護司が安全かつ円滑に職務を行えるよう、面接場所の確保や支援体制の整備に努める責務が課せられ、地方公共団体も保護司の活動への協力を努力義務とされます。\n\n事業主に対しては、従業員が保護司の職務を円滑に行えるよう、休暇取得しやすい環境の整備などの措置を講じる努力義務が課されます。さらに、保護司であること等を理由とした解雇その他の不利益な取扱いが禁止され、保護司の身分保障が図られます。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 3948,
-        "output_tokens": 451,
-        "thoughts_tokens": 2831,
-        "total_tokens": 7230,
-        "elapsed_seconds": 20.34589089399998,
-        "response_id": "HCx6aumgKP6MxMwP5e2d8Qs"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "407AC0000000086",
-      "law_name": "更生保護事業法",
-      "revisions": [
-        {
-          "law_data_id": 628863,
-          "sub_revision": "1",
-          "amendment_id": "507AC0000000082",
-          "amendment_name": "更生保護制度の充実を図るための保護司法等の一部を改正する法律",
-          "amendment_num": "令和七年法律第八十二号",
-          "enforcement_date": "2026-12-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "更生保護対象範囲の拡大と地方協力強化、従業者安全推進",
-        "body": "本改正では、更生保護事業法の対象者範囲の拡大、地方公共団体の協力義務の強化、および更生保護事業に従事する職員の安全確保に関する規定の新設が行われます。\n\n更生保護事業における支援の対象者について、その範囲が拡大されます。具体的には、保護観察に付されている者に加えて保護観察に付されていた者も対象となり、少年院から退院した者も対象に含まれるようになります。これにより、保護観察を終了した者や少年院を退院した者も、引き続き更生保護の支援を受けられる道が開かれ、支援の切れ目ない提供が可能になります。\n\n地方公共団体の更生保護事業への協力が強化されます。これまでの「協力をすることができる」という任意規定から、地域の状況に応じて「協力をするよう努めなければならない」という努力義務規定に変更されます。これにより、地域における更生保護事業の円滑な実施のため、地方公共団体がより積極的に関与することが促されます。\n\n更生保護事業に従事する職員の安全確保のため、新たな規定が設けられます。法務大臣は、認可事業者および届出事業者の従業者が安全に職務を行えるよう、事業者が従業員の安全を確保できるための必要な施策の推進に努めることになります。これは、更生保護の現場で働く職員の安全を制度的に保障するための措置です。\n\n本改正は、2026年12月1日に施行されます。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 1192,
-        "output_tokens": 349,
-        "thoughts_tokens": 1361,
-        "total_tokens": 2902,
-        "elapsed_seconds": 13.516511885,
-        "response_id": "Mix6atrAGKys7rcPp9Lv-Qk"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "419AC0000000088",
-      "law_name": "更生保護法",
-      "revisions": [
-        {
-          "law_data_id": 628865,
-          "sub_revision": "1",
-          "amendment_id": "507AC0000000082",
-          "amendment_name": "更生保護制度の充実を図るための保護司法等の一部を改正する法律",
-          "amendment_num": "令和七年法律第八十二号",
-          "enforcement_date": "2027-06-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        },
-        {
-          "law_data_id": 628864,
-          "sub_revision": "1",
-          "amendment_id": "507AC0000000082",
-          "amendment_name": "更生保護制度の充実を図るための保護司法等の一部を改正する法律",
-          "amendment_num": "令和七年法律第八十二号",
-          "enforcement_date": "2026-12-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "更生保護制度の強化と支援対象の拡大",
-        "body": "本法律改正により、更生保護制度が多岐にわたり強化され、支援の対象範囲も拡大されます。主な変更点は以下の通りです。\n\n2027年6月1日施行の改正では、生活環境の調整および更生緊急保護の対象となる「収容中の者等」の範囲に、労役場に留置されている者が加わります。また、保護観察所長は生活環境調整の際に、対象者との面接や、刑事施設等の職員からの情報聴取および面接への立会い等の協力を求めることが可能になり、これらの聴取は保護観察官または保護司が行うこととなります。これにより、より実効的な生活環境調整が期待されます。\n\n2026年12月1日施行の改正では、国の責務として地方公共団体の更生保護に関する施策への支援が明記され、地方公共団体は民間の更生保護活動に対し協力に努める義務が課せられます。また、更生保護審査会の委員長および委員の再任が明文化されるとともに、任期満了後も後任が任命されるまで職務を継続する規定が新設され、委員長が不在または欠けた場合の職務代行に関する規定も明確化されます。保護司の役割については、地域社会の一員として個性と能力を発揮することが強調されます。\n\n保護観察のための調査において、保護観察所の長は公私の団体に対し必要な事項の報告を求める権限が付与され、この権限は生活環境調整や更生緊急保護の際にも準用されます。さらに、保護観察付執行猶予者に対しては、原則として保護観察開始時に少年鑑別所による鑑別を求める制度が導入され、犯罪要因の的確な把握に資することが期待されます。更生緊急保護の開始判断における意見聴取の例外規定も、仮釈放等により保護観察が終了した者について拡充されます。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 3751,
-        "output_tokens": 450,
-        "thoughts_tokens": 3830,
-        "total_tokens": 8031,
-        "elapsed_seconds": 25.931873662000015,
-        "response_id": "Qix6auCyFbWc89kPrNDRwA4"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "421CO0000000296",
-      "law_name": "雇用保険法等の一部を改正する法律の一部の施行に伴う関係政令の整備等及び経過措置に関する政令",
-      "revisions": [
-        {
-          "law_data_id": 641336,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000232",
-          "amendment_name": "雇用保険法等の一部を改正する法律の一部の施行に伴う関係政令の整備等及び経過措置に関する政令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百三十二号",
-          "enforcement_date": "2026-08-01",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": true
@@ -200,66 +121,202 @@
     },
     "response": {
       "summary": {
-        "title": "船員保険給付の経過措置期間等の更新",
-        "body": "令和8年8月1日に施行されるこの政令は、船員保険の職務上の事由による保険給付及び失業等給付に関する経過措置の内容を改正します。\n\n旧船員保険法施行令第四十条に規定されている適用期間が、令和7年8月から令和8年8月まで延長されます。また、同条の表中の適用期限も、令和6年3月31日から令和7年3月31日まで延長されます。\n\n旧船員保険法施行令別表第三に定められている係数が全面的に改定されます。これに伴い、令和6年4月1日から令和7年3月31日までの期間に適用される新たな係数が追加されます。"
+        "title": "罰則に関する経過措置規定の項目再編",
+        "body": "本改正により、金融商品取引法及び資金決済に関する法律の附則に定める罰則に関する経過措置の規定が項目として再編されます。\n\n具体的には、附則第八十九条の条文全体が、その内容を維持したまま、第八十九条第一項として位置づけられます。この変更は、罰則の適用における経過措置の実運用には影響を与えず、改正法施行前後の行為に対する罰則は、引き続き従来の規定に基づいて適用されます。本改正は2026年8月12日に施行されます。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 4068,
+        "prompt_tokens": 690,
+        "output_tokens": 143,
+        "thoughts_tokens": 3304,
+        "total_tokens": 4137,
+        "elapsed_seconds": 26.633466885000075,
+        "response_id": "NdJ8arOHKu-EtrIPwszvoAw"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "407AC0000000105",
+      "law_name": "保険業法",
+      "revisions": [
+        {
+          "law_data_id": 637735,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "相互会社基金償却等規定削除と罰則経過措置の規定",
+        "body": "保険業法第八十九条の内容が全面的に改正されます。これにより、相互会社の基金償却等に関する規定が削除され、罰則の適用に関する経過措置が新たに規定されます。\n\nこれまで第八十九条で定められていた、相互会社が組織変更を行う際に未償却の基金を償却する義務や、特定の条文が適用されないとする規定は廃止となります。この変更により、相互会社の組織変更における基金の取り扱いに関する現行の制度は消滅します。\n\n改正後は、この法律の施行前後の行為に対して罰則を適用する際の取り扱いが明確化されます。具体的には、本法律（附則第一条第二号及び第四号に掲げる規定を含む）の施行前にした行為、および附則の規定によりなお従前の例によることとされた場合において施行後にした行為に対する罰則の適用については、従来の例に従うことになります。この改正は2026年8月12日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 734,
+        "output_tokens": 241,
+        "thoughts_tokens": 3672,
+        "total_tokens": 4647,
+        "elapsed_seconds": 24.882228365999936,
+        "response_id": "UtJ8asqbBITnld8PisqFuA0"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "326AC1000000238",
+      "law_name": "信用金庫法",
+      "revisions": [
+        {
+          "law_data_id": 637707,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "信用金庫の役員資格要件及び業務規制の変更",
+        "body": "この法律は、金融商品取引法及び資金決済に関する法律の一部改正に伴い、信用金庫法を改正するもので、2026年8月12日から施行されます。\n\n役員の資格要件については、信用金庫の役員の欠格事由として規定されている金融商品取引法の一部条項への参照が更新されます。これにより、有価証券届出書虚偽記載等の罪に関する金融商品取引法の改正を反映し、信用金庫の役員の資格に関する判断基準が明確化されます。\n\nまた、本改正により、銀行法の様々な規定が信用金庫に準用されることになります。これには、名義貸しの禁止、預金者等への情報提供、特定の関係者との取引規制、経営の健全性の確保、業務報告書の提出、業務及び財産の状況に関する説明書類の縦覧、並びに監督に関する規定などが含まれます。\n\nさらに、信用金庫代理業、信用金庫電子決済等取扱業、信用金庫電子決済等代行業といった特定の金融サービスに関する銀行法の規定も信用金庫に準用されます。これにより、これらのサービスにおける顧客保護、禁止行為、および紛争解決の枠組みが整備され、新たな金融サービスに対する規制が強化されます。\n\n紛争解決に関しては、銀行法の指定紛争解決機関に関する規定が信用金庫の業務に関連する紛争解決にも準用され、信用金庫の利用者保護のための紛争解決体制が拡充されます。\n\n罰則に関する経過措置として、この法律の施行前にした行為や、なお従前の例によることとされる場合の施行後にした行為に対する罰則の適用については、従前の例によることとされます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 8387,
+        "output_tokens": 395,
+        "thoughts_tokens": 2348,
+        "total_tokens": 11130,
+        "elapsed_seconds": 18.421420980999983,
+        "response_id": "bNJ8apqkFvC2trIPu5i7gAw"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "416AC0000000154",
+      "law_name": "信託業法",
+      "revisions": [
+        {
+          "law_data_id": 637712,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則に関する経過措置の明確化",
+        "body": "信託業法においては、金融商品取引法及び資金決済に関する法律の一部改正に伴い、罰則に関する経過措置が整備されます。施行日は2026年8月12日です。\n\n本改正により、改正法の施行前にした行為や、施行後もなお従前の例によることとされる行為に対する罰則の適用については、改正前の規定が引き続き適用されることになります。これにより、法改正に伴う混乱を避け、行為時の法律に基づいた罰則が適用されることが明確化されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 675,
+        "output_tokens": 134,
+        "thoughts_tokens": 3927,
+        "total_tokens": 4736,
+        "elapsed_seconds": 26.75552978600001,
+        "response_id": "gNJ8arScAqT5trIP35LZoAw"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "323AC0000000103",
+      "law_name": "公認会計士法",
+      "revisions": [
+        {
+          "law_data_id": 637656,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "公認会計士法に対する改正規定なし",
+        "body": "金融商品取引法及び資金決済に関する法律の一部を改正する法律において、公認会計士法を直接改正する規定は示されていません。したがって、本改正法により、公認会計士法に具体的な政策上または制度上の変更は生じない見込みです。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1774,
+        "output_tokens": 83,
+        "thoughts_tokens": 3365,
+        "total_tokens": 5222,
+        "elapsed_seconds": 22.49263311699997,
+        "response_id": "nNJ8auXyHPuD8uAPlrDHuAk"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "409AC0000000110",
+      "law_name": "内国税の適正な課税の確保を図るための国外送金等に係る調書の提出等に関する法律",
+      "revisions": [
+        {
+          "law_data_id": 637685,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "国外送金等調書提出制度の目的規定の見直し",
+        "body": "本改正により、内国税の適正な課税の確保を図るための国外送金等に係る調書の提出等に関する法律の目的規定が変更されます。これまで、国税当局が納税義務者の外国為替その他の対外取引、財産及び債務に関する情報を把握する「体制を整備することにより」目的を達成するとされていた点が、「国税当局による把握に資するため、国外送金等に係る調書の提出等に関する制度を整備し」と改められます。これにより、国外送金等に係る調書提出制度が、国税当局による情報把握に貢献するための具体的な制度であることをより明確に位置づけられます。この改正は、2026年8月12日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 985,
         "output_tokens": 182,
-        "thoughts_tokens": 2441,
-        "total_tokens": 6691,
-        "elapsed_seconds": 15.99151328299996,
-        "response_id": "XSx6aoTCNYOZ0M0PpcXukQ8"
+        "thoughts_tokens": 4477,
+        "total_tokens": 5644,
+        "elapsed_seconds": 28.152840534999996,
+        "response_id": "tNJ8avH_GOSc28sPpveJ6QE"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "406M50000400036",
-      "law_name": "不正競争防止法第十六条第一項及び第三項並びに第十七条に規定する外国の国旗又は国の紋章その他の記章及び外国の政府若しくは地方公共団体の監督用若しくは証明用の印章又は記号並びに国際機関及び国際機関を表示する標章を定める省令",
+      "law_id": "328AC0100000227",
+      "law_name": "労働金庫法",
       "revisions": [
         {
-          "law_data_id": 641343,
+          "law_data_id": 637716,
           "sub_revision": "1",
-          "amendment_id": "508M60000400062",
-          "amendment_name": "不正競争防止法第十六条第一項及び第三項並びに第十七条に規定する外国の国旗又は国の紋章その他の記章及び外国の政府若しくは地方公共団体の監督用若しくは証明用の印章又は記号並びに国際機関及び国際機関を表示する標章を定める省令の一部を改正する省令",
-          "amendment_num": "令和八年経済産業省令第六十二号",
-          "enforcement_date": "2026-08-24",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "外国の国旗等及び国際機関標章の指定内容更新",
-        "body": "不正競争防止法に基づく外国の国旗や国際機関の標章などを定める省令が改正されます。この改正により、不正競争防止法で保護される外国の国旗、国の紋章その他の記章、外国の政府または地方公共団体の監督用・証明用印章・記号、および国際機関の標章の指定内容が更新されます。\n\n具体的には、別表第二（第二条関係）および別表第四（第四条関係）が変更されます。本改正は、2026年8月24日に施行されます。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 618,
-        "output_tokens": 152,
-        "thoughts_tokens": 804,
-        "total_tokens": 1574,
-        "elapsed_seconds": 6.571460495999986,
-        "response_id": "byx6avbmFtSW89kPutPh6Ak"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "508M60000102013",
-      "law_name": "地方公共団体情報システムの標準化に関する法律第二条第一項に規定する標準化対象事務を定める政令に規定するデジタル庁令・総務省令で定める事務を定める命令第九条各号に規定する事務の処理に係るシステムに必要とされる機能等に関する標準化基準を定める命令",
-      "revisions": [
-        {
-          "law_data_id": 641340,
-          "sub_revision": "1",
-          "amendment_id": null,
-          "amendment_name": null,
-          "amendment_num": null,
-          "enforcement_date": "2026-07-27",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": true
@@ -268,32 +325,32 @@
     },
     "response": {
       "summary": {
-        "title": "地方公共団体健康管理システムの機能等標準化基準",
-        "body": "この命令は、地方公共団体情報システムの標準化に関する法律に基づき、地方公共団体情報システムのうち、特定の事務処理に係る「健康管理システム」に必要とされる機能等に関する標準化基準を定めるものです。\n\n健康管理システムに必要とされる機能等に関する標準化基準は、機能要件の標準と帳票要件の標準で構成されます。\n\n健康管理システムの機能要件の標準の細目、実装区分、適合基準日、並びに帳票要件の標準として出力する書面の細目、実装区分、適合基準日、その他出力に必要な事項は、内閣総理大臣及び厚生労働大臣が別途定めます。\n\n健康管理システムには、本命令及び内閣総理大臣及び厚生労働大臣が定めるもの以外の機能を実装してはなりません。ただし、健康管理システムに係る互換性が確保される場合において、地方公共団体が他の情報システムと一体的に運用するために健康管理システムを整備することは妨げられません。"
+        "title": "役員の欠格要件の見直し及び罰則規定の整備",
+        "body": "本改正により、労働金庫の役員の欠格要件が、金融商品取引法の改正に伴い更新されます。また、罰則に関する経過措置が明確化されます。これらの改正は2026年8月12日に施行されます。\n\n労働金庫の役員に関する欠格要件について、金融商品取引法で定められている有価証券届出書虚偽記載等の罪に関する条項の引用が改められます。これにより、金融商品取引法の罰則規定の改正内容が労働金庫の役員の資格に反映され、特定の犯罪で刑に処せられた者の欠格期間が、改正後の金融商品取引法の規定と整合するようになります。\n\nこれまで商業登記法の準用を定めていた第八十九条は、全面的に内容が変更され、罰則に関する経過措置について規定されます。この変更により、本改正の施行前に行われた行為や、附則の規定により従前の例によることとされた行為に対する罰則の適用については、なお従前の規定が適用されることが明確にされます。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 907,
-        "output_tokens": 236,
-        "thoughts_tokens": 1650,
-        "total_tokens": 2793,
-        "elapsed_seconds": 12.03539159600001,
-        "response_id": "dyx6asjEAtiL89kPuu7n4A4"
+        "prompt_tokens": 2489,
+        "output_tokens": 260,
+        "thoughts_tokens": 2094,
+        "total_tokens": 4843,
+        "elapsed_seconds": 15.443642760999978,
+        "response_id": "0tJ8aqqNCvGDufoPidTbwA8"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "337M50000008020",
-      "law_name": "地方公務員等共済組合法施行規則",
+      "law_id": "324AC0000000183",
+      "law_name": "協同組合による金融事業に関する法律",
       "revisions": [
         {
-          "law_data_id": 641493,
+          "law_data_id": 637717,
           "sub_revision": "1",
-          "amendment_id": "508M60000008097",
-          "amendment_name": "地方公務員等共済組合法施行規則の一部を改正する省令",
-          "amendment_num": "令和八年総務省令第九十七号",
-          "enforcement_date": "2026-08-01",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": true
@@ -302,154 +359,1131 @@
     },
     "response": {
       "summary": {
-        "title": "健康保険法施行令引用条項の変更",
-        "body": "本改正は、地方公務員等共済組合法施行規則の複数の条項における「健康保険法施行令」への参照を更新します。具体的には、第二条の四の九第一項第五号、第二条の四の十第一項第五号、第二条の四の十一第一項第五号、及び第二条の四の十二第一項第五号において、「健康保険法施行令第四十四条第五項」と記載されていた箇所が「健康保険法施行令第四十四条第六項」に改められます。また、第二条の四の十四第一項においては、「健康保険法施行令第四十四条第五項」が「健康保険法施行令第四十四条第六項」に、「第四十四条第七項」が「第四十四条第八項」にそれぞれ変更されます。これらの変更は、他法令である健康保険法施行令の条項番号改正に対応し、引用の整合性を保つためのものです。本改正は、2026年8月1日に施行されます。"
+        "title": "金融商品取引法改正に伴う役員欠格事由の明確化",
+        "body": "協同組合による金融事業に関する法律は、金融商品取引法の改正に伴い、役員の欠格事由に関する規定が更新されます。また、罰則の適用に関する経過措置が新たに設けられます。\n\n役員の欠格事由として定められている、金融商品取引法第百九十七条に規定する有価証券届出書虚偽記載等の罪の範囲が、より具体的に改正されます。これにより、金融商品取引法における当該罪の条項の細分化に合わせて、欠格事由の対象となる犯罪が明確化されます。\n\n本改正法の施行日である令和8年8月12日より前に犯された行為、および附則の規定によりなお従前の例によるとされる施行日以後の行為に対する罰則の適用については、改正前の規定が引き続き適用されます。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 9885,
-        "output_tokens": 228,
-        "thoughts_tokens": 2668,
-        "total_tokens": 12781,
-        "elapsed_seconds": 29.416496594999956,
-        "response_id": "hCx6asOvI7m0lu8PuJiGUA"
+        "prompt_tokens": 2086,
+        "output_tokens": 208,
+        "thoughts_tokens": 1807,
+        "total_tokens": 4101,
+        "elapsed_seconds": 13.706978134999986,
+        "response_id": "49J8aoXUKvGDufoPidTbwA8"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "363M50000040053",
-      "law_name": "消費税法施行規則",
+      "law_id": "403AC0000000066",
+      "law_name": "商品投資に係る事業の規制に関する法律",
       "revisions": [
         {
-          "law_data_id": 636884,
+          "law_data_id": 637678,
           "sub_revision": "1",
-          "amendment_id": "508M60000040019",
-          "amendment_name": "消費税法施行規則等の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第十九号",
-          "enforcement_date": "2028-04-01",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "法律改正の施行日設定と罰則適用措置",
+        "body": "本改正は、金融商品取引法及び資金決済に関する法律の一部改正における施行期日および罰則の適用に関する経過措置について定めます。\n\n改正法の大部分は2026年8月12日に施行されます。ただし、金融商品取引法の一部条文（第百九十七条第一項、第百九十七条の二第一項（第一号を除く）、第二百十条第一項の改正規定）および附則の一部条文（第四十一条、第四十七条、第八十九条）は、公布の日から起算して二十日を経過した日に先行して施行されます。これにより、罰則関連規定や一部の附則は、他の改正規定よりも早期に適用が開始されます。\n\n本改正法の施行前に犯された行為、または附則の規定により従前の例によることとされた行為に対する罰則の適用については、改正前の規定が引き続き適用されます。これにより、法改正によって罰則が変更された場合でも、遡って不利な適用がなされないよう、経過措置が設けられます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1000,
+        "output_tokens": 250,
+        "thoughts_tokens": 2699,
+        "total_tokens": 3949,
+        "elapsed_seconds": 18.99662898100007,
+        "response_id": "8tJ8atblLYf1tPUPmL264QY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "324AC0000000228",
+      "law_name": "外国為替及び外国貿易法",
+      "revisions": [
+        {
+          "law_data_id": 637703,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則に関する経過措置の条項構造変更",
+        "body": "本改正により、外国為替及び外国貿易法の罰則に関する経過措置を定める第八十九条の条文構造が変更されます。現行の第八十九条の規定は、改正法施行日である2026年8月12日をもって、同条の第一項として位置づけられます。この改正は、条文の形式的な変更であり、罰則の適用に関する経過措置の内容や、政策・制度上の実質的な変更を伴うものではありません。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 692,
+        "output_tokens": 128,
+        "thoughts_tokens": 2189,
+        "total_tokens": 3009,
+        "elapsed_seconds": 15.31835623500001,
+        "response_id": "B9N8aoy-Fo22trIPwM7JyAo"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "340AC0000000033",
+      "law_name": "所得税法",
+      "revisions": [
+        {
+          "law_data_id": 637667,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "金融商品取引法等改正の施行日と罰則経過措置を規定",
+        "body": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（以下「本改正法」という。）の施行日と、罰則に関する経過措置が定められます。これにより、本改正法の各規定がいつから適用されるか、また違反行為に対する罰則がどのように適用されるかが明確になります。\n\n本改正法の大部分は、公布の日から起算して一年を超えない範囲内において政令で定める日から施行されますが、遅くとも2026年8月12日までには施行されます。ただし、金融商品取引法における特定の改正規定（第百九十七条第一項、第百九十七条の二第一項（第一号を除く）、第二百十条第一項の改正規定）や、本改正法の附則の一部（第四十一条、第四十七条、第八十九条）については、公布の日から20日を経過した日から先行して施行されます。\n\n本改正法の施行前に行われた行為、および本改正法の附則の規定によりなお従前の例によることとされる場合における施行後の行為に対する罰則の適用については、改正前の規定が引き続き適用されることになります。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1201,
+        "output_tokens": 273,
+        "thoughts_tokens": 5921,
+        "total_tokens": 7395,
+        "elapsed_seconds": 42.14604384400002,
+        "response_id": "GdN8aoWDK4Tnld8PisqFuA0"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "410AC0000000090",
+      "law_name": "投資事業有限責任組合契約に関する法律",
+      "revisions": [
+        {
+          "law_data_id": 637705,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "改正法における罰則適用に関する経過措置",
+        "body": "本改正法は、2026年8月12日に施行されます。本改正により、罰則の適用に関する経過措置が規定されます。\n\n具体的には、本改正法の施行前に犯された行為、および附則の規定によりなお従前の例によることとされる場合における施行後に犯された行為に対しては、施行前の罰則が引き続き適用されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 692,
+        "output_tokens": 105,
+        "thoughts_tokens": 2303,
+        "total_tokens": 3100,
+        "elapsed_seconds": 15.42625332700004,
+        "response_id": "RdN8asf0CoTnld8PisqFuA0"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "326AC0100000198",
+      "law_name": "投資信託及び投資法人に関する法律",
+      "revisions": [
+        {
+          "law_data_id": 637713,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則適用に関する経過措置の明確化",
+        "body": "改正法（金融商品取引法及び資金決済に関する法律の一部を改正する法律）の施行に伴い、投資信託及び投資法人に関する法律に関する行為に適用される罰則について、経過措置が設けられます。\n\n具体的には、2026年8月12日の改正法施行日より前にされた行為、および改正法の附則の規定によりなお従前の例によるとされる施行日以降の行為に対する罰則の適用は、従前の規定に基づいて行われます。これにより、改正法の施行に伴う罰則適用の法的安定性が確保されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 703,
+        "output_tokens": 143,
+        "thoughts_tokens": 3909,
+        "total_tokens": 4755,
+        "elapsed_seconds": 26.388818854999954,
+        "response_id": "VtN8aumIA6nRqrYP3POYsAw"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "419AC0000000074",
+      "law_name": "株式会社商工組合中央金庫法",
+      "revisions": [
+        {
+          "law_data_id": 637730,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則に関する経過措置条項の項化",
+        "body": "本改正により、商工組合中央金庫法の一部の規定について形式的な変更が行われます。\n\n本法律の改正では、罰則に関する経過措置を定める第八十九条の現行規定が、同条の第一項として位置づけられることになります。これにより条文の形式が変更されますが、規定されている内容自体に実質的な変更はありません。本改正の施行日は2026年8月12日です。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 692,
+        "output_tokens": 123,
+        "thoughts_tokens": 1365,
+        "total_tokens": 2180,
+        "elapsed_seconds": 9.971881740999947,
+        "response_id": "ctN8aoG9BKermecPjPjD-Qc"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "423AC0000000039",
+      "law_name": "株式会社国際協力銀行法",
+      "revisions": [
+        {
+          "law_data_id": 637726,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則に関する経過措置規定の維持",
+        "body": "令和八年法律第六十四号の施行に伴う罰則に関する経過措置については、現行の規定が維持され、変更はありません。このため、法律施行前及び経過措置が適用される期間中の行為に対する罰則の適用は、引き続き従前の例によることとなります。\n\nこれらの規定の施行日は2026年8月12日です。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 689,
+        "output_tokens": 103,
+        "thoughts_tokens": 3503,
+        "total_tokens": 4295,
+        "elapsed_seconds": 25.347952395999982,
+        "response_id": "fdN8aufqIOqbmecPm6uBsQ0"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "419AC0000000085",
+      "law_name": "株式会社日本政策投資銀行法",
+      "revisions": [
+        {
+          "law_data_id": 637708,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則に関する経過措置は変更なし",
+        "body": "金融商品取引法及び資金決済に関する法律の一部を改正する法律による株式会社日本政策投資銀行法への改正において、第八十九条（罰則に関する経過措置）の内容に実質的な変更はありません。\n\n現行の第八十九条に規定されている罰則に関する経過措置の内容は、改正後も維持されます。このため、法律の施行前に行われた行為、または附則の規定により従前の例によることとされる施行後の行為に対する罰則の適用については、引き続き改正前の規定が適用されます。本改正は2026年8月12日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 690,
+        "output_tokens": 149,
+        "thoughts_tokens": 1958,
+        "total_tokens": 2797,
+        "elapsed_seconds": 16.80983849200004,
+        "response_id": "l9N8atDtPJ-NtPUP9pyiyQY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "419AC0000000057",
+      "law_name": "株式会社日本政策金融公庫法",
+      "revisions": [
+        {
+          "law_data_id": 637710,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則適用に係る経過措置の明確化",
+        "body": "金融商品取引法及び資金決済に関する法律の一部を改正する法律の施行に伴い、罰則に関する経過措置が新たに規定されます。\n\n本改正法の施行前にされた行為、および附則の規定により従前の例によることとされる場合における施行後にされた行為に対する罰則の適用については、改正前の規定が引き続き適用されます。これにより、改正法による新たな罰則規定が過去の行為に遡及して適用されることはありません。本規定は2026年8月12日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 691,
+        "output_tokens": 135,
+        "thoughts_tokens": 2272,
+        "total_tokens": 3098,
+        "elapsed_seconds": 15.147448027999985,
+        "response_id": "qtN8aoitFJWE8uAPz668wAY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "323AC0000000242",
+      "law_name": "水産業協同組合法",
+      "revisions": [
+        {
+          "law_data_id": 637701,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "役員欠格事由の見直しと罰則の経過措置",
+        "body": "本改正は、水産業協同組合法における役員の欠格事由に関する規定と、罰則の適用に関する経過措置について変更を加えます。この改正は、2026年8月12日から施行されます。\n\n水産業協同組合の役員の欠格事由が更新されます。現行法で金融商品取引法第百九十七条の罪を犯した者が欠格事由とされている箇所について、改正後は、金融商品取引法第百九十七条の特定の項や号（第一項第一号から第四号の二まで、第五号若しくは第六号若しくは第二項）に違反した場合が対象となります。これにより、金融商品取引法の改正に伴い、役員の欠格事由となる犯罪の範囲が具体化され、見直されます。\n\n本改正の施行前にした行為や、附則の規定によりなお従前の例によることとされる場合の本改正施行後にした行為に対する罰則の適用については、従前の例によることが明確化されます。これは、法改正に伴う罰則適用に関する経過的な措置を定めたものです。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1202,
+        "output_tokens": 268,
+        "thoughts_tokens": 2085,
+        "total_tokens": 3555,
+        "elapsed_seconds": 17.37926192100008,
+        "response_id": "u9N8asjAAaaNtPUP1KL_6Ag"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "340AC0000000034",
+      "law_name": "法人税法",
+      "revisions": [
+        {
+          "law_data_id": 637736,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "退職年金等積立金に係る法人税申告制度の見直し",
+        "body": "令和8年8月12日に施行される金融商品取引法及び資金決済に関する法律の一部改正に伴い、法人税法においても、退職年金等積立金に係る確定申告に関する規定が改められます。\n\n具体的には、退職年金業務等を行う内国法人は、各事業年度終了の日の翌日から二月以内に、税務署長に対し、当該事業年度の課税標準となる退職年金等積立金の額、これに対する法人税の額、及び中間申告による納付額を控除した法人税の額を記載した申告書を提出する義務が生じます。これに加え、財務省令で定めるその他の事項も申告書に記載する必要があります。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 888,
+        "output_tokens": 188,
+        "thoughts_tokens": 4295,
+        "total_tokens": 5371,
+        "elapsed_seconds": 29.79943382600004,
+        "response_id": "ztN8avnMI4SQtPUPpcbMyQ4"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "323AC0000000200",
+      "law_name": "消費生活協同組合法",
+      "revisions": [
+        {
+          "law_data_id": 637700,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則適用に関する経過措置規定の整備",
+        "body": "金融商品取引法及び資金決済に関する法律の一部を改正する法律の施行に伴い、消費生活協同組合法が令和8年8月12日に一部改正されます。\n\nこの改正により、消費生活協同組合法第八十九条の規定が変更されます。現行の第八十九条は組合の解散の登記の申請に関する事項を定めていますが、改正後は、改正法の施行前にした行為や、附則の規定により従前の例によることとされる場合における施行後にした行為に対する罰則の適用について、なお従前の例によることとする旨の経過措置が設けられます。これにより、同条は解散登記の申請に関する規定から、罰則適用に関する経過措置を定める規定へと内容が全面的に改められます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 685,
+        "output_tokens": 188,
+        "thoughts_tokens": 4010,
+        "total_tokens": 4883,
+        "elapsed_seconds": 25.355243644999973,
+        "response_id": "7dN8apPeMZDztPUPscL_kAQ"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "351AC0000000057",
+      "law_name": "特定商取引に関する法律",
+      "revisions": [
+        {
+          "law_data_id": 637672,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "特定商取引法の改正点に関する情報なし",
+        "body": "提供された情報によると、「特定商取引に関する法律」の条文に対する具体的な改正は確認できません。\n\n入力情報には、「金融商品取引法及び資金決済に関する法律の一部を改正する法律」（令和八年法律第六十四号）の施行期日や罰則に関する経過措置に関する記述が含まれています。しかし、これらは「特定商取引に関する法律」の個別の規定を改正するものではありません。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1046,
+        "output_tokens": 109,
+        "thoughts_tokens": 4085,
+        "total_tokens": 5240,
+        "elapsed_seconds": 27.27150953599994,
+        "response_id": "CNR8atrBG_C2trIPu5i7gAw"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "411AC0100000004",
+      "law_name": "特定融資枠契約に関する法律",
+      "revisions": [
+        {
+          "law_data_id": 637662,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "特定投資家等向け有価証券規定の整備",
+        "body": "この法律改正により、金融関連法規における「特定投資家向け有価証券」に関する規定が見直され、他の関連法規にも一部改正が加えられます。\n\n主要な改正点として、協同組合による金融事業に関する法律、投資信託及び投資法人に関する法律、信用金庫法、長期信用銀行法、労働金庫法、銀行法、保険業法、信託業法といった複数の金融関連法において、「特定投資家向け有価証券」という文言が「特定投資家等向け有価証券」に改められます。これにより、「特定投資家」の範囲に「等」が付加され、実質的に適用対象となる有価証券の範囲が拡大されるか、定義が明確化されることが見込まれます。この変更は、令和九年四月一日から施行されます。\n\nまた、住民基本台帳法においては、特定の登録、届出、認定に関する規定が別表に追加され、これにより、これらの情報が住民基本台帳制度の対象となる範囲が広がります。この改正も令和九年四月一日から施行されます。\n\n改正法の施行前にされた行為、および附則の規定によりなお従前の例によることとされる場合における施行後にされた行為に対する罰則の適用については、引き続き従前の例によることとされます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1794,
+        "output_tokens": 312,
+        "thoughts_tokens": 4253,
+        "total_tokens": 6359,
+        "elapsed_seconds": 26.339522386999988,
+        "response_id": "JNR8aozJN5q81t8Pyemt-QY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "419AC0000000022",
+      "law_name": "犯罪による収益の移転防止に関する法律",
+      "revisions": [
+        {
+          "law_data_id": 637720,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則適用経過措置規定の項構成変更",
+        "body": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）が2026年8月12日に施行されることに伴い、その附則に含まれる罰則に関する経過措置規定に改正が加えられます。\n\n具体的には、この改正法附則の第八十九条に規定されていた罰則に関する経過措置が、第八十九条第一項として再編されます。この規定は、本改正法の施行前にした行為や、附則の規定によりなお従前の例によることとされた場合の施行後の行為に対する罰則の適用については、なお従前の例によることを定めています。今回の改正は、当該経過措置規定の条文構成を変更するものであり、その実質的な内容は維持されます。\n\nこの変更は、改正法附則における条文の体系的な整理を目的としたものであり、罰則の適用に関する経過措置の内容自体に実質的な変更をもたらすものではありません。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 694,
+        "output_tokens": 233,
+        "thoughts_tokens": 6233,
+        "total_tokens": 7160,
+        "elapsed_seconds": 42.178247476000024,
+        "response_id": "QNR8atC_LfDK1t8P_OKv-A8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "425AC0000000098",
+      "law_name": "産業競争力強化法",
+      "revisions": [
+        {
+          "law_data_id": 637734,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "設立時役員認可規定の廃止と罰則経過措置の導入",
+        "body": "産業競争力強化法第八十九条が改正されます。現行の規定では、会社法に定める設立時取締役および設立時監査役の選任および解任には、経済産業大臣の認可が必要とされています。\n\n改正後は、この第八十九条の規定は廃止され、代わりに罰則に関する経過措置が新たに設けられます。これにより、本法（附則第一条第二号および第四号に掲げる規定にあっては、当該規定）の施行前にした行為、および附則の規定によりなお従前の例によることとされる場合の施行後にした行為に対する罰則の適用については、従前の例によることとされます。この改正は、2026年8月12日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 682,
+        "output_tokens": 189,
+        "thoughts_tokens": 4494,
+        "total_tokens": 5365,
+        "elapsed_seconds": 31.310166199999912,
+        "response_id": "bNR8avfkF4eVmecP7LP0-Aw"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "332AC0000000026",
+      "law_name": "租税特別措置法",
+      "revisions": [
+        {
+          "law_data_id": 637668,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "租税特別措置法に関する改正の記載なし",
+        "body": "提供された情報には、租税特別措置法の改正に関する具体的な内容は記述されていません。入力には、金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行期日に関する規定や、附則第八十九条の削除に関する記述が含まれていますが、これらは租税特別措置法自体の改正を特定するものではありません。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1248,
+        "output_tokens": 106,
+        "thoughts_tokens": 3231,
+        "total_tokens": 4585,
+        "elapsed_seconds": 20.85068682200017,
+        "response_id": "j9R8ap20E5e4trIPmu6IoAo"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "324AC0000000213",
+      "law_name": "簡易郵便局法",
+      "revisions": [
+        {
+          "law_data_id": 637686,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "「簡易郵便局法」への直接的な改正なし",
+        "body": "提供された情報からは、簡易郵便局法に対する直接的な改正は確認できません。ただし、この法律改正は「金融商品取引法及び資金決済に関する法律の一部を改正する法律」として、その施行期日および罰則に関する経過措置が定められています。\n\nこの改正法の大部分は、公布の日から起算して一年を超えない範囲内において政令で定める日から施行されます。ただし、金融商品取引法第百九十七条第一項、同法第百九十七条の二第一項（同項第一号を除く）、及び同法第二百十条第一項の改正規定、並びに附則第四十一条、第四十七条、第八十九条の規定は、公布の日から起算して二十日を経過した日から施行されます。\n\nこの改正法の施行前にした行為、およびこの附則の規定によりなお従前の例によることとされる場合における施行後にした行為に対する罰則の適用については、なお従前の例によるものとされます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 974,
+        "output_tokens": 235,
+        "thoughts_tokens": 6132,
+        "total_tokens": 7341,
+        "elapsed_seconds": 40.18715024799985,
+        "response_id": "pdR8aovbFZyZ28sPwfDdiA8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "504AC0000000043",
+      "law_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律",
+      "revisions": [
+        {
+          "law_data_id": 637692,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則適用に関する経過措置の整備",
+        "body": "今後の法改正により、罰則の適用に関する新たな経過措置が整備されます。この措置は、改正法（金融商品取引法及び資金決済に関する法律の一部を改正する法律）の施行前に行われた行為に対する罰則の適用について、従前の例によることを定めます。これにより、改正法の施行に伴う罰則適用の混乱を防ぎ、円滑な移行を確保します。\n\nこの改正法の主要部分の施行期日は、公布の日から一年を超えない範囲内で政令で定められるため、現時点では確定していません。ただし、罰則に関する経過措置を含む一部の規定は、公布の日から二十日を経過した日から施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1084,
+        "output_tokens": 166,
+        "thoughts_tokens": 8393,
+        "total_tokens": 9643,
+        "elapsed_seconds": 55.42233076299999,
+        "response_id": "z9R8atqHBZyZ28sPwfDdiA8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "421AC0000000059",
+      "law_name": "資金決済に関する法律",
+      "revisions": [
+        {
+          "law_data_id": 637694,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則適用に関する経過措置の改正",
+        "body": "資金決済に関する法律において、罰則の適用に関する経過措置が改正されます。\n\n改正後の第八十九条では、本法律（改正法）の施行前に行われた行為、および附則の規定によりなお従前の例によることとされている場合において本法律の施行後に行われた行為に対する罰則の適用について、引き続き従前の例によることが明確化されます。これにより、改正法施行日を跨ぐ期間における罰則の適用基準が整備されます。\n\nこれらの改正は、2026年8月12日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 711,
+        "output_tokens": 143,
+        "thoughts_tokens": 3942,
+        "total_tokens": 4796,
+        "elapsed_seconds": 26.566136239999878,
+        "response_id": "B9V8aqGpNJ-NtPUP9pyiyQY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "413AC0000000093",
+      "law_name": "農林中央金庫法",
+      "revisions": [
+        {
+          "law_data_id": 637697,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "役員資格参照法令更新と罰則経過措置変更",
+        "body": "農林中央金庫法は、役員の資格に関する欠格事由の参照法令更新と、罰則適用に関する経過措置の規定変更が行われます。これらの改正は、2026年8月12日に施行されます。\n\n改正により、役員の資格に関する欠格事由のうち、金融商品取引法に違反した場合の罰則に係る参照条項が、金融商品取引法自体の改正に伴い更新されます。これにより、農林中央金庫の役員に対する欠格事由の範囲が、最新の金融商品取引法の規定に整合するよう変更されます。\n\nまた、第八十九条の規定が全面的に変更され、これまで財務大臣への通知に関する内容であったものが、罰則の適用に関する経過措置となります。これにより、本法の施行前に行われた行為に対する罰則の適用については、改正前の規定が引き続き適用されることになります。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1334,
+        "output_tokens": 216,
+        "thoughts_tokens": 2678,
+        "total_tokens": 4228,
+        "elapsed_seconds": 18.056607906999943,
+        "response_id": "I9V8arG3N4Tnld8PisqFuA0"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "322AC0000000132",
+      "law_name": "農業協同組合法",
+      "revisions": [
+        {
+          "law_data_id": 637696,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "農協事業者の欠格要件の更新",
+        "body": "金融商品取引法などの改正に伴い、農業協同組合法の一部が2026年8月12日に施行されます。\n\n第十条第一項第三号に規定する事業を行う者の欠格要件について、金融商品取引法第百九十七条の罪に係る規定の参照方法が変更されます。これにより、金融商品取引法における特定の罪状に関する罰則の改定内容が、農業協同組合法の欠格要件に明確に反映されることとなります。\n\n罰則の適用に関する経過措置が新たに設けられます。これにより、改正法の施行前に発生した行為、または附則の規定によりなお従前の例によることとされた行為に対する罰則の適用については、引き続き改正前の規定が適用されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1069,
+        "output_tokens": 188,
+        "thoughts_tokens": 1837,
+        "total_tokens": 3094,
+        "elapsed_seconds": 14.056114255000011,
+        "response_id": "N9V8auKgIaaNtPUP1KL_6Ag"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "417AC0000000097",
+      "law_name": "郵政民営化法",
+      "revisions": [
+        {
+          "law_data_id": 637683,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則の経過措置に関する規定の明確化",
+        "body": "本改正法（金融商品取引法及び資金決済に関する法律の一部を改正する法律、令和八年法律第六十四号）により、同法に基づく罰則の適用について、特定の経過措置が導入されます。\n\nこの改正法の施行前にした行為、および改正法の附則の規定によりなお従前の例によることとされる場合における施行後にした行為に対する罰則の適用については、なお従前の例によることとされます。この罰則に関する経過措置を定める規定は、改正法の公布の日から起算して二十日を経過した日から施行されます。改正法全体の施行日は2026年8月12日です。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1284,
+        "output_tokens": 163,
+        "thoughts_tokens": 3108,
+        "total_tokens": 4555,
+        "elapsed_seconds": 20.186861163999993,
+        "response_id": "R9V8avqWBITnld8PisqFuA0"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "412AC0000000101",
+      "law_name": "金融サービスの提供及び利用環境の整備等に関する法律",
+      "revisions": [
+        {
+          "law_data_id": 637724,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則の適用に関する経過措置を新たに規定",
+        "body": "金融商品取引法及び資金決済に関する法律の一部を改正する法律が2026年8月12日に施行されることに伴い、現行法の第八十九条で規定されていた機構の資本金に関する条項が廃止され、新たに罰則の適用に関する経過措置が規定されます。\n\nこの改正により、本法律（附則の特定規定を含む）の施行前に行われた行為、および附則の規定によりなお従前の例によることとされる本法律の施行後に行われた行為に対する罰則の適用については、引き続き改正前の例によることとされます。これにより、改正法の施行後も、過去の行為に対する罰則の適用において法的安定性が維持されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 675,
+        "output_tokens": 173,
+        "thoughts_tokens": 3104,
+        "total_tokens": 3952,
+        "elapsed_seconds": 19.879768507000108,
+        "response_id": "XNV8asuyIqCLmecP3IiamQY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "323AC0000000025",
+      "law_name": "金融商品取引法",
+      "revisions": [
+        {
+          "law_data_id": 637711,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "無登録営業等への罰則強化と監視委の調査対象拡充",
+        "body": "この改正法では、金融商品取引法における違反行為に対する罰則が厳格化されるとともに、証券取引等監視委員会が調査可能な犯則事件の範囲が拡大されます。本改正は、2026年8月12日に施行されます。\n\n金融商品取引業における違反行為に対する罰則が強化されます。具体的には、内閣総理大臣の登録を受けずに金融商品取引業を行った場合や、不正な手段により登録を受けた場合について、これまでは金融商品取引法第百九十七条の二に定められていた罰則が、より重い罰則が適用される第百九十七条の対象となります。また、第三十六条の三の規定に違反して他人に金融商品取引業を行わせた場合についても、新たに第百九十七条で罰則が設けられます。これらの変更により、無登録営業や不正な登録取得、他者への無許可業務遂行といった行為に対する刑罰が厳格化され、違反行為の抑止効果が高まることが期待されます。\n\n証券取引等監視委員会（SESC）が調査可能な犯則事件の範囲が拡大されます。改正前は、有価証券の売買その他の取引またはデリバティブ取引等の公正を害するものとして政令で定める事件に限定されていましたが、改正後は、これらの事件に加え、「その他委員会職員の調査の対象とすることが公益または投資者保護のため必要かつ適当なものとして政令で定めるもの」も犯則事件の対象に含まれるようになります。これにより、SESCは、公益や投資家保護の観点から調査が必要と判断される多様な事案について、犯則調査を実施する権限を持つことになります。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1623,
+        "output_tokens": 397,
+        "thoughts_tokens": 3404,
+        "total_tokens": 5424,
+        "elapsed_seconds": 24.828609203000042,
+        "response_id": "ctV8aoSeMfDK1t8P_OKv-A8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "318AC0000000043",
+      "law_name": "金融機関の信託業務の兼営等に関する法律",
+      "revisions": [
+        {
+          "law_data_id": 637657,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "金融関連法改正に伴う経過措置の適用",
+        "body": "「金融商品取引法及び資金決済に関する法律の一部を改正する法律」は、原則として2026年8月12日に施行されます。ただし、同改正法の規定のうち、金融商品取引法の一部改正条項および附則第四十一条、第四十七条、第八十九条に関する規定は、公布の日から起算して二十日を経過した日から施行されます。\n\n「金融機関の信託業務の兼営等に関する法律」においては、今回の改正により、罰則に関する経過措置が適用されます。これにより、改正法の施行前にされた行為および附則の規定によりなお従前の例によることとされる場合の施行後にされた行為に対する罰則の適用については、なお従前の例によることとされます。本法律の主要な業務内容や認可基準に関する具体的な変更は、今回の情報には含まれていません。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1360,
+        "output_tokens": 203,
+        "thoughts_tokens": 6331,
+        "total_tokens": 7894,
+        "elapsed_seconds": 44.47688082500008,
+        "response_id": "jdV8ar2BDof1tPUPmL264QY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "356AC0000000059",
+      "law_name": "銀行法",
+      "revisions": [
+        {
+          "law_data_id": 637714,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則に関する経過措置規定の項区分明確化",
+        "body": "本改正により、金融商品取引法及び資金決済に関する法律の一部を改正する法律の附則第八十九条に定める罰則に関する経過措置について、当該条文が第一項として明示されることになります。これは、条文の構造を明確にし、その解釈の一貫性を高めるための変更です。施行日は2026年8月12日です。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 687,
+        "output_tokens": 108,
+        "thoughts_tokens": 4305,
+        "total_tokens": 5100,
+        "elapsed_seconds": 29.363435207999828,
+        "response_id": "u9V8atfCGaaNtPUP1KL_6Ag"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "327AC0000000187",
+      "law_name": "長期信用銀行法",
+      "revisions": [
+        {
+          "law_data_id": 637731,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "罰則に関する経過措置規定の構造整理",
+        "body": "本改正により、長期信用銀行法の罰則に関する経過措置規定の構造が整理されます。改正後の第八十九条は、これまで単一の規定であった内容が第一項として明示される形となります。これにより、罰則の適用については引き続き従前の例による旨が、項番号を付して規定されることとなりますが、規定の内容自体に変更はありません。本改正は2026年8月12日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 689,
+        "output_tokens": 117,
+        "thoughts_tokens": 1566,
+        "total_tokens": 2372,
+        "elapsed_seconds": 13.540876306999962,
+        "response_id": "2tV8aqbRCI-AtrIPisSj8Aw"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "346AC0000000034",
+      "law_name": "預金保険法",
+      "revisions": [
+        {
+          "law_data_id": 637684,
+          "sub_revision": "1",
+          "amendment_id": "508AC0000000064",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+          "amendment_num": "令和八年法律第六十四号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "預金保険法への直接改正なし",
+        "body": "本改正案においては、預金保険法そのものの条文に直接的な変更は示されておりません。\n\nしかしながら、本改正に伴い、罰則の適用に関する経過措置が導入されます。この経過措置は、金融商品取引法及び資金決済に関する法律の一部改正によるものであり、改正法の施行前に生じた行為、または改正法の規定によりなお従前の例によることとされる場合の施行後に生じた行為について、従前の罰則規定が適用されることを定めています。この附則は、法律の公布の日から起算して二十日を経過した日から施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1070,
+        "output_tokens": 150,
+        "thoughts_tokens": 6645,
+        "total_tokens": 7865,
+        "elapsed_seconds": 60.46436771699996,
+        "response_id": "6NV8atqLNM2CtrIPl7-1mAY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "339CO0000000188",
+      "law_name": "中小企業退職金共済法施行令",
+      "revisions": [
+        {
+          "law_data_id": 641366,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000239",
+          "amendment_name": "中小企業退職金共済法施行令の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百三十九号",
+          "enforcement_date": "2026-10-01",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": false
-        },
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "特定業種間の移動等における退職金通算利率の変更",
+        "body": "中小企業退職金共済法施行令の改正により、主に特定業種間の移動や一般契約から特定業種契約への移行における退職金算定の利率が変更されます。\n\n本改正により、被共済者が特定業種間を移動した場合の特定業種掛金納付月数への通算に係る金額等を算定する際の、別表第六に係る特定業種の利率が年1.3パーセントから年1.5パーセントに引き上げられます。\n\n施行日である令和8年10月1日より前に甲特定業種から乙特定業種へ移動した被共済者で、施行日以後に退職金支給の事由が生じた場合、新令別表第九の規定は適用されず、従前の例によります。ただし、法第四十六条第二項に規定する残余の額がある場合の退職金計算では、令和3年10月1日前の乙特定業種に係る掛金納付月数については従前の1.3パーセントの利率が、令和3年10月1日から退職金支給事由発生日までの期間については新令の1.5パーセントの利率がそれぞれ適用されます。\n\n同様に、施行日より前に一般の退職金共済契約から特定業種退職金共済契約へ移行した被共済者で、施行日以後に退職金支給の事由が生じた場合も、新令別表第九の規定は適用されず、従前の例によります。法第五十五条第二項に規定する残余の額がある場合の退職金計算では、令和3年10月1日前の掛金納付月数については従前の1.3パーセントの利率が、令和3年10月1日から退職金支給事由発生日までの期間については新令の1.5パーセントの利率がそれぞれ適用されます。\n\nこの政令の施行日前に退職金支給の事由が生じた者については、従前の例によります。また、施行日前に別表第六に係る特定業種掛金納付月数が36月以上である者で、施行日以後に退職金支給の事由が生じた場合は、改正後の令とは異なる特定の計算方法が適用されます。\n\n本改正に伴い、別表第六（第十二条関係）および別表第九（第十三条―第十五条関係）が変更されます。本改正は令和8年10月1日から施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 4200,
+        "output_tokens": 576,
+        "thoughts_tokens": 1859,
+        "total_tokens": 6635,
+        "elapsed_seconds": 16.86196411800006,
+        "response_id": "J9Z8apZm0KzW3w-S4rSwCA"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "415CO0000000507",
+      "law_name": "個人情報の保護に関する法律施行令",
+      "revisions": [
         {
-          "law_data_id": 636883,
+          "law_data_id": 641351,
           "sub_revision": "1",
-          "amendment_id": "508M60000040019",
-          "amendment_name": "消費税法施行規則等の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第十九号",
-          "enforcement_date": "2027-10-01",
+          "amendment_id": "508CO0000000234",
+          "amendment_name": "国家情報会議設置法の施行に伴う関係政令の整備等に関する政令",
+          "amendment_num": "令和八年政令第二百三十四号",
+          "enforcement_date": "2026-07-31",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
-          "is_current": false
-        },
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "国家情報局長への個人情報保護関連権限委任",
+        "body": "個人情報の保護に関する法律施行令は、国家情報会議設置法の施行に伴い、個人情報保護に関する行政機関の長の権限委任先が追加されます。本改正は2026年7月31日に施行されます。\n\n具体的には、行政機関の長が個人情報の保護に関する法律に基づく権限や事務を委任できる対象として、新たに国家情報局長が追加されます。これにより、国家情報局長に対しても個人情報保護に関する業務の委任が可能となります。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 2306,
+        "output_tokens": 134,
+        "thoughts_tokens": 1654,
+        "total_tokens": 4094,
+        "elapsed_seconds": 12.37251839999999,
+        "response_id": "OdZ8aub2C4f1tPUPmL264QY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "332CO0000000219",
+      "law_name": "内閣官房組織令",
+      "revisions": [
         {
-          "law_data_id": 636920,
+          "law_data_id": 641352,
           "sub_revision": "1",
-          "amendment_id": "508M60000040030",
-          "amendment_name": "国税関係法令に係る情報通信技術を活用した行政の推進等に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第三十号",
-          "enforcement_date": "2027-09-01",
+          "amendment_id": "508CO0000000234",
+          "amendment_name": "国家情報会議設置法の施行に伴う関係政令の整備等に関する政令",
+          "amendment_num": "令和八年政令第二百三十四号",
+          "enforcement_date": "2026-07-31",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
-          "is_current": false
-        },
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "内閣情報調査室の廃止と組織再編",
+        "body": "本政令は、2026年7月31日に施行され、国家情報会議設置法の施行に伴う内閣官房の組織再編と人員配置の見直しを行います。\n\n内閣官房に置かれる室の数が現行の四室から三室に変更されます。これは、内閣情報調査室が廃止され、その事務が国家情報局および国家サイバー統括室に再編されるためです。これまで内閣情報調査室が所管していた事務のうち、サイバーセキュリティ関連の事務は国家サイバー統括室が担い、同室の名称も内閣情報調査室から国家サイバー統括室に変更されます。また、内閣情報調査室に置かれていた内閣情報官の職掌に関する規定は削除されます。\n\n内閣衛星情報センターは、内閣情報調査室の附属機関から国家情報局の附属機関となり、所長は国家情報局長を補佐する役割となります。また、国家情報局に国家情報局次長が一人置かれ、国家情報局長を補佐し、その事務（内閣衛星情報センターの事務を除く）を整理する役割を担います。これにより、国家情報局は内閣官房組織の重要な一部として位置づけられます。\n\n人員配置に関しては、内閣審議官の定数が併任者を除き82人から81人に1人削減されます。一方で、内閣参事官の定数は併任者を除き114人から116人に2人増加します。また、条文の整理として、公文書監理官に関する規定が第四条の四から第四条の三に、人事政策統括官に関する規定が第五条の二から第五条の三にそれぞれ条番号が変更されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 2761,
+        "output_tokens": 418,
+        "thoughts_tokens": 3205,
+        "total_tokens": 6384,
+        "elapsed_seconds": 21.98380178399998,
+        "response_id": "RtZ8aqanM9fK1t8P1-avqQU"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "328CO0000000215",
+      "law_name": "国家公務員退職手当法施行令",
+      "revisions": [
         {
-          "law_data_id": 636882,
-          "sub_revision": "1",
-          "amendment_id": "508M60000040019",
-          "amendment_name": "消費税法施行規則等の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第十九号",
+          "law_data_id": 628410,
+          "sub_revision": "3",
+          "amendment_id": "507CO0000000341",
+          "amendment_name": "出入国管理及び難民認定法及び外国人の技能実習の適正な実施及び技能実習生の保護に関する法律の一部を改正する法律の施行に伴う関係政令の整備及び経過措置に関する政令",
+          "amendment_num": "令和七年政令第三百四十一号",
           "enforcement_date": "2027-04-01",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": false
         },
         {
-          "law_data_id": 625717,
-          "sub_revision": "2",
-          "amendment_id": "507M60000040022",
-          "amendment_name": "消費税法施行規則の一部を改正する省令",
-          "amendment_num": "令和七年財務省令第二十二号",
-          "enforcement_date": "2027-01-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        },
-        {
-          "law_data_id": 636881,
+          "law_data_id": 641355,
           "sub_revision": "1",
-          "amendment_id": "508M60000040019",
-          "amendment_name": "消費税法施行規則等の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第十九号",
-          "enforcement_date": "2026-12-11",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        },
-        {
-          "law_data_id": 625716,
-          "sub_revision": "2",
-          "amendment_id": "507M60000040022",
-          "amendment_name": "消費税法施行規則の一部を改正する省令",
-          "amendment_num": "令和七年財務省令第二十二号",
-          "enforcement_date": "2026-11-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        },
-        {
-          "law_data_id": 636880,
-          "sub_revision": "1",
-          "amendment_id": "508M60000040019",
-          "amendment_name": "消費税法施行規則等の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第十九号",
-          "enforcement_date": "2026-10-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        },
-        {
-          "law_data_id": 636879,
-          "sub_revision": "1",
-          "amendment_id": "508M60000040019",
-          "amendment_name": "消費税法施行規則等の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第十九号",
-          "enforcement_date": "2026-09-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "消費税関連手続のデジタル化と新制度導入",
-        "body": "消費税法施行規則では、主に電子記録の保存に関する手続の明確化、輸出免税制度の抜本的な見直し、および新たなプラットフォーム事業者や特定少額資産販売事業者に関する制度の導入が行われます。\n\n記録保存期間と電子化の推進に関して、2028年4月1日からは、輸出取引等や貸倒れに関する書類の保存期間の起算点が、「課税期間の末日の翌日から2ヶ月を経過した日」から「確定申告書の提出期限の翌日」に統一されます。これに伴い、電子記録の保存方法が複数条項で明確化・標準化され、課税貨物の消費税額控除に係る電子記録の保存方法に関する新たな規定が設けられます。また、2027年1月1日には、特定の電磁的記録に対する重加算税の特例の適用または適用除外に関する詳細な手続きが導入されます。\n\n輸出免税制度の変更として、2026年11月1日からは、金地金や白金地金、金貨・白金貨が免税対象物品から除外されます。また、日本国籍を有する免税購入対象者に対する海外居住証明のための必要書類が見直され、免税販売場での購入者への説明事項が、税関での確認義務や輸出義務、不履行時の措置などについて明確化されます。同時に、購入記録情報の電子的な提供および保存方法が整備され、輸出物品販売場の許可、承認免税手続事業者、承認送受信事業者、および臨時販売場の承認に関する申請手続きや届出事項が全面的に再編されます。さらに、2026年10月1日からは、輸出取引の対価を現金などで受け取る場合に、仕向国での輸入関連の「指定書類」の保存が義務付けられます。\n\n新しいプラットフォーム事業者および特定少額資産販売事業者制度の導入として、2028年4月1日より「特定少額資産の譲渡」の定義が追加され、新たに「第二種プラットフォーム事業者」が制度化され、登録や届出に関する詳細な要件が定められます。これに伴い、従来の「特定プラットフォーム事業者」は「第一種プラットフォーム事業者」に名称変更されます。また、「特定少額資産販売事業者」に関する登録・届出制度も新設されます。これらの制度導入に先立ち、2027年4月1日には第二種プラットフォーム事業者となる事業者に対する経過措置の届出が、2027年10月1日には特定少額資産販売事業者の登録に関する経過措置がそれぞれ施行されます。\n\nその他の制度変更として、2026年12月11日からは、新たな「円滑な事業再生を図るための事業者の金融機関等に対する債務の調整の手続等に関する法律」に基づく債権放棄が貸倒れの範囲に含まれるようになります。また、「盗難特定金属製物品の処分の防止等に関する法律」の施行日より3ヶ月を経過した日の翌日からは、「古物に準ずる物品及び証票」の定義から「特定金属くず」が除外されます。2026年10月1日には、適格請求書発行事業者となる小規模個人事業者に対する税額控除に関する経過措置が導入されます。なお、国または地方公共団体等に係る輸出取引等の証明書類等の保存期間の特例を定めた条項は、2028年4月1日をもって削除されます。"
-      },
-      "usage": {
-        "model": "gemini-2.5-flash",
-        "prompt_tokens": 37641,
-        "output_tokens": 788,
-        "thoughts_tokens": 10242,
-        "total_tokens": 48671,
-        "elapsed_seconds": 63.01633792199999,
-        "response_id": "qyx6at6rGcLn7rcP8tjP2AY"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "345M50000800008",
-      "law_name": "自動車の登録及び検査に関する申請書等の様式等を定める省令",
-      "revisions": [
-        {
-          "law_data_id": 641345,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800069",
-          "amendment_name": "自動車の登録及び検査に関する申請書等の様式等を定める省令の一部を改正する省令",
-          "amendment_num": "令和八年国土交通省令第六十九号",
-          "enforcement_date": "2026-07-27",
+          "amendment_id": "508CO0000000234",
+          "amendment_name": "国家情報会議設置法の施行に伴う関係政令の整備等に関する政令",
+          "amendment_num": "令和八年政令第二百三十四号",
+          "enforcement_date": "2026-07-31",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": true
@@ -458,31 +1492,459 @@
     },
     "response": {
       "summary": {
-        "title": "光ディスク申請の対象拡大と要件見直し",
-        "body": "本改正では、自動車登録や検査に関する申請書等を光ディスクで提出する際の手続について、対象となる申請の範囲と光ディスクの要件が見直されます。\n\n光ディスクによる申請手続の対象が拡大され、新規登録、変更登録、移転登録、新規検査に加え、新たに「更正の登録に係る申請」も光ディスクでの提出が可能となります。これにより、手続きの種類に応じた適切な様式（第一号様式、第二号様式、第十号様式）が指定されるようになります。\n\nまた、光ディスクの技術的な要件が変更され、これまで日本産業規格（JIS X6283）に適合する構造とされていたものが、今後は告示で定める規格に適合するものとなります。さらに、光ディスクのラベルには、告示で定める事項を記載することが義務付けられます。これにより、光ディスクの仕様や表示内容がより柔軟に運用されることになります。\n\nこれらの改正は、2026年7月27日に施行されます。"
+        "title": "外国人技能実習機構の組織改編と特別職退職手当の明確化",
+        "body": "本改正により、外国人材関連組織の再編と、特定の特別職国家公務員に関する退職手当の対象者規定が変更されます。これらは、それぞれ異なる施行日に発効します。\n\n令和七年政令第三百四十一号により、現在の外国人技能実習機構は、外国人育成就労機構へと名称および機能を変更し、これまでの業務を引き継ぐ形で再編されます。これにより、国家公務員退職手当法施行令において政令で定める法人として指定されていた「外国人技能実習機構」が「外国人育成就労機構」に置き換えられます。この変更は2027年4月1日から施行されます。\n\nまた、令和八年政令第二百三十四号により、退職日俸給月額が一般職給与法の指定職俸給表八号俸の額に相当する額を超える者に類する者等の規定が見直されます。具体的には、特別職の職員の給与に関する法律に規定される特別職職員、または国家情報会議設置法による改正前の特別職給与法に規定されていた内閣情報官として在職した者を、政令で定める者として明確化します。これにより、これらの職にあった者の退職手当に関する取り扱いが明確になります。あわせて、別表第一も改正されます。この変更は2026年7月31日から施行されます。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 1374,
-        "output_tokens": 247,
-        "thoughts_tokens": 1595,
-        "total_tokens": 3216,
-        "elapsed_seconds": 13.057392070000049,
-        "response_id": "7Cx6apGiIpaS89kPqtW7MQ"
+        "prompt_tokens": 1609,
+        "output_tokens": 332,
+        "thoughts_tokens": 2573,
+        "total_tokens": 4514,
+        "elapsed_seconds": 16.993636759000083,
+        "response_id": "X9Z8ar2sDJ-NtPUP9pyiyQY"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "329M50000002040",
-      "law_name": "自衛隊法施行規則",
+      "law_id": "414CO0000000102",
+      "law_name": "沖縄振興特別措置法施行令",
       "revisions": [
         {
-          "law_data_id": 641349,
+          "law_data_id": 641362,
           "sub_revision": "1",
-          "amendment_id": "508M60002000018",
-          "amendment_name": "自衛隊法施行規則の一部を改正する省令",
-          "amendment_num": "令和八年防衛省令第十八号",
+          "amendment_id": "508CO0000000236",
+          "amendment_name": "沖縄振興特別措置法施行令の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百三十六号",
+          "enforcement_date": "2026-07-29",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "特定の業務の資金への充当額の増額",
+        "body": "この政令は、沖縄振興特別措置法施行令の一部を改正するものです。本改正により、特定の業務の資金に充てる金額が変更されます。法律附則第三条第二項に基づき政令で定める特定の業務の資金に充てる金額は、現行の四十四億円から四十五億円に増額されます。この変更は2026年7月29日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 566,
+        "output_tokens": 114,
+        "thoughts_tokens": 1101,
+        "total_tokens": 1781,
+        "elapsed_seconds": 7.658371450999994,
+        "response_id": "cdZ8aseOIMal2_gPloG2gQs"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "402CO0000000366",
+      "law_name": "特別職の職員の給与に関する法律施行令",
+      "revisions": [
+        {
+          "law_data_id": 641354,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000234",
+          "amendment_name": "国家情報会議設置法の施行に伴う関係政令の整備等に関する政令",
+          "amendment_num": "令和八年政令第二百三十四号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "国家情報局を本府省業務調整手当の対象組織に追加",
+        "body": "本改正により、新たに設置される国家情報局が、本府省業務調整手当の支給対象となる業務を行う組織に追加されます。これにより、国家情報局の業務が、一般職の職員の指定職俸給表の適用を受ける職員の業務と同様の特殊性や困難性、職員確保の困難性があると認められる対象となります。\n\nまた、特別職の職員のうち、本府省業務調整手当の支給について、一般職の職員と同様とみなされる業務から、国家情報局長が除外されます。これは国家安全保障局長などと同様の扱いとなります。\n\nこれらの改正は、令和八年七月三十一日から施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1150,
+        "output_tokens": 176,
+        "thoughts_tokens": 1655,
+        "total_tokens": 2981,
+        "elapsed_seconds": 11.836163797000154,
+        "response_id": "etZ8atTNF-vBvPEP_tHiwAI"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "431CO0000000072",
+      "law_name": "特定複合観光施設区域整備法施行令",
+      "revisions": [
+        {
+          "law_data_id": 640335,
+          "sub_revision": "2",
+          "amendment_id": "508CO0000000210",
+          "amendment_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う関係政令の整備等に関する政令",
+          "amendment_num": "令和八年政令第二百十号",
+          "enforcement_date": "2027-05-20",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 628422,
+          "sub_revision": "2",
+          "amendment_id": "507CO0000000341",
+          "amendment_name": "出入国管理及び難民認定法及び外国人の技能実習の適正な実施及び技能実習生の保護に関する法律の一部を改正する法律の施行に伴う関係政令の整備及び経過措置に関する政令",
+          "amendment_num": "令和七年政令第三百四十一号",
+          "enforcement_date": "2027-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641365,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000238",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律の一部の施行に伴う関係政令の整備に関する政令",
+          "amendment_num": "令和八年政令第二百三十八号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "免許等欠格事由に係る罪の参照規定を整備",
+        "body": "本改正により、特定複合観光施設区域整備法施行令における免許等の欠格事由に該当する罪の規定が、関連する法律の改正に伴い整備されます。\n\n医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律に関する欠格事由の規定において、参照する条項番号が変更されます。具体的には、第八十六条第一項で参照される号が第二十五号及び第二十六号から第二十七号及び第二十八号に改正され、医薬品医療機器等法の最新の規定に合わせられます。この改正は令和9年5月20日に施行されます。\n\n外国人の技能実習に関する法律に関する欠格事由の規定において、法律の名称が「外国人の育成就労の適正な実施及び育成就労外国人の保護に関する法律」に変更されます。これにより、関連する罪の規定も新たな法律名に沿ったものとなります。この改正は令和9年4月1日に施行されます。\n\n金融商品取引法に関する欠格事由の規定において、参照する条項がより詳細化されます。第二百七条第一項の罪に関する規定で、参照される第百九十七条第一項に具体的な号が追加され、新たに第百九十七条第二項も参照対象となります。これにより、金融商品取引法における欠格事由の対象となる罪の範囲が明確化されます。この改正は令和8年8月12日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 3132,
+        "output_tokens": 338,
+        "thoughts_tokens": 2055,
+        "total_tokens": 5525,
+        "elapsed_seconds": 14.589717378999921,
+        "response_id": "idZ8aruOGu-EtrIPwszvoAw"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "415CO0000000369",
+      "law_name": "独立行政法人日本スポーツ振興センター法施行令",
+      "revisions": [
+        {
+          "law_data_id": 641391,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2027-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641367,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "医療費支給の経過措置を設ける",
+        "body": "本政令改正により、独立行政法人日本スポーツ振興センター法に基づく医療費の支給に関して、経過措置が設けられます。\n\n具体的には、この政令の主要な施行日である令和8年8月1日より前に行われた療養に係る医療費の支給については、改正前の規定が引き続き適用されます。\n\nまた、令和8年8月1日から一部の改正規定の施行日の前日である令和9年7月31日までの間に行われた療養に係る医療費の支給についても、同様に改正前の規定が適用されることになります。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1221,
+        "output_tokens": 150,
+        "thoughts_tokens": 1046,
+        "total_tokens": 2417,
+        "elapsed_seconds": 7.8361051990000306,
+        "response_id": "mdZ8asiiOLm0lu8P8-bh2Q8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "412CO0000000256",
+      "law_name": "環境省組織令",
+      "revisions": [
+        {
+          "law_data_id": 641361,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000235",
+          "amendment_name": "環境省組織令の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百三十五号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "環境省の地球温暖化対策に係る組織再編",
+        "body": "環境省組織令の改正により、温室効果ガス排出抑制に関する所掌事務の再編と、地球温暖化対策に係る国際協力体制の強化が行われます。本改正は2026年8月1日に施行されます。\n\n大臣官房の温室効果ガス排出抑制の基準策定及び規制等に関する事務について、これまで「環境基本法に基づく経済的措置」に限定されていた所掌範囲が拡大されます。これに伴い、環境経済課の所掌事務から、当該「環境基本法に基づく経済的措置」に関する温室効果ガス排出抑制の基準等策定及び規制等の事務が削除されます。この変更により、温室効果ガス排出抑制に関する経済的措置に係る事務は大臣官房に集約されるものと見られます。\n\n国際連携課は「国際地球温暖化対策推進課」に名称が変更され、地球温暖化の防止に関する国際協力、国際機関及び国際会議、ならびに海外との連絡に関する事務を専門に所掌することが明確化されます。地球温暖化対策課の所掌事務においては、これまで「国際連携課及び参事官の所掌に属するものを除く」とされていた部分が、「国際地球温暖化対策推進課の所掌に属するものを除く」に修正され、国際地球温暖化対策推進課の専門性が一層明確になります。\n\n参事官の職務から、これまで所掌していた「地球温暖化の防止に関する国際協力に関する事務のうち重要事項に係るもの」が削除されます。また、「環境省の所掌事務に係る国際協力に関する事務の総括に関する事務のうち重要事項に係るもの」についても、「重要事項に係るもの」という限定が外れ、より広範な国際協力に関する事務の総括を行う職務に変更されます。これは、地球温暖化対策の実務的な国際協力が国際地球温暖化対策推進課に移管される一方で、参事官は環境省全体の国際協力の総括という役割を強化する再編と言えます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 2626,
+        "output_tokens": 452,
+        "thoughts_tokens": 2451,
+        "total_tokens": 5529,
+        "elapsed_seconds": 18.03307113699998,
+        "response_id": "o9Z8aqj_DNCs1t8PkuK0sAg"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "328CO0000000425",
+      "law_name": "私立学校教職員共済法施行令",
+      "revisions": [
+        {
+          "law_data_id": 641393,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2027-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641392,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        },
+        {
+          "law_data_id": 641371,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2026-07-29",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "短期給付の適用範囲と高額療養費の算定基準に関する見直し",
+        "body": "この政令は、私立学校教職員共済法における短期給付に関する国家公務員共済組合法施行令の準用規定と高額療養費の算定方法について改正を行います。\n\n令和8年8月1日に施行される改正により、私立学校教職員共済法における短期給付に関する国家公務員共済組合法施行令の準用規定が見直されます。具体的には、市町村民税の経過措置や一部の給付に関する特例措置を定めていた附則の規定が準用対象から除外され、短期給付に関する特定の条項について、読み替え適用から除外される範囲が調整されます。\n\n令和9年8月1日には、短期給付に関する国家公務員共済組合法施行令の準用規定が再度改正され、育児休業手当金等の算定において育児休業支援手当金が合算されるようになります。これにより、育児休業中の支援が拡充された場合の手当金算定に影響が出ます。また、短期給付の支給に関する一部の条項で、適用対象からの除外規定がさらに変更されます。\n\n高額療養費の支給については、令和8年8月1日の施行により特例が設けられます。標準報酬月額が16万円未満の加入者、または70歳以上の加入者に対し、私立学校教職員共済法施行令が準用する国家公務員共済組合法施行令の規定に基づき、特別な算定基準額を用いた高額療養費の計算が行われます。この特例の適用を受けるためには事業団の確認が必要となります。なお、施行日より前の療養に係る高額療養費の支給は、引き続き従来の規定が適用されます。\n\nこれらの改正を円滑に実施するため、日本私立学校振興・共済事業団は、各施行日より前から、高額療養費の算定や短期給付の認定に関する準備行為として、必要な認定を行うことができるようになります。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 14185,
+        "output_tokens": 473,
+        "thoughts_tokens": 4603,
+        "total_tokens": 19261,
+        "elapsed_seconds": 31.90600894499994,
+        "response_id": "uNZ8aojpFNCs1t8PkuK0sAg"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "412CO0000000041",
+      "law_name": "行政機関の保有する情報の公開に関する法律施行令",
+      "revisions": [
+        {
+          "law_data_id": 641359,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000234",
+          "amendment_name": "国家情報会議設置法の施行に伴う関係政令の整備等に関する政令",
+          "amendment_num": "令和八年政令第二百三十四号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "情報公開事務の委任対象に国家情報局長を追加",
+        "body": "国家情報会議設置法の施行に伴い、行政機関の保有する情報の公開に関する法律施行令が改正されます。\n\n現行の施行令では、行政機関の長は、情報公開法に定める権限または事務を内閣情報官など特定の職に委任することが可能でした。改正後は、委任対象から内閣情報官が削除され、新たに国家情報局長が追加されます。これにより、行政機関の長は、情報公開に関する事務を国家情報局長に委任できるようになります。\n\nこの改正政令は、令和八年七月三十一日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 1838,
+        "output_tokens": 159,
+        "thoughts_tokens": 1077,
+        "total_tokens": 3074,
+        "elapsed_seconds": 8.39951804400016,
+        "response_id": "2dZ8aon3Hu-Plu8PxfDT-QY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "327CO0000000368",
+      "law_name": "防衛省の職員の給与等に関する法律施行令",
+      "revisions": [
+        {
+          "law_data_id": 641398,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2027-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641397,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        },
+        {
+          "law_data_id": 641378,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2026-07-29",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "高額療養費の年間合算制度導入及び算定基準額の見直し",
+        "body": "本改正は、防衛省の職員の高額療養費制度について、年間合算制度を導入し、現行の月間高額療養費制度の規定を再編するとともに、高額療養費の算定基準額を見直します。\n\n令和八年八月一日施行の改正により、現行の「高額療養費の支給要件及び支給額」は「月間の高額療養費の支給要件及び支給額」に名称が変更されます。新たに「年間の高額療養費の支給要件及び支給額」が設けられ、年間での高額療養費支給制度が導入されるとともに、高額療養費算定基準額の規定が独立した条文に整理されます。その他、年間の高額療養費制度の導入に伴い、関連条文における参照規定の更新や、退職者等の基準日に関する特例、高額介護合算療養費の支給要件の修正が行われます。また、施行日前の療養に係る高額療養費の支給には従前の規定が適用され、特定の所得層の自衛官等に対する算定基準額の確認措置が導入されるほか、一部認定に関する事前準備が認められます。\n\n令和九年八月一日施行の改正では、月間の高額療養費の算定基準額が大幅に見直されます。標準報酬の月額に応じた所得区分が従来の5段階から13段階に細分化され、各区分の算定基準額および多数回該当の場合の金額が変更されます。例えば、標準報酬の月額が127万円以上の自衛官については、算定基準額が85,800円から342,000円に引き上げられます。同様に、特定疾病給付対象療養の算定基準額も新しい所得区分に応じて見直されます。また、国が費用を負担すべき療養に係る2万円の特例における対象者の範囲が拡大されるほか、年間の高額療養費の算定基準額についても、新たな標準報酬の月額に応じた区分が追加され、各区分の基準額が設定されます。これらの算定基準額の改定に伴い、高額療養費の支給に関する防衛大臣による認定の基準も変更後の金額に則したものとなります。なお、この施行日前に受けた療養に係る高額療養費の支給については、従前の規定が適用されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 25369,
+        "output_tokens": 570,
+        "thoughts_tokens": 5601,
+        "total_tokens": 31540,
+        "elapsed_seconds": 36.54549670200004,
+        "response_id": "5dZ8ap2MF--Plu8PxfDT-QY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "413CO0000000245",
+      "law_name": "電波法施行令",
+      "revisions": [
+        {
+          "law_data_id": 641360,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000234",
+          "amendment_name": "国家情報会議設置法の施行に伴う関係政令の整備等に関する政令",
+          "amendment_num": "令和八年政令第二百三十四号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "情報収集衛星に係る電波利用料免除規定の変更",
+        "body": "電波法施行令が改正され、国家情報会議設置法の施行に伴う関係規定の整備が行われます。これにより、電波利用料の納付を要しない無線局に関する規定の参照元が変更されます。\n\n具体的には、内閣官房が開設する情報収集衛星の無線局および関連する無線局について、電波利用料が免除される根拠が、従来の「内閣官房組織令」から、新たに施行される「国家情報会議設置法」へと改められます。この変更は、情報収集衛星に関する事務が新たな組織法に基づくことになったことに伴うものです。\n\n本改正は、令和8年7月31日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 819,
+        "output_tokens": 177,
+        "thoughts_tokens": 1593,
+        "total_tokens": 2589,
+        "elapsed_seconds": 11.916171933999976,
+        "response_id": "C9d8aq7rD7m0lu8P8-bh2Q8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "406M50000100063",
+      "law_name": "中国残留邦人等の円滑な帰国の促進並びに永住帰国した中国残留邦人等及び特定配偶者の自立の支援に関する法律施行規則",
+      "revisions": [
+        {
+          "law_data_id": 634567,
+          "sub_revision": "3",
+          "amendment_id": "508M60000100028",
+          "amendment_name": "医療法等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第二十八号",
+          "enforcement_date": "2027-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641432,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100117",
+          "amendment_name": "健康保険法施行規則等の一部を改正する省令",
+          "amendment_num": "令和八年厚生労働省令第百十七号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "支援給付に係る適用規定の整備",
+        "body": "中国残留邦人等の円滑な帰国の促進並びに永住帰国した中国残留邦人等及び特定配偶者の自立の支援に関する法律施行規則において、支援給付に係る他省令の適用規定が見直されます。これにより、健康保険、船員保険、高齢者医療に関する規定の適用範囲が拡大され、また地域医療介護に関する規則の参照条文が修正されます。さらに、本省令の第一条が施行期日を定める条文へと変更されます。\n\n支援給付を保護または医療扶助とみなす場合の健康保険法施行規則の適用条文について、その範囲が第百一条から第百三条まで、第百七条及び第百八条から、第百一条から第百三条の五まで、第百七条及び第百八条へと拡大されます。これにより、健康保険に関する支援給付の運用において参照される規定が追加されます。この改正は令和八年八月一日から施行されます。\n\n同様に、支援給付を保護または医療扶助とみなす場合の船員保険法施行規則の適用条文の範囲が、第九十条から第九十二条まで、第九十七条及び第九十八条から、第九十条から第九十二条の五まで、第九十七条及び第九十八条へと拡大されます。船員保険の領域においても、支援給付の適用に関する規定が拡充されます。この改正は令和八年八月一日から施行されます。\n\n高齢者の医療の確保に関する法律施行規則において支援給付を保護とみなす際の適用条文の範囲が、第六十四条及び第六十五条から、第六十四条から第六十五条の四までへと拡大されます。高齢者医療制度における支援給付の取り扱いに関する規定がより広範に適用されるようになります。この改正は令和八年八月一日から施行されます。\n\n地域における医療及び介護の総合的な確保の促進に関する法律施行規則の規定の適用について、参照される条文が第七条の三第一号から第七条の二第一号へと変更されます。これは、支援給付の適用における参照規定の特定箇所を修正するものです。この改正は令和九年四月一日から施行されます。\n\n本省令の第一条の規定が全面的に改められ、新たに「この省令は、令和八年八月一日から施行する。」と規定されるようになります。これにより、本省令の施行期日に関する規定が第一条に明記されることになります。この改正は令和八年八月一日から施行されます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 2173,
+        "output_tokens": 578,
+        "thoughts_tokens": 4483,
+        "total_tokens": 7234,
+        "elapsed_seconds": 30.27135165300001,
+        "response_id": "Gdd8aoTTGviDtrIPyP7WiQ8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "413M60000100001",
+      "law_name": "厚生労働省組織規則",
+      "revisions": [
+        {
+          "law_data_id": 641413,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100116",
+          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第百十六号",
           "enforcement_date": "2026-10-01",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
@@ -492,32 +1954,287 @@
     },
     "response": {
       "summary": {
-        "title": "再就職届出不要報酬額の定額化",
-        "body": "本改正により、自衛官の再就職に関する防衛大臣への事後の届出が不要となる報酬額の算定方法が変更されます。\n\n現行制度では、再就職した日から一年間につき、所得税法上の給与所得控除額と租税特別措置法上の基礎控除額の合計額がその上限とされていました。改正後は、この上限額が一律に年間百六十万円と定められます。\n\nこれにより、自衛官が営利企業以外の事業の団体に再就職する際の届出要否の判断基準が明確化され、手続きの簡素化が図られます。本改正は2026年10月1日に施行されます。"
+        "title": "化学物質評価室の作業環境測定業務範囲拡大",
+        "body": "この省令改正により、厚生労働省組織規則が改正されます。\n\n化学物質評価室及び環境改善・ばく露対策室の業務範囲が拡大されます。具体的には、有害物に係る労働安全衛生法第六十五条に規定する作業環境測定に関する業務に加え、同法第六十五条の二及び第六十五条の三に規定する作業環境測定に関する業務も担当することになります。これにより、同室は有害化学物質に関するより広範な作業環境測定の監督・関与を担うこととなり、施行日である令和八年十月一日から適用されます。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 801,
-        "output_tokens": 186,
-        "thoughts_tokens": 2896,
-        "total_tokens": 3883,
-        "elapsed_seconds": 19.645463931999984,
-        "response_id": "-ix6asqMF76N89kP1-HHwQY"
+        "prompt_tokens": 984,
+        "output_tokens": 154,
+        "thoughts_tokens": 2113,
+        "total_tokens": 3251,
+        "elapsed_seconds": 13.442357081999944,
+        "response_id": "Odd8avCtFriOtPUPj_OpyAY"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "420M60000002084",
-      "law_name": "行政執行法人の役員の退職管理に関する内閣官房令",
+      "law_id": "333M50000100053",
+      "law_name": "国民健康保険法施行規則",
       "revisions": [
         {
-          "law_data_id": 641338,
+          "law_data_id": 641434,
           "sub_revision": "1",
-          "amendment_id": "508M60000001008",
-          "amendment_name": "職員の退職管理に関する内閣官房令及び行政執行法人の役員の退職管理に関する内閣官房令の一部を改正する内閣官房令",
-          "amendment_num": "令和八年内閣官房令第八号",
+          "amendment_id": "508M60000100117",
+          "amendment_name": "健康保険法施行規則等の一部を改正する省令",
+          "amendment_num": "令和八年厚生労働省令第百十七号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "高額療養費等の算定基準・申請手続きの見直し",
+        "body": "この改正は、国民健康保険における高額療養費及び高額介護合算療養費の算定方法と申請手続きを主に変更し、年間高額療養費に関する新たな規定を設けるものです。この省令は令和8年8月1日から施行されます。\n\n療養費の算定と認定の制度では、特定の療養等に要した費用の額の算定方法を定める規定が第二十七条の十三の七として再編されました。また、特定の政令規定における厚生労働省令で定める日を明確化する第二十七条の十四が新設されます。市町村または組合が特定の被保険者に対して行う認定の対象となる事由に新たな区分が追加され（令第二十九条の四第一項第五号ハや令第二十九条の三第六項第三号など）、認定業務の範囲が拡大されます。\n\n年間高額療養費については、令第二十九条の二の三に基づく支給申請手続きに関する新条文（第二十七条の十七の四）が設けられます。この新手続きでは、申請者の氏名、生年月日、個人番号、計算期間、高額療養費に係る療養を受けた者の情報、被保険者記号・番号などの記載が求められます。また、特定の高額療養費の支給申請には事実を証明する書類の添付が必要ですが、市町村や組合が公簿等で確認できる場合は書類を省略できます。既存の年間高額療養費支給申請に関する規定（第二十七条の十七の二）も改正され、書類添付に関する新たな規定が追加されるとともに、通知事項に高額療養費算定基準額が含まれるようになります。計算期間中に死亡した世帯員に係る高額療養費の申請（精算対象者の定義を含む）についても、参照条文が更新されます。さらに、健康保険法施行令等の一部を改正する政令附則第二十五条第三項の規定による申請に関して、特定の所得基準を満たす場合にその旨を付記することで申請を行う方法が第六条で定められます。\n\n高額療養費の申請に係る特例（第二十七条の十七）の対象に、新たに設けられた年間高額療養費の申請手続き（第二十七条の十七の四）が加わります。これにより、市町村はこれらの申請手続きについて別段の定めをすることが可能になります。また、申請書の記載事項を定める第二十八条の二の対象にも、新設される第二十七条の十七の四が追加されます。健康保険法施行令等の一部を改正する政令附則第二十五条第一項に定める「厚生労働省令で定める日」として、国民健康保険法施行令に規定する基準日の属する月の初日などが第五条で明確化されます。\n\n他の健康保険制度との連携を確保するため、健康保険法施行令における日雇特例被保険者に関する規定の参照が、高額療養費及び高額介護合算療養費の算定額を定める国民健康保険法施行規則の複数の条文（第二十七条の十八、第二十七条の十九、第二十七条の二十、第二十七条の二十一、第二十七条の二十四）において、最新の条項（第五項から第六項、第七項、第八項など）に更新されます。これにより、各制度間での算定基準の整合性が図られます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 18164,
+        "output_tokens": 758,
+        "thoughts_tokens": 4289,
+        "total_tokens": 23211,
+        "elapsed_seconds": 30.476160988999936,
+        "response_id": "SNd8asz7MuvBvPEP_tHiwAI"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "329M50000002023",
+      "law_name": "地方税法施行規則",
+      "revisions": [
+        {
+          "law_data_id": 637208,
+          "sub_revision": "2",
+          "amendment_id": "508M60000008047",
+          "amendment_name": "地方税法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第四十七号",
+          "enforcement_date": "2029-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641305,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008089",
+          "amendment_name": "地方税法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第八十九号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2029-01-01",
+          "enforcement_comment": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行の日の属する年の翌々年の一月一日",
+          "is_current": false
+        },
+        {
+          "law_data_id": 637205,
+          "sub_revision": "2",
+          "amendment_id": "508M60000008044",
+          "amendment_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第四十四号",
+          "enforcement_date": "2028-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641304,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008089",
+          "amendment_name": "地方税法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第八十九号",
+          "enforcement_date": "2028-01-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 637204,
+          "sub_revision": "2",
+          "amendment_id": "508M60000008044",
+          "amendment_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第四十四号",
+          "enforcement_date": "2028-01-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 637203,
+          "sub_revision": "2",
+          "amendment_id": "508M60000008044",
+          "amendment_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第四十四号",
+          "enforcement_date": "2027-09-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 637202,
+          "sub_revision": "2",
+          "amendment_id": "508M60000008044",
+          "amendment_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第四十四号",
+          "enforcement_date": "2027-05-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 625834,
+          "sub_revision": "9",
+          "amendment_id": "507M60000008030",
+          "amendment_name": "地方税法施行規則の一部を改正する省令",
+          "amendment_num": "令和七年総務省令第三十号",
+          "enforcement_date": "2027-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641303,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008089",
+          "amendment_name": "地方税法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第八十九号",
+          "enforcement_date": "2027-01-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 637201,
+          "sub_revision": "2",
+          "amendment_id": "508M60000008044",
+          "amendment_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第四十四号",
+          "enforcement_date": "2027-01-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 627705,
+          "sub_revision": "8",
+          "amendment_id": "507M60000008067",
+          "amendment_name": "地方税法施行規則等の一部を改正する省令",
+          "amendment_num": "令和七年総務省令第六十七号",
+          "enforcement_date": "2027-01-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 613172,
+          "sub_revision": "20",
+          "amendment_id": "505M60000008037",
+          "amendment_name": "地方税法施行規則の一部を改正する省令",
+          "amendment_num": "令和五年総務省令第三十七号",
+          "enforcement_date": "2027-01-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 637200,
+          "sub_revision": "2",
+          "amendment_id": "508M60000008044",
+          "amendment_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第四十四号",
+          "enforcement_date": "2026-12-11",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 637207,
+          "sub_revision": "2",
+          "amendment_id": "508M60000008046",
+          "amendment_name": "地方税法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第四十六号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2026-11-26",
+          "enforcement_comment": "都市再生特別措置法等の一部を改正する法律（令和八年法律第二十三号）の施行の日",
+          "is_current": false
+        },
+        {
+          "law_data_id": 637206,
+          "sub_revision": "2",
+          "amendment_id": "508M60000008045",
+          "amendment_name": "地方税法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第四十五号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2026-11-19",
+          "enforcement_comment": "物資の流通の効率化に関する法律の一部を改正する法律（令和八年法律第二十一号）の施行の日",
+          "is_current": false
+        },
+        {
+          "law_data_id": 641302,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008089",
+          "amendment_name": "地方税法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第八十九号",
           "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 637199,
+          "sub_revision": "2",
+          "amendment_id": "508M60000008044",
+          "amendment_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第四十四号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641301,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008089",
+          "amendment_name": "地方税法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第八十九号",
+          "enforcement_date": "2026-07-21",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "地方税行政のデジタル化推進、暗号資産課税整備、災害対策税制強化",
+        "body": "今回の改正では、地方税に関する行政手続きのデジタル化推進、特定暗号資産に係る譲渡所得等の課税制度の整備、災害危険区域等に関する税制上の措置の明確化、固定資産税の課税特例対象施設の拡充などが主な変更点となります。\n\n地方税行政のデジタル化が大きく推進されます。行政機関間の地方税関連情報の電子的な通知・照会手続きが拡充され、総務大臣が定める安全性・信頼性基準に適合する形で実施されます（2027年4月1日、5月1日施行）。これにより、地方税法に基づく資料提供や関係書類の閲覧・記録などが電子的手段で可能になります。また、納税者に対しても、自動車税、固定資産税、軽自動車税などの納税通知書が、希望に応じて電磁的方法で提供されるようになり、利便性が向上します。さらに、一億円以上の特定徴収金の納付・納入手続きにおいて、電子または書面による地方税関係申告等と同時に情報送信を行うことが可能となり（2028年4月1日施行）、高額な税金の電子的な徴収手続きが整備されます。電子申告における国税関係法令との連携に関する軽微な条項番号の修正も行われます（2027年9月1日施行）。\n\n特定暗号資産（暗号資産）の譲渡所得等に対する課税制度が整備されます。金融商品取引法等の改正に伴い、地方税法において特定暗号資産に係る譲渡所得等の計算に関する明細書の提出が義務付けられ、譲渡損失の繰越控除に関する規定も新設されます（金融商品取引法及び資金決済に関する法律の一部を改正する法律の施行の日の属する年の翌々年1月1日施行）。これは、暗号資産の譲渡による所得や損失に対して、先物取引と同様の税制上の扱いを明確化するもので、関連する申告書様式も整備されます。\n\n災害対策関連の税制措置が明確化されます。地方税法における災害危険区域と浸水想定区域の定義が詳細に規定されます（2029年4月1日施行）。道府県知事による災害危険区域の指定公示制度が導入され、また、水防法に基づく水深3メートル以上の浸水想定区域が税制上の対象区域として定められます。これらの定義は、災害に強いまちづくりに向けた税制上のインセンティブや規制の適用をより明確にするための基盤となります。市町村長レベルでの災害危険区域、浸水想定区域の定義も整備されます。\n\n固定資産税の課税標準の特例措置の対象となる施設が拡充されます。特に、特定貨物自動車中継輸送施設が新たに定義され、税制上の優遇対象となります（2026年11月19日施行）。これには、物流効率化に資する施設の骨格材などが含まれます。また、都市再生特別措置法等との連携により、都市の魅力向上や国際競争力強化に資する施設（例：民間事業者の交流・連携拠点となる集会施設、国際会議場、観光案内所、防災備蓄倉庫など）も特例の対象として追加されるなど、多様な都市機能の整備を促進する政策が反映されています（2026年11月26日施行）。自動車税及び軽自動車税の環境性能割における低排出ガス車認定や燃費評価の基準も、関連する要領の改正に合わせて更新され、学校法人が放課後児童健全育成事業を行う場合の課税の特例の対象として追加されます（2026年7月21日施行）。\n\n地方税申告手続きの簡素化が進められます。給与の支払いに関する納期の特例承認申請において、過去の給与詳細に関する記載事項が簡素化され、納税者の負担が軽減されます（2027年1月1日施行）。また、特定配当等に係る道府県民税の申告書や個人の道府県民税・市町村民税の賦課に関する書類など、複数の申告様式が関連する税制改正に伴い更新されます（2027年1月1日施行）。道府県たばこ税及び市町村たばこ税に関する申告様式も更新されます（2026年10月1日施行）。\n\nふるさと納税制度に関する地方団体の指定期間と申請手続きが明確化・整備されます（2026年10月1日施行）。地方団体が寄附金税額控除の対象となる指定を受けるための期間が毎年10月1日から翌年9月30日までと定められ、申請受付期間や、未指定団体・指定取消し団体向けの申請手続きも具体的に規定されます。さらに、指定申請時に必要な書類として、返礼品等の内容に関する書類や、基準適合性に関する事項の記載が求められるようになります。\n\nその他の変更として、負債整理計画の決定等に関する条文や（2026年12月11日施行）、優良住宅地の造成等、東日本大震災に係る買換資産の特例に関する条文（2028年1月1日施行）において、関連する上位法令の条項番号の参照が技術的に修正されます。これらの改正は、既存の税制の運用を円滑にするための調整です。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 84680,
+        "output_tokens": 1215,
+        "thoughts_tokens": 9464,
+        "total_tokens": 95359,
+        "elapsed_seconds": 66.64906062400019,
+        "response_id": "ftd8arJojYPy4A-00sjJBQ"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "417M60000008167",
+      "law_name": "携帯音声通信事業者による契約者等の本人確認等及び携帯音声通信役務の不正な利用の防止に関する法律施行規則",
+      "revisions": [
+        {
+          "law_data_id": 641411,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008094",
+          "amendment_name": "携帯音声通信事業者による契約者等の本人確認等及び携帯音声通信役務の不正な利用の防止に関する法律施行規則の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第九十四号",
+          "enforcement_date": "2027-04-01",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": false
@@ -526,31 +2243,31 @@
     },
     "response": {
       "summary": {
-        "title": "再就職届出不要報酬額の定額化",
-        "body": "行政執行法人の役員の退職管理に関する内閣官房令が、令和8年10月1日に施行される改正により変更されます。\n\n内閣総理大臣への事後の再就職届出が不要となる報酬額の算定方法が簡素化されます。現行の規定では、営利企業以外の事業の団体の地位に就くなどした場合に、一年間につき届出が不要となる報酬額は、所得税法上の給与所得控除額と租税特別措置法上の基礎控除額の合計額とされていました。改正後は、この報酬額が一律に年間百六十万円と定められます。これにより、届出が不要となる基準が明確化され、関係者の理解が容易になります。"
+        "title": "本人確認方法にICチップ情報読み取り義務化",
+        "body": "携帯音声通信事業者や貸与業者による契約者等の本人確認方法が、ICチップが組み込まれた本人確認書類の活用を義務付けるなど、より高度化されます。これは、不正な携帯音声通信役務の利用防止を強化するための措置です。\n\n新たに「写真・半導体集積回路付き本人確認書類」や「写真なし半導体集積回路付き本人確認書類」といったICチップが組み込まれた本人確認書類の定義が導入されます。特定事項伝達型本人限定受取郵便等を利用した本人確認や、代表者等の本人確認においては、これらのICチップに記録された氏名、住居、生年月日、写真などの情報の読み取りが義務付けられます。これにより、より確実で効率的な本人確認が可能となり、デジタル技術を活用した本人確認の推進が図られます。\n\n本人確認に利用できる書類の分類が詳細化され、「写真付き半導体集積回路なし本人確認書類」や「写真・半導体集積回路なし本人確認書類」などの区分が設けられます。また、住民基本台帳法の適用を受けない者や国外転出者といった特定の対象者に対する本人確認においては、書留郵便等による送付が困難な場合に、特定記録郵便等を利用することが可能となり、本人確認の選択肢が広がります。\n\n本人確認記録の記録事項には、ICチップから情報を読み取った日付を記録することが明確化されます。また、本人確認に用いた書類等の保存に関する規定も拡充され、ICチップから読み取られた情報や郵便の業務従事者から送信された情報も保存の対象となります。携帯音声通信事業者や貸与業者の「職員」に関する規定が「従業者」に変更され、業務に従事する者の範囲が実態に合わせて見直されます。これらの改正は、2027年4月1日から施行されます。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 820,
-        "output_tokens": 191,
-        "thoughts_tokens": 1796,
-        "total_tokens": 2807,
-        "elapsed_seconds": 13.169642798999973,
-        "response_id": "Dy16avqHF4y3vPEP0KyqgQ8"
+        "prompt_tokens": 16199,
+        "output_tokens": 430,
+        "thoughts_tokens": 5516,
+        "total_tokens": 22145,
+        "elapsed_seconds": 36.59109781799998,
+        "response_id": "wtd8auuFCYX62_gP6onnsAc"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "340M50010000017",
-      "law_name": "農林水産技術会議事務局組織規則",
+      "law_id": "410M50000200083",
+      "law_name": "種苗法施行規則",
       "revisions": [
         {
-          "law_data_id": 641337,
+          "law_data_id": 641344,
           "sub_revision": "1",
-          "amendment_id": "508M60000200051",
-          "amendment_name": "農林水産技術会議事務局組織規則の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第五十一号",
+          "amendment_id": "508M60000200052",
+          "amendment_name": "種苗法施行規則及び品種登録規則の一部を改正する省令",
+          "amendment_num": "令和八年農林水産省令第五十二号",
           "enforcement_date": "2026-07-24",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
@@ -560,17 +2277,231 @@
     },
     "response": {
       "summary": {
-        "title": "研究企画課の所掌事務に新法関連業務を追加",
-        "body": "本改正は、農林水産技術会議事務局の組織規則を一部変更するものであり、研究企画課と研究推進課の所掌事務を明確化します。施行日は令和8年7月24日です。\n\n研究企画課の所掌事務に、「重要品種の育成及びその種苗の生産の振興に関する法律」の施行に関する事項が新たに追加されます。これにより、研究企画課は、重要な品種の育成と種苗生産の振興に関わる新たな法律の実施を担うことになります。\n\n研究推進課の所掌事務のうち、都道府県や民間事業者などが行う試験及び研究の指導・助成に関する業務について、研究企画課の所掌に属する事項が除外されることが明記されます。これにより、両課間の業務範囲が明確になり、重複を避けることが可能となります。"
+        "title": "品種登録料の年次納付期間の延長",
+        "body": "本改正により、品種登録における年次登録料の納付期間が変更されます。現行では登録から十年目以降の登録料は第三十年目まで毎年三万円ですが、改正後はこの期間が第四十年目まで延長されます。\n\nこれにより、品種登録者は、登録から十年目から四十年目までの間、毎年三万円の登録料を納めることになり、現行よりも十年長く当該登録料を支払う必要があります。なお、登録から一年目から九年目までの登録料（毎年四千五百円）に変更はありません。"
       },
       "usage": {
         "model": "gemini-2.5-flash",
-        "prompt_tokens": 663,
-        "output_tokens": 214,
-        "thoughts_tokens": 1271,
-        "total_tokens": 2148,
-        "elapsed_seconds": 18.30737285500004,
-        "response_id": "HS16atn8M5Gb89kPkfLDwAI"
+        "prompt_tokens": 558,
+        "output_tokens": 148,
+        "thoughts_tokens": 1332,
+        "total_tokens": 2038,
+        "elapsed_seconds": 9.579366931000095,
+        "response_id": "6Nd8apnVOJq81t8Pyemt-QY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "415M60000400039",
+      "law_name": "経済産業省関係構造改革特別区域法第二条第三項に規定する省令の特例に関する措置及びその適用を受ける特定事業を定める省令",
+      "revisions": [
+        {
+          "law_data_id": 637041,
+          "sub_revision": "1",
+          "amendment_id": "508M60000400037",
+          "amendment_name": "経済産業省関係構造改革特別区域法第二条第三項に規定する省令の特例に関する措置及びその適用を受ける特定事業を定める省令の一部を改正する省令",
+          "amendment_num": "令和八年経済産業省令第三十七号",
+          "enforcement_date": "2026-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "水素等関連施設の特例廃止と関係条項の整理",
+        "body": "この省令改正は、構造改革特別区域における高圧ガス関連の特定事業に関する一部の特例措置を廃止し、関連条項の整理を行うものです。施行日は2026年4月1日です。\n\n構造改革特別区域において、水素ガススタンド等の設置における保安統括者の選任特例、燃料電池自動車用水素ガス容器等の容器再検査特例、及び液化ガス容器への充てんに係る特例を定めていた第六条、第七条、及び第九条が削除されます。これにより、これらの高圧ガス関連の施設や容器に適用されていた特定の規制緩和措置は廃止されます。\n\n経済産業省関係の特定事業を定める条項が、第三十三条から第三十四条に条文番号が変更され、その中で参照する構造改革特別区域法の別表番号も第二十七号から第二十五号に改められます。これに伴い、本省令の別表（第三十四条関係）も、この新しい条文番号を参照するように更新されます。これは、特定事業の指定に関する法的な参照構造の変更を反映するものです。\n\n特定施設の保安検査期間に関する特例を定める第十一条第一項第四号において、事故評価に関する記録の適用除外対象となる「水素ガススタンド等」の表現が、具体的な定義（燃料電池自動車に固定した容器に水素を充てんする設備、またはジメチルエーテルを燃料として使用する車両に固定した燃料装置用容器に当該ジメチルエーテルを充てんする設備）に詳細化されます。これは、事故評価記録の作成要件における対象施設の範囲を明確にするためのものです。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 2460,
+        "output_tokens": 390,
+        "thoughts_tokens": 3811,
+        "total_tokens": 6661,
+        "elapsed_seconds": 25.175915338999857,
+        "response_id": "89d8au-8K5yZ28sPwfDdiA8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "315M10000100005",
+      "law_name": "船員保険法施行規則",
+      "revisions": [
+        {
+          "law_data_id": 630903,
+          "sub_revision": "5",
+          "amendment_id": "508M60000100018",
+          "amendment_name": "労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律等の一部を改正する法律の施行に伴う厚生労働省関係省令の整備に関する省令",
+          "amendment_num": "令和八年厚生労働省令第十八号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641435,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100117",
+          "amendment_name": "健康保険法施行規則等の一部を改正する省令",
+          "amendment_num": "令和八年厚生労働省令第百十七号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "年間高額療養費申請手続きの明確化と資格認定対象の拡大",
+        "body": "船員保険法施行規則が改正され、年間高額療養費の申請手続きが明確化されるとともに、特定の資格認定の対象が拡大されます。本改正は、主に省令が参照する他の法令の改正に伴うものです。\n\n令和8年8月1日から施行される改正により、令第八条の三に基づく年間高額療養費の新たな申請手続きが導入されます。これにより、当該高額療養費の支給を受けようとする者は、被保険者等記号・番号や個人番号などの必要事項を記載した申請書を提出することになります。また、令第九条第十項第二号などの特定の要保護者に該当する場合、証明書類の添付が求められますが、協会がマイナンバー制度を通じて同一内容の情報を取得できる場合は不要となります。さらに、令第八条の二に基づく年間高額療養費の通知には、新たに高額療養費算定基準額が追加されます。特定の低所得の被保険者に対しては、新たな申請書に所定の事項を付記することで、年間高額療養費の申請を行う特例的な方法が設けられます。\n\nまた、令和8年8月1日から、「限度額適用・標準負担額減額認定」に係る情報が資格確認書に記載される対象が、令第十条第一項第四号ハ及び令第九条第五項第三号の規定による協会認定を受けた者にも拡大されます。これに伴い、申請者がこれらの規定に該当しなくなった場合の通知に関する読み替え規定も更新されます。\n\n令和8年10月1日から施行される改正では、雇用の分野における男女の均等な機会及び待遇の確保等に関する法律の条項番号の変更に伴い、本規則第二百十九条で定める参照条項が更新されます。そのほか、健康保険法施行令における条項番号の変更に対応するため、本規則の複数の条項（第三十五条、第九十五条、第九十九条、第百条、第百一条、第百二条、第百三条、第百六条など）で参照条項の技術的な修正が行われます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 16792,
+        "output_tokens": 484,
+        "thoughts_tokens": 6502,
+        "total_tokens": 23778,
+        "elapsed_seconds": 40.64816243999985,
+        "response_id": "ENh8atihC4PIivYP2obPsAQ"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "419M60000100129",
+      "law_name": "高齢者の医療の確保に関する法律施行規則",
+      "revisions": [
+        {
+          "law_data_id": 641431,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100117",
+          "amendment_name": "健康保険法施行規則等の一部を改正する省令",
+          "amendment_num": "令和八年厚生労働省令第百十七号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "後期高齢者医療の高額療養費申請等手続見直し",
+        "body": "令和8年8月1日より、高齢者の医療の確保に関する法律施行規則において、後期高齢者医療における高額療養費に関する申請手続きおよび関連事務が変更されます。これは、新たな高額療養費の支給規定に対応するための見直しです。\n\n後期高齢者医療広域連合が行う事務の範囲が再編・拡充され、特に高額療養費の支給申請に関する手続きが具体的に定められます。これには、申請書に記載すべき事項（被保険者番号、氏名、個人番号、計算期間、療養年月など）や添付書類の要件、広域連合からの情報提供者への通知義務などが含まれます。\n\n高額療養費に関連する「厚生労働省令で定める日」の定義が明確化され、他の関連規定と整合性が図られます。また、高額療養費の支給や食事・生活療養標準負担額の減額によって生活保護が不要となる「要保護者」の定義が新たに設けられ、対象者の範囲が明確にされます。\n\n限度額適用・標準負担額減額の認定を受けられる対象者の範囲が拡大されるとともに、その認定が失効する条件も最新の規定に合わせて更新されます。\n\nその他、健康保険法施行令など他の法令への参照規定に関して、日雇特例被保険者に関連する箇所を中心に複数の技術的な修正が行われ、介護合算算定基準額などの算出における参照がより正確になります。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 13234,
+        "output_tokens": 349,
+        "thoughts_tokens": 4114,
+        "total_tokens": 17697,
+        "elapsed_seconds": 27.73819293800034,
+        "response_id": "Odh8atHkO_DK1t8P_OKv-A8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "325M50080000012",
+      "law_name": "無線局（基幹放送局を除く。）の開設の根本的基準",
+      "revisions": [
+        {
+          "law_data_id": 641438,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008095",
+          "amendment_name": "無線局（基幹放送局を除く。）の開設の根本的基準等の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第九十五号",
+          "enforcement_date": "2026-07-30",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "携帯局の設置条件に関する表記変更",
+        "body": "本省令は、2026年7月30日に施行されます。携帯局の設置条件を定める第六条の三第一項および同項第一号において、条文中の参照表現が「左の」から「次に掲げる」へと改められます。この改正は、法律文書における一般的な表記の変更であり、携帯局の設置に関する実質的な条件や運用の変更を伴うものではありません。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 739,
+        "output_tokens": 115,
+        "thoughts_tokens": 3546,
+        "total_tokens": 4400,
+        "elapsed_seconds": 23.617929793999792,
+        "response_id": "Vth8apHhMpq81t8Pyemt-QY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "215IO0000000243",
+      "law_name": "健康保険法施行令",
+      "revisions": [
+        {
+          "law_data_id": 641396,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2027-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641395,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        },
+        {
+          "law_data_id": 640380,
+          "sub_revision": "2",
+          "amendment_id": "508CO0000000219",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百十九号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641394,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2026-07-29",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "高額療養費制度の所得区分と負担上限額の変更等",
+        "body": "健康保険法施行令の一部改正により、高額療養費制度に大きな見直しが行われます。これにより、医療費の自己負担上限額の計算方法が変更され、特に年間の医療費負担に対する新たな給付が導入されます。これらの改正は、一部が2026年8月1日に、より詳細な所得区分に応じた算定基準額の変更が2027年8月1日に施行されます。\n\n2026年8月1日より、年間の高額療養費制度が新たに導入されます（第四十一条の三）。この制度では、計算期間における医療費の自己負担額と介護サービス費の自己負担額を合算した金額が基準額を超えた場合、超過分が支給されます。この導入に伴い、月間の高額療養費の支給要件や高額介護合算療養費の計算方法も調整されます。具体的には、月間の高額療養費の計算において、七十五歳到達時特例対象療養に関する参照先が新しい年間の高額療養費の規定に変わります。\n\n高額療養費の算定基準額（第四十二条）は、2026年8月1日にまず一部の所得区分で見直され、特に低所得者層向けの市町村民税非課税者などの所得要件における公的年金等の金額が「八十万六千七百円」から「八十二万六千五百円」に引き上げられます（令和八年政令第二百十九号による第四十二条第三項第六号の変更）。さらに2027年8月1日には、標準報酬月額に基づく所得区分がより細分化され、特に高所得者層の区分が新設されるとともに、それぞれの所得区分に応じた新たな負担上限額（多数回該当の場合も含む）が設定されます。\n\n日雇特例被保険者に対しても、新設される年間の高額療養費制度が適用されるようになります（第四十四条）。これに伴い、傷病手当金の併給調整の対象となる者の要件や、高額療養費の準用に関する規定も調整されます。また、市町村が処理する事務に関する規定からは、「特別区を含む」という文言が削除され、表記が簡素化されます。\n\n附則については、複数の条項（第二条、第三条、第六条、第七条）が改定または再編されます。既存の特例規定が削除され、病床転換支援金等に関する新たな規定や、子ども手当に係る拠出金に関する規定が再配置されるなど、全体の構成が整理されます。また、施行日前の療養に対する高額療養費の支給は従前の例によるとともに、低所得者の高額療養費算定基準額の適用に際しては、保険者の確認が必要となる経過措置が設けられます。"
+      },
+      "usage": {
+        "model": "gemini-2.5-flash",
+        "prompt_tokens": 73330,
+        "output_tokens": 662,
+        "thoughts_tokens": 10685,
+        "total_tokens": 84677,
+        "elapsed_seconds": 69.06567085200004,
+        "response_id": "cth8aoDMM5q81t8Pyemt-QY"
       }
     }
   }
