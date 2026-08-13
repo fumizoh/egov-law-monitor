@@ -42,6 +42,8 @@ class Update(TypedDict):
     amendment_id: str | None
     amend_published_date: str | None
 
+    compare_url: str | None
+
     pending: bool
 
 

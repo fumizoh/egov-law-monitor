@@ -92,10 +92,7 @@ function renderLaws(
                     ? update.effective_date.replaceAll("-", "")
                     : null;
 
-            const compareUrl =
-                update.amendment_id && effectiveDate
-                    ? `https://laws.e-gov.go.jp/law/${law.law_id}/${effectiveDate}_${update.amendment_id}?occasion_date=${effectiveDate}&tab=compare`
-                    : null;
+            const compareUrl = update.compare_url;
 
             return `
 

@@ -7,6 +7,7 @@ from config import LAW_TYPE_ORDER
 from models import (
     Law,
     LawGroup,
+    RevisionHistory,
     Update,
 )
 
@@ -69,6 +70,17 @@ def _create_updates(
 
         metadata = matches[0]["metadata"]
 
+        compare_url = (
+            f"https://laws.e-gov.go.jp/law/"
+            f"{group.law_id}/"
+            f"{effective_date.replace('-', '')}_"
+            f"{revision.amendment_id}"
+            f"?occasion_date={effective_date.replace('-', '')}"
+            f"&tab=compare"
+            if revision.amendment_id and effective_date
+            else None
+        )
+
         updates.append(
             {
                 "law_data_id": revision.law_data_id,
@@ -85,6 +97,7 @@ def _create_updates(
                 "amend_published_date": metadata[
                     "amend_published_date"
                 ],
+                "compare_url": compare_url,
                 "pending": metadata["future"],
             }
         )

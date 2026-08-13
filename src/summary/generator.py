@@ -33,6 +33,9 @@ from summary.input import (
 
 MAX_XML_CHANGES = 50
 
+# DEBUG
+from pprint import pprint
+
 
 def _build_amendment_input(
     revision: RevisionHistory,
@@ -110,7 +113,7 @@ def _generate_new_law_summary(
 ) -> SummaryResponse:
 
     # DEBUG
-    print("Generating new law summary...")
+    # print("Generating new law summary...")
 
     summary_input = builder.build_new_law_summary_input(
         law_id=law_id,
@@ -187,7 +190,7 @@ def _generate_law_summary(
             )
 
     # DEBUG
-    print("Generating law summary...")
+    # print("Generating law summary...")
 
     prompt_input = builder.build_summary_input(
         law_name=law_name,
@@ -195,6 +198,9 @@ def _generate_law_summary(
     )
 
     prompt_document = prompt.build_prompt_document(prompt_input)
+
+    # DEBUG
+    # pprint(prompt_document)
 
     return _generate_summary(prompt_document)
 
