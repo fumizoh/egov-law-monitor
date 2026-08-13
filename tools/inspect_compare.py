@@ -13,7 +13,7 @@ from sources.compare_api import fetch_compare
 from pprint import pprint
 
 
-LAW_DATA_ID = 637704
+LAW_DATA_ID = 637185
 SUB_REVISION = 1
 
 

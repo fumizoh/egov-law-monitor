@@ -11,7 +11,7 @@ from models import RevisionHistory
 
 from sources.revision import get_revision_history
 
-LAW_ID = "504AC0000000043"
+LAW_ID = "412M50000100015"
 
 
 def print_revision_history(
