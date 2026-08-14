@@ -190,6 +190,14 @@ def build_law_summary_input(
         revisions,
     )
 
+    summary_revisions.sort(
+        key=lambda revision: (
+            revision.enforcement_date
+            or revision.scheduled_enforcement_date
+            or ""
+        )
+    )
+
     return LawSummaryInput(
         law_id=law_group.law_id,
         law_name=law_group.law_name,

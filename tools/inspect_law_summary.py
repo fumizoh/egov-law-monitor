@@ -24,7 +24,7 @@ def main() -> None:
 
     law_groups = sort_law_groups(law_groups)
 
-    law_group = law_groups[0]
+    law_group = law_groups[17]
 
     print(law_group.law_id)
     print(law_group.law_name)
