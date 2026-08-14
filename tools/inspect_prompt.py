@@ -35,7 +35,7 @@ payload = {
 
 headers = {
     "Content-Type": "application/json",
-    "User-Agent": "eGov Law Monitor",
+    "User-Agent": "e-Gov Law Monitor",
 }
 
 response = requests.post(

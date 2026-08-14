@@ -1,6 +1,6 @@
-# eGov Law Monitor
+# e-Gov Law Monitor
 
-eGov Law Monitor is an open-source project that monitors official Japanese legal information, transforms it into a canonical data model, and publishes structured JSON data through GitHub Pages.
+e-Gov Law Monitor is an open-source project that monitors official Japanese legal information, transforms it into a canonical data model, and publishes structured JSON data through GitHub Pages.
 
 Currently supported source:
 

@@ -25,13 +25,13 @@ def create_email_subject(
 
     if update_count == 0:
         return (
-            f"[eGov Law Monitor] "
+            f"[e-Gov Law Monitor] "
             f"{date} "
             f"新しい法令更新はありません"
         )
 
     return (
-        f"[eGov Law Monitor] "
+        f"[e-Gov Law Monitor] "
         f"{date} "
         f"法令更新（{update_count}件）"
     )
@@ -51,7 +51,7 @@ def create_email_body(
     if update_count == 0:
         return "\n".join(
             [
-                "eGov Law Monitor",
+                "e-Gov Law Monitor",
                 date,
                 "",
                 "新しい法令更新はありませんでした。",
@@ -63,7 +63,7 @@ def create_email_body(
 
     lines = []
 
-    lines.append("eGov Law Monitor")
+    lines.append("e-Gov Law Monitor")
     lines.append(date)
     lines.append("")
     lines.append(f"更新件数：{update_count}件")

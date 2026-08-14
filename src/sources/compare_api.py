@@ -9,7 +9,7 @@ COMPARE_URL = "https://laws.e-gov.go.jp/internal-api/SelectLawCompareData.json"
 
 HEADERS = {
     "Content-Type": "application/json",
-    "User-Agent": "eGov Law Monitor",
+    "User-Agent": "e-Gov Law Monitor",
 }
 
 
