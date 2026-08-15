@@ -46,6 +46,9 @@ function renderStatistics(statistics) {
     document.getElementById("update-count").textContent =
         egov.update_count;
 
+    document.getElementById("updated-law-count").textContent =
+        egov.updated_law_count;
+
     const div =
         document.getElementById("law-type-summary");
 

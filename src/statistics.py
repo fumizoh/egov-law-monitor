@@ -52,6 +52,7 @@ def _create_egov_statistics(
     return {
         "last_update": latest_date,
         "update_count": len(updates),
+        "updated_law_count": len(laws),
         "source": source_counts,
         "law_type": ordered_law_type_counts,
         "law_count": ordered_law_counts,
