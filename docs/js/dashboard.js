@@ -58,7 +58,7 @@ function renderStatistics(statistics) {
                 document.createElement("p");
 
             p.textContent =
-                `${name}：${count}件`;
+                `${name}：${count}件（${egov.law_count[name]}法令）`;
 
             div.appendChild(p);
 

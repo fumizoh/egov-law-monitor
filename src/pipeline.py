@@ -14,6 +14,7 @@ from statistics import create_source_statistics
 def _save_statistics(
     source: str,
     updates,
+    laws,
     date,
 ) -> None:
     """Create and save statistics."""
@@ -21,6 +22,7 @@ def _save_statistics(
     statistics = create_source_statistics(
         source=source,
         updates=updates,
+        laws=laws,
         latest_date=date,
     )
 
@@ -73,6 +75,7 @@ def process_egov(
     _save_statistics(
         "egov",
         updates,
+        laws,
         date,
     )
 

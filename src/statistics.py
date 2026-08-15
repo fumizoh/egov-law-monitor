@@ -5,6 +5,7 @@ from config import LAW_TYPE_ORDER
 
 def _create_egov_statistics(
     updates,
+    laws,
     latest_date,
 ):
     """
@@ -13,6 +14,7 @@ def _create_egov_statistics(
 
     source_counts = {}
     law_type_counts = {}
+    law_counts = {}
 
     for update in updates:
 
@@ -28,10 +30,23 @@ def _create_egov_statistics(
             law_type_counts.get(law_type, 0) + 1
         )
 
+    for law in laws:
+        law_type = law["law_type"]
+
+        law_counts[law_type] = (
+            law_counts.get(law_type, 0) + 1
+        )
+
     ordered_law_type_counts = {
         law_type: law_type_counts[law_type]
         for law_type in LAW_TYPE_ORDER
         if law_type in law_type_counts
+    }
+
+    ordered_law_counts = {
+        law_type: law_counts[law_type]
+        for law_type in LAW_TYPE_ORDER
+        if law_type in law_counts
     }
 
     return {
@@ -39,12 +54,14 @@ def _create_egov_statistics(
         "update_count": len(updates),
         "source": source_counts,
         "law_type": ordered_law_type_counts,
+        "law_count": ordered_law_counts,
     }
 
 
 def create_source_statistics(
     source,
     updates,
+    laws,
     latest_date,
 ):
     """
@@ -55,6 +72,7 @@ def create_source_statistics(
 
         return _create_egov_statistics(
             updates=updates,
+            laws=laws,
             latest_date=latest_date,
         )
 
