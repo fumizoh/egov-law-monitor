@@ -121,6 +121,10 @@ footer {
     margin: 8px 0;
 }
 
+.card p.update-summary {
+    margin: 2px 0;
+}
+
 .card p:last-of-type {
     margin-bottom: 12px;
 }
