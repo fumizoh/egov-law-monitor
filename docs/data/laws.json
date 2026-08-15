@@ -88,7 +88,21 @@
     "law_name": "国家社会機能継続性確保施策及び副首都の整備に係る施策の推進に関する法律",
     "law_type": "法律",
     "url": "https://laws.e-gov.go.jp/law/508AC1000000078/20261030_000000000000000",
-    "updates": []
+    "updates": [
+      {
+        "law_data_id": 641475,
+        "sub_revision": "1",
+        "published_date": "2026-07-31",
+        "effective_date": "2026-10-30",
+        "effective_comment": "公布の日から起算して三月を超えない範囲内において政令で定める日",
+        "amend_name": "新規制定",
+        "amend_no": "",
+        "amendment_id": null,
+        "amend_published_date": "2026-07-31",
+        "compare_url": null,
+        "pending": true
+      }
+    ]
   },
   {
     "law_id": "424AC1000000080",

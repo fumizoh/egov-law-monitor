@@ -62,7 +62,10 @@ def match_revisions(
 
                 if (
                     revision.is_new_law
-                    and revision.enforcement_date == effective_date
+                    and (
+                        revision.enforcement_date
+                        or revision.scheduled_enforcement_date
+                    ) == effective_date
                 ):
                     selected_law_data_ids.add(
                         revision.law_data_id,
