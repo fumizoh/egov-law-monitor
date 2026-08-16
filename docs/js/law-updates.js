@@ -135,7 +135,7 @@ function renderLaws(
             <p>
 
                 <a
-                    href="https://laws.e-gov.go.jp/law/${law.law_id}"
+                    href="${law.url}"
                     class="button"
                     target="_blank"
                 >

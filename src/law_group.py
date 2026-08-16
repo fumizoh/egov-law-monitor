@@ -30,7 +30,7 @@ def group_by_law(
                 law_no=metadata["law_number"],
                 law_name=event["title"],
                 law_type=metadata["law_type"],
-                url=event["url"],
+                url=f"https://laws.e-gov.go.jp/law/{law_id}",
                 events=[],
             )
 
