@@ -13,7 +13,7 @@ from statistics import create_source_statistics
 
 def _save_statistics(
     source: str,
-    updates,
+    events,
     laws,
     date,
 ) -> None:
@@ -21,7 +21,7 @@ def _save_statistics(
 
     statistics = create_source_statistics(
         source=source,
-        updates=updates,
+        events=events,
         laws=laws,
         latest_date=date,
     )
@@ -35,12 +35,12 @@ def _save_statistics(
 
 
 def process_egov(
-    updates,
+    events,
     date,
 ) -> list[Law]:
     """Process e-Gov updates."""
 
-    law_groups = law_group.group_by_law(updates)
+    law_groups = law_group.group_by_law(events)
 
     law_groups = law_builder.sort_law_groups(law_groups)
 
@@ -74,7 +74,7 @@ def process_egov(
     # Save Statistics
     _save_statistics(
         "egov",
-        updates,
+        events,
         laws,
         date,
     )

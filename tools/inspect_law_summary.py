@@ -20,18 +20,24 @@ def main() -> None:
 
     updates, date = egov.fetch()
 
+    # pprint(updates)
+
     law_groups = group_by_law(updates)
+
+    # pprint(law_groups)
 
     law_groups = sort_law_groups(law_groups)
 
-    law_group = law_groups[17]
+    # pprint(law_groups)
+
+    law_group = law_groups[3]
 
     print(law_group.law_id)
     print(law_group.law_name)
 
     summary_input = builder.build_law_summary_input(law_group)
 
-    pprint(summary_input)
+    # pprint(summary_input)
 
     result = generator._generate_law_summary(summary_input)
 

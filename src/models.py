@@ -27,6 +27,19 @@ class Event(TypedDict):
     metadata: dict[str, Any]
 
 
+@dataclass(slots=True)
+class LawGroup:
+    """Events grouped by law."""
+
+    law_id: str
+    law_no: str
+    law_name: str
+    law_type: str
+    url: str
+
+    events: list[Event]
+
+
 class Update(TypedDict):
     """Law update."""
 
@@ -47,9 +60,8 @@ class Update(TypedDict):
     pending: bool
 
 
-@dataclass(slots=True)
-class LawGroup:
-    """Events grouped by law."""
+class Law(TypedDict):
+    """Law."""
 
     law_id: str
     law_no: str
@@ -57,22 +69,7 @@ class LawGroup:
     law_type: str
     url: str
 
-    events: list[Event]
-
-
-@dataclass(slots=True)
-class CompareBlock:
-    """Normalized Compare API block."""
-
-    change_type: str
-
-    xpath: str
-
-    object_id: str
-
-    old_text: str | None
-
-    new_text: str | None
+    updates: list[Update]
 
 
 @dataclass(slots=True)
@@ -119,6 +116,34 @@ class LawRevision:
 
 
 @dataclass(slots=True)
+class CompareBlock:
+    """Normalized Compare API block."""
+
+    change_type: str
+
+    xpath: str
+
+    object_id: str
+
+    old_text: str | None
+
+    new_text: str | None
+
+
+@dataclass(slots=True)
+class CompareResult:
+    """Normalized Compare API result."""
+
+    law_id: str
+
+    old: LawRevision
+
+    new: LawRevision
+
+    blocks: list[CompareBlock]
+
+
+@dataclass(slots=True)
 class Location:
     """Display location of a law change."""
 
@@ -141,6 +166,39 @@ class Location:
             parts.append(self.item)
 
         return " ".join(parts)
+
+
+@dataclass(slots=True)
+class LawChange:
+    """Normalized law change."""
+
+    object_id: str
+
+    location: Location
+
+    change_type: str
+
+    before: str | None
+
+    after: str | None
+
+
+@dataclass(slots=True)
+class TocIndex:
+    """Parsed TOC information."""
+
+    sel_text_list: list[str]
+
+    location_lookup: dict[str, Location]
+
+    table_lookup: dict[str, str]
+
+
+@dataclass(slots=True)
+class TableChange:
+    """Detected change to a supplementary table."""
+
+    name: str
 
 
 @dataclass(slots=True)
@@ -176,72 +234,6 @@ class SummaryStatistics:
 
 
 @dataclass(slots=True)
-class Summary:
-    """AI-generated summary of a law."""
-
-    title: str
-    body: str
-
-
-class Law(TypedDict):
-    """Law."""
-
-    law_id: str
-    law_no: str
-    law_name: str
-    law_type: str
-    url: str
-
-    updates: list[Update]
-
-
-@dataclass(slots=True)
-class CompareResult:
-    """Normalized Compare API result."""
-
-    law_id: str
-
-    old: LawRevision
-
-    new: LawRevision
-
-    blocks: list[CompareBlock]
-
-
-@dataclass(slots=True)
-class LawChange:
-    """Normalized law change."""
-
-    object_id: str
-
-    location: Location
-
-    change_type: str
-
-    before: str | None
-
-    after: str | None
-
-
-@dataclass(slots=True)
-class TableChange:
-    """Detected change to a supplementary table."""
-
-    name: str
-
-
-@dataclass(slots=True)
-class TocIndex:
-    """Parsed TOC information."""
-
-    sel_text_list: list[str]
-
-    location_lookup: dict[str, Location]
-
-    table_lookup: dict[str, str]
-
-
-@dataclass(slots=True)
 class LawSummaryInput:
     """Input for Law Summary Service."""
 
@@ -250,6 +242,14 @@ class LawSummaryInput:
     law_name: str
 
     revisions: list[RevisionHistory]
+
+
+@dataclass(slots=True)
+class Summary:
+    """AI-generated summary of a law."""
+
+    title: str
+    body: str
 
 
 class SummarySchema(BaseModel):
@@ -290,3 +290,44 @@ class AiStatistics:
     """Aggregated AI statistics."""
 
     law_summary: SummaryStatistics
+
+
+@dataclass(slots=True)
+class WPLawRevision:
+    """Revision data for a WordPress post."""
+
+    law_data_id: int
+    sub_revision: str
+    amendment_id: str | None
+    amendment_name: str | None
+    amendment_num: str | None
+    enforcement_date: str | None
+    scheduled_enforcement_date: str | None
+    enforcement_comment: str | None
+    is_current: bool
+    published_date: str | None
+    amend_published_date: str | None
+    compare_url: str | None
+    pending: bool
+
+
+@dataclass(slots=True)
+class WPLaw:
+    """Law data for a WordPress post."""
+
+    law_id: str
+    law_no: str
+    law_name: str
+    law_type: str
+    law_url: str
+    wp_revisions: list[WPLawRevision]
+    summary: Summary | None
+
+
+@dataclass(slots=True)
+class WPPost:
+    """Daily WordPress post."""
+
+    date: str
+    title: str
+    wp_laws: list[WPLaw]

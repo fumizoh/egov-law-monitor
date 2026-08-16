@@ -14,7 +14,7 @@ def main():
 
     print("=== egov update ===")
 
-    updates, date = egov.fetch()
+    events, date = egov.fetch()
 
     statistics = storage.load_statistics()
     last_update = statistics.get("egov", {}).get("last_update")
@@ -35,7 +35,7 @@ def main():
         return
 
     laws = pipeline.process_egov(
-        updates=updates,
+        events=events,
         date=date,
     )
 
@@ -43,7 +43,7 @@ def main():
 
     service.send_update_notification(
         laws=laws,
-        update_count=len(updates),
+        update_count=len(events),
         date=date,
     )
 

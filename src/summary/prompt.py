@@ -12,7 +12,7 @@ from summary.input import (
 )
 
 
-# Update Law
+# Amendment
 SYSTEM_PROMPT = """
 You are an expert legal analyst specializing in Japanese legislation.
 
