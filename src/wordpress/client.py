@@ -15,14 +15,30 @@ def _get_config() -> tuple[str, str, str]:
     return wp_url, username, app_password
 
 
-def find_post(slug: str) -> dict | None:
-    """Find a post by slug."""
+def _get_endpoint(
+    wp_url: str,
+    post_type: str,
+) -> str:
+    """Get WordPress REST API endpoint."""
+
+    return f"{wp_url}/wp-json/wp/v2/{post_type}"
+
+
+def find_post(
+    slug: str,
+    *,
+    post_type: str = "posts",
+) -> dict | None:
+    """Find a WordPress post by slug."""
 
     wp_url, username, app_password = _get_config()
 
     response = requests.get(
-        f"{wp_url}/wp-json/wp/v2/posts",
-        params={"slug": slug},
+        _get_endpoint(wp_url, post_type),
+        params={
+            "slug": slug,
+            "status": "any",
+        },
         auth=(username, app_password),
         timeout=30,
     )
@@ -43,13 +59,14 @@ def create_post(
     content: str,
     slug: str,
     status: str = "draft",
+    post_type: str = "posts",
 ) -> dict:
     """Create a WordPress post."""
 
     wp_url, username, app_password = _get_config()
 
     response = requests.post(
-        f"{wp_url}/wp-json/wp/v2/posts",
+        _get_endpoint(wp_url, post_type),
         json={
             "title": title,
             "content": content,
@@ -72,13 +89,14 @@ def update_post(
     content: str,
     slug: str,
     status: str = "draft",
+    post_type: str = "posts",
 ) -> dict:
     """Update a WordPress post."""
 
     wp_url, username, app_password = _get_config()
 
     response = requests.post(
-        f"{wp_url}/wp-json/wp/v2/posts/{post_id}",
+        f"{_get_endpoint(wp_url, post_type)}/{post_id}",
         json={
             "title": title,
             "content": content,

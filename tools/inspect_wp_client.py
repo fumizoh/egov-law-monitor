@@ -10,7 +10,7 @@ sys.path.append(
 import storage
 
 from wordpress.builder import build_wp_post
-from wordpress.client import create_post
+from wordpress.client import find_post, create_post, update_post
 from wordpress.post_builder import (
     build_post_content,
     build_post_title,
@@ -33,22 +33,35 @@ def main() -> None:
         date=date,
     )
 
-    title = build_post_title(wp_post)
     content = build_post_content(wp_post)
-    slug = wp_post.date
 
-    post = create_post(
-        title=title,
-        content=content,
-        slug=slug,
-        status="draft",
+    post = find_post(
+        slug=date,
+        post_type="law_update",
     )
 
-    print("WordPress draft created.")
-    print()
+    if post is None:
+        post = create_post(
+            title=wp_post.title,
+            content=content,
+            slug=date,
+            status="draft",
+            post_type="law_update",
+        )
+        print("Created")
+    else:
+        post = update_post(
+            post["id"],
+            title=wp_post.title,
+            content=content,
+            slug=date,
+            status=post["status"],
+            post_type="law_update",
+        )
+        print("Updated")
+
     print(f"id:     {post['id']}")
     print(f"slug:   {post['slug']}")
-    print(f"title:  {post['title']['rendered']}")
     print(f"status: {post['status']}")
     print(f"link:   {post['link']}")
 
