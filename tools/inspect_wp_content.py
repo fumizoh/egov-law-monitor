@@ -41,11 +41,11 @@ def main() -> None:
 <head>
     <meta charset="UTF-8">
     <title>{title}</title>
-    <link rel="stylesheet" href="../docs/css/style.css">
+    <link rel="stylesheet" href="../src/wordpress/post.css">
 </head>
 <body>
 
-<div class="container">
+<div class="egov-post">
 
 <h1>{title}</h1>
 

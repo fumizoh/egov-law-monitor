@@ -40,7 +40,7 @@ def _build_revision(
 
     if revision.enforcement_comment:
         enforcement_comment = (
-            f'<span class="effective-comment">'
+            f'<span class="egov-effective-comment">'
             f"{revision.enforcement_comment}"
             f"</span>"
         )
@@ -58,19 +58,17 @@ def _build_revision(
         amendment_html = amendment_name
 
     return f"""
-<div class="update-history">
-    <div class="effective-info">
-        <span class="effective-date">
-            {effective_info}
-        </span>
-        {enforcement_comment}
+<div class="egov-update-history">
+    <div class="egov-effective-info">
+        <span class="egov-effective-date">{effective_info}</span>{enforcement_comment}
     </div>
 
-    <p class="amend-name">
+    <p class="egov-amend-name">
         {amendment_html}
     </p>
 </div>
 """
+
 
 def _build_law_section(
     law: WPLaw,
@@ -81,9 +79,11 @@ def _build_law_section(
 
     if law.summary:
         summary_html = f"""
-<div class="ai-summary">
-    <h3>🤖 {law.summary.title}</h3>
-    <div class="summary-body">
+<div class="egov-ai-summary">
+    <h3 class="egov-summary-title">
+        🤖 {law.summary.title}
+    </h3>
+    <div class="egov-summary-body">
         {law.summary.body}
     </div>
 </div>
@@ -105,41 +105,30 @@ def _build_law_section(
     )
 
     return f"""
-<section class="card">
-    <h2>{law.law_name}</h2>
+<section class="egov-law-card">
+    <h2 class="egov-law-name simple-h2">{law.law_name}</h2>
 
-    <p>
-        <strong>種別</strong>
-        {law.law_type}
+    <p class="egov-law-type">
+        <strong>種別</strong> {law.law_type}
     </p>
 
     {summary_html}
 
-    <details>
+    <details class="egov-update-details">
         <summary>
             今回の更新（{len(law.wp_revisions)}件）
         </summary>
 
-        <p>
-            <strong>施行済</strong>
-            {active_count}件 /
-            <strong>未施行</strong>
-            {pending_count}件
-        </p>
+        <div class="egov-update-count">
+            <strong>施行済</strong> {active_count}件 / <strong>未施行</strong> {pending_count}件
+        </div>
 
         {revisions_html}
     </details>
 
-    <p>
-        <a
-            href="{law.law_url}"
-            class="button"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            法令を見る
-        </a>
-    </p>
+    <div class="egov-law-button-wrapper">
+        <a href="{law.law_url}" class="egov-law-button" target="_blank" rel="noopener noreferrer">法令を見る</a>
+    </div>
 </section>
 """
 
@@ -149,7 +138,13 @@ def build_post_content(
 ) -> str:
     """Build WordPress post content."""
 
-    return "".join(
+    laws_html = "".join(
         _build_law_section(law)
         for law in post.wp_laws
     )
+
+    return f"""
+<div class="egov-post">
+    {laws_html}
+</div>
+""".strip()
