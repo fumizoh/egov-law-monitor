@@ -325,9 +325,21 @@ class WPLaw:
 
 
 @dataclass(slots=True)
+class WPStatistics:
+    """Statistics for a WordPress post."""
+
+    last_update: str
+    update_count: int
+    updated_law_count: int
+    law_type: dict[str, int]
+    law_count: dict[str, int]
+
+
+@dataclass(slots=True)
 class WPPost:
     """Daily WordPress post."""
 
     date: str
     title: str
+    statistics: WPStatistics
     wp_laws: list[WPLaw]

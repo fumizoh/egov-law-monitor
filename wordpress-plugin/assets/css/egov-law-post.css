@@ -1,3 +1,62 @@
+/* Dashboard */
+.egov-dashboard {
+    margin-bottom: 32px;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.egov-dashboard-title {
+    margin: 0 0 24px;
+    font-size: 1.5rem;
+    line-height: 1.4;
+}
+
+.egov-dashboard-statistics p {
+    margin: 0 0 8px;
+}
+
+.egov-dashboard-law-types {
+    margin-top: 24px;
+}
+
+.egov-dashboard-law-types h3,
+.egov-dashboard-laws h3 {
+    margin: 0 0 12px;
+    font-size: 1.2rem;
+}
+
+.egov-dashboard-law-types ul,
+.egov-dashboard-laws ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.egov-dashboard-law-types li {
+    margin-bottom: 4px;
+}
+
+.egov-dashboard-laws {
+    margin-top: 24px;
+}
+
+.egov-dashboard-laws li {
+    margin-bottom: 16px;
+}
+
+.egov-dashboard-laws li a {
+    display: inline-block;
+    font-weight: 600;
+}
+
+.egov-dashboard-summary-title {
+    margin: 4px 0 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
 .egov-post {
     max-width: 900px;
     margin: 0 auto;

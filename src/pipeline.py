@@ -52,6 +52,14 @@ def process_egov(
     # laws.json を公開データとして保存
     storage.save_laws(laws)
 
+    # Save Statistics
+    _save_statistics(
+        "egov",
+        events,
+        laws,
+        date,
+    )
+
     # Daily service
     law_summaries, logs = generator.generate(law_groups)
 
@@ -70,13 +78,5 @@ def process_egov(
     )
 
     storage.save_ai_statistics(statistics)
-
-    # Save Statistics
-    _save_statistics(
-        "egov",
-        events,
-        laws,
-        date,
-    )
 
     return laws

@@ -1,4 +1,4 @@
-"""Validate WordPress post data."""
+"""Inspect WordPress post data."""
 
 from pathlib import Path
 import sys
@@ -7,144 +7,134 @@ sys.path.append(
     str(Path(__file__).resolve().parents[1] / "src")
 )
 
-import storage
-from wordpress.builder import build_wp_post
+from wordpress.builder import (
+    build_wp_post,
+)
 
+from storage import (
+    load_law_summaries,
+    load_laws,
+    load_statistics,
+)
 
-def validate_wp_post(
-    laws,
-    law_summaries,
-    wp_post,
-) -> None:
-    """Validate generated WordPress post."""
+def main() -> None:
+    date = "20260814"
 
-    errors = []
+    laws = load_laws()
+    law_summaries = load_law_summaries()
+    statistics = load_statistics()
 
-    # Law count
-    if len(wp_post.wp_laws) != len(laws):
-        errors.append(
-            f"law count mismatch: "
-            f"{len(laws)} -> {len(wp_post.wp_laws)}"
-        )
+    print(f"Date: {date}")
+    print(f"Laws: {len(laws)}")
+    print(f"Law summaries: {len(law_summaries)}")
 
-    # Law-level validation
-    for law_id, law in laws.items():
-        wp_law = next(
-            (
-                item
-                for item in wp_post.wp_laws
-                if item.law_id == law_id
-            ),
-            None,
-        )
+    wp_post = build_wp_post(
+        laws=laws,
+        law_summaries=law_summaries,
+        statistics_data=statistics,
+        date=date,
+    )
 
-        if wp_law is None:
-            errors.append(
-                f"missing WP law: {law_id}"
-            )
-            continue
+    assert wp_post.date == date
+    assert len(wp_post.wp_laws) == len(laws)
 
-        # law_url
-        expected_url = law["url"]
-        if wp_law.law_url != expected_url:
-            errors.append(
-                f"law_url mismatch: {law_id}"
-            )
+    # Statistics
+    wp_statistics = wp_post.statistics
+    egov_statistics = statistics["egov"]
 
-        # Summary
-        law_summary = law_summaries.get(law_id)
+    assert wp_statistics.last_update == egov_statistics["last_update"]
+    assert wp_statistics.update_count == egov_statistics["update_count"]
+    assert (
+        wp_statistics.updated_law_count
+        == egov_statistics["updated_law_count"]
+    )
+    assert wp_statistics.law_type == egov_statistics["law_type"]
+    assert wp_statistics.law_count == egov_statistics["law_count"]
+
+    assert (
+        len(wp_post.wp_laws)
+        == wp_statistics.updated_law_count
+    )
+
+    # Law mapping
+    for wp_law in wp_post.wp_laws:
+        assert wp_law.law_id in laws
+
+        law = laws[wp_law.law_id]
+
+        assert wp_law.law_name == law["law_name"]
+        assert wp_law.law_no == law["law_no"]
+        assert wp_law.law_type == law["law_type"]
+        assert wp_law.law_url == law["url"]
+
+    # Summary
+    for wp_law in wp_post.wp_laws:
+        law_summary = law_summaries.get(wp_law.law_id)
 
         if law_summary is None:
-            if wp_law.summary is not None:
-                errors.append(
-                    f"unexpected summary: {law_id}"
-                )
-        elif wp_law.summary != law_summary.response.summary:
-            errors.append(
-                f"summary mismatch: {law_id}"
+            assert wp_law.summary is None
+        else:
+            assert wp_law.summary == (
+                law_summary.response.summary
             )
 
-        # Revision count
-        if law_summary is not None:
-            expected_count = len(
-                law_summary.summary_input.revisions
+    # Revision mapping
+    for wp_law in wp_post.wp_laws:
+        law = laws[wp_law.law_id]
+        law_summary = law_summaries.get(wp_law.law_id)
+
+        if law_summary is None:
+            continue
+
+        revisions = {
+            revision.law_data_id: revision
+            for revision in law_summary.summary_input.revisions
+        }
+
+        assert len(wp_law.wp_revisions) == len(
+            law["updates"]
+        )
+
+        for wp_revision, update in zip(
+            wp_law.wp_revisions,
+            law["updates"],
+        ):
+            revision = revisions[update["law_data_id"]]
+
+            assert (
+                wp_revision.law_data_id
+                == revision.law_data_id
+            )
+            assert (
+                wp_revision.sub_revision
+                == revision.sub_revision
+            )
+            assert (
+                wp_revision.amendment_id
+                == revision.amendment_id
+            )
+            assert (
+                wp_revision.is_current
+                == revision.is_current
+            )
+            assert (
+                wp_revision.published_date
+                == update["published_date"]
+            )
+            assert (
+                wp_revision.amend_published_date
+                == update["amend_published_date"]
+            )
+            assert (
+                wp_revision.compare_url
+                == update["compare_url"]
+            )
+            assert (
+                wp_revision.pending
+                == update["pending"]
             )
 
-            if len(wp_law.wp_revisions) != len(law["updates"]):
-                errors.append(
-                    f"revision count mismatch: {law_id}"
-                )
-
-            if expected_count != len(wp_law.wp_revisions):
-                errors.append(
-                    f"summary revision count mismatch: {law_id}"
-                )
-
-            # Revision mapping
-            expected_revisions = {
-                revision.law_data_id: revision
-                for revision in law_summary.summary_input.revisions
-            }
-
-            actual_revisions = {
-                revision.law_data_id: revision
-                for revision in wp_law.wp_revisions
-            }
-
-            if set(expected_revisions) != set(actual_revisions):
-                errors.append(
-                    f"revision mapping mismatch: {law_id}"
-                )
-
-            # Revision fields
-            for law_data_id, revision in expected_revisions.items():
-                wp_revision = actual_revisions.get(law_data_id)
-
-                if wp_revision is None:
-                    continue
-
-                if wp_revision.is_current != revision.is_current:
-                    errors.append(
-                        f"is_current mismatch: "
-                        f"{law_id}/{law_data_id}"
-                    )
-
-                if (
-                    wp_revision.enforcement_date
-                    != revision.enforcement_date
-                ):
-                    errors.append(
-                        f"enforcement_date mismatch: "
-                        f"{law_id}/{law_data_id}"
-                    )
-
-                if (
-                    wp_revision.scheduled_enforcement_date
-                    != revision.scheduled_enforcement_date
-                ):
-                    errors.append(
-                        f"scheduled_enforcement_date mismatch: "
-                        f"{law_id}/{law_data_id}"
-                    )
-
-                if (
-                    wp_revision.enforcement_comment
-                    != revision.enforcement_comment
-                ):
-                    errors.append(
-                        f"enforcement_comment mismatch: "
-                        f"{law_id}/{law_data_id}"
-                    )
-
-    if errors:
-        print("Validation failed.")
-        print()
-
-        for error in errors:
-            print(f"✗ {error}")
-
-        raise SystemExit(1)
-
+    print()
     print("WPPost validation passed.")
     print()
     print(f"date:       {wp_post.date}")
@@ -153,33 +143,21 @@ def validate_wp_post(
     print(f"summaries:  {len(law_summaries)}")
     print(f"wp_laws:    {len(wp_post.wp_laws)}")
     print()
+    print("Statistics:")
+    print(f"  last_update:        {wp_statistics.last_update}")
+    print(f"  update_count:       {wp_statistics.update_count}")
+    print(
+        "  updated_law_count:  "
+        f"{wp_statistics.updated_law_count}"
+    )
+    print(f"  law_type:           {wp_statistics.law_type}")
+    print(f"  law_count:          {wp_statistics.law_count}")
+    print()
+    print("✓ statistics")
     print("✓ law mapping")
-    print("✓ law_url")
     print("✓ summaries")
     print("✓ revision mapping")
     print("✓ revision fields")
-
-
-def main() -> None:
-    """Run WordPress post validation."""
-
-    laws = storage.load_laws()
-    law_summaries = storage.load_law_summaries()
-
-    statistics = storage.load_statistics()
-    date = statistics["egov"]["last_update"]
-
-    wp_post = build_wp_post(
-        laws=laws,
-        law_summaries=law_summaries,
-        date=date,
-    )
-
-    validate_wp_post(
-        laws=laws,
-        law_summaries=law_summaries,
-        wp_post=wp_post,
-    )
 
 
 if __name__ == "__main__":

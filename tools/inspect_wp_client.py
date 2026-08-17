@@ -29,6 +29,7 @@ def main() -> None:
     wp_post = build_wp_post(
         laws=laws,
         law_summaries=law_summaries,
+        statistics_data=statistics,
         date=date,
     )
 

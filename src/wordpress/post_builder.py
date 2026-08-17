@@ -1,11 +1,20 @@
 """Build WordPress post content."""
 
-
 from models import (
     WPPost,
     WPLaw,
     WPLawRevision,
 )
+
+
+def _format_date(date: str) -> str:
+    """Format YYYYMMDD as YYYY年MM月DD日."""
+
+    return (
+        f"{date[:4]}年"
+        f"{date[4:6]}月"
+        f"{date[6:8]}日"
+    )
 
 
 def build_post_title(post: WPPost) -> str:
@@ -16,6 +25,92 @@ def build_post_title(post: WPPost) -> str:
         f"{post.date[4:6]}月"
         f"{post.date[6:8]}日の法令更新"
     )
+
+
+def _build_dashboard(
+    post: WPPost,
+) -> str:
+    """Build dashboard HTML."""
+
+    statistics = post.statistics
+
+    law_items = []
+
+    for law in post.wp_laws:
+        count = len(law.wp_revisions)
+
+        law_name = (
+            law.law_name
+            if count == 1
+            else f"{law.law_name}（{count}件）"
+        )
+
+        summary_html = ""
+
+        if law.summary:
+            summary_html = (
+                f'<p class="egov-dashboard-summary-title">'
+                f'{law.summary.title}'
+                f'</p>'
+            )
+
+        law_items.append(
+            f'<li><a href="#law-{law.law_id}">'
+            f'{law_name}</a>{summary_html}</li>'
+        )
+
+    law_items_html = "".join(law_items)
+
+    law_type_items = []
+
+    for name, count in statistics.law_type.items():
+        law_count = statistics.law_count.get(name, 0)
+
+        law_type_items.append(
+            f"""
+<li>
+    {name}：{count}件（{law_count}法令）
+</li>
+"""
+        )
+
+    law_type_html = "".join(law_type_items)
+
+    return f"""
+<section class="egov-dashboard">
+
+    <h2 class="egov-dashboard-title simple-h2">
+        法令更新ダッシュボード
+    </h2>
+
+    <div class="egov-dashboard-statistics">
+        <p>
+            最終更新日：{_format_date(statistics.last_update)}
+        </p>
+        <p>
+            更新件数：{statistics.update_count}件
+        </p>
+        <p>
+            更新法令数：{statistics.updated_law_count}法令
+        </p>
+    </div>
+
+    <div class="egov-dashboard-law-types">
+        <h3>法令種別</h3>
+        <ul>
+            {law_type_html}
+        </ul>
+    </div>
+
+    <div class="egov-dashboard-laws">
+        <h3>今回更新された法令</h3>
+        <ul>
+            {law_items_html}
+        </ul>
+    </div>
+
+</section>
+"""
 
 
 def _build_revision(
@@ -105,7 +200,7 @@ def _build_law_section(
     )
 
     return f"""
-<section class="egov-law-card">
+<section id="law-{law.law_id}" class="egov-law-card">
     <h2 class="egov-law-name simple-h2">{law.law_name}</h2>
 
     <p class="egov-law-type">
@@ -138,6 +233,8 @@ def build_post_content(
 ) -> str:
     """Build WordPress post content."""
 
+    dashboard_html = _build_dashboard(post)
+
     laws_html = "".join(
         _build_law_section(law)
         for law in post.wp_laws
@@ -145,6 +242,7 @@ def build_post_content(
 
     return f"""
 <div class="egov-post">
+    {dashboard_html}
     {laws_html}
 </div>
 """.strip()

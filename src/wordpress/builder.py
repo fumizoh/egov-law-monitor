@@ -8,7 +8,22 @@ from models import (
     WPPost,
     WPLaw,
     WPLawRevision,
+    WPStatistics,
 )
+
+
+def _build_statistics(
+    data: dict,
+) -> WPStatistics:
+    """Build WordPress statistics."""
+
+    return WPStatistics(
+        last_update=data["last_update"],
+        update_count=data["update_count"],
+        updated_law_count=data["updated_law_count"],
+        law_type=data["law_type"],
+        law_count=data["law_count"],
+    )
 
 
 def _build_wp_revision(
@@ -67,9 +82,14 @@ def _build_wp_law(
 def build_wp_post(
     laws: dict[str, Law],
     law_summaries: dict[str, LawSummary],
+    statistics_data: dict,
     date: str,
 ) -> WPPost:
     """Build a daily WordPress post."""
+
+    statistics = _build_statistics(
+        statistics_data["egov"],
+    )
 
     wp_laws = [
         _build_wp_law(
@@ -82,5 +102,6 @@ def build_wp_post(
     return WPPost(
         date=date,
         title=f"{date[:4]}年{date[4:6]}月{date[6:8]}日の法令更新",
+        statistics=statistics,
         wp_laws=wp_laws,
     )
