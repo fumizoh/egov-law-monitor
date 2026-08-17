@@ -1,3 +1,5 @@
+from models import ProcessingResult
+
 from notification.generator import (
     create_email_body,
     create_email_subject,
@@ -5,26 +7,19 @@ from notification.generator import (
 from notification.mailer import send_email
 
 
-def send_update_notification(
-    laws,
-    update_count,
-    date,
+def send_processing_notification(
+    result: ProcessingResult,
 ) -> None:
-    """Send update notification."""
+    """Send processing result notification."""
 
-    subject = create_email_subject(
-        update_count,
-        date,
-    )
-
-    body = create_email_body(
-        laws,
-        update_count,
-        date,
-    )
+    subject = create_email_subject(result)
+    body = create_email_body(result)
 
     try:
         send_email(subject, body)
 
-    except KeyError as e:
-        print("環境変数が設定されていないため、メール送信をスキップ")
+    except KeyError:
+        print(
+            "環境変数が設定されていないため、"
+            "メール送信をスキップ"
+        )

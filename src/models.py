@@ -343,3 +343,26 @@ class WPPost:
     title: str
     statistics: WPStatistics
     wp_laws: list[WPLaw]
+
+
+@dataclass(slots=True)
+class WPResult:
+    """WordPress publishing result."""
+
+    status: str
+    action: str | None = None
+    post_id: int | None = None
+    post_status: str | None = None
+    link: str | None = None
+    error: str | None = None
+
+
+@dataclass(slots=True)
+class ProcessingResult:
+    """Daily processing result."""
+
+    date: str
+    update_count: int
+    updated_law_count: int
+    laws: list[Law]
+    wp: WPResult | None
