@@ -9,6 +9,11 @@ on:
     - cron: "0 19 * * *"
 
   workflow_dispatch:
+    inputs:
+      date:
+        description: "処理対象日（YYYYMMDD）"
+        required: false
+        type: string
 
 jobs:
   run:
@@ -53,7 +58,7 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           MAIL_FROM: ${{ secrets.MAIL_FROM }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
-        run: python src/monitor.py
+        run: python src/monitor.py "${{ inputs.date }}"
 
       - name: Configure Git
         run: |

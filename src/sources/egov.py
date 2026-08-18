@@ -17,10 +17,11 @@ from storage import load_events
 from utils.date import normalize_date
 
 
-def fetch():
+def fetch(date: str | None = None):
     """Fetch update events from e-Gov."""
 
-    date = get_latest_update_date()
+    if date is None:
+        date = get_latest_update_date()
 
     zip_path = download_update_xml(date)
 

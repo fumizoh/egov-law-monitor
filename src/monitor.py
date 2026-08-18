@@ -12,15 +12,17 @@ from notification import service
 from wordpress import service as wordpress_service
 
 
-def main():
+def main(date: str | None = None):
     print("=== egov update ===")
 
-    events, date = egov.fetch()
+    specified_date = date
+
+    events, date = egov.fetch(date=specified_date)
 
     statistics = storage.load_statistics()
     last_update = statistics.get("egov", {}).get("last_update")
 
-    if last_update == date:
+    if specified_date is None and last_update == date:
         print(f"新しい法令更新なし: {date}")
 
         today = datetime.now(JST).strftime("%Y%m%d")
@@ -86,4 +88,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+
+    date = sys.argv[1] if len(sys.argv) > 1 and sys.argv[1] else None
+    main(date)
