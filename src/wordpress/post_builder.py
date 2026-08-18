@@ -95,7 +95,7 @@ def _build_dashboard(
 
     <div class="egov-dashboard-statistics">
         <p>
-            最終更新日：{_format_date(statistics.last_update)}
+            e-Gov更新日：{_format_date(statistics.last_update)}
         </p>
         <p>
             更新件数：{statistics.update_count}件
