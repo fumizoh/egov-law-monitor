@@ -150,17 +150,19 @@ def _build_revision(
             f"</span>"
         )
 
-    amendment_name = revision.amendment_name or ""
+    if revision.amendment_id is None:
+        amendment_html = "新規制定"
 
-    if revision.compare_url:
+    elif revision.compare_url:
         amendment_html = (
             f'<a href="{revision.compare_url}" '
             f'target="_blank" rel="noopener noreferrer">'
-            f"{amendment_name}　条文比較"
+            f"{revision.amendment_name}　条文比較"
             f"</a>"
         )
+
     else:
-        amendment_html = amendment_name
+        amendment_html = revision.amendment_name or ""
 
     return f"""
 <div class="egov-update-history">
