@@ -51,6 +51,14 @@
     font-weight: 600;
 }
 
+.egov-dashboard-laws li a:link {
+    color: #0066CC;
+}
+
+.egov-dashboard-laws li a:visited {
+    color: #551A8B;
+}
+
 .egov-dashboard-summary-title {
     margin: 4px 0 0;
     font-size: 0.95rem;
@@ -157,6 +165,14 @@
 .egov-amend-name {
     margin: 0;
     line-height: 1.5;
+}
+
+.egov-amend-name a:link {
+    color: #0066cc;
+}
+
+.egov-amend-name a:visited {
+    color: #551A8B;
 }
 
 .egov-law-button-wrapper {

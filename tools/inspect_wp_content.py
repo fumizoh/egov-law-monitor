@@ -30,6 +30,7 @@ def main() -> None:
     wp_post = build_wp_post(
         laws=laws,
         law_summaries=law_summaries,
+        statistics_data=statistics,
         date=date,
     )
 
@@ -41,7 +42,7 @@ def main() -> None:
 <head>
     <meta charset="UTF-8">
     <title>{title}</title>
-    <link rel="stylesheet" href="../src/wordpress/post.css">
+    <link rel="stylesheet" href="../wordpress-plugin/assets/css/egov-law-post.css">
 </head>
 <body>
 
@@ -70,7 +71,6 @@ def main() -> None:
     print("WordPress post content generated.")
     print()
     print(f"title: {title}")
-    print(f"laws:  {len(wp_post.wp_laws)}")
     print()
     print(f"output: {OUTPUT_PATH}")
 
