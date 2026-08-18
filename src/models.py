@@ -325,6 +325,14 @@ class WPLaw:
 
 
 @dataclass(slots=True)
+class WPLawGroup:
+    """Law group for a WordPress post."""
+
+    law_type: str
+    laws: list[WPLaw]
+
+
+@dataclass(slots=True)
 class WPStatistics:
     """Statistics for a WordPress post."""
 
@@ -342,7 +350,7 @@ class WPPost:
     date: str
     title: str
     statistics: WPStatistics
-    wp_laws: list[WPLaw]
+    law_groups: list[WPLawGroup]
 
 
 @dataclass(slots=True)

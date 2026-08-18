@@ -57,6 +57,12 @@
     line-height: 1.5;
 }
 
+.egov-dashboard-law-group {
+    margin-top: 20px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
 .egov-post {
     max-width: 900px;
     margin: 0 auto;

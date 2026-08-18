@@ -7,9 +7,12 @@ from models import (
     Update,
     WPPost,
     WPLaw,
+    WPLawGroup,
     WPLawRevision,
     WPStatistics,
 )
+
+from config import LAW_TYPE_ORDER
 
 
 def _build_statistics(
@@ -99,9 +102,29 @@ def build_wp_post(
         for law_id, law in laws.items()
     ]
 
+    law_groups = []
+
+    for law_type, _ in sorted(
+        LAW_TYPE_ORDER.items(),
+        key=lambda item: item[1],
+    ):
+        grouped_laws = [
+            law
+            for law in wp_laws
+            if law.law_type == law_type
+        ]
+
+        if grouped_laws:
+            law_groups.append(
+                WPLawGroup(
+                    law_type=law_type,
+                    laws=grouped_laws,
+                )
+            )
+
     return WPPost(
         date=date,
         title=f"{date[:4]}年{date[4:6]}月{date[6:8]}日の法令更新",
         statistics=statistics,
-        wp_laws=wp_laws,
+        law_groups=law_groups,
     )

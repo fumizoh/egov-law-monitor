@@ -3,6 +3,7 @@
 from models import (
     WPPost,
     WPLaw,
+    WPLawGroup,
     WPLawRevision,
 )
 
@@ -36,28 +37,37 @@ def _build_dashboard(
 
     law_items = []
 
-    for law in post.wp_laws:
-        count = len(law.wp_revisions)
-
-        law_name = (
-            law.law_name
-            if count == 1
-            else f"{law.law_name}（{count}件）"
+    for group in post.law_groups:
+        law_items.append(
+            f'<li class="egov-dashboard-law-group">'
+            f'<strong>{group.law_type}</strong></li>'
         )
 
-        summary_html = ""
+        for law in group.laws:
+            count = len(law.wp_revisions)
 
-        if law.summary:
-            summary_html = (
-                f'<p class="egov-dashboard-summary-title">'
-                f'{law.summary.title}'
-                f'</p>'
+            law_name = (
+                law.law_name
+                if count == 1
+                else f"{law.law_name}（{count}件）"
             )
 
-        law_items.append(
-            f'<li><a href="#law-{law.law_id}">'
-            f'{law_name}</a>{summary_html}</li>'
-        )
+            summary_html = ""
+
+            if law.summary:
+                summary_html = (
+                    f'<p class="egov-dashboard-summary-title">'
+                    f'{law.summary.title}'
+                    f'</p>'
+                )
+
+            law_items.append(
+                f'<li>'
+                f'<a href="#law-{law.law_id}">'
+                f'{law_name}</a>'
+                f'{summary_html}'
+                f'</li>'
+            )
 
     law_items_html = "".join(law_items)
 
@@ -237,7 +247,8 @@ def build_post_content(
 
     laws_html = "".join(
         _build_law_section(law)
-        for law in post.wp_laws
+        for group in post.law_groups
+        for law in group.laws
     )
 
     return f"""
