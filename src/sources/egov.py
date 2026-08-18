@@ -12,13 +12,13 @@ from storage import (
     find_update_csv,
 )
 
-from storage import load_updates
+from storage import load_events
 
 from utils.date import normalize_date
 
 
 def fetch():
-    """Fetch updates from e-Gov."""
+    """Fetch update events from e-Gov."""
 
     date = get_latest_update_date()
 
@@ -30,13 +30,13 @@ def fetch():
 
     csv_path = find_update_csv(extract_dir)
 
-    rows = load_updates(csv_path)
+    rows = load_events(csv_path)
 
-    updates = []
+    events = []
 
     for row in rows:
 
-        updates.append(
+        events.append(
             {
                 "source": "egov",
                 "type": "law_update",
@@ -59,4 +59,4 @@ def fetch():
             }
         )
 
-    return updates, date
+    return events, date

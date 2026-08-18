@@ -61,21 +61,21 @@ def find_update_csv(extract_dir: Path) -> Path:
     return csv_files[0]
 
 
-def load_updates(csv_path: Path) -> list[dict]:
+def load_events(csv_path: Path) -> list[dict]:
     """
     更新法令CSVを読み込む。
     """
 
-    updates = []
+    events = []
 
     with open(csv_path, encoding="utf-8-sig") as f:
 
         reader = csv.DictReader(f)
 
         for row in reader:
-            updates.append(row)
+            events.append(row)
 
-    return updates
+    return events
 
 
 def json_default(obj):
