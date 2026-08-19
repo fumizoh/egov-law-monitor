@@ -5,7 +5,12 @@ import json
 import zipfile
 import csv
 
-from dataclasses import asdict, is_dataclass
+from dataclasses import (
+    asdict,
+    dataclass,
+    is_dataclass,
+)
+
 from pathlib import Path
 
 from utils.dataclass import from_dict
@@ -26,6 +31,28 @@ from config import (
     AI_STATISTICS_JSON,
     AI_SUMMARY_LOG_JSONL,
     APP_JSON,
+)
+
+@dataclass(frozen=True)
+class StoragePaths:
+    """Paths for post generation data."""
+
+    laws: Path
+    law_summaries: Path
+    statistics: Path
+
+DEFAULT_STORAGE = StoragePaths(
+    laws=LAWS_JSON,
+    law_summaries=LAW_SUMMARIES_JSON,
+    statistics=STATISTICS_JSON,
+)
+
+REPROCESS_DIR = DOCS_DATA / "reprocess"
+
+REPROCESS_STORAGE = StoragePaths(
+    laws=REPROCESS_DIR / "laws.json",
+    law_summaries=REPROCESS_DIR / "law_summaries.json",
+    statistics=REPROCESS_DIR / "statistics.json",
 )
 
 
@@ -106,6 +133,11 @@ def save_json(
     Save as JSON atomically.
     """
 
+    output_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
     tmp_path = output_path.with_suffix(
         output_path.suffix + ".tmp"
     )
@@ -179,44 +211,40 @@ def load_statistics() -> dict:
 def save_statistics(
     source,
     statistics,
+    paths: StoragePaths = DEFAULT_STORAGE,
 ):
-    """
-    情報源ごとの統計を statistics.json に保存する。
-    """
+    """Save statistics."""
 
     try:
-
-        data = load_json(
-            STATISTICS_JSON
-        )
-
+        data = load_json(paths.statistics)
     except FileNotFoundError:
-
         data = {}
 
     data[source] = statistics
 
     save_json(
         data,
-        STATISTICS_JSON,
+        paths.statistics,
     )
 
 
-def load_law_summaries() -> dict[str, LawSummary]:
+def load_law_summaries(
+    paths: StoragePaths = DEFAULT_STORAGE,
+) -> dict[str, LawSummary]:
     """Load cached law summaries."""
 
-    if not LAW_SUMMARIES_JSON.exists():
+    if not paths.law_summaries.exists():
         return {}
 
     try:
         data = load_json(
-            LAW_SUMMARIES_JSON,
+            paths.law_summaries,
         )
 
     except json.JSONDecodeError:
         logger.exception(
             "Failed to load %s",
-            LAW_SUMMARIES_JSON,
+            paths.law_summaries,
         )
         return {}
 
@@ -233,11 +261,12 @@ def load_law_summaries() -> dict[str, LawSummary]:
 
 def save_law_summaries(
     summaries: list[LawSummary],
+    paths: StoragePaths = DEFAULT_STORAGE,
 ) -> None:
 
     save_json(
         summaries,
-        LAW_SUMMARIES_JSON,
+        paths.law_summaries,
     )
 
 
