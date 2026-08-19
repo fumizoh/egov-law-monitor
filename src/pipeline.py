@@ -16,6 +16,7 @@ def _save_statistics(
     events,
     laws,
     date,
+    storage_paths: storage.StoragePaths,
 ) -> None:
     """Create and save statistics."""
 
@@ -29,6 +30,7 @@ def _save_statistics(
     storage.save_statistics(
         source=source,
         statistics=statistics,
+        paths=storage_paths,
     )
 
     print(f"{source}: データ保存・統計更新完了")
@@ -37,6 +39,7 @@ def _save_statistics(
 def process_egov(
     events,
     date,
+    storage_paths: storage.StoragePaths = storage.DEFAULT_STORAGE,
 ) -> list[Law]:
     """Process e-Gov updates."""
 
@@ -46,31 +49,33 @@ def process_egov(
 
     laws = law_builder.build_laws(law_groups)
 
-    # DEBUG
     print("Total:", len(laws), "laws")
 
-    # laws.json を公開データとして保存
-    storage.save_laws(laws)
+    storage.save_laws(
+        laws,
+        paths=storage_paths,
+    )
 
-    # Save Statistics
     _save_statistics(
         "egov",
         events,
         laws,
         date,
+        storage_paths=storage_paths,
     )
 
-    # Daily service
-    law_summaries, logs = generator.generate(law_groups)
+    law_summaries, logs = generator.generate(
+        law_groups,
+        storage_paths=storage_paths,
+    )
 
-    storage.save_law_summaries(law_summaries)
-
-    # Tool: Delete All AI Summary Log
-    # storage.reset_ai_summary_logs()
+    storage.save_law_summaries(
+        law_summaries,
+        paths=storage_paths,
+    )
 
     storage.append_ai_summary_logs(logs)
 
-    # AI Statistics
     all_logs = storage.load_ai_summary_logs()
 
     statistics = summary_statistics.create_statistics(

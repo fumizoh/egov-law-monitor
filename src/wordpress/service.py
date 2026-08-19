@@ -17,12 +17,21 @@ POST_TYPE = "law_update"
 
 def sync_daily_post(
     date: str,
+    storage_paths: storage.StoragePaths = storage.DEFAULT_STORAGE,
 ) -> dict:
     """Create or update a daily WordPress law update post."""
 
-    laws = storage.load_laws()
-    law_summaries = storage.load_law_summaries()
-    statistics = storage.load_statistics()
+    laws = storage.load_laws(
+        paths=storage_paths,
+    )
+
+    law_summaries = storage.load_law_summaries(
+        paths=storage_paths,
+    )
+
+    statistics = storage.load_statistics(
+        paths=storage_paths,
+    )
 
     wp_post = build_wp_post(
         laws=laws,

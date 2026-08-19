@@ -45,9 +45,15 @@ def main(date: str | None = None):
 
     print("=== pipeline ===")
 
+    if specified_date is None:
+        storage_paths = storage.DEFAULT_STORAGE
+    else:
+        storage_paths = storage.REPROCESS_STORAGE
+
     laws = pipeline.process_egov(
         events=events,
         date=date,
+        storage_paths=storage_paths,
     )
 
     print("=== WordPress ===")
@@ -55,6 +61,7 @@ def main(date: str | None = None):
     try:
         wp_result = wordpress_service.sync_daily_post(
             date=date,
+            storage_paths=storage_paths,
         )
 
         print(

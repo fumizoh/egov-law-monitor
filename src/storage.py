@@ -157,23 +157,25 @@ def save_json(
     )
 
 
-def load_laws() -> dict[str, Law]:
+def load_laws(
+    paths: StoragePaths = DEFAULT_STORAGE,
+) -> dict[str, Law]:
     """
     Load previous Law view.
     """
 
-    if not LAWS_JSON.exists():
+    if not paths.laws.exists():
         return {}
 
     try:
         laws = load_json(
-            LAWS_JSON,
+            paths.laws,
         )
 
     except json.JSONDecodeError:
         logger.exception(
             "Failed to load %s",
-            LAWS_JSON,
+            paths.laws,
         )
         return {}
 
@@ -183,27 +185,30 @@ def load_laws() -> dict[str, Law]:
     }
 
 
-def save_laws(laws):
-    """
-    Save Law view as laws.json.
-    """
+def save_laws(
+    laws,
+    paths: StoragePaths = DEFAULT_STORAGE,
+):
+    """Save Law view as laws.json."""
 
     save_json(
         laws,
-        LAWS_JSON,
+        paths.laws,
     )
 
 
-def load_statistics() -> dict:
+def load_statistics(
+    paths: StoragePaths = DEFAULT_STORAGE,
+) -> dict:
     """
     Load statistics from statistics.json.
     """
 
-    if not STATISTICS_JSON.exists():
+    if not paths.statistics.exists():
         return {}
 
     try:
-        return load_json(STATISTICS_JSON)
+        return load_json(paths.statistics)
     except json.JSONDecodeError:
         return {}
 

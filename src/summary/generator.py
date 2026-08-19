@@ -207,12 +207,15 @@ def _generate_law_summary(
 
 def generate(
     law_groups: list[LawGroup],
+    storage_paths: storage.StoragePaths = storage.DEFAULT_STORAGE,
 ) -> tuple[
     list[LawSummary],
     list[AiSummaryLog],
 ]:
 
-    cached_summaries = storage.load_law_summaries()
+    cached_summaries = storage.load_law_summaries(
+        paths=storage_paths,
+    )
 
     law_summaries: list[LawSummary] = []
 

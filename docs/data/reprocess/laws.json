@@ -1,0 +1,618 @@
+[
+  {
+    "law_id": "411AC0000000089",
+    "law_no": "平成十一年法律第八十九号",
+    "law_name": "内閣府設置法",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/411AC0000000089",
+    "updates": [
+      {
+        "law_data_id": 636842,
+        "sub_revision": "4",
+        "published_date": "1999-07-16",
+        "effective_date": "2027-06-16",
+        "effective_comment": "公布の日から起算して一年を超えない範囲内において政令で定める日",
+        "amend_name": "人工衛星等の打上げ及び人工衛星の管理に関する法律等の一部を改正する法律",
+        "amend_no": "令和八年法律第三十九号",
+        "amendment_id": "508AC0000000039",
+        "amend_published_date": "2026-06-17",
+        "compare_url": "https://laws.e-gov.go.jp/law/411AC0000000089/20270616_508AC0000000039?occasion_date=20270616&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 636755,
+        "sub_revision": "4",
+        "published_date": "1999-07-16",
+        "effective_date": "2027-06-16",
+        "effective_comment": "公布の日から起算して一年を超えない範囲内において政令で定める日",
+        "amend_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律及び株式会社国際協力銀行法の一部を改正する法律",
+        "amend_no": "令和八年法律第三十八号",
+        "amendment_id": "508AC0000000038",
+        "amend_published_date": "2026-06-17",
+        "compare_url": "https://laws.e-gov.go.jp/law/411AC0000000089/20270616_508AC0000000038?occasion_date=20270616&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 636527,
+        "sub_revision": "2",
+        "published_date": "1999-07-16",
+        "effective_date": "2026-12-31",
+        "effective_comment": "防災庁設置法（令和八年法律第六十一号）の施行の日",
+        "amend_name": "防災庁設置法の施行に伴う関係法律の整備等に関する法律",
+        "amend_no": "令和八年法律第六十二号",
+        "amendment_id": "508AC0000000062",
+        "amend_published_date": "2026-07-17",
+        "compare_url": "https://laws.e-gov.go.jp/law/411AC0000000089/20261231_508AC0000000062?occasion_date=20261231&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641473,
+        "sub_revision": "1",
+        "published_date": "1999-07-16",
+        "effective_date": "2026-10-30",
+        "effective_comment": "公布の日から起算して三月を超えない範囲内において政令で定める日",
+        "amend_name": "国家社会機能継続性確保施策及び副首都の整備に係る施策の推進に関する法律",
+        "amend_no": "令和八年法律第七十八号",
+        "amendment_id": "508AC1000000078",
+        "amend_published_date": "2026-07-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/411AC0000000089/20261030_508AC1000000078?occasion_date=20261030&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "503AC0000000081",
+    "law_no": "令和三年法律第八十一号",
+    "law_name": "医療的ケア児等及び重症心身障害者並びにそれらの家族に対する支援に関する法律",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/503AC0000000081",
+    "updates": [
+      {
+        "law_data_id": 641479,
+        "sub_revision": "1",
+        "published_date": "2021-06-18",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "医療的ケア児及びその家族に対する支援に関する法律の一部を改正する法律",
+        "amend_no": "令和八年法律第七十七号",
+        "amendment_id": "508AC1000000077",
+        "amend_published_date": "2026-07-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/503AC0000000081/20270401_508AC1000000077?occasion_date=20270401&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "508AC1000000078",
+    "law_no": "令和八年法律第七十八号",
+    "law_name": "国家社会機能継続性確保施策及び副首都の整備に係る施策の推進に関する法律",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/508AC1000000078",
+    "updates": [
+      {
+        "law_data_id": 641475,
+        "sub_revision": "1",
+        "published_date": "2026-07-31",
+        "effective_date": "2026-10-30",
+        "effective_comment": "公布の日から起算して三月を超えない範囲内において政令で定める日",
+        "amend_name": "新規制定",
+        "amend_no": "",
+        "amendment_id": null,
+        "amend_published_date": "2026-07-31",
+        "compare_url": null,
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "424AC1000000080",
+    "law_no": "平成二十四年法律第八十号",
+    "law_name": "大都市地域における特別区の設置に関する法律",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/424AC1000000080",
+    "updates": [
+      {
+        "law_data_id": 641474,
+        "sub_revision": "1",
+        "published_date": "2012-09-05",
+        "effective_date": "2026-10-30",
+        "effective_comment": "公布の日から起算して三月を超えない範囲内において政令で定める日",
+        "amend_name": "国家社会機能継続性確保施策及び副首都の整備に係る施策の推進に関する法律",
+        "amend_no": "令和八年法律第七十八号",
+        "amendment_id": "508AC1000000078",
+        "amend_published_date": "2026-07-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/424AC1000000080/20261030_508AC1000000078?occasion_date=20261030&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "325AC1000000202",
+    "law_no": "昭和二十五年法律第二百二号",
+    "law_name": "建築士法",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/325AC1000000202",
+    "updates": [
+      {
+        "law_data_id": 641478,
+        "sub_revision": "1",
+        "published_date": "1950-05-24",
+        "effective_date": "2029-07-30",
+        "effective_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
+        "amend_name": "建築士法の一部を改正する法律",
+        "amend_no": "令和八年法律第七十四号",
+        "amendment_id": "508AC1000000074",
+        "amend_published_date": "2026-07-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/325AC1000000202/20290730_508AC1000000074?occasion_date=20290730&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641477,
+        "sub_revision": "1",
+        "published_date": "1950-05-24",
+        "effective_date": "2027-07-30",
+        "effective_comment": "公布の日から起算して一年を超えない範囲内において政令で定める日",
+        "amend_name": "建築士法の一部を改正する法律",
+        "amend_no": "令和八年法律第七十四号",
+        "amendment_id": "508AC1000000074",
+        "amend_published_date": "2026-07-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/325AC1000000202/20270730_508AC1000000074?occasion_date=20270730&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641476,
+        "sub_revision": "1",
+        "published_date": "1950-05-24",
+        "effective_date": "2026-07-31",
+        "effective_comment": "",
+        "amend_name": "建築士法の一部を改正する法律",
+        "amend_no": "令和八年法律第七十四号",
+        "amendment_id": "508AC1000000074",
+        "amend_published_date": "2026-07-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/325AC1000000202/20260731_508AC1000000074?occasion_date=20260731&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "419AC1000000051",
+    "law_no": "平成十九年法律第五十一号",
+    "law_name": "日本国憲法の改正手続に関する法律",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/419AC1000000051",
+    "updates": [
+      {
+        "law_data_id": 641472,
+        "sub_revision": "1",
+        "published_date": "2007-05-18",
+        "effective_date": "2026-10-31",
+        "effective_comment": "",
+        "amend_name": "日本国憲法の改正手続に関する法律の一部を改正する法律",
+        "amend_no": "令和八年法律第七十三号",
+        "amendment_id": "508AC1000000073",
+        "amend_published_date": "2026-07-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/419AC1000000051/20261031_508AC1000000073?occasion_date=20261031&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "215M10000008036",
+    "law_no": "大正十五年内務省令第三十六号",
+    "law_name": "健康保険法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/215M10000008036",
+    "updates": [
+      {
+        "law_data_id": 630900,
+        "sub_revision": "6",
+        "published_date": "1926-07-01",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律等の一部を改正する法律の施行に伴う厚生労働省関係省令の整備に関する省令",
+        "amend_no": "令和八年厚生労働省令第十八号",
+        "amendment_id": "508M60000100018",
+        "amend_published_date": "2026-02-26",
+        "compare_url": "https://laws.e-gov.go.jp/law/215M10000008036/20261001_508M60000100018?occasion_date=20261001&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641433,
+        "sub_revision": "1",
+        "published_date": "1926-07-01",
+        "effective_date": "2026-08-01",
+        "effective_comment": "",
+        "amend_name": "健康保険法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百十七号",
+        "amendment_id": "508M60000100117",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/215M10000008036/20260801_508M60000100117?occasion_date=20260801&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "347M50002000044",
+    "law_no": "昭和四十七年労働省令第四十四号",
+    "law_name": "労働安全衛生法及びこれに基づく命令に係る登録及び指定に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/347M50002000044",
+    "updates": [
+      {
+        "law_data_id": 634757,
+        "sub_revision": "2",
+        "published_date": "1972-09-30",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第二十九号",
+        "amendment_id": "508M60000100029",
+        "amend_published_date": "2026-03-23",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000044/20270401_508M60000100029?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641424,
+        "sub_revision": "1",
+        "published_date": "1972-09-30",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000044/20261001_508M60000100116?occasion_date=20261001&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641423,
+        "sub_revision": "1",
+        "published_date": "1972-09-30",
+        "effective_date": "2026-09-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000044/20260901_508M60000100116?occasion_date=20260901&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641416,
+        "sub_revision": "1",
+        "published_date": "1972-09-30",
+        "effective_date": "2026-08-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000044/20260801_508M60000100116?occasion_date=20260801&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "417M60000100044",
+    "law_no": "平成十七年厚生労働省令第四十四号",
+    "law_name": "厚生労働省の所管する法令の規定に基づく民間事業者等が行う書面の保存等における情報通信の技術の利用に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/417M60000100044",
+    "updates": [
+      {
+        "law_data_id": 640818,
+        "sub_revision": "2",
+        "published_date": "2005-03-25",
+        "effective_date": "2027-05-20",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十号",
+        "amendment_id": "508M60000100110",
+        "amend_published_date": "2026-06-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/417M60000100044/20270520_508M60000100110?occasion_date=20270520&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641422,
+        "sub_revision": "1",
+        "published_date": "2005-03-25",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/417M60000100044/20261001_508M60000100116?occasion_date=20261001&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641414,
+        "sub_revision": "1",
+        "published_date": "2005-03-25",
+        "effective_date": "2026-09-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/417M60000100044/20260901_508M60000100116?occasion_date=20260901&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "410M50000200086",
+    "law_no": "平成十年農林水産省令第八十六号",
+    "law_name": "品種登録規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/410M50000200086",
+    "updates": [
+      {
+        "law_data_id": 641454,
+        "sub_revision": "1",
+        "published_date": "1998-12-11",
+        "effective_date": "2026-07-24",
+        "effective_comment": "",
+        "amend_name": "種苗法施行規則及び品種登録規則の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第五十二号",
+        "amendment_id": "508M60000200052",
+        "amend_published_date": "2026-07-24",
+        "compare_url": "https://laws.e-gov.go.jp/law/410M50000200086/20260724_508M60000200052?occasion_date=20260724&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "347M50002000036",
+    "law_no": "昭和四十七年労働省令第三十六号",
+    "law_name": "有機溶剤中毒予防規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/347M50002000036",
+    "updates": [
+      {
+        "law_data_id": 638052,
+        "sub_revision": "2",
+        "published_date": "1972-09-30",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第八十九号",
+        "amendment_id": "508M60000100089",
+        "amend_published_date": "2026-04-28",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000036/20270401_508M60000100089?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 634760,
+        "sub_revision": "2",
+        "published_date": "1972-09-30",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第二十九号",
+        "amendment_id": "508M60000100029",
+        "amend_published_date": "2026-03-23",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000036/20270401_508M60000100029?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641425,
+        "sub_revision": "1",
+        "published_date": "1972-09-30",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000036/20261001_508M60000100116?occasion_date=20261001&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641417,
+        "sub_revision": "1",
+        "published_date": "1972-09-30",
+        "effective_date": "2026-09-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000036/20260901_508M60000100116?occasion_date=20260901&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "347M50002000039",
+    "law_no": "昭和四十七年労働省令第三十九号",
+    "law_name": "特定化学物質障害予防規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/347M50002000039",
+    "updates": [
+      {
+        "law_data_id": 638053,
+        "sub_revision": "4",
+        "published_date": "1972-09-30",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第八十九号",
+        "amendment_id": "508M60000100089",
+        "amend_published_date": "2026-04-28",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000039/20270401_508M60000100089?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 634763,
+        "sub_revision": "4",
+        "published_date": "1972-09-30",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第二十九号",
+        "amendment_id": "508M60000100029",
+        "amend_published_date": "2026-03-23",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000039/20270401_508M60000100029?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641469,
+        "sub_revision": "1",
+        "published_date": "1972-09-30",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000039/20261001_508M60000100116?occasion_date=20261001&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641468,
+        "sub_revision": "1",
+        "published_date": "1972-09-30",
+        "effective_date": "2026-09-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000039/20260901_508M60000100116?occasion_date=20260901&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "354M50002000018",
+    "law_no": "昭和五十四年労働省令第十八号",
+    "law_name": "粉じん障害防止規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/354M50002000018",
+    "updates": [
+      {
+        "law_data_id": 634768,
+        "sub_revision": "2",
+        "published_date": "1979-04-25",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第二十九号",
+        "amendment_id": "508M60000100029",
+        "amend_published_date": "2026-03-23",
+        "compare_url": "https://laws.e-gov.go.jp/law/354M50002000018/20270401_508M60000100029?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641428,
+        "sub_revision": "1",
+        "published_date": "1979-04-25",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/354M50002000018/20261001_508M60000100116?occasion_date=20261001&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641420,
+        "sub_revision": "1",
+        "published_date": "1979-04-25",
+        "effective_date": "2026-09-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/354M50002000018/20260901_508M60000100116?occasion_date=20260901&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "347M50002000037",
+    "law_no": "昭和四十七年労働省令第三十七号",
+    "law_name": "鉛中毒予防規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/347M50002000037",
+    "updates": [
+      {
+        "law_data_id": 634761,
+        "sub_revision": "2",
+        "published_date": "1972-09-30",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第二十九号",
+        "amendment_id": "508M60000100029",
+        "amend_published_date": "2026-03-23",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000037/20270401_508M60000100029?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641426,
+        "sub_revision": "1",
+        "published_date": "1972-09-30",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000037/20261001_508M60000100116?occasion_date=20261001&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641418,
+        "sub_revision": "1",
+        "published_date": "1972-09-30",
+        "effective_date": "2026-09-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百十六号",
+        "amendment_id": "508M60000100116",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/347M50002000037/20260901_508M60000100116?occasion_date=20260901&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "325M50080000018",
+    "law_no": "昭和二十五年電波監理委員会規則第十八号",
+    "law_name": "無線設備規則",
+    "law_type": "規則",
+    "url": "https://laws.e-gov.go.jp/law/325M50080000018",
+    "updates": [
+      {
+        "law_data_id": 641439,
+        "sub_revision": "1",
+        "published_date": "1950-11-30",
+        "effective_date": "2026-07-30",
+        "effective_comment": "",
+        "amend_name": "無線局（基幹放送局を除く。）の開設の根本的基準等の一部を改正する省令",
+        "amend_no": "令和八年総務省令第九十五号",
+        "amendment_id": "508M60000008095",
+        "amend_published_date": "2026-07-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/325M50080000018/20260730_508M60000008095?occasion_date=20260730&tab=compare",
+        "pending": false
+      },
+      {
+        "law_data_id": 641347,
+        "sub_revision": "1",
+        "published_date": "1950-11-30",
+        "effective_date": "2026-07-24",
+        "effective_comment": "",
+        "amend_name": "電波法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年総務省令第九十一号",
+        "amendment_id": "508M60000008091",
+        "amend_published_date": "2026-07-24",
+        "compare_url": "https://laws.e-gov.go.jp/law/325M50080000018/20260724_508M60000008091?occasion_date=20260724&tab=compare",
+        "pending": false
+      }
+    ]
+  }
+]
