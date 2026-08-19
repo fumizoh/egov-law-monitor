@@ -1,394 +1,2432 @@
 [
   {
-    "law_id": "413M60000800110",
-    "law_no": "平成十三年国土交通省令第百十号",
-    "law_name": "マンションの管理の適正化の推進に関する法律施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/413M60000800110",
+    "law_id": "507AC0000000079",
+    "law_no": "令和七年法律第七十九号",
+    "law_name": "独立行政法人男女共同参画機構法",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/507AC0000000079",
     "updates": [
       {
-        "law_data_id": 641495,
+        "law_data_id": 626455,
         "sub_revision": "1",
-        "published_date": "2001-07-19",
-        "effective_date": "2027-04-01",
+        "published_date": "2025-06-27",
+        "effective_date": "2026-04-01",
         "effective_comment": "",
-        "amend_name": "マンションの管理の適正化の推進に関する法律施行規則及び長期優良住宅の普及の促進に関する法律施行規則の一部を改正する省令",
-        "amend_no": "令和八年国土交通省令第七十号",
-        "amendment_id": "508M60000800070",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/413M60000800110/20270401_508M60000800070?occasion_date=20270401&tab=compare",
-        "pending": true
+        "amend_name": "新規制定",
+        "amend_no": "",
+        "amendment_id": null,
+        "amend_published_date": "2025-06-27",
+        "compare_url": null,
+        "pending": false
       }
     ]
   },
   {
-    "law_id": "418M60000100070",
-    "law_no": "平成十八年厚生労働省令第七十号",
-    "law_name": "労働者派遣事業の適正な運営の確保及び派遣労働者の保護等に関する法律施行令第二条第二項の市町村を定める省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/418M60000100070",
+    "law_id": "507CO0000000243",
+    "law_no": "令和七年政令第二百四十三号",
+    "law_name": "事業性融資の推進等に関する法律施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/507CO0000000243",
     "updates": [
       {
-        "law_data_id": 641503,
+        "law_data_id": 641582,
         "sub_revision": "1",
-        "published_date": "2006-03-31",
+        "published_date": "2025-07-02",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十六号",
+        "amendment_id": "508CO0000000246",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/507CO0000000243/20260807_508CO0000000246?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "410CO0000000412",
+    "law_no": "平成十年政令第四百十二号",
+    "law_name": "介護保険法施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/410CO0000000412",
+    "updates": [
+      {
+        "law_data_id": 641577,
+        "sub_revision": "1",
+        "published_date": "1998-12-24",
+        "effective_date": "2026-08-04",
+        "effective_comment": "",
+        "amend_name": "厚生労働省組織令及び社会保障審議会令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十五号",
+        "amendment_id": "508CO0000000245",
+        "amend_published_date": "2026-08-03",
+        "compare_url": "https://laws.e-gov.go.jp/law/410CO0000000412/20260804_508CO0000000245?occasion_date=20260804&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "327CO0000000307",
+    "law_no": "昭和二十七年政令第三百七号",
+    "law_name": "企業会計審議会令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/327CO0000000307",
+    "updates": [
+      {
+        "law_data_id": 641580,
+        "sub_revision": "1",
+        "published_date": "1952-07-31",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十六号",
+        "amendment_id": "508CO0000000246",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/327CO0000000307/20260807_508CO0000000246?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "412CO0000000252",
+    "law_no": "平成十二年政令第二百五十二号",
+    "law_name": "厚生労働省組織令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/412CO0000000252",
+    "updates": [
+      {
+        "law_data_id": 628406,
+        "sub_revision": "6",
+        "published_date": "2000-06-07",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "出入国管理及び難民認定法及び外国人の技能実習の適正な実施及び技能実習生の保護に関する法律の一部を改正する法律の施行に伴う関係政令の整備及び経過措置に関する政令",
+        "amend_no": "令和七年政令第三百四十一号",
+        "amendment_id": "507CO0000000341",
+        "amend_published_date": "2025-10-01",
+        "compare_url": "https://laws.e-gov.go.jp/law/412CO0000000252/20270401_507CO0000000341?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 638491,
+        "sub_revision": "2",
+        "published_date": "2000-06-07",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う関係政令の整備に関する政令",
+        "amend_no": "令和八年政令第百九十六号",
+        "amendment_id": "508CO0000000196",
+        "amend_published_date": "2026-06-17",
+        "compare_url": "https://laws.e-gov.go.jp/law/412CO0000000252/20261001_508CO0000000196?occasion_date=20261001&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641575,
+        "sub_revision": "1",
+        "published_date": "2000-06-07",
+        "effective_date": "2026-08-04",
+        "effective_comment": "",
+        "amend_name": "厚生労働省組織令及び社会保障審議会令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十五号",
+        "amendment_id": "508CO0000000245",
+        "amend_published_date": "2026-08-03",
+        "compare_url": "https://laws.e-gov.go.jp/law/412CO0000000252/20260804_508CO0000000245?occasion_date=20260804&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "417CO0000000169",
+    "law_no": "平成十七年政令第百六十九号",
+    "law_name": "特定外来生物による生態系等に係る被害の防止に関する法律施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/417CO0000000169",
+    "updates": [
+      {
+        "law_data_id": 641586,
+        "sub_revision": "1",
+        "published_date": "2005-04-27",
         "effective_date": "2026-09-01",
         "effective_comment": "",
-        "amend_name": "労働者派遣事業の適正な運営の確保及び派遣労働者の保護等に関する法律施行令第二条第二項の市町村を定める省令の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第百二十号",
-        "amendment_id": "508M60000100120",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/418M60000100070/20260901_508M60000100120?occasion_date=20260901&tab=compare",
+        "amend_name": "特定外来生物による生態系等に係る被害の防止に関する法律施行令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十八号",
+        "amendment_id": "508CO0000000248",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/417CO0000000169/20260901_508CO0000000248?occasion_date=20260901&tab=compare",
         "pending": true
       }
     ]
   },
   {
-    "law_id": "323M40000100050",
-    "law_no": "昭和二十三年厚生省令第五十号",
-    "law_name": "医療法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/323M40000100050",
+    "law_id": "412CO0000000282",
+    "law_no": "平成十二年政令第二百八十二号",
+    "law_name": "社会保障審議会令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/412CO0000000282",
     "updates": [
       {
-        "law_data_id": 634560,
+        "law_data_id": 641576,
+        "sub_revision": "1",
+        "published_date": "2000-06-07",
+        "effective_date": "2026-08-04",
+        "effective_comment": "",
+        "amend_name": "厚生労働省組織令及び社会保障審議会令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十五号",
+        "amendment_id": "508CO0000000245",
+        "amend_published_date": "2026-08-03",
+        "compare_url": "https://laws.e-gov.go.jp/law/412CO0000000282/20260804_508CO0000000245?occasion_date=20260804&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "412CO0000000254",
+    "law_no": "平成十二年政令第二百五十四号",
+    "law_name": "経済産業省組織令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/412CO0000000254",
+    "updates": [
+      {
+        "law_data_id": 641585,
+        "sub_revision": "1",
+        "published_date": "2000-06-07",
+        "effective_date": "2026-08-05",
+        "effective_comment": "",
+        "amend_name": "経済産業省組織令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十七号",
+        "amendment_id": "508CO0000000247",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/412CO0000000254/20260805_508CO0000000247?occasion_date=20260805&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "420CO0000000389",
+    "law_no": "平成二十年政令第三百八十九号",
+    "law_name": "職員の退職管理に関する政令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/420CO0000000389",
+    "updates": [
+      {
+        "law_data_id": 628411,
         "sub_revision": "6",
-        "published_date": "1948-11-05",
-        "effective_date": "2029-04-01",
-        "effective_comment": "",
-        "amend_name": "医療法施行規則の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第二十七号",
-        "amendment_id": "508M60000100027",
-        "amend_published_date": "2026-03-19",
-        "compare_url": "https://laws.e-gov.go.jp/law/323M40000100050/20290401_508M60000100027?occasion_date=20290401&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 640868,
-        "sub_revision": "2",
-        "published_date": "1948-11-05",
-        "effective_date": "2027-05-20",
-        "effective_comment": "",
-        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
-        "amend_no": "令和八年厚生労働省令第百十号",
-        "amendment_id": "508M60000100110",
-        "amend_published_date": "2026-06-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/323M40000100050/20270520_508M60000100110?occasion_date=20270520&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 641505,
-        "sub_revision": "1",
-        "published_date": "1948-11-05",
+        "published_date": "2008-12-25",
         "effective_date": "2027-04-01",
         "effective_comment": "",
-        "amend_name": "医療法等の一部を改正する法律の施行に伴う厚生労働省関係省令の整備等に関する省令",
-        "amend_no": "令和八年厚生労働省令第百十九号",
-        "amendment_id": "508M60000100119",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/323M40000100050/20270401_508M60000100119?occasion_date=20270401&tab=compare",
+        "amend_name": "出入国管理及び難民認定法及び外国人の技能実習の適正な実施及び技能実習生の保護に関する法律の一部を改正する法律の施行に伴う関係政令の整備及び経過措置に関する政令",
+        "amend_no": "令和七年政令第三百四十一号",
+        "amendment_id": "507CO0000000341",
+        "amend_published_date": "2025-10-01",
+        "compare_url": "https://laws.e-gov.go.jp/law/420CO0000000389/20270401_507CO0000000341?occasion_date=20270401&tab=compare",
         "pending": true
       },
       {
-        "law_data_id": 638000,
-        "sub_revision": "2",
-        "published_date": "1948-11-05",
-        "effective_date": "2027-04-01",
-        "effective_comment": "",
-        "amend_name": "医療法施行規則の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第八十四号",
-        "amendment_id": "508M60000100084",
-        "amend_published_date": "2026-04-24",
-        "compare_url": "https://laws.e-gov.go.jp/law/323M40000100050/20270401_508M60000100084?occasion_date=20270401&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 641504,
+        "law_data_id": 641581,
         "sub_revision": "1",
-        "published_date": "1948-11-05",
-        "effective_date": "2026-10-01",
+        "published_date": "2008-12-25",
+        "effective_date": "2026-08-07",
         "effective_comment": "",
-        "amend_name": "医療法等の一部を改正する法律の施行に伴う厚生労働省関係省令の整備等に関する省令",
-        "amend_no": "令和八年厚生労働省令第百十九号",
-        "amendment_id": "508M60000100119",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/323M40000100050/20261001_508M60000100119?occasion_date=20261001&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "335M50000100012",
-    "law_no": "昭和三十五年厚生省令第十二号",
-    "law_name": "国民年金法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/335M50000100012",
-    "updates": [
-      {
-        "law_data_id": 641506,
-        "sub_revision": "1",
-        "published_date": "1960-04-23",
-        "effective_date": "2026-10-01",
-        "effective_comment": "",
-        "amend_name": "国民年金法施行規則の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第百二十一号",
-        "amendment_id": "508M60000100121",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/335M50000100012/20261001_508M60000100121?occasion_date=20261001&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "327M50000002073",
-    "law_no": "昭和二十七年総理府令第七十三号",
-    "law_name": "地方公営企業法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/327M50000002073",
-    "updates": [
-      {
-        "law_data_id": 627988,
-        "sub_revision": "2",
-        "published_date": "1952-09-29",
-        "effective_date": "2026-09-24",
-        "effective_comment": "",
-        "amend_name": "地方自治法施行規則等の一部を改正する省令",
-        "amend_no": "令和七年総務省令第八十七号",
-        "amendment_id": "507M60000008087",
-        "amend_published_date": "2025-08-26",
-        "compare_url": "https://laws.e-gov.go.jp/law/327M50000002073/20260924_507M60000008087?occasion_date=20260924&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 636147,
-        "sub_revision": "1",
-        "published_date": "1952-09-29",
-        "effective_date": "2026-04-01",
-        "effective_comment": "",
-        "amend_name": "地方公営企業法施行規則の一部を改正する省令",
-        "amend_no": "令和八年総務省令第三十六号",
-        "amendment_id": "508M60000008036",
-        "amend_published_date": "2026-03-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/327M50000002073/20260401_508M60000008036?occasion_date=20260401&tab=compare",
+        "amend_name": "金融庁組織令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十六号",
+        "amendment_id": "508CO0000000246",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/420CO0000000389/20260807_508CO0000000246?occasion_date=20260807&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "429M60000008079",
-    "law_no": "平成二十九年総務省令第七十九号",
-    "law_name": "地方独立行政法人法別表及び地方独立行政法人法施行令第五条第一項の総務省令で定める事務を定める省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/429M60000008079",
+    "law_id": "412CO0000000264",
+    "law_no": "平成十二年政令第二百六十四号",
+    "law_name": "自動車損害賠償責任保険審議会令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/412CO0000000264",
     "updates": [
       {
-        "law_data_id": 641549,
+        "law_data_id": 641584,
         "sub_revision": "1",
-        "published_date": "2017-12-04",
-        "effective_date": "2026-08-01",
+        "published_date": "2000-06-07",
+        "effective_date": "2026-08-07",
         "effective_comment": "",
-        "amend_name": "地方独立行政法人法別表及び地方独立行政法人法施行令第五条第一項の総務省令で定める事務を定める省令の一部を改正する省令",
-        "amend_no": "令和八年総務省令第九十六号",
-        "amendment_id": "508M60000008096",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/429M60000008079/20260801_508M60000008096?occasion_date=20260801&tab=compare",
+        "amend_name": "金融庁組織令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十六号",
+        "amendment_id": "508CO0000000246",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/412CO0000000264/20260807_508CO0000000246?occasion_date=20260807&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "322M40000008029",
-    "law_no": "昭和二十二年内務省令第二十九号",
-    "law_name": "地方自治法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/322M40000008029",
+    "law_id": "412CO0000000260",
+    "law_no": "平成十二年政令第二百六十号",
+    "law_name": "金融危機対応会議令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/412CO0000000260",
     "updates": [
       {
-        "law_data_id": 640796,
+        "law_data_id": 641579,
         "sub_revision": "1",
-        "published_date": "1947-05-03",
-        "effective_date": "2027-07-01",
+        "published_date": "2000-06-07",
+        "effective_date": "2026-08-07",
         "effective_comment": "",
-        "amend_name": "地方自治法施行規則の一部を改正する省令",
-        "amend_no": "令和八年総務省令第八十号",
-        "amendment_id": "508M60000008080",
-        "amend_published_date": "2026-06-26",
-        "compare_url": "https://laws.e-gov.go.jp/law/322M40000008029/20270701_508M60000008080?occasion_date=20270701&tab=compare",
-        "pending": true
-      },
+        "amend_name": "金融庁組織令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十六号",
+        "amendment_id": "508CO0000000246",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/412CO0000000260/20260807_508CO0000000246?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "410CO0000000392",
+    "law_no": "平成十年政令第三百九十二号",
+    "law_name": "金融庁組織令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/410CO0000000392",
+    "updates": [
       {
-        "law_data_id": 640826,
+        "law_data_id": 641578,
         "sub_revision": "1",
-        "published_date": "1947-05-03",
-        "effective_date": "2026-10-01",
+        "published_date": "1998-12-15",
+        "effective_date": "2026-08-07",
         "effective_comment": "",
-        "amend_name": "地方自治法施行規則の一部を改正する省令",
-        "amend_no": "令和八年総務省令第八十六号",
-        "amendment_id": "508M60000008086",
-        "amend_published_date": "2026-06-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/322M40000008029/20261001_508M60000008086?occasion_date=20261001&tab=compare",
-        "pending": true
-      },
+        "amend_name": "金融庁組織令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十六号",
+        "amendment_id": "508CO0000000246",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/410CO0000000392/20260807_508CO0000000246?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416CO0000000241",
+    "law_no": "平成十六年政令第二百四十一号",
+    "law_name": "金融機能強化審査会令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/416CO0000000241",
+    "updates": [
       {
-        "law_data_id": 627987,
+        "law_data_id": 641583,
+        "sub_revision": "1",
+        "published_date": "2004-07-23",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十六号",
+        "amendment_id": "508CO0000000246",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/416CO0000000241/20260807_508CO0000000246?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "414M60000040068",
+    "law_no": "平成十四年財務省令第六十八号",
+    "law_name": "個人向け国債の発行等に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/414M60000040068",
+    "updates": [
+      {
+        "law_data_id": 641624,
+        "sub_revision": "1",
+        "published_date": "2002-12-06",
+        "effective_date": "2026-12-01",
+        "effective_comment": "",
+        "amend_name": "個人向け国債の発行等に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省令第五十七号",
+        "amendment_id": "508M60000040057",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/414M60000040068/20261201_508M60000040057?occasion_date=20261201&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "420M60000100144",
+    "law_no": "平成二十年厚生労働省令第百四十四号",
+    "law_name": "全国健康保険協会の財務及び会計に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/420M60000100144",
+    "updates": [
+      {
+        "law_data_id": 641604,
+        "sub_revision": "1",
+        "published_date": "2008-09-26",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/420M60000100144/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000100001",
+    "law_no": "平成十三年厚生労働省令第一号",
+    "law_name": "厚生労働省組織規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000100001",
+    "updates": [
+      {
+        "law_data_id": 641592,
+        "sub_revision": "1",
+        "published_date": "2001-01-06",
+        "effective_date": "2026-08-04",
+        "effective_comment": "",
+        "amend_name": "厚生労働省組織規則の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百二十二号",
+        "amendment_id": "508M60000100122",
+        "amend_published_date": "2026-08-03",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000100001/20260804_508M60000100122?occasion_date=20260804&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "507M60000100003",
+    "law_no": "令和七年厚生労働省令第三号",
+    "law_name": "国立健康危機管理研究機構の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/507M60000100003",
+    "updates": [
+      {
+        "law_data_id": 641603,
+        "sub_revision": "1",
+        "published_date": "2025-01-17",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/507M60000100003/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000080057",
+    "law_no": "平成十五年文部科学省令第五十七号",
+    "law_name": "国立大学法人法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000080057",
+    "updates": [
+      {
+        "law_data_id": 641675,
+        "sub_revision": "1",
+        "published_date": "2003-12-19",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000080057/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "427M60000102004",
+    "law_no": "平成二十七年内閣府・厚生労働省令第四号",
+    "law_name": "国立研究開発法人医薬基盤・健康・栄養研究所の業務運営、財務及び会計並びに人事管理に関する命令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/427M60000102004",
+    "updates": [
+      {
+        "law_data_id": 641641,
+        "sub_revision": "1",
+        "published_date": "2015-04-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "国立研究開発法人医薬基盤・健康・栄養研究所の業務運営、財務及び会計並びに人事管理に関する命令の一部を改正する命令",
+        "amend_no": "令和八年内閣府・厚生労働省令第十四号",
+        "amendment_id": "508M60000102014",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/427M60000102004/20260807_508M60000102014?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60001000014",
+    "law_no": "平成十三年環境省令第十四号",
+    "law_name": "国立研究開発法人国立環境研究所の業務運営並びに財務及び会計等に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60001000014",
+    "updates": [
+      {
+        "law_data_id": 641588,
+        "sub_revision": "1",
+        "published_date": "2001-04-03",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "国立研究開発法人国立環境研究所の業務運営並びに財務及び会計等に関する省令及び独立行政法人環境再生保全機構に関する省令の一部を改正する省令",
+        "amend_no": "令和八年環境省令第二十二号",
+        "amendment_id": "508M60001000022",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60001000014/20260807_508M60001000022?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000200047",
+    "law_no": "平成十三年農林水産省令第四十七号",
+    "law_name": "国立研究開発法人国際農林水産業研究センターの業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000200047",
+    "updates": [
+      {
+        "law_data_id": 641654,
+        "sub_revision": "1",
+        "published_date": "2001-02-16",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "国立研究開発法人国際農林水産業研究センターの業務運営、財務及び会計並びに人事管理に関する省令及び国立研究開発法人農業・食品産業技術総合研究機構の農業・食品産業技術研究等業務及び農業機械化促進業務に係る財務及び会計並びに人事管理に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第六十一号",
+        "amendment_id": "508M60000200061",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000200047/20260807_508M60000200061?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000800044",
+    "law_no": "平成十三年国土交通省令第四十四号",
+    "law_name": "国立研究開発法人土木研究所の財務及び会計等に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000800044",
+    "updates": [
+      {
+        "law_data_id": 641606,
+        "sub_revision": "1",
+        "published_date": "2001-03-27",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000800044/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000080050",
+    "law_no": "平成十五年文部科学省令第五十号",
+    "law_name": "国立研究開発法人宇宙航空研究開発機構の会計の原則及び短期借入金の認可の申請手続等に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000080050",
+    "updates": [
+      {
+        "law_data_id": 641672,
+        "sub_revision": "1",
+        "published_date": "2003-10-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000080050/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000800045",
+    "law_no": "平成十三年国土交通省令第四十五号",
+    "law_name": "国立研究開発法人建築研究所に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000800045",
+    "updates": [
+      {
+        "law_data_id": 641607,
+        "sub_revision": "1",
+        "published_date": "2001-03-27",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000800045/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "427M60000582001",
+    "law_no": "平成二十七年内閣府・文部科学省・厚生労働省・経済産業省令第一号",
+    "law_name": "国立研究開発法人日本医療研究開発機構の業務運営、財務及び会計並びに人事管理に関する命令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/427M60000582001",
+    "updates": [
+      {
+        "law_data_id": 641645,
+        "sub_revision": "1",
+        "published_date": "2015-03-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "国立研究開発法人日本医療研究開発機構の業務運営、財務及び会計並びに人事管理に関する命令の一部を改正する命令",
+        "amend_no": "令和八年内閣府・文部科学省・厚生労働省・経済産業省令第三号",
+        "amendment_id": "508M60000582003",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/427M60000582001/20260807_508M60000582003?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "417M60000080044",
+    "law_no": "平成十七年文部科学省令第四十四号",
+    "law_name": "国立研究開発法人日本原子力研究開発機構の監査報告の作成、監事の調査の対象となる書類、会計の原則、短期借入金の認可の申請手続、埋設処分業務に係る財務及び会計、内部組織並びに管理又は監督の地位等に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/417M60000080044",
+    "updates": [
+      {
+        "law_data_id": 641680,
+        "sub_revision": "1",
+        "published_date": "2005-09-09",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/417M60000080044/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000200048",
+    "law_no": "平成十三年農林水産省令第四十八号",
+    "law_name": "国立研究開発法人森林研究・整備機構の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000200048",
+    "updates": [
+      {
+        "law_data_id": 641656,
+        "sub_revision": "1",
+        "published_date": "2001-02-16",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "国立研究開発法人森林研究・整備機構の業務運営、財務及び会計並びに人事管理に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第六十二号",
+        "amendment_id": "508M60000200062",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000200048/20260807_508M60000200062?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000200049",
+    "law_no": "平成十三年農林水産省令第四十九号",
+    "law_name": "国立研究開発法人水産研究・教育機構の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000200049",
+    "updates": [
+      {
+        "law_data_id": 641653,
+        "sub_revision": "1",
+        "published_date": "2001-02-16",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "国立研究開発法人水産研究・教育機構の業務運営、財務及び会計並びに人事管理に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第六十号",
+        "amendment_id": "508M60000200060",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000200049/20260807_508M60000200060?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000800047",
+    "law_no": "平成十三年国土交通省令第四十七号",
+    "law_name": "国立研究開発法人海上・港湾・航空技術研究所に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000800047",
+    "updates": [
+      {
+        "law_data_id": 641608,
+        "sub_revision": "1",
+        "published_date": "2001-03-27",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000800047/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416M60000080009",
+    "law_no": "平成十六年文部科学省令第九号",
+    "law_name": "国立研究開発法人海洋研究開発機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/416M60000080009",
+    "updates": [
+      {
+        "law_data_id": 641678,
+        "sub_revision": "1",
+        "published_date": "2004-03-24",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/416M60000080009/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000080036",
+    "law_no": "平成十三年文部科学省令第三十六号",
+    "law_name": "国立研究開発法人物質・材料研究機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000080036",
+    "updates": [
+      {
+        "law_data_id": 641663,
+        "sub_revision": "1",
+        "published_date": "2001-03-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000080036/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000080049",
+    "law_no": "平成十五年文部科学省令第四十九号",
+    "law_name": "国立研究開発法人理化学研究所に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000080049",
+    "updates": [
+      {
+        "law_data_id": 641671,
+        "sub_revision": "1",
+        "published_date": "2003-10-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000080049/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000080047",
+    "law_no": "平成十五年文部科学省令第四十七号",
+    "law_name": "国立研究開発法人科学技術振興機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000080047",
+    "updates": [
+      {
+        "law_data_id": 641669,
+        "sub_revision": "1",
+        "published_date": "2003-10-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000080047/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000240003",
+    "law_no": "平成十五年財務省・農林水産省令第三号",
+    "law_name": "国立研究開発法人農業・食品産業技術総合研究機構の基礎的研究業務に係る財務及び会計に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000240003",
+    "updates": [
+      {
+        "law_data_id": 641628,
+        "sub_revision": "1",
+        "published_date": "2003-09-16",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "国立研究開発法人農業・食品産業技術総合研究機構の基礎的研究業務に係る財務及び会計に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省・農林水産省令第三号",
+        "amendment_id": "508M60000240003",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000240003/20260807_508M60000240003?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000200094",
+    "law_no": "平成十五年農林水産省令第九十四号",
+    "law_name": "国立研究開発法人農業・食品産業技術総合研究機構の農業・食品産業技術研究等業務及び農業機械化促進業務に係る財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000200094",
+    "updates": [
+      {
+        "law_data_id": 641655,
+        "sub_revision": "1",
+        "published_date": "2003-09-16",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "国立研究開発法人国際農林水産業研究センターの業務運営、財務及び会計並びに人事管理に関する省令及び国立研究開発法人農業・食品産業技術総合研究機構の農業・食品産業技術研究等業務及び農業機械化促進業務に係る財務及び会計並びに人事管理に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第六十一号",
+        "amendment_id": "508M60000200061",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000200094/20260807_508M60000200061?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000080039",
+    "law_no": "平成十三年文部科学省令第三十九号",
+    "law_name": "国立研究開発法人量子科学技術研究開発機構の財務及び会計に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000080039",
+    "updates": [
+      {
+        "law_data_id": 641665,
+        "sub_revision": "1",
+        "published_date": "2001-03-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000080039/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000080037",
+    "law_no": "平成十三年文部科学省令第三十七号",
+    "law_name": "国立研究開発法人防災科学技術研究所に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000080037",
+    "updates": [
+      {
+        "law_data_id": 641664,
+        "sub_revision": "1",
+        "published_date": "2001-03-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000080037/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "418M60000100060",
+    "law_no": "平成十八年厚生労働省令第六十号",
+    "law_name": "年金積立金管理運用独立行政法人の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/418M60000100060",
+    "updates": [
+      {
+        "law_data_id": 641601,
+        "sub_revision": "1",
+        "published_date": "2006-03-29",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/418M60000100060/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000080039",
+    "law_no": "平成十五年文部科学省令第三十九号",
+    "law_name": "放送大学学園に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000080039",
+    "updates": [
+      {
+        "law_data_id": 641681,
+        "sub_revision": "1",
+        "published_date": "2003-09-16",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000080039/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "421M60000100166",
+    "law_no": "平成二十一年厚生労働省令第百六十六号",
+    "law_name": "日本年金機構の財務及び会計に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/421M60000100166",
+    "updates": [
+      {
+        "law_data_id": 641605,
+        "sub_revision": "1",
+        "published_date": "2009-12-28",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/421M60000100166/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "409M50000080042",
+    "law_no": "平成九年文部省令第四十二号",
+    "law_name": "日本私立学校振興・共済事業団の財務及び会計に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/409M50000080042",
+    "updates": [
+      {
+        "law_data_id": 641682,
+        "sub_revision": "1",
+        "published_date": "1997-12-18",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/409M50000080042/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "423M60000002059",
+    "law_no": "平成二十三年内閣府令第五十九号",
+    "law_name": "沖縄科学技術大学院大学学園法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/423M60000002059",
+    "updates": [
+      {
+        "law_data_id": 641633,
+        "sub_revision": "1",
+        "published_date": "2011-10-31",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "沖縄科学技術大学院大学学園法施行規則の一部を改正する内閣府令",
+        "amend_no": "令和八年内閣府令第六十八号",
+        "amendment_id": "508M60000002068",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/423M60000002059/20260807_508M60000002068?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "504M62000800001",
+    "law_no": "令和四年カジノ管理委員会規則・国土交通省令第一号",
+    "law_name": "特定複合観光施設区域整備法に基づくカジノ事業者又はカジノ施設供用事業者が行う設置運営事業等の監査及び会計に関する命令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/504M62000800001",
+    "updates": [
+      {
+        "law_data_id": 641620,
+        "sub_revision": "1",
+        "published_date": "2022-07-22",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "特定複合観光施設区域整備法に基づくカジノ事業者又はカジノ施設供用事業者が行う設置運営事業等の監査及び会計に関する命令の一部を改正する命令",
+        "amend_no": "令和八年カジノ管理委員会・国土交通省令第二号",
+        "amendment_id": "508M62000800002",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/504M62000800001/20260807_508M62000800002?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "503M60000800075",
+    "law_no": "令和三年国土交通省令第七十五号",
+    "law_name": "特定複合観光施設区域整備法に基づく設置運営事業等の監査及び会計に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/503M60000800075",
+    "updates": [
+      {
+        "law_data_id": 641619,
+        "sub_revision": "1",
+        "published_date": "2021-12-03",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/503M60000800075/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "419M60000840001",
+    "law_no": "平成十九年財務省・国土交通省令第一号",
+    "law_name": "独立行政法人住宅金融支援機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/419M60000840001",
+    "updates": [
+      {
+        "law_data_id": 641626,
+        "sub_revision": "1",
+        "published_date": "2007-03-28",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人奄美群島振興開発基金に関する省令及び独立行政法人住宅金融支援機構に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省・国土交通省令第二号",
+        "amendment_id": "508M60000840002",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/419M60000840001/20260807_508M60000840002?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000100151",
+    "law_no": "平成十五年厚生労働省令第百五十一号",
+    "law_name": "独立行政法人労働政策研究・研修機構の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000100151",
+    "updates": [
+      {
+        "law_data_id": 641595,
+        "sub_revision": "1",
+        "published_date": "2003-09-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000100151/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416M60000100056",
+    "law_no": "平成十六年厚生労働省令第五十六号",
+    "law_name": "独立行政法人労働者健康安全機構の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/416M60000100056",
+    "updates": [
+      {
+        "law_data_id": 641598,
+        "sub_revision": "1",
+        "published_date": "2004-03-29",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/416M60000100056/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000100152",
+    "law_no": "平成十五年厚生労働省令第百五十二号",
+    "law_name": "独立行政法人勤労者退職金共済機構の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000100152",
+    "updates": [
+      {
+        "law_data_id": 641596,
+        "sub_revision": "1",
+        "published_date": "2003-09-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000100152/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000202012",
+    "law_no": "平成十五年内閣府・農林水産省令第十二号",
+    "law_name": "独立行政法人北方領土問題対策協会の業務運営、財務及び会計並びに人事管理に関する命令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000202012",
+    "updates": [
+      {
+        "law_data_id": 641643,
+        "sub_revision": "1",
+        "published_date": "2003-09-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人北方領土問題対策協会の業務運営、財務及び会計並びに人事管理に関する命令の一部を改正する命令",
+        "amend_no": "令和八年内閣府・農林水産省令第十一号",
+        "amendment_id": "508M60000202011",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000202012/20260807_508M60000202011?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416M60000100055",
+    "law_no": "平成十六年厚生労働省令第五十五号",
+    "law_name": "独立行政法人医薬品医療機器総合機構の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/416M60000100055",
+    "updates": [
+      {
+        "law_data_id": 641597,
+        "sub_revision": "1",
+        "published_date": "2004-03-29",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/416M60000100055/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000002085",
+    "law_no": "平成十五年内閣府令第八十五号",
+    "law_name": "独立行政法人国民生活センターの業務運営、財務及び会計並びに人事管理に関する内閣府令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000002085",
+    "updates": [
+      {
+        "law_data_id": 641634,
+        "sub_revision": "1",
+        "published_date": "2003-09-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人国民生活センターの業務運営、財務及び会計並びに人事管理に関する内閣府令の一部を改正する内閣府令",
+        "amend_no": "令和八年内閣府令第六十九号",
+        "amendment_id": "508M60000002069",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000002085/20260807_508M60000002069?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000002014",
+    "law_no": "平成十三年内閣府令第十四号",
+    "law_name": "独立行政法人国立公文書館の業務運営並びに財務及び会計に関する内閣府令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000002014",
+    "updates": [
+      {
+        "law_data_id": 641632,
+        "sub_revision": "1",
+        "published_date": "2001-03-14",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人国立公文書館の業務運営並びに財務及び会計に関する内閣府令の一部を改正する内閣府令",
+        "amend_no": "令和八年内閣府令第六十七号",
+        "amendment_id": "508M60000002067",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000002014/20260807_508M60000002067?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000040045",
+    "law_no": "平成十五年財務省令第四十五号",
+    "law_name": "独立行政法人国立印刷局に関する命令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000040045",
+    "updates": [
+      {
+        "law_data_id": 641587,
+        "sub_revision": "1",
+        "published_date": "2003-03-31",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人国立印刷局に関する命令の一部を改正する命令",
+        "amend_no": "令和八年デジタル庁・財務省令第一号",
+        "amendment_id": "508M60004040001",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000040045/20260807_508M60004040001?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000080041",
+    "law_no": "平成十三年文部科学省令第四十一号",
+    "law_name": "独立行政法人国立文化財機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000080041",
+    "updates": [
+      {
+        "law_data_id": 641667,
+        "sub_revision": "1",
+        "published_date": "2001-03-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000080041/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000080028",
+    "law_no": "平成十三年文部科学省令第二十八号",
+    "law_name": "独立行政法人国立特別支援教育総合研究所に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000080028",
+    "updates": [
+      {
+        "law_data_id": 641659,
+        "sub_revision": "1",
+        "published_date": "2001-03-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000080028/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416M60000100077",
+    "law_no": "平成十六年厚生労働省令第七十七号",
+    "law_name": "独立行政法人国立病院機構の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/416M60000100077",
+    "updates": [
+      {
+        "law_data_id": 641599,
+        "sub_revision": "1",
+        "published_date": "2004-03-31",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/416M60000100077/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000080035",
+    "law_no": "平成十三年文部科学省令第三十五号",
+    "law_name": "独立行政法人国立科学博物館に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000080035",
+    "updates": [
+      {
+        "law_data_id": 641662,
+        "sub_revision": "1",
+        "published_date": "2001-03-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000080035/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000080040",
+    "law_no": "平成十三年文部科学省令第四十号",
+    "law_name": "独立行政法人国立美術館に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000080040",
+    "updates": [
+      {
+        "law_data_id": 641666,
+        "sub_revision": "1",
+        "published_date": "2001-03-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000080040/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000100149",
+    "law_no": "平成十五年厚生労働省令第百四十九号",
+    "law_name": "独立行政法人国立重度知的障害者総合施設のぞみの園の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000100149",
+    "updates": [
+      {
+        "law_data_id": 641594,
+        "sub_revision": "1",
+        "published_date": "2003-09-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000100149/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000080030",
+    "law_no": "平成十三年文部科学省令第三十号",
+    "law_name": "独立行政法人国立青少年教育振興機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000080030",
+    "updates": [
+      {
+        "law_data_id": 641661,
+        "sub_revision": "1",
+        "published_date": "2001-03-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000080030/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000080058",
+    "law_no": "平成十五年文部科学省令第五十八号",
+    "law_name": "独立行政法人国立高等専門学校機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000080058",
+    "updates": [
+      {
+        "law_data_id": 641676,
+        "sub_revision": "1",
+        "published_date": "2003-12-19",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000080058/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000800103",
+    "law_no": "平成十五年国土交通省令第百三号",
+    "law_name": "独立行政法人国際観光振興機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000800103",
+    "updates": [
+      {
+        "law_data_id": 641613,
+        "sub_revision": "1",
+        "published_date": "2003-10-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000800103/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "417M60000100145",
+    "law_no": "平成十七年厚生労働省令第百四十五号",
+    "law_name": "独立行政法人地域医療機能推進機構の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/417M60000100145",
+    "updates": [
+      {
+        "law_data_id": 641600,
+        "sub_revision": "1",
+        "published_date": "2005-09-22",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/417M60000100145/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000080029",
+    "law_no": "平成十三年文部科学省令第二十九号",
+    "law_name": "独立行政法人大学入試センターに関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000080029",
+    "updates": [
+      {
+        "law_data_id": 641660,
+        "sub_revision": "1",
+        "published_date": "2001-03-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000080029/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000080059",
+    "law_no": "平成十五年文部科学省令第五十九号",
+    "law_name": "独立行政法人大学改革支援・学位授与機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000080059",
+    "updates": [
+      {
+        "law_data_id": 641677,
+        "sub_revision": "1",
+        "published_date": "2003-12-19",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000080059/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416M60000840003",
+    "law_no": "平成十六年財務省・国土交通省令第三号",
+    "law_name": "独立行政法人奄美群島振興開発基金に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/416M60000840003",
+    "updates": [
+      {
+        "law_data_id": 641625,
+        "sub_revision": "1",
+        "published_date": "2004-09-29",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人奄美群島振興開発基金に関する省令及び独立行政法人住宅金融支援機構に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省・国土交通省令第二号",
+        "amendment_id": "508M60000840002",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/416M60000840003/20260807_508M60000840002?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000200035",
+    "law_no": "平成十三年農林水産省令第三十五号",
+    "law_name": "独立行政法人家畜改良センターの業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000200035",
+    "updates": [
+      {
+        "law_data_id": 641648,
+        "sub_revision": "1",
+        "published_date": "2001-02-16",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人家畜改良センターの業務運営、財務及び会計並びに人事管理に関する省令及び独立行政法人農畜産業振興機構の業務運営、財務及び会計並びに人事管理に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第五十七号",
+        "amendment_id": "508M60000200057",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000200035/20260807_508M60000200057?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000080043",
+    "law_no": "平成十三年文部科学省令第四十三号",
+    "law_name": "独立行政法人教職員支援機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000080043",
+    "updates": [
+      {
+        "law_data_id": 641668,
+        "sub_revision": "1",
+        "published_date": "2001-03-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000080043/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000080051",
+    "law_no": "平成十五年文部科学省令第五十一号",
+    "law_name": "独立行政法人日本スポーツ振興センターに関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000080051",
+    "updates": [
+      {
+        "law_data_id": 641673,
+        "sub_revision": "1",
+        "published_date": "2003-10-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000080051/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416M60000080023",
+    "law_no": "平成十六年文部科学省令第二十三号",
+    "law_name": "独立行政法人日本学生支援機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/416M60000080023",
+    "updates": [
+      {
+        "law_data_id": 627786,
         "sub_revision": "4",
-        "published_date": "1947-05-03",
-        "effective_date": "2026-09-24",
+        "published_date": "2004-03-31",
+        "effective_date": "2026-10-01",
         "effective_comment": "",
-        "amend_name": "地方自治法施行規則等の一部を改正する省令",
-        "amend_no": "令和七年総務省令第八十七号",
-        "amendment_id": "507M60000008087",
-        "amend_published_date": "2025-08-26",
-        "compare_url": "https://laws.e-gov.go.jp/law/322M40000008029/20260924_507M60000008087?occasion_date=20260924&tab=compare",
+        "amend_name": "独立行政法人日本学生支援機構に関する省令及び大学等における修学の支援に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和七年文部科学省令第十九号",
+        "amendment_id": "507M60000080019",
+        "amend_published_date": "2025-07-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/416M60000080023/20261001_507M60000080019?occasion_date=20261001&tab=compare",
         "pending": true
       },
       {
-        "law_data_id": 637918,
+        "law_data_id": 641679,
         "sub_revision": "1",
-        "published_date": "1947-05-03",
-        "effective_date": "2026-05-21",
+        "published_date": "2004-03-31",
+        "effective_date": "2026-08-07",
         "effective_comment": "",
-        "amend_name": "地方自治法施行規則及び地方自治法第二百五十五条の五第一項の規定による自治紛争処理委員の審理等の手続に関する省令の一部を改正する省令",
-        "amend_no": "令和八年総務省令第六十三号",
-        "amendment_id": "508M60000008063",
-        "amend_published_date": "2026-04-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/322M40000008029/20260521_508M60000008063?occasion_date=20260521&tab=compare",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/416M60000080023/20260807_508M60000080028?occasion_date=20260807&tab=compare",
         "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000080048",
+    "law_no": "平成十五年文部科学省令第四十八号",
+    "law_name": "独立行政法人日本学術振興会に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000080048",
+    "updates": [
+      {
+        "law_data_id": 641670,
+        "sub_revision": "1",
+        "published_date": "2003-10-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000080048/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000080052",
+    "law_no": "平成十五年文部科学省令第五十二号",
+    "law_name": "独立行政法人日本芸術文化振興会に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000080052",
+    "updates": [
+      {
+        "law_data_id": 641674,
+        "sub_revision": "1",
+        "published_date": "2003-10-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
+        "amend_no": "令和八年文部科学省令第二十八号",
+        "amendment_id": "508M60000080028",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000080052/20260807_508M60000080028?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "417M60000800064",
+    "law_no": "平成十七年国土交通省令第六十四号",
+    "law_name": "独立行政法人日本高速道路保有・債務返済機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/417M60000800064",
+    "updates": [
+      {
+        "law_data_id": 641618,
+        "sub_revision": "1",
+        "published_date": "2005-06-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/417M60000800064/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000800104",
+    "law_no": "平成十五年国土交通省令第百四号",
+    "law_name": "独立行政法人水資源機構の財務及び会計等に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000800104",
+    "updates": [
+      {
+        "law_data_id": 641614,
+        "sub_revision": "1",
+        "published_date": "2003-10-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000800104/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000800052",
+    "law_no": "平成十三年国土交通省令第五十二号",
+    "law_name": "独立行政法人海技教育機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000800052",
+    "updates": [
+      {
+        "law_data_id": 641609,
+        "sub_revision": "1",
+        "published_date": "2001-03-27",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000800052/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416M60001000011",
+    "law_no": "平成十六年環境省令第十一号",
+    "law_name": "独立行政法人環境再生保全機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/416M60001000011",
+    "updates": [
+      {
+        "law_data_id": 641589,
+        "sub_revision": "1",
+        "published_date": "2004-04-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "国立研究開発法人国立環境研究所の業務運営並びに財務及び会計等に関する省令及び独立行政法人環境再生保全機構に関する省令の一部を改正する省令",
+        "amend_no": "令和八年環境省令第二十二号",
+        "amendment_id": "508M60001000022",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/416M60001000011/20260807_508M60001000022?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "508M60000082003",
+    "law_no": "令和八年内閣府・文部科学省令第三号",
+    "law_name": "独立行政法人男女共同参画機構の業務運営、財務及び会計並びに人事管理に関する命令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/508M60000082003",
+    "updates": [
+      {
+        "law_data_id": 641644,
+        "sub_revision": "1",
+        "published_date": "2026-03-13",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人男女共同参画機構の業務運営、財務及び会計並びに人事管理に関する命令の一部を改正する命令",
+        "amend_no": "令和八年内閣府・文部科学省令第六号",
+        "amendment_id": "508M60000082006",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/508M60000082003/20260807_508M60000082006?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000100148",
+    "law_no": "平成十五年厚生労働省令第百四十八号",
+    "law_name": "独立行政法人福祉医療機構の業務運営、財務及び会計並びに人事管理に関する命令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000100148",
+    "updates": [
+      {
+        "law_data_id": 641642,
+        "sub_revision": "1",
+        "published_date": "2003-09-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人福祉医療機構の業務運営、財務及び会計並びに人事管理に関する命令の一部を改正する命令",
+        "amend_no": "令和八年内閣府・厚生労働省令第十五号",
+        "amendment_id": "508M60000102015",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000100148/20260807_508M60000102015?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000800107",
+    "law_no": "平成十五年国土交通省令第百七号",
+    "law_name": "独立行政法人空港周辺整備機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000800107",
+    "updates": [
+      {
+        "law_data_id": 641616,
+        "sub_revision": "1",
+        "published_date": "2003-10-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000800107/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000800106",
+    "law_no": "平成十五年国土交通省令第百六号",
+    "law_name": "独立行政法人自動車事故対策機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000800106",
+    "updates": [
+      {
+        "law_data_id": 641615,
+        "sub_revision": "1",
+        "published_date": "2003-10-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000800106/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "414M60000800057",
+    "law_no": "平成十四年国土交通省令第五十七号",
+    "law_name": "独立行政法人自動車技術総合機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/414M60000800057",
+    "updates": [
+      {
+        "law_data_id": 641611,
+        "sub_revision": "1",
+        "published_date": "2002-04-02",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/414M60000800057/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000800053",
+    "law_no": "平成十三年国土交通省令第五十三号",
+    "law_name": "独立行政法人航空大学校に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000800053",
+    "updates": [
+      {
+        "law_data_id": 641610,
+        "sub_revision": "1",
+        "published_date": "2001-03-27",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000800053/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000200033",
+    "law_no": "平成十三年農林水産省令第三十三号",
+    "law_name": "独立行政法人農林水産消費安全技術センターの業務運営並びに財務及び会計に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000200033",
+    "updates": [
+      {
+        "law_data_id": 641657,
+        "sub_revision": "1",
+        "published_date": "2001-02-16",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人農林水産消費安全技術センターの業務運営並びに財務及び会計に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第六十三号",
+        "amendment_id": "508M60000200063",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000200033/20260807_508M60000200063?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000200107",
+    "law_no": "平成十五年農林水産省令第百七号",
+    "law_name": "独立行政法人農林漁業信用基金の農業保険関係業務及び漁業災害補償関係業務に係る財務及び会計に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000200107",
+    "updates": [
+      {
+        "law_data_id": 641650,
+        "sub_revision": "1",
+        "published_date": "2003-09-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人農林漁業信用基金の農業保険関係業務及び漁業災害補償関係業務に係る財務及び会計に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第五十八号",
+        "amendment_id": "508M60000200058",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000200107/20260807_508M60000200058?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000240005",
+    "law_no": "平成十五年財務省・農林水産省令第五号",
+    "law_name": "独立行政法人農林漁業信用基金の農業信用保険業務、林業信用保証業務及び漁業信用保険業務に係る財務及び会計に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000240005",
+    "updates": [
+      {
+        "law_data_id": 641627,
+        "sub_revision": "1",
+        "published_date": "2003-09-26",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人農林漁業信用基金の農業信用保険業務、林業信用保証業務及び漁業信用保険業務に係る財務及び会計に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省・農林水産省令第二号",
+        "amendment_id": "508M60000240002",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000240005/20260807_508M60000240002?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000200100",
+    "law_no": "平成十五年農林水産省令第百号",
+    "law_name": "独立行政法人農業者年金基金の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000200100",
+    "updates": [
+      {
+        "law_data_id": 641652,
+        "sub_revision": "1",
+        "published_date": "2003-09-29",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人農業者年金基金の業務運営、財務及び会計並びに人事管理に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第五十九号",
+        "amendment_id": "508M60000200059",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000200100/20260807_508M60000200059?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000200104",
+    "law_no": "平成十五年農林水産省令第百四号",
+    "law_name": "独立行政法人農畜産業振興機構の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000200104",
+    "updates": [
+      {
+        "law_data_id": 605114,
+        "sub_revision": "2",
+        "published_date": "2003-09-30",
+        "effective_date": "2117-12-31",
+        "effective_comment": "環太平洋パートナーシップ協定が日本について効力を生ずる日の前日",
+        "amend_name": "砂糖及びでん粉の価格調整に関する法律施行規則等の一部を改正する省令",
+        "amend_no": "平成二十九年農林水産省令第六号",
+        "amendment_id": "429M60000200006",
+        "amend_published_date": "2017-01-25",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000200104/21171231_429M60000200006?occasion_date=21171231&tab=compare",
+        "pending": true
       },
       {
-        "law_data_id": 637196,
+        "law_data_id": 641649,
         "sub_revision": "1",
-        "published_date": "1947-05-03",
-        "effective_date": "2026-04-01",
+        "published_date": "2003-09-30",
+        "effective_date": "2026-08-07",
         "effective_comment": "",
-        "amend_name": "地方税法施行規則及び地方税法施行規則の一部を改正する等の省令の一部を改正する省令",
-        "amend_no": "令和八年総務省令第四十四号",
-        "amendment_id": "508M60000008044",
-        "amend_published_date": "2026-03-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/322M40000008029/20260401_508M60000008044?occasion_date=20260401&tab=compare",
+        "amend_name": "独立行政法人家畜改良センターの業務運営、財務及び会計並びに人事管理に関する省令及び独立行政法人農畜産業振興機構の業務運営、財務及び会計並びに人事管理に関する省令の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第五十七号",
+        "amendment_id": "508M60000200057",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000200104/20260807_508M60000200057?occasion_date=20260807&tab=compare",
         "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000040044",
+    "law_no": "平成十五年財務省令第四十四号",
+    "law_name": "独立行政法人造幣局に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000040044",
+    "updates": [
+      {
+        "law_data_id": 641623,
+        "sub_revision": "1",
+        "published_date": "2003-03-31",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人造幣局に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省令第五十六号",
+        "amendment_id": "508M60000040056",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000040044/20260807_508M60000040056?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416M60000800070",
+    "law_no": "平成十六年国土交通省令第七十号",
+    "law_name": "独立行政法人都市再生機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/416M60000800070",
+    "updates": [
+      {
+        "law_data_id": 641617,
+        "sub_revision": "1",
+        "published_date": "2004-06-18",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/416M60000800070/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000040006",
+    "law_no": "平成十三年財務省令第六号",
+    "law_name": "独立行政法人酒類総合研究所に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000040006",
+    "updates": [
+      {
+        "law_data_id": 641622,
+        "sub_revision": "1",
+        "published_date": "2001-02-08",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "独立行政法人酒類総合研究所に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省令第五十五号",
+        "amendment_id": "508M60000040055",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000040006/20260807_508M60000040055?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000800102",
+    "law_no": "平成十五年国土交通省令第百二号",
+    "law_name": "独立行政法人鉄道建設・運輸施設整備支援機構に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000800102",
+    "updates": [
+      {
+        "law_data_id": 641612,
+        "sub_revision": "1",
+        "published_date": "2003-10-01",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
+        "amend_no": "令和八年国土交通省令第七十一号",
+        "amendment_id": "508M60000800071",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000800102/20260807_508M60000800071?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415M60000100147",
+    "law_no": "平成十五年厚生労働省令第百四十七号",
+    "law_name": "独立行政法人高齢・障害・求職者雇用支援機構の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/415M60000100147",
+    "updates": [
+      {
+        "law_data_id": 641593,
+        "sub_revision": "1",
+        "published_date": "2003-09-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000100147/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "424M60000004003",
+    "law_no": "平成二十四年復興庁令第三号",
+    "law_name": "福島復興再生特別措置法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/424M60000004003",
+    "updates": [
+      {
+        "law_data_id": 641658,
+        "sub_revision": "1",
+        "published_date": "2012-03-31",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "福島復興再生特別措置法施行規則の一部を改正する庁令",
+        "amend_no": "令和八年復興庁令第四号",
+        "amendment_id": "508M60000004004",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/424M60000004003/20260807_508M60000004004?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "326M50000040055",
+    "law_no": "昭和二十六年大蔵省令第五十五号",
+    "law_name": "税理士法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/326M50000040055",
+    "updates": [
+      {
+        "law_data_id": 619513,
+        "sub_revision": "3",
+        "published_date": "1951-06-15",
+        "effective_date": "2026-09-01",
+        "effective_comment": "",
+        "amend_name": "税理士法施行規則の一部を改正する省令",
+        "amend_no": "令和六年財務省令第二十五号",
+        "amendment_id": "506M60000040025",
+        "amend_published_date": "2024-03-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/326M50000040055/20260901_506M60000040025?occasion_date=20260901&tab=compare",
+        "pending": true
       },
       {
-        "law_data_id": 636146,
+        "law_data_id": 641621,
         "sub_revision": "1",
-        "published_date": "1947-05-03",
-        "effective_date": "2026-04-01",
+        "published_date": "1951-06-15",
+        "effective_date": "2026-08-07",
         "effective_comment": "",
-        "amend_name": "地方自治法施行規則の一部を改正する省令",
-        "amend_no": "令和八年総務省令第三十五号",
-        "amendment_id": "508M60000008035",
-        "amend_published_date": "2026-03-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/322M40000008029/20260401_508M60000008035?occasion_date=20260401&tab=compare",
+        "amend_name": "税理士法施行規則の一部を改正する省令",
+        "amend_no": "令和八年財務省令第五十四号",
+        "amendment_id": "508M60000040054",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/326M50000040055/20260807_508M60000040054?occasion_date=20260807&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "429M60000400027",
-    "law_no": "平成二十九年経済産業省令第二十七号",
-    "law_name": "株式会社日本貿易保険の会計に関する省令",
+    "law_id": "413M60000400001",
+    "law_no": "平成十三年経済産業省令第一号",
+    "law_name": "経済産業省組織規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/429M60000400027",
+    "url": "https://laws.e-gov.go.jp/law/413M60000400001",
     "updates": [
       {
-        "law_data_id": 641501,
+        "law_data_id": 641591,
         "sub_revision": "1",
-        "published_date": "2017-03-29",
-        "effective_date": "2026-07-31",
+        "published_date": "2001-01-06",
+        "effective_date": "2026-08-05",
         "effective_comment": "",
-        "amend_name": "株式会社日本貿易保険の会計に関する省令の一部を改正する省令",
-        "amend_no": "令和八年経済産業省令第六十五号",
-        "amendment_id": "508M60000400065",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/429M60000400027/20260731_508M60000400065?occasion_date=20260731&tab=compare",
+        "amend_name": "経済産業省組織規則の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第六十六号",
+        "amendment_id": "508M60000400066",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000400001/20260805_508M60000400066?occasion_date=20260805&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "430M60001FCA003",
-    "law_no": "平成三十年内閣府・総務省・財務省・文部科学省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第三号",
-    "law_name": "産業競争力強化法に基づく認定技術等情報漏えい防止措置認証機関に関する命令",
+    "law_id": "413M60000008001",
+    "law_no": "平成十三年総務省令第一号",
+    "law_name": "総務省組織規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/430M60001FCA003",
+    "url": "https://laws.e-gov.go.jp/law/413M60000008001",
     "updates": [
       {
-        "law_data_id": 641521,
+        "law_data_id": 641630,
         "sub_revision": "1",
-        "published_date": "2018-09-25",
-        "effective_date": "2026-07-31",
+        "published_date": "2001-01-06",
+        "effective_date": "2026-08-04",
         "effective_comment": "",
-        "amend_name": "産業競争力強化法施行規則及び産業競争力強化法に基づく認定技術等情報漏えい防止措置認証機関に関する命令の一部を改正する命令",
-        "amend_no": "令和八年内閣府・総務省・財務省・文部科学省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第四号",
-        "amendment_id": "508M60001FCA004",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/430M60001FCA003/20260731_508M60001FCA004?occasion_date=20260731&tab=compare",
+        "amend_name": "総務省組織規則の一部を改正する省令",
+        "amend_no": "令和八年総務省令第九十八号",
+        "amendment_id": "508M60000008098",
+        "amend_published_date": "2026-08-04",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000008001/20260804_508M60000008098?occasion_date=20260804&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "430M60001FCA001",
-    "law_no": "平成三十年内閣府・総務省・財務省・文部科学省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第一号",
-    "law_name": "産業競争力強化法施行規則",
+    "law_id": "427M60000010011",
+    "law_no": "平成二十七年法務省令第十一号",
+    "law_name": "総合法律支援法施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/430M60001FCA001",
+    "url": "https://laws.e-gov.go.jp/law/427M60000010011",
     "updates": [
       {
-        "law_data_id": 641520,
+        "law_data_id": 641683,
         "sub_revision": "1",
-        "published_date": "2018-07-06",
-        "effective_date": "2026-07-31",
+        "published_date": "2015-03-31",
+        "effective_date": "2026-08-07",
         "effective_comment": "",
-        "amend_name": "産業競争力強化法施行規則及び産業競争力強化法に基づく認定技術等情報漏えい防止措置認証機関に関する命令の一部を改正する命令",
-        "amend_no": "令和八年内閣府・総務省・財務省・文部科学省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第四号",
-        "amendment_id": "508M60001FCA004",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/430M60001FCA001/20260731_508M60001FCA004?occasion_date=20260731&tab=compare",
+        "amend_name": "総合法律支援法施行規則の一部を改正する省令",
+        "amend_no": "令和八年法務省令第四十六号",
+        "amendment_id": "508M60000010046",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/427M60000010011/20260807_508M60000010046?occasion_date=20260807&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "410M50000200083",
-    "law_no": "平成十年農林水産省令第八十三号",
-    "law_name": "種苗法施行規則",
+    "law_id": "419M60000002062",
+    "law_no": "平成十九年内閣府令第六十二号",
+    "law_name": "財務計算に関する書類その他の情報の適正性を確保するための体制に関する内閣府令",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/410M50000200083",
+    "url": "https://laws.e-gov.go.jp/law/419M60000002062",
     "updates": [
       {
-        "law_data_id": 641522,
+        "law_data_id": 641640,
         "sub_revision": "1",
-        "published_date": "1998-12-03",
-        "effective_date": "2026-07-31",
+        "published_date": "2007-08-10",
+        "effective_date": "2026-08-07",
         "effective_comment": "",
-        "amend_name": "種苗法施行規則の一部を改正する省令",
-        "amend_no": "令和八年農林水産省令第五十三号",
-        "amendment_id": "508M60000200053",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/410M50000200083/20260731_508M60000200053?occasion_date=20260731&tab=compare",
+        "amend_name": "金融庁組織規則等の一部を改正する内閣府令",
+        "amend_no": "令和八年内閣府令第七十号",
+        "amendment_id": "508M60000002070",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/419M60000002062/20260807_508M60000002070?occasion_date=20260807&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "429M60000040031",
-    "law_no": "平成二十九年財務省令第三十一号",
-    "law_name": "貿易保険法に規定する法人税に係る課税の特例に関する省令",
+    "law_id": "338M50000040059",
+    "law_no": "昭和三十八年大蔵省令第五十九号",
+    "law_name": "財務諸表等の用語、様式及び作成方法に関する規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/429M60000040031",
+    "url": "https://laws.e-gov.go.jp/law/338M50000040059",
     "updates": [
       {
-        "law_data_id": 641502,
+        "law_data_id": 641637,
         "sub_revision": "1",
-        "published_date": "2017-03-31",
-        "effective_date": "2026-07-31",
+        "published_date": "1963-11-27",
+        "effective_date": "2026-08-07",
         "effective_comment": "",
-        "amend_name": "貿易保険法に規定する法人税に係る課税の特例に関する省令の一部を改正する省令",
-        "amend_no": "令和八年財務省令第五十三号",
-        "amendment_id": "508M60000040053",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/429M60000040031/20260731_508M60000040053?occasion_date=20260731&tab=compare",
+        "amend_name": "金融庁組織規則等の一部を改正する内閣府令",
+        "amend_no": "令和八年内閣府令第七十号",
+        "amendment_id": "508M60000002070",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/338M50000040059/20260807_508M60000002070?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "332M50000040012",
+    "law_no": "昭和三十二年大蔵省令第十二号",
+    "law_name": "財務諸表等の監査証明に関する内閣府令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/332M50000040012",
+    "updates": [
+      {
+        "law_data_id": 641639,
+        "sub_revision": "1",
+        "published_date": "1957-03-28",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織規則等の一部を改正する内閣府令",
+        "amend_no": "令和八年内閣府令第七十号",
+        "amendment_id": "508M60000002070",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/332M50000040012/20260807_508M60000002070?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "326M50010000021",
+    "law_no": "昭和二十六年農林省令第二十一号",
+    "law_name": "農薬取締法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/326M50010000021",
+    "updates": [
+      {
+        "law_data_id": 641647,
+        "sub_revision": "1",
+        "published_date": "1951-04-20",
+        "effective_date": "2026-08-03",
+        "effective_comment": "",
+        "amend_name": "農薬取締法施行規則の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第五十六号",
+        "amendment_id": "508M60000200056",
+        "amend_published_date": "2026-08-03",
+        "compare_url": "https://laws.e-gov.go.jp/law/326M50010000021/20260803_508M60000200056?occasion_date=20260803&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "351M50000040028",
+    "law_no": "昭和五十一年大蔵省令第二十八号",
+    "law_name": "連結財務諸表の用語、様式及び作成方法に関する規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/351M50000040028",
+    "updates": [
+      {
+        "law_data_id": 641638,
+        "sub_revision": "1",
+        "published_date": "1976-10-30",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織規則等の一部を改正する内閣府令",
+        "amend_no": "令和八年内閣府令第七十号",
+        "amendment_id": "508M60000002070",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/351M50000040028/20260807_508M60000002070?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "419M60000002052",
+    "law_no": "平成十九年内閣府令第五十二号",
+    "law_name": "金融商品取引業等に関する内閣府令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/419M60000002052",
+    "updates": [
+      {
+        "law_data_id": 641631,
+        "sub_revision": "1",
+        "published_date": "2007-08-06",
+        "effective_date": "2026-08-03",
+        "effective_comment": "",
+        "amend_name": "金融商品取引業等に関する内閣府令の一部を改正する内閣府令",
+        "amend_no": "令和八年内閣府令第六十六号",
+        "amendment_id": "508M60000002066",
+        "amend_published_date": "2026-08-03",
+        "compare_url": "https://laws.e-gov.go.jp/law/419M60000002052/20260803_508M60000002066?occasion_date=20260803&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "404M50000040069",
+    "law_no": "平成四年大蔵省令第六十九号",
+    "law_name": "金融庁等の職員が検査の際に携帯すべき身分証明書等の様式を定める内閣府令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/404M50000040069",
+    "updates": [
+      {
+        "law_data_id": 641636,
+        "sub_revision": "1",
+        "published_date": "1992-07-20",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織規則等の一部を改正する内閣府令",
+        "amend_no": "令和八年内閣府令第七十号",
+        "amendment_id": "508M60000002070",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/404M50000040069/20260807_508M60000002070?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "351M50010000036",
+    "law_no": "昭和五十一年農林省令第三十六号",
+    "law_name": "飼料の安全性の確保及び品質の改善に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/351M50010000036",
+    "updates": [
+      {
+        "law_data_id": 641646,
+        "sub_revision": "1",
+        "published_date": "1976-07-24",
+        "effective_date": "2026-08-03",
+        "effective_comment": "",
+        "amend_name": "飼料の安全性の確保及び品質の改善に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第五十五号",
+        "amendment_id": "508M60000200055",
+        "amend_published_date": "2026-08-03",
+        "compare_url": "https://laws.e-gov.go.jp/law/351M50010000036/20260803_508M60000200055?occasion_date=20260803&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "422M60000100038",
+    "law_no": "平成二十二年厚生労働省令第三十八号",
+    "law_name": "高度専門医療に関する研究等を行う国立研究開発法人の業務運営、財務及び会計並びに人事管理に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/422M60000100038",
+    "updates": [
+      {
+        "law_data_id": 641602,
+        "sub_revision": "1",
+        "published_date": "2010-03-31",
+        "effective_date": "2026-08-07",
+        "effective_comment": "",
+        "amend_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
+        "amend_no": "令和八年厚生労働省令第百二十三号",
+        "amendment_id": "508M60000100123",
+        "amend_published_date": "2026-08-05",
+        "compare_url": "https://laws.e-gov.go.jp/law/422M60000100038/20260807_508M60000100123?occasion_date=20260807&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "339RJNJ09017000",
+    "law_no": "昭和三十九年人事院規則九―一七",
+    "law_name": "人事院規則九―一七（俸給の特別調整額）",
+    "law_type": "規則",
+    "url": "https://laws.e-gov.go.jp/law/339RJNJ09017000",
+    "updates": [
+      {
+        "law_data_id": 641629,
+        "sub_revision": "1",
+        "published_date": "1964-12-26",
+        "effective_date": "2026-08-04",
+        "effective_comment": "",
+        "amend_name": "人事院規則九―一七（俸給の特別調整額）の一部を改正する人事院規則",
+        "amend_no": "令和八年人事院規則九―一七―一七八",
+        "amendment_id": "508RJNJ09017178",
+        "amend_published_date": "2026-08-04",
+        "compare_url": "https://laws.e-gov.go.jp/law/339RJNJ09017000/20260804_508RJNJ09017178?occasion_date=20260804&tab=compare",
         "pending": false
       }
     ]
