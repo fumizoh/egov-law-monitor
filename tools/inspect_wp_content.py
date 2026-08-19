@@ -21,10 +21,20 @@ OUTPUT_PATH = Path("tmp/wp_post.html")
 def main() -> None:
     """Generate and save WordPress post HTML."""
 
-    laws = storage.load_laws()
-    law_summaries = storage.load_law_summaries()
+    storage_paths=storage.REPROCESS_STORAGE
 
-    statistics = storage.load_statistics()
+    laws = storage.load_laws(
+        paths=storage_paths,
+    )
+
+    law_summaries = storage.load_law_summaries(
+        paths=storage_paths,
+    )
+
+    statistics = storage.load_statistics(
+        paths=storage_paths,
+    )
+
     date = statistics["egov"]["last_update"]
 
     wp_post = build_wp_post(

@@ -1,11 +1,18 @@
 """Build WordPress post content."""
 
+import markdown
+
 from models import (
     WPPost,
     WPLaw,
     WPLawGroup,
     WPLawRevision,
 )
+
+
+def _render_summary_body(body: str) -> str:
+    """Render AI summary body as HTML."""
+    return markdown.markdown(body)
 
 
 def _format_date(date: str) -> str:
@@ -191,7 +198,7 @@ def _build_law_section(
         🤖 {law.summary.title}
     </h3>
     <div class="egov-summary-body">
-        {law.summary.body}
+        {_render_summary_body(law.summary.body)}
     </div>
 </div>
 """
