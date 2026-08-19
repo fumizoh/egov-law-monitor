@@ -96,7 +96,7 @@ def _build_dashboard(
     return f"""
 <section class="egov-dashboard">
 
-    <h2 class="egov-dashboard-title simple-h2">
+    <h2 class="egov-dashboard-title">
         法令更新ダッシュボード
     </h2>
 
@@ -220,7 +220,7 @@ def _build_law_section(
 
     return f"""
 <section id="law-{law.law_id}" class="egov-law-card">
-    <h2 class="egov-law-name simple-h2">{law.law_name}</h2>
+    <h2 class="egov-law-name">{law.law_name}</h2>
 
     <p class="egov-law-type">
         <strong>種別</strong> {law.law_type}

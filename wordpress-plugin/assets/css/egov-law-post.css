@@ -84,8 +84,11 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
 }
 
-.egov-law-name {
+.entry-content .egov-law-card .egov-law-name,
+.entry-content .egov-dashboard-title {
     margin: 0 0 16px;
+    padding: 0;
+    border: none;
     font-size: 1.5rem;
     line-height: 1.4;
     font-weight: 700;
@@ -110,6 +113,27 @@
 
 .egov-summary-body {
     white-space: normal;
+}
+
+.entry-content .egov-law-card .egov-summary-body h2 {
+    margin: 1.5rem 0 0.4rem;
+    padding: 0 0 0.3rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    font-weight: 700;
+    color: #222;
+    border: none;
+    border-left: 4px solid #004080;
+}
+
+.entry-content .egov-law-card .egov-summary-body h3 {
+    margin: 1.25rem 0 0.5rem;
+    padding: 0;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    font-weight: 700;
+    color: #222;
+    border: none;
 }
 
 .egov-update-details {
