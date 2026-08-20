@@ -16,6 +16,8 @@ from wordpress.post_builder import (
     build_post_title,
 )
 
+from wordpress.service import POST_TYPE
+
 
 def main() -> None:
     """Create a WordPress draft post for inspection."""
@@ -37,7 +39,7 @@ def main() -> None:
 
     post = find_post(
         slug=date,
-        post_type="law_update",
+        post_type=POST_TYPE,
     )
 
     if post is None:
@@ -46,7 +48,7 @@ def main() -> None:
             content=content,
             slug=date,
             status="draft",
-            post_type="law_update",
+            post_type=POST_TYPE,
         )
         print("Created")
     else:
@@ -56,7 +58,7 @@ def main() -> None:
             content=content,
             slug=date,
             status=post["status"],
-            post_type="law_update",
+            post_type=POST_TYPE,
         )
         print("Updated")
 

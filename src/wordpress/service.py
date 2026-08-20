@@ -12,7 +12,7 @@ from wordpress.post_builder import build_post_content
 
 from models import WPResult
 
-POST_TYPE = "law_update"
+POST_TYPE = "posts"
 
 
 def sync_daily_post(
