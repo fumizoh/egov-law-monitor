@@ -13,7 +13,7 @@
     line-height: 1.4;
 }
 
-.egov-dashboard-statistics p {
+.egov-dashboard .egov-dashboard-statistics p {
     margin: 0 0 8px;
 }
 
@@ -27,8 +27,8 @@
     font-size: 1.2rem;
 }
 
-.entry-content .egov-dashboard-law-types ul,
-.entry-content .egov-dashboard-laws ul {
+.egov-dashboard .egov-dashboard-law-types ul,
+.egov-dashboard .egov-dashboard-laws ul {
     margin: 0;
     padding: 0;
     list-style: none;
