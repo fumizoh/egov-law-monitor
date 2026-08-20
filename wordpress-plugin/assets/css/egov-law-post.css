@@ -27,8 +27,8 @@
     font-size: 1.2rem;
 }
 
-.egov-dashboard-law-types ul,
-.egov-dashboard-laws ul {
+.entry-content .egov-dashboard-law-types ul,
+.entry-content .egov-dashboard-laws ul {
     margin: 0;
     padding: 0;
     list-style: none;
