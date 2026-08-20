@@ -84,8 +84,8 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
 }
 
-.entry-content .egov-law-card .egov-law-name,
-.entry-content .egov-dashboard-title {
+.entry-content .egov-dashboard .egov-dashboard-title,
+.entry-content .egov-law-card .egov-law-name {
     margin: 0 0 16px;
     padding: 0;
     border: none;
