@@ -1,60 +1,57 @@
 # e-Gov Law Monitor
 
-e-Gov Law Monitor is an open-source project that monitors official Japanese legal information, transforms it into a canonical data model, and publishes structured JSON data through GitHub Pages.
+e-Gov Law Monitorは、日本の法令に関する公的な情報を監視し、取得した情報を標準化されたデータモデルに変換して、構造化されたJSONデータとしてGitHub Pagesなどで公開するオープンソースプロジェクトです。
 
-Currently supported source:
+## 現在対応している情報源
 
-* e-Gov Law Updates
+- e-Gov法令検索
 
-The project is designed around a common Event model, making it possible to integrate additional official government information sources in the future.
-
-Planned future sources include:
-
-* e-Gov Data Portal
-* Cabinet Legislation Bureau ("Recently Enacted Laws")
-* Other official legal information services
+このプロジェクトは、共通のEventモデルを中心に設計されており、将来的に他の政府系情報源を追加できる構成になっています。
 
 ---
 
-## Features
+## 機能
 
-* Automatic monitoring of e-Gov Law Updates
-* GitHub Pages dashboard
-* AI-generated law amendment summaries
-* Email notifications
-* Law update statistics
-* Canonical Event model
-* Public Law model (`laws.json`)
-* Multi-source architecture
+- e-Gov法令更新情報の自動監視
+- GitHub Pagesによるダッシュボード
+- AIによる法令改正の要約
+- AIによる新規制定法令の要約
+- メール通知
+- 法令更新統計（日毎）
+- 共通のEventモデル
+- 公開用Lawモデル（`laws.json`）
+- 複数の情報源に対応できるアーキテクチャ
+- WordPressへの法令更新記事の投稿
+- WordPressの既存記事の更新
 
 ---
 
 ## GitHub Pages
 
-The published website currently provides:
+現在公開しているWebサイトでは、以下を提供しています。
 
-* Dashboard
-* Law Updates
+- ダッシュボード
+- 法令更新情報
 
 https://fumizoh.github.io/egov-law-monitor/
 
 ---
 
-## Screenshots
+## スクリーンショット
 
-Screenshots will be updated in a future release.
+スクリーンショットは今後のリリースで更新する予定です。
 
 ---
 
-## Directory Structure
+## ディレクトリ構成
 
 ```text
 .
 ├── .github/
 │   └── workflows/      # GitHub Actions
-├── docs/                # GitHub Pages
-├── src/                 # Application source code
-├── tools/               # Development and inspection tools
+├── docs/               # GitHub Pages
+├── src/                # アプリケーションのソースコード
+├── tools/              # 開発・検証用ツール
 ├── CHANGELOG.md
 ├── LICENSE
 ├── README.md
@@ -63,99 +60,103 @@ Screenshots will be updated in a future release.
 
 ---
 
-## Architecture
+## アーキテクチャ
 
 ```text
-e-Gov Law Updates
+e-Gov法令更新情報
         │
         ▼
-  Canonical Event Model
+  共通Eventモデル
         │
-        ├── Statistics
-        ├── Email Notification
+        ├── 統計情報
+        ├── メール通知
         │
         ▼
-    Public Law Model
+   公開用Lawモデル
         │
         ├── GitHub Pages
+        ├── WordPress
         │
         ▼
-  AI Summary Input Model
+ AI要約入力モデル
         │
         ▼
-   AI Summary Generation
+    AI要約生成
 ```
 
-The project separates data acquisition and transformation from AI summarization.
+このプロジェクトでは、データの取得・変換とAIによる要約を分離しています。
 
-Python transforms source data into purpose-specific, semantically structured input models. AI is responsible for summarization and expression based on those structured inputs.
+Pythonが、取得したデータを目的に応じた意味的に構造化された入力モデルへ変換し、AIはその構造化された入力をもとに要約と表現を行います。
 
 ---
 
-## Public Data
+## 公開データ
 
-The project publishes structured JSON data under `docs/data`.
+構造化されたJSONデータを `docs/data` 以下に公開しています。
 
-| File                 | Description                                                 |
+| ファイル              | 説明                                                         |
 | -------------------- | ----------------------------------------------------------- |
-| `app.json`           | Application metadata                                        |
-| `statistics.json`    | Dashboard statistics                                        |
-| `laws.json`          | Public Law model for GitHub Pages and external applications |
-| `law_summaries.json` | AI-generated law amendment summaries                        |
+| `app.json`           | アプリケーションのメタデータ                                   |
+| `statistics.json`    | ダッシュボード用の統計データ                                   |
+| `laws.json`          | GitHub Pagesや外部アプリケーション向けの公開モデル              |
+| `law_summaries.json` | AIが生成した法令改正の要約                                    |
 
-The Event model is the canonical internal representation.
+Eventモデルが、内部データの標準的な表現となります。
 
-The Law model is generated from Event data and is intended for GitHub Pages, WordPress, and future external integrations.
-
----
-
-## Workflow
-
-GitHub Actions runs every day and performs:
-
-1. Download e-Gov Law Updates
-2. Extract ZIP archive
-3. Parse CSV
-4. Build canonical Event data
-5. Generate public Law data
-6. Generate AI summaries when required
-7. Generate statistics
-8. Publish GitHub Pages
-9. Send email notifications
+LawモデルはEventデータから生成され、GitHub Pages、WordPress、将来的な外部連携で利用することを想定しています。
 
 ---
 
-## AI Summaries
+## ワークフロー
 
-The project provides AI-generated summaries of law amendments.
+GitHub Actionsが毎日実行され、以下の処理を行います。
 
-AI summaries are generated from purpose-specific structured input models rather than raw source data.
-
-The input models are prepared by Python and may include:
-
-* Law and amendment information
-* Enforcement dates
-* Article-level changes
-* Supplementary table changes
-
-AI is responsible for summarizing and expressing the information provided in these models. Detailed amendment text remains available through e-Gov's law comparison pages.
-
----
-
-## Email Notifications
-
-Notification emails are sent only when law updates are available.
-
-Each email includes:
-
-* Update date
-* Number of updates
-* Updated laws
-* GitHub Pages link
+1. e-Gov法令更新情報をダウンロード
+2. ZIPアーカイブを展開
+3. CSVを解析
+4. 共通Eventデータを構築
+5. 公開用Lawデータを生成
+6. 必要に応じてAI要約を生成
+7. 統計情報を生成
+8. GitHub Pagesを更新
+9. WordPressへ法令更新記事を投稿・更新
+10. メール通知を送信
 
 ---
 
-## Technologies
+## AI要約
+
+法令改正について、AIによる要約を生成します。
+
+AI要約は、生の情報源データを直接AIに渡すのではなく、目的に応じた構造化入力モデルをもとに生成されます。
+
+入力モデルには、例えば以下の情報が含まれます。
+
+* 法令および改正に関する情報
+* 施行日
+* 条文単位の変更内容
+* 別表の変更有無
+
+AIは、これらのモデルに含まれる情報を要約し、読みやすい文章として表現します。
+
+詳細な改正内容については、e-Govの法令比較ページから確認できます。
+
+---
+
+## メール通知
+
+法令の更新がある場合にのみ、通知メールを送信します。
+
+メールには以下の情報が含まれます。
+
+* 更新日
+* 更新件数
+* 更新された法令
+* GitHub Pagesへのリンク
+
+---
+
+## 使用技術
 
 * Python 3.13
 * GitHub Actions
@@ -164,18 +165,7 @@ Each email includes:
 * CSS
 * JavaScript
 * SMTP
-* Gemini API
-
----
-
-## Roadmap
-
-- e-Gov Data Portal support
-- Cabinet Legislation Bureau integration
-- Additional official information sources
-- Richer law metadata
-- Improved Law UI
-- Search and filtering
+* Gemini API (Gemini 3.5 Flash)
 
 ---
 
