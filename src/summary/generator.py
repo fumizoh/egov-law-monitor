@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import logging
+
 import law_change
 import table_change
 import comparison
@@ -31,10 +33,10 @@ from summary.input import (
     PromptDocument,
 )
 
-MAX_XML_CHANGES = 50
 
-# DEBUG
-from pprint import pprint
+logger = logging.getLogger(__name__)
+
+MAX_XML_CHANGES = 50
 
 
 def _build_amendment_input(
@@ -46,27 +48,9 @@ def _build_amendment_input(
         new_sub_revision=revision.sub_revision,
     )
 
-    if compare_json is None:
-
-        # DEBUG
-        print(
-            f"Skip compare: "
-            f"{revision.amendment_num} "
-            f"{revision.enforcement_date}"
-        )
-
-        return None
-
     compare_result = comparison.parse_compare_result(compare_json)
 
     if compare_result is None:
-
-        # DEBUG
-        print(
-            f"Skip summary: {revision.amendment_num} "
-            f"({revision.enforcement_date})"
-        )
-        
         return None
 
     toc_json = toc_api.fetch_law_toc(
@@ -112,9 +96,6 @@ def _generate_new_law_summary(
     revision: RevisionHistory,
 ) -> SummaryResponse:
 
-    # DEBUG
-    # print("Generating new law summary...")
-
     summary_input = builder.build_new_law_summary_input(
         law_id=law_id,
         revision=revision,
@@ -134,9 +115,6 @@ def _generate_law_summary(
 
     law_name = summary_input.law_name
     revisions = summary_input.revisions
-
-    # DEBUG
-    # print(len(revisions), "summary revisions")
 
     # New law
     if (
@@ -171,13 +149,6 @@ def _generate_law_summary(
         for article in amendment.articles
     )
 
-    # DEBUG
-    print(
-        f"XML check: {law_name}, "
-        f"changes={change_count}, "
-        f"max={MAX_XML_CHANGES}"
-    )
-
     if change_count <= MAX_XML_CHANGES:
         for revision, amendment in zip(
             amendment_revisions,
@@ -189,18 +160,12 @@ def _generate_law_summary(
                 amendment=amendment,
             )
 
-    # DEBUG
-    # print("Generating law summary...")
-
     prompt_input = builder.build_summary_input(
         law_name=law_name,
         amendments=amendments,
     )
 
     prompt_document = prompt.build_prompt_document(prompt_input)
-
-    # DEBUG
-    # pprint(prompt_document)
 
     return _generate_summary(prompt_document)
 
@@ -237,24 +202,33 @@ def generate(
         )
 
         if reused:
-            # DEBUG
-            print(f"Reuse summary: {summary_input.law_name}")
+            logger.info(
+                "Reuse summary: %s",
+                summary_input.law_name,
+            )
 
             law_summary = previous_summary
 
         else:
-            # DEBUG
-            print(f"Generate summary: {summary_input.law_name}")
+            logger.info(
+                "Generate summary: %s",
+                summary_input.law_name,
+            )
 
             response = _generate_law_summary(
                 summary_input,
             )
 
-            # DEBUG
             if response is None:
-                print(f"FAILED: {summary_input.law_name}")
+                logger.info(
+                    "FAILED: %s",
+                    summary_input.law_name,
+                )
             else:
-                print(f"OK: {summary_input.law_name}")
+                logger.info(
+                    "OK: %s",
+                    summary_input.law_name,
+                )
 
             if response is None:
                 continue

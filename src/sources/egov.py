@@ -27,8 +27,6 @@ def fetch(date: str | None = None):
 
     extract_dir = extract_zip(zip_path)
 
-    print(extract_dir.resolve())
-
     csv_path = find_update_csv(extract_dir)
 
     rows = load_events(csv_path)

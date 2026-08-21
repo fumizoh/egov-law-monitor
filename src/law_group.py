@@ -2,11 +2,16 @@
 Law grouping.
 """
 
+import logging
+
 from models import (
     Event,
     LawGroup,
     RevisionHistory,
 )
+
+
+logger = logging.getLogger(__name__)
 
 
 def group_by_law(
@@ -91,11 +96,11 @@ def match_revisions(
         # フォールバック
         if not matches:
 
-            print(
-                f"Fallback Revision Match: "
-                f"{law_group.law_name} "
-                f"{amend_number} "
-                f"{effective_date}"
+            logger.info(
+                "Fallback Revision Match: %s %s %s",
+                law_group.law_name,
+                amend_number,
+                effective_date,
             )
 
             matches = [

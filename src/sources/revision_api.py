@@ -1,8 +1,11 @@
 """Revision API client."""
 
+import logging
 import requests
-
 import time
+
+
+logger = logging.getLogger(__name__)
 
 REVISION_URL = (
     "https://laws.e-gov.go.jp/internal-api/"
@@ -46,11 +49,14 @@ def fetch_revisions(law_id: str) -> dict:
 
         if attempt + 1 < REVISION_API_MAX_RETRIES:
             wait = REVISION_API_RETRY_WAIT
-            print(
-                f"Revision API rate limited "
-                f"({attempt + 1}/{REVISION_API_MAX_RETRIES}). "
-                f"Waiting {wait} seconds..."
+
+            logger.info(
+                "Revision API rate limited (%d/%d). Waiting %d seconds...",
+                attempt + 1,
+                REVISION_API_MAX_RETRIES,
+                wait,
             )
+
             time.sleep(wait)
 
     raise RuntimeError(

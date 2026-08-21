@@ -1,5 +1,7 @@
 """ pipeline.py """
 
+import logging
+
 from models import Law
 
 import law_group
@@ -9,6 +11,9 @@ from summary import generator
 import summary.statistics as summary_statistics
 
 from statistics import create_source_statistics
+
+
+logger = logging.getLogger(__name__)
 
 
 def _save_statistics(
@@ -33,7 +38,10 @@ def _save_statistics(
         paths=storage_paths,
     )
 
-    print(f"{source}: データ保存・統計更新完了")
+    logger.info(
+        "%s: データ保存・統計更新完了",
+        source,
+    )
 
 
 def process_egov(
@@ -49,7 +57,7 @@ def process_egov(
 
     laws = law_builder.build_laws(law_groups)
 
-    print("Total:", len(laws), "laws")
+    logger.info("Total: %d laws", len(laws))
 
     storage.save_laws(
         laws,

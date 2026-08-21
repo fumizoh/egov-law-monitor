@@ -1,9 +1,10 @@
 """Compare API client."""
 
+import requests
+
 from sources.toc_api import fetch_law_toc
 from toc_parser import build_sel_text_list
 
-import requests
 
 COMPARE_URL = "https://laws.e-gov.go.jp/internal-api/SelectLawCompareData.json"
 
@@ -17,7 +18,7 @@ def _request_compare(
     new_law_data_id: int,
     new_sub_revision: str,
     sel_text_list: list[str],
-) -> dict | None:
+) -> dict:
     """Fetch Compare API response."""
 
     payload = {
@@ -38,15 +39,9 @@ def _request_compare(
     raw = response.json()
 
     if not raw["result"]["success"]:
-
-        # DEBUG
-        print(
-            "Compare API:",
-            raw["result"]["errorMessage"],
+        raise RuntimeError(
+            f"Compare API: {raw['result']['errorMessage']}"
         )
-        # DEBUG
-
-        return None
 
     return raw
 
@@ -54,7 +49,7 @@ def _request_compare(
 def fetch_compare(
     new_law_data_id: int,
     new_sub_revision: str,
-) -> dict | None:
+) -> dict:
     """Fetch compare data."""
 
     toc = fetch_law_toc(

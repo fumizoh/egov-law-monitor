@@ -1,5 +1,6 @@
 """ storage.py """
 
+import logging
 import os
 import json
 import zipfile
@@ -21,6 +22,9 @@ from models import (
     LawSummary,
     AiSummaryLog,
 )
+
+
+logger = logging.getLogger(__name__)
 
 from config import (
     EXTRACT_DIR,

@@ -1,7 +1,11 @@
+import logging
 import os
 import smtplib
 
 from email.message import EmailMessage
+
+
+logger = logging.getLogger(__name__)
 
 
 def send_email(subject, body):
@@ -42,7 +46,7 @@ def send_email(subject, body):
 
         print("メール送信完了")
 
-    except Exception as e:
+    except Exception:
 
-        print(f"メール送信失敗: {e}")
+        logger.exception("メール送信失敗")
         raise

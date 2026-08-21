@@ -1,10 +1,15 @@
+import logging
+
 from models import ProcessingResult
 
 from notification.generator import (
     create_email_body,
     create_email_subject,
 )
+
 from notification.mailer import send_email
+
+logger = logging.getLogger(__name__)
 
 
 def send_processing_notification(
@@ -19,7 +24,6 @@ def send_processing_notification(
         send_email(subject, body)
 
     except KeyError:
-        print(
-            "環境変数が設定されていないため、"
-            "メール送信をスキップ"
+        logger.info(
+            "環境変数が設定されていないため、メール送信をスキップ"
         )

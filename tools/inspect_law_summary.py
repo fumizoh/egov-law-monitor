@@ -30,7 +30,7 @@ def main() -> None:
 
     # pprint(law_groups)
 
-    law_group = law_groups[7]
+    law_group = law_groups[9]
 
     print(law_group.law_id)
     print(law_group.law_name)

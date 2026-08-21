@@ -1,8 +1,8 @@
 """ monitor.py """
 
+import logging
+import sys
 from datetime import datetime, timedelta, timezone
-
-JST = timezone(timedelta(hours=9))
 
 from models import ProcessingResult, WPResult
 from sources import egov
@@ -10,6 +10,16 @@ import pipeline
 import storage
 from notification import service
 from wordpress import service as wordpress_service
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s: %(message)s",
+)
+
+logger = logging.getLogger(__name__)
+
+JST = timezone(timedelta(hours=9))
 
 
 def main(date: str | None = None):
@@ -23,7 +33,7 @@ def main(date: str | None = None):
     last_update = statistics.get("egov", {}).get("last_update")
 
     if specified_date is None and last_update == date:
-        print(f"新しい法令更新なし: {date}")
+        logger.info("新しい法令更新なし: %s", date)
 
         today = datetime.now(JST).strftime("%Y%m%d")
 
@@ -72,7 +82,7 @@ def main(date: str | None = None):
         )
 
     except Exception as e:
-        print(f"WordPress error: {e}")
+        logger.exception("WordPress error")
 
         wp_result = WPResult(
             status="error",
@@ -95,7 +105,6 @@ def main(date: str | None = None):
 
 
 if __name__ == "__main__":
-    import sys
 
     date = sys.argv[1] if len(sys.argv) > 1 and sys.argv[1] else None
     main(date)

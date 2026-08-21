@@ -1,5 +1,6 @@
+import logging
+
 from time import perf_counter, sleep
-# from pprint import pprint
 
 from google import genai
 from google.genai.types import (
@@ -20,6 +21,9 @@ from config import (
     LOCATION,
     MODEL_NAME,
 )
+
+
+logger = logging.getLogger(__name__)
 
 
 def summarize(prompt: str) -> SummaryResponse:
@@ -54,17 +58,15 @@ def summarize(prompt: str) -> SummaryResponse:
 
             wait = 10 * (2**attempt)
 
-            print(
-                f"[Retry {attempt + 1}/3] "
-                f"Gemini rate limit reached. "
-                f"Retry in {wait} seconds..."
+            logger.info(
+                "[Retry %d/3] Gemini rate limit reached. Retry in %d seconds...",
+                attempt + 1,
+                wait,
             )
 
             sleep(wait)
 
     elapsed = perf_counter() - start
-
-    # pprint(response)
 
     result = response.parsed
 
