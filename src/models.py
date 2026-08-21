@@ -310,6 +310,11 @@ class WPLawRevision:
     compare_url: str | None
     pending: bool
 
+    @property
+    def is_new_law(self) -> bool:
+        """True if this revision is the initial enactment."""
+        return self.amendment_id is None
+
 
 @dataclass(slots=True)
 class WPLaw:
@@ -322,6 +327,14 @@ class WPLaw:
     law_url: str
     wp_revisions: list[WPLawRevision]
     summary: Summary | None
+
+    @property
+    def is_new_law(self) -> bool:
+        """True if this law includes its initial enactment."""
+        return any(
+            revision.is_new_law
+            for revision in self.wp_revisions
+        )
 
 
 @dataclass(slots=True)
@@ -349,6 +362,7 @@ class WPPost:
 
     date: str
     title: str
+    excerpt: str
     statistics: WPStatistics
     law_groups: list[WPLawGroup]
 

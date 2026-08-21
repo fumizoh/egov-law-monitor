@@ -53,10 +53,12 @@ def _build_dashboard(
         for law in group.laws:
             count = len(law.wp_revisions)
 
+            prefix = "【新】" if law.is_new_law else ""
+
             law_name = (
-                law.law_name
+                f"{prefix}{law.law_name}"
                 if count == 1
-                else f"{law.law_name}（{count}件）"
+                else f"{prefix}{law.law_name}（{count}件）"
             )
 
             summary_html = ""
@@ -157,7 +159,7 @@ def _build_revision(
             f"</span>"
         )
 
-    if revision.amendment_id is None:
+    if revision.is_new_law:
         amendment_html = "新規制定"
 
     elif revision.compare_url:

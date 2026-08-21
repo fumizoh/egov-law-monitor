@@ -82,6 +82,30 @@ def _build_wp_law(
     )
 
 
+def _build_excerpt(
+    statistics: WPStatistics,
+    law_groups: list[WPLawGroup],
+) -> str:
+
+    new_laws = [
+        law
+        for group in law_groups
+        for law in group.laws
+        if law.is_new_law
+    ]
+
+    excerpt = f"{statistics.updated_law_count}法令が更新されました。"
+
+    if new_laws:
+        names = [law.law_name for law in new_laws[:3]]
+        excerpt += f"<br>新規制定：{'、'.join(names)}"
+
+        if len(new_laws) > 3:
+            excerpt += f"、ほか{len(new_laws) - 3}法令"
+
+    return excerpt
+
+
 def build_wp_post(
     laws: dict[str, Law],
     law_summaries: dict[str, LawSummary],
@@ -122,9 +146,15 @@ def build_wp_post(
                 )
             )
 
+    excerpt = _build_excerpt(
+        statistics=statistics,
+        law_groups=law_groups,
+    )
+
     return WPPost(
         date=date,
         title=f"{date[:4]}年{date[4:6]}月{date[6:8]}日の法令更新",
+        excerpt=excerpt,
         statistics=statistics,
         law_groups=law_groups,
     )

@@ -57,6 +57,7 @@ def create_post(
     *,
     title: str,
     content: str,
+    excerpt: str,
     slug: str,
     status: str = "draft",
     post_type: str = "posts",
@@ -70,6 +71,7 @@ def create_post(
         json={
             "title": title,
             "content": content,
+            "excerpt": excerpt,
             "slug": slug,
             "status": status,
         },
@@ -87,6 +89,7 @@ def update_post(
     *,
     title: str,
     content: str,
+    excerpt: str,
     slug: str,
     status: str = "draft",
     post_type: str = "posts",
@@ -100,6 +103,7 @@ def update_post(
         json={
             "title": title,
             "content": content,
+            "excerpt": excerpt,
             "slug": slug,
             "status": status,
         },

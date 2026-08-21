@@ -22,10 +22,20 @@ from wordpress.service import POST_TYPE
 def main() -> None:
     """Create a WordPress draft post for inspection."""
 
-    laws = storage.load_laws()
-    law_summaries = storage.load_law_summaries()
+    storage_paths = storage.DEFAULT_STORAGE
 
-    statistics = storage.load_statistics()
+    laws = storage.load_laws(
+        paths=storage_paths,
+    )
+
+    law_summaries = storage.load_law_summaries(
+        paths=storage_paths,
+    )
+
+    statistics = storage.load_statistics(
+        paths=storage_paths,
+    )
+
     date = statistics["egov"]["last_update"]
 
     wp_post = build_wp_post(
@@ -38,7 +48,7 @@ def main() -> None:
     content = build_post_content(wp_post)
 
     post = find_post(
-        slug=date,
+        slug=f"{date}-update",
         post_type=POST_TYPE,
     )
 
@@ -46,7 +56,8 @@ def main() -> None:
         post = create_post(
             title=wp_post.title,
             content=content,
-            slug=date,
+            excerpt=wp_post.excerpt,
+            slug=f"{date}-update",
             status="draft",
             post_type=POST_TYPE,
         )
@@ -56,7 +67,8 @@ def main() -> None:
             post["id"],
             title=wp_post.title,
             content=content,
-            slug=date,
+            excerpt=wp_post.excerpt,
+            slug=f"{date}-update",
             status=post["status"],
             post_type=POST_TYPE,
         )

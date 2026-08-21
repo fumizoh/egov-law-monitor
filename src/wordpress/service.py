@@ -43,7 +43,7 @@ def sync_daily_post(
     content = build_post_content(wp_post)
 
     post = find_post(
-        slug=date,
+        slug=f"{date}-update",
         post_type=POST_TYPE,
     )
 
@@ -51,7 +51,8 @@ def sync_daily_post(
         post = create_post(
             title=wp_post.title,
             content=content,
-            slug=date,
+            excerpt=wp_post.excerpt,
+            slug=f"{date}-update",
             status="draft",
             post_type=POST_TYPE,
         )
@@ -68,7 +69,8 @@ def sync_daily_post(
         post["id"],
         title=wp_post.title,
         content=content,
-        slug=date,
+        excerpt=wp_post.excerpt,
+        slug=f"{date}-update",
         status=post["status"],
         post_type=POST_TYPE,
     )
