@@ -191,6 +191,9 @@ def _build_law_section(
 ) -> str:
     """Build HTML for one law."""
 
+    prefix = "【新】" if law.is_new_law else ""
+    law_name = f"{prefix}{law.law_name}"
+
     summary_html = ""
 
     if law.summary:
@@ -222,7 +225,7 @@ def _build_law_section(
 
     return f"""
 <section id="law-{law.law_id}" class="egov-law-card">
-    <h2 class="egov-law-name">{law.law_name}</h2>
+    <h2 class="egov-law-name">{law_name}</h2>
 
     <p class="egov-law-type">
         <strong>種別</strong> {law.law_type}
