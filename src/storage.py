@@ -279,6 +279,23 @@ def save_law_summaries(
     )
 
 
+def upsert_law_summaries(
+    summaries: list[LawSummary],
+    paths: StoragePaths = DEFAULT_STORAGE,
+) -> None:
+    """Add or update law summaries in the cache."""
+
+    cached = load_law_summaries(paths)
+
+    for summary in summaries:
+        cached[summary.summary_input.law_id] = summary
+
+    save_law_summaries(
+        list(cached.values()),
+        paths=paths,
+    )
+
+
 def save_ai_statistics(statistics: AiStatistics):
     """
     Save AI statistics as ai_statistics.json.
