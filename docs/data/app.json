@@ -2,7 +2,7 @@
     "app_name": "e-Gov Law Monitor",
     "description": "e-Gov法令更新監視ツール",
     "latest_version": "1.0.0",
-    "release_date": "2026-08-XX",
+    "release_date": "2026-08-22",
     "repository": "https://github.com/fumizoh/egov-law-monitor",
     "download_url": "https://github.com/fumizoh/egov-law-monitor/releases/latest",
     "changes": [

@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: eGov Law Monitor
- * Description: eGov Law MonitorのWordPress連携機能。
- * Version: 0.1.0
+ * Plugin Name: e-Gov Law Monitor
+ * Description: e-Gov Law MonitorのWordPress連携機能。
+ * Version: 1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
