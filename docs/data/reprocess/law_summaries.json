@@ -1,139 +1,15 @@
 [
   {
     "summary_input": {
-      "law_id": "507CO0000000243",
-      "law_name": "事業性融資の推進等に関する法律施行令",
+      "law_id": "412CO0000000523",
+      "law_name": "公益的法人等への一般職の地方公務員の派遣等に関する法律第二条第一項第三号の法人を定める政令",
       "revisions": [
         {
-          "law_data_id": 641582,
+          "law_data_id": 641703,
           "sub_revision": "1",
-          "amendment_id": "508CO0000000246",
-          "amendment_name": "金融庁組織令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十六号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "事業性融資推進本部の庶務担当変更と対象者の規定",
-        "body": "本改正では、事業性融資推進本部の庶務を担当する部署が、従来の「金融庁監督局総務課」から「金融庁銀行・証券監督局総務課」へと変更されます。\n\nまた、事業性融資の推進等に関する法律の規定に基づき、政令で定める対象者として、外国銀行支店、外国保険会社等、および金銭の貸付けに係る業務を行うことについて承認を受けた外国信託会社が定められます。\n\nこの政令は、令和8年8月7日から施行されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 880,
-        "output_tokens": 152,
-        "thoughts_tokens": 1382,
-        "total_tokens": 2414,
-        "elapsed_seconds": 8.771549152000034,
-        "response_id": "GUGJavm5EOHLodAPvfHd0QE"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "410CO0000000412",
-      "law_name": "介護保険法施行令",
-      "revisions": [
-        {
-          "law_data_id": 641577,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000245",
-          "amendment_name": "厚生労働省組織令及び社会保障審議会令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十五号",
-          "enforcement_date": "2026-08-04",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "厚生労働省組織令の引用規定の整理",
-        "body": "厚生労働省組織令などの一部改正に伴い、介護保険法施行令における厚生労働省組織令の引用規定が整理されます。具体的には、介護保険法第106条ただし書の政令で定める規定等（同法施行令第37条第1項第32号）において、引用対象とする厚生労働省組織令の条項が、従来の「第四条第五号、第三十三条第四号、第五号及び第七号並びに第三十四条第二号」から、「第四条第五号、第三十三条第四号並びに第三十三条の二第一号、第三号、第七号及び第十一号」へと変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 677,
-        "output_tokens": 158,
-        "thoughts_tokens": 1358,
-        "total_tokens": 2193,
-        "elapsed_seconds": 8.555060337999976,
-        "response_id": "T0KJavO9IrS7odAPleeTiQQ"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "327CO0000000307",
-      "law_name": "企業会計審議会令",
-      "revisions": [
-        {
-          "law_data_id": 641580,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000246",
-          "amendment_name": "金融庁組織令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十六号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会令における金融庁組織令の引用条項の変更",
-        "body": "企業会計審議会令の趣旨を定める第一条において、引用している「金融庁組織令」の条項が、「第二十四条第二項」から「第三十四条第二項」へと改められます。\n\nこの改正は、令和八年（2026年）八月七日から施行されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 784,
-        "output_tokens": 104,
-        "thoughts_tokens": 391,
-        "total_tokens": 1279,
-        "elapsed_seconds": 4.081343193000066,
-        "response_id": "WUKJasKRDte36tkPoq2LqQg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "412CO0000000252",
-      "law_name": "厚生労働省組織令",
-      "revisions": [
-        {
-          "law_data_id": 641575,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000245",
-          "amendment_name": "厚生労働省組織令及び社会保障審議会令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十五号",
-          "enforcement_date": "2026-08-04",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        },
-        {
-          "law_data_id": 638491,
-          "sub_revision": "2",
-          "amendment_id": "508CO0000000196",
-          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う関係政令の整備に関する政令",
-          "amendment_num": "令和八年政令第百九十六号",
-          "enforcement_date": "2026-10-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        },
-        {
-          "law_data_id": 628406,
-          "sub_revision": "6",
-          "amendment_id": "507CO0000000341",
-          "amendment_name": "出入国管理及び難民認定法及び外国人の技能実習の適正な実施及び技能実習生の保護に関する法律の一部を改正する法律の施行に伴う関係政令の整備及び経過措置に関する政令",
-          "amendment_num": "令和七年政令第三百四十一号",
+          "amendment_id": "508CO0000000250",
+          "amendment_name": "公益的法人等への一般職の地方公務員の派遣等に関する法律第二条第一項第三号の法人を定める政令の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百五十号",
           "enforcement_date": "2027-04-01",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
@@ -143,315 +19,32 @@
     },
     "response": {
       "summary": {
-        "title": "審議官や課室の再編と育成就労制度への対応",
-        "body": "厚生労働省の統計・政策立案機能の強化や各部局における事務の効率化を図るため、審議官ポストや課室の再編、および関係法令の改正に伴う所掌事務の整理が行われました。\n\nまず、大臣官房においては「政策立案総括審議官」を「統計・政策立案総括審議官」に改め、統計に関する企画や立案、調整事務を追加しました。また、大臣官房の参事官を減員する一方で本省の参事官を増員するなど、幹部体制の見直しを行っています。\n\n医療・保険分野では、医政局の「医療経営支援課」が「医療経営改革課」へ改組され、医師をはじめとする医療関係者の勤務環境改善や確保に関する事務などを統合して担うことになりました。これにより医政局は九課体制へと移行します。一方、保険局では「医療介護連携政策課」が整理され、その所掌事務を総務課などに統合・移管したことで、七課から六課体制に縮小されました。また、医薬局における一部事務の廃止等に伴い、審議官や企画課の名称および所掌が変更されています。\n\n雇用・労働分野では、職業安定局の「労働市場センター業務室」が「労働市場情報システム課」に改組され、十課および参事官一人体制となりました。新設される参事官は、介護労働者の雇用管理改善などを担当します。このほか、外国人技能実習制度から育成就労制度への移行に伴い、労働基準局などの所掌事務における表記が「育成就労」に改められたほか、労働安全衛生法等の改正に伴い化学物質対策課の所掌が一部整理されました。"
+        "title": "地方公務員の派遣対象法人を定める政令の一部改正",
+        "body": "「公益的法人等への一般職の地方公務員の派遣等に関する法律第二条第一項第三号の法人を定める政令」の一部を改正する政令（令和八年政令第二百五十号）が、2027年4月1日に施行されます。なお、具体的な改正内容に関する詳細は、提供された情報に含まれていません。"
       },
       "usage": {
         "model": "gemini-3.5-flash",
-        "prompt_tokens": 14596,
-        "output_tokens": 422,
-        "thoughts_tokens": 3596,
-        "total_tokens": 18614,
-        "elapsed_seconds": 21.916554977000033,
-        "response_id": "YEKJasC4J7Kf998P8qiFiAg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "417CO0000000169",
-      "law_name": "特定外来生物による生態系等に係る被害の防止に関する法律施行令",
-      "revisions": [
-        {
-          "law_data_id": 641586,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000248",
-          "amendment_name": "特定外来生物による生態系等に係る被害の防止に関する法律施行令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十八号",
-          "enforcement_date": "2026-09-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "外来生物の種および交雑生物に関する別表を改正",
-        "body": "2026年9月1日施行の改正により、特定外来生物による生態系等に係る被害の防止に関する法律施行令における対象生物の区分が変更されます。\n\n今回の改正では、第一条関係の「別表第一　外来生物の種」および「別表第二　交雑することにより生じた生物」がそれぞれ変更されます。これにより、規制の対象となる外来生物の種や、交雑によって生じた生物の指定内容が見直されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 563,
-        "output_tokens": 138,
-        "thoughts_tokens": 1043,
-        "total_tokens": 1744,
-        "elapsed_seconds": 7.550103430000036,
-        "response_id": "d0KJapbWLoHEodAPk5P3wA4"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "412CO0000000282",
-      "law_name": "社会保障審議会令",
-      "revisions": [
-        {
-          "law_data_id": 641576,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000245",
-          "amendment_name": "厚生労働省組織令及び社会保障審議会令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十五号",
-          "enforcement_date": "2026-08-04",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "医療分科会の庶務担当課を区分に応じて細分化",
-        "body": "社会保障審議会令の改正により、医療分科会の庶務を担当する組織の体制が変更されます。これまで、医療分科会の庶務は一括して厚生労働省医政局総務課が担当していましたが、改正後は、定められた区分に応じてそれぞれの担当課が処理を行うことになります。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 609,
-        "output_tokens": 88,
-        "thoughts_tokens": 1509,
-        "total_tokens": 2206,
-        "elapsed_seconds": 9.926844449999976,
-        "response_id": "gEKJat-mGr-C_9MPjuSMwQ8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "412CO0000000254",
-      "law_name": "経済産業省組織令",
-      "revisions": [
-        {
-          "law_data_id": 641585,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000247",
-          "amendment_name": "経済産業省組織令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十七号",
-          "enforcement_date": "2026-08-05",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "ロボットや宇宙、情報処理の担当局課における所掌事務の変更",
-        "body": "本改正により、ロボットや宇宙、情報処理に関連する分野において、担当する局や課の所掌事務が整理・変更されます。局レベルでは、製造産業局が所掌していた「ロボットの利用に関する総括」の事務が商務情報政策局へ移管され、製造産業局には新たに「宇宙の利用に関する総括」の事務が追加されます。課レベルでは、「情報技術利用促進課」が「情報処理システム開発・ロボット課」へと改称されます。これに伴い、これまで同課が所掌していた「情報処理技術の利用促進」や「情報処理技術者試験の実施」といった事務は「情報経済課」へと移管されます。一方で、新設される「情報処理システム開発・ロボット課」は、これまで情報産業課が担当していた「情報処理に関連する技術の研究開発」に関する事務を引き継ぐとともに、新たにロボット関連の物資やロボット利用の総括に関する事務を所掌します。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 2062,
-        "output_tokens": 239,
-        "thoughts_tokens": 3301,
-        "total_tokens": 5602,
-        "elapsed_seconds": 19.610572122000008,
-        "response_id": "i0KJauDiNtOf998P_uK26As"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "420CO0000000389",
-      "law_name": "職員の退職管理に関する政令",
-      "revisions": [
-        {
-          "law_data_id": 641581,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000246",
-          "amendment_name": "金融庁組織令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十六号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        },
-        {
-          "law_data_id": 628411,
-          "sub_revision": "6",
-          "amendment_id": "507CO0000000341",
-          "amendment_name": "出入国管理及び難民認定法及び外国人の技能実習の適正な実施及び技能実習生の保護に関する法律の一部を改正する法律の施行に伴う関係政令の整備及び経過措置に関する政令",
-          "amendment_num": "令和七年政令第三百四十一号",
-          "enforcement_date": "2027-04-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "退職管理の対象となる役職や法人の見直し",
-        "body": "この改正により、職員の退職管理における対象役職の定義や、対象となる関係法人の名称が見直されました。具体的には、退職管理の対象となる「部長又は課長の職に準ずる職」として、金融庁の監督総括審議官、政策立案総括審議官、審議官、公文書監理官および参事官が追加されました。また、「長官、事務次官、事務局長又は局長の職に準ずる職」として、新たに金融国際審議官が追加されるとともに、内閣府の対象役職の規定が整理されました。さらに、退職手当通算法人および内閣総理大臣への事前の再就職の届出に係る認可法人について、名称が「外国人技能実習機構」から「外国人育成就労機構」へと改められました。これらの改正は、金融庁等の役職見直しに関するものは令和8年8月7日から、関係法人の名称変更に関するものは令和9年4月1日からそれぞれ施行されます。また、罰則の適用に関する経過措置も設けられています。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 1946,
-        "output_tokens": 259,
-        "thoughts_tokens": 3073,
-        "total_tokens": 5278,
-        "elapsed_seconds": 18.82426146900002,
-        "response_id": "oUKJauK4MIG7odAPm_CP4A8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "412CO0000000264",
-      "law_name": "自動車損害賠償責任保険審議会令",
-      "revisions": [
-        {
-          "law_data_id": 641584,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000246",
-          "amendment_name": "金融庁組織令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十六号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "審議会の庶務を担う金融庁の部署名を変更",
-        "body": "自動車損害賠償責任保険審議会の庶務を処理する部署が、これまでの「金融庁監督局保険課」から「金融庁資産運用・保険監督局保険課」へと変更されます。\n\nこの改正は、2026年（令和8年）8月7日から施行されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 724,
-        "output_tokens": 93,
-        "thoughts_tokens": 649,
-        "total_tokens": 1466,
-        "elapsed_seconds": 5.06747679700004,
-        "response_id": "tUKJaqK2Md6O4_UPusfe2A8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "412CO0000000260",
-      "law_name": "金融危機対応会議令",
-      "revisions": [
-        {
-          "law_data_id": 641579,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000246",
-          "amendment_name": "金融庁組織令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十六号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融危機対応会議の庶務担当部署の変更",
-        "body": "金融危機対応会議の庶務を処理する金融庁の担当部署が変更されます。\n\nこれまで、会議の庶務は「金融庁監督局総務課」において財務省大臣官房信用機構課の協力を得て処理されていましたが、改正後は「金融庁銀行・証券監督局総務課」が財務省の同課の協力を得て処理することになります。\n\n本改正は、2026年（令和8年）8月7日から施行されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 744,
-        "output_tokens": 137,
-        "thoughts_tokens": 905,
-        "total_tokens": 1786,
-        "elapsed_seconds": 6.152562797000087,
-        "response_id": "u0KJaqnxOdmPq8YPteCl-Ac"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "410CO0000000392",
-      "law_name": "金融庁組織令",
-      "revisions": [
-        {
-          "law_data_id": 641578,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000246",
-          "amendment_name": "金融庁組織令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十六号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "３局体制への組織再編と所掌事務の整理",
-        "body": "金融庁に置かれる局が再編され、「企画市場局」「銀行・証券監督局」「資産運用・保険監督局」の３局体制となります。これに伴い、各局に置かれる課や参事官、検査監理官などの配置が新たに見直されます。\n\n局のほかに置かれる組織として、「秘書課」「文書課」「総合政策課」「国際課」の４課が設置されます。役職としては、次長１人のほか、監督総括審議官１人、政策立案総括審議官１人、審議官７人、公文書監理官１人、参事官３人が置かれ、それぞれの職務が規定されます。\n\nこのほか、新体制に伴い、各局・各課や審議官等が担当する各種金融機関等の監督や検査、金融に関する制度の企画・立案、重要政策の総合調整といった具体的な所掌事務の範囲が詳細に整理・変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 28093,
-        "output_tokens": 243,
-        "thoughts_tokens": 1395,
-        "total_tokens": 29731,
-        "elapsed_seconds": 9.48804927399999,
-        "response_id": "w0KJaufOKK6fq8YP2NzKmQc"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "416CO0000000241",
-      "law_name": "金融機能強化審査会令",
-      "revisions": [
-        {
-          "law_data_id": 641583,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000246",
-          "amendment_name": "金融庁組織令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百四十六号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "審査会の庶務処理部署を銀行・証券監督局へ変更",
-        "body": "金融機能強化審査会令の一部が改正され、同審査会の庶務を処理する部署が「金融庁監督局銀行第二課」から「金融庁銀行・証券監督局銀行第二課」に変更されます。\n\nこの改正は、2026年（令和8年）8月7日から施行されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 733,
+        "prompt_tokens": 546,
         "output_tokens": 97,
-        "thoughts_tokens": 868,
-        "total_tokens": 1698,
-        "elapsed_seconds": 6.428290007999976,
-        "response_id": "zkKJavi-ErS7odAPleeTiQQ"
+        "thoughts_tokens": 1266,
+        "total_tokens": 1909,
+        "elapsed_seconds": 8.570020010999997,
+        "response_id": "FkuJasPGAZStodAPs93BCQ"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "414M60000040068",
-      "law_name": "個人向け国債の発行等に関する省令",
+      "law_id": "507CO0000000193",
+      "law_name": "刑法等の一部を改正する法律及び刑法等の一部を改正する法律の施行に伴う関係法律の整理等に関する法律の施行に伴う関係政令の整理等及び経過措置に関する政令",
       "revisions": [
         {
-          "law_data_id": 641624,
+          "law_data_id": 641710,
           "sub_revision": "1",
-          "amendment_id": "508M60000040057",
-          "amendment_name": "個人向け国債の発行等に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第五十七号",
-          "enforcement_date": "2026-12-01",
+          "amendment_id": "508CO0000000253",
+          "amendment_name": "更生保護制度の充実を図るための保護司法等の一部を改正する法律の施行に伴う関係政令の整理に関する政令",
+          "amendment_num": "令和八年政令第二百五十三号",
+          "enforcement_date": "2027-06-01",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": false
@@ -460,2354 +53,65 @@
     },
     "response": {
       "summary": {
-        "title": "個人向け国債の保有対象に一部の法人等を追加",
-        "body": "個人向け国債の保有対象者が、従来の個人に加えて、特定投資家を除く法人やその他の団体に拡大されます。\\n\\nこの変更に伴い、中途換金の特例に関する規定が整備されます。災害救助法が適用される災害が発生した際の中途換金請求について、従来の居住地に加え、営業所や事務所などの所在地も対象となります。また、法人が解散した場合、解散時の代表者による請求が可能となり、提出書類等の手続きが定められます。さらに、特定投資家が個人向け国債を保有することとなった場合の中途換金請求に関する規定が新たに設けられます。"
+        "title": "更生保護法の技術的読替え対象に第八号を追加",
+        "body": "本改正は、更生保護制度の充実に伴う関係政令の整理として、刑法等の適用に関する技術的読替え規定の一部を変更するものです。\\n\\n具体的には、更生保護法に関する技術的読替え規定において、対象となる範囲に新たに「第八号」が追加されます。これにより、対象となる号の指定に「第八号」が加わり、必要な規定の整理が行われます。"
       },
       "usage": {
         "model": "gemini-3.5-flash",
-        "prompt_tokens": 1990,
-        "output_tokens": 156,
-        "thoughts_tokens": 908,
-        "total_tokens": 3054,
-        "elapsed_seconds": 7.269632983999941,
-        "response_id": "1UKJaoOlN9e36tkPoq2LqQg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "420M60000100144",
-      "law_name": "全国健康保険協会の財務及び会計に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641604,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、全国健康保険協会の財務及び会計に関する省令における企業会計基準の参照条項が変更されます。具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとされる、企業会計審議会により公表された企業会計基準について、根拠となる金融庁組織令の条文が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 686,
-        "output_tokens": 124,
-        "thoughts_tokens": 809,
-        "total_tokens": 1619,
-        "elapsed_seconds": 5.9448974850000695,
-        "response_id": "3kKJauvdE_GV4_UP_8mX8QM"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000100001",
-      "law_name": "厚生労働省組織規則",
-      "revisions": [
-        {
-          "law_data_id": 641592,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100122",
-          "amendment_name": "厚生労働省組織規則の一部を改正する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十二号",
-          "enforcement_date": "2026-08-04",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "交渉官や特別研究官の新設と組織・室の再編",
-        "body": "厚生労働省の組織体制における専門官職の新設や、各局における室・課の再編が行われます。\n\n【新たな官職の設置と整理】\n大臣官房に医薬分野に関する政策の企画・立案を支援する「医薬国際交渉官」、本省に医療・福祉分野の情報政策を担う「医療・福祉情報特別研究官」や「労働情報政策管理官」が新たに置かれます。また、職業安定局関係のシステムを設計・運用する「システム計画官」や、介護労働者の雇用管理改善などを助ける「人材確保支援企画官」が新設されます。一方で、会計課の「会計管理官」や、雇用政策課の「雇用復興企画官」などの官職が廃止されます。\n\n【室・課の再編と改称】\n医療分野では、地域医療計画課の「医療安全推進・医務指導室」が「地域医療構想推進室」に改組されるほか、看護課にあった「看護サービス推進室」が医療経営改革課に移管されます。さらに「保険データ企画室」が廃止され、総務課に「医療介護連携政策室」が新設されます。これに伴い、「医療経営支援課」が「医療機構運営支援課」に、「医薬産業振興・医療情報企画課」が「医薬産業振興企画課」に改称されます。\n労働・職業安定分野では、総務課の「訓練受講支援室」および「人材確保支援総合企画室」が廃止され、「就労支援室」に生活困窮者の職業安定に関する事務が追加されるなどの整理が行われます。\n\n【事務処理の表現見直し】\n労働保険の徴収業務や政府管掌年金事業等の実施に関する事務について、従来の「電子計算組織」という表現が「情報システム」の整備、管理、運用等に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 8748,
-        "output_tokens": 455,
-        "thoughts_tokens": 2063,
-        "total_tokens": 11266,
-        "elapsed_seconds": 13.314966908000088,
-        "response_id": "5kKJaoXPAdnAodAPiOPvqAw"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "507M60000100003",
-      "law_name": "国立健康危機管理研究機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641603,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準に係る金融庁組織令の参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則に関する規定における参照条項が整理されます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして示されている、金融庁組織令の企業会計審議会に関する参照条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 698,
+        "prompt_tokens": 3045,
         "output_tokens": 113,
-        "thoughts_tokens": 1231,
-        "total_tokens": 2042,
-        "elapsed_seconds": 7.715913418000127,
-        "response_id": "9EKJapLqG-TFodAPzZjowAk"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000080057",
-      "law_name": "国立大学法人法施行規則",
-      "revisions": [
-        {
-          "law_data_id": 641675,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の規定に係る金融庁組織令の参照条項の改定",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、国立大学法人法施行規則における会計の原則に関する規定の整理が行われます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとされる、企業会計審議会が公表した企業会計の基準について、同審議会を規定する金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 683,
-        "output_tokens": 133,
-        "thoughts_tokens": 1467,
-        "total_tokens": 2283,
-        "elapsed_seconds": 9.524254506000034,
-        "response_id": "_UKJauy3GP3h998Po_qz0AU"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "427M60000102004",
-      "law_name": "国立研究開発法人医薬基盤・健康・栄養研究所の業務運営、財務及び会計並びに人事管理に関する命令",
-      "revisions": [
-        {
-          "law_data_id": 641641,
-          "sub_revision": "1",
-          "amendment_id": "508M60000102014",
-          "amendment_name": "国立研究開発法人医薬基盤・健康・栄養研究所の業務運営、財務及び会計並びに人事管理に関する命令の一部を改正する命令",
-          "amendment_num": "令和八年内閣府・厚生労働省令第十四号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準の根拠となる金融庁組織令の参照条項の変更",
-        "body": "一般に公正妥当と認められる企業会計の基準の定義において引用されている金融庁組織令の条項が、従来の「第二十四条第一項」から「第三十四条第一項」へと変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 714,
-        "output_tokens": 79,
-        "thoughts_tokens": 635,
-        "total_tokens": 1428,
-        "elapsed_seconds": 4.752451608000001,
-        "response_id": "CEOJasThB-me998PnO3Q8QI"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60001000014",
-      "law_name": "国立研究開発法人国立環境研究所の業務運営並びに財務及び会計等に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641588,
-          "sub_revision": "1",
-          "amendment_id": "508M60001000022",
-          "amendment_name": "国立研究開発法人国立環境研究所の業務運営並びに財務及び会計等に関する省令及び独立行政法人環境再生保全機構に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年環境省令第二十二号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計原則や積立金処分申請に係る引用条文の整理",
-        "body": "この改正では、会計の原則における企業会計審議会に関する規定、および積立金の処分に係る申請書類の規定において、それぞれ引用している法令の条項が整理されました。\n\n具体的には、会計の原則において「一般に公正妥当と認められる企業会計の基準」に該当するものとして引用している金融庁組織令の企業会計審議会に関する条項が、「第二十四条第一項」から「第三十四条第一項」に改められました。\n\nまた、積立金の処分に係る申請の際に提出する書類（期間最後の事業年度末の貸借対照表および損益計算書）の規定において、引用している「独立行政法人の組織、運営及び管理に係る共通的な事項に関する政令」の条項が、「第五条第二項」から「第二十一条第三項において準用する同条第二項」に改められました。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 900,
-        "output_tokens": 222,
-        "thoughts_tokens": 764,
-        "total_tokens": 1886,
-        "elapsed_seconds": 5.826510125999903,
-        "response_id": "DkOJaqWeAume998PnO3Q8QI"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000200047",
-      "law_name": "国立研究開発法人国際農林水産業研究センターの業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641654,
-          "sub_revision": "1",
-          "amendment_id": "508M60000200061",
-          "amendment_name": "国立研究開発法人国際農林水産業研究センターの業務運営、財務及び会計並びに人事管理に関する省令及び国立研究開発法人農業・食品産業技術総合研究機構の農業・食品産業技術研究等業務及び農業機械化促進業務に係る財務及び会計並びに人事管理に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第六十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する参照条項の改正",
-        "body": "企業会計の基準に関する規定において、引用されている金融庁組織令の条項が変更されます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準を公表する企業会計審議会について、その根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 748,
-        "output_tokens": 111,
-        "thoughts_tokens": 1102,
-        "total_tokens": 1961,
-        "elapsed_seconds": 7.41230791199996,
-        "response_id": "FUOJarTGAvWn998P3IzSuAc"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000800044",
-      "law_name": "国立研究開発法人土木研究所の財務及び会計等に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641606,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う引用条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則に関する規定における引用条項が整理されます。\n\n具体的には、企業会計審議会により公表された企業会計の基準に関する規定において、引用している金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 690,
-        "output_tokens": 110,
-        "thoughts_tokens": 678,
-        "total_tokens": 1478,
-        "elapsed_seconds": 5.322823190000008,
-        "response_id": "HUOJateSJ_3h998Po_qz0AU"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000080050",
-      "law_name": "国立研究開発法人宇宙航空研究開発機構の会計の原則及び短期借入金の認可の申請手続等に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641672,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う会計原則の参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則に関する規定における参照条項が整理されます。具体的には、一般に公正妥当と認められる企業会計の基準として、企業会計審議会が公表した基準を規定する第二項において、引用している金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」に更新されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 704,
-        "output_tokens": 117,
-        "thoughts_tokens": 1062,
-        "total_tokens": 1883,
-        "elapsed_seconds": 7.001385539000012,
-        "response_id": "JEOJapLvCPWn998P3IzSuAc"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000800045",
-      "law_name": "国立研究開発法人建築研究所に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641607,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準に関する金融庁組織令の引用条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、国立研究開発法人建築研究所に関する省令の規定が整理されます。\n\n具体的には、会計の原則に関する規定において、企業会計審議会により公表された企業会計の基準を一般に公正妥当と認められる企業会計の基準に該当するものとする記述のなかで、引用している「金融庁組織令」の条文が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 685,
-        "output_tokens": 140,
-        "thoughts_tokens": 978,
-        "total_tokens": 1803,
-        "elapsed_seconds": 6.795192859000053,
-        "response_id": "LEOJaoTPFYSF998Px_W_gAE"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "427M60000582001",
-      "law_name": "国立研究開発法人日本医療研究開発機構の業務運営、財務及び会計並びに人事管理に関する命令",
-      "revisions": [
-        {
-          "law_data_id": 641645,
-          "sub_revision": "1",
-          "amendment_id": "508M60000582003",
-          "amendment_name": "国立研究開発法人日本医療研究開発機構の業務運営、財務及び会計並びに人事管理に関する命令の一部を改正する命令",
-          "amendment_num": "令和八年内閣府・文部科学省・厚生労働省・経済産業省令第三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計原則における金融庁組織令の引用条項の変更",
-        "body": "企業会計の基準に関する規定において、引用している金融庁組織令の条項が変更されます。具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして企業会計審議会が公表した基準を定める規定（第十条第二項）について、同審議会の根拠となる金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 712,
-        "output_tokens": 120,
-        "thoughts_tokens": 668,
-        "total_tokens": 1500,
-        "elapsed_seconds": 5.292545046999976,
-        "response_id": "NEOJaqfUFrKf998P8qiFiAg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "417M60000080044",
-      "law_name": "国立研究開発法人日本原子力研究開発機構の監査報告の作成、監事の調査の対象となる書類、会計の原則、短期借入金の認可の申請手続、埋設処分業務に係る財務及び会計、内部組織並びに管理又は監督の地位等に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641680,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計の原則における金融庁組織令の引用条項の整理",
-        "body": "金融庁組織令の一部改正に伴い、会計の原則に関する規定で引用している同令の条項番号が整理されます。\n\n具体的には、企業会計審議会が公表した企業会計の基準を一般に公正妥当と認められる基準とする規定において、引用する金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 737,
-        "output_tokens": 120,
-        "thoughts_tokens": 681,
-        "total_tokens": 1538,
-        "elapsed_seconds": 5.041568006000034,
-        "response_id": "OkOJarmiMPrUodAPq6nTwQ4"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000200048",
-      "law_name": "国立研究開発法人森林研究・整備機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641656,
-          "sub_revision": "1",
-          "amendment_id": "508M60000200062",
-          "amendment_name": "国立研究開発法人森林研究・整備機構の業務運営、財務及び会計並びに人事管理に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第六十二号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に係る参照条文の改正",
-        "body": "国立研究開発法人森林研究・整備機構の業務運営、財務及び会計並びに人事管理に関する省令において、企業会計原則に関する規定の参照条項が整理されます。具体的には、第十条第二項に規定されている、企業会計審議会の根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 705,
-        "output_tokens": 112,
-        "thoughts_tokens": 1604,
-        "total_tokens": 2421,
-        "elapsed_seconds": 9.683758573000205,
-        "response_id": "QUOJasmwAty76tkPyYa8kQg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000200049",
-      "law_name": "国立研究開発法人水産研究・教育機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641653,
-          "sub_revision": "1",
-          "amendment_id": "508M60000200060",
-          "amendment_name": "国立研究開発法人水産研究・教育機構の業務運営、財務及び会計並びに人事管理に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第六十号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計原則における金融庁組織令の参照条項の変更",
-        "body": "一般に公正妥当と認められる企業会計の基準に関する規定（第十一条第二項）において、参照している金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」へ変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 707,
-        "output_tokens": 82,
-        "thoughts_tokens": 495,
-        "total_tokens": 1284,
-        "elapsed_seconds": 4.206437593999908,
-        "response_id": "S0OJapmiO5v86tkP3saMyQI"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000800047",
-      "law_name": "国立研究開発法人海上・港湾・航空技術研究所に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641608,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う参照条項の変更",
-        "body": "国立研究開発法人海上・港湾・航空技術研究所に関する省令において、会計の原則に関する規定が一部改正されます。\\n\\n金融庁組織令の一部を改正する政令の施行に伴い、一般に公正妥当と認められる企業会計の基準を公表する企業会計審議会について規定した箇所において、参照する金融庁組織令の条文番号が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 691,
-        "output_tokens": 127,
-        "thoughts_tokens": 1413,
-        "total_tokens": 2231,
-        "elapsed_seconds": 8.554656386999795,
-        "response_id": "UUOJasvjFa-fq8YPlZv88Ac"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "416M60000080009",
-      "law_name": "国立研究開発法人海洋研究開発機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641678,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計原則における金融庁組織令の引用条項の整理",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、国立研究開発法人海洋研究開発機構の会計の原則に関する規定において、引用している金融庁組織令の条項番号が整理されます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとされている「企業会計審議会により公表された企業会計の基準」について、その根拠となる同令の参照条項が「第二十四条第一項」から「第三十四条第一項」へと変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 688,
-        "output_tokens": 144,
-        "thoughts_tokens": 657,
-        "total_tokens": 1489,
-        "elapsed_seconds": 5.067743099999916,
-        "response_id": "W0OJapX8Bfu7odAPqJCrsQs"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000080036",
-      "law_name": "国立研究開発法人物質・材料研究機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641663,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する引用条項の修正",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、企業会計の基準に関する規定において引用している同政令の条項が変更されます。具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして示されている「企業会計審議会により公表された企業会計の基準」について、その根拠となる金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 690,
-        "output_tokens": 125,
-        "thoughts_tokens": 1182,
-        "total_tokens": 1997,
-        "elapsed_seconds": 7.188960624999936,
-        "response_id": "YUOJar22FO6s6tkPpsmFgA8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000080049",
-      "law_name": "国立研究開発法人理化学研究所に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641671,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準に関する参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、国立研究開発法人理化学研究所の会計原則に関する規定が改正されます。具体的には、一般に公正妥当と認められる企業会計の基準として引用されている金融庁組織令の条項が、従来の「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 687,
-        "output_tokens": 98,
-        "thoughts_tokens": 862,
-        "total_tokens": 1647,
-        "elapsed_seconds": 6.037591895000105,
-        "response_id": "aUOJau7TLe-Z4_UPybr-yA8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000080047",
-      "law_name": "国立研究開発法人科学技術振興機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641669,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う企業会計審議会に係る参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、国立研究開発法人科学技術振興機構に関する省令における参照条項の整理が行われます。具体的には、一般に公正妥当と認められる企業会計の基準を公表する「企業会計審議会」の根拠となる金融庁組織令の条項について、従来の「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 690,
-        "output_tokens": 125,
-        "thoughts_tokens": 934,
-        "total_tokens": 1749,
-        "elapsed_seconds": 6.956265181999925,
-        "response_id": "cUOJauwl17fq2Q-irYupCA"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000240003",
-      "law_name": "国立研究開発法人農業・食品産業技術総合研究機構の基礎的研究業務に係る財務及び会計に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641628,
-          "sub_revision": "1",
-          "amendment_id": "508M60000240003",
-          "amendment_name": "国立研究開発法人農業・食品産業技術総合研究機構の基礎的研究業務に係る財務及び会計に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年財務省・農林水産省令第三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の参照条項の変更に伴う規定の整理",
-        "body": "一般に公正妥当と認められる企業会計の基準として企業会計審議会により公表されたものを規定する第二条第二項において、引用している「金融庁組織令」の条項が「第二十四条第一項」から「第三十四条第一項」に変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 705,
-        "output_tokens": 86,
-        "thoughts_tokens": 583,
-        "total_tokens": 1374,
-        "elapsed_seconds": 4.9132255359998,
-        "response_id": "eUOJau7iB5StodAPs93BCQ"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000200094",
-      "law_name": "国立研究開発法人農業・食品産業技術総合研究機構の農業・食品産業技術研究等業務及び農業機械化促進業務に係る財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641655,
-          "sub_revision": "1",
-          "amendment_id": "508M60000200061",
-          "amendment_name": "国立研究開発法人国際農林水産業研究センターの業務運営、財務及び会計並びに人事管理に関する省令及び国立研究開発法人農業・食品産業技術総合研究機構の農業・食品産業技術研究等業務及び農業機械化促進業務に係る財務及び会計並びに人事管理に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第六十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計原則における引用条項の変更",
-        "body": "本改正では、企業会計原則に関する規定における引用条項が変更されます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして定められている「企業会計審議会により公表された企業会計の基準」について、その根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 760,
-        "output_tokens": 116,
-        "thoughts_tokens": 981,
-        "total_tokens": 1857,
-        "elapsed_seconds": 6.360416918000055,
-        "response_id": "f0OJasW8FYeb4_UPs-eXuAU"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000080039",
-      "law_name": "国立研究開発法人量子科学技術研究開発機構の財務及び会計に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641665,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する参照条文の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則に関する規定において引用している参照条項が整理されます。具体的には、一般に公正妥当と認められる企業会計の基準として適用される、企業会計審議会が公表した基準の根拠となる金融庁組織令の参照条文について、従来の「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 693,
-        "output_tokens": 115,
-        "thoughts_tokens": 1100,
-        "total_tokens": 1908,
-        "elapsed_seconds": 7.3444468279999455,
-        "response_id": "hkOJau-aMOW-odAPv52QoQE"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000080037",
-      "law_name": "国立研究開発法人防災科学技術研究所に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641664,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の根拠条項の変更に伴う規定の整理",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則に関する規定における参照条項が整理されます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準として扱われる「企業会計審議会により公表された企業会計の基準」について、同審議会の根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 688,
-        "output_tokens": 129,
-        "thoughts_tokens": 709,
-        "total_tokens": 1526,
-        "elapsed_seconds": 5.131154615000014,
-        "response_id": "j0OJaozGFN6O4_UPusfe2A8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "418M60000100060",
-      "law_name": "年金積立金管理運用独立行政法人の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641601,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う参照条項の変更",
-        "body": "金融庁組織令の一部改正に伴い、企業会計基準の公表主体である企業会計審議会の根拠条項の参照先が変更されます。\\n\\n具体的には、本省令の第八条第二項において引用されている金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」に改められます。この改正は、2026年8月7日から施行されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 702,
-        "output_tokens": 118,
-        "thoughts_tokens": 785,
-        "total_tokens": 1605,
-        "elapsed_seconds": 5.3529467129999375,
-        "response_id": "lUOJavHMKvrUodAPq6nTwQ4"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000080039",
-      "law_name": "放送大学学園に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641681,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則における規定の整理が行われます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして引用されている、金融庁組織令に規定する企業会計審議会の参照条項が、従来の「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 683,
-        "output_tokens": 106,
-        "thoughts_tokens": 1422,
-        "total_tokens": 2211,
-        "elapsed_seconds": 8.640256458000067,
-        "response_id": "nEOJarDZDrKf998P8qiFiAg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "421M60000100166",
-      "law_name": "日本年金機構の財務及び会計に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641605,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準に関する引用条項の整理",
-        "body": "金融庁組織令の改正に伴い、会計の原則に関する規定の整理が行われます。一般に公正妥当と認められる企業会計の基準に該当するものとして規定されている、企業会計審議会により公表された企業会計の基準について、その根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」へ変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 690,
-        "output_tokens": 110,
-        "thoughts_tokens": 1246,
-        "total_tokens": 2046,
-        "elapsed_seconds": 7.956338154999912,
-        "response_id": "pkOJat-0Bt6O4_UPusfe2A8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "409M50000080042",
-      "law_name": "日本私立学校振興・共済事業団の財務及び会計に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641682,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う引用条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、日本私立学校振興・共済事業団の財務及び会計に関する省令において、一般に公正妥当と認められる企業会計の基準を公表する「企業会計審議会」の根拠となる金融庁組織令の条項が、これまでの「第二十四条第一項」から「第三十四条第一項」に改められます。この改正は、関連する政令の改正に伴う規定の整理を行うものです。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 693,
-        "output_tokens": 134,
-        "thoughts_tokens": 950,
-        "total_tokens": 1777,
-        "elapsed_seconds": 6.6366818219999,
-        "response_id": "r0OJasmsEd6O4_UPusfe2A8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "423M60000002059",
-      "law_name": "沖縄科学技術大学院大学学園法施行規則",
-      "revisions": [
-        {
-          "law_data_id": 641633,
-          "sub_revision": "1",
-          "amendment_id": "508M60000002068",
-          "amendment_name": "沖縄科学技術大学院大学学園法施行規則の一部を改正する内閣府令",
-          "amendment_num": "令和八年内閣府令第六十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の引用条項を第三十四条第一項に改正",
-        "body": "沖縄科学技術大学院大学学園法施行規則の会計の原則において、引用する金融庁組織令の条項が変更されます。具体的には、一般に公正妥当と認められる企業会計の基準とされる、企業会計審議会により公表された企業会計の基準に関する規定（第八条第二項）について、引用している金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 676,
-        "output_tokens": 131,
-        "thoughts_tokens": 810,
-        "total_tokens": 1617,
-        "elapsed_seconds": 5.724653265999905,
-        "response_id": "t0OJatbwCJqZ4_UP9ZbByQM"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "504M62000800001",
-      "law_name": "特定複合観光施設区域整備法に基づくカジノ事業者又はカジノ施設供用事業者が行う設置運営事業等の監査及び会計に関する命令",
-      "revisions": [
-        {
-          "law_data_id": 641620,
-          "sub_revision": "1",
-          "amendment_id": "508M62000800002",
-          "amendment_name": "特定複合観光施設区域整備法に基づくカジノ事業者又はカジノ施設供用事業者が行う設置運営事業等の監査及び会計に関する命令の一部を改正する命令",
-          "amendment_num": "令和八年カジノ管理委員会・国土交通省令第二号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の根拠条項の変更に伴う規定の修正",
-        "body": "本改正では、会計の原則において引用されている企業会計審議会の設置根拠について、金融庁組織令の条項を「第二十四条第一項」から「第三十四条第一項」に改める修正を行っています。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 745,
-        "output_tokens": 82,
-        "thoughts_tokens": 655,
-        "total_tokens": 1482,
-        "elapsed_seconds": 4.641993006000121,
-        "response_id": "vkOJarr0AfzEodAP-szegAw"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "503M60000800075",
-      "law_name": "特定複合観光施設区域整備法に基づく設置運営事業等の監査及び会計に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641619,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の根拠条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則に関する規定が一部改正されます。\n\n具体的には、企業会計審議会の根拠として引用されている金融庁組織令の条項が、従来の「第二十四条第一項」から「第三十四条第一項」へと変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 717,
-        "output_tokens": 97,
-        "thoughts_tokens": 709,
-        "total_tokens": 1523,
-        "elapsed_seconds": 5.0705801429999156,
-        "response_id": "w0OJap7LM_GV4_UP_8mX8QM"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "419M60000840001",
-      "law_name": "独立行政法人住宅金融支援機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641626,
-          "sub_revision": "1",
-          "amendment_id": "508M60000840002",
-          "amendment_name": "独立行政法人奄美群島振興開発基金に関する省令及び独立行政法人住宅金融支援機構に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年財務省・国土交通省令第二号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計の原則における金融庁組織令の参照条項の改正",
-        "body": "独立行政法人住宅金融支援機構に関する省令の第八条（会計の原則）において、企業会計審議会の規定に係る参照条項が改正されます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして示されている企業会計審議会に関し、その根拠となる金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」へと変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 693,
-        "output_tokens": 127,
-        "thoughts_tokens": 621,
-        "total_tokens": 1441,
-        "elapsed_seconds": 5.021195306999971,
-        "response_id": "ykOJasqpCuHeodAPvbjsmQg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000100151",
-      "law_name": "独立行政法人労働政策研究・研修機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641595,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準の参照条項における条文番号の修正",
-        "body": "金融庁組織令の改正に伴い、一般に公正妥当と認められる企業会計の基準に関して引用されている同組織令の条項番号が、従来の「第二十四条第一項」から「第三十四条第一項」へと修正されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 702,
-        "output_tokens": 76,
-        "thoughts_tokens": 594,
-        "total_tokens": 1372,
-        "elapsed_seconds": 4.662950059999957,
-        "response_id": "0EOJavffFOme998PnO3Q8QI"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "416M60000100056",
-      "law_name": "独立行政法人労働者健康安全機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641598,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令改正に伴う企業会計審議会の参照条項の整理",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、省令における参照条項の整理が行われます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして引用されている「企業会計審議会」の規定について、参照先である金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」へ変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 701,
-        "output_tokens": 124,
-        "thoughts_tokens": 539,
-        "total_tokens": 1364,
-        "elapsed_seconds": 4.313862448999998,
-        "response_id": "1kOJapnVD--Z4_UPybr-yA8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000100152",
-      "law_name": "独立行政法人勤労者退職金共済機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641596,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計の基準に関する根拠条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、企業会計原則等に関する規定の整理が行われます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとされる、企業会計審議会が公表した企業会計の基準の根拠条項について、金融庁組織令の「第二十四条第一項」から「第三十四条第一項」への変更が適用されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 706,
-        "output_tokens": 117,
-        "thoughts_tokens": 876,
-        "total_tokens": 1699,
-        "elapsed_seconds": 6.2337438499998825,
-        "response_id": "20OJarbULrKf998P8qiFiAg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000202012",
-      "law_name": "独立行政法人北方領土問題対策協会の業務運営、財務及び会計並びに人事管理に関する命令",
-      "revisions": [
-        {
-          "law_data_id": 641643,
-          "sub_revision": "1",
-          "amendment_id": "508M60000202011",
-          "amendment_name": "独立行政法人北方領土問題対策協会の業務運営、財務及び会計並びに人事管理に関する命令の一部を改正する命令",
-          "amendment_num": "令和八年内閣府・農林水産省令第十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の参照条項変更に伴う会計原則の整理",
-        "body": "独立行政法人北方領土問題対策協会の会計原則において、一般に公正妥当と認められる企業会計の基準として引用されている「金融庁組織令」の条項が変更されます。\n\n具体的には、企業会計審議会について規定する同政令の参照先が、従来の「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 705,
-        "output_tokens": 116,
-        "thoughts_tokens": 742,
-        "total_tokens": 1563,
-        "elapsed_seconds": 5.375480152999899,
-        "response_id": "40OJasbyEbuPq8YPtv3UqQo"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "416M60000100055",
-      "law_name": "独立行政法人医薬品医療機器総合機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641597,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う参照条項の整理",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、本省令において引用している同令の条項が整理されます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして規定されている、企業会計審議会により公表された企業会計の基準について、同審議会を規定する金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 702,
-        "output_tokens": 130,
-        "thoughts_tokens": 1418,
-        "total_tokens": 2250,
-        "elapsed_seconds": 8.972243612000057,
-        "response_id": "6UOJau2tL-HeodAPvbjsmQg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000002085",
-      "law_name": "独立行政法人国民生活センターの業務運営、財務及び会計並びに人事管理に関する内閣府令",
-      "revisions": [
-        {
-          "law_data_id": 641634,
-          "sub_revision": "1",
-          "amendment_id": "508M60000002069",
-          "amendment_name": "独立行政法人国民生活センターの業務運営、財務及び会計並びに人事管理に関する内閣府令の一部を改正する内閣府令",
-          "amendment_num": "令和八年内閣府令第六十九号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に係る参照条項の変更",
-        "body": "独立行政法人国民生活センターの会計原則における規定が一部変更されます。一般に公正妥当と認められる企業会計の基準として示されている、企業会計審議会により公表された基準について、当該審議会の規定に係る金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 702,
-        "output_tokens": 100,
-        "thoughts_tokens": 1662,
-        "total_tokens": 2464,
-        "elapsed_seconds": 10.189927718000035,
-        "response_id": "80OJar28OY6b4_UPoungsAg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000002014",
-      "law_name": "独立行政法人国立公文書館の業務運営並びに財務及び会計に関する内閣府令",
-      "revisions": [
-        {
-          "law_data_id": 641632,
-          "sub_revision": "1",
-          "amendment_id": "508M60000002067",
-          "amendment_name": "独立行政法人国立公文書館の業務運営並びに財務及び会計に関する内閣府令の一部を改正する内閣府令",
-          "amendment_num": "令和八年内閣府令第六十七号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に係る金融庁組織令の引用条項の変更",
-        "body": "本改正により、一般に公正妥当と認められる企業会計の基準の根拠として規定されている企業会計審議会について、引用する金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 699,
-        "output_tokens": 91,
-        "thoughts_tokens": 614,
-        "total_tokens": 1404,
-        "elapsed_seconds": 4.561169709000069,
-        "response_id": "_0OJat-ZFYeb4_UPs-eXuAU"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000040045",
-      "law_name": "独立行政法人国立印刷局に関する命令",
-      "revisions": [
-        {
-          "law_data_id": 641587,
-          "sub_revision": "1",
-          "amendment_id": "508M60004040001",
-          "amendment_name": "独立行政法人国立印刷局に関する命令の一部を改正する命令",
-          "amendment_num": "令和八年デジタル庁・財務省令第一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準に関する金融庁組織令の参照条項の変更",
-        "body": "独立行政法人国立印刷局に関する命令第八条第二項における、金融庁組織令の参照条項が変更されます。\\n\\n一般に公正妥当と認められる企業会計の基準に該当するものとして企業会計審議会が公表した基準を規定する同項において、引用している金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 674,
-        "output_tokens": 117,
-        "thoughts_tokens": 957,
-        "total_tokens": 1748,
-        "elapsed_seconds": 7.071811152000009,
-        "response_id": "BUSJaoSfBvWn998P3IzSuAc"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000080041",
-      "law_name": "独立行政法人国立文化財機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641667,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する引用条項の整理",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則における引用条項が整理されました。具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとされる、企業会計審議会により公表された企業会計の基準について、その根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 687,
-        "output_tokens": 115,
-        "thoughts_tokens": 968,
-        "total_tokens": 1770,
-        "elapsed_seconds": 6.2692433739998705,
-        "response_id": "DUSJat_EF9y76tkPyYa8kQg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000080028",
-      "law_name": "独立行政法人国立特別支援教育総合研究所に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641659,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則における参照条項の整理が行われます。\n\n具体的には、企業会計審議会により公表された企業会計の基準が一般に公正妥当と認められる企業会計の基準に該当すると定める規定において、同審議会の根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 689,
-        "output_tokens": 120,
-        "thoughts_tokens": 904,
-        "total_tokens": 1713,
-        "elapsed_seconds": 6.670453393000116,
-        "response_id": "FESJarSyNeHLodAPvfHd0QE"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "416M60000100077",
-      "law_name": "独立行政法人国立病院機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641599,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の根拠条項の変更に伴う参照条項の整理",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、企業会計の基準を公表する「企業会計審議会」の根拠となる同令の条項が変更されました。これに対応するため、本省令において一般に公正妥当と認められる企業会計の基準に関する規定の中で参照している金融庁組織令の条項が、従来の「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 699,
-        "output_tokens": 126,
-        "thoughts_tokens": 830,
-        "total_tokens": 1655,
-        "elapsed_seconds": 5.91604620499993,
-        "response_id": "HESJasOLLPiUq8YP98arqAo"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000080035",
-      "law_name": "独立行政法人国立科学博物館に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641662,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する引用条項の整理",
-        "body": "金融庁組織令の改正に伴い、会計の原則に関する規定における引用条項が整理されます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準を公表する「企業会計審議会」の根拠となる金融庁組織令の規定について、引用する条項が従来の「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 686,
-        "output_tokens": 110,
-        "thoughts_tokens": 836,
-        "total_tokens": 1632,
-        "elapsed_seconds": 5.342237021000074,
-        "response_id": "I0SJatCzMZmV4_UPofuK2QE"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000080040",
-      "law_name": "独立行政法人国立美術館に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641666,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計原則における金融庁組織令の引用条項の修正",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、独立行政法人国立美術館に関する省令の会計原則に関する規定が整理されます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして示されている「企業会計審議会により公表された企業会計の基準」について、その根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 685,
-        "output_tokens": 130,
-        "thoughts_tokens": 670,
-        "total_tokens": 1485,
-        "elapsed_seconds": 4.950043704000109,
-        "response_id": "KkSJapjWFv3h998Po_qz0AU"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000100149",
-      "law_name": "独立行政法人国立重度知的障害者総合施設のぞみの園の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641594,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令改正に伴う企業会計審議会の参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、企業会計原則等に関する規定における参照条項が変更されます。具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして示されている、企業会計審議会により公表された企業会計の基準について、根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 707,
-        "output_tokens": 131,
-        "thoughts_tokens": 1265,
-        "total_tokens": 2103,
-        "elapsed_seconds": 7.950231000000031,
-        "response_id": "MESJav3SG5mV4_UPofuK2QE"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000080030",
-      "law_name": "独立行政法人国立青少年教育振興機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641661,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の根拠条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則における規定の一部が変更されます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準を公表する主体として規定されている「企業会計審議会」について、その根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 689,
-        "output_tokens": 120,
-        "thoughts_tokens": 585,
-        "total_tokens": 1394,
-        "elapsed_seconds": 4.285839720000013,
-        "response_id": "OUSJasjsJOTFodAPzZjowAk"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000080058",
-      "law_name": "独立行政法人国立高等専門学校機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641676,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計の基準に関する参照条項の変更",
-        "body": "金融庁組織令の改正に伴い、本省令における会計原則の参照条項が整理されます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして規定されている、企業会計審議会により公表された企業会計の基準について、その根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 688,
-        "output_tokens": 122,
-        "thoughts_tokens": 689,
-        "total_tokens": 1499,
-        "elapsed_seconds": 5.319362284000135,
-        "response_id": "P0SJaujFAZStodAPs93BCQ"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000800103",
-      "law_name": "独立行政法人国際観光振興機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641613,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計原則における金融庁組織令の引用条項の整理",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、独立行政法人国際観光振興機構の会計の原則に関する規定において、引用する条項の整理が行われます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして示されている企業会計審議会の規定について、引用している金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」へ改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 686,
-        "output_tokens": 131,
-        "thoughts_tokens": 501,
-        "total_tokens": 1318,
-        "elapsed_seconds": 4.313299852,
-        "response_id": "RUSJaoKkJoDc998PiMbJ-Q0"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "417M60000100145",
-      "law_name": "独立行政法人地域医療機能推進機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641600,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する金融庁組織令の引用条項の改正",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、本省令における引用条項の整理が行われます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準として該当する「企業会計審議会により公表された企業会計の基準」について、その根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」に改められます。\\n\\nこの改正は、2026年8月7日から施行されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 701,
-        "output_tokens": 145,
-        "thoughts_tokens": 1247,
-        "total_tokens": 2093,
-        "elapsed_seconds": 7.95425013199997,
-        "response_id": "S0SJasrYCf3h998Po_qz0AU"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000080029",
-      "law_name": "独立行政法人大学入試センターに関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641660,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準の根拠となる金融庁組織令の参照条項を修正",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則における参照条項が整理されます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして定められている「企業会計審議会により公表された企業会計の基準」について、同審議会を規定する金融庁組織令の条項の参照先が、従来の「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 687,
-        "output_tokens": 140,
-        "thoughts_tokens": 540,
-        "total_tokens": 1367,
-        "elapsed_seconds": 4.6185211449999315,
-        "response_id": "VESJavW8EuHeodAPvbjsmQg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000080059",
-      "law_name": "独立行政法人大学改革支援・学位授与機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641677,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準に係る金融庁組織令の参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、独立行政法人大学改革支援・学位授与機構の会計の原則に関する規定において、引用されている金融庁組織令の条項が変更されます。\n\n具体的には、同機構の会計における「一般に公正妥当と認められる企業会計の基準」に該当するものとされる、企業会計審議会により公表された企業会計の基準について、その根拠となる金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 691,
-        "output_tokens": 148,
-        "thoughts_tokens": 822,
-        "total_tokens": 1661,
-        "elapsed_seconds": 6.065225192999833,
-        "response_id": "WkSJapH2BJqZ4_UP9ZbByQM"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "416M60000840003",
-      "law_name": "独立行政法人奄美群島振興開発基金に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641625,
-          "sub_revision": "1",
-          "amendment_id": "508M60000840002",
-          "amendment_name": "独立行政法人奄美群島振興開発基金に関する省令及び独立行政法人住宅金融支援機構に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年財務省・国土交通省令第二号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する金融庁組織令の引用条項の改正",
-        "body": "独立行政法人奄美群島振興開発基金に関する省令の会計の原則に関する規定において、金融庁組織令の引用条項が変更されます。具体的には、企業会計審議会について規定している金融庁組織令の引用箇所が、「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 697,
-        "output_tokens": 106,
-        "thoughts_tokens": 777,
-        "total_tokens": 1580,
-        "elapsed_seconds": 5.348639278000064,
-        "response_id": "YUSJasDrGbS7odAPleeTiQQ"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000200035",
-      "law_name": "独立行政法人家畜改良センターの業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641648,
-          "sub_revision": "1",
-          "amendment_id": "508M60000200057",
-          "amendment_name": "独立行政法人家畜改良センターの業務運営、財務及び会計並びに人事管理に関する省令及び独立行政法人農畜産業振興機構の業務運営、財務及び会計並びに人事管理に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第五十七号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準に関する金融庁組織令の参照条項の変更",
-        "body": "一般に公正妥当と認められる企業会計の基準として規定されている、企業会計審議会により公表された企業会計の基準について、その根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 724,
-        "output_tokens": 88,
-        "thoughts_tokens": 775,
-        "total_tokens": 1587,
-        "elapsed_seconds": 5.5057150820000516,
-        "response_id": "Z0SJarGJN-6s6tkPpsmFgA8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000080043",
-      "law_name": "独立行政法人教職員支援機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641668,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計の原則における金融庁組織令の引用条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則に関する規定における参照条項が整理されます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとされる、企業会計審議会が公表した企業会計の基準について、その根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」へ変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 687,
-        "output_tokens": 123,
-        "thoughts_tokens": 1326,
-        "total_tokens": 2136,
-        "elapsed_seconds": 8.147686870999905,
-        "response_id": "bkSJapv7Jdy76tkPyYa8kQg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000080051",
-      "law_name": "独立行政法人日本スポーツ振興センターに関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641673,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準に関する金融庁組織令の引用条項の整理",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、独立行政法人日本スポーツ振興センターの会計の原則に関する規定が整備されます。具体的には、一般に公正妥当と認められる企業会計の基準として示されている、企業会計審議会により公表された企業会計の基準について、根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」に変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 688,
-        "output_tokens": 127,
-        "thoughts_tokens": 1245,
-        "total_tokens": 2060,
-        "elapsed_seconds": 7.695174436999878,
-        "response_id": "eESJavH0Af3h998Po_qz0AU"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "416M60000080023",
-      "law_name": "独立行政法人日本学生支援機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641679,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        },
-        {
-          "law_data_id": 627786,
-          "sub_revision": "4",
-          "amendment_id": "507M60000080019",
-          "amendment_name": "独立行政法人日本学生支援機構に関する省令及び大学等における修学の支援に関する法律施行規則の一部を改正する省令",
-          "amendment_num": "令和七年文部科学省令第十九号",
-          "enforcement_date": "2026-10-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計原則の参照条項と支給額算定基準における文言の変更",
-        "body": "本改正では、主に以下の2点について見直しが行われます。\n\nまず、会計の原則に関する規定において、一般に公正妥当と認められる企業会計の基準として定義されている、企業会計審議会が公表した企業会計の基準について、参照している金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」へ改められます。\n\n次に、国内に住所を有しない者等に係る支給額算定基準額の算定に関する規定において、対象者の要件に関わる文言が整理されます。具体的には、選考対象者や給付奨学生、またはその生計維持者の要件として示されている「扶養親族」という表現が「扶養親族等」に改められ、これに伴い「扶養親族である者の数」および「扶養親族である者」が、それぞれ「扶養親族等である者の数」および「扶養親族等である者」へと変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 1316,
-        "output_tokens": 252,
-        "thoughts_tokens": 720,
-        "total_tokens": 2288,
-        "elapsed_seconds": 6.207864192999978,
-        "response_id": "gUSJarGEOIG7odAPm_CP4A8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000080048",
-      "law_name": "独立行政法人日本学術振興会に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641670,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う企業会計審議会引用条項の変更",
-        "body": "金融庁組織令の改正に伴い、会計の原則における引用条項が修正されます。具体的には、一般に公正妥当と認められる企業会計の基準を公表する「企業会計審議会」の根拠となる金融庁組織令の条項が、従来の第二十四条第一項から第三十四条第一項へと変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 689,
-        "output_tokens": 103,
-        "thoughts_tokens": 1166,
-        "total_tokens": 1958,
-        "elapsed_seconds": 7.540019255000061,
-        "response_id": "iUSJapKOHLa4odAP4eec6AE"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000080052",
-      "law_name": "独立行政法人日本芸術文化振興会に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641674,
-          "sub_revision": "1",
-          "amendment_id": "508M60000080028",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う文部科学省関係省令の整理に関する省令",
-          "amendment_num": "令和八年文部科学省令第二十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に係る金融庁組織令の引用条項の改正",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則に関する規定における引用条項の整理が行われます。具体的には、公正妥当と認められる企業会計の基準を公表する「企業会計審議会」に関して規定する金融庁組織令の参照条項が、「第二十四条第一項」から「第三十四条第一項」へと変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 689,
-        "output_tokens": 110,
-        "thoughts_tokens": 1193,
-        "total_tokens": 1992,
-        "elapsed_seconds": 7.80417067999997,
-        "response_id": "kkSJasePB5StodAPs93BCQ"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "417M60000800064",
-      "law_name": "独立行政法人日本高速道路保有・債務返済機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641618,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う企業会計審議会参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則に関する規定が整理されます。\n\n一般に公正妥当と認められる企業会計の基準を公表する「企業会計審議会」について、その根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 691,
-        "output_tokens": 119,
-        "thoughts_tokens": 881,
-        "total_tokens": 1691,
-        "elapsed_seconds": 6.0194514489999165,
-        "response_id": "m0SJavW6Bu-Z4_UPybr-yA8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000800104",
-      "law_name": "独立行政法人水資源機構の財務及び会計等に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641614,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計の原則における金融庁組織令の引用条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、独立行政法人水資源機構の会計の原則に関する規定において、引用している同令の条項が変更されます。具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして企業会計審議会が公表した基準を規定する箇所について、引用する金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 689,
-        "output_tokens": 129,
-        "thoughts_tokens": 890,
-        "total_tokens": 1708,
-        "elapsed_seconds": 6.492759409999962,
-        "response_id": "okSJapOGF9eR4_UP25fh8As"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000800052",
-      "law_name": "独立行政法人海技教育機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641609,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計の原則における金融庁組織令の参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、独立行政法人海技教育機構に関する省令の会計の原則に関する規定において、引用している金融庁組織令の条項が変更されます。具体的には、企業会計審議会により公表された企業会計の基準に関する規定の中で参照されている同政令の条項が、「第二十四条第一項」から「第三十四条第一項」へと改められます。この改正は、2026年8月7日から施行されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 685,
-        "output_tokens": 134,
-        "thoughts_tokens": 982,
-        "total_tokens": 1801,
-        "elapsed_seconds": 6.815881598000033,
-        "response_id": "qkSJavjABfmQq8YPs8OsuQw"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "416M60001000011",
-      "law_name": "独立行政法人環境再生保全機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641589,
-          "sub_revision": "1",
-          "amendment_id": "508M60001000022",
-          "amendment_name": "国立研究開発法人国立環境研究所の業務運営並びに財務及び会計等に関する省令及び独立行政法人環境再生保全機構に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年環境省令第二十二号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に係る金融庁組織令の参照条項の変更",
-        "body": "独立行政法人環境再生保全機構に関する省令の会計の原則に関する規定において、金融庁組織令の参照条項が変更されます。具体的には、一般に公正妥当と認められる企業会計の基準を公表する「企業会計審議会」の規定について、引用されている金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 698,
-        "output_tokens": 123,
-        "thoughts_tokens": 1113,
-        "total_tokens": 1934,
-        "elapsed_seconds": 7.652185933999817,
-        "response_id": "skSJasP-Ce-c998P392CsA4"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "508M60000082003",
-      "law_name": "独立行政法人男女共同参画機構の業務運営、財務及び会計並びに人事管理に関する命令",
-      "revisions": [
-        {
-          "law_data_id": 641644,
-          "sub_revision": "1",
-          "amendment_id": "508M60000082006",
-          "amendment_name": "独立行政法人男女共同参画機構の業務運営、財務及び会計並びに人事管理に関する命令の一部を改正する命令",
-          "amendment_num": "令和八年内閣府・文部科学省令第六号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する引用条項の変更",
-        "body": "会計の原則に関する規定において、引用されている金融庁組織令の条項番号が変更されます。具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして企業会計審議会により公表された基準を定める箇所において、同審議会を規定する金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 701,
-        "output_tokens": 112,
-        "thoughts_tokens": 1422,
-        "total_tokens": 2235,
-        "elapsed_seconds": 8.6389370280001,
-        "response_id": "ukSJarn8NuW-odAPv52QoQE"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000100148",
-      "law_name": "独立行政法人福祉医療機構の業務運営、財務及び会計並びに人事管理に関する命令",
-      "revisions": [
-        {
-          "law_data_id": 641642,
-          "sub_revision": "1",
-          "amendment_id": "508M60000102015",
-          "amendment_name": "独立行政法人福祉医療機構の業務運営、財務及び会計並びに人事管理に関する命令の一部を改正する命令",
-          "amendment_num": "令和八年内閣府・厚生労働省令第十五号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に係る金融庁組織令の参照条項の改正",
-        "body": "企業会計原則等の規定において、一般に公正妥当と認められる企業会計の基準に該当するものとされる基準を公表する「企業会計審議会」について、その根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 699,
-        "output_tokens": 97,
-        "thoughts_tokens": 870,
-        "total_tokens": 1666,
-        "elapsed_seconds": 6.604626264999979,
-        "response_id": "xESJaob-NNnAodAPiOPvqAw"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000800107",
-      "law_name": "独立行政法人空港周辺整備機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641616,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計の原則における金融庁組織令の参照条項の変更",
-        "body": "金融庁組織令の一部改正に伴い、会計の原則において引用されている同政令の条項が整理されます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして定められている、企業会計審議会により公表された企業会計の基準について、その根拠となる金融庁組織令の参照条項が、従来の「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 685,
-        "output_tokens": 125,
-        "thoughts_tokens": 1087,
-        "total_tokens": 1897,
-        "elapsed_seconds": 7.079607679999981,
-        "response_id": "zESJarKIJtnAodAPiOPvqAw"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000800106",
-      "law_name": "独立行政法人自動車事故対策機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641615,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、独立行政法人自動車事故対策機構に関する省令の一部が整理されます。具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとされる、企業会計審議会により公表された企業会計の基準について、その根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 685,
-        "output_tokens": 119,
-        "thoughts_tokens": 1412,
-        "total_tokens": 2216,
-        "elapsed_seconds": 9.699908232000098,
-        "response_id": "1ESJao-jN9e36tkPoq2LqQg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "414M60000800057",
-      "law_name": "独立行政法人自動車技術総合機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641611,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する参照条項の整理",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、独立行政法人自動車技術総合機構の会計原則に関する規定が整理されます。具体的には、一般に公正妥当と認められる企業会計の基準として適用される、企業会計審議会が公表した基準の根拠となる金融庁組織令の参照条項について、従来の「第二十四条第一項」から「第三十四条第一項」へ改める変更が行われます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 685,
-        "output_tokens": 118,
-        "thoughts_tokens": 1052,
-        "total_tokens": 1855,
-        "elapsed_seconds": 7.6671055389999765,
-        "response_id": "30SJaryeMfu7odAPqJCrsQs"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000800053",
-      "law_name": "独立行政法人航空大学校に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641610,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う参照条文の修正",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則における参照条項の整理が行われます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとされる、企業会計審議会により公表された企業会計の基準について、同審議会の根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 684,
-        "output_tokens": 125,
         "thoughts_tokens": 1376,
-        "total_tokens": 2185,
-        "elapsed_seconds": 11.40756640099994,
-        "response_id": "6ESJasO1J7Kf998P8qiFiAg"
+        "total_tokens": 4534,
+        "elapsed_seconds": 8.909139936999992,
+        "response_id": "H0uJarOvJuCoq8YPuJCJoQk"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "413M60000200033",
-      "law_name": "独立行政法人農林水産消費安全技術センターの業務運営並びに財務及び会計に関する省令",
+      "law_id": "508CO0000000254",
+      "law_name": "溶融亜鉛めっき鋼帯及び鋼板に対して課する暫定的な不当廉売関税に関する政令",
       "revisions": [
         {
-          "law_data_id": 641657,
+          "law_data_id": 641711,
           "sub_revision": "1",
-          "amendment_id": "508M60000200063",
-          "amendment_name": "独立行政法人農林水産消費安全技術センターの業務運営並びに財務及び会計に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第六十三号",
+          "amendment_id": null,
+          "amendment_name": null,
+          "amendment_num": null,
+          "enforcement_date": "2026-08-08",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "韓国・中国産めっき鋼帯等への暫定不当廉売関税の適用",
+        "body": "本政令は、特定国を原産地とする溶融亜鉛めっき鋼帯及び鋼板などの特定貨物に対し、暫定的な不当廉売関税を課す制度について定めています。\n\n暫定不当廉売関税の税率は、原産地および生産者に応じて設定されています。大韓民国を原産地とする貨物は38.0％、中国を原産地とする貨物は55.3％の税率が適用されます。ただし、それぞれ指定された生産者が生産した貨物については、個別に定める税率が適用されます。\n\nこれらの貨物、またはそれらを原料の一部として保税工場等で製造された製品を輸入しようとする者は、生産者が作成した生産証明書など、税率の適用に必要な書類を税関長に提出しなければなりません。また、税関長は輸入者に対し、当該貨物の原産地を証明する書類の提出を求めることができます。\n\nこの暫定不当廉売関税と通常の関税は、それぞれ別個の関税として関税法の規定が適用されます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 1321,
+        "output_tokens": 277,
+        "thoughts_tokens": 1347,
+        "total_tokens": 2945,
+        "elapsed_seconds": 10.093257113000007,
+        "response_id": "KUuJauXcEr6K9LsP-b3ZiQI"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "416M60000008069",
+      "law_name": "国立研究開発法人情報通信研究機構の業務（出資継続業務を除く。）に係る財務及び会計に関する省令",
+      "revisions": [
+        {
+          "law_data_id": 641733,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008100",
+          "amendment_name": "国立研究開発法人情報通信研究機構の業務（出資継続業務を除く。）に係る財務及び会計に関する省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第百号",
           "enforcement_date": "2026-08-07",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
@@ -2817,31 +121,31 @@
     },
     "response": {
       "summary": {
-        "title": "企業会計の基準に係る金融庁組織令の引用条文を改正",
-        "body": "本改正により、独立行政法人農林水産消費安全技術センターの財務および会計における企業会計原則に関する規定（第十条第二項）が一部変更されました。具体的には、一般に公正妥当と認められる企業会計の基準を示す企業会計審議会について、その根拠となる金融庁組織令の引用条文が「第二十四条第一項」から「第三十四条第一項」へと改められました。"
+        "title": "企業会計審議会の根拠となる金融庁組織令の参照条項の変更",
+        "body": "この改正により、会計の原則に関する規定において引用されている金融庁組織令の条項が変更されます。具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとされる企業会計の基準を公表する企業会計審議会の根拠条項が、これまでの「第二十四条第一項」から「第三十四条第一項」に改められます。"
       },
       "usage": {
         "model": "gemini-3.5-flash",
         "prompt_tokens": 703,
-        "output_tokens": 124,
-        "thoughts_tokens": 661,
-        "total_tokens": 1488,
-        "elapsed_seconds": 5.4481692540000495,
-        "response_id": "9USJaoKEEbS7odAPleeTiQQ"
+        "output_tokens": 111,
+        "thoughts_tokens": 1283,
+        "total_tokens": 2097,
+        "elapsed_seconds": 8.166810931,
+        "response_id": "NEuJap2-IrePq8YPpOGJ2AU"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "415M60000200107",
-      "law_name": "独立行政法人農林漁業信用基金の農業保険関係業務及び漁業災害補償関係業務に係る財務及び会計に関する省令",
+      "law_id": "416M60000008051",
+      "law_name": "地方独立行政法人法施行規則",
       "revisions": [
         {
-          "law_data_id": 641650,
+          "law_data_id": 641739,
           "sub_revision": "1",
-          "amendment_id": "508M60000200058",
-          "amendment_name": "独立行政法人農林漁業信用基金の農業保険関係業務及び漁業災害補償関係業務に係る財務及び会計に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第五十八号",
+          "amendment_id": "508M60000008106",
+          "amendment_name": "地方独立行政法人法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第百六号",
           "enforcement_date": "2026-08-07",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
@@ -2851,178 +155,31 @@
     },
     "response": {
       "summary": {
-        "title": "企業会計審議会に係る金融庁組織令の参照条項の改正",
-        "body": "独立行政法人農林漁業信用基金の農業保険関係業務及び漁業災害補償関係業務に係る財務及び会計に関する省令において、企業会計原則に関する規定の参照条項が改正されます。\\n\\n具体的には、同省令第二条第二項において、一般に公正妥当と認められる企業会計の基準に該当するものとされる企業会計審議会公表の基準について、当該審議会を規定する金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
+        "title": "金融庁組織令の参照条項の修正",
+        "body": "地方独立行政法人の会計の原則において、一般に公正妥当と認められる企業会計の基準として扱われる「企業会計審議会により公表された企業会計の基準」について、その根拠となる金融庁組織令の参照条項が修正されます。\n\n具体的には、参照する条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
       },
       "usage": {
         "model": "gemini-3.5-flash",
-        "prompt_tokens": 715,
-        "output_tokens": 149,
-        "thoughts_tokens": 897,
-        "total_tokens": 1761,
-        "elapsed_seconds": 8.987898580999854,
-        "response_id": "_ESJap3yKteR4_UP25fh8As"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000240005",
-      "law_name": "独立行政法人農林漁業信用基金の農業信用保険業務、林業信用保証業務及び漁業信用保険業務に係る財務及び会計に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641627,
-          "sub_revision": "1",
-          "amendment_id": "508M60000240002",
-          "amendment_name": "独立行政法人農林漁業信用基金の農業信用保険業務、林業信用保証業務及び漁業信用保険業務に係る財務及び会計に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年財務省・農林水産省令第二号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の根拠条項の更新と経過措置の整理",
-        "body": "今回の改正では、独立行政法人農林漁業信用基金の財務及び会計に関する省令において、以下の変更が行われます。\n\nまず、企業会計原則に関する規定において、一般に公正妥当と認められる企業会計の基準を公表する「企業会計審議会」の根拠となる金融庁組織令の条項が、「第二十四条第一項」から「第三十四条第一項」へ更新されます。\n\nまた、財務諸表及び事業報告書の作成に係る経過措置に関する規定について、所要の整理が行われます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 837,
-        "output_tokens": 152,
-        "thoughts_tokens": 1128,
-        "total_tokens": 2117,
-        "elapsed_seconds": 7.707479771999942,
-        "response_id": "BkWJaonRB9nAodAPiOPvqAw"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000200100",
-      "law_name": "独立行政法人農業者年金基金の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641652,
-          "sub_revision": "1",
-          "amendment_id": "508M60000200059",
-          "amendment_name": "独立行政法人農業者年金基金の業務運営、財務及び会計並びに人事管理に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第五十九号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準に関する金融庁組織令の引用条項の変更",
-        "body": "独立行政法人農業者年金基金の業務運営、財務及び会計並びに人事管理に関する省令の一部が改正されます。\\n\\n今回の改正では、第九条第二項において一般に公正妥当と認められる企業会計の基準に該当するものとして引用されている「金融庁組織令」の条項が、従来の「第二十四条第一項」から「第三十四条第一項」へと変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 702,
-        "output_tokens": 113,
-        "thoughts_tokens": 1280,
-        "total_tokens": 2095,
-        "elapsed_seconds": 8.497741575999953,
-        "response_id": "D0WJaqrTBtnAodAPiOPvqAw"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000200104",
-      "law_name": "独立行政法人農畜産業振興機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641649,
-          "sub_revision": "1",
-          "amendment_id": "508M60000200057",
-          "amendment_name": "独立行政法人家畜改良センターの業務運営、財務及び会計並びに人事管理に関する省令及び独立行政法人農畜産業振興機構の業務運営、財務及び会計並びに人事管理に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第五十七号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        },
-        {
-          "law_data_id": 605114,
-          "sub_revision": "2",
-          "amendment_id": "429M60000200006",
-          "amendment_name": "砂糖及びでん粉の価格調整に関する法律施行規則等の一部を改正する省令",
-          "amendment_num": "平成二十九年農林水産省令第六号",
-          "enforcement_date": null,
-          "scheduled_enforcement_date": "2117-12-31",
-          "enforcement_comment": "環太平洋パートナーシップ協定が日本について効力を生ずる日の前日",
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準の根拠となる金融庁組織令参照条項の変更",
-        "body": "独立行政法人農畜産業振興機構の業務運営、財務及び会計並びに人事管理に関する省令の第九条第二項において、引用している金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」へ変更されます。これは、一般に公正妥当と認められる企業会計の基準に該当するものと規定されている、企業会計審議会が公表した企業会計基準の根拠条項を修正するものです。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 726,
-        "output_tokens": 128,
-        "thoughts_tokens": 1029,
-        "total_tokens": 1883,
-        "elapsed_seconds": 8.034751595999978,
-        "response_id": "GUWJarG9E4G7odAPm_CP4A8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000040044",
-      "law_name": "独立行政法人造幣局に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641623,
-          "sub_revision": "1",
-          "amendment_id": "508M60000040056",
-          "amendment_name": "独立行政法人造幣局に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第五十六号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する金融庁組織令の参照条項の改正",
-        "body": "独立行政法人造幣局の会計に関する基準において、一般に公正妥当と認められる企業会計の基準に該当するものとされる「企業会計審議会により公表された企業会計の基準」について、同審議会を規定する「金融庁組織令」の参照条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 675,
+        "prompt_tokens": 668,
         "output_tokens": 115,
-        "thoughts_tokens": 650,
-        "total_tokens": 1440,
-        "elapsed_seconds": 4.9284803680000095,
-        "response_id": "IkWJau2cH_zEodAP-szegAw"
+        "thoughts_tokens": 591,
+        "total_tokens": 1374,
+        "elapsed_seconds": 4.566221108999997,
+        "response_id": "PUuJapC1NJmV4_UPofuK2QE"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "416M60000800070",
-      "law_name": "独立行政法人都市再生機構に関する省令",
+      "law_id": "415M60000400119",
+      "law_name": "独立行政法人日本貿易振興機構の業務運営、財務及び会計並びに人事管理に関する省令",
       "revisions": [
         {
-          "law_data_id": 641617,
+          "law_data_id": 641723,
           "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
+          "amendment_id": "508M60000400068",
+          "amendment_name": "独立行政法人経済産業研究所の業務運営、財務及び会計並びに人事管理に関する省令等の一部を改正する省令",
+          "amendment_num": "令和八年経済産業省令第六十八号",
           "enforcement_date": "2026-08-07",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
@@ -3032,31 +189,31 @@
     },
     "response": {
       "summary": {
-        "title": "金融庁組織令の改正に伴う参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、関係する省令の規定が整理されます。\n\n具体的には、会計の原則において「一般に公正妥当と認められる企業会計の基準」に該当するものと定められている、企業会計審議会により公表された企業会計の基準について、その根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」へと変更されます。"
+        "title": "会計の原則における金融庁組織令の参照条項の変更",
+        "body": "会計の原則に関する規定において、企業会計の基準を公表する「企業会計審議会」の根拠として引用されている金融庁組織令の条項が、従来の「第二十四条第一項」から「第三十四条第一項」に改められます。"
       },
       "usage": {
         "model": "gemini-3.5-flash",
-        "prompt_tokens": 684,
-        "output_tokens": 126,
-        "thoughts_tokens": 728,
-        "total_tokens": 1538,
-        "elapsed_seconds": 5.4442377139998825,
-        "response_id": "KEWJarzgJ7S7odAPleeTiQQ"
+        "prompt_tokens": 699,
+        "output_tokens": 82,
+        "thoughts_tokens": 676,
+        "total_tokens": 1457,
+        "elapsed_seconds": 5.138256103000003,
+        "response_id": "Q0uJaraPJK6fq8YP2NzKmQc"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "413M60000040006",
-      "law_name": "独立行政法人酒類総合研究所に関する省令",
+      "law_id": "419M60000008098",
+      "law_name": "独立行政法人郵便貯金簡易生命保険管理・郵便局ネットワーク支援機構に関する省令",
       "revisions": [
         {
-          "law_data_id": 641622,
+          "law_data_id": 641736,
           "sub_revision": "1",
-          "amendment_id": "508M60000040055",
-          "amendment_name": "独立行政法人酒類総合研究所に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第五十五号",
+          "amendment_id": "508M60000008103",
+          "amendment_name": "独立行政法人郵便貯金簡易生命保険管理・郵便局ネットワーク支援機構に関する省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第百三号",
           "enforcement_date": "2026-08-07",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
@@ -3066,276 +223,129 @@
     },
     "response": {
       "summary": {
-        "title": "企業会計審議会の根拠条項の修正",
-        "body": "独立行政法人酒類総合研究所に関する省令の一部が改正され、企業会計原則等の適用に関する規定における引用条項が修正されます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準を公表する「企業会計審議会」の根拠となる金融庁組織令の参照条項について、従来の「第二十四条第一項」から「第三十四条第一項」に改められます。"
+        "title": "企業会計の基準に関する金融庁組織令の参照条項の変更",
+        "body": "本改正により、一般に公正妥当と認められる企業会計の基準に該当するものとされる、企業会計審議会が公表した企業会計の基準に関する規定において、同審議会の根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に変更されます。"
       },
       "usage": {
         "model": "gemini-3.5-flash",
-        "prompt_tokens": 677,
+        "prompt_tokens": 696,
+        "output_tokens": 97,
+        "thoughts_tokens": 546,
+        "total_tokens": 1339,
+        "elapsed_seconds": 4.426428227000002,
+        "response_id": "SUuJas7SOK6fq8YP2NzKmQc"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "426M60000400001",
+      "law_name": "経済産業省関係産業競争力強化法施行規則",
+      "revisions": [
+        {
+          "law_data_id": 641500,
+          "sub_revision": "1",
+          "amendment_id": "508M60000400063",
+          "amendment_name": "経済産業省関係産業競争力強化法施行規則及び株式会社東日本大震災事業者再生支援機構法第五十九条第一項の要件を定める省令の一部を改正する省令",
+          "amendment_num": "令和八年経済産業省令第六十三号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "特定生産性向上設備等の確認基準の新設と投資要件の改定",
+        "body": "特定生産性向上設備等の導入等に関する一連の確認・審査手続きが新たに規定されました。経済産業大臣による投資計画の確認や変更の確認、確認の取消しに関する運用のほか、投資計画の具体的な審査基準が整備されました。主な確認基準として、年平均の投資利益率が15パーセント以上であること、取得価額の合計額が35億円以上（中小企業者等の投資計画の場合は5億円以上）であること、確認から5年以内に設備を取得等して事業の用に供することなどが定められています。さらに、経済産業大臣が導入状況や投資利益率等の調査・評価・公表を行える規定や、事業者の申請に基づき導入状況の証明書を交付する手続きが新設されました。\\n\\nまた、生産性向上設備等の定義における投資計画の要件が一部見直されました。サーバー用の電子計算機に関する一部の除外規定が削除されたほか、投資利益率の要件について、従来設けられていた中小企業者等向けの緩和措置（5パーセント以上）が廃止され、一律で15パーセント以上となりました。\\n\\nこのほか、創業支援や創業関連保証等の規定に関して、参照している法律の条項番号のずれに伴う文言の整理・修正が行われています。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 5759,
+        "output_tokens": 304,
+        "thoughts_tokens": 3036,
+        "total_tokens": 9099,
+        "elapsed_seconds": 17.31369541699999,
+        "response_id": "T0uJar6JLb2E998PoaO18QM"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "506M60002000004",
+      "law_name": "自衛官等に対する療養の給付等に関する省令",
+      "revisions": [
+        {
+          "law_data_id": 641507,
+          "sub_revision": "1",
+          "amendment_id": "508M60002000019",
+          "amendment_name": "自衛官等に対する療養の給付等に関する省令の一部を改正する省令",
+          "amendment_num": "令和八年防衛省令第十九号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "高額療養費の申請手続きや請求様式の見直し",
+        "body": "本改正により、高額療養費の支給申請手続きおよび請求様式が見直されます。\n\n主な変更点は以下の通りです。\n\n■月間および年間の高額療養費請求手続きの整理\n高額療養費の支給を受けようとする際、月間の申請には「月間の高額療養費請求書」を、年間の申請には「年間の高額療養費請求書」をそれぞれ実施機関の長に提出することが定められました。また、年間の高額療養費請求において必要な場合には、該当者であることを証明する書類の添付が求められます。\n\n■被扶養者が死亡した場合等の申請規定の整備\n計算期間の途中で死亡した被扶養者などの「精算対象者」がいる場合、その者を扶養していた自衛官等が、当該精算対象者に係る高額療養費の算定申請を行うことができるようになります。\n\n■関係規定の整備と経過措置\n関係する政令の改正等に伴い、条文の参照先や要保護者に関する基準が整理されました。また、施行時に手元にある改正前の旧様式の用紙については、当分の間、取り繕って使用できる等の経過措置が設けられます。\n\n本改正は2026年8月1日から施行されます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 4511,
+        "output_tokens": 318,
+        "thoughts_tokens": 1111,
+        "total_tokens": 5940,
+        "elapsed_seconds": 9.274959558999996,
+        "response_id": "YkuJavy2CbuPq8YPtv3UqQo"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "413M60000400105",
+      "law_name": "貿易保険法施行規則",
+      "revisions": [
+        {
+          "law_data_id": 641525,
+          "sub_revision": "1",
+          "amendment_id": "508M60000400064",
+          "amendment_name": "貿易保険法施行規則の一部を改正する省令",
+          "amendment_num": "令和八年経済産業省令第六十四号",
+          "enforcement_date": "2026-07-31",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "特定引受けの定義追加と認可申請手続きの新設",
+        "body": "本改正により、貿易保険法施行規則の定義規定に「特定引受け」が追加されました。また、特定引受けの決定に関する認可申請手続きが新たに整備されました。会社が特定引受けの決定について経済産業大臣の認可を受けようとする場合、当該特定引受けに係る貿易保険または再保険の内容や、経済産業大臣が定める取決めに係るものであるかを確認するために必要な事項を記載した申請書を提出しなければならないこととされました。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 1573,
         "output_tokens": 121,
-        "thoughts_tokens": 593,
-        "total_tokens": 1391,
-        "elapsed_seconds": 4.637905331999946,
-        "response_id": "L0WJarmeDuW-odAPv52QoQE"
+        "thoughts_tokens": 1548,
+        "total_tokens": 3242,
+        "elapsed_seconds": 10.206686792,
+        "response_id": "bEuJaoPiJev1tALPkN-hAQ"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "415M60000800102",
-      "law_name": "独立行政法人鉄道建設・運輸施設整備支援機構に関する省令",
+      "law_id": "410M50000002081",
+      "law_name": "金融庁組織規則",
       "revisions": [
         {
-          "law_data_id": 641612,
-          "sub_revision": "1",
-          "amendment_id": "508M60000800071",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う国土交通省関係省令の整理に関する省令",
-          "amendment_num": "令和八年国土交通省令第七十一号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う参照条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、会計の原則に関する参照条項の整理が行われます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして示されている、企業会計審議会により公表された企業会計の基準について、引用している金融庁組織令の条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 689,
-        "output_tokens": 126,
-        "thoughts_tokens": 587,
-        "total_tokens": 1402,
-        "elapsed_seconds": 4.969267837999951,
-        "response_id": "NUWJaqecBJqZ4_UP9ZbByQM"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000100147",
-      "law_name": "独立行政法人高齢・障害・求職者雇用支援機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641593,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会に関する金融庁組織令の引用条項の変更",
-        "body": "金融庁組織令の一部を改正する政令の施行に伴い、企業会計審議会に関する引用条項が変更されます。\\n\\n具体的には、一般に公正妥当と認められる企業会計の基準を公表する主体として規定されている「企業会計審議会」について、その根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 706,
-        "output_tokens": 123,
-        "thoughts_tokens": 1263,
-        "total_tokens": 2092,
-        "elapsed_seconds": 8.081181504000142,
-        "response_id": "O0WJaqHxCtnAodAPiOPvqAw"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "424M60000004003",
-      "law_name": "福島復興再生特別措置法施行規則",
-      "revisions": [
-        {
-          "law_data_id": 641658,
-          "sub_revision": "1",
-          "amendment_id": "508M60000004004",
-          "amendment_name": "福島復興再生特別措置法施行規則の一部を改正する庁令",
-          "amendment_num": "令和八年復興庁令第四号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の規定に係る引用条項の改正",
-        "body": "2026年8月7日の施行に伴い、一般に公正妥当と認められる企業会計の基準に該当するものとされる、企業会計審議会により公表された基準について、同審議会を規定する金融庁組織令の引用条項が、第二十四条第一項から第三十四条第一項に変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 673,
-        "output_tokens": 95,
-        "thoughts_tokens": 1287,
-        "total_tokens": 2055,
-        "elapsed_seconds": 8.390130552000073,
-        "response_id": "REWJavqlI5StodAPs93BCQ"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "326M50000040055",
-      "law_name": "税理士法施行規則",
-      "revisions": [
-        {
-          "law_data_id": 641621,
-          "sub_revision": "1",
-          "amendment_id": "508M60000040054",
-          "amendment_name": "税理士法施行規則の一部を改正する省令",
-          "amendment_num": "令和八年財務省令第五十四号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        },
-        {
-          "law_data_id": 619513,
-          "sub_revision": "3",
-          "amendment_id": "506M60000040025",
-          "amendment_name": "税理士法施行規則の一部を改正する省令",
-          "amendment_num": "令和六年財務省令第二十五号",
-          "enforcement_date": "2026-09-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "検査等事務の参照条項変更と税務代理権限証書等の様式特例",
-        "body": "金融庁組織規則の改正に伴い、金融証券検査官や証券検査官による検査事務、および証券取引特別調査官による犯則事件の調査事務において引用されている、同規則の該当条項が更新されます。また、国税庁長官が、税務代理権限証書等の様式（別紙第八号から第十号様式）について、必要に応じて事項の付記や削減を行える特例が設けられます。これに関連して、様式改正の施行時に存在する旧様式の用紙については、当分の間、継続して使用できる経過措置が定められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 1102,
-        "output_tokens": 162,
-        "thoughts_tokens": 1877,
-        "total_tokens": 3141,
-        "elapsed_seconds": 12.000657818000036,
-        "response_id": "T0WJau-MA5mV4_UPofuK2QE"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000400001",
-      "law_name": "経済産業省組織規則",
-      "revisions": [
-        {
-          "law_data_id": 641591,
-          "sub_revision": "1",
-          "amendment_id": "508M60000400066",
-          "amendment_name": "経済産業省組織規則の一部を改正する省令",
-          "amendment_num": "令和八年経済産業省令第六十六号",
-          "enforcement_date": "2026-08-05",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "ロボット・デジタル分野の組織再編と関連室の設置",
-        "body": "本改正により、ロボット政策や情報処理・デジタル取引に関連する組織体制の再編が行われます。\\n\\nまず、産業機械課に置かれていた「ロボット政策室」が廃止され、新たに情報処理システム開発・ロボット課に「ＡＩロボティクス室」が設置されます。ＡＩロボティクス室は、ロボットの利用に関する事務の総括を担当します。\\n\\nまた、情報経済課の体制が再編され、同課に「デジタル取引環境整備室」、「情報技術利用促進室」、「デジタル高度化推進室」の3つの室が置かれることになります。これにより、取引の透明性・公正性の確保や、情報技術の利用促進、情報処理システムの高度化および戦略的な利用に関する事務分掌が整理されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 1851,
-        "output_tokens": 196,
-        "thoughts_tokens": 1809,
-        "total_tokens": 3856,
-        "elapsed_seconds": 11.244943523000074,
-        "response_id": "XEWJasqMGeiM4_UPqYLcmQM"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000008001",
-      "law_name": "総務省組織規則",
-      "revisions": [
-        {
-          "law_data_id": 641630,
-          "sub_revision": "1",
-          "amendment_id": "508M60000008098",
-          "amendment_name": "総務省組織規則の一部を改正する省令",
-          "amendment_num": "令和八年総務省令第九十八号",
-          "enforcement_date": "2026-08-04",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "スタートアップ支援室や電気通信経済安全保障室の新設など",
-        "body": "今回の改正では、総務省の組織において、新しい室の設置や不要となった組織・役職の廃止、および所掌事務の再編が行われました。\n\n**組織の新設**\n* **スタートアップ支援室の新設**：技術政策課に「スタートアップ支援室」が新設されます。同室は、技術政策課の所掌事務のうち、中小企業者や個人による新たな事業の創出、または中小企業者の行う事業の成長発展に資する革新的な研究開発の促進に係る事務をつかさどります。\n* **電気通信経済安全保障室の新設**：事業政策課に「電気通信経済安全保障室」が新設されます。同室は、情報の電磁的流通のための有線施設の設置・使用の規律、および電気通信事業の発達・改善・調整に関する事務のうち、安全保障の確保に関する経済施策に関する事務をつかさどります。\n\n**組織や役職の廃止・整理**\n* 通信規格課の「標準化戦略室」が廃止され、これに伴い標準化推進官の所掌事務が整理されます。\n* 地域通信振興課の「デジタル経済推進室」、放送技術課の「技術企画官」、および事業政策課の「市場評価企画官」がそれぞれ廃止されます。\n\n**その他の変更**\n* 「情報の電磁的流通」の定義規定の記載箇所が、第36条の国際機関室等の規定に移動されます。\n* 各室の新設や廃止等に伴い、情報通信政策課などの関連する条番号や項番号が整理されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 4183,
-        "output_tokens": 391,
-        "thoughts_tokens": 2056,
-        "total_tokens": 6630,
-        "elapsed_seconds": 12.530350863999956,
-        "response_id": "aUWJap-LBdeR4_UP25fh8As"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "427M60000010011",
-      "law_name": "総合法律支援法施行規則",
-      "revisions": [
-        {
-          "law_data_id": 641683,
-          "sub_revision": "1",
-          "amendment_id": "508M60000010046",
-          "amendment_name": "総合法律支援法施行規則の一部を改正する省令",
-          "amendment_num": "令和八年法務省令第四十六号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計基準における金融庁組織令の引用条項の変更",
-        "body": "総合法律支援法施行規則における会計の原則に関する規定が一部改正されます。\n\n一般に公正妥当と認められる企業会計の基準に該当するものとして示されている、企業会計審議会により公表された企業会計の基準について、その根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」へ改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 667,
-        "output_tokens": 116,
-        "thoughts_tokens": 517,
-        "total_tokens": 1300,
-        "elapsed_seconds": 4.399483059999966,
-        "response_id": "dkWJapz9MeiM4_UPqYLcmQM"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "419M60000002062",
-      "law_name": "財務計算に関する書類その他の情報の適正性を確保するための体制に関する内閣府令",
-      "revisions": [
-        {
-          "law_data_id": 641640,
+          "law_data_id": 641635,
           "sub_revision": "1",
           "amendment_id": "508M60000002070",
           "amendment_name": "金融庁組織規則等の一部を改正する内閣府令",
@@ -3349,32 +359,32 @@
     },
     "response": {
       "summary": {
-        "title": "企業会計審議会に係る参照条項の改正",
-        "body": "第一条第五項において規定されている、企業会計審議会に関する「金融庁組織令」の参照条項が変更されます。従来の「第二十四条第一項」から「第三十四条第一項」に改められます。\n\nこの変更は、一般に公正妥当と認められる財務報告に係る内部統制の評価および監査に関する基準の該当性について定めた規定における、政令の参照箇所の整理を行うものです。"
+        "title": "金融庁組織の再編と各課室の設置・事務分掌の変更",
+        "body": "本改正では、金融庁の組織再編に伴い、各局・課室の設置や所掌事務、職員の配置が整理されました。\n\n主な変更点として、銀行・証券監督局の総務課に監督調査室、リスク管理検査室、金融犯罪対策室などの多くの室を配置したほか、信用課に信用機構企画室、市場課に市場機能強化室および暗号資産企画室を設置しました。さらに、資金決済課に金融サービス仲介業室、暗号資産・ステーブルコイン課にイノベーション推進室をそれぞれ設けています。\n\nまた、従来の管理室や情報化統括室が担っていた事務を秘書課に移行したほか、総務課の事務の一部を文書課や国際課などに移管しました。これに伴い、管理予算調整官、情報企画調整官、各種規制・法制企画調整官などの各種調整官や専門官の配置、任務についても、移行先の課の所掌に合わせて改められています。\n\nこのほか、証券取引等監視委員会の事務局では、市場分析審査課に「国際取引等分析室」を新たに設置し、国外での不公正取引等に関する情報収集や、国際金融資本市場の情報収集・分析などの事務を担わせることとしました。"
       },
       "usage": {
         "model": "gemini-3.5-flash",
-        "prompt_tokens": 758,
-        "output_tokens": 122,
-        "thoughts_tokens": 533,
-        "total_tokens": 1413,
-        "elapsed_seconds": 4.641697495000017,
-        "response_id": "fEWJarLYG_Wn998P3IzSuAc"
+        "prompt_tokens": 18105,
+        "output_tokens": 316,
+        "thoughts_tokens": 2228,
+        "total_tokens": 20649,
+        "elapsed_seconds": 16.224351322000018,
+        "response_id": "eEuJaqfKDPepq8YP5rziiAk"
       }
     }
   },
   {
     "summary_input": {
-      "law_id": "338M50000040059",
-      "law_name": "財務諸表等の用語、様式及び作成方法に関する規則",
+      "law_id": "414M60400000011",
+      "law_name": "国家公安委員会関係自動車運転代行業の業務の適正化に関する法律施行規則",
       "revisions": [
         {
-          "law_data_id": 641637,
+          "law_data_id": 641748,
           "sub_revision": "1",
-          "amendment_id": "508M60000002070",
-          "amendment_name": "金融庁組織規則等の一部を改正する内閣府令",
-          "amendment_num": "令和八年内閣府令第七十号",
-          "enforcement_date": "2026-08-07",
+          "amendment_id": "508M60400000017",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律の一部の施行に伴う関係国家公安委員会規則の整理に関する規則",
+          "amendment_num": "令和八年国家公安委員会規則第十七号",
+          "enforcement_date": "2026-08-12",
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": true
@@ -3383,289 +393,17 @@
     },
     "response": {
       "summary": {
-        "title": "金融庁組織令の参照条項の変更",
-        "body": "一般に公正妥当と認められる企業会計の基準に該当するものとされる、企業会計審議会が公表した企業会計の基準について、その根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
+        "title": "暴力的不法行為等に当たる金融商品取引法違反罪の範囲を整理",
+        "body": "金融商品取引法及び資金決済に関する法律の一部を改正する法律の一部の施行に伴い、自動車運転代行業の業務の適正化に関する法律施行規則で規定されている「暴力的不法行為その他の罪に当たる行為」の範囲が整理されます。\n\n具体的には、対象となる金融商品取引法違反の罪として、同法第百九十七条第一項第四号の三および第四号の四に規定する罪が追加されます。また、これに伴い、同法第百九十七条の二第一項における対象条項の規定が変更されます。"
       },
       "usage": {
         "model": "gemini-3.5-flash",
-        "prompt_tokens": 677,
-        "output_tokens": 85,
-        "thoughts_tokens": 1010,
-        "total_tokens": 1772,
-        "elapsed_seconds": 6.971186272000068,
-        "response_id": "gkWJapinG9y76tkPyYa8kQg"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "332M50000040012",
-      "law_name": "財務諸表等の監査証明に関する内閣府令",
-      "revisions": [
-        {
-          "law_data_id": 641639,
-          "sub_revision": "1",
-          "amendment_id": "508M60000002070",
-          "amendment_name": "金融庁組織規則等の一部を改正する内閣府令",
-          "amendment_num": "令和八年内閣府令第七十号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "一般に公正妥当と認められる監査基準の引用条項の変更",
-        "body": "監査証明の手続において、一般に公正妥当と認められる監査に関する基準に該当するものとして定義されている、企業会計審議会が公表した監査に関する基準について、審議会の根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 720,
-        "output_tokens": 105,
-        "thoughts_tokens": 681,
-        "total_tokens": 1506,
-        "elapsed_seconds": 5.102887163000105,
-        "response_id": "ikWJaq7BJu-Z4_UPybr-yA8"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "326M50010000021",
-      "law_name": "農薬取締法施行規則",
-      "revisions": [
-        {
-          "law_data_id": 641647,
-          "sub_revision": "1",
-          "amendment_id": "508M60000200056",
-          "amendment_name": "農薬取締法施行規則の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第五十六号",
-          "enforcement_date": "2026-08-03",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "農薬の表示における使用回数に「農作物等への使用」を明記",
-        "body": "農薬の表示方法に関する規定が一部改正されます。\n\n具体的には、農薬の表示事項のうち、生育期間において「農薬を使用することができる総回数」および「含有する有効成分の種類ごとの総使用回数」の定義について、表記が変更されます。改正により、それぞれ農薬を「当該農作物等に使用することができる」総回数、および当該有効成分を含有する農薬を「当該農作物等に使用することができる」総回数と表記されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 899,
-        "output_tokens": 133,
-        "thoughts_tokens": 1451,
-        "total_tokens": 2483,
-        "elapsed_seconds": 8.98680160899994,
-        "response_id": "kUWJasAk4d6h0A-9uOyZCA"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "351M50000040028",
-      "law_name": "連結財務諸表の用語、様式及び作成方法に関する規則",
-      "revisions": [
-        {
-          "law_data_id": 641638,
-          "sub_revision": "1",
-          "amendment_id": "508M60000002070",
-          "amendment_name": "金融庁組織規則等の一部を改正する内閣府令",
-          "amendment_num": "令和八年内閣府令第七十号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の改正に伴う企業会計審議会関連の引用条項の整備",
-        "body": "連結財務諸表の用語、様式及び作成方法に関する規則における適用の一般原則において引用されている、金融庁組織令の条文番号が変更されます。具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとして定められている『企業会計審議会により公表された企業会計の基準』の根拠規定が、従来の『第二十四条第一項』から『第三十四条第一項』へと改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 678,
-        "output_tokens": 128,
-        "thoughts_tokens": 1540,
-        "total_tokens": 2346,
-        "elapsed_seconds": 8.912261317000002,
-        "response_id": "m0WJavXVDuiM4_UPqYLcmQM"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "419M60000002052",
-      "law_name": "金融商品取引業等に関する内閣府令",
-      "revisions": [
-        {
-          "law_data_id": 641631,
-          "sub_revision": "1",
-          "amendment_id": "508M60000002066",
-          "amendment_name": "金融商品取引業等に関する内閣府令の一部を改正する内閣府令",
-          "amendment_num": "令和八年内閣府令第六十六号",
-          "enforcement_date": "2026-08-03",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "特定投資家等の要件における契約件数制限の緩和",
-        "body": "本改正により、特定投資家への移行を申し出ることができる個人、および海外投資家等の範囲に関する基準が緩和されます。\\n\\nこれまで、特定投資家への移行を申し出る個人や海外投資家等の要件として、直近1年間における契約実績が「1か月あたり平均4件以上」であることが求められていました。今回の改正により、この実績要件から件数の制限がなくなり、直近1年間に「契約があること」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 874,
-        "output_tokens": 126,
-        "thoughts_tokens": 2515,
-        "total_tokens": 3515,
-        "elapsed_seconds": 14.792625426999848,
-        "response_id": "pkWJav6hArS7odAPleeTiQQ"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "404M50000040069",
-      "law_name": "金融庁等の職員が検査の際に携帯すべき身分証明書等の様式を定める内閣府令",
-      "revisions": [
-        {
-          "law_data_id": 641636,
-          "sub_revision": "1",
-          "amendment_id": "508M60000002070",
-          "amendment_name": "金融庁組織規則等の一部を改正する内閣府令",
-          "amendment_num": "令和八年内閣府令第七十号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁等職員が携帯する身分証明書等の様式に関する規定の改正",
-        "body": "「金融庁組織規則等の一部を改正する内閣府令」により、「金融庁等の職員が検査の際に携帯すべき身分証明書等の様式を定める内閣府令」の一部が改正されます。\\n\\nこの改正は、2026年8月7日に施行されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 524,
-        "output_tokens": 94,
-        "thoughts_tokens": 1392,
-        "total_tokens": 2010,
-        "elapsed_seconds": 8.877435083000137,
-        "response_id": "tkWJavjhBtDRodAPvsjX4AI"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "351M50010000036",
-      "law_name": "飼料の安全性の確保及び品質の改善に関する法律施行規則",
-      "revisions": [
-        {
-          "law_data_id": 641646,
-          "sub_revision": "1",
-          "amendment_id": "508M60000200055",
-          "amendment_name": "飼料の安全性の確保及び品質の改善に関する法律施行規則の一部を改正する省令",
-          "amendment_num": "令和八年農林水産省令第五十五号",
-          "enforcement_date": "2026-08-03",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "飼料製造管理者の設置免除となる製造業者の要件を変更",
-        "body": "飼料製造管理者の設置義務が免除される製造業者の対象範囲が変更されます。\\n\\n販売を目的としない飼料の製造業者において、設置義務の免除対象から除外される製造業者の要件が、これまでの「抗菌性物質製剤（農林水産大臣が指定するものを除く。）を含む飼料」を製造する者から「令第五条第二号に掲げる飼料」を製造する者に改められます。また、前提となる製造業者の範囲についても「令第五条各号に掲げる飼料の製造」から「令第五条第一号に掲げる飼料の製造」を業とする者に変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 773,
-        "output_tokens": 172,
-        "thoughts_tokens": 2142,
-        "total_tokens": 3087,
-        "elapsed_seconds": 12.652433598000016,
-        "response_id": "wEWJatbGEeTFodAPzZjowAk"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "422M60000100038",
-      "law_name": "高度専門医療に関する研究等を行う国立研究開発法人の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641602,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100123",
-          "amendment_name": "金融庁組織令の一部を改正する政令の施行に伴う厚生労働省関係省令の整理に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百二十三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の根拠条項変更に伴う参照条文の整理",
-        "body": "金融庁組織令の改正に伴い、一般に公正妥当と認められる企業会計の基準を公表する「企業会計審議会」の根拠となる同令の条項が、従来の「第二十四条第一項」から「第三十四条第一項」へと移行しました。\n\nこれに伴い、本省令の第八条第二項において参照している金融庁組織令の条項を、改正後の条項に合わせる整理が行われました。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 704,
-        "output_tokens": 129,
-        "thoughts_tokens": 840,
-        "total_tokens": 1673,
-        "elapsed_seconds": 5.8205566439999075,
-        "response_id": "zkWJav2UBpv86tkP3saMyQI"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "339RJNJ09017000",
-      "law_name": "人事院規則九―一七（俸給の特別調整額）",
-      "revisions": [
-        {
-          "law_data_id": 641629,
-          "sub_revision": "1",
-          "amendment_id": "508RJNJ09017178",
-          "amendment_name": "人事院規則九―一七（俸給の特別調整額）の一部を改正する人事院規則",
-          "amendment_num": "令和八年人事院規則九―一七―一七八",
-          "enforcement_date": "2026-08-04",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "俸給の特別調整額における別表第一の変更",
-        "body": "2026年8月4日施行の人事院規則の改正により、俸給の特別調整額に関する規定の一部が変更されます。\n\n今回の改正では、第一条関係に定められている「別表第一」の内容について変更が行われます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 544,
-        "output_tokens": 83,
-        "thoughts_tokens": 798,
-        "total_tokens": 1425,
-        "elapsed_seconds": 5.532035681000025,
-        "response_id": "1UWJaqvnFJv86tkP3saMyQI"
+        "prompt_tokens": 1922,
+        "output_tokens": 160,
+        "thoughts_tokens": 1019,
+        "total_tokens": 3101,
+        "elapsed_seconds": 6.926480776000005,
+        "response_id": "ikuJasyaA_mQq8YPs8OsuQw"
       }
     }
   }
