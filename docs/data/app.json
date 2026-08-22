@@ -1,12 +1,14 @@
 {
-    "app_name": "EGOV Law Monitor",
+    "app_name": "e-Gov Law Monitor",
     "description": "e-Gov法令更新監視ツール",
-    "latest_version": "0.6.0",
-    "release_date": "2026-07-15",
+    "latest_version": "1.0.0",
+    "release_date": "2026-08-XX",
     "repository": "https://github.com/fumizoh/egov-law-monitor",
     "download_url": "https://github.com/fumizoh/egov-law-monitor/releases/latest",
     "changes": [
-        "GitHub Pages対応",
-        "公式サイト公開"
+        "AI要約モデルをGemini 3.5 Flashに変更",
+        "新規制定法令のAI要約に対応",
+        "WordPressへの法令更新記事投稿に対応",
+        "既存のWordPress記事の更新に対応"
     ]
 }
