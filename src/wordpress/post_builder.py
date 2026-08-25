@@ -13,6 +13,7 @@ from models import (
 def _render_summary_body(body: str) -> str:
     """Render AI summary body as HTML."""
     body = body.replace("\\n", "\n")
+    body = body.replace("　", "")
     return markdown.markdown(body)
 
 

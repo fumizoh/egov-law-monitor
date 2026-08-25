@@ -97,11 +97,12 @@ def _build_excerpt(
     excerpt = f"{statistics.updated_law_count}法令が更新されました。"
 
     if new_laws:
-        names = [law.law_name for law in new_laws[:3]]
-        excerpt += f"<br>新規制定：{'、'.join(names)}"
+        names = [f"「{law.law_name}」" for law in new_laws[:3]]
+        excerpt += f"<br><strong>新規制定：{len(new_laws)}法令</strong>"
+        excerpt += f"<br>{' '.join(names)}"
 
         if len(new_laws) > 3:
-            excerpt += f"、ほか{len(new_laws) - 3}法令"
+            excerpt += f" ほか{len(new_laws) - 3}法令"
 
     return excerpt
 

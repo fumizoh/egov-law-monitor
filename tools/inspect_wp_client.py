@@ -22,7 +22,7 @@ from wordpress.service import POST_TYPE
 def main() -> None:
     """Create a WordPress draft post for inspection."""
 
-    storage_paths = storage.REPROCESS_STORAGE
+    storage_paths = storage.DEFAULT_STORAGE
 
     laws = storage.load_laws(
         paths=storage_paths,
