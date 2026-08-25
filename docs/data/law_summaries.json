@@ -1576,5 +1576,805 @@
         "response_id": "M52MatKWGsGL9LsPxKHwwQs"
       }
     }
+  },
+  {
+    "summary_input": {
+      "law_id": "410CO0000000412",
+      "law_name": "介護保険法施行令",
+      "revisions": [
+        {
+          "law_data_id": 641404,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000240",
+          "amendment_name": "健康保険法施行令等の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十号",
+          "enforcement_date": "2027-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "健康保険法施行令等の改正に伴う介護保険法施行令の変更",
+        "body": "「健康保険法施行令等の一部を改正する政令」の施行に伴い、介護保険法施行令の改正が行われます。本改正は、2027年8月1日に施行される予定です。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 498,
+        "output_tokens": 65,
+        "thoughts_tokens": 653,
+        "total_tokens": 1216,
+        "elapsed_seconds": 27.39481134099998,
+        "response_id": "luyNatzsLNG8998Pr5P5yAM"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "508CO0000000259",
+      "law_name": "令和八年熊本地震による災害についての激甚災害及びこれに対し適用すべき措置の指定に関する政令",
+      "revisions": [
+        {
+          "law_data_id": 641761,
+          "sub_revision": "1",
+          "amendment_id": null,
+          "amendment_name": null,
+          "amendment_num": null,
+          "enforcement_date": "2026-08-07",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "令和八年熊本地震を激甚災害に指定し支援措置を適用",
+        "body": "本政令は、令和八年に発生した熊本地震による災害を激甚災害として指定し、その災害に対して適用すべき特別な措置を定めるものです。これにより、被災した地域や事業者の復旧・復興を促すための支援措置が適用されることになります。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 484,
+        "output_tokens": 93,
+        "thoughts_tokens": 747,
+        "total_tokens": 1324,
+        "elapsed_seconds": 5.523975312999937,
+        "response_id": "qOyNaqXXJveW998PtvXckAY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "508CO0000000260",
+      "law_name": "令和八年熊本地震による災害についての特定非常災害及びこれに対し適用すべき措置の指定に関する政令",
+      "revisions": [
+        {
+          "law_data_id": 641762,
+          "sub_revision": "1",
+          "amendment_id": null,
+          "amendment_name": null,
+          "amendment_num": null,
+          "enforcement_date": "2026-08-07",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "令和八年熊本地震の特定非常災害指定と特別措置",
+        "body": "本政令は、令和八年熊本地震による災害を特定非常災害として指定し、被災者の権利利益の保全等を図るための特別措置を適用することを定めています。特定非常災害が発生した日は令和八年七月二十八日と定められました。\\n\\n適用される各特別措置の対象および期日は以下の通りです。\\n\\n・行政上の権利利益の満了日延長に関する措置\\n延長期日は、令和九年一月二十七日と定められています。\\n\\n・特定義務の不履行についての免責に関する措置\\n免責に係る期限は、令和八年十一月二十七日と定められています。\\n\\n・法人の破産手続開始の決定の特例に関する措置\\n特例に係る期日は、令和十年七月二十七日と定められています。\\n\\n・相続の承認又は放棄をすべき期間の特例に関する措置\\n対象となる地区は、令和八年熊本地震に際して災害救助法が適用された災害発生市町村の区域であり、期日は令和九年三月三十一日と定められています。\\n\\n・調停の申立ての手数料の特例に関する措置\\n対象となる地区は、上記と同様に災害救助法が適用された災害発生市町村の区域であり、期日は令和十一年六月三十日と定められています。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 981,
+        "output_tokens": 327,
+        "thoughts_tokens": 2136,
+        "total_tokens": 3444,
+        "elapsed_seconds": 16.13075138399995,
+        "response_id": "r-yNasGgCJqsodAPiP2WkAU"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "508CO0000000261",
+      "law_name": "令和八年熊本地震による災害についての総合法律支援法第三十条第一項第四号の規定による指定等に関する政令",
+      "revisions": [
+        {
+          "law_data_id": 641760,
+          "sub_revision": "1",
+          "amendment_id": null,
+          "amendment_name": null,
+          "amendment_num": null,
+          "enforcement_date": "2026-08-07",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "令和八年熊本地震に係る総合法律支援法の非常災害等の指定",
+        "body": "この政令は、総合法律支援法に基づき、令和八年熊本地震による災害を同法第三十条第一項第四号に規定する非常災害として指定するものです。また、この非常災害に関して同法が適用される地区および期間を定めています。対象地区は、令和八年熊本地震に際し災害救助法が適用された同法第二条第一項に規定する災害発生市町村の区域となります。対象期間は、この政令の施行の日から令和九年七月二十七日までとされています。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 678,
+        "output_tokens": 143,
+        "thoughts_tokens": 1358,
+        "total_tokens": 2179,
+        "elapsed_seconds": 10.250243929000021,
+        "response_id": "wOyNarC7C7GsodAPl_j42A0"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "414CO0000000349",
+      "law_name": "国際受刑者移送法施行令",
+      "revisions": [
+        {
+          "law_data_id": 641709,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000253",
+          "amendment_name": "更生保護制度の充実を図るための保護司法等の一部を改正する法律の施行に伴う関係政令の整理に関する政令",
+          "amendment_num": "令和八年政令第二百五十三号",
+          "enforcement_date": "2027-06-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "更生保護法の技術的読替えに関する参照規定の追加",
+        "body": "国際受刑者移送法に基づき更生保護法の規定を適用する際の技術的読替えについて、整理が行われます。\n\n具体的には、更生保護法第八十六条第一項の読替えに関する規定において、読み替え対象となる語句の中に「第八号」が追加されます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 3452,
+        "output_tokens": 88,
+        "thoughts_tokens": 1179,
+        "total_tokens": 4719,
+        "elapsed_seconds": 8.903936327999986,
+        "response_id": "y-yNaob5K53RtQLg1rCYBQ"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "347CO0000000095",
+      "law_name": "沖縄の復帰に伴う法務省関係法令の適用の特別措置等に関する政令",
+      "revisions": [
+        {
+          "law_data_id": 641708,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000253",
+          "amendment_name": "更生保護制度の充実を図るための保護司法等の一部を改正する法律の施行に伴う関係政令の整理に関する政令",
+          "amendment_num": "令和八年政令第二百五十三号",
+          "enforcement_date": "2026-12-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "保護司の経過措置でみなす対象となる保護司法の条項を変更",
+        "body": "更生保護制度の充実を図るための保護司法等の一部を改正する法律の施行に伴い、沖縄の復帰に伴う法務省関係法令の適用の特別措置等に関する政令に定められている保護司に関する経過措置の規定が一部変更されます。　具体的には、沖縄の保護司法第九条第二項第二号又は第三号に該当する場合に、保護司法のどの条項に該当するとみなすかについて規定が整理されます。改正前は「保護司法第十二条第二項第二号又は第三号」に該当するものとみなされていましたが、改正後は「保護司法第十一条第二項第二号又は第三号」に該当するものとみなされるようになります。本改正は、2026年12月1日から施行されます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 655,
+        "output_tokens": 192,
+        "thoughts_tokens": 1461,
+        "total_tokens": 2308,
+        "elapsed_seconds": 16.913555859999974,
+        "response_id": "1eyNaoWZM76mq8YPpvLf0Ag"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "416CO0000000002",
+      "law_name": "独立行政法人日本学生支援機構法施行令",
+      "revisions": [
+        {
+          "law_data_id": 641701,
+          "sub_revision": "1",
+          "amendment_id": "508CO0000000249",
+          "amendment_name": "独立行政法人日本学生支援機構法施行令及び大学等における修学の支援に関する法律施行令の一部を改正する政令",
+          "amendment_num": "令和八年政令第二百四十九号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "学資支給金額の算定における控除対象者の要件および控除額の改定",
+        "body": "学資支給金の額を算定する際、基準となる生計維持者の所得合計額から一定の金額を控除する制度について、その適用要件と控除額が変更されます。\n\nこれまでは、控除の対象となる支給対象者を生計維持者の「扶養親族」としていましたが、改正後は「生計維持者と生計を一にする親族（配偶者を除く）」または「里親に委託された児童」（ただし、青色事業専従者などを除き、前年の合計所得金額が123万円以下のものに限る）へと改められます。\n\nあわせて、生計維持者の所得合計額から控除する金額について、従来の一律12万円から、支給対象者の区分（イからホ）に応じて定める金額を控除する仕組みへと変更されます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 2208,
+        "output_tokens": 218,
+        "thoughts_tokens": 1036,
+        "total_tokens": 3462,
+        "elapsed_seconds": 12.030944139999974,
+        "response_id": "6OyNaspkm6Wh0A-h27jADw"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "333M50000100027",
+      "law_name": "予防接種実施規則",
+      "revisions": [
+        {
+          "law_data_id": 609655,
+          "sub_revision": "1",
+          "amendment_id": "504M60000100165",
+          "amendment_name": "感染症の予防及び感染症の患者に対する医療に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備に関する省令",
+          "amendment_num": "令和四年厚生労働省令第百六十五号",
+          "enforcement_date": "2022-12-09",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 610148,
+          "sub_revision": "1",
+          "amendment_id": "505M60000100011",
+          "amendment_name": "予防接種実施規則の一部を改正する省令",
+          "amendment_num": "令和五年厚生労働省令第十一号",
+          "enforcement_date": "2023-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 613914,
+          "sub_revision": "1",
+          "amendment_id": "505M60000100084",
+          "amendment_name": "感染症の予防及び感染症の患者に対する医療に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備に関する省令附則第四項の規定によりなおその効力を有するものとされた同令第二条の規定による改正前の予防接種法施行規則の一部を改正する省令",
+          "amendment_num": "令和五年厚生労働省令第八十四号",
+          "enforcement_date": "2023-06-19",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 618905,
+          "sub_revision": "1",
+          "amendment_id": "506M60000100069",
+          "amendment_name": "予防接種法施行規則等の一部を改正する省令",
+          "amendment_num": "令和六年厚生労働省令第六十九号",
+          "enforcement_date": "2024-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 621467,
+          "sub_revision": "1",
+          "amendment_id": "506M60000100130",
+          "amendment_name": "予防接種実施規則の一部を改正する省令",
+          "amendment_num": "令和六年厚生労働省令第百三十号",
+          "enforcement_date": "2024-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 621466,
+          "sub_revision": "1",
+          "amendment_id": "506M60000100129",
+          "amendment_name": "予防接種実施規則の一部を改正する省令",
+          "amendment_num": "令和六年厚生労働省令第百二十九号",
+          "enforcement_date": "2024-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 625027,
+          "sub_revision": "1",
+          "amendment_id": "507M60000100024",
+          "amendment_name": "予防接種法施行規則及び予防接種実施規則の一部を改正する省令",
+          "amendment_num": "令和七年厚生労働省令第二十四号",
+          "enforcement_date": "2025-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 628522,
+          "sub_revision": "1",
+          "amendment_id": "507M60000100094",
+          "amendment_name": "予防接種実施規則の一部を改正する省令",
+          "amendment_num": "令和七年厚生労働省令第九十四号",
+          "enforcement_date": "2025-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 636027,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100037",
+          "amendment_name": "予防接種法施行規則及び予防接種実施規則の一部を改正する省令",
+          "amendment_num": "令和八年厚生労働省令第三十七号",
+          "enforcement_date": "2026-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 628987,
+          "sub_revision": "2",
+          "amendment_id": "507M60000100117",
+          "amendment_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和七年厚生労働省令第百十七号",
+          "enforcement_date": "2026-05-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "定期予防接種の対象ワクチンの追加や接種方法等の見直し",
+        "body": "本改正により、定期の予防接種の対象となるワクチンの追加や、接種方法および使用するワクチンの種類に関する見直しが段階的に実施されます。\\n\\nまず、新たな定期接種として、新型コロナウイルス感染症（オミクロン株各系統に対応するワクチンを使用）、帯状疱疹（乾燥弱毒生水痘ワクチンまたは乾燥組換えワクチンを使用）、および妊婦を対象としたRSウイルス感染症が追加され、それぞれの詳細な接種方法や回数が定められました。これに伴い、これら各感染症は臨時の予防接種の対象にも順次追加されています。\\n\\n既存の予防接種においても、ワクチンの移行や接種方法の整理が行われます。乳幼児期のジフテリア、百日せき、急性灰白髄炎（ポリオ）、破傷風、およびHib感染症を同時に予防できる「五種混合ワクチン」が導入され、初回・追加接種や各種同時接種の規定が整理されました。小児の肺炎球菌感染症では、従来の13価ワクチンに代わり15価および20価ワクチンへの移行と筋肉内注射の選択肢が追加され、高齢者の肺炎球菌感染症でも沈降二十価ワクチン（筋肉内注射）への変更がなされました。さらに、ヒトパピローマウイルス感染症（HPV）の定期接種は9価ワクチン（3回接種、または一部の年齢層に対する2回接種）へ移行されました。\\n\\nその他、母子健康手帳の提示を求める対象者が「定期の予防接種等を行う者」へと整理されたほか、予防接種に使用する接種液の基準について「検定」から「検査」への文言修正等が行われました。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 22750,
+        "output_tokens": 391,
+        "thoughts_tokens": 2550,
+        "total_tokens": 25691,
+        "elapsed_seconds": 17.260059494000075,
+        "response_id": "_OyNaq7NF8GwodAPmrmPiQY"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "347M50002000044",
+      "law_name": "労働安全衛生法及びこれに基づく命令に係る登録及び指定に関する省令",
+      "revisions": [
+        {
+          "law_data_id": 641416,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100116",
+          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第百十六号",
+          "enforcement_date": "2026-08-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        },
+        {
+          "law_data_id": 641423,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100116",
+          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第百十六号",
+          "enforcement_date": "2026-09-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 641424,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100116",
+          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第百十六号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 634757,
+          "sub_revision": "2",
+          "amendment_id": "508M60000100029",
+          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第二十九号",
+          "enforcement_date": "2027-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "個人ばく露測定講習の経過措置や登録基準の見直し",
+        "body": "本改正では、労働安全衛生法及び作業環境測定法の一部改正に伴い、個人ばく露測定等に係る講習の円滑な移行に向けた経過措置が整備されるとともに、登録基準などの見直しが行われます。\n\n主な改正内容は以下のとおりです。\n\n■個人ばく露測定等に係る講習の経過措置\n従来の登録講習機関が実施した「旧デザイン等講習」および「旧サンプリング講習」は、新たな規則に基づく「新個人ばく露測定講習」および「サンプリング補助者講習」とみなされます。これらに対応して交付された修了証についても、それぞれ新講習の修了証とみなす措置が講じられます。また、従来の登録機関は登録から5年間に限り、なおその効力を有することとされます。\n\n■登録基準の整備と規定の適正化\n登録申請の要件適合に関する規定において、判定等を行う主体が都道府県労働局長から厚生労働大臣へと整理されます。さらに、粉じん障害防止規則に基づく登録較正の実施管理者に関する規定や、指定外国検査機関の実施義務における参照条文などが適正化されます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 6586,
+        "output_tokens": 289,
+        "thoughts_tokens": 1678,
+        "total_tokens": 8553,
+        "elapsed_seconds": 11.88011541700007,
+        "response_id": "Ee2Nao_mKMGL9LsPxKHwwQs"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "413M60000100001",
+      "law_name": "厚生労働省組織規則",
+      "revisions": [
+        {
+          "law_data_id": 641413,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100116",
+          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第百十六号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "化学物質評価室等の作業環境測定に係る所掌事務の変更",
+        "body": "本改正は、2026年10月1日（令和8年10月1日）から施行されます。\\n\\n改正により、化学物質評価室及び環境改善・ばく露対策室の所掌事務について、労働安全衛生法に基づく作業環境測定に関する規定の範囲が変更されます。\\n\\n具体的には、有害物に係る作業環境測定に関する事務の対象が、従来の同法「第六十五条」に規定するものから、「第六十五条から第六十五条の三まで」に規定するものへと改められます。なお、労働基準監督官が行う監督に関する事務を除外する点については変更ありません。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 1091,
+        "output_tokens": 164,
+        "thoughts_tokens": 1204,
+        "total_tokens": 2459,
+        "elapsed_seconds": 11.966551902999981,
+        "response_id": "Hu2Naq7pN9m04_UPu4bJiQE"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "420M60000008087",
+      "law_name": "地方公共団体金融機構の財務及び会計に関する省令",
+      "revisions": [
+        {
+          "law_data_id": 641737,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008104",
+          "amendment_name": "地方公共団体金融機構の財務及び会計に関する省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第百四号",
+          "enforcement_date": "2026-08-07",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "企業会計審議会に関する金融庁組織令の参照条項を変更",
+        "body": "地方公共団体金融機構の財務及び会計に関する省令において引用されている、金融庁組織令の企業会計審議会に関する参照条項が変更されます。\n\n具体的には、会計の原則、監査証明の手続、および適用の一般原則の各規定において、企業会計審議会により公表された各種基準（企業会計の基準、監査に関する基準、財務報告に係る内部統制の評価及び監査に関する基準）を一般に公正妥当と認める根拠となる、金融庁組織令の規定が、従来の「第二十四条第一項」から「第三十四条第一項」に改められます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 1040,
+        "output_tokens": 166,
+        "thoughts_tokens": 1244,
+        "total_tokens": 2450,
+        "elapsed_seconds": 9.203571716999932,
+        "response_id": "LO2NauqzCrGsodAPl_j42A0"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "343M50000400023",
+      "law_name": "液化石油ガス器具等の技術上の基準等に関する省令",
+      "revisions": [
+        {
+          "law_data_id": 622257,
+          "sub_revision": "1",
+          "amendment_id": "506M60000400083",
+          "amendment_name": "液化石油ガス器具等の技術上の基準等に関する省令の一部を改正する省令",
+          "amendment_num": "令和六年経済産業省令第八十三号",
+          "enforcement_date": "2025-02-06",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 625769,
+          "sub_revision": "1",
+          "amendment_id": "507M60000400030",
+          "amendment_name": "経済産業省関係特定製品の技術上の基準等に関する省令等の一部を改正する省令",
+          "amendment_num": "令和七年経済産業省令第三十号",
+          "enforcement_date": "2025-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        },
+        {
+          "law_data_id": 622973,
+          "sub_revision": "2",
+          "amendment_id": "507M60000400006",
+          "amendment_name": "消費生活用製品安全法等の一部を改正する法律の施行に伴う経済産業省関係省令の整備に関する省令",
+          "amendment_num": "令和七年経済産業省令第六号",
+          "enforcement_date": "2025-12-25",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "携帯用バーナーの追加や国内管理人に関する規制の整備",
+        "body": "液化石油ガス器具等に関する技術上の基準等について、複数の改正が行われました。主な改正内容は以下の通りです。\n\n■ 登録区分の追加と表示の整理\n登録の区分に「携帯液化石油ガス用バーナー」が新たに追加され、これに伴う器具等の区分に応じた表示規定が一部修正されました。\n\n■ 特定輸入事業者と国内管理人に関する基準等の整備\n特定輸入事業者が事業届出をする際に、国内管理人の住民票、権限を付与したことを証する書類、契約書や誓約書などの提出が義務付けられました。また、届出に必要となる設計、定期検査、情報の報告等に関する要件が整理されました。\nさらに、日本国内で手続き等を行う「国内管理人」の満たすべき基準（日本に住所を有すること、通知受領権限があること、法令遵守、日本語会話能力、委託契約、業務実施方法の適切性など）が明確化されました。事業者や国内管理人の代表者氏名の変更が軽微な変更として扱われるようになり、情報の提供に関する規定が削除されました。\n\n■ 検査記録の保存および違反公表手続きの整備\n検査記録およびその写しの保存期間について、検査の日から3年間保存することが規定され、電磁的方法による保存の準用規定も整備されました。\n法令違反者の氏名等の公表について、インターネット等を利用した公表方法が定められ、原則として公表前に本人や国内管理人に通知し、意見を述べる機会を供与する手続きが設けられました。\n\n■ 旅費相当額の計算方法の変更\n検査のための出張旅費相当額を計算するにあたり、在勤官署の所在地計算に係る旅費法の条項、旅費の支給制限にかかる引用条項などが整理され、従来の旅行雑費が「渡航雑費」へと改められました。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 6449,
+        "output_tokens": 442,
+        "thoughts_tokens": 2553,
+        "total_tokens": 9444,
+        "elapsed_seconds": 18.754598320000014,
+        "response_id": "OO2NaripHo2c9LsP44vs8AE"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "416M60000440002",
+      "law_name": "独立行政法人中小企業基盤整備機構の産業基盤整備業務に係る業務運営、財務及び会計に関する省令",
+      "revisions": [
+        {
+          "law_data_id": 641731,
+          "sub_revision": "1",
+          "amendment_id": "508M60000440002",
+          "amendment_name": "独立行政法人中小企業基盤整備機構の産業基盤整備業務に係る業務運営、財務及び会計に関する省令の一部を改正する省令",
+          "amendment_num": "令和八年財務省・経済産業省令第二号",
+          "enforcement_date": "2026-08-07",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "会 計の原 則にお ける金 融庁組 織令の 参照条 項の改 正",
+        "body": "本 改正に より、 会計の 原則に おいて 参照さ れている 金融庁 組織令 の条項 が変更 されま す。具 体的に は、企 業会計 審議会 により 公表さ れた企 業会計 の基準 に関す る規定 におい て、引 用する 金融庁 組織令 の条項 が「第 二十四 条第一 項」か ら「第 三十四 条第一 項」に 改めら れます 。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 708,
+        "output_tokens": 144,
+        "thoughts_tokens": 1406,
+        "total_tokens": 2258,
+        "elapsed_seconds": 10.522809944000073,
+        "response_id": "TO2NaqmAF6zU6tkP9K718A8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "416M60000100077",
+      "law_name": "独立行政法人国立病院機構の業務運営、財務及び会計並びに人事管理に関する省令",
+      "revisions": [
+        {
+          "law_data_id": 641489,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100119",
+          "amendment_name": "医療法等の一部を改正する法律の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第百十九号",
+          "enforcement_date": "2027-04-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "医療機関開設者の範囲に係る医療法参照条文の変更",
+        "body": "独立行政法人国立病院機構の再編成対象施設の移譲を受けて引き続き医療機関を開設できる者の範囲について、引用している医療法の条項が整理されました。具体的には、対象者として規定されている医療法第7条の2の参照箇所が「同条第7項に規定する者」から「同条第12項に規定する者」へと変更されています。これは、医療法等の一部を改正する法律の施行に伴い行われる整備の一環です。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 886,
+        "output_tokens": 122,
+        "thoughts_tokens": 789,
+        "total_tokens": 1797,
+        "elapsed_seconds": 10.044552559000067,
+        "response_id": "WO2NasfKB5ulodAPodu4wA8"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "502M60000400078",
+      "law_name": "独立行政法人情報処理推進機構の業務運営、財務及び会計並びに人事管理に関する命令",
+      "revisions": [
+        {
+          "law_data_id": 641717,
+          "sub_revision": "1",
+          "amendment_id": "508M60004400001",
+          "amendment_name": "独立行政法人情報処理推進機構の業務運営、財務及び会計並びに人事管理に関する命令の一部を改正する命令",
+          "amendment_num": "令和八年デジタル庁・経済産業省令第一号",
+          "enforcement_date": "2026-08-07",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "企業会計審議会に係る参照条項の改定",
+        "body": "会計の原則に関する規定において、企業会計審議会が公表する企業会計の基準の根拠となる「金融庁組織令」の参照条項が変更されます。\n\n具体的には、同令の引用条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 697,
+        "output_tokens": 93,
+        "thoughts_tokens": 856,
+        "total_tokens": 1646,
+        "elapsed_seconds": 8.671135749000086,
+        "response_id": "Y-2NapiyE86Z9LsP7M25OQ"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "415M60000008002",
+      "law_name": "独立行政法人統計センターに関する省令",
+      "revisions": [
+        {
+          "law_data_id": 641738,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008105",
+          "amendment_name": "独立行政法人統計センターに関する省令の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第百五号",
+          "enforcement_date": "2026-08-07",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "会計の原則における金融庁組織令の参照条項の変更",
+        "body": "独立行政法人統計センターに関する省令の会計の原則に関する規定において、引用されている法令の条項が変更されます。\n\n具体的には、一般に公正妥当と認められる企業会計の基準を公表する「企業会計審議会」の根拠として参照している金融庁組織令の条項が、従来の「第二十四条第一項」から「第三十四条第一項」へと改められます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 673,
+        "output_tokens": 115,
+        "thoughts_tokens": 666,
+        "total_tokens": 1454,
+        "elapsed_seconds": 7.114156487999935,
+        "response_id": "be2NaoGyCtuo4_UP1riW2Ao"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "363M50001000046",
+      "law_name": "電気通信事業報告規則",
+      "revisions": [
+        {
+          "law_data_id": 641766,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008107",
+          "amendment_name": "電気通信事業法施行規則等の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第百七号",
+          "enforcement_date": "2026-08-10",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "電気通信事業報告規則の一部改正省令が施行",
+        "body": "令和八年総務省令第百七号「電気通信事業法施行規則等の一部を改正する省令」が2026年8月10日に施行されることに伴い、電気通信事業報告規則が改正されます。なお、具体的な改正内容の詳細については提供された入力情報に含まれていません。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 504,
+        "output_tokens": 87,
+        "thoughts_tokens": 926,
+        "total_tokens": 1517,
+        "elapsed_seconds": 9.030859790999898,
+        "response_id": "de2NarH9J-GOq8YPhdjKSQ"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "421RJNJ09123000",
+      "law_name": "人事院規則九―一二三（本府省業務調整手当）",
+      "revisions": [
+        {
+          "law_data_id": 641732,
+          "sub_revision": "1",
+          "amendment_id": "508RJNJ09123047",
+          "amendment_name": "人事院規則九―一二三（本府省業務調整手当）の一部を改正する人事院規則",
+          "amendment_num": "令和八年人事院規則九―一二三―四七",
+          "enforcement_date": "2026-08-07",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "金融庁の内部部局の範囲に次長を追加",
+        "body": "本府省業務調整手当の対象となる国の行政機関の内部部局について、金融庁の範囲に「次長」が追加されます。これまでは金融庁の内部部局として金融国際審議官が含まれていましたが、改正により、金融国際審議官に加えて次長も含まれることになります。この改正は2026年8月7日から施行されます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 616,
+        "output_tokens": 102,
+        "thoughts_tokens": 956,
+        "total_tokens": 1674,
+        "elapsed_seconds": 14.097992507999948,
+        "response_id": "gO2NasK9CJSb4_UPlb2qCA"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "416M60400000023",
+      "law_name": "確認事務の委託の手続等に関する規則",
+      "revisions": [
+        {
+          "law_data_id": 641749,
+          "sub_revision": "1",
+          "amendment_id": "508M60400000017",
+          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律の一部の施行に伴う関係国家公安委員会規則の整理に関する規則",
+          "amendment_num": "令和八年国家公安委員会規則第十七号",
+          "enforcement_date": "2026-08-12",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "金融商品取引法改正に伴う暴力的不法行為等の範囲の整理",
+        "body": "「確認事務の委託の手続等に関する規則」において規定されている「暴力的不法行為その他の罪に当たる行為」の範囲について、金融商品取引法に係る参照条項の整理が行われます。具体的には、第三条第一項第八号に定める金融商品取引法の罪の範囲において、改正前の「第百九十七条の二第一項第十号の四、第十号の五若しくは第十号の八から第十二号まで」が、改正後は「第百九十七条第一項第四号の三若しくは第四号の四、第百九十七条の二第一項第十号の五から第十二号まで」に改められます。これ以外の同号における参照条項に変更はありません。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 1915,
+        "output_tokens": 183,
+        "thoughts_tokens": 1678,
+        "total_tokens": 3776,
+        "elapsed_seconds": 22.74917389099994,
+        "response_id": "j-2Nao-LIOKD998PueDZiAk"
+      }
+    }
   }
 ]
