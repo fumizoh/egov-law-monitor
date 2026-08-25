@@ -12,7 +12,9 @@ from wordpress.post_builder import build_post_content
 
 from models import WPResult
 
+
 POST_TYPE = "posts"
+LAW_UPDATE_CATEGORY_ID = 7
 
 
 def sync_daily_post(
@@ -55,6 +57,7 @@ def sync_daily_post(
             slug=f"{date}-update",
             status="draft",
             post_type=POST_TYPE,
+            category_id=LAW_UPDATE_CATEGORY_ID,
         )
 
         return WPResult(
@@ -73,6 +76,7 @@ def sync_daily_post(
         slug=f"{date}-update",
         status=post["status"],
         post_type=POST_TYPE,
+        category_id=LAW_UPDATE_CATEGORY_ID,
     )
 
     return WPResult(

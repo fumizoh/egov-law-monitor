@@ -61,6 +61,7 @@ def create_post(
     slug: str,
     status: str = "draft",
     post_type: str = "posts",
+    category_id: int,
 ) -> dict:
     """Create a WordPress post."""
 
@@ -74,6 +75,7 @@ def create_post(
             "excerpt": excerpt,
             "slug": slug,
             "status": status,
+            "categories": [category_id],
         },
         auth=(username, app_password),
         timeout=30,
@@ -93,6 +95,7 @@ def update_post(
     slug: str,
     status: str = "draft",
     post_type: str = "posts",
+    category_id: int,
 ) -> dict:
     """Update a WordPress post."""
 
@@ -106,6 +109,7 @@ def update_post(
             "excerpt": excerpt,
             "slug": slug,
             "status": status,
+            "categories": [category_id],
         },
         auth=(username, app_password),
         timeout=30,

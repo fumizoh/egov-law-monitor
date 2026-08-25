@@ -16,7 +16,10 @@ from wordpress.post_builder import (
     build_post_title,
 )
 
-from wordpress.service import POST_TYPE
+from wordpress.service import (
+    POST_TYPE,
+    LAW_UPDATE_CATEGORY_ID,
+)
 
 
 def main() -> None:
@@ -60,6 +63,7 @@ def main() -> None:
             slug=f"{date}-update",
             status="draft",
             post_type=POST_TYPE,
+            category_id=LAW_UPDATE_CATEGORY_ID,
         )
         print("Created")
     else:
@@ -71,6 +75,7 @@ def main() -> None:
             slug=f"{date}-update",
             status=post["status"],
             post_type=POST_TYPE,
+            category_id=LAW_UPDATE_CATEGORY_ID,
         )
         print("Updated")
 
