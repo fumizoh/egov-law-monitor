@@ -1954,28 +1954,6 @@
       "law_name": "労働安全衛生法及びこれに基づく命令に係る登録及び指定に関する省令",
       "revisions": [
         {
-          "law_data_id": 641416,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100116",
-          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百十六号",
-          "enforcement_date": "2026-08-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        },
-        {
-          "law_data_id": 641423,
-          "sub_revision": "1",
-          "amendment_id": "508M60000100116",
-          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
-          "amendment_num": "令和八年厚生労働省令第百十六号",
-          "enforcement_date": "2026-09-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        },
-        {
           "law_data_id": 641424,
           "sub_revision": "1",
           "amendment_id": "508M60000100116",
@@ -1985,33 +1963,22 @@
           "scheduled_enforcement_date": null,
           "enforcement_comment": null,
           "is_current": false
-        },
-        {
-          "law_data_id": 634757,
-          "sub_revision": "2",
-          "amendment_id": "508M60000100029",
-          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う関係省令の整備等に関する省令",
-          "amendment_num": "令和八年厚生労働省令第二十九号",
-          "enforcement_date": "2027-04-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
         }
       ]
     },
     "response": {
       "summary": {
-        "title": "個人ばく露測定講習の経過措置や登録基準の見直し",
-        "body": "本改正では、労働安全衛生法及び作業環境測定法の一部改正に伴い、個人ばく露測定等に係る講習の円滑な移行に向けた経過措置が整備されるとともに、登録基準などの見直しが行われます。\n\n主な改正内容は以下のとおりです。\n\n■個人ばく露測定等に係る講習の経過措置\n従来の登録講習機関が実施した「旧デザイン等講習」および「旧サンプリング講習」は、新たな規則に基づく「新個人ばく露測定講習」および「サンプリング補助者講習」とみなされます。これらに対応して交付された修了証についても、それぞれ新講習の修了証とみなす措置が講じられます。また、従来の登録機関は登録から5年間に限り、なおその効力を有することとされます。\n\n■登録基準の整備と規定の適正化\n登録申請の要件適合に関する規定において、判定等を行う主体が都道府県労働局長から厚生労働大臣へと整理されます。さらに、粉じん障害防止規則に基づく登録較正の実施管理者に関する規定や、指定外国検査機関の実施義務における参照条文などが適正化されます。"
+        "title": "講習機関の呼称変更と作業環境測定士の登録基準の整理",
+        "body": "本改正では、主に講習機関の呼称変更と、登録基準における参照条項の整理が行われます。第一に、都道府県労働局長が衛生工学衛生管理者講習の事務や経理状況の報告を求めることができる対象について、その名称が「衛生工学衛生管理者講習機関」から「登録衛生工学衛生管理者講習機関」に変更されます。第二に、登録基準における実施管理者に関する規定において、配置されるべき第一種作業環境測定士の定義が、作業環境測定法の「第二条第五号」に規定するものから「第二条第六号」に規定するものへと改められます。"
       },
       "usage": {
         "model": "gemini-3.5-flash",
-        "prompt_tokens": 6586,
-        "output_tokens": 289,
-        "thoughts_tokens": 1678,
-        "total_tokens": 8553,
-        "elapsed_seconds": 11.88011541700007,
-        "response_id": "Ee2Nao_mKMGL9LsPxKHwwQs"
+        "prompt_tokens": 884,
+        "output_tokens": 160,
+        "thoughts_tokens": 1478,
+        "total_tokens": 2522,
+        "elapsed_seconds": 10.621200548999994,
+        "response_id": "ElyPasabGZ3olOoPvv-fkAI"
       }
     }
   },
@@ -2374,6 +2341,323 @@
         "total_tokens": 3776,
         "elapsed_seconds": 22.74917389099994,
         "response_id": "j-2Nao-LIOKD998PueDZiAk"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "417M60000100044",
+      "law_name": "厚生労働省の所管する法令の規定に基づく民間事業者等が行う書面の保存等における情報通信の技術の利用に関する省令",
+      "revisions": [
+        {
+          "law_data_id": 641422,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100116",
+          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第百十六号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "書面保存等での情報通信技術利用に関する省令の別表改正",
+        "body": "「労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令」の施行に伴い、本省令の別表が変更されます。\\n\\n変更対象となるのは以下の通りです。\\n・別表第一（第三条及び第四条関係）\\n・別表第二（第五条、第六条及び第七条関係）\\n・別表第三（第八条及び第九条関係）\\n・別表第四（第十条及び第十一条関係）\\n\\nこの改正は、2026年10月1日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 612,
+        "output_tokens": 168,
+        "thoughts_tokens": 1882,
+        "total_tokens": 2662,
+        "elapsed_seconds": 11.343299875,
+        "response_id": "HlyPatKrJ5_Il7oPz9v3iA0"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "347M50002000036",
+      "law_name": "有機溶剤中毒予防規則",
+      "revisions": [
+        {
+          "law_data_id": 641425,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100116",
+          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第百十六号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "有機溶剤濃度の測定方法および測定実施者の要件の見直し",
+        "body": "本改正により、有機溶剤の濃度を測定する際の方法および測定を実施する者の要件などが変更されます。\n\nまず、労働者に呼吸用保護具を使用させるための基準となる有機溶剤の濃度測定、および6月以内ごとに定期的に行う濃度測定について、その測定方法が変更されます。\n\nまた、特定の測定方法によって濃度を測定する際、その業務の区分に応じて特定の資格を有する者に実施させることが義務付けられました。デザインおよびサンプリング業務、ならびに分析業務のそれぞれについて、登録を受けた作業環境測定士や作業環境測定機関などの要件が定められています。さらに、一定の講習を修了した補助者や一級化学分析技能士に業務を補助させることができる仕組みが整備されました。\n\nそのほか、改正の施行時にすでに提出されている改正前の様式については、改正後の様式とみなす経過措置が設けられます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 3243,
+        "output_tokens": 224,
+        "thoughts_tokens": 1508,
+        "total_tokens": 4975,
+        "elapsed_seconds": 9.954568943999988,
+        "response_id": "K1yPaq72G-KnsbwP952teQ"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "347M50002000039",
+      "law_name": "特定化学物質障害予防規則",
+      "revisions": [
+        {
+          "law_data_id": 641469,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100116",
+          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第百十六号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "特定化学物質の濃度測定方法や測定実施者の要件を規定",
+        "body": "本改正により、特定化学物質の濃度測定に関する規定や、測定を実施する者の資格要件などが新たに整備されます。\n\n主な改正内容は以下の通りです。\n\n■ 測定方法の明確化\n特定化学物質の濃度測定について、対象となる物質の区分に応じ、指定された測定方法（イ若しくはロに掲げる方法、又はロに掲げる方法）により測定を行うよう規定されました。これに伴い、関連する条文における測定方法の表現が整理されています。\n\n■ 測定を実施する者の要件と補助者の規定\n規定された方法により特定化学物質の濃度を測定する際、デザイン及びサンプリングの業務、並びに分析の業務をそれぞれ行わせるべき者の要件が定められました。特定の登録を受けた作業環境測定士や第一種作業環境測定士、作業環境測定機関などがその対象となります。また、サンプリング補助者講習を修了した者や一級化学分析技能士による業務の補助についても新たに規定されました。\n\n■ 特定有機溶剤混合物の測定規定等の整備\n特定有機溶剤混合物を製造・取扱う作業場において、測定等に関する有機化学物質予防規則（有機則）の準用・読み替え規定が整理されました。\n\n■ その他の変更および経過措置\n金属アーク溶接等作業における溶接ヒュームの濃度測定に関し、使用する機器の表記が「試料採取機器等」から「試料採取機器」へと変更されました。また、改正に伴う経過措置として、施行時に提出されている改正前の様式（特化則様式第一号の四など）は、改正後の様式とみなされます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 4526,
+        "output_tokens": 396,
+        "thoughts_tokens": 1276,
+        "total_tokens": 6198,
+        "elapsed_seconds": 9.378275415000005,
+        "response_id": "N1yPaohxg4-xvA_JmfLhCg"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "414M60000008064",
+      "law_name": "第一号基礎的電気通信役務の提供に係る第一種交付金及び第一種負担金算定等規則",
+      "revisions": [
+        {
+          "law_data_id": 641767,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008107",
+          "amendment_name": "電気通信事業法施行規則等の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第百七号",
+          "enforcement_date": "2026-08-10",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "交付金算定に関する届出期限の統一や資産・費用整理規定の整備",
+        "body": "第一種適格電気通信事業者が行う各種届出の提出期限が、従来の届出内容に応じた区分（年度経過後5月以内または3月以内）から、「年度経過後5月以内」に統一されました。\n\n支援機関に届け出る事項については、従前のアナログ電話用設備や第一種公衆電話機等の通信量割合に関する規定が廃止され、特定の電気通信役務（電気通信事業法施行規則第14条第2号の二に掲げるもの）の提供に係る原価や、関連する他人資本費用、自己資本費用、利益対応税の額などを新たに届け出ることとなりました。\n\n資産および費用の整理・報告実務も見直されました。効率的な設備構成を想定した整理を行う対象から、上記の特定電気通信役務のみに用いられる設備が除外されたほか、整理結果に関する総務大臣への報告義務が廃止されました。また、第一種公衆電話機台数削減等における資産整理の算定基礎が「第一号基礎的電気通信役務収支表の第一表の営業費用を基礎とする基準」へと変更されました。\n\nさらに、上記の特定電気通信役務に係る新たな規定として、その資産・費用の整理基準や、管理運営費用等に資本費用や税の合計額を加える設備管理部門原価の算定方法が新設され、設備管理部門の全体の原価算定に組み込まれることとなりました。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 4856,
+        "output_tokens": 349,
+        "thoughts_tokens": 2281,
+        "total_tokens": 7486,
+        "elapsed_seconds": 14.641375197000002,
+        "response_id": "QlyPau6dAa_d4PoPvPqLuAM"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "354M50002000018",
+      "law_name": "粉じん障害防止規則",
+      "revisions": [
+        {
+          "law_data_id": 641428,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100116",
+          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第百十六号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "粉じん濃度測定方法の見直しと測定実施者の規定整備",
+        "body": "粉じん濃度の測定方法、および測定の実施者等に関する規定が新たに整備されます。\\n\\n【粉じん濃度測定方法の見直し】\\n粉じん濃度の測定について、測定方法が「イ又はロに掲げる方法」に改められます。これに伴い、6月以内ごとに1回定期に行う粉じん濃度の測定についても、同様の方法によることとされます。また、特定の測定をもって代替できるとする要件についても整理されます。\\n\\n【測定実施者の規定整備】\\n特定の方法（ロに掲げる方法）により粉じん濃度を測定する場合、その業務の区分に応じて、測定を以下の者に行わせなければならないこととされました。\\n・デザイン及びサンプリング業務：特定の登録を受けた作業環境測定士、登録作業環境測定機関、または指定機関。サンプリング補助者講習を修了した者に業務を補助させることができます。\\n・分析業務：特定の第一種作業環境測定士、登録作業環境測定機関、または指定機関。特定の条件を満たす一級化学分析技能士に業務を補助させることができます。\\n\\n【様式に関する経過措置】\\n省令の施行の際、現に提出されている改正前の様式（粉じん障害防止規則様式第五号など）は、改正後の様式とみなされます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 2677,
+        "output_tokens": 305,
+        "thoughts_tokens": 2607,
+        "total_tokens": 5589,
+        "elapsed_seconds": 15.855590706000015,
+        "response_id": "UlyPao-UFaPgsbwP75m7UQ"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "418M60000200059",
+      "law_name": "農業の担い手に対する経営安定のための交付金の交付に関する法律施行規則",
+      "revisions": [
+        {
+          "law_data_id": 641763,
+          "sub_revision": "1",
+          "amendment_id": "508M60000200065",
+          "amendment_name": "農業の担い手に対する経営安定のための交付金の交付に関する法律施行規則の一部を改正する省令",
+          "amendment_num": "令和八年農林水産省令第六十五号",
+          "enforcement_date": "2026-08-13",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        },
+        {
+          "law_data_id": 603960,
+          "sub_revision": "2",
+          "amendment_id": "429M60000200006",
+          "amendment_name": "砂糖及びでん粉の価格調整に関する法律施行規則等の一部を改正する省令",
+          "amendment_num": "平成二十九年農林水産省令第六号",
+          "enforcement_date": null,
+          "scheduled_enforcement_date": "2117-12-31",
+          "enforcement_comment": "環太平洋パートナーシップ協定が日本について効力を生ずる日の前日",
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "令和八年熊本地震に伴う積立金納付期限の特例措置",
+        "body": "令和八年熊本地震による災害に伴い、積立金の納付期限に関する特例が設けられました。\n\n本特例により、当該災害が発生した時に災害救助法が適用された市町村の区域内に住所を有していた者が行う令和八年度の選択した額の納付について、本来の期限である八月三十一日から「令和八年十月三十一日」へと期限が変更されます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 923,
+        "output_tokens": 118,
+        "thoughts_tokens": 1541,
+        "total_tokens": 2582,
+        "elapsed_seconds": 8.736082167999996,
+        "response_id": "ZFyPaqyjD7iIl7oPkPf92AE"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "347M50002000037",
+      "law_name": "鉛中毒予防規則",
+      "revisions": [
+        {
+          "law_data_id": 641426,
+          "sub_revision": "1",
+          "amendment_id": "508M60000100116",
+          "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+          "amendment_num": "令和八年厚生労働省令第百十六号",
+          "enforcement_date": "2026-10-01",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": false
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "鉛の濃度測定における実施者の資格要件などの見直し",
+        "body": "鉛の濃度測定方法および測定を行う実施者に関する規定が整備されます。特定の方法によって鉛の濃度測定を実施する際、デザインおよびサンプリング業務、ならびに分析（解析を含む）業務について、それぞれ作業環境測定士や作業環境測定機関などの定められた資格を有する者に行わせる必要があります。また、これらの業務の補助者として、サンプリング業務にはサンプリング補助者講習修了者を、分析業務には条件を満たす一級化学分析技能士を充てることができる規定が設けられます。その他、改正前の様式を改正後の様式とみなす経過措置が適用されます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 2648,
+        "output_tokens": 154,
+        "thoughts_tokens": 1337,
+        "total_tokens": 4139,
+        "elapsed_seconds": 8.869222473999997,
+        "response_id": "blyPao3TIOv44PoP2ODzkAg"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "360M50001000026",
+      "law_name": "電気通信事業会計規則",
+      "revisions": [
+        {
+          "law_data_id": 641765,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008107",
+          "amendment_name": "電気通信事業法施行規則等の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第百七号",
+          "enforcement_date": "2026-08-10",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "電気通信事業法施行規則等の改正省令が令和8年8月10日に施行",
+        "body": "令和八年総務省令第百七号として「電気通信事業法施行規則等の一部を改正する省令」が制定され、2026年8月10日に施行されます。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 504,
+        "output_tokens": 72,
+        "thoughts_tokens": 644,
+        "total_tokens": 1220,
+        "elapsed_seconds": 4.893262494999988,
+        "response_id": "eFyPatm6Lq-slcIPsc6WyQg"
+      }
+    }
+  },
+  {
+    "summary_input": {
+      "law_id": "360M50001000025",
+      "law_name": "電気通信事業法施行規則",
+      "revisions": [
+        {
+          "law_data_id": 641764,
+          "sub_revision": "1",
+          "amendment_id": "508M60000008107",
+          "amendment_name": "電気通信事業法施行規則等の一部を改正する省令",
+          "amendment_num": "令和八年総務省令第百七号",
+          "enforcement_date": "2026-08-10",
+          "scheduled_enforcement_date": null,
+          "enforcement_comment": null,
+          "is_current": true
+        }
+      ]
+    },
+    "response": {
+      "summary": {
+        "title": "経過措置における略称定義の整理",
+        "body": "経過措置を定める規定において、文言の整理が行われました。\n\n具体的には、改正法の施行時にすでに電気通信事業法の登録を受けている者または届出をしている者に関する経過措置の規定について、これまで規定されていた「この省令による改正後の電気通信事業法施行規則」を指す「（以下「新施行規則」という。）」という略称の定義が削除されました。"
+      },
+      "usage": {
+        "model": "gemini-3.5-flash",
+        "prompt_tokens": 744,
+        "output_tokens": 103,
+        "thoughts_tokens": 1227,
+        "total_tokens": 2074,
+        "elapsed_seconds": 7.854153382999982,
+        "response_id": "f1yPau7bJe3asbwPyufYyQE"
       }
     }
   }
