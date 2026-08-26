@@ -388,3 +388,10 @@ class ProcessingResult:
     updated_law_count: int
     laws: list[Law]
     wp: WPResult | None
+
+
+@dataclass(slots=True)
+class Watch:
+    """Watched law."""
+
+    law_id: str
