@@ -215,3 +215,20 @@
 .egov-law-button:hover {
     background: #0060c0;
 }
+
+@media (max-width: 767px) {
+    .content-container.site-container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .category-law-update .entry-content-wrap {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .category-law-update .egov-law-card,
+    .category-law-update .egov-dashboard {
+        padding: 12px;
+    }
+}
