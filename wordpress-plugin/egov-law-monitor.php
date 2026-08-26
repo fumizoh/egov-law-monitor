@@ -26,3 +26,5 @@ add_action(
         );
     }
 );
+
+require_once plugin_dir_path( __FILE__ ) . 'includes/law-search.php';

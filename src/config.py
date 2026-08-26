@@ -33,8 +33,9 @@ WATCH_JSON = DOCS_DATA / "watch.json"
 LAW_TYPE_ORDER = {
     "法律": 0,
     "政令": 1,
-    "府省令": 2,
-    "規則": 3,
+    "勅令": 2,
+    "府省令": 3,
+    "規則": 4,
 }
 
 
