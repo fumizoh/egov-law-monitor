@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action(
     'wp_enqueue_scripts',
     function () {
+
+        // CSS
         $css_path = plugin_dir_path( __FILE__ )
             . 'assets/css/egov-law-post.css';
 
@@ -24,7 +26,27 @@ add_action(
             array(),
             filemtime( $css_path )
         );
+
+        // JS
+        $js_path = plugin_dir_path( __FILE__ )
+            . 'assets/js/law-watch.js';
+
+        $js_url = plugin_dir_url( __FILE__ )
+            . 'assets/js/law-watch.js';
+
+        wp_enqueue_script(
+            'egov-law-watch',
+            $js_url,
+            array(),
+            filemtime( $js_path ),
+            true
+        );
+
     }
 );
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/law-search.php';
+
+require_once plugin_dir_path( __FILE__ ) . 'includes/law-search-page.php';
+
+require_once plugin_dir_path( __FILE__ ) . 'includes/watch-api.php';
