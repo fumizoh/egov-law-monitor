@@ -26,8 +26,6 @@ KEYWORDS_JSON = DOCS_DATA / "keywords.json"
 
 AI_SUMMARY_LOG_JSONL = DOCS_DATA / "ai_summary_log.jsonl"
 
-WATCH_JSON = DOCS_DATA / "watch.json"
-
 
 # Sorting order
 LAW_TYPE_ORDER = {

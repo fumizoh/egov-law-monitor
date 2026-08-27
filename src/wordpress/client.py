@@ -118,3 +118,19 @@ def update_post(
     response.raise_for_status()
 
     return response.json()
+
+
+def get_watches() -> list[dict]:
+    """Get watched laws from WordPress."""
+
+    wp_url, username, app_password = _get_config()
+
+    response = requests.get(
+        f"{wp_url}/wp-json/egov-law-monitor/v1/watches",
+        auth=(username, app_password),
+        timeout=30,
+    )
+
+    response.raise_for_status()
+
+    return response.json()
