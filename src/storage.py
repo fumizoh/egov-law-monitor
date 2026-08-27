@@ -246,9 +246,7 @@ def load_law_summaries(
         return {}
 
     try:
-        data = load_json(
-            paths.law_summaries,
-        )
+        data = load_json(paths.law_summaries)
 
     except json.JSONDecodeError:
         logger.exception(
@@ -256,6 +254,10 @@ def load_law_summaries(
             paths.law_summaries,
         )
         return {}
+
+    # New format
+    if isinstance(data, dict):
+        data = data.get("summaries", [])
 
     summaries = [
         from_dict(LawSummary, item)
@@ -268,19 +270,68 @@ def load_law_summaries(
     }
 
 
+def get_law_summaries_date(
+    paths: StoragePaths = DEFAULT_STORAGE,
+) -> str | None:
+    """Return the cache date."""
+
+    if not paths.law_summaries.exists():
+        return None
+
+    try:
+        data = load_json(paths.law_summaries)
+
+    except json.JSONDecodeError:
+        logger.exception(
+            "Failed to load %s",
+            paths.law_summaries,
+        )
+        return None
+
+    if not isinstance(data, dict):
+        # Legacy format has no date.
+        return None
+
+    return data.get("date")
+
+
 def save_law_summaries(
     summaries: list[LawSummary],
+    date: str,
     paths: StoragePaths = DEFAULT_STORAGE,
 ) -> None:
+    """Save law summaries with cache date."""
 
     save_json(
-        summaries,
+        {
+            "date": date,
+            "summaries": summaries,
+        },
         paths.law_summaries,
+    )
+
+
+def prepare_law_summaries(
+    date: str,
+    paths: StoragePaths = DEFAULT_STORAGE,
+) -> None:
+    """Prepare law summary cache for a processing date."""
+
+    cached_date = get_law_summaries_date(paths)
+
+    if cached_date == date:
+        return
+
+    save_law_summaries(
+        [],
+        date=date,
+        paths=paths,
     )
 
 
 def upsert_law_summaries(
     summaries: list[LawSummary],
+    date: str,
     paths: StoragePaths = DEFAULT_STORAGE,
 ) -> None:
     """Add or update law summaries in the cache."""
@@ -292,6 +343,7 @@ def upsert_law_summaries(
 
     save_law_summaries(
         list(cached.values()),
+        date=date,
         paths=paths,
     )
 

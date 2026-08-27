@@ -275,6 +275,14 @@ class LawSummary:
 
 
 @dataclass(slots=True)
+class WatchNotification:
+    """Data for a law watch notification."""
+
+    law: Law
+    summary: Summary | None
+
+
+@dataclass(slots=True)
 class AiSummaryLog:
     """AI summary generation log."""
 

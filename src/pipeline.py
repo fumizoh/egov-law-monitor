@@ -4,10 +4,14 @@ import logging
 
 from models import Law
 
+import storage
 import law_group
 import law_builder
-import storage
+
+import watch.service as watch_service
+
 from summary import generator
+
 import summary.statistics as summary_statistics
 
 from statistics import create_source_statistics
@@ -59,6 +63,13 @@ def process_egov(
 
     laws = law_builder.build_laws(law_groups)
 
+    watched_laws = watch_service.find_watched_laws(laws)
+
+    logger.info(
+        "Watched laws: %d",
+        len(watched_laws),
+    )
+
     logger.info("Total %d laws", len(laws))
 
     storage.save_laws(
@@ -74,6 +85,11 @@ def process_egov(
         storage_paths=storage_paths,
     )
 
+    storage.prepare_law_summaries(
+        date=date,
+        paths=storage_paths,
+    )
+
     total_batches = (len(law_groups) + BATCH_SIZE - 1) // BATCH_SIZE
 
     for i in range(0, len(law_groups), BATCH_SIZE):
@@ -86,6 +102,7 @@ def process_egov(
 
         storage.upsert_law_summaries(
             law_summaries,
+            date=date,
             paths=storage_paths,
         )
 

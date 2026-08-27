@@ -1,49 +1,56 @@
 """Watch service."""
 
-from models import Watch
+from models import (
+    Law,
+    LawSummary,
+    WatchNotification,
+)
 
-from watch import storage
-
-
-def get_watches() -> list[Watch]:
-    """Get all watched laws."""
-
-    return storage.load_watches()
+from wordpress import client
 
 
-def add_watch(law_id: str) -> None:
-    """Add a law to the watch list."""
+def get_watch_ids() -> set[str]:
+    """Get watched law IDs from WordPress."""
 
-    watches = storage.load_watches()
+    watches = client.get_watches()
 
-    if any(watch.law_id == law_id for watch in watches):
-        return
-
-    watches.append(
-        Watch(law_id=law_id)
-    )
-
-    storage.save_watches(watches)
-
-
-def remove_watch(law_id: str) -> None:
-    """Remove a law from the watch list."""
-
-    watches = storage.load_watches()
-
-    watches = [
-        watch
+    return {
+        watch["law_id"]
         for watch in watches
-        if watch.law_id != law_id
+    }
+
+
+def find_watched_laws(
+    laws: list[Law],
+) -> list[Law]:
+    """Return laws that are being watched."""
+
+    watch_ids = get_watch_ids()
+
+    return [
+        law
+        for law in laws
+        if law["law_id"] in watch_ids
     ]
 
-    storage.save_watches(watches)
 
+def build_notifications(
+    laws: list[Law],
+    law_summaries: list[LawSummary],
+) -> list[WatchNotification]:
+    """Build watch notifications for watched laws."""
 
-def is_watched(law_id: str) -> bool:
-    """Return True if the law is being watched."""
+    watched_laws = find_watched_laws(laws)
 
-    return any(
-        watch.law_id == law_id
-        for watch in storage.load_watches()
-    )
+    summaries = {
+        law_summary.summary_input.law_id: law_summary.response.summary
+        for law_summary in law_summaries
+    }
+
+    return [
+        WatchNotification(
+            law=law,
+            summary=summaries.get(law["law_id"]),
+        )
+        for law in watched_laws
+    ]

@@ -1,410 +1,413 @@
-[
-  {
-    "summary_input": {
-      "law_id": "412CO0000000523",
-      "law_name": "公益的法人等への一般職の地方公務員の派遣等に関する法律第二条第一項第三号の法人を定める政令",
-      "revisions": [
-        {
-          "law_data_id": 641703,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000250",
-          "amendment_name": "公益的法人等への一般職の地方公務員の派遣等に関する法律第二条第一項第三号の法人を定める政令の一部を改正する政令",
-          "amendment_num": "令和八年政令第二百五十号",
-          "enforcement_date": "2027-04-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "地方公務員の派遣対象法人を定める政令の一部改正",
-        "body": "「公益的法人等への一般職の地方公務員の派遣等に関する法律第二条第一項第三号の法人を定める政令」の一部を改正する政令（令和八年政令第二百五十号）が、2027年4月1日に施行されます。なお、具体的な改正内容に関する詳細は、提供された情報に含まれていません。"
+{
+  "date": "20260820",
+  "summaries": [
+    {
+      "summary_input": {
+        "law_id": "412CO0000000523",
+        "law_name": "公益的法人等への一般職の地方公務員の派遣等に関する法律第二条第一項第三号の法人を定める政令",
+        "revisions": [
+          {
+            "law_data_id": 641703,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000250",
+            "amendment_name": "公益的法人等への一般職の地方公務員の派遣等に関する法律第二条第一項第三号の法人を定める政令の一部を改正する政令",
+            "amendment_num": "令和八年政令第二百五十号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
       },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 546,
-        "output_tokens": 97,
-        "thoughts_tokens": 1266,
-        "total_tokens": 1909,
-        "elapsed_seconds": 8.570020010999997,
-        "response_id": "FkuJasPGAZStodAPs93BCQ"
+      "response": {
+        "summary": {
+          "title": "地方公務員の派遣対象となる法人を定める政令の一部改正",
+          "body": "「公益的法人等への一般職の地方公務員の派遣等に関する法律第二条第一項第三号の法人を定める政令の一部を改正する政令」（令和八年政令第二百五十号）が、2027年4月1日より施行されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 546,
+          "output_tokens": 80,
+          "thoughts_tokens": 785,
+          "total_tokens": 1411,
+          "elapsed_seconds": 9.870968000002904,
+          "response_id": "bfSPatLiC46Lx9gPurHI2Qw"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "507CO0000000193",
+        "law_name": "刑法等の一部を改正する法律及び刑法等の一部を改正する法律の施行に伴う関係法律の整理等に関する法律の施行に伴う関係政令の整理等及び経過措置に関する政令",
+        "revisions": [
+          {
+            "law_data_id": 641710,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000253",
+            "amendment_name": "更生保護制度の充実を図るための保護司法等の一部を改正する法律の施行に伴う関係政令の整理に関する政令",
+            "amendment_num": "令和八年政令第二百五十三号",
+            "enforcement_date": "2027-06-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "読替え規定に対象項目を追加する政令の改正",
+          "body": "更生保護制度の充実を図るための保護司法等の一部を改正する法律の施行に伴い、関係政令の整理が行われます。具体的には、関係法律の整理等に伴う刑法等の適用に関する技術的読替え規定において、読替えの対象となる項目に「第八号」が追加されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 3045,
+          "output_tokens": 89,
+          "thoughts_tokens": 1418,
+          "total_tokens": 4552,
+          "elapsed_seconds": 10.455821499999729,
+          "response_id": "dfSPatu1MPGcx9gPk9Pa-QQ"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "508CO0000000254",
+        "law_name": "溶融亜鉛めっき鋼帯及び鋼板に対して課する暫定的な不当廉売関税に関する政令",
+        "revisions": [
+          {
+            "law_data_id": 641711,
+            "sub_revision": "1",
+            "amendment_id": null,
+            "amendment_name": null,
+            "amendment_num": null,
+            "enforcement_date": "2026-08-08",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "韓国・中国産鋼帯等に対する暫定不当廉売関税の賦課",
+          "body": "大韓民国および中国を原産地とする溶融亜鉛めっき鋼帯及び鋼板のうち、特定の期間内に輸入されるものに対して暫定的な不当廉売関税を課す制度について定めています。\\n\\n適用される税率は、大韓民国を原産地とする貨物は原則として38.0パーセント、中国を原産地とする貨物は原則として55.3パーセントとなります。ただし、特定の生産者によって生産された貨物については、それぞれ個別に定められた税率が適用されます。\\n\\n輸入手続において、税関長は輸入者に対し対象貨物の原産地を証明する書類の提出を求めることができます。また、大韓民国または中国を原産地とする貨物を輸入しようとする者は、生産者が作成した生産を証明する書類など、税率の適用に必要な書類を税関長に提出しなければなりません。\\n\\nなお、この暫定不当廉売関税と通常の関税は、それぞれ別個の関税として関税法の規定が適用されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1321,
+          "output_tokens": 268,
+          "thoughts_tokens": 1454,
+          "total_tokens": 3043,
+          "elapsed_seconds": 11.18025089999719,
+          "response_id": "gvSPatXvA_ybx9gP5KLK6Ao"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "416M60000008069",
+        "law_name": "国立研究開発法人情報通信研究機構の業務（出資継続業務を除く。）に係る財務及び会計に関する省令",
+        "revisions": [
+          {
+            "law_data_id": 641733,
+            "sub_revision": "1",
+            "amendment_id": "508M60000008100",
+            "amendment_name": "国立研究開発法人情報通信研究機構の業務（出資継続業務を除く。）に係る財務及び会計に関する省令の一部を改正する省令",
+            "amendment_num": "令和八年総務省令第百号",
+            "enforcement_date": "2026-08-07",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "企業会計審議会に係る金融庁組織令の引用条項の修正",
+          "body": "一般に公正妥当と認められる企業会計の基準に該当するものとして規定されている「企業会計審議会により公表された企業会計の基準」について、当該審議会の根拠となる金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」へと改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 703,
+          "output_tokens": 103,
+          "thoughts_tokens": 425,
+          "total_tokens": 1231,
+          "elapsed_seconds": 5.422255199999199,
+          "response_id": "j_SPasToFd6Nx9gPn4ifiQs"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "416M60000008051",
+        "law_name": "地方独立行政法人法施行規則",
+        "revisions": [
+          {
+            "law_data_id": 641739,
+            "sub_revision": "1",
+            "amendment_id": "508M60000008106",
+            "amendment_name": "地方独立行政法人法施行規則の一部を改正する省令",
+            "amendment_num": "令和八年総務省令第百六号",
+            "enforcement_date": "2026-08-07",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "金融庁組織令の参照条項の変更に伴う規定の整理",
+          "body": "地方独立行政法人法施行規則における、一般に公正妥当と認められる企業会計の基準に関する規定において、引用している金融庁組織令の条項が変更されます。\\n\\n具体的には、企業会計審議会について定めた金融庁組織令の参照条項が、従来の「第二十四条第一項」から「第三十四条第一項」へと改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 668,
+          "output_tokens": 108,
+          "thoughts_tokens": 1177,
+          "total_tokens": 1953,
+          "elapsed_seconds": 9.536450499996135,
+          "response_id": "lvSParuuKvGcx9gPk9Pa-QQ"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "415M60000400119",
+        "law_name": "独立行政法人日本貿易振興機構の業務運営、財務及び会計並びに人事管理に関する省令",
+        "revisions": [
+          {
+            "law_data_id": 641723,
+            "sub_revision": "1",
+            "amendment_id": "508M60000400068",
+            "amendment_name": "独立行政法人経済産業研究所の業務運営、財務及び会計並びに人事管理に関する省令等の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第六十八号",
+            "enforcement_date": "2026-08-07",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "企業会計の基準に関する金融庁組織令の引用条項の改正",
+          "body": "会計の原則において、一般に公正妥当と認められる企業会計の基準に該当するものと規定されている「企業会計審議会により公表された企業会計の基準」について、当該審議会を規定する金融庁組織令の引用条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 699,
+          "output_tokens": 107,
+          "thoughts_tokens": 870,
+          "total_tokens": 1676,
+          "elapsed_seconds": 7.591869800002314,
+          "response_id": "ovSPapDhIeydx9gP3viLgA4"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "419M60000008098",
+        "law_name": "独立行政法人郵便貯金簡易生命保険管理・郵便局ネットワーク支援機構に関する省令",
+        "revisions": [
+          {
+            "law_data_id": 641736,
+            "sub_revision": "1",
+            "amendment_id": "508M60000008103",
+            "amendment_name": "独立行政法人郵便貯金簡易生命保険管理・郵便局ネットワーク支援機構に関する省令の一部を改正する省令",
+            "amendment_num": "令和八年総務省令第百三号",
+            "enforcement_date": "2026-08-07",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "金融庁組織令の改正に伴う企業会計審議会の引用条項の変更",
+          "body": "本改正により、会計の原則に関する規定（第十二条第二項）において引用されている、企業会計審議会の根拠となる「金融庁組織令」の条項が、従来の「第二十四条第一項」から「第三十四条第一項」に改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 696,
+          "output_tokens": 88,
+          "thoughts_tokens": 861,
+          "total_tokens": 1645,
+          "elapsed_seconds": 7.287936699998681,
+          "response_id": "q_SPav3_M_ybx9gP5KLK6Ao"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "426M60000400001",
+        "law_name": "経済産業省関係産業競争力強化法施行規則",
+        "revisions": [
+          {
+            "law_data_id": 641500,
+            "sub_revision": "1",
+            "amendment_id": "508M60000400063",
+            "amendment_name": "経済産業省関係産業競争力強化法施行規則及び株式会社東日本大震災事業者再生支援機構法第五十九条第一項の要件を定める省令の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第六十三号",
+            "enforcement_date": "2026-07-31",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "特定生産性向上設備等の確認基準の新設と設備定義の見直し",
+          "body": "特定生産性向上設備等投資計画に関する経済産業大臣の確認手続き、およびその変更や取消しの規定が新たに整備されました。この確認の基準として、投資利益率が年平均15パーセント以上であること、設備の取得価額の合計が35億円（中小企業者等は5億円）以上であること、確認から5年以内に取得し事業に供することなどが定められています。さらに、設備導入状況に関する国による調査・公表や、事業者への証明書の交付手続きも規定されました。\n\nまた、生産性向上設備等の定義が見直され、投資計画における年平均投資利益率の要件から中小企業者等の特例（5パーセント以上）が削除され、一律15パーセント以上となりました。これに加え、サーバー用電子計算機に係る除外規定も削除されています。\n\nそのほか、産業競争力強化法の改正による項ずれに対応するため、特定創業支援等事業の証明や創業関連保証などの参照条文の整理が行われました。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 5759,
+          "output_tokens": 247,
+          "thoughts_tokens": 1823,
+          "total_tokens": 7829,
+          "elapsed_seconds": 12.719637100002728,
+          "response_id": "tfSPate8Fd6Nx9gPn4ifiQs"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "506M60002000004",
+        "law_name": "自衛官等に対する療養の給付等に関する省令",
+        "revisions": [
+          {
+            "law_data_id": 641507,
+            "sub_revision": "1",
+            "amendment_id": "508M60002000019",
+            "amendment_name": "自衛官等に対する療養の給付等に関する省令の一部を改正する省令",
+            "amendment_num": "令和八年防衛省令第十九号",
+            "enforcement_date": "2026-08-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "高額療養費請求書の区分化と年間請求手続の整備",
+          "body": "高額療養費の支給請求について、月間および年間での請求手続きが整理・整備されました。\n\n月間の高額療養費請求については、提出する請求書が「月間の高額療養費請求書」に改められ、関係する規定が整理されました。\n\nまた、年間の高額療養費請求に関する手続きが新たに整備されました。基準日自衛官等が年間の高額療養費の支給を請求する際には「年間の高額療養費請求書」を提出することとし、特定の要件に該当する場合は証明書類の添付を義務付けます。計算期間の途中で被扶養者等が死亡した場合には、扶養する自衛官等が支給算定の申請を行うことができます。あわせて、食事療養・生活療養標準負担額の減額等があれば生活保護の要保護者に該当しないこととなる者を、年間の支給における対象者として新たに定義しています。\n\nそのほか、健康保険法施行令等の一部を改正する政令の附則に基づく申請手続きに関する規定や、従来の様式による書類を新様式のものとみなして当分の間使用できる経過措置などが設けられています。本省令は2026年8月1日から施行されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 4511,
+          "output_tokens": 302,
+          "thoughts_tokens": 1237,
+          "total_tokens": 6050,
+          "elapsed_seconds": 10.444354499995825,
+          "response_id": "xPSPatOIA96Nx9gPn4ifiQs"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "413M60000400105",
+        "law_name": "貿易保険法施行規則",
+        "revisions": [
+          {
+            "law_data_id": 641525,
+            "sub_revision": "1",
+            "amendment_id": "508M60000400064",
+            "amendment_name": "貿易保険法施行規則の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第六十四号",
+            "enforcement_date": "2026-07-31",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "「特定引受け」の定義追加と認可申請手続きの新設",
+          "body": "貿易保険法施行規則の改正により、用語の定義に「特定引受け」が追加されました。\n\nこれに伴い、会社が特定引受けの決定について経済産業大臣の認可を申請する際の手続きが新たに規定されました。認可の申請書には、対象となる特定引受けに係る貿易保険または再保険の内容や、その特定引受けが経済産業大臣の定める取決めに係るものであるかを確認するために必要な事項を記載することが義務付けられます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1573,
+          "output_tokens": 132,
+          "thoughts_tokens": 555,
+          "total_tokens": 2260,
+          "elapsed_seconds": 7.119575400000031,
+          "response_id": "0PSParb2Kd6Nx9gPn4ifiQs"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "410M50000002081",
+        "law_name": "金融庁組織規則",
+        "revisions": [
+          {
+            "law_data_id": 641635,
+            "sub_revision": "1",
+            "amendment_id": "508M60000002070",
+            "amendment_name": "金融庁組織規則等の一部を改正する内閣府令",
+            "amendment_num": "令和八年内閣府令第七十号",
+            "enforcement_date": "2026-08-07",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "金融庁の組織再編に伴う内部組織と所掌事務の再整備",
+          "body": "この改正では、金融庁の組織再編に伴い、各内部部局や証券取引等監視委員会事務局における室の設置や、各種調整官・専門官の配置および所掌事務の整理が行われました。\\n\\n主な改正内容は以下の通りです。\\n\\n・内部部局における組織の移管と新設\\n秘書課、文書課、信用課、市場課、国際課、銀行・証券監督局、資産運用・保険監督局などの間で、組織再編が実施されました。管理室や情報化統括室の事務が秘書課へ、総務課の事務の一部が文書課や国際課などへ移管され、各種調整官等の所属が変更されました。また、市場課には「市場機能強化室」や「暗号資産企画室」、資金決済課には「金融サービス仲介業室」、暗号資産・ステーブルコイン課には「イノベーション推進室」が新たに置かれました。\\n\\n・銀行・証券監督局等の設置に伴う整備\\n新たに整備された銀行・証券監督局の総務課には、監督調査室、リスク管理検査室、サイバーセキュリティ対策企画調整室、金融犯罪対策室、金融サービス利用者相談室、貸金業室、信用機構対応室、金融仲介企画室が配置され、多数の調整官や検査官が置かれました。\\n\\n・証券取引等監視委員会事務局の体制整備\\n市場分析審査課に、国外の不公正取引に関する情報収集や分析を行う「国際取引等分析室」が新設されました。これに合わせて、所掌事務等の関係規定や一部の定員が見直されました。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 18105,
+          "output_tokens": 404,
+          "thoughts_tokens": 3001,
+          "total_tokens": 21510,
+          "elapsed_seconds": 19.724699799997325,
+          "response_id": "2vSPat7zDN6Nx9gPn4ifiQs"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "414M60400000011",
+        "law_name": "国家公安委員会関係自動車運転代行業の業務の適正化に関する法律施行規則",
+        "revisions": [
+          {
+            "law_data_id": 641748,
+            "sub_revision": "1",
+            "amendment_id": "508M60400000017",
+            "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律の一部の施行に伴う関係国家公安委員会規則の整理に関する規則",
+            "amendment_num": "令和八年国家公安委員会規則第十七号",
+            "enforcement_date": "2026-08-12",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "暴力的不法行為等に該当する金融商品取引法の罪の規定を整理",
+          "body": "自動車運転代行業の業務の適正化に関する法律施行規則において規定されている、暴力的不法行為その他の罪に当たる行為のうち、対象となる金融商品取引法の罪の規定が整理されます。\n\nこれは、金融商品取引法等の改正に伴い実施されるものです。具体的には、同規則第1条第1項第8号で引用されている金融商品取引法の条項が一部改められ、同法第197条第1項第4号の3若しくは第4号の4、又は第197条の2第1項第10号の5から第12号までに規定する罪などが新たに対象規定として整理されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1922,
+          "output_tokens": 181,
+          "thoughts_tokens": 1103,
+          "total_tokens": 3206,
+          "elapsed_seconds": 9.66827490000287,
+          "response_id": "8PSParzgGuydx9gP3viLgA4"
+        }
       }
     }
-  },
-  {
-    "summary_input": {
-      "law_id": "507CO0000000193",
-      "law_name": "刑法等の一部を改正する法律及び刑法等の一部を改正する法律の施行に伴う関係法律の整理等に関する法律の施行に伴う関係政令の整理等及び経過措置に関する政令",
-      "revisions": [
-        {
-          "law_data_id": 641710,
-          "sub_revision": "1",
-          "amendment_id": "508CO0000000253",
-          "amendment_name": "更生保護制度の充実を図るための保護司法等の一部を改正する法律の施行に伴う関係政令の整理に関する政令",
-          "amendment_num": "令和八年政令第二百五十三号",
-          "enforcement_date": "2027-06-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": false
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "更生保護法の技術的読替え対象に第八号を追加",
-        "body": "本改正は、更生保護制度の充実に伴う関係政令の整理として、刑法等の適用に関する技術的読替え規定の一部を変更するものです。\\n\\n具体的には、更生保護法に関する技術的読替え規定において、対象となる範囲に新たに「第八号」が追加されます。これにより、対象となる号の指定に「第八号」が加わり、必要な規定の整理が行われます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 3045,
-        "output_tokens": 113,
-        "thoughts_tokens": 1376,
-        "total_tokens": 4534,
-        "elapsed_seconds": 8.909139936999992,
-        "response_id": "H0uJarOvJuCoq8YPuJCJoQk"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "508CO0000000254",
-      "law_name": "溶融亜鉛めっき鋼帯及び鋼板に対して課する暫定的な不当廉売関税に関する政令",
-      "revisions": [
-        {
-          "law_data_id": 641711,
-          "sub_revision": "1",
-          "amendment_id": null,
-          "amendment_name": null,
-          "amendment_num": null,
-          "enforcement_date": "2026-08-08",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "韓国・中国産めっき鋼帯等への暫定不当廉売関税の適用",
-        "body": "本政令は、特定国を原産地とする溶融亜鉛めっき鋼帯及び鋼板などの特定貨物に対し、暫定的な不当廉売関税を課す制度について定めています。\n\n暫定不当廉売関税の税率は、原産地および生産者に応じて設定されています。大韓民国を原産地とする貨物は38.0％、中国を原産地とする貨物は55.3％の税率が適用されます。ただし、それぞれ指定された生産者が生産した貨物については、個別に定める税率が適用されます。\n\nこれらの貨物、またはそれらを原料の一部として保税工場等で製造された製品を輸入しようとする者は、生産者が作成した生産証明書など、税率の適用に必要な書類を税関長に提出しなければなりません。また、税関長は輸入者に対し、当該貨物の原産地を証明する書類の提出を求めることができます。\n\nこの暫定不当廉売関税と通常の関税は、それぞれ別個の関税として関税法の規定が適用されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 1321,
-        "output_tokens": 277,
-        "thoughts_tokens": 1347,
-        "total_tokens": 2945,
-        "elapsed_seconds": 10.093257113000007,
-        "response_id": "KUuJauXcEr6K9LsP-b3ZiQI"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "416M60000008069",
-      "law_name": "国立研究開発法人情報通信研究機構の業務（出資継続業務を除く。）に係る財務及び会計に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641733,
-          "sub_revision": "1",
-          "amendment_id": "508M60000008100",
-          "amendment_name": "国立研究開発法人情報通信研究機構の業務（出資継続業務を除く。）に係る財務及び会計に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年総務省令第百号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計審議会の根拠となる金融庁組織令の参照条項の変更",
-        "body": "この改正により、会計の原則に関する規定において引用されている金融庁組織令の条項が変更されます。具体的には、一般に公正妥当と認められる企業会計の基準に該当するものとされる企業会計の基準を公表する企業会計審議会の根拠条項が、これまでの「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 703,
-        "output_tokens": 111,
-        "thoughts_tokens": 1283,
-        "total_tokens": 2097,
-        "elapsed_seconds": 8.166810931,
-        "response_id": "NEuJap2-IrePq8YPpOGJ2AU"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "416M60000008051",
-      "law_name": "地方独立行政法人法施行規則",
-      "revisions": [
-        {
-          "law_data_id": 641739,
-          "sub_revision": "1",
-          "amendment_id": "508M60000008106",
-          "amendment_name": "地方独立行政法人法施行規則の一部を改正する省令",
-          "amendment_num": "令和八年総務省令第百六号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織令の参照条項の修正",
-        "body": "地方独立行政法人の会計の原則において、一般に公正妥当と認められる企業会計の基準として扱われる「企業会計審議会により公表された企業会計の基準」について、その根拠となる金融庁組織令の参照条項が修正されます。\n\n具体的には、参照する条項が「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 668,
-        "output_tokens": 115,
-        "thoughts_tokens": 591,
-        "total_tokens": 1374,
-        "elapsed_seconds": 4.566221108999997,
-        "response_id": "PUuJapC1NJmV4_UPofuK2QE"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "415M60000400119",
-      "law_name": "独立行政法人日本貿易振興機構の業務運営、財務及び会計並びに人事管理に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641723,
-          "sub_revision": "1",
-          "amendment_id": "508M60000400068",
-          "amendment_name": "独立行政法人経済産業研究所の業務運営、財務及び会計並びに人事管理に関する省令等の一部を改正する省令",
-          "amendment_num": "令和八年経済産業省令第六十八号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "会計の原則における金融庁組織令の参照条項の変更",
-        "body": "会計の原則に関する規定において、企業会計の基準を公表する「企業会計審議会」の根拠として引用されている金融庁組織令の条項が、従来の「第二十四条第一項」から「第三十四条第一項」に改められます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 699,
-        "output_tokens": 82,
-        "thoughts_tokens": 676,
-        "total_tokens": 1457,
-        "elapsed_seconds": 5.138256103000003,
-        "response_id": "Q0uJaraPJK6fq8YP2NzKmQc"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "419M60000008098",
-      "law_name": "独立行政法人郵便貯金簡易生命保険管理・郵便局ネットワーク支援機構に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641736,
-          "sub_revision": "1",
-          "amendment_id": "508M60000008103",
-          "amendment_name": "独立行政法人郵便貯金簡易生命保険管理・郵便局ネットワーク支援機構に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年総務省令第百三号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "企業会計の基準に関する金融庁組織令の参照条項の変更",
-        "body": "本改正により、一般に公正妥当と認められる企業会計の基準に該当するものとされる、企業会計審議会が公表した企業会計の基準に関する規定において、同審議会の根拠となる金融庁組織令の参照条項が「第二十四条第一項」から「第三十四条第一項」に変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 696,
-        "output_tokens": 97,
-        "thoughts_tokens": 546,
-        "total_tokens": 1339,
-        "elapsed_seconds": 4.426428227000002,
-        "response_id": "SUuJas7SOK6fq8YP2NzKmQc"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "426M60000400001",
-      "law_name": "経済産業省関係産業競争力強化法施行規則",
-      "revisions": [
-        {
-          "law_data_id": 641500,
-          "sub_revision": "1",
-          "amendment_id": "508M60000400063",
-          "amendment_name": "経済産業省関係産業競争力強化法施行規則及び株式会社東日本大震災事業者再生支援機構法第五十九条第一項の要件を定める省令の一部を改正する省令",
-          "amendment_num": "令和八年経済産業省令第六十三号",
-          "enforcement_date": "2026-07-31",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "特定生産性向上設備等の確認基準の新設と投資要件の改定",
-        "body": "特定生産性向上設備等の導入等に関する一連の確認・審査手続きが新たに規定されました。経済産業大臣による投資計画の確認や変更の確認、確認の取消しに関する運用のほか、投資計画の具体的な審査基準が整備されました。主な確認基準として、年平均の投資利益率が15パーセント以上であること、取得価額の合計額が35億円以上（中小企業者等の投資計画の場合は5億円以上）であること、確認から5年以内に設備を取得等して事業の用に供することなどが定められています。さらに、経済産業大臣が導入状況や投資利益率等の調査・評価・公表を行える規定や、事業者の申請に基づき導入状況の証明書を交付する手続きが新設されました。\\n\\nまた、生産性向上設備等の定義における投資計画の要件が一部見直されました。サーバー用の電子計算機に関する一部の除外規定が削除されたほか、投資利益率の要件について、従来設けられていた中小企業者等向けの緩和措置（5パーセント以上）が廃止され、一律で15パーセント以上となりました。\\n\\nこのほか、創業支援や創業関連保証等の規定に関して、参照している法律の条項番号のずれに伴う文言の整理・修正が行われています。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 5759,
-        "output_tokens": 304,
-        "thoughts_tokens": 3036,
-        "total_tokens": 9099,
-        "elapsed_seconds": 17.31369541699999,
-        "response_id": "T0uJar6JLb2E998PoaO18QM"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "506M60002000004",
-      "law_name": "自衛官等に対する療養の給付等に関する省令",
-      "revisions": [
-        {
-          "law_data_id": 641507,
-          "sub_revision": "1",
-          "amendment_id": "508M60002000019",
-          "amendment_name": "自衛官等に対する療養の給付等に関する省令の一部を改正する省令",
-          "amendment_num": "令和八年防衛省令第十九号",
-          "enforcement_date": "2026-08-01",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "高額療養費の申請手続きや請求様式の見直し",
-        "body": "本改正により、高額療養費の支給申請手続きおよび請求様式が見直されます。\n\n主な変更点は以下の通りです。\n\n■月間および年間の高額療養費請求手続きの整理\n高額療養費の支給を受けようとする際、月間の申請には「月間の高額療養費請求書」を、年間の申請には「年間の高額療養費請求書」をそれぞれ実施機関の長に提出することが定められました。また、年間の高額療養費請求において必要な場合には、該当者であることを証明する書類の添付が求められます。\n\n■被扶養者が死亡した場合等の申請規定の整備\n計算期間の途中で死亡した被扶養者などの「精算対象者」がいる場合、その者を扶養していた自衛官等が、当該精算対象者に係る高額療養費の算定申請を行うことができるようになります。\n\n■関係規定の整備と経過措置\n関係する政令の改正等に伴い、条文の参照先や要保護者に関する基準が整理されました。また、施行時に手元にある改正前の旧様式の用紙については、当分の間、取り繕って使用できる等の経過措置が設けられます。\n\n本改正は2026年8月1日から施行されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 4511,
-        "output_tokens": 318,
-        "thoughts_tokens": 1111,
-        "total_tokens": 5940,
-        "elapsed_seconds": 9.274959558999996,
-        "response_id": "YkuJavy2CbuPq8YPtv3UqQo"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "413M60000400105",
-      "law_name": "貿易保険法施行規則",
-      "revisions": [
-        {
-          "law_data_id": 641525,
-          "sub_revision": "1",
-          "amendment_id": "508M60000400064",
-          "amendment_name": "貿易保険法施行規則の一部を改正する省令",
-          "amendment_num": "令和八年経済産業省令第六十四号",
-          "enforcement_date": "2026-07-31",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "特定引受けの定義追加と認可申請手続きの新設",
-        "body": "本改正により、貿易保険法施行規則の定義規定に「特定引受け」が追加されました。また、特定引受けの決定に関する認可申請手続きが新たに整備されました。会社が特定引受けの決定について経済産業大臣の認可を受けようとする場合、当該特定引受けに係る貿易保険または再保険の内容や、経済産業大臣が定める取決めに係るものであるかを確認するために必要な事項を記載した申請書を提出しなければならないこととされました。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 1573,
-        "output_tokens": 121,
-        "thoughts_tokens": 1548,
-        "total_tokens": 3242,
-        "elapsed_seconds": 10.206686792,
-        "response_id": "bEuJaoPiJev1tALPkN-hAQ"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "410M50000002081",
-      "law_name": "金融庁組織規則",
-      "revisions": [
-        {
-          "law_data_id": 641635,
-          "sub_revision": "1",
-          "amendment_id": "508M60000002070",
-          "amendment_name": "金融庁組織規則等の一部を改正する内閣府令",
-          "amendment_num": "令和八年内閣府令第七十号",
-          "enforcement_date": "2026-08-07",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "金融庁組織の再編と各課室の設置・事務分掌の変更",
-        "body": "本改正では、金融庁の組織再編に伴い、各局・課室の設置や所掌事務、職員の配置が整理されました。\n\n主な変更点として、銀行・証券監督局の総務課に監督調査室、リスク管理検査室、金融犯罪対策室などの多くの室を配置したほか、信用課に信用機構企画室、市場課に市場機能強化室および暗号資産企画室を設置しました。さらに、資金決済課に金融サービス仲介業室、暗号資産・ステーブルコイン課にイノベーション推進室をそれぞれ設けています。\n\nまた、従来の管理室や情報化統括室が担っていた事務を秘書課に移行したほか、総務課の事務の一部を文書課や国際課などに移管しました。これに伴い、管理予算調整官、情報企画調整官、各種規制・法制企画調整官などの各種調整官や専門官の配置、任務についても、移行先の課の所掌に合わせて改められています。\n\nこのほか、証券取引等監視委員会の事務局では、市場分析審査課に「国際取引等分析室」を新たに設置し、国外での不公正取引等に関する情報収集や、国際金融資本市場の情報収集・分析などの事務を担わせることとしました。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 18105,
-        "output_tokens": 316,
-        "thoughts_tokens": 2228,
-        "total_tokens": 20649,
-        "elapsed_seconds": 16.224351322000018,
-        "response_id": "eEuJaqfKDPepq8YP5rziiAk"
-      }
-    }
-  },
-  {
-    "summary_input": {
-      "law_id": "414M60400000011",
-      "law_name": "国家公安委員会関係自動車運転代行業の業務の適正化に関する法律施行規則",
-      "revisions": [
-        {
-          "law_data_id": 641748,
-          "sub_revision": "1",
-          "amendment_id": "508M60400000017",
-          "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律の一部の施行に伴う関係国家公安委員会規則の整理に関する規則",
-          "amendment_num": "令和八年国家公安委員会規則第十七号",
-          "enforcement_date": "2026-08-12",
-          "scheduled_enforcement_date": null,
-          "enforcement_comment": null,
-          "is_current": true
-        }
-      ]
-    },
-    "response": {
-      "summary": {
-        "title": "暴力的不法行為等に当たる金融商品取引法違反罪の範囲を整理",
-        "body": "金融商品取引法及び資金決済に関する法律の一部を改正する法律の一部の施行に伴い、自動車運転代行業の業務の適正化に関する法律施行規則で規定されている「暴力的不法行為その他の罪に当たる行為」の範囲が整理されます。\n\n具体的には、対象となる金融商品取引法違反の罪として、同法第百九十七条第一項第四号の三および第四号の四に規定する罪が追加されます。また、これに伴い、同法第百九十七条の二第一項における対象条項の規定が変更されます。"
-      },
-      "usage": {
-        "model": "gemini-3.5-flash",
-        "prompt_tokens": 1922,
-        "output_tokens": 160,
-        "thoughts_tokens": 1019,
-        "total_tokens": 3101,
-        "elapsed_seconds": 6.926480776000005,
-        "response_id": "ikuJasyaA_mQq8YPs8OsuQw"
-      }
-    }
-  }
-]
+  ]
+}
