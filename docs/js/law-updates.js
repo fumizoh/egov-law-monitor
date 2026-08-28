@@ -196,7 +196,7 @@ async function main() {
 
     const [
         laws,
-        lawSummaries,
+        lawSummaryData,
     ] = await Promise.all([
         fetchJson("data/laws.json"),
         fetchJson("data/law_summaries.json"),
@@ -204,7 +204,7 @@ async function main() {
 
     renderLaws(
         laws,
-        lawSummaries,
+        lawSummaryData.summaries,
     );
 
 }

@@ -160,7 +160,7 @@ async function loadLaws() {
 
     renderLaws(
         laws,
-        summaries,
+        summaries.summaries,
     );
 
 }
