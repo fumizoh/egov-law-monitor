@@ -51,7 +51,6 @@ https://fumizoh.github.io/egov-law-monitor/
 │   └── workflows/      # GitHub Actions
 ├── docs/               # GitHub Pages
 ├── src/                # アプリケーションのソースコード
-├── tools/              # 開発・検証用ツール
 ├── CHANGELOG.md
 ├── LICENSE
 ├── README.md

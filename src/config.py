@@ -29,11 +29,12 @@ AI_SUMMARY_LOG_JSONL = DOCS_DATA / "ai_summary_log.jsonl"
 
 # Sorting order
 LAW_TYPE_ORDER = {
-    "法律": 0,
-    "政令": 1,
-    "勅令": 2,
-    "府省令": 3,
-    "規則": 4,
+    "憲法": 0,
+    "法律": 1,
+    "政令": 2,
+    "勅令": 3,
+    "府省令": 4,
+    "規則": 5,
 }
 
 
