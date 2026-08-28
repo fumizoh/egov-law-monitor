@@ -27,6 +27,11 @@ def main(date: str | None = None):
 
     specified_date = date
 
+    if specified_date is None:
+        storage_paths = storage.DEFAULT_STORAGE
+    else:
+        storage_paths = storage.REPROCESS_STORAGE
+
     events, date = egov.fetch(date=specified_date)
 
     statistics = storage.load_statistics()
@@ -45,62 +50,59 @@ def main(date: str | None = None):
             wp=None,
         )
 
-        print("=== notification ===")
-
-        service.send_processing_notification(
-            result=result,
-        )
-
-        return
-
-    print("=== pipeline ===")
-
-    if specified_date is None:
-        storage_paths = storage.DEFAULT_STORAGE
     else:
-        storage_paths = storage.REPROCESS_STORAGE
+        print("=== pipeline ===")
 
-    laws = pipeline.process_egov(
-        events=events,
-        date=date,
-        storage_paths=storage_paths,
-    )
-
-    print("=== WordPress ===")
-
-    try:
-        wp_result = wordpress_service.sync_daily_post(
+        laws = pipeline.process_egov(
+            events=events,
             date=date,
             storage_paths=storage_paths,
         )
 
-        print(
-            f"WordPress: {wp_result.status} "
-            f"({wp_result.action}) "
-            f"post_id={wp_result.post_id} "
-            f"status={wp_result.post_status}"
+        print("=== WordPress ===")
+
+        try:
+            wp_result = wordpress_service.sync_daily_post(
+                date=date,
+                storage_paths=storage_paths,
+            )
+
+            print(
+                f"WordPress: {wp_result.status} "
+                f"({wp_result.action}) "
+                f"post_id={wp_result.post_id} "
+                f"status={wp_result.post_status}"
+            )
+
+        except Exception as e:
+            logger.exception("WordPress error")
+
+            wp_result = WPResult(
+                status="error",
+                error=str(e),
+            )
+
+        result = ProcessingResult(
+            date=date,
+            update_count=len(events),
+            updated_law_count=len(laws),
+            laws=laws,
+            wp=wp_result,
         )
-
-    except Exception as e:
-        logger.exception("WordPress error")
-
-        wp_result = WPResult(
-            status="error",
-            error=str(e),
-        )
-
-    result = ProcessingResult(
-        date=date,
-        update_count=len(events),
-        updated_law_count=len(laws),
-        laws=laws,
-        wp=wp_result,
-    )
 
     print("=== notification ===")
 
     service.send_processing_notification(
         result=result,
+    )
+
+    print("=== record last checked ===")
+
+    storage.save_watch_status(
+        {
+            "last_checked": datetime.now(JST).isoformat(),
+        },
+        paths=storage_paths,
     )
 
 

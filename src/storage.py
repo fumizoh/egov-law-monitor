@@ -35,6 +35,7 @@ from config import (
     AI_STATISTICS_JSON,
     AI_SUMMARY_LOG_JSONL,
     APP_JSON,
+    WATCH_STATUS_JSON,
 )
 
 @dataclass(frozen=True)
@@ -44,11 +45,13 @@ class StoragePaths:
     laws: Path
     law_summaries: Path
     statistics: Path
+    watch_status: Path
 
 DEFAULT_STORAGE = StoragePaths(
     laws=LAWS_JSON,
     law_summaries=LAW_SUMMARIES_JSON,
     statistics=STATISTICS_JSON,
+    watch_status=WATCH_STATUS_JSON,
 )
 
 REPROCESS_DIR = DOCS_DATA / "reprocess"
@@ -57,6 +60,7 @@ REPROCESS_STORAGE = StoragePaths(
     laws=REPROCESS_DIR / "laws.json",
     law_summaries=REPROCESS_DIR / "law_summaries.json",
     statistics=REPROCESS_DIR / "statistics.json",
+    watch_status=REPROCESS_DIR / "watch_status.json",
 )
 
 
@@ -418,3 +422,33 @@ def append_ai_summary_logs(
             )
 
             f.write("\n")
+
+
+def load_watch_status(
+    paths: StoragePaths = DEFAULT_STORAGE,
+) -> dict:
+    """Load Watch status."""
+
+    if not paths.watch_status.exists():
+        return {}
+
+    try:
+        return load_json(paths.watch_status)
+    except json.JSONDecodeError:
+        logger.exception(
+            "Failed to load %s",
+            paths.watch_status,
+        )
+        return {}
+
+
+def save_watch_status(
+    status: dict,
+    paths: StoragePaths = DEFAULT_STORAGE,
+) -> None:
+    """Save Watch status."""
+
+    save_json(
+        status,
+        paths.watch_status,
+    )
