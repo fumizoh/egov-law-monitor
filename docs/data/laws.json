@@ -1,23 +1,23 @@
 [
   {
-    "law_id": "421M60000008029",
-    "law_no": "平成二十一年総務省令第二十九号",
-    "law_name": "国家公務員退職手当法の規定に基づく意見の聴取の手続に関する規則",
+    "law_id": "424M60000004003",
+    "law_no": "平成二十四年復興庁令第三号",
+    "law_name": "福島復興再生特別措置法施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/421M60000008029",
+    "url": "https://laws.e-gov.go.jp/law/424M60000004003",
     "updates": [
       {
-        "law_data_id": 641771,
+        "law_data_id": 641772,
         "sub_revision": "1",
-        "published_date": "2009-03-31",
-        "effective_date": "2026-10-01",
+        "published_date": "2012-03-31",
+        "effective_date": "2026-08-17",
         "effective_comment": "",
-        "amend_name": "国家公務員退職手当法の規定に基づく意見の聴取の手続に関する規則の一部を改正する内閣官房令",
-        "amend_no": "令和八年内閣官房令第九号",
-        "amendment_id": "508M60000001009",
-        "amend_published_date": "2026-08-19",
-        "compare_url": "https://laws.e-gov.go.jp/law/421M60000008029/20261001_508M60000001009?occasion_date=20261001&tab=compare",
-        "pending": true
+        "amend_name": "福島復興再生特別措置法施行規則の一部を改正する庁令",
+        "amend_no": "令和八年復興庁令第五号",
+        "amendment_id": "508M60000004005",
+        "amend_published_date": "2026-08-17",
+        "compare_url": "https://laws.e-gov.go.jp/law/424M60000004003/20260817_508M60000004005?occasion_date=20260817&tab=compare",
+        "pending": false
       }
     ]
   }

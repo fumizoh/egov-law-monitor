@@ -1,37 +1,37 @@
 {
-  "date": "20260827",
+  "date": "20260828",
   "summaries": [
     {
       "summary_input": {
-        "law_id": "421M60000008029",
-        "law_name": "国家公務員退職手当法の規定に基づく意見の聴取の手続に関する規則",
+        "law_id": "424M60000004003",
+        "law_name": "福島復興再生特別措置法施行規則",
         "revisions": [
           {
-            "law_data_id": 641771,
+            "law_data_id": 641772,
             "sub_revision": "1",
-            "amendment_id": "508M60000001009",
-            "amendment_name": "国家公務員退職手当法の規定に基づく意見の聴取の手続に関する規則の一部を改正する内閣官房令",
-            "amendment_num": "令和八年内閣官房令第九号",
-            "enforcement_date": "2026-10-01",
+            "amendment_id": "508M60000004005",
+            "amendment_name": "福島復興再生特別措置法施行規則の一部を改正する庁令",
+            "amendment_num": "令和八年復興庁令第五号",
+            "enforcement_date": "2026-08-17",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": false
+            "is_current": true
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "意見聴取の主宰者を再指名する事由の見直し",
-          "body": "本改正により、意見の聴取を行う主宰者が変更となる際の、新たな主宰者を指名する手続きの要件が見直されます。\n\nこれまでは、主宰者が準用行政手続法第十九条第二項各号のいずれかに該当するに至った場合のほか、主宰者が死亡し、または心身の故障その他の事由により継続して意見の聴取を行えなくなった場合にも、退職手当管理機関は速やかに新たな主宰者を指名しなければならないとされていました。今回の改正により、後者の死亡や心身の故障等により意見の聴取を行えなくなった場合に関する規定が削除されます。\n\nこれにより、新たな主宰者の指名が必要となるのは、主宰者が準用行政手続法第十九条第二項各号のいずれかに該当するに至ったときのみとなります。\n\nなお、この改正は2026年10月1日から施行されます。"
+          "title": "福島復興再生特別措置法施行規則の一部改正",
+          "body": "令和八年復興庁令第五号により、福島復興再生特別措置法施行規則の一部を改正する庁令が、2026年8月17日に施行されます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 707,
-          "output_tokens": 224,
-          "thoughts_tokens": 2059,
-          "total_tokens": 2990,
-          "elapsed_seconds": 14.404319998000119,
-          "response_id": "8uSQaqDqBL_BodAP096KqQI"
+          "prompt_tokens": 509,
+          "output_tokens": 57,
+          "thoughts_tokens": 532,
+          "total_tokens": 1098,
+          "elapsed_seconds": 4.472392654000004,
+          "response_id": "XQ-SaqyUH_CUl7oP2beFoQ8"
         }
       }
     }
