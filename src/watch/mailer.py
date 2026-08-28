@@ -46,10 +46,12 @@ def _get_smtp_config() -> tuple[str, int, str, str, str, str] | None:
     )
 
 
-def send_email(subject, body):
-    """
-    メールを送信する。
-    """
+def send_email(
+    subject: str,
+    body: str,
+    html_body: str | None = None,
+) -> None:
+    """Send watch notification email."""
 
     config = _get_smtp_config()
 
@@ -72,6 +74,12 @@ def send_email(subject, body):
     message["To"] = mail_to
 
     message.set_content(body)
+
+    if html_body is not None:
+        message.add_alternative(
+            html_body,
+            subtype="html",
+        )
 
     try:
         with smtplib.SMTP_SSL(

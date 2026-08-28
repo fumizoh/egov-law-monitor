@@ -219,6 +219,10 @@ __marimo__/
 
 # Generated data
 data/downloads/
+data/email/
 data/extracted/
 data/logs/
 data/xml/
+
+# Development tools
+/tools/

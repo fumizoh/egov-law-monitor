@@ -9,23 +9,22 @@ from models import (
 from wordpress import client
 
 
-def get_watch_ids() -> set[str]:
-    """Get watched law IDs from WordPress."""
+def get_watches() -> list[dict]:
+    """Get watched laws from WordPress."""
 
-    watches = client.get_watches()
-
-    return {
-        watch["law_id"]
-        for watch in watches
-    }
+    return client.get_watches()
 
 
 def find_watched_laws(
     laws: list[Law],
+    watches: list[dict],
 ) -> list[Law]:
     """Return laws that are being watched."""
 
-    watch_ids = get_watch_ids()
+    watch_ids = {
+        watch["law_id"]
+        for watch in watches
+    }
 
     return [
         law
@@ -40,8 +39,6 @@ def build_notifications(
 ) -> list[WatchNotification]:
     """Build watch notifications for watched laws."""
 
-    watched_laws = find_watched_laws(laws)
-
     summaries = {
         law_summary.summary_input.law_id: law_summary.response.summary
         for law_summary in law_summaries
@@ -52,5 +49,5 @@ def build_notifications(
             law=law,
             summary=summaries.get(law["law_id"]),
         )
-        for law in watched_laws
+        for law in laws
     ]

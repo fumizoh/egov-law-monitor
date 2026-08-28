@@ -9,6 +9,8 @@ import law_group
 import law_builder
 
 import watch.service as watch_service
+import watch.email as watch_email
+import watch.mailer as watch_mailer
 
 from summary import generator
 
@@ -63,12 +65,7 @@ def process_egov(
 
     laws = law_builder.build_laws(law_groups)
 
-    watched_laws = watch_service.find_watched_laws(laws)
-
-    logger.info(
-        "Watched laws: %d",
-        len(watched_laws),
-    )
+    watches = watch_service.get_watches()
 
     logger.info("Total %d laws", len(laws))
 
@@ -126,5 +123,41 @@ def process_egov(
     )
 
     storage.save_ai_statistics(statistics)
+
+    # Watch
+    law_summaries = storage.load_law_summaries(
+        storage_paths
+    )
+
+    watched_laws = watch_service.find_watched_laws(
+        laws,
+        watches,
+    )
+
+    notifications = watch_service.build_notifications(
+        watched_laws,
+        list(law_summaries.values()),
+    )
+
+    if notifications:
+        subject = watch_email.build_subject(
+            notifications
+        )
+
+        body = watch_email.build_body(
+            notifications,
+            watches,
+        )
+
+        html_body = watch_email.build_html(
+            notifications,
+            watches,
+        )
+
+        watch_mailer.send_email(
+            subject,
+            body,
+            html_body=html_body,
+        )
 
     return laws
