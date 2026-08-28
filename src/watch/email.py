@@ -88,14 +88,6 @@ def build_html(
     padding: 24px 16px;
 ">
 
-<h1 style="
-    margin: 0 0 24px;
-    font-size: 20px;
-    font-weight: 600;
-">
-    法令ウォッチ
-</h1>
-
 <p style="margin: 0 0 24px;">
     ウォッチ対象の法令が
     <strong>{count}件</strong>
@@ -131,8 +123,6 @@ def build_html(
     margin: 0 0 12px;
     padding: 16px;
     background: #ffffff;
-    border: 1px solid #e1e5e8;
-    border-radius: 8px;
 ">
     <div style="margin-bottom: 4px;">
         <a href="{law_url}" style="
