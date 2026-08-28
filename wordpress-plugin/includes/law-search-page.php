@@ -33,6 +33,15 @@ function egov_law_monitor_render_search_page() {
 
             <h2>現在ウォッチ中の法令</h2>
 
+            <div class="egov-law-watch-status">
+                <p>
+                    現在 <?php echo count( $watches ); ?> 件の法令を監視中
+                </p>
+                <p>
+                    最終確認：<span id="egov-law-watch-last-checked">確認中…</span>
+                </p>
+            </div>
+
             <div class="egov-law-watches">
 
                 <?php foreach ( $watches as $watch ) : ?>

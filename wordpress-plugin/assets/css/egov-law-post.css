@@ -231,11 +231,25 @@
 
 /* Law Watch */
 
+/* Status */
 .egov-law-search h2 {
     margin-top: 32px;
     margin-bottom: 16px;
 }
 
+.egov-law-search .egov-law-watch-status {
+    margin-bottom: 20px;
+}
+
+.egov-law-search .egov-law-watch-status p {
+    margin: 0;
+}
+
+.egov-law-search .egov-law-watch-status p+p {
+    margin-top: 4px;
+}
+
+/* Watched laws */
 .egov-law-watches {
     display: flex;
     flex-direction: column;
@@ -268,9 +282,7 @@
     margin-top: 8px;
 }
 
-
 /* Search form */
-
 .egov-law-search-form {
     display: flex;
     flex-wrap: wrap;

@@ -1,4 +1,39 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    const lastChecked =
+        document.getElementById('egov-law-watch-last-checked');
+
+    if (lastChecked) {
+        try {
+            const response = await fetch(
+                `${egovLawMonitor.dataUrl}data/watch_status.json`
+            );
+
+            if (!response.ok) {
+                throw new Error('Watch status could not be loaded.');
+            }
+
+            const data = await response.json();
+
+            if (!data.last_checked) {
+                lastChecked.textContent = '未確認';
+            } else {
+                const date = new Date(data.last_checked);
+
+                lastChecked.textContent =
+                    new Intl.DateTimeFormat('ja-JP', {
+                        year: 'numeric',
+                        month: 'numeric',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: '2-digit',
+                    }).format(date);
+            }
+        } catch (error) {
+            console.error(error);
+            lastChecked.textContent = '確認できません';
+        }
+    }
+
     const buttons = document.querySelectorAll(
         '.egov-law-watch-button'
     );
