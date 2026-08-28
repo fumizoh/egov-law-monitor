@@ -247,7 +247,6 @@ def load_law_summaries(
 
     try:
         data = load_json(paths.law_summaries)
-
     except json.JSONDecodeError:
         logger.exception(
             "Failed to load %s",
@@ -255,13 +254,9 @@ def load_law_summaries(
         )
         return {}
 
-    # New format
-    if isinstance(data, dict):
-        data = data.get("summaries", [])
-
     summaries = [
         from_dict(LawSummary, item)
-        for item in data
+        for item in data["summaries"]
     ]
 
     return {
@@ -280,7 +275,6 @@ def get_law_summaries_date(
 
     try:
         data = load_json(paths.law_summaries)
-
     except json.JSONDecodeError:
         logger.exception(
             "Failed to load %s",
@@ -288,11 +282,7 @@ def get_law_summaries_date(
         )
         return None
 
-    if not isinstance(data, dict):
-        # Legacy format has no date.
-        return None
-
-    return data.get("date")
+    return data["date"]
 
 
 def save_law_summaries(
