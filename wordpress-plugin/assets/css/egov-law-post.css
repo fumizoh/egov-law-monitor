@@ -264,6 +264,22 @@
     border-radius: 8px;
 }
 
+.egov-law-search .egov-law-watch-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.egov-law-search .egov-law-watch-header h3 {
+    margin: 0;
+    min-width: 0;
+}
+
+.egov-law-search .egov-law-watch-header .egov-law-unwatch-button {
+    flex: 0 0 auto;
+}
+
 .egov-law-search .egov-law-watch h3 {
     margin: 0 0 4px;
     padding: 0;
@@ -317,6 +333,22 @@
     background: #fff;
     border: 1px solid #e1e5e8;
     border-radius: 8px;
+}
+
+.egov-law-search .egov-law-search-result-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.egov-law-search .egov-law-search-result-header h4 {
+    margin: 0;
+    min-width: 0;
+}
+
+.egov-law-search .egov-law-search-result-header button {
+    flex: 0 0 auto;
 }
 
 .egov-law-search .egov-law-search-result h4 {
