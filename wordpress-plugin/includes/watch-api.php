@@ -3,44 +3,41 @@
  * e-Gov Law Monitor - Watch API
  */
 
-define(
-    'EGOV_LAW_MONITOR_WATCH_OPTION',
-    'egov_law_monitor_watches'
-);
-
-
 /**
- * Get watched laws.
+ * Get watched laws for the current user.
  *
  * @return array
  */
 function egov_law_monitor_get_watches() {
 
-    $watches = get_option(
-        EGOV_LAW_MONITOR_WATCH_OPTION,
-        []
-    );
+    global $wpdb;
 
-    if ( ! is_array( $watches ) ) {
+    $user_id = get_current_user_id();
+
+    if ( ! $user_id ) {
         return [];
     }
 
-    return array_values( $watches );
-}
+    $table_name = $wpdb->prefix . 'law_watch_settings';
 
-
-/**
- * Save watched laws.
- *
- * @param array $watches Watched laws.
- * @return bool
- */
-function egov_law_monitor_save_watches( $watches ) {
-
-    return update_option(
-        EGOV_LAW_MONITOR_WATCH_OPTION,
-        array_values( $watches )
+    $results = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT
+                law_id,
+                law_name,
+                law_no,
+                law_type,
+                created_at,
+                updated_at
+             FROM {$table_name}
+             WHERE user_id = %d
+             ORDER BY created_at ASC",
+            $user_id
+        ),
+        ARRAY_A
     );
+
+    return is_array( $results ) ? $results : [];
 }
 
 
@@ -51,7 +48,7 @@ function egov_law_monitor_save_watches( $watches ) {
  */
 function egov_law_monitor_watch_permission() {
 
-    return current_user_can( 'manage_options' );
+    return is_user_logged_in();
 }
 
 
@@ -78,6 +75,20 @@ add_action(
                     'methods'             => WP_REST_Server::CREATABLE,
                     'callback'            => function ( WP_REST_Request $request ) {
 
+                        global $wpdb;
+
+                        $user_id = get_current_user_id();
+
+                        if ( ! $user_id ) {
+                            return new WP_Error(
+                                'not_logged_in',
+                                'ログインが必要です。',
+                                [
+                                    'status' => 401,
+                                ]
+                            );
+                        }
+
                         $law_id   = $request->get_param( 'law_id' );
                         $law_name = $request->get_param( 'law_name' );
                         $law_no   = $request->get_param( 'law_no' );
@@ -102,37 +113,71 @@ add_action(
                             );
                         }
 
-                        $watch = [
-                            'law_id'   => trim( $law_id ),
-                            'law_name' => trim( $law_name ),
-                            'law_no'   => trim( $law_no ),
-                            'law_type' => trim( $law_type ),
-                        ];
+                        $law_id   = trim( $law_id );
+                        $law_name = trim( $law_name );
+                        $law_no   = trim( $law_no );
+                        $law_type = trim( $law_type );
 
-                        $watches = egov_law_monitor_get_watches();
+                        $table_name = $wpdb->prefix . 'law_watch_settings';
 
-                        foreach ( $watches as $existing_watch ) {
+                        $existing = $wpdb->get_var(
+                            $wpdb->prepare(
+                                "SELECT id
+                                 FROM {$table_name}
+                                 WHERE user_id = %d
+                                   AND law_id = %s
+                                 LIMIT 1",
+                                $user_id,
+                                $law_id
+                            )
+                        );
 
-                            if (
-                                isset( $existing_watch['law_id'] )
-                                && $existing_watch['law_id'] === $watch['law_id']
-                            ) {
-                                return new WP_Error(
-                                    'already_watched',
-                                    'This law is already being watched.',
-                                    [
-                                        'status' => 409,
-                                    ]
-                                );
-                            }
+                        if ( $existing ) {
+                            return new WP_Error(
+                                'already_watched',
+                                'This law is already being watched.',
+                                [
+                                    'status' => 409,
+                                ]
+                            );
                         }
 
-                        $watches[] = $watch;
+                        $now = current_time( 'mysql' );
 
-                        egov_law_monitor_save_watches( $watches );
+                        $inserted = $wpdb->insert(
+                            $table_name,
+                            [
+                                'user_id'    => $user_id,
+                                'law_id'     => $law_id,
+                                'law_name'   => $law_name,
+                                'law_no'     => $law_no,
+                                'law_type'   => $law_type,
+                                'created_at' => $now,
+                                'updated_at' => $now,
+                            ],
+                            [
+                                '%d',
+                                '%s',
+                                '%s',
+                                '%s',
+                                '%s',
+                                '%s',
+                                '%s',
+                            ]
+                        );
+
+                        if ( false === $inserted ) {
+                            return new WP_Error(
+                                'watch_save_failed',
+                                'ウォッチ登録に失敗しました。',
+                                [
+                                    'status' => 500,
+                                ]
+                            );
+                        }
 
                         return [
-                            'law_id'  => $watch['law_id'],
+                            'law_id' => $law_id,
                             'watches' => egov_law_monitor_get_watches(),
                         ];
                     },
@@ -148,31 +193,47 @@ add_action(
                 'methods'             => WP_REST_Server::DELETABLE,
                 'callback'            => function ( WP_REST_Request $request ) {
 
+                    global $wpdb;
+
+                    $user_id = get_current_user_id();
+
+                    if ( ! $user_id ) {
+                        return new WP_Error(
+                            'not_logged_in',
+                            'ログインが必要です。',
+                            [
+                                'status' => 401,
+                            ]
+                        );
+                    }
+
                     $law_id = $request->get_param( 'law_id' );
 
-                    $watches = egov_law_monitor_get_watches();
+                    $table_name = $wpdb->prefix . 'law_watch_settings';
 
-                    $found = false;
-
-                    $watches = array_values(
-                        array_filter(
-                            $watches,
-                            static function ( $watch ) use ( $law_id, &$found ) {
-
-                                if (
-                                    isset( $watch['law_id'] )
-                                    && $watch['law_id'] === $law_id
-                                ) {
-                                    $found = true;
-                                    return false;
-                                }
-
-                                return true;
-                            }
-                        )
+                    $deleted = $wpdb->delete(
+                        $table_name,
+                        [
+                            'user_id' => $user_id,
+                            'law_id'  => $law_id,
+                        ],
+                        [
+                            '%d',
+                            '%s',
+                        ]
                     );
 
-                    if ( ! $found ) {
+                    if ( false === $deleted ) {
+                        return new WP_Error(
+                            'watch_delete_failed',
+                            'ウォッチ解除に失敗しました。',
+                            [
+                                'status' => 500,
+                            ]
+                        );
+                    }
+
+                    if ( 0 === $deleted ) {
                         return new WP_Error(
                             'not_watched',
                             'This law is not being watched.',
@@ -182,11 +243,9 @@ add_action(
                         );
                     }
 
-                    egov_law_monitor_save_watches( $watches );
-
                     return [
                         'law_id'  => $law_id,
-                        'watches' => $watches,
+                        'watches' => egov_law_monitor_get_watches(),
                     ];
                 },
                 'permission_callback' => 'egov_law_monitor_watch_permission',
