@@ -1,22 +1,197 @@
 [
   {
-    "law_id": "424M60000004003",
-    "law_no": "平成二十四年復興庁令第三号",
-    "law_name": "福島復興再生特別措置法施行規則",
+    "law_id": "508M60000100130",
+    "law_no": "令和八年厚生労働省令第百三十号",
+    "law_name": "令和八年熊本地震による災害に対処するための要介護認定有効期間及び要支援認定有効期間の特例に関する省令",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/424M60000004003",
+    "url": "https://laws.e-gov.go.jp/law/508M60000100130",
     "updates": [
       {
-        "law_data_id": 641772,
+        "law_data_id": 641786,
         "sub_revision": "1",
-        "published_date": "2012-03-31",
+        "published_date": "2026-08-17",
         "effective_date": "2026-08-17",
         "effective_comment": "",
-        "amend_name": "福島復興再生特別措置法施行規則の一部を改正する庁令",
-        "amend_no": "令和八年復興庁令第五号",
-        "amendment_id": "508M60000004005",
+        "amend_name": "新規制定",
+        "amend_no": "",
+        "amendment_id": null,
         "amend_published_date": "2026-08-17",
-        "compare_url": "https://laws.e-gov.go.jp/law/424M60000004003/20260817_508M60000004005?occasion_date=20260817&tab=compare",
+        "compare_url": null,
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "419M60000100014",
+    "law_no": "平成十九年厚生労働省令第十四号",
+    "law_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律第二条第十五項に規定する指定薬物及び同法第七十六条の四に規定する医療等の用途を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/419M60000100014",
+    "updates": [
+      {
+        "law_data_id": 641787,
+        "sub_revision": "1",
+        "published_date": "2007-02-28",
+        "effective_date": "2026-08-28",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律第二条第十五項に規定する指定薬物及び同法第七十六条の四に規定する医療等の用途を定める省令の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百三十一号",
+        "amendment_id": "508M60000100131",
+        "amend_published_date": "2026-08-18",
+        "compare_url": "https://laws.e-gov.go.jp/law/419M60000100014/20260828_508M60000100131?occasion_date=20260828&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "426M60000400036",
+    "law_no": "平成二十六年経済産業省令第三十六号",
+    "law_name": "広域的運営推進機関に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/426M60000400036",
+    "updates": [
+      {
+        "law_data_id": 641773,
+        "sub_revision": "1",
+        "published_date": "2014-07-29",
+        "effective_date": "2026-08-14",
+        "effective_comment": "",
+        "amend_name": "広域的運営推進機関に関する省令の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第六十九号",
+        "amendment_id": "508M60000400069",
+        "amend_published_date": "2026-08-14",
+        "compare_url": "https://laws.e-gov.go.jp/law/426M60000400036/20260814_508M60000400069?occasion_date=20260814&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "330M50000100023",
+    "law_no": "昭和三十年厚生省令第二十三号",
+    "law_name": "歯科技工士法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/330M50000100023",
+    "updates": [
+      {
+        "law_data_id": 641783,
+        "sub_revision": "1",
+        "published_date": "1955-09-22",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "医師法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百二十八号",
+        "amendment_id": "508M60000100128",
+        "amend_published_date": "2026-08-14",
+        "compare_url": "https://laws.e-gov.go.jp/law/330M50000100023/20270401_508M60000100128?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 640709,
+        "sub_revision": "2",
+        "published_date": "1955-09-22",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amendment_id": "508M60000100107",
+        "amend_published_date": "2026-06-25",
+        "compare_url": "https://laws.e-gov.go.jp/law/330M50000100023/20261001_508M60000100107?occasion_date=20261001&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 637085,
+        "sub_revision": "2",
+        "published_date": "1955-09-22",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "歯科技工士法施行規則の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第六十三号",
+        "amendment_id": "508M60000100063",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/330M50000100023/20261001_508M60000100063?occasion_date=20261001&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641777,
+        "sub_revision": "1",
+        "published_date": "1955-09-22",
+        "effective_date": "2026-08-14",
+        "effective_comment": "",
+        "amend_name": "医師法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百二十八号",
+        "amendment_id": "508M60000100128",
+        "amend_published_date": "2026-08-14",
+        "compare_url": "https://laws.e-gov.go.jp/law/330M50000100023/20260814_508M60000100128?occasion_date=20260814&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "401M50000100046",
+    "law_no": "平成元年厚生省令第四十六号",
+    "law_name": "歯科衛生士法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/401M50000100046",
+    "updates": [
+      {
+        "law_data_id": 641782,
+        "sub_revision": "1",
+        "published_date": "1989-10-31",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "医師法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百二十八号",
+        "amendment_id": "508M60000100128",
+        "amend_published_date": "2026-08-14",
+        "compare_url": "https://laws.e-gov.go.jp/law/401M50000100046/20270401_508M60000100128?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 640708,
+        "sub_revision": "2",
+        "published_date": "1989-10-31",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "栄養士法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百七号",
+        "amendment_id": "508M60000100107",
+        "amend_published_date": "2026-06-25",
+        "compare_url": "https://laws.e-gov.go.jp/law/401M50000100046/20261001_508M60000100107?occasion_date=20261001&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 641776,
+        "sub_revision": "1",
+        "published_date": "1989-10-31",
+        "effective_date": "2026-08-14",
+        "effective_comment": "",
+        "amend_name": "医師法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百二十八号",
+        "amendment_id": "508M60000100128",
+        "amend_published_date": "2026-08-14",
+        "compare_url": "https://laws.e-gov.go.jp/law/401M50000100046/20260814_508M60000100128?occasion_date=20260814&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "413M60000100102",
+    "law_no": "平成十三年厚生労働省令第百二号",
+    "law_name": "調理師試験の実施に関する事務を行う者等を指定する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/413M60000100102",
+    "updates": [
+      {
+        "law_data_id": 641785,
+        "sub_revision": "1",
+        "published_date": "2001-03-30",
+        "effective_date": "2026-08-17",
+        "effective_comment": "",
+        "amend_name": "調理師試験の実施に関する事務を行う者等を指定する省令の一部を改正する省令",
+        "amend_no": "令和八年厚生労働省令第百二十九号",
+        "amendment_id": "508M60000100129",
+        "amend_published_date": "2026-08-17",
+        "compare_url": "https://laws.e-gov.go.jp/law/413M60000100102/20260817_508M60000100129?occasion_date=20260817&tab=compare",
         "pending": false
       }
     ]

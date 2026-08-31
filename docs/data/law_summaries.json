@@ -1,17 +1,17 @@
 {
-  "date": "20260828",
+  "date": "20260831",
   "summaries": [
     {
       "summary_input": {
-        "law_id": "424M60000004003",
-        "law_name": "福島復興再生特別措置法施行規則",
+        "law_id": "508M60000100130",
+        "law_name": "令和八年熊本地震による災害に対処するための要介護認定有効期間及び要支援認定有効期間の特例に関する省令",
         "revisions": [
           {
-            "law_data_id": 641772,
+            "law_data_id": 641786,
             "sub_revision": "1",
-            "amendment_id": "508M60000004005",
-            "amendment_name": "福島復興再生特別措置法施行規則の一部を改正する庁令",
-            "amendment_num": "令和八年復興庁令第五号",
+            "amendment_id": null,
+            "amendment_name": null,
+            "amendment_num": null,
             "enforcement_date": "2026-08-17",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
@@ -21,17 +21,242 @@
       },
       "response": {
         "summary": {
-          "title": "福島復興再生特別措置法施行規則の一部改正",
-          "body": "令和八年復興庁令第五号により、福島復興再生特別措置法施行規則の一部を改正する庁令が、2026年8月17日に施行されます。"
+          "title": "熊本地震における要介護等の有効期間特例",
+          "body": "本省令は、令和八年熊本地震による災害に対処するため、要介護認定および要支援認定の有効期間に関する特例を定めるものです。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 509,
-          "output_tokens": 57,
-          "thoughts_tokens": 532,
-          "total_tokens": 1098,
-          "elapsed_seconds": 4.472392654000004,
-          "response_id": "XQ-SaqyUH_CUl7oP2beFoQ8"
+          "prompt_tokens": 489,
+          "output_tokens": 55,
+          "thoughts_tokens": 799,
+          "total_tokens": 1343,
+          "elapsed_seconds": 7.790207523999996,
+          "response_id": "7gqWauj2G46kq8YP67TZ6QE"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "419M60000100014",
+        "law_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律第二条第十五項に規定する指定薬物及び同法第七十六条の四に規定する医療等の用途を定める省令",
+        "revisions": [
+          {
+            "law_data_id": 641787,
+            "sub_revision": "1",
+            "amendment_id": "508M60000100131",
+            "amendment_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律第二条第十五項に規定する指定薬物及び同法第七十六条の四に規定する医療等の用途を定める省令の一部を改正する省令",
+            "amendment_num": "令和八年厚生労働省令第百三十一号",
+            "enforcement_date": "2026-08-28",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "指定薬物に4物質とその塩類を新たに追加",
+          "body": "「医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律」に基づき、保健衛生上の危害が発生するおそれがある「指定薬物」を定める省令の一部が改正されました。\n\n今回の改正により、新たに以下の4物質とその塩類が指定薬物に追加されます。\n\n・Ｎ―イソブチル―五―メトキシトリプタミン\n・一―（二―ジエチルアミノ）エチル―二―（四―イソブトキシベンジル）―五―ニトロベンズイミダゾール\n・一―（二―ジエチルアミノ）エチル―二―［四―（二―フルオロエトキシ）ベンジル］―五―ニトロベンズイミダゾール\n・Ｎ・Ｎ―ジエチル―四―（フェロセンカルボニル）―七―メチル―四・六・六ａ・七・八・九―ヘキサヒドロインドロ［四・三―ｆｇ］キノリン―九―カルボキサミド\n\nまた、新物質の追加に伴い、既存の指定薬物の号数（掲載順序）が繰り下げられるなどの整理が行われました。\n\nこの改正は、2026年8月28日から施行されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 37923,
+          "output_tokens": 325,
+          "thoughts_tokens": 1950,
+          "total_tokens": 40198,
+          "elapsed_seconds": 11.494511830999983,
+          "response_id": "9wqWaoX2MOqR9LsPqoL2sAE"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "426M60000400036",
+        "law_name": "広域的運営推進機関に関する省令",
+        "revisions": [
+          {
+            "law_data_id": 641773,
+            "sub_revision": "1",
+            "amendment_id": "508M60000400069",
+            "amendment_name": "広域的運営推進機関に関する省令の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第六十九号",
+            "enforcement_date": "2026-08-14",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "広域系統整備交付金の算定見直しと資金貸付等の新設",
+          "body": "広域系統整備交付金の交付手続きや額の算定方法が変更されました。交付金は実施主体からの請求に基づき交付され、その額は翌年度の電気工作物の整備等に要する費用などを基礎として定められます。額の決定には経済産業大臣の同意が必要となり、決定後は請求者に通知されます。交付期間は、請求日または使用開始日のいずれか遅い日の属する年度から耐用年数の末日の属する年度までとなります。\\n\\nまた、認定整備等事業者に対する資金の貸付けに関する制度が新設されました。貸付けは事業者の請求により行われ、貸付額は整備等に必要な資金の額や配分額を基礎として決定されます。貸付けを行う際、推進機関は事前に金額や利子、償還期間などの条件について経済産業大臣の同意を得る必要があります。\\n\\nさらに、広域系統整備計画の評価に関する規定が追加されました。推進機関は、整備等の進捗状況などを勘案した適切な時期に計画内容の評価を行い、経済産業大臣へ報告しなければなりません。評価の結果、必要があると認めるときは計画の変更届出を行います。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 2398,
+          "output_tokens": 270,
+          "thoughts_tokens": 2061,
+          "total_tokens": 4729,
+          "elapsed_seconds": 16.04311247200002,
+          "response_id": "BAuWas-7GuaPq8YP7cnO4Aw"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "330M50000100023",
+        "law_name": "歯科技工士法施行規則",
+        "revisions": [
+          {
+            "law_data_id": 641777,
+            "sub_revision": "1",
+            "amendment_id": "508M60000100128",
+            "amendment_name": "医師法施行規則等の一部を改正する省令",
+            "amendment_num": "令和八年厚生労働省令第百二十八号",
+            "enforcement_date": "2026-08-14",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          },
+          {
+            "law_data_id": 640709,
+            "sub_revision": "2",
+            "amendment_id": "508M60000100107",
+            "amendment_name": "栄養士法施行規則等の一部を改正する省令",
+            "amendment_num": "令和八年厚生労働省令第百七号",
+            "enforcement_date": "2026-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 637085,
+            "sub_revision": "2",
+            "amendment_id": "508M60000100063",
+            "amendment_name": "歯科技工士法施行規則の一部を改正する省令",
+            "amendment_num": "令和八年厚生労働省令第六十三号",
+            "enforcement_date": "2026-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 641783,
+            "sub_revision": "1",
+            "amendment_id": "508M60000100128",
+            "amendment_name": "医師法施行規則等の一部を改正する省令",
+            "amendment_num": "令和八年厚生労働省令第百二十八号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "指示書への歯科技工所番号記載の導入と申請手続等の整理",
+          "body": "歯科技工指示書における記載事項の追加として、都道府県知事等から開設者に通知される「歯科技工所番号」が、指示書の記載事項に加わります。この変更は2026年10月1日以降に発行される指示書に適用されます。　また、免許の申請や名簿の訂正手続きにおいて、提出書類に関する規定の用語整理が行われます。　各種様式の変更に関しては経過措置が設けられ、改正前の旧様式による書類は新様式によるものとみなされるほか、旧様式の用紙についても当分の間、取り繕って使用することが可能です。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 2688,
+          "output_tokens": 164,
+          "thoughts_tokens": 1747,
+          "total_tokens": 4599,
+          "elapsed_seconds": 12.905441880000012,
+          "response_id": "FwuWas-dN8r1tAK7p90Q"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "401M50000100046",
+        "law_name": "歯科衛生士法施行規則",
+        "revisions": [
+          {
+            "law_data_id": 641776,
+            "sub_revision": "1",
+            "amendment_id": "508M60000100128",
+            "amendment_name": "医師法施行規則等の一部を改正する省令",
+            "amendment_num": "令和八年厚生労働省令第百二十八号",
+            "enforcement_date": "2026-08-14",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          },
+          {
+            "law_data_id": 640708,
+            "sub_revision": "2",
+            "amendment_id": "508M60000100107",
+            "amendment_name": "栄養士法施行規則等の一部を改正する省令",
+            "amendment_num": "令和八年厚生労働省令第百七号",
+            "enforcement_date": "2026-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 641782,
+            "sub_revision": "1",
+            "amendment_id": "508M60000100128",
+            "amendment_name": "医師法施行規則等の一部を改正する省令",
+            "amendment_num": "令和八年厚生労働省令第百二十八号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "歯科衛生士名簿の登録事項の変更や手続きの整備",
+          "body": "歯科衛生士名簿の登録事項について、氏名、生年月日、本籍地都道府県の順に整理され、日本国籍を有しない者については「国籍等」を登録することとされました。これに伴い、免許の申請や名簿の訂正手続きで提出する住民票の写しなどの書類についても、用語の整理が行われます。また、改正の施行前に免許申請を行った者の名簿登録事項は従前の例によりますが、改正後の規定に合わせた内容に変更するための名簿訂正を申請することも可能です。この際、変更後30日以内とする申請期限の制限は適用されません。なお、従前の様式による書類は改正後の様式によるものとみなされ、手元にある旧様式の用紙も当分の間、取り繕って使用することができます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 2980,
+          "output_tokens": 196,
+          "thoughts_tokens": 2625,
+          "total_tokens": 5801,
+          "elapsed_seconds": 19.348433751000016,
+          "response_id": "JwuWapGmK-Coq8YPtIeqoAc"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "413M60000100102",
+        "law_name": "調理師試験の実施に関する事務を行う者等を指定する省令",
+        "revisions": [
+          {
+            "law_data_id": 641785,
+            "sub_revision": "1",
+            "amendment_id": "508M60000100129",
+            "amendment_name": "調理師試験の実施に関する事務を行う者等を指定する省令の一部を改正する省令",
+            "amendment_num": "令和八年厚生労働省令第百二十九号",
+            "enforcement_date": "2026-08-17",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "指定団体の事務所所在地および法人格の変更",
+          "body": "調理師試験の実施事務や調理技術に関する審査事務、および関連する講習を行う者として指定されている「公益社団法人調理技術技能センター」について、主たる事務所の所在地が東京都中央区日本橋堀留町二丁目八番五号ＪＡＣＣビルから「東京都中央区日本橋人形町一丁目四番一号内山ビル」に変更されます。\n\nまた、講習を行う者として指定されている「全日本司厨士協会」について、法人格が「公益社団法人」から「一般社団法人」に変更されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1091,
+          "output_tokens": 149,
+          "thoughts_tokens": 1229,
+          "total_tokens": 2469,
+          "elapsed_seconds": 7.410542856999996,
+          "response_id": "PAuWapXQBbKm9LsP_8miqQE"
         }
       }
     }
