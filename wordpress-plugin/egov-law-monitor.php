@@ -59,14 +59,21 @@ add_action(
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/database.php';
 
+require_once plugin_dir_path( __FILE__ ) . 'includes/permissions.php';
+
 require_once plugin_dir_path( __FILE__ ) . 'includes/law-search.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/law-search-page.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/watch-api.php';
 
+require_once plugin_dir_path( __FILE__ ) . 'includes/internal-api.php';
+
 
 register_activation_hook(
     __FILE__,
-    'egov_law_monitor_create_tables'
+    function () {
+        egov_law_monitor_create_tables();
+        egov_law_monitor_setup_api_user();
+    }
 );
