@@ -69,7 +69,6 @@ def send_email(subject, body):
     message = EmailMessage()
 
     message["Subject"] = subject
-    message["From"] = mail_from
     message["From"] = Address(
         display_name="e-Gov Law Monitor",
         addr_spec=mail_from,
