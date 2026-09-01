@@ -275,6 +275,23 @@ class LawSummary:
 
 
 @dataclass(slots=True)
+class WatchSetting:
+    """A law watched by a user."""
+
+    law_id: str
+    law_name: str
+
+
+@dataclass(slots=True)
+class WatchUser:
+    """Watch settings for a user."""
+
+    user_id: int
+    email: str
+    watches: list[WatchSetting]
+
+
+@dataclass(slots=True)
 class WatchNotification:
     """Data for a law watch notification."""
 

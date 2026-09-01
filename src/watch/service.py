@@ -4,25 +4,42 @@ from models import (
     Law,
     LawSummary,
     WatchNotification,
+    WatchSetting,
+    WatchUser,
 )
 
 from wordpress import client
 
 
-def get_watches() -> list[dict]:
-    """Get watched laws from WordPress."""
+def get_watch_users() -> list[WatchUser]:
+    """Get watch settings for all users."""
 
-    return client.get_watches()
+    users = client.get_watch_settings()
+
+    return [
+        WatchUser(
+            user_id=user["user_id"],
+            email=user["email"],
+            watches=[
+                WatchSetting(
+                    law_id=watch["law_id"],
+                    law_name=watch["law_name"],
+                )
+                for watch in user["watches"]
+            ],
+        )
+        for user in users
+    ]
 
 
 def find_watched_laws(
     laws: list[Law],
-    watches: list[dict],
+    watches: list[WatchSetting],
 ) -> list[Law]:
     """Return laws that are being watched."""
 
     watch_ids = {
-        watch["law_id"]
+        watch.law_id
         for watch in watches
     }
 
@@ -51,3 +68,21 @@ def build_notifications(
         )
         for law in laws
     ]
+
+
+def build_user_notifications(
+    laws: list[Law],
+    law_summaries: list[LawSummary],
+    user: WatchUser,
+) -> list[WatchNotification]:
+    """Build notifications for a user."""
+
+    watched_laws = find_watched_laws(
+        laws,
+        user.watches,
+    )
+
+    return build_notifications(
+        watched_laws,
+        law_summaries,
+    )

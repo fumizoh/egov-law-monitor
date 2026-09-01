@@ -65,8 +65,6 @@ def process_egov(
 
     laws = law_builder.build_laws(law_groups)
 
-    watches = watch_service.get_watches()
-
     logger.info("Total %d laws", len(laws))
 
     storage.save_laws(
@@ -129,32 +127,40 @@ def process_egov(
         storage_paths
     )
 
-    watched_laws = watch_service.find_watched_laws(
-        laws,
-        watches,
-    )
+    watch_users = watch_service.get_watch_users()
 
-    notifications = watch_service.build_notifications(
-        watched_laws,
-        list(law_summaries.values()),
-    )
+    for user in watch_users:
+        notifications = watch_service.build_user_notifications(
+            laws,
+            list(law_summaries.values()),
+            user,
+        )
 
-    if notifications:
+        if not notifications:
+            continue
+
+        logger.info(
+            "Watch notifications: user_id=%d, count=%d",
+            user.user_id,
+            len(notifications),
+        )
+
         subject = watch_email.build_subject(
             notifications
         )
 
         body = watch_email.build_body(
             notifications,
-            watches,
+            user.watches,
         )
 
         html_body = watch_email.build_html(
             notifications,
-            watches,
+            user.watches,
         )
 
         watch_mailer.send_email(
+            user.email,
             subject,
             body,
             html_body=html_body,

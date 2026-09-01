@@ -15,6 +15,16 @@ def _get_config() -> tuple[str, str, str]:
     return wp_url, username, app_password
 
 
+def _get_api_config() -> tuple[str, str, str]:
+    """Get WordPress internal API configuration."""
+
+    wp_url = os.environ["WP_URL"].rstrip("/")
+    username = os.environ["WP_API_USERNAME"]
+    app_password = os.environ["WP_API_APP_PASSWORD"]
+
+    return wp_url, username, app_password
+
+
 def _get_endpoint(
     wp_url: str,
     post_type: str,
@@ -134,3 +144,19 @@ def get_watches() -> list[dict]:
     response.raise_for_status()
 
     return response.json()
+
+
+def get_watch_settings() -> list[dict]:
+    """Get watch settings for all users from WordPress."""
+
+    wp_url, username, app_password = _get_api_config()
+
+    response = requests.get(
+        f"{wp_url}/wp-json/egov-law-monitor/v1/internal/watch-settings",
+        auth=(username, app_password),
+        timeout=30,
+    )
+
+    response.raise_for_status()
+
+    return response.json()["users"]

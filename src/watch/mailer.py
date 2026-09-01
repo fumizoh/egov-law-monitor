@@ -8,7 +8,7 @@ from email.message import EmailMessage
 logger = logging.getLogger(__name__)
 
 
-def _get_smtp_config() -> tuple[str, int, str, str, str, str] | None:
+def _get_smtp_config() -> tuple[str, int, str, str, str] | None:
     """Get SMTP configuration from environment variables."""
 
     smtp_host = os.environ.get("SMTP_HOST")
@@ -18,7 +18,6 @@ def _get_smtp_config() -> tuple[str, int, str, str, str, str] | None:
     smtp_password = os.environ.get("SMTP_PASSWORD")
 
     mail_from = os.environ.get("MAIL_FROM")
-    mail_to = os.environ.get("MAIL_TO")
 
     if not all(
         [
@@ -27,7 +26,6 @@ def _get_smtp_config() -> tuple[str, int, str, str, str, str] | None:
             smtp_user,
             smtp_password,
             mail_from,
-            mail_to,
         ]
     ):
         logger.warning(
@@ -42,11 +40,11 @@ def _get_smtp_config() -> tuple[str, int, str, str, str, str] | None:
         smtp_user,
         smtp_password,
         mail_from,
-        mail_to,
     )
 
 
 def send_email(
+    to: str,
     subject: str,
     body: str,
     html_body: str | None = None,
@@ -64,14 +62,13 @@ def send_email(
         smtp_user,
         smtp_password,
         mail_from,
-        mail_to,
     ) = config
 
     message = EmailMessage()
 
     message["Subject"] = subject
     message["From"] = mail_from
-    message["To"] = mail_to
+    message["To"] = to
 
     message.set_content(body)
 

@@ -2,7 +2,7 @@
 
 from html import escape
 
-from models import WatchNotification
+from models import WatchNotification, WatchSetting
 
 
 def build_subject(
@@ -17,7 +17,7 @@ def build_subject(
 
 def build_body(
     notifications: list[WatchNotification],
-    watches: list[dict],
+    watches: list[WatchSetting],
 ) -> str:
     """Build plain-text email body."""
 
@@ -32,7 +32,7 @@ def build_body(
         law = notification.law
         summary = notification.summary
 
-        lines.append(f"■ {law['law_name']}")
+        lines.append(f"・{law['law_name']}")
 
         if summary is not None:
             lines.append(summary.title)
@@ -52,14 +52,14 @@ def build_body(
     )
 
     for watch in watches:
-        lines.append(f"・{watch['law_name']}")
+        lines.append(f"・{watch.law_name}")
 
     return "\n".join(lines)
 
 
 def build_html(
     notifications: list[WatchNotification],
-    watches: list[dict],
+    watches: list[WatchSetting],
 ) -> str:
     """Build HTML email body."""
 
@@ -171,7 +171,7 @@ def build_html(
     )
 
     for watch in watches:
-        law_name = escape(watch["law_name"])
+        law_name = escape(watch.law_name)
 
         # Watch APIには現在URLがないため、
         # 現時点では法令名のみ表示する。
