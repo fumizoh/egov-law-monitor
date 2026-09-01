@@ -5,6 +5,18 @@ from html import escape
 from models import WatchNotification, WatchSetting
 
 
+def build_update_url(
+    update_date: str,
+    law_id: str,
+) -> str:
+    """Build the URL for the law on the update post."""
+
+    return (
+        f"https://egovlm.oogushioffice.com/"
+        f"{update_date}-update/#law-{law_id}"
+    )
+
+
 def build_subject(
     notifications: list[WatchNotification],
 ) -> str:
@@ -18,6 +30,7 @@ def build_subject(
 def build_body(
     notifications: list[WatchNotification],
     watches: list[WatchSetting],
+    update_date: str,
 ) -> str:
     """Build plain-text email body."""
 
@@ -32,7 +45,15 @@ def build_body(
         law = notification.law
         summary = notification.summary
 
-        lines.append(f"・{law['law_name']}")
+        law_url = build_update_url(
+            update_date,
+            law["law_id"],
+        )
+
+        lines.append(
+            f"・{law['law_name']}"
+        )
+        lines.append(law_url)
 
         if summary is not None:
             lines.append(summary.title)
@@ -60,6 +81,7 @@ def build_body(
 def build_html(
     notifications: list[WatchNotification],
     watches: list[WatchSetting],
+    update_date: str,
 ) -> str:
     """Build HTML email body."""
 
@@ -109,7 +131,14 @@ def build_html(
         summary = notification.summary
 
         law_name = escape(law["law_name"])
-        law_url = escape(law["url"], quote=True)
+
+        law_url = escape(
+            build_update_url(
+                update_date,
+                law["law_id"],
+            ),
+            quote=True,
+        )
 
         title = (
             escape(summary.title)
@@ -123,6 +152,8 @@ def build_html(
     margin: 0 0 12px;
     padding: 16px;
     background: #ffffff;
+    border: 1px solid #e1e5e8;
+    border-radius: 8px;
 ">
     <div style="margin-bottom: 4px;">
         <a href="{law_url}" style="

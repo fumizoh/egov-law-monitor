@@ -152,11 +152,13 @@ def process_egov(
         body = watch_email.build_body(
             notifications,
             user.watches,
+            date,
         )
 
         html_body = watch_email.build_html(
             notifications,
             user.watches,
+            date,
         )
 
         watch_mailer.send_email(
