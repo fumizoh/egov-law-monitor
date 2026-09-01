@@ -3,6 +3,7 @@ import os
 import smtplib
 
 from email.message import EmailMessage
+from email.headerregistry import Address
 
 
 logger = logging.getLogger(__name__)
@@ -69,6 +70,10 @@ def send_email(subject, body):
 
     message["Subject"] = subject
     message["From"] = mail_from
+    message["From"] = Address(
+        display_name="e-Gov Law Monitor",
+        addr_spec=mail_from,
+    )
     message["To"] = mail_to
 
     message.set_content(body)
