@@ -55,7 +55,7 @@ def sync_daily_post(
             content=content,
             excerpt=wp_post.excerpt,
             slug=f"{date}-update",
-            status="draft",
+            status="publish",
             post_type=POST_TYPE,
             category_id=LAW_UPDATE_CATEGORY_ID,
         )
