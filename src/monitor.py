@@ -10,6 +10,9 @@ import pipeline
 import storage
 from notification import service
 from wordpress import service as wordpress_service
+import watch.service as watch_service
+import watch.email as watch_email
+import watch.mailer as watch_mailer
 
 
 logging.basicConfig(
@@ -20,6 +23,63 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 JST = timezone(timedelta(hours=9))
+
+
+def send_watch_notifications(
+    laws,
+    storage_paths,
+    date,
+) -> None:
+    """Send watch notifications to users."""
+
+    law_summaries = storage.load_law_summaries(storage_paths)
+    watch_users = watch_service.get_watch_users()
+
+    for user in watch_users:
+        try:
+            notifications = watch_service.build_user_notifications(
+                laws,
+                list(law_summaries.values()),
+                user,
+            )
+
+            if not notifications:
+                continue
+
+            logger.info(
+                "Watch notifications: user_id=%d, count=%d",
+                user.user_id,
+                len(notifications),
+            )
+
+            subject = watch_email.build_subject(
+                notifications,
+            )
+
+            body = watch_email.build_body(
+                notifications,
+                user.watches,
+                date,
+            )
+
+            html_body = watch_email.build_html(
+                notifications,
+                user.watches,
+                date,
+            )
+
+            watch_mailer.send_email(
+                user.email,
+                subject,
+                body,
+                html_body=html_body,
+            )
+
+        except Exception:
+            logger.exception(
+                "Watch notification error: user_id=%d",
+                user.user_id,
+            )
 
 
 def main(date: str | None = None):
@@ -59,6 +119,15 @@ def main(date: str | None = None):
             storage_paths=storage_paths,
         )
 
+        print("=== record last checked ===")
+
+        storage.save_watch_status(
+            {
+                "last_checked": datetime.now(JST).isoformat(),
+            },
+            paths=storage_paths,
+        )
+
         print("=== WordPress ===")
 
         try:
@@ -90,23 +159,28 @@ def main(date: str | None = None):
             wp=wp_result,
         )
 
+        print("=== watch notification ===")
+
+        try:
+            send_watch_notifications(
+                laws=laws,
+                storage_paths=storage_paths,
+                date=date,
+            )
+
+        except Exception:
+            logger.exception("Watch notification processing error")
+
     print("=== notification ===")
 
-    service.send_processing_notification(
-        result=result,
-    )
-
-    print("=== record last checked ===")
-
-    storage.save_watch_status(
-        {
-            "last_checked": datetime.now(JST).isoformat(),
-        },
-        paths=storage_paths,
-    )
+    try:
+        service.send_processing_notification(
+            result=result,
+        )
+    except Exception:
+        logger.exception("Processing notification error")
 
 
 if __name__ == "__main__":
-
     date = sys.argv[1] if len(sys.argv) > 1 and sys.argv[1] else None
     main(date)
