@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             try {
                 const url =
-                    `${lawSearchUrl}?query=${encodeURIComponent(keyword)}&all=1`;
+                    `${lawSearchUrl}?query=${encodeURIComponent(keyword)}`;
 
                 const response = await fetch(url);
 

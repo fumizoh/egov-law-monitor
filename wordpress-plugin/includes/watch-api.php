@@ -193,6 +193,31 @@ add_action(
                             );
                         }
 
+                        /*
+                        * Limit target laws.
+                        */
+                        $target_laws = egov_law_monitor_search_laws( $keyword );
+
+                        if ( is_wp_error( $target_laws ) ) {
+                            return new WP_Error(
+                                'law_search_failed',
+                                '対象法令の確認に失敗しました。しばらくしてからもう一度お試しください。',
+                                [
+                                    'status' => 503,
+                                ]
+                            );
+                        }
+
+                        if ( count( $target_laws ) >= 100 ) {
+                            return new WP_Error(
+                                'too_many_target_laws',
+                                '対象法令が100件以上となるキーワードは登録できません。より具体的なキーワードで絞り込んでください。',
+                                [
+                                    'status' => 400,
+                                ]
+                            );
+                        }
+
                         $now = current_time( 'mysql' );
 
                         $inserted = $wpdb->insert(

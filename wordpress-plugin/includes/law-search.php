@@ -119,56 +119,6 @@ function egov_law_monitor_search_laws( $search_text ) {
 
 
 /**
- * Search all matching laws using e-Gov internal API.
- *
- * @param string $search_text Search text.
- * @return array|WP_Error
- */
-function egov_law_monitor_search_laws_all( $search_text ) {
-
-    $search_text = trim( $search_text );
-
-    if ( $search_text === '' ) {
-        return [];
-    }
-
-    $all_results = [];
-    $offset = 0;
-
-    while ( true ) {
-
-        $results = egov_law_monitor_search_laws_page(
-            $search_text,
-            $offset
-        );
-
-        if ( is_wp_error( $results ) ) {
-            return $results;
-        }
-
-        $count = count( $results );
-
-        if ( $count === 0 ) {
-            break;
-        }
-
-        $all_results = array_merge(
-            $all_results,
-            $results
-        );
-
-        if ( $count < 100 ) {
-            break;
-        }
-
-        $offset += 100;
-    }
-
-    return $all_results;
-}
-
-
-/**
  * Register law search REST API.
  */
 add_action(
@@ -203,12 +153,6 @@ add_action(
                                 'status' => 400,
                             ]
                         );
-                    }
-
-                    $all = $request->get_param( 'all' );
-
-                    if ( '1' === $all ) {
-                        return egov_law_monitor_search_laws_all( $query );
                     }
 
                     return egov_law_monitor_search_laws( $query );
