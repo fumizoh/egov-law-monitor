@@ -10,16 +10,6 @@
  */
 function egov_law_monitor_render_search_page() {
 
-    $search_text = isset( $_GET['law_search'] )
-        ? sanitize_text_field( wp_unslash( $_GET['law_search'] ) )
-        : '';
-
-    $results = [];
-
-    if ( $search_text !== '' ) {
-        $results = egov_law_monitor_search_laws( $search_text );
-    }
-
     $rest_nonce = wp_create_nonce( 'wp_rest' );
 
     $watches = egov_law_monitor_get_watches();
@@ -29,56 +19,52 @@ function egov_law_monitor_render_search_page() {
 
     <div class="egov-law-search">
 
+        <h2>法令ウォッチ</h2>
+
         <?php if ( ! empty( $watches ) ) : ?>
 
-            <h2>現在ウォッチ中の法令</h2>
-
-            <div class="egov-law-watch-status">
-                <p>
-                    現在 <?php echo count( $watches ); ?> 件の法令を監視中
-                </p>
-                <p>
-                    最終確認：<span id="egov-law-watch-last-checked">確認中…</span>
-                </p>
-            </div>
+            <h3>現在ウォッチ中のキーワード</h3>
 
             <div class="egov-law-watches">
 
                 <?php foreach ( $watches as $watch ) : ?>
 
                     <article class="egov-law-watch">
-                        <div class="egov-law-watch-header">
-                            <h3>
-                                <?php echo esc_html( $watch['law_name'] ); ?>
-                            </h3>
 
-                            <button
-                                type="button"
-                                class="egov-law-unwatch-button"
-                                data-law-id="<?php echo esc_attr( $watch['law_id'] ); ?>"
-                                data-rest-url="<?php echo esc_url( rest_url( 'egov-law-monitor/v1/watches/' . $watch['law_id'] ) ); ?>"
-                                data-rest-nonce="<?php echo esc_attr( $rest_nonce ); ?>"
-                            >
-                                ウォッチ解除
-                            </button>
+                        <div class="egov-law-watch-header">
+                            <p>
+                                「<?php echo esc_html( $watch['keyword'] ); ?>」
+                            </p>
+
+                            <div class="egov-law-watch-actions">
+                                <button
+                                    type="button"
+                                    class="egov-law-unwatch-button"
+                                    data-keyword="<?php echo esc_attr( $watch['keyword'] ); ?>"
+                                    data-rest-url="<?php echo esc_url( rest_url( 'egov-law-monitor/v1/watches/' . rawurlencode( $watch['keyword'] ) ) ); ?>"
+                                    data-rest-nonce="<?php echo esc_attr( $rest_nonce ); ?>"
+                                >
+                                    ウォッチ解除
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="egov-law-watch-targets-button"
+                                    data-keyword="<?php echo esc_attr( $watch['keyword'] ); ?>"
+                                >
+                                    対象法令を確認
+                                </button>
+                            </div>
                         </div>
 
-                        <?php if ( $watch['law_no'] !== '' ) : ?>
-
-                            <p>
-                                <?php echo esc_html( $watch['law_no'] ); ?>
-                            </p>
-
-                        <?php endif; ?>
-
-                        <?php if ( $watch['law_type'] !== '' ) : ?>
-
-                            <p>
-                                法令種別：
-                                <?php echo esc_html( $watch['law_type'] ); ?>
-                            </p>
-
-                        <?php endif; ?>
+                        <div
+                            class="egov-law-watch-targets"
+                            data-keyword="<?php echo esc_attr( $watch['keyword'] ); ?>"
+                            hidden
+                        >
+                            <h4></h4>
+                            <ul></ul>
+                        </div>
 
                     </article>
 
@@ -88,117 +74,41 @@ function egov_law_monitor_render_search_page() {
 
         <?php endif; ?>
 
-        <h2>法令を検索</h2>
 
-        <form method="get">
-            <div class="egov-law-search-form">
+        <div class="egov-law-watch-form">
 
-                <label for="egov-law-search-input">
-                    法令名・キーワード
+            <h3>法令名キーワードをウォッチ</h3>
+
+            <form id="egov-law-watch-form">
+
+                <label for="egov-law-watch-input">
+                    法令名キーワード
                 </label>
 
-                <input
-                    type="search"
-                    id="egov-law-search-input"
-                    name="law_search"
-                    value="<?php echo esc_attr( $search_text ); ?>"
-                >
-
-                <button type="submit">
-                    検索
-                </button>
-
-            </div>
-        </form>
-
-        <?php if ( $search_text !== '' ) : ?>
-
-            <h3>
-                「<?php echo esc_html( $search_text ); ?>」の検索結果
-            </h3>
-
-            <?php if ( is_wp_error( $results ) ) : ?>
-
-                <p>
-                    法令検索でエラーが発生しました。
+                <p class="egov-law-watch-description">
+                    <span class="egov-law-watch-note">※</span>
+                    2文字以上のキーワードを1個入力してください。
                 </p>
 
-            <?php elseif ( empty( $results ) ) : ?>
+                <div class="egov-law-search-form">
 
-                <p>
-                    該当する法令が見つかりませんでした。
-                </p>
+                    <input
+                        type="text"
+                        id="egov-law-watch-input"
+                        name="keyword"
+                        minlength="2"
+                        required
+                    >
 
-            <?php else : ?>
-
-                <p>
-                    <?php echo count( $results ); ?>件
-                </p>
-
-                <div class="egov-law-search-results">
-
-                    <?php
-                    $watched_law_ids = array_map(
-                        static function ( $watch ) {
-                            return $watch['law_id'];
-                        },
-                        $watches
-                    );
-                    ?>
-
-                    <?php foreach ( $results as $law ) : ?>
-
-                        <article class="egov-law-search-result">
-                            <div class="egov-law-search-result-header">
-                                <h4>
-                                    <?php echo esc_html( $law['law_name'] ); ?>
-                                </h4>
-
-                                <?php if ( in_array( $law['law_id'], $watched_law_ids, true ) ) : ?>
-
-                                    <button
-                                        type="button"
-                                        disabled
-                                    >
-                                        ウォッチ中
-                                    </button>
-
-                                <?php else : ?>
-
-                                    <button
-                                        type="button"
-                                        class="egov-law-watch-button"
-                                        data-law-id="<?php echo esc_attr( $law['law_id'] ); ?>"
-                                        data-law-name="<?php echo esc_attr( $law['law_name'] ); ?>"
-                                        data-law-no="<?php echo esc_attr( $law['law_no'] ); ?>"
-                                        data-law-type="<?php echo esc_attr( $law['law_type'] ); ?>"
-                                        data-rest-url="<?php echo esc_url( rest_url( 'egov-law-monitor/v1/watches' ) ); ?>"
-                                        data-rest-nonce="<?php echo esc_attr( $rest_nonce ); ?>"
-                                    >
-                                        ウォッチする
-                                    </button>
-
-                                <?php endif; ?>
-                            </div>
-
-                            <p>
-                                <?php echo esc_html( $law['law_no'] ); ?>
-                            </p>
-
-                            <p>
-                                法令種別：
-                                <?php echo esc_html( $law['law_type'] ); ?>
-                            </p>
-
-                        </article>
-
-                    <?php endforeach; ?>
+                    <button type="submit">
+                        このキーワードをウォッチ
+                    </button>
 
                 </div>
 
-            <?php endif; ?>
+            </form>
 
-        <?php endif; ?>
+        </div>
 
     </div>
 

@@ -18,16 +18,13 @@ function egov_law_monitor_create_tables() {
     $sql = "CREATE TABLE {$table_name} (
         id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
         user_id BIGINT UNSIGNED NOT NULL,
-        law_id VARCHAR(32) NOT NULL,
-        law_name TEXT NOT NULL,
-        law_no TEXT NOT NULL,
-        law_type VARCHAR(100) NOT NULL,
+        keyword VARCHAR(255) NOT NULL,
         created_at DATETIME NOT NULL,
         updated_at DATETIME NOT NULL,
         PRIMARY KEY  (id),
-        UNIQUE KEY user_law (user_id, law_id),
+        UNIQUE KEY user_keyword (user_id, keyword),
         KEY user_id (user_id),
-        KEY law_id (law_id)
+        KEY keyword (keyword)
     ) {$charset_collate};";
 
     dbDelta( $sql );

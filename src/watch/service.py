@@ -22,8 +22,7 @@ def get_watch_users() -> list[WatchUser]:
             email=user["email"],
             watches=[
                 WatchSetting(
-                    law_id=watch["law_id"],
-                    law_name=watch["law_name"],
+                    keyword=watch["keyword"],
                 )
                 for watch in user["watches"]
             ],
@@ -36,17 +35,20 @@ def find_watched_laws(
     laws: list[Law],
     watches: list[WatchSetting],
 ) -> list[Law]:
-    """Return laws that are being watched."""
+    """Return laws that match watched keywords."""
 
-    watch_ids = {
-        watch.law_id
+    keywords = {
+        watch.keyword
         for watch in watches
     }
 
     return [
         law
         for law in laws
-        if law["law_id"] in watch_ids
+        if any(
+            keyword in law["law_name"]
+            for keyword in keywords
+        )
     ]
 
 

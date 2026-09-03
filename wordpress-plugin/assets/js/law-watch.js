@@ -34,33 +34,50 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    const buttons = document.querySelectorAll(
-        '.egov-law-watch-button'
-    );
 
-    buttons.forEach((button) => {
-        button.addEventListener('click', async () => {
+    /*
+     * Watch keyword
+     */
+    const watchForm = document.getElementById('egov-law-watch-form');
 
-            const lawId = button.dataset.lawId;
-            const lawName = button.dataset.lawName;
-            const lawNo = button.dataset.lawNo;
-            const lawType = button.dataset.lawType;
-            const restUrl = button.dataset.restUrl;
-            const restNonce = button.dataset.restNonce;
+    if (watchForm) {
+        watchForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
 
-            if (
-                !lawId
-                || !lawName
-                || !lawNo
-                || !lawType
-                || !restUrl
-                || !restNonce
-            ) {
+            const input =
+                document.getElementById('egov-law-watch-input');
+
+            if (!input) {
                 return;
             }
 
-            button.disabled = true;
-            button.textContent = '登録中…';
+            const keyword = input.value.trim();
+
+            if (keyword.length < 2) {
+                alert('キーワードは2文字以上で入力してください。');
+                input.focus();
+                return;
+            }
+
+            const submitButton =
+                watchForm.querySelector('button[type="submit"]');
+
+            if (!submitButton) {
+                return;
+            }
+
+            const restUrl = egovLawMonitor.restUrl;
+
+            const restNonce =
+                window.egovLawMonitor?.restNonce;
+
+            if (!restNonce) {
+                alert('ウォッチ登録に必要な情報を取得できませんでした。');
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.textContent = '登録中…';
 
             try {
                 const response = await fetch(restUrl, {
@@ -70,10 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         'X-WP-Nonce': restNonce,
                     },
                     body: JSON.stringify({
-                        law_id: lawId,
-                        law_name: lawName,
-                        law_no: lawNo,
-                        law_type: lawType,
+                        keyword: keyword,
                     }),
                 });
 
@@ -90,8 +104,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             } catch (error) {
                 console.error(error);
 
-                button.disabled = false;
-                button.textContent = 'ウォッチする';
+                submitButton.disabled = false;
+                submitButton.textContent = 'このキーワードをウォッチ';
 
                 alert(
                     error.message ||
@@ -99,9 +113,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 );
             }
         });
-    });
+    }
 
 
+    /*
+     * Unwatch keyword
+     */
     const unwatchButtons = document.querySelectorAll(
         '.egov-law-unwatch-button'
     );
@@ -147,6 +164,83 @@ document.addEventListener('DOMContentLoaded', async () => {
                     error.message ||
                     'ウォッチ解除に失敗しました。'
                 );
+            }
+        });
+    });
+
+
+    /*
+    * Check target laws
+    */
+    const targetButtons = document.querySelectorAll(
+        '.egov-law-watch-targets-button'
+    );
+
+    targetButtons.forEach((button) => {
+        button.addEventListener('click', async () => {
+
+            const keyword = button.dataset.keyword;
+            const targetContainer = button
+                .closest('.egov-law-watch')
+                ?.querySelector('.egov-law-watch-targets');
+
+            if (!keyword || !targetContainer) {
+                return;
+            }
+
+            const title = targetContainer.querySelector('h4');
+            const list = targetContainer.querySelector('ul');
+            const lawSearchUrl = window.egovLawMonitor?.lawSearchUrl;
+
+            if (!title || !list || !lawSearchUrl) {
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = '確認中…';
+
+            try {
+                const url =
+                    `${lawSearchUrl}?query=${encodeURIComponent(keyword)}&all=1`;
+
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error(
+                        '対象法令の取得に失敗しました。'
+                    );
+                }
+
+                const laws = await response.json();
+
+                title.textContent =
+                    `「${keyword}」の対象法令（${laws.length}件）`;
+
+                list.replaceChildren();
+
+                if (laws.length === 0) {
+                    const item = document.createElement('li');
+                    item.textContent = '該当する法令がありません。';
+                    list.appendChild(item);
+                } else {
+                    laws.forEach((law) => {
+                        const item = document.createElement('li');
+                        item.textContent = law.law_name;
+                        list.appendChild(item);
+                    });
+                }
+
+                targetContainer.hidden = false;
+
+            } catch (error) {
+                console.error(error);
+                alert(
+                    error.message ||
+                    '対象法令の取得に失敗しました。'
+                );
+            } finally {
+                button.disabled = false;
+                button.textContent = '対象法令を確認';
             }
         });
     });

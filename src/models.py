@@ -276,10 +276,9 @@ class LawSummary:
 
 @dataclass(slots=True)
 class WatchSetting:
-    """A law watched by a user."""
+    """A keyword watched by a user."""
 
-    law_id: str
-    law_name: str
+    keyword: str
 
 
 @dataclass(slots=True)

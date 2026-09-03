@@ -33,8 +33,7 @@ function egov_law_monitor_get_all_watch_settings() {
         "SELECT
             w.user_id,
             u.user_email,
-            w.law_id,
-            w.law_name
+            w.keyword
          FROM {$table_name} AS w
          INNER JOIN {$wpdb->users} AS u
             ON w.user_id = u.ID
@@ -61,8 +60,7 @@ function egov_law_monitor_get_all_watch_settings() {
         }
 
         $users[ $user_id ]['watches'][] = [
-            'law_id'   => $row['law_id'],
-            'law_name' => $row['law_name'],
+            'keyword' => $row['keyword'],
         ];
     }
 

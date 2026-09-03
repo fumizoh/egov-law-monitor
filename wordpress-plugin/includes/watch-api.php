@@ -4,7 +4,7 @@
  */
 
 /**
- * Get watched laws for the current user.
+ * Get watched keywords for the current user.
  *
  * @return array
  */
@@ -23,10 +23,7 @@ function egov_law_monitor_get_watches() {
     $results = $wpdb->get_results(
         $wpdb->prepare(
             "SELECT
-                law_id,
-                law_name,
-                law_no,
-                law_type,
+                keyword,
                 created_at,
                 updated_at
              FROM {$table_name}
@@ -37,7 +34,20 @@ function egov_law_monitor_get_watches() {
         ARRAY_A
     );
 
-    return is_array( $results ) ? $results : [];
+    if ( ! is_array( $results ) ) {
+        return [];
+    }
+
+    return array_map(
+        static function ( $watch ) {
+            return [
+                'keyword'    => $watch['keyword'],
+                'created_at' => $watch['created_at'],
+                'updated_at' => $watch['updated_at'],
+            ];
+        },
+        $results
+    );
 }
 
 
@@ -89,53 +99,94 @@ add_action(
                             );
                         }
 
-                        $law_id   = $request->get_param( 'law_id' );
-                        $law_name = $request->get_param( 'law_name' );
-                        $law_no   = $request->get_param( 'law_no' );
-                        $law_type = $request->get_param( 'law_type' );
+                        $keyword = $request->get_param( 'keyword' );
 
-                        if (
-                            ! is_string( $law_id )
-                            || trim( $law_id ) === ''
-                            || ! is_string( $law_name )
-                            || trim( $law_name ) === ''
-                            || ! is_string( $law_no )
-                            || trim( $law_no ) === ''
-                            || ! is_string( $law_type )
-                            || trim( $law_type ) === ''
-                        ) {
+                        if ( ! is_string( $keyword ) ) {
                             return new WP_Error(
-                                'invalid_watch',
-                                'Invalid watch data.',
+                                'invalid_keyword',
+                                'キーワードを入力してください。',
                                 [
                                     'status' => 400,
                                 ]
                             );
                         }
 
-                        $law_id   = trim( $law_id );
-                        $law_name = trim( $law_name );
-                        $law_no   = trim( $law_no );
-                        $law_type = trim( $law_type );
+                        $keyword = trim( $keyword );
+
+                        if ( $keyword === '' ) {
+                            return new WP_Error(
+                                'empty_keyword',
+                                'キーワードを入力してください。',
+                                [
+                                    'status' => 400,
+                                ]
+                            );
+                        }
+
+                        if ( mb_strlen( $keyword ) < 2 ) {
+                            return new WP_Error(
+                                'keyword_too_short',
+                                'キーワードは2文字以上で入力してください。',
+                                [
+                                    'status' => 400,
+                                ]
+                            );
+                        }
+
+                        if ( preg_match( '/\s/u', $keyword ) ) {
+                            return new WP_Error(
+                                'multiple_keywords',
+                                'キーワードは1個だけ入力してください。',
+                                [
+                                    'status' => 400,
+                                ]
+                            );
+                        }
 
                         $table_name = $wpdb->prefix . 'law_watch_settings';
 
+                        /*
+                         * Free plan:
+                         * One keyword per user.
+                         */
+                        $watch_count = (int) $wpdb->get_var(
+                            $wpdb->prepare(
+                                "SELECT COUNT(*)
+                                 FROM {$table_name}
+                                 WHERE user_id = %d",
+                                $user_id
+                            )
+                        );
+
+                        if ( $watch_count >= 1 ) {
+                            return new WP_Error(
+                                'watch_limit_reached',
+                                '無料プランではキーワードを1個まで登録できます。',
+                                [
+                                    'status' => 409,
+                                ]
+                            );
+                        }
+
+                        /*
+                         * Prevent duplicate keyword registration.
+                         */
                         $existing = $wpdb->get_var(
                             $wpdb->prepare(
                                 "SELECT id
                                  FROM {$table_name}
                                  WHERE user_id = %d
-                                   AND law_id = %s
+                                   AND keyword = %s
                                  LIMIT 1",
                                 $user_id,
-                                $law_id
+                                $keyword
                             )
                         );
 
                         if ( $existing ) {
                             return new WP_Error(
                                 'already_watched',
-                                'This law is already being watched.',
+                                'このキーワードはすでにウォッチ中です。',
                                 [
                                     'status' => 409,
                                 ]
@@ -148,18 +199,12 @@ add_action(
                             $table_name,
                             [
                                 'user_id'    => $user_id,
-                                'law_id'     => $law_id,
-                                'law_name'   => $law_name,
-                                'law_no'     => $law_no,
-                                'law_type'   => $law_type,
+                                'keyword'    => $keyword,
                                 'created_at' => $now,
                                 'updated_at' => $now,
                             ],
                             [
                                 '%d',
-                                '%s',
-                                '%s',
-                                '%s',
                                 '%s',
                                 '%s',
                                 '%s',
@@ -169,7 +214,7 @@ add_action(
                         if ( false === $inserted ) {
                             return new WP_Error(
                                 'watch_save_failed',
-                                'ウォッチ登録に失敗しました。',
+                                'キーワードのウォッチ登録に失敗しました。',
                                 [
                                     'status' => 500,
                                 ]
@@ -177,7 +222,7 @@ add_action(
                         }
 
                         return [
-                            'law_id' => $law_id,
+                            'keyword' => $keyword,
                             'watches' => egov_law_monitor_get_watches(),
                         ];
                     },
@@ -186,9 +231,10 @@ add_action(
             ]
         );
 
+
         register_rest_route(
             'egov-law-monitor/v1',
-            '/watches/(?P<law_id>[A-Za-z0-9]+)',
+            '/watches/(?P<keyword>[^/]+)',
             [
                 'methods'             => WP_REST_Server::DELETABLE,
                 'callback'            => function ( WP_REST_Request $request ) {
@@ -207,7 +253,29 @@ add_action(
                         );
                     }
 
-                    $law_id = $request->get_param( 'law_id' );
+                    $keyword = $request->get_param( 'keyword' );
+
+                    if ( ! is_string( $keyword ) ) {
+                        return new WP_Error(
+                            'invalid_keyword',
+                            'キーワードが指定されていません。',
+                            [
+                                'status' => 400,
+                            ]
+                        );
+                    }
+
+                    $keyword = trim( rawurldecode( $keyword ) );
+                    
+                    if ( $keyword === '' ) {
+                        return new WP_Error(
+                            'empty_keyword',
+                            'キーワードが指定されていません。',
+                            [
+                                'status' => 400,
+                            ]
+                        );
+                    }
 
                     $table_name = $wpdb->prefix . 'law_watch_settings';
 
@@ -215,7 +283,7 @@ add_action(
                         $table_name,
                         [
                             'user_id' => $user_id,
-                            'law_id'  => $law_id,
+                            'keyword' => $keyword,
                         ],
                         [
                             '%d',
@@ -226,7 +294,7 @@ add_action(
                     if ( false === $deleted ) {
                         return new WP_Error(
                             'watch_delete_failed',
-                            'ウォッチ解除に失敗しました。',
+                            'キーワードのウォッチ解除に失敗しました。',
                             [
                                 'status' => 500,
                             ]
@@ -236,7 +304,7 @@ add_action(
                     if ( 0 === $deleted ) {
                         return new WP_Error(
                             'not_watched',
-                            'This law is not being watched.',
+                            'このキーワードはウォッチされていません。',
                             [
                                 'status' => 404,
                             ]
@@ -244,7 +312,7 @@ add_action(
                     }
 
                     return [
-                        'law_id'  => $law_id,
+                        'keyword' => $keyword,
                         'watches' => egov_law_monitor_get_watches(),
                     ];
                 },
