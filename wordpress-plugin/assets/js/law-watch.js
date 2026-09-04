@@ -53,12 +53,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const keyword = input.value.trim();
 
-            if (keyword.length < 2) {
-                alert('キーワードは2文字以上で入力してください。');
-                input.focus();
-                return;
-            }
-
             const submitButton =
                 watchForm.querySelector('button[type="submit"]');
 

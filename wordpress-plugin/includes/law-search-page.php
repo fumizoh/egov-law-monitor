@@ -77,7 +77,7 @@ function egov_law_monitor_render_search_page() {
 
         <div class="egov-law-watch-form">
 
-            <h3>法令名キーワードをウォッチ</h3>
+            <h3>法令名キーワードを設定</h3>
 
             <form id="egov-law-watch-form">
 
@@ -87,7 +87,7 @@ function egov_law_monitor_render_search_page() {
 
                 <p class="egov-law-watch-description">
                     <span class="egov-law-watch-note">※</span>
-                    2文字以上のキーワードを1個入力してください。
+                    1文字以上のキーワードを1個入力してください。
                 </p>
 
                 <div class="egov-law-search-form">
@@ -96,12 +96,11 @@ function egov_law_monitor_render_search_page() {
                         type="text"
                         id="egov-law-watch-input"
                         name="keyword"
-                        minlength="2"
                         required
                     >
 
                     <button type="submit">
-                        このキーワードをウォッチ
+                        このキーワードを設定
                     </button>
 
                 </div>

@@ -123,16 +123,6 @@ add_action(
                             );
                         }
 
-                        if ( mb_strlen( $keyword ) < 2 ) {
-                            return new WP_Error(
-                                'keyword_too_short',
-                                'キーワードは2文字以上で入力してください。',
-                                [
-                                    'status' => 400,
-                                ]
-                            );
-                        }
-
                         if ( preg_match( '/\s/u', $keyword ) ) {
                             return new WP_Error(
                                 'multiple_keywords',
