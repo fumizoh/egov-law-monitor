@@ -1,6 +1,7 @@
 """WordPress REST API client."""
 
 import os
+import time
 
 from dotenv import load_dotenv
 import requests
@@ -46,24 +47,44 @@ def find_post(
 
     wp_url, username, app_password = _get_config()
 
-    response = requests.get(
-        _get_endpoint(wp_url, post_type),
-        params={
-            "slug": slug,
-            "status": "any",
-        },
-        auth=(username, app_password),
-        timeout=30,
-    )
+    retry_delays = (10, 30)
 
-    response.raise_for_status()
+    for attempt in range(3):
+        try:
+            response = requests.get(
+                _get_endpoint(wp_url, post_type),
+                params={
+                    "slug": slug,
+                    "status": "any",
+                },
+                auth=(username, app_password),
+                timeout=30,
+            )
 
-    posts = response.json()
+            if response.status_code in {502, 503, 504}:
+                if attempt < 2:
+                    time.sleep(retry_delays[attempt])
+                    continue
 
-    if not posts:
-        return None
+            response.raise_for_status()
 
-    return posts[0]
+            posts = response.json()
+
+            if not posts:
+                return None
+
+            return posts[0]
+
+        except (
+            requests.exceptions.ConnectTimeout,
+            requests.exceptions.ConnectionError,
+        ):
+            if attempt == 2:
+                raise
+
+            time.sleep(retry_delays[attempt])
+
+    raise RuntimeError("WordPressへの接続に失敗しました。")
 
 
 def create_post(
