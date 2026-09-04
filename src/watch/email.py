@@ -67,13 +67,13 @@ def build_body(
         [
             "──────────────────",
             "",
-            f"現在ウォッチ中の法令（{len(watches)}件）",
+            f"現在設定中のキーワード（{len(watches)}件）",
             "",
         ]
     )
 
     for watch in watches:
-        lines.append(f"・{watch.law_name}")
+        lines.append(f"・{watch.keyword}")
 
     return "\n".join(lines)
 
@@ -189,7 +189,7 @@ def build_html(
     font-size: 15px;
     font-weight: 600;
 ">
-    現在ウォッチ中の法令（{watch_count}件）
+    現在設定中のキーワード（{watch_count}件）
 </h2>
 
 <ul style="
@@ -202,14 +202,12 @@ def build_html(
     )
 
     for watch in watches:
-        law_name = escape(watch.law_name)
+        keyword = escape(watch.keyword)
 
-        # Watch APIには現在URLがないため、
-        # 現時点では法令名のみ表示する。
         parts.append(
             f"""
 <li style="margin: 4px 0;">
-    {law_name}
+    {keyword}
 </li>
 """
         )
