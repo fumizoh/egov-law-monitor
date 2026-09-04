@@ -1,607 +1,18 @@
 {
-  "date": "20260903",
+  "date": "20260904",
   "summaries": [
     {
       "summary_input": {
-        "law_id": "409AC0000000123",
-        "law_name": "介護保険法",
+        "law_id": "502M60000800049",
+        "law_name": "船員に関する労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律施行規則",
         "revisions": [
           {
-            "law_data_id": 636809,
+            "law_data_id": 641823,
             "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "施行前の行為に対する罰則適用の経過措置を規定",
-          "body": "「地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律」の施行に伴い、罰則に関する経過措置が定められます。\n\n具体的には、この法律の施行前に行われた行為に対する罰則の適用については、施行後もなお従前の例によることとされます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 656,
-          "output_tokens": 92,
-          "thoughts_tokens": 793,
-          "total_tokens": 1541,
-          "elapsed_seconds": 6.108354566000003,
-          "response_id": "iuqZasfoAsGF9LsPwLbEiQQ"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "322AC0000000164",
-        "law_name": "児童福祉法",
-        "revisions": [
-          {
-            "law_data_id": 636811,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "施行前の行為に対する罰則適用の経過措置を規定",
-          "body": "本改正の施行前にした行為に対する罰則の適用については、なお従前の例によるという経過措置が設けられます。\n\nまた、児童の福祉を保障するための原理は、すべての児童に関する法令の施行に際して、常に尊重されなければならないことが規定されています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 637,
-          "output_tokens": 81,
-          "thoughts_tokens": 1070,
-          "total_tokens": 1788,
-          "elapsed_seconds": 9.230543804000007,
-          "response_id": "kuqZasanBLSW9LsPpNLioQE"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "341AC0000000126",
-        "law_name": "入会林野等に係る権利関係の近代化の助長に関する法律",
-        "revisions": [
-          {
-            "law_data_id": 636784,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "旧慣使用林野整備計画に係る議決不要規定の参照条項整理",
-          "body": "旧慣使用林野整備計画について市町村の議会による議決があった場合、計画に定められた旧慣使用林野に係る権利の設定または移転について、重ねて地方自治法に基づく議決を行うことを不要とする特例規定において、引用する地方自治法の条項が「第二百九十五条」から「第二百九十五条第三項」に改められ、参照条項の整理が行われます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 907,
-          "output_tokens": 122,
-          "thoughts_tokens": 683,
-          "total_tokens": 1712,
-          "elapsed_seconds": 5.724958506000007,
-          "response_id": "nOqZat_VOriM9LsP2-qvqQc"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "347AC0000000066",
-        "law_name": "公有地の拡大の推進に関する法律",
-        "revisions": [
-          {
-            "law_data_id": 636791,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "清算人の債権申出催告における公告手続きの簡素化",
-          "body": "清算人が行う債権者への債権申出の催告に関する手続きが見直されます。\n\nこれまでは、清算人は就職の日から2か月以内に少なくとも3回の公告を行う必要がありましたが、改正後は、就職後遅滞なく公告を行うこととされ、公告回数や期限に関する制限が緩和されます。また、債権者が申出をすべき期間の下限の表記が「二箇月」から「二月」に変更されます。\n\nなお、この改正の施行前にした行為に対する罰則の適用については、なお従前の例によることとされています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1090,
-          "output_tokens": 160,
-          "thoughts_tokens": 1679,
-          "total_tokens": 2929,
-          "elapsed_seconds": 11.418777053000014,
-          "response_id": "pOqZavG_F7OD9LsP4MzHsAs"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "325AC1000000100",
-        "law_name": "公職選挙法",
-        "revisions": [
-          {
-            "law_data_id": 636785,
-            "sub_revision": "2",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "財産区議会議員選挙における地方自治法の参照条項を改正",
-          "body": "財産区の議会の議員の選挙に関する規定（第二百六十八条）において、適用除外の根拠となる地方自治法の参照条項が「第二百九十五条」から「第二百九十五条第一項」へと適正化されました。これに伴い、表記を「除く外」から「除くほか」に改める修正が行われています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 871,
-          "output_tokens": 108,
-          "thoughts_tokens": 772,
-          "total_tokens": 1751,
-          "elapsed_seconds": 6.145948916000009,
-          "response_id": "3uuZapODILSVq8YPo_ac-AE"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "329AC0000000119",
-        "law_name": "土地区画整理法",
-        "revisions": [
-          {
-            "law_data_id": 636796,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "施行期日、事業施行者の規定及び罰則の経過措置を整備",
-          "body": "本改正では、施行期日や罰則に関する経過措置、および土地区画整理事業の施行に関する基本的な規定が整理されました。\n\nまず、法律の施行期日は原則として公布の日から起算して3か月を経過した日と定められ、特定の規定については2026年10月1日から施行されることとなりました。また、この法律の施行前に行われた行為に対する罰則の適用については、なお従前の例によるという経過措置が設けられています。\n\nさらに、土地区画整理事業の目的や、事業を行うことができる施行者についても規定されています。施行者には、宅地の所有者や借地権者（個人または共同）、土地区画整理組合、特定の要件を満たす株式会社のほか、都道府県や市町村、そして一定の要件を満たす場合の国土交通大臣などが位置付けられています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1470,
-          "output_tokens": 213,
-          "thoughts_tokens": 1756,
-          "total_tokens": 3439,
-          "elapsed_seconds": 12.124182271999985,
-          "response_id": "5uuZaq2zEpCF9LsP9ITxoQk"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "340AC0000000124",
-        "law_name": "地方住宅供給公社法",
-        "revisions": [
-          {
-            "law_data_id": 636795,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "清算人による債権申出催告の手続きを緩和",
-          "body": "地方住宅供給公社が清算を行う際、清算人が債権者に対して行う債権申出の催告手続きが緩和されます。\\n\\nこれまでは、清算人は就職した日から2か月以内に少なくとも3回の公告を行って催告しなければなりませんでした。改正後は、就職後遅滞なく公告を行えば足りることとなり、公告の回数や特定の期間制限が緩和されます。ただし、債権申出のために設けるべき期間について、2か月を下回ってはならないとする規定は維持されます。\\n\\nなお、改正法の施行前にした行為に対する罰則の適用については、なお従前の例によることとされています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 994,
-          "output_tokens": 165,
-          "thoughts_tokens": 1596,
-          "total_tokens": 2755,
-          "elapsed_seconds": 11.519963821000033,
-          "response_id": "9OuZaqQ7_I70uw-khYLwAQ"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "415AC0000000118",
-        "law_name": "地方独立行政法人法",
-        "revisions": [
-          {
-            "law_data_id": 636802,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "清算人による債権催告の手続きを迅速化・簡素化",
-          "body": "地方独立行政法人の清算手続において、清算人が債権者に対して行う債権申出の催告手続きが変更されます。具体的には、清算人が就職した際に行う催告の期限が、従来の「就職の日から二月以内」から「就職後遅滞なく」へと改められます。また、公告の回数についても、従来の「少なくとも三回」という要件が廃止され、「公告をもって」行うこととされ、手続きが簡素化されます。なお、債権申出の期間として二カ月以上を確保しなければならないとする制限については維持されます。この改正は公布の日から起算して三月を経過した日から施行され、施行前の行為に対する罰則の適用については従前の例によることとされています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1110,
-          "output_tokens": 192,
-          "thoughts_tokens": 2132,
-          "total_tokens": 3434,
-          "elapsed_seconds": 13.872047339999995,
-          "response_id": "AeyZaqyKEqaC9LsP4_Kh-QI"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "322AC0000000067",
-        "law_name": "地方自治法",
-        "revisions": [
-          {
-            "law_data_id": 636792,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "財産区の議会設置手続きの見直しと告示の簡素化",
-          "body": "外部監査人の監査の事務を補助する者（外部監査人補助者）に関する告示の手続きが変更されます。これまで監査委員は、補助者の氏名および住所、補助できる期間を告示することとされていましたが、改正後は告示事項から「住所」が除外され、「氏名」と「補助できる期間」のみとなります。補助者でなくなった場合の告示についても同様に、住所の告示は不要となります。\n\nまた、財産区の議会または総会の設置に関する手続きが見直されます。これまでは都道府県知事が議会の議決を経て市町村または特別区の条例を設定し、これらを設けることとされていましたが、改正後は市町村または特別区が、必要と認めるときに自ら条例で設置できるようになります。なお、この条例の制定または改廃については、都道府県知事も市町村または特別区の議会に議案を提出することができます。設置された財産区の議会または総会は、当該財産区に関して市町村または特別区の議会が議決すべき事項を議決することとなります。\n\nこのほか、関連する表記の整理や準用規定の整理が行われるとともに、改正の施行前にした行為に対する罰則の適用については、なお従前の例によることとされています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 2738,
-          "output_tokens": 303,
-          "thoughts_tokens": 2125,
-          "total_tokens": 5166,
-          "elapsed_seconds": 14.914367182999968,
-          "response_id": "FuyZap2uJKGoq8YPntaxAQ"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "345AC0000000082",
-        "law_name": "地方道路公社法",
-        "revisions": [
-          {
-            "law_data_id": 636797,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "清算人による債権申出の公告回数や期限を緩和",
-          "body": "地方道路公社が清算を行う際、清算人が債権者に対して行う債権申出の催告手続きが見直されます。\n\nこれまでは、清算人は就職の日から2カ月以内に、少なくとも3回公告を行う必要がありました。改正後は、就職後遅滞なく公告を行えば足りるようになり、回数や期限の要件が緩和されます。ただし、債権申出のために定める期間が2カ月を下回ってはならないという制限は維持されます。\n\nまた、この改正の施行前にした行為に対する罰則の適用については、従前の例によるものとする経過措置が設けられます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 997,
-          "output_tokens": 170,
-          "thoughts_tokens": 1308,
-          "total_tokens": 2475,
-          "elapsed_seconds": 8.963265976999992,
-          "response_id": "J-yZavb1DOaK9LsP74q7iAE"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "356AC0000000076",
-        "law_name": "広域臨海環境整備センター法",
-        "revisions": [
-          {
-            "law_data_id": 636798,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "清算人による債権申出の催告手続きの簡素化",
-          "body": "広域臨海環境整備センターの清算手続きにおける、清算人による債権申出の催告手続きが簡素化されます。\n\nこれまでは、清算人が就職した日から2カ月以内に「少なくとも3回」の公告を行って債権申出の催告をする必要がありましたが、改正により、就職後「遅滞なく」公告を行えばよいこととされ、複数回の公告を求める義務が廃止されます。なお、債権者が申出をすべき期間について、2カ月を下ることができないとする制限は維持されます。\n\nまた、改正の施行前にした行為に対する罰則の適用については、従前の例によることとする経過措置が設けられます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 980,
-          "output_tokens": 186,
-          "thoughts_tokens": 1025,
-          "total_tokens": 2191,
-          "elapsed_seconds": 8.161486422999928,
-          "response_id": "MeyZapr_MLOW9LsP9dWkOA"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "322AC0000000224",
-        "law_name": "戸籍法",
-        "revisions": [
-          {
-            "law_data_id": 636799,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "戸籍事務の法定受託事務化と処理基準等の整備",
-          "body": "戸籍に関する事務について、市町村長が管掌することを定めた上で、この事務を地方自治法に規定する「第一号法定受託事務」と位置づけました。\n\nまた、戸籍事務の処理における国と地方の役割について定めています。法務大臣は市町村長が事務を行う際の基準を策定できることとされました。管轄法務局長等は、戸籍事務の処理に関し、市町村長への報告要求や助言、勧告のほか、適正な処理を確保するため特に必要な場合の指示を行うことができます。さらに、管轄法務局長等は、市町村からの照会対応や指導等のために必要な場合、届出人や関係者等に対して質問をし、または書類の提出を求めることができるようになります。なお、これらの戸籍事務については地方自治法の一部の規定が適用されません。\n\nその他、この法律の施行期日に関する規定や、施行前にした行為に対する罰則の適用については従前の例によることとする経過措置が設けられています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1112,
-          "output_tokens": 255,
-          "thoughts_tokens": 1601,
-          "total_tokens": 2968,
-          "elapsed_seconds": 10.785274583000046,
-          "response_id": "O-yZao-1MKaKq8YP3OGmgQM"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "324AC0000000188",
-        "law_name": "測量法",
-        "revisions": [
-          {
-            "law_data_id": 636800,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "整備法の施行期日と罰則に関する経過措置を規定",
-          "body": "「地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律」の施行に伴い、その施行期日および罰則に関する経過措置が定められます。\n\n本法律は、原則として公布の日から起算して3ヶ月を経過した日から施行されます。ただし、地方自治法別表第一の測量法の項の改正規定など、一部の規定については公布の日から起算して6ヶ月を経過した日から施行することとされています。\n\nまた、経過措置として、本法律の施行前に行われた行為に対する罰則の適用については、施行後もなお従前の例によることが規定されています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 965,
-          "output_tokens": 170,
-          "thoughts_tokens": 1518,
-          "total_tokens": 2653,
-          "elapsed_seconds": 10.737344150000013,
-          "response_id": "SOyZaqHfErCK9LsP5Pyy0QQ"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "325AC0000000218",
-        "law_name": "港湾法",
-        "revisions": [
-          {
-            "law_data_id": 636801,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "清算人による債権申出の公告手続きを簡素化",
-          "body": "港湾法における清算手続き時の債権者に対する催告方法が見直されます。\n\nこれまでは、清算人は就職の日から2カ月以内に、少なくとも3回の公告をもって債権者へ債権申出の催告を行う必要がありました。改正後は、この「就職の日から2カ月以内」および「少なくとも3回」という要件が廃止され、清算人は就職後「遅滞なく」公告を行えばよいこととなります。なお、債権者が申し出をすべき期間が2カ月を下ってはならないという制限は、改正後も維持されます。\n\nこのほか、施行前にした行為に対する罰則の適用については、なお従前の例によることとする経過措置が設けられます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 979,
-          "output_tokens": 191,
-          "thoughts_tokens": 1411,
-          "total_tokens": 2581,
-          "elapsed_seconds": 10.008601338000062,
-          "response_id": "VeyZau21I7OW9LsP9dWkOA"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "426AC1000000127",
-        "law_name": "空家等対策の推進に関する特別措置法",
-        "revisions": [
-          {
-            "law_data_id": 636805,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "空家等管理活用支援法人の指定対象に非営利法人を追加",
-          "body": "空家等の管理や活用を行う「空家等管理活用支援法人」について、市町村長が指定できる対象が拡大されます。\n\nこれまでは、特定非営利活動法人、一般社団法人、一般財団法人、または空家等の管理・活用を行う会社が指定の対象となっていましたが、今回の改正により、新たに「その他の営利を目的としない法人」が追加されます。\n\nなお、本改正は2026年9月3日に施行されます。また、この法律の施行前に行われた行為に対する罰則の適用については、なお従前の例によることとされています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1235,
-          "output_tokens": 165,
-          "thoughts_tokens": 876,
-          "total_tokens": 2276,
-          "elapsed_seconds": 6.962253210000085,
-          "response_id": "YeyZap3nDI6Oq8YPmIu1kQs"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "417AC0000000123",
-        "law_name": "障害者の日常生活及び社会生活を総合的に支援するための法律",
-        "revisions": [
-          {
-            "law_data_id": 636810,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "法改正に伴う罰則適用の経過措置と国民の責務の規定",
-          "body": "改正法の施行前にした行為に対する罰則の適用については、施行後もなお従前の例によることとする経過措置が設けられます。\n\nまた、すべての国民は、障害の有無にかかわらず、障害者等が自立した日常生活または社会生活を営むことができる地域社会の実現に協力するよう努めることとされています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 654,
-          "output_tokens": 105,
-          "thoughts_tokens": 1178,
-          "total_tokens": 1937,
-          "elapsed_seconds": 8.079129156000022,
-          "response_id": "auyZapKSFpqSq8YP3_mjiAs"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "325AC0000000131",
-        "law_name": "電波法",
-        "revisions": [
-          {
-            "law_data_id": 636793,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000027",
-            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和八年法律第二十七号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "伝搬障害防止区域図面の備え付け場所指定の廃止",
-          "body": "総務大臣が伝搬障害防止区域を指定した際に行う図面の一般縦覧について、実施場所に関する義務が変更されます。\n\nこれまでは、対象区域を表示した図面を「総務省及び関係地方公共団体の事務所に備え付け」て一般の縦覧に供する必要がありましたが、改正によりこの場所に関する規定が削除され、単に「一般の縦覧に供しなければならない」こととされました。\n\nまた、この改正の施行前にした行為に対する罰則の適用については、改正後もなお従前の例によることとする経過措置が設けられています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 884,
-          "output_tokens": 161,
-          "thoughts_tokens": 1272,
-          "total_tokens": 2317,
-          "elapsed_seconds": 8.29461505300003,
-          "response_id": "deyZarSmF7SVq8YPo_ac-AE"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "419CO0000000325",
-        "law_name": "前期高齢者交付金及び後期高齢者医療の国庫負担金の算定等に関する政令",
-        "revisions": [
-          {
-            "law_data_id": 637344,
-            "sub_revision": "1",
-            "amendment_id": "508CO0000000134",
-            "amendment_name": "前期高齢者交付金及び後期高齢者医療の国庫負担金の算定等に関する政令の一部を改正する政令",
-            "amendment_num": "令和八年政令第百三十四号",
-            "enforcement_date": "2026-04-08",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          },
-          {
-            "law_data_id": 637339,
-            "sub_revision": "1",
-            "amendment_id": "508CO0000000133",
-            "amendment_name": "前期高齢者交付金及び後期高齢者医療の国庫負担金の算定等に関する政令の一部を改正する政令",
-            "amendment_num": "令和八年政令第百三十三号",
-            "enforcement_date": "2026-04-08",
+            "amendment_id": "508M60000800072",
+            "amendment_name": "労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律等の一部を改正する法律の施行に伴う国土交通省関係省令の整備に関する省令",
+            "amendment_num": "令和八年国土交通省令第七十二号",
+            "enforcement_date": "2026-10-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": false
@@ -610,51 +21,153 @@
       },
       "response": {
         "summary": {
-          "title": "高齢者医療に関する算定割合の引き上げと適用期限の延長",
-          "body": "本改正では、算定等に用いられる特定の割合の引き上げと、対象となる期日および年度の延長が行われます。\\n\\n具体的には、法第三十八条第四項に規定する政令で定める割合が百分の六・〇一から百分の六・〇五に、同条第五項に規定する割合が百分の十四・〇一から百分の十四・六九にそれぞれ引き上げられます。\\n\\nまた、法附則第二条に規定する政令で定める日が令和八年三月三十一日から令和十五年三月三十一日へ変更されるとともに、法附則第九条の二第一項に規定する政令で定める年度が令和七年度から令和十五年度へと変更されます。"
+          "title": "調停の準用条項および権限委任の根拠条文の変更",
+          "body": "労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律等の改正に伴い、調停手続きの準用に関する規定や、国土交通大臣の権限委任に関する根拠条文の整理が行われます。\n\n調停に関する準用規定の変更では、調停員が行う調停について、準用する「船員に関する雇用の分野における男女の均等な機会及び待遇の確保等に関する法律施行規則」の対象条項が「第八条から第十六条まで」に変更され、引用される同法の条項番号などの読み替え規定が整理されます。\n\nまた、地方運輸局長等への権限委任に関する規定についても、委任の対象となる国土交通大臣の権限に係る法条項が、改正後の法に基づき整理されます。\n\nこの改正は、2026年10月1日から施行されます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 1060,
-          "output_tokens": 192,
-          "thoughts_tokens": 1428,
-          "total_tokens": 2680,
-          "elapsed_seconds": 10.049201544000084,
-          "response_id": "gOyZarnGK-mbq8YPgIK1UQ"
+          "prompt_tokens": 2601,
+          "output_tokens": 233,
+          "thoughts_tokens": 1234,
+          "total_tokens": 4068,
+          "elapsed_seconds": 8.924112785000005,
+          "response_id": "STmbau-1AfXCiLsPlNKpiAc"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "413CO0000000245",
-        "law_name": "電波法施行令",
+        "law_id": "403M50000800036",
+        "law_name": "船員に関する育児休業、介護休業等育児又は家族介護を行う労働者の福祉に関する法律施行規則",
         "revisions": [
           {
-            "law_data_id": 641713,
+            "law_data_id": 641820,
             "sub_revision": "1",
-            "amendment_id": "508CO0000000255",
-            "amendment_name": "電波法施行令の一部を改正する政令",
-            "amendment_num": "令和八年政令第二百五十五号",
-            "enforcement_date": "2026-09-03",
+            "amendment_id": "508M60000800072",
+            "amendment_name": "労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律等の一部を改正する法律の施行に伴う国土交通省関係省令の整備に関する省令",
+            "amendment_num": "令和八年国土交通省令第七十二号",
+            "enforcement_date": "2026-10-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": true
+            "is_current": false
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "伝搬障害防止区域を表示した図面の縦覧場所の変更",
-          "body": "伝搬障害防止区域を表示した図面の縦覧に関する規定が変更されます。\n\nこれまで図面は総務省総合通信基盤局や総合通信局のほか、関係する都道府県や市町村の事務所にも備え付けることとされていましたが、改正後は、総務省総合通信基盤局の事務所において全ての区域の図面を、総合通信局の事務所において管轄区域の図面をそれぞれ縦覧に供することとされ、都道府県や市町村に関する規定が整理されました。\n\nこれに伴い、図面の縮尺や着色（薄緑色）などの仕様に関する規定が第九条第一項に、縦覧の実施場所に関する規定が第二項になり、条文の見出しも「伝搬障害防止区域を表示した図面の縦覧」に改められます。"
+          "title": "調停手続きにおける準用規定の整理",
+          "body": "育児や家族介護を行う船員に対する調停手続き（両立支援調停会議による調停）について、準用される関係省令の対象条項や読み替え規定が整理されました。具体的には、準用される「船員に関する雇用の分野における男女の均等な機会及び待遇の確保等に関する法律施行規則」の対象条項が「第五条から第十三条まで」から「第八条から第十六条まで」に変更されました。これに伴い、関係する条項番号や参照する法律の条文番号などの読み替え規定が実態に合わせて改められます。この改正は、2026年10月1日から施行されます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 1061,
+          "prompt_tokens": 2004,
+          "output_tokens": 161,
+          "thoughts_tokens": 2705,
+          "total_tokens": 4870,
+          "elapsed_seconds": 17.438055794999997,
+          "response_id": "UzmbavfSA6-p4vAPhZWm6Ao"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "428M60000800022",
+        "law_name": "船員に関する障害者の雇用の促進等に関する法律施行規則",
+        "revisions": [
+          {
+            "law_data_id": 641822,
+            "sub_revision": "1",
+            "amendment_id": "508M60000800072",
+            "amendment_name": "労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律等の一部を改正する法律の施行に伴う国土交通省関係省令の整備に関する省令",
+            "amendment_num": "令和八年国土交通省令第七十二号",
+            "enforcement_date": "2026-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "準用条項および読み替え規定の整理",
+          "body": "障害者の雇用の促進等に関する法律に基づき調停員が行う調停に関して、準用元である「船員に関する雇用の分野における男女の均等な機会及び待遇の確保等に関する法律施行規則」の条項が変更されたことに伴い、準用条項および読み替え規定が整理されます。\n\n具体的には、準用する条項が「第五条から第十三条まで」から「第八条から第十六条まで」に改められ、これに合わせて読み替える対象の条項や、引用されている法律の条文番号が最新の規定に整理・更新されます。\n\nこの改正は、2026年10月1日から施行されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 2333,
+          "output_tokens": 177,
+          "thoughts_tokens": 1405,
+          "total_tokens": 3915,
+          "elapsed_seconds": 9.264753529000004,
+          "response_id": "ZTmbao-uKpuMncEPs-GZ8AE"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "361M50000800001",
+        "law_name": "船員に関する雇用の分野における男女の均等な機会及び待遇の確保等に関する法律施行規則",
+        "revisions": [
+          {
+            "law_data_id": 641819,
+            "sub_revision": "1",
+            "amendment_id": "508M60000800072",
+            "amendment_name": "労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律等の一部を改正する法律の施行に伴う国土交通省関係省令の整備に関する省令",
+            "amendment_num": "令和八年国土交通省令第七十二号",
+            "enforcement_date": "2026-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "船員雇用均等施行規則における適用条項の整理と規定整備",
+          "body": "本改正は、関係法律の改正に伴い、船員に関する雇用の分野における男女の均等な機会及び待遇の確保等に関する法律施行規則について、関係条項の整理や必要な規定の整備を行うものです。主な変更として、関係法律の改正に伴う参照条項や条番号の整理に加え、新たに「求職者以外の者」の対象として、事業主が実施する採用活動への参加者や乗船・操船等の実習を受ける者を規定しました。また、妊娠又は出産に関する事由について、不利益取扱いの禁止等に関連する省令で定める事項の規定が再整理されています。さらに経過措置として、施行時に行われている旧様式による申請の効力維持や、旧様式の用紙を当分の間取り繕って使用できることが定められています。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 6922,
           "output_tokens": 196,
-          "thoughts_tokens": 1006,
-          "total_tokens": 2263,
-          "elapsed_seconds": 7.810400114000004,
-          "response_id": "jOyZapP6KO-Mq8YPjOqSWA"
+          "thoughts_tokens": 1930,
+          "total_tokens": 9048,
+          "elapsed_seconds": 13.230329989999987,
+          "response_id": "cDmbauKNDZ2J2MkPla-FsA8"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "323M40000800032",
+        "law_name": "船員職業安定法施行規則",
+        "revisions": [
+          {
+            "law_data_id": 641821,
+            "sub_revision": "1",
+            "amendment_id": "508M60000800072",
+            "amendment_name": "労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律等の一部を改正する法律の施行に伴う国土交通省関係省令の整備に関する省令",
+            "amendment_num": "令和八年国土交通省令第七十二号",
+            "enforcement_date": "2026-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "関係法律の改正に伴う求人制限規定の条項整理",
+          "body": "関係法律の改正に伴い、船員職業安定法施行規則において引用している他法律の条項番号を整理する改正が行われます。\\n\\n具体的には、求人者が労働関係法令に違反し公表された場合の確認規定（法第十五条に関する事項）について、引用している「労働施策の総合的な推進並びに労働者の雇用の安定及び職業生活の充実等に関する法律」の公表規定の条項を「第三十三条第二項」から「第四十二条第二項」へ改めます。\\n\\n同様に、「雇用の分野における男女の均等な機会及び待遇の確保等に関する法律」の公表規定の条項についても、引用を「第三十条」から「第三十六条」へ改める整理を行います。\\n\\nこの改正は、令和8年（2026年）10月1日から施行されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1375,
+          "output_tokens": 213,
+          "thoughts_tokens": 1589,
+          "total_tokens": 3177,
+          "elapsed_seconds": 11.247348173000006,
+          "response_id": "fjmbavmdMPWeyOgPzL_VoAg"
         }
       }
     }
