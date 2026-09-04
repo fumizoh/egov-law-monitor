@@ -21,6 +21,10 @@ function egov_law_monitor_render_search_page() {
 
         <h2>法令ウォッチ</h2>
 
+        <p class="egov-law-watch-last-checked">
+            最終確認：<span id="egov-law-watch-last-checked">確認中…</span>
+        </p>
+
         <?php if ( ! empty( $watches ) ) : ?>
 
             <h3>現在ウォッチ中のキーワード</h3>
