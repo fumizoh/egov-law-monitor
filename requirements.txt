@@ -12,3 +12,4 @@ openai>=2.0.0
 google-genai
 google-cloud-aiplatform
 Markdown
+python-dotenv

@@ -226,3 +226,6 @@ data/xml/
 
 # Development tools
 /tools/
+
+# Environmental variables
+.env

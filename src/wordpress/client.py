@@ -2,7 +2,10 @@
 
 import os
 
+from dotenv import load_dotenv
 import requests
+
+load_dotenv()
 
 
 def _get_config() -> tuple[str, str, str]:
