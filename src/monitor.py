@@ -161,15 +161,20 @@ def main(date: str | None = None):
 
         print("=== watch notification ===")
 
-        try:
-            send_watch_notifications(
-                laws=laws,
-                storage_paths=storage_paths,
-                date=date,
-            )
+        if wp_result.status == "success":
+            try:
+                send_watch_notifications(
+                    laws=laws,
+                    storage_paths=storage_paths,
+                    date=date,
+                )
 
-        except Exception:
-            logger.exception("Watch notification processing error")
+            except Exception:
+                logger.exception("Watch notification processing error")
+        else:
+            logger.warning(
+                "WordPress投稿に失敗したため、法令ウォッチ通知をスキップします。"
+            )
 
     print("=== notification ===")
 
