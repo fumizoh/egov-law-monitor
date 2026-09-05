@@ -225,7 +225,9 @@ data/logs/
 data/xml/
 
 # Development tools
-/tools/
+tools/*
+!tools/recovery/
+!tools/recovery/*.py
 
 # Environmental variables
 .env
