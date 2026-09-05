@@ -221,6 +221,21 @@ def load_statistics(
         return {}
 
 
+def find_storage_for_date(
+    date: str,
+) -> StoragePaths | None:
+    """Find storage containing data for the specified date."""
+
+    for paths in (DEFAULT_STORAGE, REPROCESS_STORAGE):
+        statistics = load_statistics(paths)
+        last_update = statistics.get("egov", {}).get("last_update")
+
+        if last_update == date:
+            return paths
+
+    return None
+
+
 def save_statistics(
     source,
     statistics,
