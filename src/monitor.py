@@ -161,7 +161,11 @@ def main(date: str | None = None):
 
         print("=== watch notification ===")
 
-        if wp_result.status == "success":
+        if specified_date is not None:
+            logger.info(
+                "日付指定による再処理のため、法令ウォッチ通知をスキップします。"
+            )
+        elif wp_result.status == "success":
             try:
                 send_watch_notifications(
                     laws=laws,
