@@ -1,37 +1,81 @@
 {
-  "date": "20260906",
+  "date": "20260907",
   "summaries": [
     {
       "summary_input": {
-        "law_id": "402CO0000000238",
-        "law_name": "麻薬、麻薬原料植物、向精神薬、麻薬向精神薬原料等を指定する政令",
+        "law_id": "326CO0000000319",
+        "law_name": "出入国管理及び難民認定法",
         "revisions": [
           {
-            "law_data_id": 641716,
+            "law_data_id": 636612,
             "sub_revision": "1",
-            "amendment_id": "508CO0000000258",
-            "amendment_name": "麻薬、麻薬原料植物、向精神薬、麻薬向精神薬原料等を指定する政令の一部を改正する政令",
-            "amendment_num": "令和八年政令第二百五十八号",
-            "enforcement_date": "2026-09-06",
+            "amendment_id": "508AC0000000032",
+            "amendment_name": "出入国管理及び難民認定法及び出入国管理及び難民認定法第二条第五号ロの旅券を所持する外国人の上陸申請の特例に関する法律の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十二号",
+            "enforcement_date": "2026-10-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": true
+            "is_current": false
+          },
+          {
+            "law_data_id": 624659,
+            "sub_revision": "3",
+            "amendment_id": "507AC0000000039",
+            "amendment_name": "情報通信技術の進展等に対応するための刑事訴訟法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第三十九号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2027-03-31",
+            "enforcement_comment": "令和九年三月三十一日までの間において政令で定める日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 618657,
+            "sub_revision": "6",
+            "amendment_id": "506AC0000000060",
+            "amendment_name": "出入国管理及び難民認定法及び外国人の技能実習の適正な実施及び技能実習生の保護に関する法律の一部を改正する法律",
+            "amendment_num": "令和六年法律第六十号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 636613,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000032",
+            "amendment_name": "出入国管理及び難民認定法及び出入国管理及び難民認定法第二条第五号ロの旅券を所持する外国人の上陸申請の特例に関する法律の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十二号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2028-10-31",
+            "enforcement_comment": "令和十年十月三十一日までの間において政令で定める日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 636614,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000032",
+            "amendment_name": "出入国管理及び難民認定法及び出入国管理及び難民認定法第二条第五号ロの旅券を所持する外国人の上陸申請の特例に関する法律の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十二号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2029-03-31",
+            "enforcement_comment": "令和十一年三月三十一日までの間において政令で定める日",
+            "is_current": false
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "新たに3物質を麻薬として追加指定する改正",
-          "body": "本改正により、新たに3つの物質とその塩類が麻薬として指定されます。これにより、これらの物質は麻薬としての規制対象となります。\n\n新たに追加指定される物質は以下の通りです。\n・二―（四―イソプロポキシベンジル）―五―ニトロ―一―［二―（ピロリジン―一―イル）エチル］ベンズイミダゾール\n・二―（四―エトキシベンジル）―一―（エチルアミノ）エチル―五―ニトロベンズイミダゾール\n・メチル＝二―［一―（四―フルオロベンジル）―一Ｈ―インダゾール―三―カルボキサミド］―三・三―ジメチルブタノアート\n\nまた、これらの新規追加に伴い、既存の指定物質の号（項目番号）を繰り下げるなどの整理が行われています。"
+          "title": "手数料や永住許可制度の見直し、事前認証の導入など",
+          "body": "本改正により、出入国管理及び難民認定制度において、手数料制度の見直し、在留資格や永住許可制度の厳格化、事前認証制度の導入、運送業者の報告義務の追加などの重要な変更が行われます。\n\n在留資格の変更、在留期間の更新、永住許可、再入国許可の手数料に上限が設定され、経済的困難などの特別な理由がある場合には手数料を減額または免除できる仕組みが設けられます。永住許可については、法令の遵守や公租公課の支払いが要件として明確化され、義務を怠った場合や公租公課を故意に支払わない場合、また特定の罪で拘禁刑に処せられた場合などが、在留資格の取消事由に追加されます。なお、取り消される場合でも、引き続き本邦に在留することが適当と認められるときは職権で他の在留資格への変更が許可されます。\n\n従来の「技能実習」に代わり「育成就労」の在留資格が導入され、特定技能外国人の支援に関する委託規制も強化されます。特定技能所属機関は、登録支援機関以外の者に支援業務を委託することが禁止されます。\n\nまた、不法入国等を防止するため、短期滞在を目的とする査証免除対象者や直行通過者などを対象に、事前に電磁的方式で情報を提供して条件適合の認証を受ける「事前認証制度」が導入されます。これに伴い、本邦に入る船舶や航空機の運送業者に対し、予約者の情報を事前に報告する義務や、不適当と通知された者を搭乗させない義務などが課されます。\n\nこのほか、刑事訴訟法の特例に関連して、被疑者等の引渡しの際に電磁的記録を提供する措置が追加されるほか、不法就労等に関する罰則が強化されます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 19325,
-          "output_tokens": 236,
-          "thoughts_tokens": 4189,
-          "total_tokens": 23750,
-          "elapsed_seconds": 20.58738658300001,
-          "response_id": "h9qdarTyA_7H998P66uZyA0"
+          "prompt_tokens": 25334,
+          "output_tokens": 435,
+          "thoughts_tokens": 1328,
+          "total_tokens": 27097,
+          "elapsed_seconds": 11.293468641999993,
+          "response_id": "JDWfatO2ENXYh-cPnPjE4QU"
         }
       }
     }
