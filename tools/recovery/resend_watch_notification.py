@@ -5,7 +5,7 @@ import sys
 
 sys.path.insert(
     0,
-    str(Path(__file__).resolve().parents[1] / "src")
+    str(Path(__file__).resolve().parents[2] / "src")
 )
 
 import storage
@@ -29,15 +29,19 @@ def main() -> None:
         print(f"指定した日付のデータが見つかりません: {date}")
         sys.exit(1)
 
-    send_watch_notifications(
-        laws=storage.load_laws(storage_paths),
+    laws = storage.load_laws(storage_paths)
+
+    result = send_watch_notifications(
+        laws=list(laws.values()),
         storage_paths=storage_paths,
         date=date,
     )
 
     print("=== Watch notification resend ===")
     print(f"date: {date}")
-    print("status: success")
+    print(f"target: {result.target_count}")
+    print(f"sent: {result.sent_count}")
+    print(f"failed: {result.failed_count}")
 
 
 if __name__ == "__main__":
