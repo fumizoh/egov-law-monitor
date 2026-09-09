@@ -5,10 +5,10 @@ import sys
 
 sys.path.insert(
     0,
-    str(Path(__file__).resolve().parents[1] / "src")
+    str(Path(__file__).resolve().parents[2] / "src")
 )
 
-from wordpress import storage
+import storage
 from wordpress.service import sync_daily_post
 
 
