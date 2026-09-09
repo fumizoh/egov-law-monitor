@@ -1,37 +1,48 @@
 {
-  "date": "20260828",
+  "date": "20260907",
   "summaries": [
     {
       "summary_input": {
-        "law_id": "424M60000004003",
-        "law_name": "福島復興再生特別措置法施行規則",
+        "law_id": "326CO0000000319",
+        "law_name": "出入国管理及び難民認定法",
         "revisions": [
           {
-            "law_data_id": 641772,
+            "law_data_id": 636612,
             "sub_revision": "1",
-            "amendment_id": "508M60000004005",
-            "amendment_name": "福島復興再生特別措置法施行規則の一部を改正する庁令",
-            "amendment_num": "令和八年復興庁令第五号",
-            "enforcement_date": "2026-08-17",
+            "amendment_id": "508AC0000000032",
+            "amendment_name": "出入国管理及び難民認定法及び出入国管理及び難民認定法第二条第五号ロの旅券を所持する外国人の上陸申請の特例に関する法律の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十二号",
+            "enforcement_date": "2026-10-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": true
+            "is_current": false
+          },
+          {
+            "law_data_id": 624659,
+            "sub_revision": "3",
+            "amendment_id": "507AC0000000039",
+            "amendment_name": "情報通信技術の進展等に対応するための刑事訴訟法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第三十九号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2027-03-31",
+            "enforcement_comment": "令和九年三月三十一日までの間において政令で定める日",
+            "is_current": false
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "福島復興再生特別措置法施行規則の一部改正",
-          "body": "令和八年復興庁令第五号により、福島復興再生特別措置法施行規則の一部を改正する庁令が2026年8月17日から施行されます。なお、今回の改正に関する具体的な詳細内容や変更点については、提供された入力情報に含まれておりません。"
+          "title": "手数料上限の引き上げと電磁的記録提供の導入",
+          "body": "在留資格の変更許可や在留期間の更新許可の手数料上限が10万円に、永住許可が30万円に、再入国許可が1万円にそれぞれ改定されます。政令で定める手数料の額は、実費のほか、適正な在留確保や安定的・円滑な在留支援に要する費用などを考慮して定められます。また、経済的困難などの特別な理由がある場合には、手数料の減額や免除を可能とする措置が設けられます。なお、施行日前にされた申請に対する手数料については、従前の例によります。\n\nあわせて、刑事訴訟法の特例に基づく手続きにおいて、収容令書が発付された場合や監理措置決定がされた際に入国警備官へ引き渡す対象に、書類および証拠物だけでなく、新たに電磁的記録が追加されます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 509,
-          "output_tokens": 81,
-          "thoughts_tokens": 1276,
-          "total_tokens": 1866,
-          "elapsed_seconds": 10.069710658000076,
-          "response_id": "_YOXap25CbjGh-cPhZSw8A0"
+          "prompt_tokens": 3779,
+          "output_tokens": 218,
+          "thoughts_tokens": 1910,
+          "total_tokens": 5907,
+          "elapsed_seconds": 174.96221869899998,
+          "response_id": "OrKgauLKKruKzLEP5b7RiAk"
         }
       }
     }
