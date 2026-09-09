@@ -86,19 +86,51 @@ def _build_excerpt(
     statistics: WPStatistics,
     law_groups: list[WPLawGroup],
 ) -> str:
+    """Build the WordPress post excerpt."""
 
-    new_laws = [
+    updated_laws = [
         law
         for group in law_groups
         for law in group.laws
+    ]
+
+    new_laws = [
+        law
+        for law in updated_laws
         if law.is_new_law
+    ]
+
+    amended_laws = [
+        law
+        for law in updated_laws
+        if not law.is_new_law
     ]
 
     excerpt = f"{statistics.updated_law_count}法令が更新されました。"
 
+    # 改正
+    if amended_laws:
+        excerpt += (
+            f"<br><strong>改正：{len(amended_laws)}法令</strong>"
+        )
+
+        excerpt += (
+            f"<br>「{amended_laws[0].law_name}」"
+        )
+
+        if len(amended_laws) > 1:
+            excerpt += f" ほか{len(amended_laws) - 1}法令"
+
+    # 新規制定
     if new_laws:
-        names = [f"「{law.law_name}」" for law in new_laws[:3]]
-        excerpt += f"<br><strong>新規制定：{len(new_laws)}法令</strong>"
+        excerpt += (
+            f"<br><strong>新規制定：{len(new_laws)}法令</strong>"
+        )
+
+        names = [
+            f"「{law.law_name}」"
+            for law in new_laws[:3]
+        ]
         excerpt += f"<br>{' '.join(names)}"
 
         if len(new_laws) > 3:
