@@ -404,6 +404,15 @@ class WPResult:
 
 
 @dataclass(slots=True)
+class WatchNotificationResult:
+    """Law watch notification result."""
+
+    target_count: int
+    sent_count: int
+    failed_count: int
+
+
+@dataclass(slots=True)
 class ProcessingResult:
     """Daily processing result."""
 
@@ -412,3 +421,4 @@ class ProcessingResult:
     updated_law_count: int
     laws: list[Law]
     wp: WPResult | None
+    watch: WatchNotificationResult | None = None

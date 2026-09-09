@@ -4,7 +4,12 @@ import logging
 import sys
 from datetime import datetime, timedelta, timezone
 
-from models import ProcessingResult, WPResult
+from models import (
+    ProcessingResult,
+    WatchNotificationResult,
+    WPResult,
+)
+
 from sources import egov
 import pipeline
 import storage
@@ -29,11 +34,15 @@ def send_watch_notifications(
     laws,
     storage_paths,
     date,
-) -> None:
+) -> WatchNotificationResult:
     """Send watch notifications to users."""
 
     law_summaries = storage.load_law_summaries(storage_paths)
     watch_users = watch_service.get_watch_users()
+
+    target_count = 0
+    sent_count = 0
+    failed_count = 0
 
     for user in watch_users:
         try:
@@ -45,6 +54,8 @@ def send_watch_notifications(
 
             if not notifications:
                 continue
+
+            target_count += 1
 
             logger.info(
                 "Watch notifications: user_id=%d, count=%d",
@@ -75,11 +86,21 @@ def send_watch_notifications(
                 html_body=html_body,
             )
 
+            sent_count += 1
+
         except Exception:
+            failed_count += 1
+
             logger.exception(
                 "Watch notification error: user_id=%d",
                 user.user_id,
             )
+
+    return WatchNotificationResult(
+        target_count=target_count,
+        sent_count=sent_count,
+        failed_count=failed_count,
+    )
 
 
 def main(date: str | None = None):
@@ -167,15 +188,11 @@ def main(date: str | None = None):
                 "日付指定による再処理のため、法令ウォッチ通知をスキップします。"
             )
         elif wp_result.status == "success":
-            try:
-                send_watch_notifications(
-                    laws=laws,
-                    storage_paths=storage_paths,
-                    date=date,
-                )
-
-            except Exception:
-                logger.exception("Watch notification processing error")
+            result.watch = send_watch_notifications(
+                laws=laws,
+                storage_paths=storage_paths,
+                date=date,
+            )
         else:
             logger.warning(
                 "WordPress投稿に失敗したため、法令ウォッチ通知をスキップします。"

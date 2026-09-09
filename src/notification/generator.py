@@ -94,6 +94,21 @@ def create_email_body(
                 f"URL：{result.wp.link}"
             )
 
+    lines.append("")
+
+    if result.watch is None:
+        lines.append("法令ウォッチ：処理をスキップ")
+    else:
+        lines.append(
+            f"法令ウォッチ：対象 {result.watch.target_count}人"
+        )
+        lines.append(
+            f"送信成功：{result.watch.sent_count}通"
+        )
+        lines.append(
+            f"送信失敗：{result.watch.failed_count}通"
+        )
+
     if result.update_count == 0:
         lines.extend(
             [
