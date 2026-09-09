@@ -94,7 +94,7 @@ def send_email(
 
             smtp.send_message(message)
 
-        print("メール送信完了")
+        logger.info("メール送信完了")
 
     except Exception:
         logger.exception("メール送信失敗")

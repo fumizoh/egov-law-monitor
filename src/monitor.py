@@ -83,7 +83,7 @@ def send_watch_notifications(
 
 
 def main(date: str | None = None):
-    print("=== egov update ===")
+    logger.info("=== egov update ===")
 
     specified_date = date
 
@@ -111,7 +111,7 @@ def main(date: str | None = None):
         )
 
     else:
-        print("=== pipeline ===")
+        logger.info("=== pipeline ===")
 
         laws = pipeline.process_egov(
             events=events,
@@ -119,7 +119,7 @@ def main(date: str | None = None):
             storage_paths=storage_paths,
         )
 
-        print("=== record last checked ===")
+        logger.info("=== record last checked ===")
 
         storage.save_watch_status(
             {
@@ -128,7 +128,7 @@ def main(date: str | None = None):
             paths=storage_paths,
         )
 
-        print("=== WordPress ===")
+        logger.info("=== WordPress ===")
 
         try:
             wp_result = wordpress_service.sync_daily_post(
@@ -136,11 +136,12 @@ def main(date: str | None = None):
                 storage_paths=storage_paths,
             )
 
-            print(
-                f"WordPress: {wp_result.status} "
-                f"({wp_result.action}) "
-                f"post_id={wp_result.post_id} "
-                f"status={wp_result.post_status}"
+            logger.info(
+                "WordPress: %s (%s) post_id=%s status=%s",
+                wp_result.status,
+                wp_result.action,
+                wp_result.post_id,
+                wp_result.post_status,
             )
 
         except Exception as e:
@@ -159,7 +160,7 @@ def main(date: str | None = None):
             wp=wp_result,
         )
 
-        print("=== watch notification ===")
+        logger.info("=== watch notification ===")
 
         if specified_date is not None:
             logger.info(
@@ -180,7 +181,7 @@ def main(date: str | None = None):
                 "WordPress投稿に失敗したため、法令ウォッチ通知をスキップします。"
             )
 
-    print("=== notification ===")
+    logger.info("=== notification ===")
 
     try:
         service.send_processing_notification(
