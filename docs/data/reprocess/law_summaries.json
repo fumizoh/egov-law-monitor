@@ -1,48 +1,37 @@
 {
-  "date": "20260907",
+  "date": "20260906",
   "summaries": [
     {
       "summary_input": {
-        "law_id": "326CO0000000319",
-        "law_name": "出入国管理及び難民認定法",
+        "law_id": "402CO0000000238",
+        "law_name": "麻薬、麻薬原料植物、向精神薬、麻薬向精神薬原料等を指定する政令",
         "revisions": [
           {
-            "law_data_id": 636612,
+            "law_data_id": 641716,
             "sub_revision": "1",
-            "amendment_id": "508AC0000000032",
-            "amendment_name": "出入国管理及び難民認定法及び出入国管理及び難民認定法第二条第五号ロの旅券を所持する外国人の上陸申請の特例に関する法律の一部を改正する法律",
-            "amendment_num": "令和八年法律第三十二号",
-            "enforcement_date": "2026-10-01",
+            "amendment_id": "508CO0000000258",
+            "amendment_name": "麻薬、麻薬原料植物、向精神薬、麻薬向精神薬原料等を指定する政令の一部を改正する政令",
+            "amendment_num": "令和八年政令第二百五十八号",
+            "enforcement_date": "2026-09-06",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 624659,
-            "sub_revision": "3",
-            "amendment_id": "507AC0000000039",
-            "amendment_name": "情報通信技術の進展等に対応するための刑事訴訟法等の一部を改正する法律",
-            "amendment_num": "令和七年法律第三十九号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2027-03-31",
-            "enforcement_comment": "令和九年三月三十一日までの間において政令で定める日",
-            "is_current": false
+            "is_current": true
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "手数料上限の引き上げと電磁的記録提供の導入",
-          "body": "在留資格の変更許可や在留期間の更新許可の手数料上限が10万円に、永住許可が30万円に、再入国許可が1万円にそれぞれ改定されます。政令で定める手数料の額は、実費のほか、適正な在留確保や安定的・円滑な在留支援に要する費用などを考慮して定められます。また、経済的困難などの特別な理由がある場合には、手数料の減額や免除を可能とする措置が設けられます。なお、施行日前にされた申請に対する手数料については、従前の例によります。\n\nあわせて、刑事訴訟法の特例に基づく手続きにおいて、収容令書が発付された場合や監理措置決定がされた際に入国警備官へ引き渡す対象に、書類および証拠物だけでなく、新たに電磁的記録が追加されます。"
+          "title": "麻薬として新たに3物質とその塩類を指定する改正",
+          "body": "麻薬、麻薬原料植物、向精神薬、麻薬向精神薬原料等を指定する政令の一部を改正し、新たに3つの物質およびその塩類を「麻薬」として指定するものです。\n\n具体的には、以下の物質とその塩類が麻薬の指定対象に追加されます。\n\n・二―（四―イソプロポキシベンジル）―五―ニトロ―一―［二―（ピロリジン―一―イル）エチル］ベンズイミダゾール\n・二―（四―エトキシベンジル）―一―（エチルアミノ）エチル―五―ニトロベンズイミダゾール\n・メチル＝二―［一―（四―フルオロベンジル）―一Ｈ―インダゾール―三―カルボキサミド］―三・三―ジメチルブタノアート\n\nこれらの新物質の追加に伴い、関係する既存の指定物質の号数が繰り下げられ、整理されます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 3779,
-          "output_tokens": 218,
-          "thoughts_tokens": 1910,
-          "total_tokens": 5907,
-          "elapsed_seconds": 174.96221869899998,
-          "response_id": "OrKgauLKKruKzLEP5b7RiAk"
+          "prompt_tokens": 19325,
+          "output_tokens": 258,
+          "thoughts_tokens": 2703,
+          "total_tokens": 22286,
+          "elapsed_seconds": 15.037423622000006,
+          "response_id": "_7agav-KJJzEodAPhMnzqAc"
         }
       }
     }
