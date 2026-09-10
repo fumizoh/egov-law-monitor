@@ -47,6 +47,21 @@ add_action(
             true
         );
 
+        // Law post JS
+        $post_js_path = plugin_dir_path( __FILE__ )
+            . 'assets/js/law-post.js';
+
+        $post_js_url = plugin_dir_url( __FILE__ )
+            . 'assets/js/law-post.js';
+
+        wp_enqueue_script(
+            'egov-law-post',
+            $post_js_url,
+            array(),
+            filemtime( $post_js_path ),
+            true
+        );
+
         wp_localize_script(
             'egov-law-watch',
             'egovLawMonitor',
