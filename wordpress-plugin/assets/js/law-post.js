@@ -6,26 +6,24 @@ function openLawCard(card) {
     }
 }
 
-function openLawCardFromHash() {
-    const targetId = decodeURIComponent(window.location.hash.slice(1));
 
-    if (!targetId.startsWith('law-')) {
+function scrollToLawCard(card) {
+    const title = card.querySelector('.egov-law-name');
+
+    if (!title) {
         return;
     }
 
-    const card = document.getElementById(targetId);
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const offset = isMobile ? 120 : 80;
 
-    if (!card) {
-        return;
-    }
+    const top = title.getBoundingClientRect().top
+        + window.scrollY
+        - offset;
 
-    openLawCard(card);
-
-    requestAnimationFrame(() => {
-        card.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-        });
+    window.scrollTo({
+        top: top,
+        behavior: 'smooth',
     });
 }
 
@@ -55,5 +53,27 @@ document.addEventListener('click', (event) => {
 
 // 直接リンクでページを開いた場合
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(openLawCardFromHash, 100);
+    setTimeout(() => {
+        const targetId = decodeURIComponent(
+            window.location.hash.slice(1)
+        );
+
+        if (!targetId.startsWith('law-')) {
+            return;
+        }
+
+        const card = document.getElementById(targetId);
+
+        if (!card) {
+            return;
+        }
+
+        openLawCard(card);
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                scrollToLawCard(card);
+            });
+        });
+    }, 100);
 });
