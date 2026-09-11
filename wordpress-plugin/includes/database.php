@@ -29,3 +29,28 @@ function egov_law_monitor_create_tables() {
 
     dbDelta( $sql );
 }
+
+/**
+ * Delete law watch settings when a user is deleted.
+ */
+function egov_law_monitor_delete_user_data( $user_id ) {
+
+    global $wpdb;
+
+    $table_name = $wpdb->prefix . 'law_watch_settings';
+
+    $wpdb->delete(
+        $table_name,
+        array(
+            'user_id' => $user_id,
+        ),
+        array(
+            '%d',
+        )
+    );
+}
+
+add_action(
+    'delete_user',
+    'egov_law_monitor_delete_user_data'
+);
