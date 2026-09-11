@@ -45,6 +45,13 @@ def send_watch_notifications(
     failed_count = 0
 
     for user in watch_users:
+        if not user.notifications:
+            logger.info(
+                "Watch notifications: user_id=%d, notifications=OFF",
+                user.user_id,
+            )
+            continue
+
         try:
             notifications = watch_service.build_user_notifications(
                 laws,

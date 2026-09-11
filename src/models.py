@@ -287,6 +287,8 @@ class WatchUser:
 
     user_id: int
     email: str
+    plan: str
+    notifications: bool
     watches: list[WatchSetting]
 
 

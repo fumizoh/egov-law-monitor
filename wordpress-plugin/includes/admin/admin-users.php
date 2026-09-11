@@ -12,6 +12,44 @@ function egov_law_monitor_render_admin_users() {
         wp_die( 'このページにアクセスする権限がありません。' );
     }
 
+    if (
+        isset( $_POST['egov_law_monitor_save_user'] )
+        && check_admin_referer(
+            'egov_law_monitor_save_user',
+            'egov_law_monitor_nonce'
+        )
+    ) {
+        $user_id = isset( $_POST['user_id'] )
+            ? absint( $_POST['user_id'] )
+            : 0;
+
+        $plan = isset( $_POST['plan'] )
+            ? sanitize_key( $_POST['plan'] )
+            : EGOV_LAW_MONITOR_PLAN_FREE;
+
+        $notifications = isset( $_POST['notifications'] )
+            ? 1
+            : 0;
+
+        if ( $user_id > 0 && get_userdata( $user_id ) ) {
+            update_user_meta(
+                $user_id,
+                EGOV_LAW_MONITOR_META_PLAN,
+                $plan
+            );
+
+            update_user_meta(
+                $user_id,
+                EGOV_LAW_MONITOR_META_NOTIFICATIONS,
+                $notifications
+            );
+
+            echo '<div class="notice notice-success is-dismissible">';
+            echo '<p>ユーザー設定を保存しました。</p>';
+            echo '</div>';
+        }
+    }
+
     global $wpdb;
 
     $users = get_users(
@@ -55,13 +93,14 @@ function egov_law_monitor_render_admin_users() {
                     <th>通知</th>                    
                     <th>ウォッチキーワード</th>
                     <th>登録日</th>
+                    <th>操作</th>
                 </tr>
             </thead>
 
             <tbody>
                 <?php if ( empty( $users ) ) : ?>
                     <tr>
-                        <td colspan="7">ユーザーはいません。</td>
+                        <td colspan="8">ユーザーはいません。</td>
                     </tr>
                 <?php else : ?>
                     <?php foreach ( $users as $user ) : ?>
@@ -81,21 +120,36 @@ function egov_law_monitor_render_admin_users() {
                             <td>
                                 <?php
                                 $plan = egov_law_monitor_get_plan( $user->ID );
-
-                                if ( $plan === EGOV_LAW_MONITOR_PLAN_FREE ) {
-                                    echo '無料';
-                                } else {
-                                    echo esc_html( $plan );
-                                }
                                 ?>
+
+                                <select
+                                    name="plan"
+                                    form="egov-law-monitor-user-<?php echo esc_attr( $user->ID ); ?>"
+                                >
+                                    <option
+                                        value="<?php echo esc_attr( EGOV_LAW_MONITOR_PLAN_FREE ); ?>"
+                                        <?php selected( $plan, EGOV_LAW_MONITOR_PLAN_FREE ); ?>
+                                    >
+                                        無料
+                                    </option>
+                                </select>
                             </td>
 
                             <td>
                                 <?php
-                                echo egov_law_monitor_get_notifications( $user->ID )
-                                    ? 'ON'
-                                    : 'OFF';
+                                $notifications = egov_law_monitor_get_notifications( $user->ID );
                                 ?>
+
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        name="notifications"
+                                        value="1"
+                                        form="egov-law-monitor-user-<?php echo esc_attr( $user->ID ); ?>"
+                                        <?php checked( $notifications, true ); ?>
+                                    >
+                                    ON
+                                </label>
                             </td>
 
                             <td>
@@ -119,6 +173,34 @@ function egov_law_monitor_render_admin_users() {
                                     )
                                 );
                                 ?>
+                            </td>
+
+                            <td>
+                                <form
+                                    method="post"
+                                    id="egov-law-monitor-user-<?php echo esc_attr( $user->ID ); ?>"
+                                >
+                                    <?php
+                                    wp_nonce_field(
+                                        'egov_law_monitor_save_user',
+                                        'egov_law_monitor_nonce'
+                                    );
+                                    ?>
+
+                                    <input
+                                        type="hidden"
+                                        name="user_id"
+                                        value="<?php echo esc_attr( $user->ID ); ?>"
+                                    >
+
+                                    <button
+                                        type="submit"
+                                        name="egov_law_monitor_save_user"
+                                        class="button button-primary"
+                                    >
+                                        保存
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
