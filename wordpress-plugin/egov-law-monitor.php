@@ -87,6 +87,11 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/watch-api.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/internal-api.php';
 
+require_once plugin_dir_path( __FILE__ ) . 'includes/user-settings.php';
+
+require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-users.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-menu.php';
+
 
 register_activation_hook(
     __FILE__,
