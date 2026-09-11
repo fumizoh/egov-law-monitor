@@ -236,6 +236,14 @@
     margin-bottom: 16px;
 }
 
+.egov-law-watch-plan {
+    margin-bottom: 0.5rem !important;
+}
+
+.egov-law-watch-last-checked {
+    margin-top: 0 !important;
+}
+
 .egov-law-watches {
     display: flex;
     flex-direction: column;
