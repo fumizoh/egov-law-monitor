@@ -199,6 +199,16 @@ add_action(
                             );
                         }
 
+                        if ( 0 === count( $target_laws ) ) {
+                            return new WP_Error(
+                                'no_target_laws',
+                                '対象法令が見つかりません。法令名の一部など、別のキーワードでお試しください。',
+                                [
+                                    'status' => 400,
+                                ]
+                            );
+                        }
+
                         if ( count( $target_laws ) >= 100 ) {
                             return new WP_Error(
                                 'too_many_target_laws',
