@@ -15,7 +15,7 @@ function scrollToLawCard(card) {
     }
 
     const isMobile = window.matchMedia('(max-width: 767px)').matches;
-    const offset = isMobile ? 120 : 80;
+    const offset = isMobile ? 120 : 82;
 
     const top = title.getBoundingClientRect().top
         + window.scrollY
@@ -71,9 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         openLawCard(card);
 
         requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                scrollToLawCard(card);
-            });
+            scrollToLawCard(card);
         });
     }, 100);
 });
