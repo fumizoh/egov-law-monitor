@@ -95,6 +95,16 @@
     color: #222;
 }
 
+.entry-content .egov-law-card .egov-law-name {
+    scroll-margin-top: 82px;
+}
+
+@media (max-width: 767px) {
+    .entry-content .egov-law-card .egov-law-name {
+        scroll-margin-top: 120px;
+    }
+}
+
 .egov-law-type {
     margin: 8px 0 16px;
 }
