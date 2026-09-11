@@ -136,22 +136,23 @@ add_action(
                         $table_name = $wpdb->prefix . 'law_watch_settings';
 
                         /*
-                         * Free plan:
-                         * One keyword per user.
-                         */
+                        * Check watch keyword limit by plan.
+                        */
+                        $watch_limit = egov_law_monitor_get_watch_limit( $user_id );
+
                         $watch_count = (int) $wpdb->get_var(
                             $wpdb->prepare(
                                 "SELECT COUNT(*)
-                                 FROM {$table_name}
-                                 WHERE user_id = %d",
+                                FROM {$table_name}
+                                WHERE user_id = %d",
                                 $user_id
                             )
                         );
 
-                        if ( $watch_count >= 1 ) {
+                        if ( $watch_count >= $watch_limit ) {
                             return new WP_Error(
                                 'watch_limit_reached',
-                                '無料プランではキーワードを1個まで登録できます。',
+                                '現在のプランでは、これ以上キーワードを登録できません。',
                                 [
                                     'status' => 409,
                                 ]

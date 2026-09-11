@@ -10,6 +10,19 @@ define( 'EGOV_LAW_MONITOR_META_NOTIFICATIONS', 'egov_law_monitor_notifications' 
 define( 'EGOV_LAW_MONITOR_PLAN_FREE', 'free' );
 
 /**
+ * プランごとのウォッチキーワード上限を取得
+ */
+function egov_law_monitor_get_watch_limit( $user_id ) {
+    $plan = egov_law_monitor_get_plan( $user_id );
+
+    $limits = array(
+        EGOV_LAW_MONITOR_PLAN_FREE => 1,
+    );
+
+    return $limits[ $plan ] ?? 0;
+}
+
+/**
  * 料金プランを取得
  */
 function egov_law_monitor_get_plan( $user_id ) {
