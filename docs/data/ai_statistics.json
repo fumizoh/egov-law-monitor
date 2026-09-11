@@ -1,14 +1,14 @@
 {
   "law_summary": {
     "model": "gemini-2.5-flash",
-    "count": 873,
-    "prompt_tokens": 5452070,
-    "output_tokens": 235216,
-    "thoughts_tokens": 1980261,
-    "total_tokens": 7667547,
-    "elapsed_seconds": 14293.47,
-    "estimated_cost_usd": 7.174,
-    "estimated_cost_jpy": 1076.1,
+    "count": 883,
+    "prompt_tokens": 5824248,
+    "output_tokens": 238525,
+    "thoughts_tokens": 2001836,
+    "total_tokens": 8064609,
+    "elapsed_seconds": 14443.83,
+    "estimated_cost_usd": 7.348,
+    "estimated_cost_jpy": 1102.2,
     "average_cost_jpy": 1.2
   }
 }
