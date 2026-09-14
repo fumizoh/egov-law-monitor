@@ -122,6 +122,15 @@ def main(date: str | None = None):
 
     events, date = egov.fetch(date=specified_date)
 
+    logger.info("=== record last checked ===")
+
+    storage.save_watch_status(
+        {
+            "last_checked": datetime.now(JST).isoformat(),
+        },
+        paths=storage_paths,
+    )
+
     statistics = storage.load_statistics()
     last_update = statistics.get("egov", {}).get("last_update")
 
@@ -145,15 +154,6 @@ def main(date: str | None = None):
             events=events,
             date=date,
             storage_paths=storage_paths,
-        )
-
-        logger.info("=== record last checked ===")
-
-        storage.save_watch_status(
-            {
-                "last_checked": datetime.now(JST).isoformat(),
-            },
-            paths=storage_paths,
         )
 
         logger.info("=== WordPress ===")
