@@ -172,6 +172,7 @@ def _generate_law_summary(
 
 def generate(
     law_groups: list[LawGroup],
+    date: str,
     storage_paths: storage.StoragePaths = storage.DEFAULT_STORAGE,
 ) -> tuple[
     list[LawSummary],
@@ -236,6 +237,12 @@ def generate(
             law_summary = LawSummary(
                 summary_input=summary_input,
                 response=response,
+            )
+
+            storage.upsert_law_summaries(
+                [law_summary],
+                date=date,
+                paths=storage_paths,
             )
 
             logs.append(

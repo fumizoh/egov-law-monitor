@@ -17,8 +17,6 @@ from statistics import create_source_statistics
 
 logger = logging.getLogger(__name__)
 
-BATCH_SIZE = 10
-
 
 def _save_statistics(
     source: str,
@@ -81,34 +79,14 @@ def process_egov(
         paths=storage_paths,
     )
 
-    total_batches = (len(law_groups) + BATCH_SIZE - 1) // BATCH_SIZE
-
-    for i in range(0, len(law_groups), BATCH_SIZE):
-        batch = law_groups[i:i + BATCH_SIZE]
-
+    for law_group_item in law_groups:
         law_summaries, logs = generator.generate(
-            batch,
+            [law_group_item],
+            date=date,
             storage_paths=storage_paths,
         )
 
-        storage.upsert_law_summaries(
-            law_summaries,
-            date=date,
-            paths=storage_paths,
-        )
-
         storage.append_ai_summary_logs(logs)
-
-        batch_number = i // BATCH_SIZE + 1
-        processed = min(i + BATCH_SIZE, len(law_groups))
-
-        logger.info(
-            "Summary batch %d/%d completed (%d/%d)",
-            batch_number,
-            total_batches,
-            processed,
-            len(law_groups),
-        )
 
     all_logs = storage.load_ai_summary_logs()
 

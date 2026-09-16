@@ -1,58 +1,115 @@
 {
-  "date": "20260914",
+  "date": "20260915",
   "summaries": [
     {
       "summary_input": {
-        "law_id": "508AC0000000040",
-        "law_name": "予備自衛官等の職務の円滑な遂行を図るための国家公務員及び地方公務員の兼業の特例に関する法律",
+        "law_id": "411AC0100000105",
+        "law_name": "ダイオキシン類対策特別措置法",
         "revisions": [
           {
-            "law_data_id": 637598,
+            "law_data_id": 637811,
             "sub_revision": "1",
-            "amendment_id": null,
-            "amendment_name": null,
-            "amendment_num": null,
-            "enforcement_date": "2027-04-01",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": false
+            "is_current": true
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "公務員の予備自衛官等兼業に関する特例制度",
-          "body": "この法律は、予備自衛官等の継続的かつ安定的な確保やその職務の円滑な遂行を図るため、国家公務員や地方公務員が予備自衛官等として兼業を行う場合における職務専念義務や兼業制限の特例等を定めたものです。\\n\\n一般職の国家公務員（行政執行法人職員を含む）、裁判所職員、自衛隊員については、所轄庁の長などから承認を受けることで、予備自衛官等の職務に従事することができます。承認を受けた職員が招集に応じるため勤務しない時間については、職務専念義務の規定が適用されず、兼業制限に関する許可も不要となります。勤務しない時間に対する給与は、原則として勤務一時間当たりの給与額が減額されて支給され、行政執行法人はこの基準を参酌して定めた支給基準を届け出・公表する必要があります（自衛隊員は政令で定められます）。\\n\\n地方公務員（特定地方独立行政法人職員を含む）についても同様の特例が設けられており、任命権者などの承認を受けることで予備自衛官等の職務に従事できます。承認を受けた職員が招集等により勤務しない時間については職務専念義務が免除され、兼業制限の許可も不要となります。\\n\\nまた、国は広報や啓発活動等を通じて、予備自衛官等の職務の重要性に対する国民の関心と理解を深めるよう努めるものとされています。"
+          "title": "廃棄物処理法の改正に伴うばいじん等処理の読み替え規定の修正",
+          "body": "廃棄物焼却炉から排出される集じん機で集めたばいじんや焼却灰などの処理に関して、廃棄物の処理及び清掃に関する法律を適用する際の読み替え規定の一部が修正されます。\n\n具体的には、廃棄物の処理及び清掃に関する法律における処理基準の読み替えの対象を、従来の「第六条の二第三項」から「第六条の二第四項」に改める整備が行われます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 1965,
-          "output_tokens": 357,
-          "thoughts_tokens": 1864,
-          "total_tokens": 4186,
-          "elapsed_seconds": 14.016203749999988,
-          "response_id": "cnaoat-0PLq_998PvIWW4AY"
+          "prompt_tokens": 2238,
+          "output_tokens": 117,
+          "thoughts_tokens": 754,
+          "total_tokens": 3109,
+          "elapsed_seconds": 12.244451200000185,
+          "response_id": "jx-qau_WDaecvdAPoYeN2AQ"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "325AC0000000226",
-        "law_name": "地方税法",
+        "law_id": "503AC0000000060",
+        "law_name": "プラスチックに係る資源循環の促進等に関する法律",
         "revisions": [
           {
-            "law_data_id": 637523,
+            "law_data_id": 637822,
             "sub_revision": "1",
-            "amendment_id": "508AC0000000051",
-            "amendment_name": "社会福祉法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第五十一号",
-            "enforcement_date": "2027-04-01",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": false
-          },
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "廃棄物処理法特例におけるみなし規定の参照条項を改正",
+          "body": "廃棄物処理法の特例に関する規定において、参照する同法の条項が変更されます。指定法人の再委託を受けて分別収集物の再商品化に必要な行為を業として行う者、および第四十一条第三項に規定する者について、廃棄物処理法の適用にあたり一般廃棄物または産業廃棄物の収集運搬業者・処分業者とみなす際、参照される同法の条項が「第六条の二第六項」から「第六条の二第八項」へと改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1125,
+          "output_tokens": 134,
+          "thoughts_tokens": 1552,
+          "total_tokens": 2811,
+          "elapsed_seconds": 27.59132899999895,
+          "response_id": "xiCqaurkCrGXvdAPncz8kAU"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "415AC0000000044",
+        "law_name": "中間貯蔵・環境安全事業株式会社法",
+        "revisions": [
           {
-            "law_data_id": 636716,
+            "law_data_id": 637823,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "非常災害廃棄物の処理に関する支援事業の追加",
+          "body": "中間貯蔵・環境安全事業株式会社の目的および事業の範囲に、非常災害廃棄物の適正な処理を円滑かつ迅速に実施するための事業が追加されます。\n\n具体的には、市町村や都道府県に対して非常災害廃棄物の処理方策の提案や専門家の派遣などの援助を行うほか、国の委託を受けて自治体への情報・技術的知識の提供、調査研究、および技術開発を行います。\n\nこれらの新設された事業やこれらに附帯する事業を営む間についても、政府が同社の発行済株式の総数を保有しなければならない期間に追加されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1428,
+          "output_tokens": 153,
+          "thoughts_tokens": 644,
+          "total_tokens": 2225,
+          "elapsed_seconds": 6.5702735999984725,
+          "response_id": "5CCqavbTC4GfvdAPq5bKoQY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "323AC0000000068",
+        "law_name": "予防接種法",
+        "revisions": [
+          {
+            "law_data_id": 636674,
             "sub_revision": "1",
             "amendment_id": "508AC0000000031",
             "amendment_name": "健康保険法等の一部を改正する法律",
@@ -63,18 +120,7 @@
             "is_current": false
           },
           {
-            "law_data_id": 631180,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000002",
-            "amendment_name": "地方税法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第二号",
-            "enforcement_date": "2027-04-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 624681,
+            "law_data_id": 624491,
             "sub_revision": "2",
             "amendment_id": "507AC0000000087",
             "amendment_name": "医療法等の一部を改正する法律",
@@ -85,117 +131,18 @@
             "is_current": false
           },
           {
-            "law_data_id": 636844,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000059",
-            "amendment_name": "科学技術・イノベーション創出の活性化に関する法律の一部を改正する法律",
-            "amendment_num": "令和八年法律第五十九号",
+            "law_data_id": 623527,
+            "sub_revision": "3",
+            "amendment_id": "507AC0000000037",
+            "amendment_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律",
+            "amendment_num": "令和七年法律第三十七号",
             "enforcement_date": null,
-            "scheduled_enforcement_date": "2027-04-16",
-            "enforcement_comment": "公布の日から起算して九月を超えない範囲内において政令で定める日",
+            "scheduled_enforcement_date": "2028-05-20",
+            "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
             "is_current": false
           },
           {
-            "law_data_id": 631181,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000002",
-            "amendment_name": "地方税法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第二号",
-            "enforcement_date": "2027-05-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 631182,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000002",
-            "amendment_name": "地方税法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第二号",
-            "enforcement_date": "2027-05-20",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 631198,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000002",
-            "amendment_name": "地方税法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第二号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2027-05-26",
-            "enforcement_comment": "都市再生特別措置法等の一部を改正する法律（令和八年法律第二十三号）附則第一条第二号に掲げる規定の施行の日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 631201,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000002",
-            "amendment_name": "地方税法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第二号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2027-06-18",
-            "enforcement_comment": "産業技術力強化法の一部を改正する法律（令和八年法律第四十一号）の施行の日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 631183,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000002",
-            "amendment_name": "地方税法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第二号",
-            "enforcement_date": "2027-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 626286,
-            "sub_revision": "5",
-            "amendment_id": "507AC0000000057",
-            "amendment_name": "譲渡担保契約及び所有権留保契約に関する法律の施行に伴う関係法律の整備等に関する法律",
-            "amendment_num": "令和七年法律第五十七号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2027-12-05",
-            "enforcement_comment": "譲渡担保契約及び所有権留保契約に関する法律（令和七年法律第五十六号）の施行の日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 631192,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000002",
-            "amendment_name": "地方税法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第二号",
-            "enforcement_date": "2028-01-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 631193,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000002",
-            "amendment_name": "地方税法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第二号",
-            "enforcement_date": "2028-04-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 636727,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000031",
-            "amendment_name": "健康保険法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第三十一号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2028-06-04",
-            "enforcement_comment": "公布の日から起算して二年を超えない範囲内において政令で定める日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 624682,
+            "law_data_id": 624502,
             "sub_revision": "2",
             "amendment_id": "507AC0000000087",
             "amendment_name": "医療法等の一部を改正する法律",
@@ -206,29 +153,1115 @@
             "is_current": false
           },
           {
-            "law_data_id": 631199,
+            "law_data_id": 637470,
             "sub_revision": "1",
-            "amendment_id": "508AC0000000002",
-            "amendment_name": "地方税法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第二号",
+            "amendment_id": "508AC0000000046",
+            "amendment_name": "民法等の一部を改正する法律の施行に伴う関係法律の整備等に関する法律",
+            "amendment_num": "令和八年法律第四十六号",
             "enforcement_date": null,
-            "scheduled_enforcement_date": "2029-01-01",
-            "enforcement_comment": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行の日の属する年の翌々年の一月一日",
+            "scheduled_enforcement_date": "2028-12-23",
+            "enforcement_comment": "民法等の一部を改正する法律（令和八年法律第四十五号）の施行の日",
             "is_current": false
-          },
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "仮名予防接種情報の利用制度創設と保護者定義の見直し",
+          "body": "この法改正により、予防接種関連情報の利活用、保護者の範囲、および手続きに関する規定が変更されます。\n\nまず、公衆衛生の向上や医療分野の研究開発を促進するため、特定の個人を識別できないよう加工した「仮名予防接種等関連情報」の利用・提供制度が創設されます。厚生労働大臣は、学術研究や医療分野の研究開発等を行う国、地方公共団体、大学、民間事業者等に対して情報を提供できるようになり、他の仮名医療情報等と連結して利用することも可能になります。情報の適正な取扱いを確保するため、利用目的の制限や、是正命令、立入検査、罰則などの各種監督規定もあわせて整備されます。\n\n次に、民法改正等に伴う見直しとして、同法における「保護者」の定義に「特定補助人」が追加されます。これに伴い、予防接種の勧奨や接種の努力義務が課される対象について、従来の「成年被後見人」から「特定補助人を付する処分の審判を受けた者」へと変更されます。\n\nその他、基盤機構等への事務の共同委託先に厚生労働省令で定める者が追加されるほか、特定医薬品製造販売業者の要件における外国製造業者の「認定」が「登録」に改められるなどの手続き上の変更が行われます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 11405,
+          "output_tokens": 316,
+          "thoughts_tokens": 1713,
+          "total_tokens": 13434,
+          "elapsed_seconds": 14.447344000000157,
+          "response_id": "8iCqatHgBOmevdAP6OHv-QY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "409AC0000000123",
+        "law_name": "介護保険法",
+        "revisions": [
           {
-            "law_data_id": 631194,
+            "law_data_id": 637545,
             "sub_revision": "1",
-            "amendment_id": "508AC0000000002",
-            "amendment_name": "地方税法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第二号",
-            "enforcement_date": "2029-04-01",
+            "amendment_id": "508AC0000000051",
+            "amendment_name": "社会福祉法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第五十一号",
+            "enforcement_date": "2027-04-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": false
           },
           {
-            "law_data_id": 637580,
+            "law_data_id": 636680,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000031",
+            "amendment_name": "健康保険法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十一号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 624519,
+            "sub_revision": "1",
+            "amendment_id": "507AC0000000087",
+            "amendment_name": "医療法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第八十七号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 637571,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000051",
+            "amendment_name": "社会福祉法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第五十一号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2027-12-24",
+            "enforcement_comment": "公布の日から起算して一年六月を超えない範囲内において政令で定める日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 637576,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000051",
+            "amendment_name": "社会福祉法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第五十一号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2028-06-24",
+            "enforcement_comment": "公布の日から起算して二年を超えない範囲内において政令で定める日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 624522,
+            "sub_revision": "1",
+            "amendment_id": "507AC0000000087",
+            "amendment_name": "医療法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第八十七号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2028-12-11",
+            "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 637581,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000051",
+            "amendment_name": "社会福祉法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第五十一号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2029-06-24",
+            "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "生産性向上と経営安定の両連、特定地域向けサービスの創設",
+          "body": "介護サービスにおける生産性の向上や人材確保と、安定した経営基盤の確立を両立するため、国や地方公共団体の責務が明確化されました。これに伴い、都道府県等には関係機関で構成される協議会の設置が求められ、市町村や都道府県の介護保険事業計画において、生産性向上や経営基盤確立のための取組に関する事項を定めることとされました。\\n\\nまた、人口減少地域などの特定地域における支援のため、市町村が実施できる「特定地域居宅サービス等事業」が創設され、特例給付や新たな施設区分の規定が整備されました。さらに、登録有料老人ホームにおける「登録施設介護支援」及び「登録施設介護予防支援」が新たに規定され、指定基準や給付の手続きが設けられました。一方、「夜間対応型訪問介護」は地域密着型サービス等の定義から削除されました。\\n\\nこのほか、マイナンバーカードによるオンライン資格確認を可能とする規定が導入され、被保険者証の提示等に関する手続きが整備されました。介護支援専門員の制度においては、介護支援専門員証の有効期間更新規定が削除され、資質向上のための研修受講義務や、事業者がその受講機会を確保する義務などが新たに規定されました。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 128239,
+          "output_tokens": 299,
+          "thoughts_tokens": 2070,
+          "total_tokens": 130608,
+          "elapsed_seconds": 16.527366400001483,
+          "response_id": "CiGqatqFI4GfvdAPq5bKoQY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "424AC0000000057",
+        "law_name": "使用済小型電子機器等の再資源化の促進に関する法律",
+        "revisions": [
+          {
+            "law_data_id": 637820,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "認定事業者等の廃棄物処理法特例の対象条項を変更",
+          "body": "認定事業者および第十三条第三項に規定する者について、一般廃棄物収集運搬業者や産業廃棄物収集運搬業者等とみなして廃棄物処理法の規定を適用する特例において、引用する同法の条項が一部変更されます。\n\n具体的には、特例が適用される廃棄物処理法の規定のうち、「第六条の二第六項」とされていた箇所が「第六条の二第八項」に改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1376,
+          "output_tokens": 122,
+          "thoughts_tokens": 958,
+          "total_tokens": 2456,
+          "elapsed_seconds": 8.725434600000881,
+          "response_id": "HSGqarLhE4GfvdAPq5bKoQY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "211AC0000000070",
+        "law_name": "健康保険法",
+        "revisions": [
+          {
+            "law_data_id": 637515,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000051",
+            "amendment_name": "社会福祉法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第五十一号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 636717,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000031",
+            "amendment_name": "健康保険法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十一号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 624530,
+            "sub_revision": "2",
+            "amendment_id": "507AC0000000087",
+            "amendment_name": "医療法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第八十七号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 637274,
+            "sub_revision": "1",
+            "amendment_id": "507AC0000000037",
+            "amendment_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律",
+            "amendment_num": "令和七年法律第三十七号",
+            "enforcement_date": "2027-05-20",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 636726,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000031",
+            "amendment_name": "健康保険法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十一号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2027-06-04",
+            "enforcement_comment": "公布の日から起算して一年を超えない範囲内において政令で定める日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 627034,
+            "sub_revision": "3",
+            "amendment_id": "507AC0000000074",
+            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
+            "amendment_num": "令和七年法律第七十四号",
+            "enforcement_date": "2027-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "一部保険外療養の創設や短時間労働者の適用拡大など",
+          "body": "今回の改正により、健康保険制度において主に以下の変更が行われます。  第一に、一般用医薬品等との代替性が特に高い薬剤を使用する療養などについて、「一部保険外療養」が新たに定義されます。これに伴い、一部保険外療養を受けた場合の保険外併用療養費や療養費、家族療養費等の支給額の算定方法が整備されます。  第二に、短時間労働者に対する社会保険の適用拡大に向けた措置が整理されます。特定の短時間労働者を健康保険の被保険者としない経過措置に期限（令和17年9月30日まで）が設けられるほか、適用対象となる事業所の規模要件（従業員数）が段階的に引き下げられます。  第三に、国民健康保険への移行に関する手続きが、従来の「承認」から「申出」へと見直されます。また、保険医療機関に対し、医療の質向上や業務効率化、従業者の勤務環境改善等のための措置を講ずる努力義務が追加されます。  このほか、地域医療構想を踏まえた病床過剰地域における保険医療機関等の指定制限に関する要件の整理や、介護保険法等の関連法令の改正に伴う規定の整理などが行われます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 19164,
+          "output_tokens": 292,
+          "thoughts_tokens": 1768,
+          "total_tokens": 21224,
+          "elapsed_seconds": 13.209633999998914,
+          "response_id": "LyGqaomcA6ecvdAPoYeN2AQ"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "323AC0000000129",
+        "law_name": "医療情報基盤・診療報酬審査支払機構法",
+        "revisions": [
+          {
+            "law_data_id": 624512,
+            "sub_revision": "2",
+            "amendment_id": "507AC0000000087",
+            "amendment_name": "医療法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第八十七号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "情報収集等の受託業務の追加と規定の簡素化",
+          "body": "機構が受託して行うことのできる業務の範囲が拡大されるとともに、関連する規定の整理が行われます。\n\n具体的には、国や地方公共団体、独立行政法人、その他厚生労働省令で定める者からの委託を受け、医療に関する給付の対象者（過去の対象者を含む）に係る情報の収集、整理、利用、提供に関する事務を機構が行えるようになります。また、これら追加された情報収集や提供等に関する事務については、厚生労働大臣の認可を受けて他の団体等へ委託できる業務に位置づけられる一方、保険者等へその費用を負担させる対象からは除外されます。\n\nさらに、これまで個別の法律名が細かく列挙されていた情報収集や診療報酬に関する意見陳述、支払事務の対象となる法律の規定について、「その他の厚生労働省令で定める法律」という表現に改められ、規定が簡素化されます。\n\nこのほか、この法律の施行後5年を目途として、施行状況等を勘案した上で検討を加え、必要な措置を講ずることが定められています。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 2740,
+          "output_tokens": 264,
+          "thoughts_tokens": 1816,
+          "total_tokens": 4820,
+          "elapsed_seconds": 13.384403199997905,
+          "response_id": "PyGqaq-tAoGfvdAPq5bKoQY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "322AC0000000067",
+        "law_name": "地方自治法",
+        "revisions": [
+          {
+            "law_data_id": 637812,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "第一号法定受託事務における廃棄物処理法関連規定の改定",
+          "body": "「廃棄物の処理及び清掃に関する法律等の一部を改正する法律」の制定に伴い、地方自治法別表第一における第一号法定受託事務の規定が変更されます。\n\n具体的には、別表第一に掲げられている「廃棄物の処理及び清掃に関する法律」に係る事務の対象条項について、一部規定の削除および新たな規定の追加が行われます。\n\n対象から削られるのは、同法第十七条の二第一項、同条第三項において準用する第十八条第一項、第十九条第一項、第十九条の三（第一号及び第三号を除く。）、第十九条の五第一項（第二号から第四号までを除く。）の規定に係る事務などです。\n\n新たに対象に加えられるのは、同法第二十四条の七第一項及び第二項、第二十四条の八第一項、同条第三項及び第四項（第二十四条の十六第三項において準用する場合を含む。）、第二十四条の九（第二十四条の十七において読み替えて準用する場合を含む。）、第二十四条の十（第二十四条の十七において読み替えて準用する場合を含む。）、第二十四条の十五第一項及び第二項、第二十四条の十六第一項、第二十四条の二十二第一項及び第二項、第二十四条の二十三第一項及び第二項、第二十四条の二十四から第二十四条の二十六まで、第二十四条の二十九、第二十四条の三十の規定に係る事務などです。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1724,
+          "output_tokens": 352,
+          "thoughts_tokens": 1585,
+          "total_tokens": 3661,
+          "elapsed_seconds": 12.281550399999105,
+          "response_id": "UCGqaqTtKqecvdAPoYeN2AQ"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "508AC0000000033",
+        "law_name": "太陽電池廃棄物の再資源化等の推進に関する法律",
+        "revisions": [
+          {
+            "law_data_id": 638430,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "改正法の原則的な施行期日の延長と一部規定の早期施行",
+          "body": "「廃棄物の処理及び清掃に関する法律等の一部を改正する法律」の施行期日に関する規定が変更されます。改正により、本法の原則的な施行期日が、従来の「公布の日から起算して1年6月を超えない範囲内」から「公布の日から起算して2年6月を超えない範囲内」において政令で定める日へと延長されます。一方で、特定の規定については、早期に施行されることとなります。具体的には、廃棄物の処理及び清掃に関する法律、資源の有効な利用の促進に関する法律、使用済小型電子機器等の再資源化の促進に関する法律、プラスチックに係る資源循環の促進等に関する法律、および資源循環の促進のための再資源化事業等の高度化に関する法律の一部改正規定など、一部の規定については「公布の日から起算して3月を超えない範囲内において政令で定める日」から施行されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1683,
+          "output_tokens": 207,
+          "thoughts_tokens": 2364,
+          "total_tokens": 4254,
+          "elapsed_seconds": 24.780334000002767,
+          "response_id": "aSGqaoipK6ecvdAPoYeN2AQ"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "423AC1000000110",
+        "law_name": "平成二十三年三月十一日に発生した東北地方太平洋沖地震に伴う原子力発電所の事故により放出された放射性物質による環境の汚染への対処に関する特別措置法",
+        "revisions": [
+          {
+            "law_data_id": 637815,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "廃棄物等の定義における参照条項の変更",
+          "body": "この改正は、本法における「一般廃棄物」や「特別管理一般廃棄物」などの各用語の定義において、参照している「廃棄物の処理及び清掃に関する法律」の条項を整理するものです。具体的には、これらの用語の意義の定義に係る参照条項のうち、「第六条の二第二項及び第三項」とされていた箇所が「第六条の二第二項及び第四項」に改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 2153,
+          "output_tokens": 111,
+          "thoughts_tokens": 1038,
+          "total_tokens": 3302,
+          "elapsed_seconds": 23.538601500000368,
+          "response_id": "eiGqavyEI7GXvdAPncz8kAU"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "345AC0000000137",
+        "law_name": "廃棄物の処理及び清掃に関する法律",
+        "revisions": [
+          {
+            "law_data_id": 637818,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "非常災害廃棄物の円滑な処理に向けた体制整備",
+          "body": "今回の改正では、非常災害時に発生する「非常災害廃棄物」の適正かつ円滑な処理を確保するため、連携体制の強化や処理手続きの特例が整備されました。まず、都道府県や市町村は、処理業者等との間で災害時の処理協力に関する協定を締結するよう努めなければならないとされました。また、自治体相互間でも職員の派遣などに関する協定の締結に努めることとされています。さらに、市町村から非常災害廃棄物の処理委託を受けた者が、基準に従う場合に限り再委託や再々委託を行うことができる特例が設けられました。施設設置の特例として、処分施設の設置届出における一部書類の添付不要化や、都道府県知事が申請に基づき「非常災害廃棄物最終処分場」の設置者を指定する制度が創設され、指定された設置者は原則として市町村からの委託に応じる義務を負います。このほか、国による情報や技術的知識の提供等の推進も定められました。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 12740,
+          "output_tokens": 238,
+          "thoughts_tokens": 1921,
+          "total_tokens": 14899,
+          "elapsed_seconds": 15.073524100000213,
+          "response_id": "lCGqas26IOmevdAP6OHv-QY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "416AC0000000112",
+        "law_name": "武力攻撃事態等における国民の保護のための措置に関する法律",
+        "revisions": [
+          {
+            "law_data_id": 637817,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "廃棄物処理法改正に伴う特例基準の参照条項の変更",
+          "body": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律の施行に伴い、武力攻撃事態等における国民の保護のための措置に関する法律における廃棄物処理の特例に関する条項が整理されます。具体的には、環境大臣が指定する特例地域において適用される廃棄物処理の特例基準について、みなす対象となる廃棄物処理法の引用条項が「第六条の二第三項」から「第六条の二第四項」へ変更されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 2126,
+          "output_tokens": 127,
+          "thoughts_tokens": 1300,
+          "total_tokens": 3553,
+          "elapsed_seconds": 9.615123899999162,
+          "response_id": "piGqauiBC-mevdAP6OHv-QY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "340AC0000000141",
+        "law_name": "母子保健法",
+        "revisions": [
+          {
+            "law_data_id": 624490,
+            "sub_revision": "2",
+            "amendment_id": "507AC0000000087",
+            "amendment_name": "医療法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第八十七号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 618498,
+            "sub_revision": "6",
+            "amendment_id": "506AC0000000053",
+            "amendment_name": "地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律",
+            "amendment_num": "令和六年法律第五十三号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2027-06-18",
+            "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 636711,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000031",
+            "amendment_name": "健康保険法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十一号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2028-06-04",
+            "enforcement_comment": "公布の日から起算して二年を超えない範囲内において政令で定める日",
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "養育医療の電子資格確認導入と妊婦健診の基準明確化",
+          "body": "市町村が実施する養育医療の給付手続きにおいて、マイナンバーカード等を用いた「電子資格確認」の仕組みが導入されます。保護者は、指定養育医療機関において電子資格確認等による対象確認を受ける必要があります。これに伴い、市町村は養育医療や乳幼児健診、産後ケア事業に関する事務を医療情報基盤・診療報酬審査支払機構や国民健康保険団体連合会等に委託できるようになります。　また、従来の妊産婦向けの健康診査が、妊婦に対する健診と産婦に対する健診に明確に区分されます。妊婦健診については、国が望ましい実施基準や標準的な費用の額を定め、市町村や医療機関等はこれらを勘案するよう努めることとされます。さらに、妊婦が適切に健診を選択できるよう、国が健診内容や費用に関する情報を収集し、分かりやすい形で公表する仕組みが整備されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 12564,
+          "output_tokens": 229,
+          "thoughts_tokens": 2431,
+          "total_tokens": 15224,
+          "elapsed_seconds": 17.463713000001007,
+          "response_id": "tCGqaqj8JLGXvdAPncz8kAU"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "345AC0000000136",
+        "law_name": "海洋汚染等及び海上災害の防止に関する法律",
+        "revisions": [
+          {
+            "law_data_id": 637816,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "目的規定の改正と段階的な施行期日の設定",
+          "body": "本改正では、海洋汚染や海上災害の防止、海洋環境の保全等を目指す目的規定が改正されました。具体的には、船舶や海洋施設などからの油や有害液体物質、廃棄物の排出・廃棄・焼却の規制をはじめ、有害水バラストの排出規制、船舶からの排出ガスの放出規制、廃油の適正処理、排出された油等の防除、海上火災の防止措置などを講ずることが明記されています。また、本法律は原則として公布の日から起算して２年６ヶ月を超えない範囲内で政令で定める日から施行されますが、一部の規定（廃棄物処理法の改正の一部や第七条の規定等）については、公布の日から起算して３ヶ月を超えない範囲内で政令で定める日から先行して施行されることが定められています。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1837,
+          "output_tokens": 193,
+          "thoughts_tokens": 2870,
+          "total_tokens": 4900,
+          "elapsed_seconds": 19.66611499999999,
+          "response_id": "yCGqasO0GvyevdAPmo-6wQc"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "336AC0000000223",
+        "law_name": "災害対策基本法",
+        "revisions": [
+          {
+            "law_data_id": 637813,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "災害廃棄物処理特例における参照条文の修正",
+          "body": "災害対策基本法における、災害時の廃棄物処理の特例に関する規定が改正されます。具体的には、環境大臣が廃棄物処理特例地域を指定した際に定める「廃棄物処理特例基準」について、廃棄物処理法（廃棄物の処理及び清掃に関する法律）における基準とみなす対象の条文が一部変更されます。改正前は同法第六条の二の「第二項及び第三項」に規定する基準とみなされていましたが、改正後は同条の「第二項及び第四項」に規定する基準とみなすこととされます。この改正は、廃棄物の処理及び清掃に関する法律等の一部を改正する法律の施行に伴い、参照条文の整合性を図るために行われるものです。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 2067,
+          "output_tokens": 179,
+          "thoughts_tokens": 1415,
+          "total_tokens": 3661,
+          "elapsed_seconds": 9.281119699997362,
+          "response_id": "3iGqauKjG-mevdAP6OHv-QY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "423AC0000000126",
+        "law_name": "特定Ｂ型肝炎ウイルス感染者給付金等の支給に関する特別措置法",
+        "revisions": [
+          {
+            "law_data_id": 624483,
+            "sub_revision": "1",
+            "amendment_id": "507AC0000000087",
+            "amendment_name": "医療法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第八十七号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "給付手続きへのマイナンバーカード等による電子資格確認の導入",
+          "body": "定期検査費や母子感染防止医療費の給付手続において、従来の受給者証の提示に加え、個人番号カード（マイナンバーカード）の利用者証明用電子証明書等を利用した「電子資格確認」により特定無症候性持続感染者であることの確認を受けられるようになります。これに伴い、国や機構、医療機関等の関係者は、電子資格確認の導入や情報通信技術の利用推進に向けて連携・協力に努めるものとされます。\\n\\nまた、機構が支払事務に伴う情報の収集・整理等を行うにあたっては、医療情報基盤・診療報酬審査支払機構法に基づく事務などと一体的に行うほか、当該事務の委託を保険者や市町村等と共同して行うことと規定されます。\\n\\nさらに、法律の施行後5年を目途として、施行状況等を勘案した検討を加え、必要な措置を講ずることが定められています。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 2334,
+          "output_tokens": 227,
+          "thoughts_tokens": 2251,
+          "total_tokens": 4812,
+          "elapsed_seconds": 14.863385500000732,
+          "response_id": "6iGqas_ZEemevdAP6OHv-QY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "328AC0000000245",
+        "law_name": "私立学校教職員共済法",
+        "revisions": [
+          {
+            "law_data_id": 636704,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000031",
+            "amendment_name": "健康保険法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十一号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 624450,
+            "sub_revision": "2",
+            "amendment_id": "507AC0000000087",
+            "amendment_name": "医療法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第八十七号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 627010,
+            "sub_revision": "3",
+            "amendment_id": "507AC0000000074",
+            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
+            "amendment_num": "令和七年法律第七十四号",
+            "enforcement_date": "2027-09-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 627268,
+            "sub_revision": "3",
+            "amendment_id": "507AC0000000074",
+            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
+            "amendment_num": "令和七年法律第七十四号",
+            "enforcement_date": "2027-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "標準報酬月額の上限引き上げや短時間労働者への適用見直し",
+          "body": "私立学校教職員共済制度における標準報酬月額の等級が見直され、新たに第32級（65万円）と第33級（68万円）が追加されて上限が引き上げられます。これに伴い、特定の加入者に対する標準報酬月額改定の経過措置が設けられます。\n\nまた、短時間労働者（特定四分の三未満短時間労働者）を被保険者としない経過措置の期限が、従来の「当分の間」から「令和17年9月30日まで」に限定されます。これに関連して、適用除外の基準となる特定労働者数について、令和9年10月から段階的に引き下げる（35人、20人、10人へ移行）などの見直しが実施されます。\n\nこのほか、日本私立学校振興・共済事業団が特定の事務を共同委託する相手方の対象について、文部科学省令で定める者を加えるなどの整備が行われます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 9665,
+          "output_tokens": 250,
+          "thoughts_tokens": 2559,
+          "total_tokens": 12474,
+          "elapsed_seconds": 16.047780000000785,
+          "response_id": "_yGqasSkNr6MncoPzou_uQQ"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "332AC0000000026",
+        "law_name": "租税特別措置法",
+        "revisions": [
+          {
+            "law_data_id": 631095,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000012",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第十二号",
+            "enforcement_date": "2026-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 631142,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000012",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第十二号",
+            "enforcement_date": "2026-05-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 631155,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000012",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第十二号",
+            "enforcement_date": "2026-06-25",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 636541,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000029",
+            "amendment_name": "経済社会情勢の変化を踏まえた企業の事業活動の持続的な発展を図るための産業競争力強化法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第二十九号",
+            "enforcement_date": "2026-07-31",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 631151,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000012",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第十二号",
+            "enforcement_date": "2026-07-31",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 637668,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000064",
+            "amendment_name": "金融商品取引法及び資金決済に関する法律の一部を改正する法律",
+            "amendment_num": "令和八年法律第六十四号",
+            "enforcement_date": "2026-08-12",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          },
+          {
+            "law_data_id": 631143,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000012",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第十二号",
+            "enforcement_date": "2026-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 636651,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000035",
+            "amendment_name": "地域公共交通の活性化及び再生に関する法律の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十五号",
+            "enforcement_date": "2026-10-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 623604,
+            "sub_revision": "5",
+            "amendment_id": "507AC0000000013",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第十三号",
+            "enforcement_date": "2026-11-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 631154,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000012",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第十二号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2026-11-26",
+            "enforcement_comment": "都市再生特別措置法等の一部を改正する法律（令和八年法律第二十三号）の施行の日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 631144,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000012",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第十二号",
+            "enforcement_date": "2026-12-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 631152,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000012",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第十二号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2026-12-04",
+            "enforcement_comment": "経済社会情勢の変化を踏まえた企業の事業活動の持続的な発展を図るための産業競争力強化法等の一部を改正する法律（令和八年法律第二十九号）附則第一条第二号に掲げる規定の施行の日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 631145,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000012",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第十二号",
+            "enforcement_date": "2027-01-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 623606,
+            "sub_revision": "6",
+            "amendment_id": "507AC0000000013",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第十三号",
+            "enforcement_date": "2027-01-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 617021,
+            "sub_revision": "15",
+            "amendment_id": "506AC0000000008",
+            "amendment_name": "所得税法等の一部を改正する法律",
+            "amendment_num": "令和六年法律第八号",
+            "enforcement_date": "2027-01-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "住宅ローン控除や試験研究費等の各種特例の要件見直しと期限延長",
+          "body": "【研究開発および生産性向上に関する税制の見直し】試験研究を行った場合の税額控除について、控除対象を「控除対象試験研究費」に変更するとともに、増減試験研究費割合に応じた税額控除割合の計算方法が見直され、適用期限が延長されました。また、特別試験研究費に係る特別控除は新たに独立した規定となり、さらに特定生産性向上設備等を取得した場合の特別償却または税額控除の特例が新設されました。 【賃上げおよび雇用促進税制の改定】給与等の支給額が増加した場合の税額控除（賃上げ税制）において、特定個人や特定法人の対象要件（従業員数二千人以下等）が整備され、継続雇用者給与等支給増加割合に応じた控除率や上乗せ要件が見直されました。また、地方活力向上地域における特定建物等の取得等に係る特別償却や税額控除の特例について適用期限が延長され、従来の雇用者数増加による特別控除は廃止・再編されました。 【住宅関連税制および譲渡損失の特例延長】住宅借入金等特別控除（住宅ローン控除）の適用期限が令和十二年十二月三十一日まで延長され、借入限度額や控除率、小規模居住用家屋等の適用要件、災害危険区域内での不適用要件などが整備されました。特定の居住用財産の買換えや譲渡損失の繰越控除、優良住宅地造成等のための長期譲渡所得の課税特例などの適用期限もそれぞれ延長されました。 【その他の特例措置の期限延長と手続整備】特定船舶や環境負荷低減事業活動用資産等の特別償却、土地の登記等の登録免許税の税率軽減などの各種特例について期限が延長されました。青色申告特別控除の額や適用要件が見直され、電磁的記録の保存等の要件に応じた控除額が調整されました。また、輸出酒類販売場における酒税の免税手続において、税関長による確認や電磁的記録の提供を求める手続が整備されました。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 364176,
+          "output_tokens": 503,
+          "thoughts_tokens": 3336,
+          "total_tokens": 368015,
+          "elapsed_seconds": 25.30034439999872,
+          "response_id": "KiKqauHtPMWCncoPq_Tx4A4"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "403AC0000000048",
+        "law_name": "資源の有効な利用の促進に関する法律",
+        "revisions": [
+          {
+            "law_data_id": 637819,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "廃棄物処理法特例における引用条項の変更",
+          "body": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律の施行に伴い、廃棄物処理法の特例規定における参照条項が変更されます。具体的には、第五十七条第四項における認定自主回収・再資源化事業者、および同条第五項における第三項に規定する者に対して、一般廃棄物または産業廃棄物の収集運搬業者・処分業者とみなして廃棄物処理法の規定を適用する際、引用されている「廃棄物処理法第六条の二第六項」が「廃棄物処理法第六条の二第八項」に改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1358,
+          "output_tokens": 146,
+          "thoughts_tokens": 1868,
+          "total_tokens": 3372,
+          "elapsed_seconds": 10.81351580000046,
+          "response_id": "RiKqar-cHfCLktwP-oiR6AY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "506AC0000000041",
+        "law_name": "資源循環の促進のための再資源化事業等の高度化に関する法律",
+        "revisions": [
+          {
+            "law_data_id": 637824,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000043",
+            "amendment_name": "廃棄物の処理及び清掃に関する法律等の一部を改正する法律",
+            "amendment_num": "令和八年法律第四十三号",
+            "enforcement_date": "2026-09-16",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "高度再資源化事業者等の特例に係る参照条項の変更",
+          "body": "本改正では、認定高度再資源化事業者等に対する廃棄物処理法の特例（みなし規定）において引用されている参照条項の変更が行われます。　　対象となるのは、認定高度再資源化事業者、同法第十三条第三項に規定する者、および認定高度分離・回収事業者です。これらの者が一般廃棄物若しくは産業廃棄物の収集運搬業者又は処分業者とみなされて廃棄物処理法の規定が適用される際、適用対象として引用されていた「第六条の二第六項」という文言が、それぞれ「第六条の二第八項」へと改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1527,
+          "output_tokens": 155,
+          "thoughts_tokens": 2354,
+          "total_tokens": 4036,
+          "elapsed_seconds": 18.399782100001175,
+          "response_id": "UyKqar-fOvubncoP2Yrl6Qc"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "333AC0000000099",
+        "law_name": "農林漁業団体職員共済組合法",
+        "revisions": [
+          {
+            "law_data_id": 641795,
+            "sub_revision": "1",
+            "amendment_id": "506AC0000000052",
+            "amendment_name": "事業性融資の推進等に関する法律",
+            "amendment_num": "令和六年法律第五十二号",
+            "enforcement_date": "2024-06-14",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 641797,
+            "sub_revision": "1",
+            "amendment_id": "507AC0000000074",
+            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
+            "amendment_num": "令和七年法律第七十四号",
+            "enforcement_date": "2025-06-20",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 641798,
+            "sub_revision": "1",
+            "amendment_id": "507AC0000000074",
+            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
+            "amendment_num": "令和七年法律第七十四号",
+            "enforcement_date": "2026-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 641796,
+            "sub_revision": "1",
+            "amendment_id": "506AC0000000052",
+            "amendment_name": "事業性融資の推進等に関する法律",
+            "amendment_num": "令和六年法律第五十二号",
+            "enforcement_date": "2026-05-25",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 641799,
+            "sub_revision": "1",
+            "amendment_id": "507AC0000000074",
+            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
+            "amendment_num": "令和七年法律第七十四号",
+            "enforcement_date": "2028-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "特例業務負担金や移行年金給付に関する規定の整備",
+          "body": "年金制度や事業性融資に関連する法律の改正に伴い、以下の規定が変更されます。　特例業務負担金に関する規定では、存続組合が徴収する特例業務負担金に準用される厚生年金保険法の条文から、一部の項目が新たに除外されます。　遺族厚生年金の特例支給においては、引用される厚生年金保険法について、令和七年の法改正前の規定を適用するための読み替えなどの整備が行われます。　移行年金給付（移行農林共済年金）に関しては、配偶者や子に関する規定の読み替えが新たに追加されるほか、退職共済年金の受給権者に準用される厚生年金保険法の条文に、新たに第四十四条の四や第四十四条の五などの規定が追加されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 50972,
+          "output_tokens": 207,
+          "thoughts_tokens": 2404,
+          "total_tokens": 53583,
+          "elapsed_seconds": 12.206414200001745,
+          "response_id": "bSKqapaCOMWCncoPq_Tx4A4"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "357AC0000000080",
+        "law_name": "高齢者の医療の確保に関する法律",
+        "revisions": [
+          {
+            "law_data_id": 637524,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000051",
+            "amendment_name": "社会福祉法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第五十一号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 636722,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000031",
+            "amendment_name": "健康保険法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十一号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 624509,
+            "sub_revision": "2",
+            "amendment_id": "507AC0000000087",
+            "amendment_name": "医療法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第八十七号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 637273,
+            "sub_revision": "1",
+            "amendment_id": "507AC0000000037",
+            "amendment_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律",
+            "amendment_num": "令和七年法律第三十七号",
+            "enforcement_date": "2027-05-20",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 636731,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000031",
+            "amendment_name": "健康保険法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十一号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2027-06-04",
+            "enforcement_comment": "公布の日から起算して一年を超えない範囲内において政令で定める日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 636737,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000031",
+            "amendment_name": "健康保険法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十一号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2028-06-04",
+            "enforcement_comment": "公布の日から起算して二年を超えない範囲内において政令で定める日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 637555,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000051",
+            "amendment_name": "社会福祉法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第五十一号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2028-06-24",
+            "enforcement_comment": "公布の日から起算して二年を超えない範囲内において政令で定める日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 624518,
+            "sub_revision": "2",
+            "amendment_id": "507AC0000000087",
+            "amendment_name": "医療法等の一部を改正する法律",
+            "amendment_num": "令和七年法律第八十七号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2028-12-11",
+            "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 637573,
             "sub_revision": "1",
             "amendment_id": "508AC0000000051",
             "amendment_name": "社会福祉法等の一部を改正する法律",
@@ -239,13 +1272,13 @@
             "is_current": false
           },
           {
-            "law_data_id": 627059,
-            "sub_revision": "3",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
+            "law_data_id": 636742,
+            "sub_revision": "1",
+            "amendment_id": "508AC0000000031",
+            "amendment_name": "健康保険法等の一部を改正する法律",
+            "amendment_num": "令和八年法律第三十一号",
             "enforcement_date": null,
-            "scheduled_enforcement_date": "2030-06-19",
+            "scheduled_enforcement_date": "2031-06-04",
             "enforcement_comment": "公布の日から起算して五年を超えない範囲内において政令で定める日",
             "is_current": false
           }
@@ -253,155 +1286,76 @@
       },
       "response": {
         "summary": {
-          "title": "暗号資産の分離課税新設やひとり親控除の引き上げなど",
-          "body": "本改正により、地方税法における個人住民税の負担軽減、新たな課税特例の創設、優遇措置の見直し、犯則調査のデジタル化や罰則強化など、多岐にわたる見直しが行われます。\n\n【個人住民税や国保税等の見直し】\n個人住民税（所得割）におけるひとり親控除の額が30万円から33万円に引き上げられます（2028年1月1日施行）。また、国民健康保険税においては、被保険者均等割額が減額される世帯の被保険者の対象範囲について、従来の「6歳以下」から「18歳以下」へと引き上げ、負担を軽減します（2027年4月1日施行）。その他、寄附金税額控除における特例控除額の割合規定について、適用期間の延長や見直しが行われます。\n\n【特定暗号資産に係る課税特例の創設】\n暗号資産の譲渡所得等について、他の所得と区分して分離課税（道府県民税2％、市町村民税3％）とする特例が導入されます（2028年1月1日施行）。さらに、暗号資産の取引により生じた損失について、翌年以後3年間にわたり繰り越して控除することができる繰越控除制度が新たに設けられ、国民健康保険税の算定にもこれが反映されます。\n\n【災害リスク区域内における住宅優遇措置の除外】\n土砂災害特別警戒区域や浸水被害防止区域などの特定区域内に新築された住宅について、不動産取得税の課税標準から1,200万円（認定長期優良住宅は1,300万円）を控除する特例や、当該住宅用の土地に係る減額特例の適用対象から除外されます（2029年4月1日施行）。また、固定資産税についても同様に、特定区域内に新築された住宅や認定長期優良住宅に対する税額減額特例の対象から原則として除外されます。\n\n【プラットフォーム取引における地方消費税の課税適正化】\nデジタルプラットフォームを介して行われる資産の譲渡や電気通信利用役務の提供について、取引の対価を回収するプラットフォーム事業者がこれらを行ったものとみなして、地方消費税を課す制度が導入されます（2028年4月1日施行）。\n\n【固定資産税の免税点と法人の事業税非課税範囲の変更】\n固定資産税における償却資産の免税点について、課税標準額「150万円」から「180万円」に引き上げされます（2027年4月1日施行）。さらに、法人の事業税における非課税所得等の範囲に「先端技術研究成果活用推進機構」を追加する一方、「石炭鉱業年金基金」が対象から除外されます。\n\n【犯則事件調査のデジタル化と滞納処分違反に対する罰則強化】\n犯則事件の調査手続きにおいて、従来の「記録命令付差押え」に代わり「電磁的記録提供命令」が整備され、許可状の電磁的記録による発付や提示、電磁的記録による調書の作成、電磁的方法による検察官への告発などが可能になり、手続きのデジタル化が図られます（2027年10月1日施行）。この手続きにおいては、関連のない個人情報を取得しないよう特に留意する規定が設けられます。\nまた、滞納処分に伴う徴税吏員の移転命令等に違反した者に対する罰則（3年以下の拘禁刑もしくは250万円以下の罰金、またはこれらの併科）や法人に対する罰金刑（両罰規定）が各税目に新設されます（2027年4月1日施行）。"
+          "title": "仮名医療情報の利活用制度創設や医療費適正化計画の見直し",
+          "body": "医療情報の利活用と計画の見直しについて、国民保健の向上を目的に、特定の個人を識別できないよう加工した「仮名医療保険等関連情報」を厚生労働大臣が利用、あるいは研究機関や民間事業者等に提供できる仕組みが整備されました。また、医療費適正化計画において、病床機能に加えて「医療機関機能」の分化・連携の推進成果を反映することとし、地域医療構想との調和を図るよう改められました。　保険給付と負担の調整について、一般用医薬品等との代替性が高い薬剤の費用を一部給付対象外とする「一部保険外療養」が新設され、これに伴い保険外併用療養費等の給付規定が整備されました。さらに、従来の「出産育児支援金」が「出産支援金」に改称され、算定基礎が分娩費等の支給に要する費用に整理されるほか、新たに導入される「医師手当拠出金」を反映した財政調整規定が設けられました。　適正な運営のための報告制度として、金融商品取引業者等が所得税法等の書類を提出する際、特定の被保険者情報を後期高齢者医療広域連合へ報告する制度が導入され、関係する罰則や過料が整備されました。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 99371,
-          "output_tokens": 899,
-          "thoughts_tokens": 4972,
-          "total_tokens": 105242,
-          "elapsed_seconds": 31.94607973799998,
-          "response_id": "onaoasmhB9TG4_UP-KrYwQM"
+          "prompt_tokens": 42201,
+          "output_tokens": 311,
+          "thoughts_tokens": 3136,
+          "total_tokens": 45648,
+          "elapsed_seconds": 23.53761519999898,
+          "response_id": "iCKqar3oHPOcncoP5tL--A4"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "503CO0000000192",
-        "law_name": "デジタル庁組織令",
+        "law_id": "409CO0000000363",
+        "law_name": "内国税の適正な課税の確保を図るための国外送金等に係る調書の提出等に関する法律施行令",
         "revisions": [
           {
-            "law_data_id": 641841,
+            "law_data_id": 636257,
             "sub_revision": "1",
-            "amendment_id": "508CO0000000263",
-            "amendment_name": "デジタル庁組織令の一部を改正する政令",
-            "amendment_num": "令和八年政令第二百六十三号",
-            "enforcement_date": "2026-09-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "参事官の定数を1人増やし22人に変更",
-          "body": "2026年9月1日に施行される改正により、参事官の定数が変更されます。\n\n具体的には、参事官（併任の者を除く）の定数が、従来の21人から22人に1人増員されます。なお、公文書監理官の定数（1人）に変更はありません。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 609,
-          "output_tokens": 95,
-          "thoughts_tokens": 918,
-          "total_tokens": 1622,
-          "elapsed_seconds": 7.685256677999973,
-          "response_id": "w3aoatHzCcOv6tkPtsWD2Q0"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "508CO0000000259",
-        "law_name": "令和八年熊本地震による災害についての激甚災害及びこれに対し適用すべき措置の指定に関する政令",
-        "revisions": [
-          {
-            "law_data_id": 641844,
-            "sub_revision": "1",
-            "amendment_id": "508CO0000000264",
-            "amendment_name": "令和八年熊本地震による災害についての激甚災害及びこれに対し適用すべき措置の指定に関する政令の一部を改正する政令",
-            "amendment_num": "令和八年政令第二百六十四号",
-            "enforcement_date": "2026-08-28",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "熊本地震の激甚災害指定政令の一部改正",
-          "body": "令和八年熊本地震による災害についての激甚災害及びこれに対し適用すべき措置の指定に関する政令の一部を改正する政令が、2026年8月28日に施行されます。本改正により、同災害における激甚災害の指定および適用すべき措置に関する規定の一部が変更されます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 539,
-          "output_tokens": 89,
-          "thoughts_tokens": 1131,
-          "total_tokens": 1759,
-          "elapsed_seconds": 7.618728938000004,
-          "response_id": "zHaoarfKC8fXodAP9NXPgQg"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "325CO0000000089",
-        "law_name": "公職選挙法施行令",
-        "revisions": [
-          {
-            "law_data_id": 641839,
-            "sub_revision": "1",
-            "amendment_id": "508CO0000000262",
-            "amendment_name": "地方自治法施行令及び公職選挙法施行令の一部を改正する政令",
-            "amendment_num": "令和八年政令第二百六十二号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          },
-          {
-            "law_data_id": 627491,
-            "sub_revision": "4",
-            "amendment_id": "507CO0000000237",
-            "amendment_name": "地方自治法施行令等の一部を改正する政令",
-            "amendment_num": "令和七年政令第二百三十七号",
-            "enforcement_date": "2026-09-24",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
+            "amendment_id": "508CO0000000100",
+            "amendment_name": "内国税の適正な課税の確保を図るための国外送金等に係る調書の提出等に関する法律施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第百号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2028-01-01",
+            "enforcement_comment": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行の日の属する年の翌年の一月一日",
             "is_current": false
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "地方自治法等の改正に伴う引用条文の整理",
-          "body": "公職選挙法施行令における他の法令の引用部分について、条項の整理が行われます。\n\n主な改正内容は以下のとおりです。\n\nまず、財産区の議会の議員の選挙事務の管理に関して、適用対象となる地方自治法の規定の引用が「第二百九十五条第一項」に改められます。\n\n次に、参議院合同選挙区選挙管理委員会に適用または準用される地方自治法および地方自治法施行令の条項が整理されます。具体的には、適用される地方自治法の規定が「第二百四十三条の二の八第一項」に、準用される地方自治法施行令の規定が「第百七十三条の五第一項」にそれぞれ変更されます。"
+          "title": "財産債務調書の提出事項に特定暗号資産の所得を追加",
+          "body": "財産債務調書の提出に関し必要な事項を定める規定において、租税特別措置法に規定する特定暗号資産に係る譲渡所得等の金額に関する事項が新たに追加されます。この追加に伴い、従来規定されていた先物取引に係る雑所得等の金額や、外国居住者等の所得に対する相互主義による所得税等の非課税等に関する法律、租税条約等の実施に伴う所得税法、法人税法及び地方税法の特例等に関する法律に関連する各規定の号数がそれぞれ一つずつ繰り下げられます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 2403,
-          "output_tokens": 182,
-          "thoughts_tokens": 1098,
-          "total_tokens": 3683,
-          "elapsed_seconds": 8.594018999000014,
-          "response_id": "1naoaqfZCo6Z4_UP7vrk0QE"
+          "prompt_tokens": 3188,
+          "output_tokens": 141,
+          "thoughts_tokens": 944,
+          "total_tokens": 4273,
+          "elapsed_seconds": 7.93978629999765,
+          "response_id": "oiKqau39GvOcncoP5tL--A4"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "410CO0000000178",
-        "law_name": "出入国管理及び難民認定法施行令",
+        "law_id": "423CO0000000112",
+        "law_name": "東日本大震災の被災者等に係る国税関係法律の臨時特例に関する法律施行令",
         "revisions": [
           {
-            "law_data_id": 641843,
+            "law_data_id": 636262,
             "sub_revision": "1",
-            "amendment_id": "508CO0000000268",
-            "amendment_name": "出入国管理及び難民認定法施行令及び日本国との平和条約に基づき日本の国籍を離脱した者等の出入国管理に関する特例法施行令の一部を改正する政令",
-            "amendment_num": "令和八年政令第二百六十八号",
-            "enforcement_date": "2026-10-01",
+            "amendment_id": "508CO0000000102",
+            "amendment_name": "東日本大震災の被災者等に係る国税関係法律の臨時特例に関する法律施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第百二号",
+            "enforcement_date": "2026-04-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": false
+            "is_current": true
           },
           {
-            "law_data_id": 628434,
-            "sub_revision": "5",
-            "amendment_id": "507CO0000000341",
-            "amendment_name": "出入国管理及び難民認定法及び外国人の技能実習の適正な実施及び技能実習生の保護に関する法律の一部を改正する法律の施行に伴う関係政令の整備及び経過措置に関する政令",
-            "amendment_num": "令和七年政令第三百四十一号",
+            "law_data_id": 636263,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000102",
+            "amendment_name": "東日本大震災の被災者等に係る国税関係法律の臨時特例に関する法律施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第百二号",
             "enforcement_date": "2027-04-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
@@ -411,559 +1365,351 @@
       },
       "response": {
         "summary": {
-          "title": "永住許可手数料の引き上げと手数料減免規定の整備",
-          "body": "主に永住許可等に係る手数料の改定、手数料の減額および免除に関する規定の整備、ならびに地方出入国在留管理局等への権限委任の見直しが行われます。\n\nまず、2026年10月1日の施行により、永住許可に係る手数料が従来の1万円から20万円へと引き上げられます。これと同時に、人道上の配慮が必要な生活困窮者（難民認定を受けた者等）や、外交・公用の在留資格を持つ者を対象とした、手数料の減額・免除に関する詳細な規定が新設されます。このうち生活困窮者については、在留資格変更等が1万円、永住許可が2万円を上限として手数料が減額されます。あわせて、手数料の減免に関する権限の委任や、特定在留カードの交付等に係る手数料の算定に関する特例・経過措置も整備されます。\n\n次に、2027年4月1日の施行により、出入国在留管理庁長官等に委任される権限の対象として「法第二十二条の六に規定する権限」が新たに追加され、関連する各号の番号が整理されます。"
+          "title": "特別償却・控除の適用期間見直しや証明書交付主体等の変更",
+          "body": "企業立地促進区域等における機械等の取得や避難対象雇用者等の雇用に係る特別償却・税額控除について、区域の変更に伴う対象期間や資産の範囲、税額計算の参照規定などが整理されました。また、新産業創出等推進事業促進区域での開発研究用資産の特別償却等の適用期限が、令和11年3月31日まで延長されました。住宅借入金等特別控除の特例についても、居住年に応じた適用要件等が整備されています。\n\n被災者が取得した農用地の所有権移転登記の免税や、代替農用地の取得等に係る契約書の印紙税非課税措置に関し、証明書の交付主体が「農業委員会」から「市町村長」へと変更されました。さらに令和9年4月1日施行の改正により、建物に係る保存登記等の免税や、代替建物の取得等に係る契約書の印紙税非課税措置における証明書の交付主体が「市町村長又は特別区の区長」から「市町村長」に変更されます。\n\n印紙税非課税の対象となる消費貸借契約書の要件から株式会社東日本大震災事業者再生支援機構が除外されたほか、改正前の規定による特別償却等に関する必要な経過措置が設けられました。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 6151,
-          "output_tokens": 294,
-          "thoughts_tokens": 2051,
-          "total_tokens": 8496,
-          "elapsed_seconds": 11.703924373999996,
-          "response_id": "4HaoaruqN5fF4_UPqLDfgQ0"
+          "prompt_tokens": 43945,
+          "output_tokens": 321,
+          "thoughts_tokens": 1755,
+          "total_tokens": 46021,
+          "elapsed_seconds": 12.782967999999528,
+          "response_id": "riKqatO8B_aNncoPqcvqmAk"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "322CO0000000016",
-        "law_name": "地方自治法施行令",
+        "law_id": "363CO0000000360",
+        "law_name": "消費税法施行令",
         "revisions": [
           {
-            "law_data_id": 641840,
+            "law_data_id": 636230,
             "sub_revision": "1",
-            "amendment_id": "508CO0000000262",
-            "amendment_name": "地方自治法施行令及び公職選挙法施行令の一部を改正する政令",
-            "amendment_num": "令和八年政令第二百六十二号",
-            "enforcement_date": "2026-09-03",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          },
-          {
-            "law_data_id": 627490,
-            "sub_revision": "19",
-            "amendment_id": "507CO0000000237",
-            "amendment_name": "地方自治法施行令等の一部を改正する政令",
-            "amendment_num": "令和七年政令第二百三十七号",
-            "enforcement_date": "2026-09-24",
+            "amendment_id": "508CO0000000096",
+            "amendment_name": "消費税法施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第九十六号",
+            "enforcement_date": "2026-05-22",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": false
           },
           {
-            "law_data_id": 635972,
-            "sub_revision": "3",
-            "amendment_id": "508CO0000000074",
-            "amendment_name": "児童福祉法施行令及び地方自治法施行令の一部を改正する政令",
-            "amendment_num": "令和八年政令第七十四号",
+            "law_data_id": 636231,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000096",
+            "amendment_name": "消費税法施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第九十六号",
+            "enforcement_date": "2026-09-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          },
+          {
+            "law_data_id": 636271,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000108",
+            "amendment_name": "消費税法施行令等の一部を改正する政令の一部を改正する政令",
+            "amendment_num": "令和八年政令第百八号",
             "enforcement_date": "2026-10-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": false
           },
           {
-            "law_data_id": 640333,
-            "sub_revision": "2",
-            "amendment_id": "508CO0000000210",
-            "amendment_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う関係政令の整備等に関する政令",
-            "amendment_num": "令和八年政令第二百十号",
-            "enforcement_date": "2027-05-20",
+            "law_data_id": 636232,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000096",
+            "amendment_name": "消費税法施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第九十六号",
+            "enforcement_date": "2026-10-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": false
           },
           {
-            "law_data_id": 636153,
-            "sub_revision": "4",
-            "amendment_id": "508CO0000000083",
-            "amendment_name": "地方税法施行令等の一部を改正する政令",
-            "amendment_num": "令和八年政令第八十三号",
+            "law_data_id": 625440,
+            "sub_revision": "3",
+            "amendment_id": "507CO0000000125",
+            "amendment_name": "消費税法施行令の一部を改正する政令",
+            "amendment_num": "令和七年政令第百二十五号",
+            "enforcement_date": "2026-11-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 636235,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000096",
+            "amendment_name": "消費税法施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第九十六号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2027-07-22",
+            "enforcement_comment": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行の日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 636234,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000096",
+            "amendment_name": "消費税法施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第九十六号",
+            "enforcement_date": null,
+            "scheduled_enforcement_date": "2028-01-01",
+            "enforcement_comment": "第五号に掲げる規定の施行の日の属する年の翌年の一月一日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 636233,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000096",
+            "amendment_name": "消費税法施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第九十六号",
             "enforcement_date": "2028-04-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": false
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "免税手続や暗号資産等の取扱い、各種事業者登録制度の整備",
+          "body": "【免税手続等（輸出物品販売場）の見直し】輸出物品販売場における免税販売手続や旅券等の提示方法、購入記録情報の提供手続きについて規定が整備されました。免税販売手続を委託できる「承認免税手続事業者」や、購入記録情報の送信等を委託できる「承認送受信事業者」に関する要件が整備されました。　【暗号資産等の取引に係る消費税の取扱いの変更】暗号資産の定義が金融商品取引法上のものに変更され、支払手段に類するものから除外されるとともに、有価証券に類するもの等に整理されました。これに伴い、課税売上割合の計算において暗号資産の譲渡対価の額の５％に相当する金額とする措置や、暗号資産・電子決済手段の貸付けに関する非課税の取扱い等が整備されました。　【特定少額資産販売事業者等の創設】「特定少額資産販売事業者」および「特定少額資産の譲渡」の定義が新たに設けられ、登録申請の手続きや特定少額資産販売事業者登録簿の登載事項等の規定が整備されました。また、中小事業者の仕入れに係る消費税額の控除の特例（簡易課税制度）の計算対象から、特定少額資産の譲渡等に係る消費税額が除外されました。　【プラットフォーム事業者および国内判定等に関する改正】「特定プラットフォーム事業者」が「第一種プラットフォーム事業者」に改められ、新たに「第二種プラットフォーム事業者」が合併等を行った場合の取扱いに関する特例が設けられました。また、貯留権の創設に伴い、その所在地を国内判定基準に加えるほか、漁業権や入漁権の譲渡・貸付けに関する国内判定の基準地を「漁場」に変更するなどの見直しが行われました。　【帳簿・書類の保存方法等の整備】消費税額の控除に係る書類や帳簿の保存について、従来の「課税期間の末日の翌日から二月を経過した日」から「確定申告書の提出期限の翌日」から７年間保存する規定等に改められました。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 32990,
+          "output_tokens": 505,
+          "thoughts_tokens": 2854,
+          "total_tokens": 36349,
+          "elapsed_seconds": 28.97478400000182,
+          "response_id": "xiKqapn0LPCLktwP-oiR6AY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "422CO0000000067",
+        "law_name": "租税特別措置の適用状況の透明化等に関する法律施行令",
+        "revisions": [
+          {
+            "law_data_id": 636258,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000101",
+            "amendment_name": "租税特別措置の適用状況の透明化等に関する法律施行令等の一部を改正する政令",
+            "amendment_num": "令和八年政令第百一号",
+            "enforcement_date": "2026-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
           },
           {
-            "law_data_id": 603795,
-            "sub_revision": "47",
-            "amendment_id": "429CO0000000007",
-            "amendment_name": "畜産物の価格安定に関する法律施行令等の一部を改正する政令",
-            "amendment_num": "平成二十九年政令第七号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2117-12-31",
-            "enforcement_comment": "環太平洋パートナーシップ協定が日本国について効力を生ずる日の前日",
-            "is_current": false
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "外部監査契約での住所告示の廃止や児童福祉関連事務の整理",
-          "body": "地方自治法施行令の一部を改正する複数の政令により、主に以下の変更が行われます。\\n\\n【外部監査契約に関する告示事項の見直し】\\n包括外部監査契約または個別外部監査契約を締結した際に告示しなければならない事項から「住所」が除外され、契約を締結した者の「氏名」のみを告示することとされます。\\n\\n【財務・収納事務および免責基準等の整備】\\n地方税共同機構に特定収納事務を行わせることができる「特定歳入等」の具体的な範囲（地方税、地方法人特別税、森林環境税、特別法人事業税に係る徴収金など）を規定するとともに、地方税法施行令の準用規定を整備します。また、普通地方公共団体の長等の損害賠償責任の一部免責に関する基準について、地方自治法の参照条項の変更に伴う整理や、関連条文の繰り下げを行います。\\n\\n【児童福祉に関する事務の範囲の整理】\\n児童福祉法の改正等に伴い、指定都市や中核市が処理する児童福祉に関する事務の区分を整理します。具体的には、登録一時保護委託者の登録等に関する事務を処理事務に加えるほか、措置等に関する事務の対象条項を追加し、これに伴う条項や号数の整理を行います。\\n\\nその他、第一号法定受託事務に関する別表の変更など、所要の技術的整備が行われます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 15865,
-          "output_tokens": 339,
-          "thoughts_tokens": 3287,
-          "total_tokens": 19491,
-          "elapsed_seconds": 21.078351614999974,
-          "response_id": "83aoavKRDeCY4_UPzqXnyQQ"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "423CO0000000420",
-        "law_name": "日本国との平和条約に基づき日本の国籍を離脱した者等の出入国管理に関する特例法施行令",
-        "revisions": [
-          {
-            "law_data_id": 641842,
+            "law_data_id": 636261,
             "sub_revision": "1",
-            "amendment_id": "508CO0000000268",
-            "amendment_name": "出入国管理及び難民認定法施行令及び日本国との平和条約に基づき日本の国籍を離脱した者等の出入国管理に関する特例法施行令の一部を改正する政令",
-            "amendment_num": "令和八年政令第二百六十八号",
-            "enforcement_date": "2026-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "特定特別永住者証明書の交付手数料の特例対象を拡大",
-          "body": "特定特別永住者証明書の交付に係る手数料の特例について、適用される要件が緩和され、対象が拡大されます。\n\nこれまでは、住民基本台帳に記録されていない特別永住者が特別永住者証明書の交付当日に行う申請等に限り手数料の特例が適用されていましたが、改正後は、既に特定特別永住者証明書の交付を受けている特別永住者が行う場合を除き、住民基本台帳への記録の有無や申請を行う日にかかわらず、特定特別永住者証明書の交付を受ける際に広く手数料の特例が適用されるようになります。\n\nなお、施行日である2026年10月1日前に行われた申請等に基づく交付に係る手数料の納付については、改正後もなお従前の例によることとする経過措置が設けられます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 2014,
-          "output_tokens": 205,
-          "thoughts_tokens": 1195,
-          "total_tokens": 3414,
-          "elapsed_seconds": 9.115397005000034,
-          "response_id": "CXeoapGRH6vDodAP89L6uAw"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "420CO0000000314",
-        "law_name": "科学技術・イノベーション創出の活性化に関する法律施行令",
-        "revisions": [
-          {
-            "law_data_id": 641845,
-            "sub_revision": "1",
-            "amendment_id": "508CO0000000265",
-            "amendment_name": "科学技術・イノベーション創出の活性化に関する法律施行令の一部を改正する政令",
-            "amendment_num": "令和八年政令第二百六十五号",
-            "enforcement_date": "2026-08-28",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "第七条の二に関わる別表第二の変更",
-          "body": "科学技術・イノベーション創出の活性化に関する法律施行令について、第七条の二関係に該当する別表第二の変更が行われます。この改正は、2026年8月28日に施行されます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 538,
-          "output_tokens": 67,
-          "thoughts_tokens": 685,
-          "total_tokens": 1290,
-          "elapsed_seconds": 5.486132278000014,
-          "response_id": "E3eoauTmNIbJ4_UP-fC7sQs"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "329CO0000000179",
-        "law_name": "自衛隊法施行令",
-        "revisions": [
-          {
-            "law_data_id": 641846,
-            "sub_revision": "1",
-            "amendment_id": "508CO0000000266",
-            "amendment_name": "自衛隊法施行令の一部を改正する政令",
-            "amendment_num": "令和八年政令第二百六十六号",
-            "enforcement_date": "2026-08-28",
+            "amendment_id": "508CO0000000101",
+            "amendment_name": "租税特別措置の適用状況の透明化等に関する法律施行令等の一部を改正する政令",
+            "amendment_num": "令和八年政令第百一号",
+            "enforcement_date": "2026-07-31",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": true
           },
           {
-            "law_data_id": 628432,
-            "sub_revision": "6",
-            "amendment_id": "507CO0000000341",
-            "amendment_name": "出入国管理及び難民認定法及び外国人の技能実習の適正な実施及び技能実習生の保護に関する法律の一部を改正する法律の施行に伴う関係政令の整備及び経過措置に関する政令",
-            "amendment_num": "令和七年政令第三百四十一号",
+            "law_data_id": 636259,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000101",
+            "amendment_name": "租税特別措置の適用状況の透明化等に関する法律施行令等の一部を改正する政令",
+            "amendment_num": "令和八年政令第百一号",
             "enforcement_date": "2027-04-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": false
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "別表第十および別表第十一の段階的な改正",
-          "body": "自衛隊法施行令における別表第十および別表第十一の変更が、施行日に合わせて段階的に行われます。\n\n2026年8月28日の施行においては、第百二十条の十五に関連する別表第十一が変更されます。\n\n続いて2027年4月1日の施行においては、出入国管理や外国人の技能実習に関する法改正に伴う関係政令の整備等として、第六十条の二に関連する別表第十が変更されます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 617,
-          "output_tokens": 135,
-          "thoughts_tokens": 984,
-          "total_tokens": 1736,
-          "elapsed_seconds": 5.996191980000049,
-          "response_id": "G3eoapnKOa2Y4_UPyu_GyAE"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "503M60004000001",
-        "law_name": "デジタル庁組織規則",
-        "revisions": [
+          },
           {
-            "law_data_id": 641848,
+            "law_data_id": 636260,
             "sub_revision": "1",
-            "amendment_id": "508M60004000006",
-            "amendment_name": "デジタル庁組織規則の一部を改正する庁令",
-            "amendment_num": "令和八年デジタル庁令第六号",
-            "enforcement_date": "2026-09-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "企画官の定数を22人から21人へ削減",
-          "body": "デジタル庁組織規則の一部を改正する庁令により、併任の者を除く企画官の定数が、従来の二十二人から二十一人へと削減されます。この改正は、2026年9月1日から施行されます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 571,
-          "output_tokens": 70,
-          "thoughts_tokens": 594,
-          "total_tokens": 1235,
-          "elapsed_seconds": 15.228995451999992,
-          "response_id": "LXeoapyDI8K_odAP0ujUqAc"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "333M50000100027",
-        "law_name": "予防接種実施規則",
-        "revisions": [
-          {
-            "law_data_id": 641859,
-            "sub_revision": "1",
-            "amendment_id": "508M60000100136",
-            "amendment_name": "予防接種実施規則の一部を改正する省令",
-            "amendment_num": "令和八年厚生労働省令第百三十六号",
-            "enforcement_date": "2026-09-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "予防接種の同意確認が電磁的記録による管理へ移行",
-          "body": "予防接種の実施における同意の取得方法が変更されます。\\n\\nこれまでは予防接種を行う際、被接種者やその保護者から文書により同意を得る必要がありました。今回の改正により、接種を行う者は、適切な説明を行った上で得た同意の有無を、電磁的記録として記録することが義務付けられます。\\n\\nただし、被接種者やその保護者が書面によって同意の有無を示した場合は、電磁的記録による記録義務の対象外となります。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 753,
-          "output_tokens": 129,
-          "thoughts_tokens": 1867,
-          "total_tokens": 2749,
-          "elapsed_seconds": 12.496984488999999,
-          "response_id": "M3eoas6cJbiR998PtJnu4Ao"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "408M50000040005",
-        "law_name": "保険業法施行規則",
-        "revisions": [
-          {
-            "law_data_id": 641855,
-            "sub_revision": "1",
-            "amendment_id": "508M60000002073",
-            "amendment_name": "保険業法施行規則及び金融サービス仲介業者等に関する内閣府令の一部を改正する内閣府令",
-            "amendment_num": "令和八年内閣府令第七十三号",
-            "enforcement_date": "2028-03-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "複数所属の保険募集人による説明事項の範囲見直し",
-          "body": "保険業法施行規則の一部改正により、二以上の所属保険会社等を有する保険募集人が行う情報提供（説明）の範囲が変更されます。\\n\\n具体的には、情報の提供に関する規定において、説明が求められる対象が、従来の「イからハまでに掲げる場合における当該イからハまでに定める事項」から「イ又はロに掲げる場合における当該イ又はロに定める事項」へと改められます。この変更は、第二百二十七条の二第三項第四号および第二百三十四条の二十一の二第一項第二号の双方に適用されます。\\n\\nなお、この改正は2028年3月1日より施行されます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 881,
-          "output_tokens": 170,
-          "thoughts_tokens": 1560,
-          "total_tokens": 2611,
-          "elapsed_seconds": 10.811939932000087,
-          "response_id": "QneoatjTBIrC998PlZWg2Ac"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "417M60001200002",
-        "law_name": "特定外来生物による生態系等に係る被害の防止に関する法律施行規則",
-        "revisions": [
-          {
-            "law_data_id": 641858,
-            "sub_revision": "1",
-            "amendment_id": "508M60001200007",
-            "amendment_name": "特定外来生物による生態系等に係る被害の防止に関する法律施行規則の一部を改正する省令",
-            "amendment_num": "令和八年農林水産省・環境省令第七号",
-            "enforcement_date": "2026-09-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "飼養等禁止の適用除外規定の整理と別表の変更",
-          "body": "本改正では、主に適用除外規定の整理と別表の変更が行われます。　まず、未判定外来生物に関する別表第一および別表第二、ならびに種類名証明書の添付が必要な生物に関する別表第三および別表第四の内容が変更されます。　また、特定外来生物の指定時の防除に伴う飼養等に係る適用除外規定や、指定時に現に飼養等を行っている者への適用除外規定が削除されます。これに伴い、飼養等の禁止の適用除外に関する第二条の各号の号数が繰り上げられます。　さらに、この号数繰り上げに伴う整理として、譲渡し等の禁止の適用除外や権限の委任に関する規定において引用されている条項番号について、それぞれ整合性を図るための修正が行われます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 4397,
-          "output_tokens": 208,
-          "thoughts_tokens": 2574,
-          "total_tokens": 7179,
-          "elapsed_seconds": 17.872780672999966,
-          "response_id": "TneoaqKRA8K_odAP0ujUqAc"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "359M50000100017",
-        "law_name": "環境省関係浄化槽法施行規則",
-        "revisions": [
-          {
-            "law_data_id": 641860,
-            "sub_revision": "1",
-            "amendment_id": "508M60001000023",
-            "amendment_name": "環境省関係浄化槽法施行規則の一部を改正する省令",
-            "amendment_num": "令和八年環境省令第二十三号",
-            "enforcement_date": "2026-08-31",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "外国籍者の免状申請・書換えにおける添付書類の変更",
-          "body": "浄化槽の免状の交付申請および記載事項変更に伴う書換え申請における、提出書類の規定が変更されます。\n\nこれまで申請の際には、戸籍の謄本もしくは抄本、または本籍が記載された住民票の写しなどの提出が必要でした。今回の改正により、日本の国籍を有しない者がこれらの申請を行う場合には、本籍の記載に代わり、国籍等が記載された住民票の写しやこれに代わる書面を提出できるようになります。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 880,
-          "output_tokens": 136,
-          "thoughts_tokens": 1095,
-          "total_tokens": 2111,
-          "elapsed_seconds": 10.152102323000008,
-          "response_id": "YXeoat21AbaGzLEPmYeb0AU"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "506M60002000004",
-        "law_name": "自衛官等に対する療養の給付等に関する省令",
-        "revisions": [
-          {
-            "law_data_id": 641862,
-            "sub_revision": "1",
-            "amendment_id": "508M60002000020",
-            "amendment_name": "自衛官等に対する療養の給付等に関する省令の一部を改正する省令",
-            "amendment_num": "令和八年防衛省令第二十号",
-            "enforcement_date": "2026-08-31",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "自衛官等の一部負担金等払戻金の基準額を引き上げ",
-          "body": "今回の改正により、自衛官等に支給される一部負担金等払戻金の支給基準となる金額が引き上げられます。\\n\\n具体的には、通常の対象者における1件あたりの一部負担金等の基準額が2万5千円から2万7千円に、2件以上の合算や被扶養者との合算によって高額療養費等が支給される場合の基準額が5万円から5万4千円にそれぞれ引き上げられます。\\n\\nまた、標準報酬月額が53万円以上の対象者に対する基準額も同様に引き上げられます。1件あたりの基準額は5万円から5万4千円に、合算時の基準額は10万円から10万8千円に変更されます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1609,
-          "output_tokens": 196,
-          "thoughts_tokens": 1219,
-          "total_tokens": 3024,
-          "elapsed_seconds": 8.339340115999903,
-          "response_id": "bHeoavOhFIbJ4_UP-fC7sQs"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "358M50000040040",
-        "law_name": "貸金業法施行規則",
-        "revisions": [
-          {
-            "law_data_id": 641856,
-            "sub_revision": "1",
-            "amendment_id": "508M60000002074",
-            "amendment_name": "貸金業法施行規則の一部を改正する内閣府令",
-            "amendment_num": "令和八年内閣府令第七十四号",
-            "enforcement_date": "2026-08-31",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "登録簿における日本国籍を有しない者の国籍等の記載見直し",
-          "body": "貸金業務取扱主任者登録簿の記載事項が変更されます。\\n\\n日本国籍を有しない者について、従来記載事項とされていた「その者の有する国籍」が、「その国籍等（国籍の属する国又は出入国管理及び難民認定法第二条第五号ロに規定する地域）」に改められます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 680,
-          "output_tokens": 100,
-          "thoughts_tokens": 1436,
-          "total_tokens": 2216,
-          "elapsed_seconds": 19.03314284499993,
-          "response_id": "gHeoaoTRHMXe6tkPoqmt-Qc"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "508M60000F5A004",
-        "law_name": "重要電子計算機に対する不正な行為による被害の防止に関する法律に基づく特別社会基盤事業者による特定侵害事象等の報告等に関する命令",
-        "revisions": [
-          {
-            "law_data_id": 641857,
-            "sub_revision": "1",
-            "amendment_id": "508M60000F5A007",
-            "amendment_name": "重要電子計算機に対する不正な行為による被害の防止に関する法律に基づく特別社会基盤事業者による特定侵害事象等の報告等に関する命令の一部を改正する命令",
-            "amendment_num": "令和八年内閣府・総務省・法務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省令第七号",
+            "amendment_id": "508CO0000000101",
+            "amendment_name": "租税特別措置の適用状況の透明化等に関する法律施行令等の一部を改正する政令",
+            "amendment_num": "令和八年政令第百一号",
             "enforcement_date": null,
-            "scheduled_enforcement_date": "2026-12-16",
-            "enforcement_comment": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律及び株式会社国際協力銀行法の一部を改正する法律附則第一条第三号に掲げる規定の施行の日",
+            "scheduled_enforcement_date": "2028-01-01",
+            "enforcement_comment": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行の日の属する年の翌年の一月一日",
+            "is_current": false
+          },
+          {
+            "law_data_id": 612846,
+            "sub_revision": "4",
+            "amendment_id": "505CO0000000150",
+            "amendment_name": "租税特別措置の適用状況の透明化等に関する法律施行令の一部を改正する政令",
+            "amendment_num": "令和五年政令第百五十号",
+            "enforcement_date": "2030-01-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
             "is_current": false
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "特定重要電子計算機の届出や報告の特例対象等の見直し",
-          "body": "特別社会基盤事業者による特定重要電子計算機の届出期限や特定侵害事象等の報告に関する特例の適用対象、および届出書の代替提出に関わる設備の定義が変更されます。\n\n具体的には、特別社会基盤事業者が経済安全保障推進法に基づく指定を受けた場合の特定重要電子計算機の届出期限（指定から6か月以内とする特例）、および指定から6か月以内に発生した特定侵害事象等の報告に関する規定について、同法第53条第1項各号に掲げる事由により基準に該当することとなった事業者を特例の対象から除外します。\n\nまた、届出書の提出を導入等計画書等で代えることができる対象となる「構成設備」の定義について、経済安全保障推進法の規定による特定妨害行為の手段として使用されるおそれがあるものから、同法の主務省令で定める設備、機器、装置またはプログラムに変更します。"
+          "title": "適用額明細書提出義務の対象措置と対象外規定の範囲を見直し",
+          "body": "租税特別措置の適用状況の透明化等に関する法律施行令等の改正により、適用額明細書の提出義務の対象となる法人税関係特別措置の範囲、および租税特別措置に含まれない規定の範囲が段階的に見直されます。\\n\\nまず、適用額明細書の提出義務の対象となる特別措置が変更されます。2026年4月1日の施行により、提出義務の対象として新たに租税特別措置法第42条の4の2（一部の準用部分を除く）が追加されるほか、一部の規定の削除や、提出義務から除外される項の整理が行われます。また、同年7月31日の施行により、対象措置に第42条の12の7が追加されます。\\n\\n次に、租税特別措置に含まれない規定（対象外規定）の範囲が整理されます。2028年1月1日の施行予定に伴い、対象外規定に第38条の2が追加されます。また、2030年1月1日の施行により、対象外規定の範囲のうち「第四十一条の九から第四十一条の十二の二まで」とされていた部分が、「第四十一条の九、第四十一条の十から第四十一条の十二の二まで」に改められます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 2002,
-          "output_tokens": 233,
-          "thoughts_tokens": 1271,
-          "total_tokens": 3506,
-          "elapsed_seconds": 9.64561378999997,
-          "response_id": "ineoauzqD5fF4_UPqLDfgQ0"
+          "prompt_tokens": 3131,
+          "output_tokens": 309,
+          "thoughts_tokens": 3389,
+          "total_tokens": 6829,
+          "elapsed_seconds": 18.366049600001134,
+          "response_id": "6iKqav2xKfaNncoPqcvqmAk"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "333RJNJ09024000",
-        "law_name": "人事院規則九―二四（通勤手当）",
+        "law_id": "332CO0000000043",
+        "law_name": "租税特別措置法施行令",
         "revisions": [
           {
-            "law_data_id": 641849,
+            "law_data_id": 636241,
             "sub_revision": "1",
-            "amendment_id": "508RJNJ09024024",
-            "amendment_name": "人事院規則九―二四（通勤手当）の一部を改正する人事院規則",
-            "amendment_num": "令和八年人事院規則九―二四―二四",
+            "amendment_id": "508CO0000000098",
+            "amendment_name": "租税特別措置法施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第九十八号",
+            "enforcement_date": "2026-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 636244,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000098",
+            "amendment_name": "租税特別措置法施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第九十八号",
+            "enforcement_date": "2026-05-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 636245,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000098",
+            "amendment_name": "租税特別措置法施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第九十八号",
+            "enforcement_date": "2026-05-22",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 636253,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000098",
+            "amendment_name": "租税特別措置法施行令の一部を改正する政令",
+            "amendment_num": "令和八年政令第九十八号",
+            "enforcement_date": "2026-07-31",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "設備投資や雇用促進に係る特別控除・償却の要件見直し等",
+          "body": "今回の改正では、各種の特別控除や特別償却等の適用要件が見直されたほか、関連法改正に伴う規定の整備等が行われました。\\n\\nまず、優遇税制の適用要件や基準が見直されました。給与等の支給額が増加した場合の特別控除について計算方法や要件が改められたほか、地方活力向上地域等における特定建物等の特別控除について、取得価額要件が3,500万円以上から4,500万円以上に引き上げられ、雇用者数の増加要件などが新たに整備されました。また、特定中小事業者が取得する特定経営力向上設備等や特定事業継続力強化設備等に係る一部資産の取得価額要件が30万円以上から40万円以上に引き上げられたほか、少額減価償却資産特例を適用できる中小事業者の要件が従業員数500人以下から400人以下に引き下げられました。さらに、新たに「特定生産性向上設備等を取得した場合の特別償却又は特別控除」の制度が設けられ、対象となるソフトウェアや機械装置の規模、計算方法等が規定されました。\\n\\n次に、関係法令の改正を受けた整備として、マンション建替に関する特例措置が「マンションの再生等の円滑化に関する法律」の施行に伴うものへと移行されました。これにより、長期譲渡所得の特例や収用等に伴う代替資産取得の特例、登録免許税の軽減措置等がマンション再生事業等に適用されるよう規定が改められています。\\n\\nその他、医師の確保を図る必要がある特定の区域における建物の登記に係る登録免許税の軽減や、地盤の液状化により境界に相違が生じた土地に関する登記の免税措置などが新たに規定されました。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 230709,
+          "output_tokens": 414,
+          "thoughts_tokens": 3917,
+          "total_tokens": 235040,
+          "elapsed_seconds": 25.74460729999919,
+          "response_id": "BiOqarvAI6yrktwPyJrokAY"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "326M50010000035",
+        "law_name": "家畜伝染病予防法施行規則",
+        "revisions": [
+          {
+            "law_data_id": 640806,
+            "sub_revision": "1",
+            "amendment_id": "508M60000200047",
+            "amendment_name": "家畜伝染病予防法施行規則等の一部を改正する等の省令",
+            "amendment_num": "令和八年農林水産省令第四十七号",
+            "enforcement_date": "2026-07-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          },
+          {
+            "law_data_id": 640810,
+            "sub_revision": "1",
+            "amendment_id": "508M60000200047",
+            "amendment_name": "家畜伝染病予防法施行規則等の一部を改正する等の省令",
+            "amendment_num": "令和八年農林水産省令第四十七号",
             "enforcement_date": "2026-10-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": false
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "通勤手当の支給開始時期や額の改定時期などの見直し",
-          "body": "この改正により、通勤手当の支給開始や支給額の改定時期、支給日に関する規定などが変更されます。\n\nまず、通勤手当の支給開始時期について、これまでの「要件が具備された日の属する月の翌月（月の初日の場合はその月）」から、「要件が具備された日の属する月」から支給が開始されるようになります。また、事実発生から15日を経過した後に届け出た場合についても、支給開始は「届出を受理した日の属する月」からとなります。\n\nさらに、手当の額を改定する時期についても区分が整理され、増額して改定する場合は変更すべき事実が生じた日の属する月（15日を超えて届け出た場合は受理された日の属する月）から、減額等の場合は原則として事実が生じた日の属する月の翌月（月の初日の場合はその月）から改定されるようになります。\n\nそのほか、出張や休暇等により月の全日数にわたって通勤しなくなった場合における支給単位期間の開始時期に関する規定や、手当の返納事由となる対象の範囲などが整備されます。また、令和八年九月二日から九月三十日までの間に支給要件が具備された場合等における支給単位期間等の開始に関する経過措置が設けられます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 4832,
-          "output_tokens": 321,
-          "thoughts_tokens": 1869,
-          "total_tokens": 7022,
-          "elapsed_seconds": 42.62593877300003,
-          "response_id": "s3eoaqDUO7aGzLEPmYeb0AU"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "345RJNJ09055000",
-        "law_name": "人事院規則九―五五（特地勤務手当等）",
-        "revisions": [
+          },
           {
-            "law_data_id": 641850,
-            "sub_revision": "1",
-            "amendment_id": "508RJNJ09055158",
-            "amendment_name": "人事院規則九―五五（特地勤務手当等）の一部を改正する人事院規則",
-            "amendment_num": "令和八年人事院規則九―五五―一五八",
-            "enforcement_date": "2026-09-01",
+            "law_data_id": 628505,
+            "sub_revision": "6",
+            "amendment_id": "507M60000200044",
+            "amendment_name": "家畜伝染病予防法施行規則の一部を改正する省令",
+            "amendment_num": "令和七年農林水産省令第四十四号",
+            "enforcement_date": "2026-10-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": true
+            "is_current": false
+          },
+          {
+            "law_data_id": 640811,
+            "sub_revision": "1",
+            "amendment_id": "508M60000200047",
+            "amendment_name": "家畜伝染病予防法施行規則等の一部を改正する等の省令",
+            "amendment_num": "令和八年農林水産省令第四十七号",
+            "enforcement_date": "2027-01-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 640724,
+            "sub_revision": "1",
+            "amendment_id": "508M60000200046",
+            "amendment_name": "家畜伝染病予防法施行規則の一部を改正する省令",
+            "amendment_num": "令和八年農林水産省令第四十六号",
+            "enforcement_date": "2027-05-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "特地勤務手当等における別表第一の改正",
-          "body": "人事院規則九―五五（特地勤務手当等）の一部を改正する人事院規則が施行されます。今回の改正により、第一条から第四条に関係する別表第一の変更が行われます。施行日は2026年9月1日です。"
+          "title": "ランピースキン病の追加や輸出入検査、飼養衛生管理制度の整備",
+          "body": "本改正では、家畜伝染病の発生予防およびまん延防止に向け、各種疾病の追加、輸出入検査制度の見直し、および新たな飼養衛生管理体制の整備などが行われます。\\n\\n主な改正内容は以下のとおりです。\\n\\nまず、監視伝染病や届出対象の病原体に「ランピースキン病」が追加され、監視体制が強化されます。また、鳥インフルエンザ対策等の対象となる鳥類の卵や輸入届出の対象に「エミュー」が追加されます。\\n\\n次に、検疫・輸出入管理の対象が拡大・見直されます。指定検検物の対象に、動物の体液、細胞、くちばし、爪、歯牙やそれらの加工品が追加されます。あわせて、輸入届出の対象動物として「うさぎ」および「蜜蜂」が、輸出検査の事前申請義務の対象として「犬」および「うさぎ」が新たに追加され、それぞれの手続きが整備されます。試験研究用の細胞等の輸入に係る例外措置についても要件が整理されます。\\n\\nさらに、病原体を拡散するおそれがある物品等の廃棄処分に関する手続が具体化されます。廃棄（焼却）における具体的な基準が設けられるほか、処分を受けた者の氏名や住所などを農林水産省のウェブサイトで公表する手続きが定められます。\\n\\n最後に、動物用生物学的製剤の適正管理等に関わる「登録飼養衛生管理者」に関する規定が新設されます。この制度において必要となる衛生管理区域の要件、管理者の登録や更新の手続き、受講すべき研修の内容、登録名簿の管理方法などが新たに規定されます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 547,
-          "output_tokens": 81,
-          "thoughts_tokens": 1124,
-          "total_tokens": 1752,
-          "elapsed_seconds": 18.584678318999977,
-          "response_id": "y3eoaqfDGMfXodAP9NXPgQg"
+          "prompt_tokens": 25611,
+          "output_tokens": 398,
+          "thoughts_tokens": 3354,
+          "total_tokens": 29363,
+          "elapsed_seconds": 21.365036499999405,
+          "response_id": "JyOqasqkEr6MncoPzou_uQQ"
         }
       }
     }
