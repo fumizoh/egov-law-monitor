@@ -5,6 +5,8 @@ import requests
 from sources.toc_api import fetch_law_toc
 from toc_parser import build_sel_text_list
 
+class CompareDataNotFoundError(RuntimeError):
+    """Compare data is not available."""
 
 COMPARE_URL = "https://laws.e-gov.go.jp/internal-api/SelectLawCompareData.json"
 
@@ -39,8 +41,15 @@ def _request_compare(
     raw = response.json()
 
     if not raw["result"]["success"]:
+        error_message = raw["result"]["errorMessage"]
+
+        if error_message == "指定の新旧比較情報が存在しません。":
+            raise CompareDataNotFoundError(
+                f"Compare API: {error_message}"
+            )
+
         raise RuntimeError(
-            f"Compare API: {raw['result']['errorMessage']}"
+            f"Compare API: {error_message}"
         )
 
     return raw

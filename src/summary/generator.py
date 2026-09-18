@@ -43,19 +43,10 @@ def _build_amendment_input(
     revision: RevisionHistory,
 ) -> AmendmentSummaryInput | None:
 
-    try:
-        compare_json = compare_api.fetch_compare(
-            new_law_data_id=revision.law_data_id,
-            new_sub_revision=revision.sub_revision,
-        )
-    except RuntimeError as exc:
-        logger.warning(
-            "Compare data unavailable: law_data_id=%s, sub_revision=%s, error=%s",
-            revision.law_data_id,
-            revision.sub_revision,
-            exc,
-        )
-        return None
+    compare_json = compare_api.fetch_compare(
+        new_law_data_id=revision.law_data_id,
+        new_sub_revision=revision.sub_revision,
+    )
 
     compare_result = comparison.parse_compare_result(compare_json)
 
@@ -141,9 +132,19 @@ def _generate_law_summary(
 
     for revision in revisions:
 
-        amendment = _build_amendment_input(
-            revision=revision,
-        )
+        try:
+            amendment = _build_amendment_input(
+                revision=revision,
+            )
+        except compare_api.CompareDataNotFoundError as exc:
+            logger.warning(
+                "Compare data unavailable: law=%s, law_data_id=%s, sub_revision=%s, error=%s",
+                law_name,
+                revision.law_data_id,
+                revision.sub_revision,
+                exc,
+            )
+            continue
 
         if amendment is not None:
             amendments.append(amendment)
