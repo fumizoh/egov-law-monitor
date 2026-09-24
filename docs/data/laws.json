@@ -1,878 +1,474 @@
 [
   {
-    "law_id": "211AC0000000070",
-    "law_no": "大正十一年法律第七十号",
-    "law_name": "健康保険法",
+    "law_id": "414AC1000000101",
+    "law_no": "平成十四年法律第百一号",
+    "law_name": "入札談合等関与行為の排除及び防止並びに職員による入札等の公正を害すべき行為の処罰に関する法律",
     "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/211AC0000000070",
+    "url": "https://laws.e-gov.go.jp/law/414AC1000000101",
     "updates": [
       {
-        "law_data_id": 627043,
-        "sub_revision": "3",
-        "published_date": "1922-04-22",
-        "effective_date": "2029-10-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20291001_507AC0000000074?occasion_date=20291001&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 637549,
+        "law_data_id": 617482,
         "sub_revision": "1",
-        "published_date": "1922-04-22",
-        "effective_date": "2029-06-24",
-        "effective_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
-        "amend_name": "社会福祉法等の一部を改正する法律",
-        "amend_no": "令和八年法律第五十一号",
-        "amendment_id": "508AC0000000051",
-        "amend_published_date": "2026-06-25",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20290624_508AC0000000051?occasion_date=20290624&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 624534,
-        "sub_revision": "2",
-        "published_date": "1922-04-22",
-        "effective_date": "2028-12-11",
-        "effective_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
-        "amend_name": "医療法等の一部を改正する法律",
-        "amend_no": "令和七年法律第八十七号",
-        "amendment_id": "507AC0000000087",
-        "amend_published_date": "2025-12-12",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20281211_507AC0000000087?occasion_date=20281211&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 636735,
-        "sub_revision": "1",
-        "published_date": "1922-04-22",
-        "effective_date": "2028-06-04",
-        "effective_comment": "公布の日から起算して二年を超えない範囲内において政令で定める日",
-        "amend_name": "健康保険法等の一部を改正する法律",
-        "amend_no": "令和八年法律第三十一号",
-        "amendment_id": "508AC0000000031",
-        "amend_published_date": "2026-06-05",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20280604_508AC0000000031?occasion_date=20280604&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627034,
-        "sub_revision": "3",
-        "published_date": "1922-04-22",
-        "effective_date": "2027-10-01",
+        "published_date": "2002-07-31",
+        "effective_date": "2026-09-24",
         "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20271001_507AC0000000074?occasion_date=20271001&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 636726,
-        "sub_revision": "1",
-        "published_date": "1922-04-22",
-        "effective_date": "2027-06-04",
-        "effective_comment": "公布の日から起算して一年を超えない範囲内において政令で定める日",
-        "amend_name": "健康保険法等の一部を改正する法律",
-        "amend_no": "令和八年法律第三十一号",
-        "amendment_id": "508AC0000000031",
-        "amend_published_date": "2026-06-05",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20270604_508AC0000000031?occasion_date=20270604&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 637274,
-        "sub_revision": "1",
-        "published_date": "1922-04-22",
-        "effective_date": "2027-05-20",
-        "effective_comment": "",
-        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律",
-        "amend_no": "令和七年法律第三十七号",
-        "amendment_id": "507AC0000000037",
-        "amend_published_date": "2025-05-21",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20270520_507AC0000000037?occasion_date=20270520&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 637515,
-        "sub_revision": "1",
-        "published_date": "1922-04-22",
-        "effective_date": "2027-04-01",
-        "effective_comment": "",
-        "amend_name": "社会福祉法等の一部を改正する法律",
-        "amend_no": "令和八年法律第五十一号",
-        "amendment_id": "508AC0000000051",
-        "amend_published_date": "2026-06-25",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20270401_508AC0000000051?occasion_date=20270401&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 636717,
-        "sub_revision": "1",
-        "published_date": "1922-04-22",
-        "effective_date": "2027-04-01",
-        "effective_comment": "",
-        "amend_name": "健康保険法等の一部を改正する法律",
-        "amend_no": "令和八年法律第三十一号",
-        "amendment_id": "508AC0000000031",
-        "amend_published_date": "2026-06-05",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20270401_508AC0000000031?occasion_date=20270401&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 624530,
-        "sub_revision": "2",
-        "published_date": "1922-04-22",
-        "effective_date": "2027-04-01",
-        "effective_comment": "",
-        "amend_name": "医療法等の一部を改正する法律",
-        "amend_no": "令和七年法律第八十七号",
-        "amendment_id": "507AC0000000087",
-        "amend_published_date": "2025-12-12",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20270401_507AC0000000087?occasion_date=20270401&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 624517,
-        "sub_revision": "2",
-        "published_date": "1922-04-22",
-        "effective_date": "2026-10-01",
-        "effective_comment": "",
-        "amend_name": "医療法等の一部を改正する法律",
-        "amend_no": "令和七年法律第八十七号",
-        "amendment_id": "507AC0000000087",
-        "amend_published_date": "2025-12-12",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20261001_507AC0000000087?occasion_date=20261001&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627040,
-        "sub_revision": "3",
-        "published_date": "1922-04-22",
-        "effective_date": "2026-10-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/211AC0000000070/20261001_507AC0000000074?occasion_date=20261001&tab=compare",
-        "pending": true
+        "amend_name": "地方自治法の一部を改正する法律",
+        "amend_no": "令和六年法律第六十五号",
+        "amendment_id": "506AC0000000065",
+        "amend_published_date": "2024-06-26",
+        "compare_url": "https://laws.e-gov.go.jp/law/414AC1000000101/20260924_506AC0000000065?occasion_date=20260924&tab=compare",
+        "pending": false
       }
     ]
   },
   {
-    "law_id": "329AC0000000115",
-    "law_no": "昭和二十九年法律第百十五号",
-    "law_name": "厚生年金保険法",
+    "law_id": "327AC0000000292",
+    "law_no": "昭和二十七年法律第二百九十二号",
+    "law_name": "地方公営企業法",
     "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/329AC0000000115",
+    "url": "https://laws.e-gov.go.jp/law/327AC0000000292",
     "updates": [
       {
-        "law_data_id": 627047,
+        "law_data_id": 617492,
         "sub_revision": "1",
-        "published_date": "1954-05-19",
-        "effective_date": "2029-10-01",
+        "published_date": "1952-08-01",
+        "effective_date": "2026-09-24",
         "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000115/20291001_507AC0000000074?occasion_date=20291001&tab=compare",
-        "pending": true
-      },
+        "amend_name": "地方自治法の一部を改正する法律",
+        "amend_no": "令和六年法律第六十五号",
+        "amendment_id": "506AC0000000065",
+        "amend_published_date": "2024-06-26",
+        "compare_url": "https://laws.e-gov.go.jp/law/327AC0000000292/20260924_506AC0000000065?occasion_date=20260924&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "415AC0000000118",
+    "law_no": "平成十五年法律第百十八号",
+    "law_name": "地方独立行政法人法",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/415AC0000000118",
+    "updates": [
       {
-        "law_data_id": 627046,
-        "sub_revision": "1",
-        "published_date": "1954-05-19",
-        "effective_date": "2029-09-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000115/20290901_507AC0000000074?occasion_date=20290901&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627045,
-        "sub_revision": "1",
-        "published_date": "1954-05-19",
-        "effective_date": "2029-06-19",
-        "effective_comment": "公布の日から起算して四年を超えない範囲内において政令で定める日",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000115/20290619_507AC0000000074?occasion_date=20290619&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627044,
-        "sub_revision": "1",
-        "published_date": "1954-05-19",
-        "effective_date": "2029-04-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000115/20290401_507AC0000000074?occasion_date=20290401&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627041,
-        "sub_revision": "1",
-        "published_date": "1954-05-19",
-        "effective_date": "2028-09-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000115/20280901_507AC0000000074?occasion_date=20280901&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 612265,
+        "law_data_id": 617486,
         "sub_revision": "4",
-        "published_date": "1954-05-19",
-        "effective_date": "2028-06-13",
-        "effective_comment": "公布の日から起算して五年を超えない範囲内において政令で定める日",
-        "amend_name": "民事関係手続等における情報通信技術の活用等の推進を図るための関係法律の整備に関する法律",
-        "amend_no": "令和五年法律第五十三号",
-        "amendment_id": "505AC0000000053",
-        "amend_published_date": "2023-06-14",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000115/20280613_505AC0000000053?occasion_date=20280613&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627036,
-        "sub_revision": "1",
-        "published_date": "1954-05-19",
-        "effective_date": "2028-04-01",
+        "published_date": "2003-07-16",
+        "effective_date": "2026-09-24",
         "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000115/20280401_507AC0000000074?occasion_date=20280401&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627033,
-        "sub_revision": "1",
-        "published_date": "1954-05-19",
-        "effective_date": "2027-10-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000115/20271001_507AC0000000074?occasion_date=20271001&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627028,
-        "sub_revision": "1",
-        "published_date": "1954-05-19",
-        "effective_date": "2027-09-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000115/20270901_507AC0000000074?occasion_date=20270901&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 629477,
-        "sub_revision": "1",
-        "published_date": "1954-05-19",
-        "effective_date": "2026-12-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000115/20261201_507AC0000000074?occasion_date=20261201&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627039,
-        "sub_revision": "1",
-        "published_date": "1954-05-19",
-        "effective_date": "2026-10-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000115/20261001_507AC0000000074?occasion_date=20261001&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "411AC0000000200",
-    "law_no": "平成十一年法律第二百号",
-    "law_name": "独立行政法人経済産業研究所法",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/411AC0000000200",
-    "updates": [
-      {
-        "law_data_id": 636759,
-        "sub_revision": "1",
-        "published_date": "1999-12-22",
-        "effective_date": "2026-09-18",
-        "effective_comment": "",
-        "amend_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律及び株式会社国際協力銀行法の一部を改正する法律",
-        "amend_no": "令和八年法律第三十八号",
-        "amendment_id": "508AC0000000038",
-        "amend_published_date": "2026-06-17",
-        "compare_url": "https://laws.e-gov.go.jp/law/411AC0000000200/20260918_508AC0000000038?occasion_date=20260918&tab=compare",
+        "amend_name": "地方自治法の一部を改正する法律",
+        "amend_no": "令和六年法律第六十五号",
+        "amendment_id": "506AC0000000065",
+        "amend_published_date": "2024-06-26",
+        "compare_url": "https://laws.e-gov.go.jp/law/415AC0000000118/20260924_506AC0000000065?occasion_date=20260924&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "419AC0000000104",
-    "law_no": "平成十九年法律第百四号",
-    "law_name": "社会保障協定の実施に伴う厚生年金保険法等の特例等に関する法律",
+    "law_id": "325AC0000000226",
+    "law_no": "昭和二十五年法律第二百二十六号",
+    "law_name": "地方税法",
     "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/419AC0000000104",
+    "url": "https://laws.e-gov.go.jp/law/325AC0000000226",
     "updates": [
       {
-        "law_data_id": 626994,
-        "sub_revision": "1",
-        "published_date": "2007-06-27",
-        "effective_date": "2028-04-01",
+        "law_data_id": 617491,
+        "sub_revision": "17",
+        "published_date": "1950-07-31",
+        "effective_date": "2026-09-24",
         "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/419AC0000000104/20280401_507AC0000000074?occasion_date=20280401&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627003,
-        "sub_revision": "1",
-        "published_date": "2007-06-27",
-        "effective_date": "2026-10-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/419AC0000000104/20261001_507AC0000000074?occasion_date=20261001&tab=compare",
-        "pending": true
+        "amend_name": "地方自治法の一部を改正する法律",
+        "amend_no": "令和六年法律第六十五号",
+        "amendment_id": "506AC0000000065",
+        "amend_published_date": "2024-06-26",
+        "compare_url": "https://laws.e-gov.go.jp/law/325AC0000000226/20260924_506AC0000000065?occasion_date=20260924&tab=compare",
+        "pending": false
       }
     ]
   },
   {
-    "law_id": "328AC0000000245",
-    "law_no": "昭和二十八年法律第二百四十五号",
-    "law_name": "私立学校教職員共済法",
+    "law_id": "322AC0000000067",
+    "law_no": "昭和二十二年法律第六十七号",
+    "law_name": "地方自治法",
     "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/328AC0000000245",
+    "url": "https://laws.e-gov.go.jp/law/322AC0000000067",
     "updates": [
       {
-        "law_data_id": 627027,
-        "sub_revision": "3",
-        "published_date": "1953-08-21",
-        "effective_date": "2029-09-01",
+        "law_data_id": 617480,
+        "sub_revision": "15",
+        "published_date": "1947-04-17",
+        "effective_date": "2026-09-24",
         "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/328AC0000000245/20290901_507AC0000000074?occasion_date=20290901&tab=compare",
-        "pending": true
-      },
+        "amend_name": "地方自治法の一部を改正する法律",
+        "amend_no": "令和六年法律第六十五号",
+        "amendment_id": "506AC0000000065",
+        "amend_published_date": "2024-06-26",
+        "compare_url": "https://laws.e-gov.go.jp/law/322AC0000000067/20260924_506AC0000000065?occasion_date=20260924&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "416AC0000000059",
+    "law_no": "平成十六年法律第五十九号",
+    "law_name": "市町村の合併の特例に関する法律",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/416AC0000000059",
+    "updates": [
       {
-        "law_data_id": 624479,
+        "law_data_id": 617488,
+        "sub_revision": "1",
+        "published_date": "2004-05-26",
+        "effective_date": "2026-09-24",
+        "effective_comment": "",
+        "amend_name": "地方自治法の一部を改正する法律",
+        "amend_no": "令和六年法律第六十五号",
+        "amendment_id": "506AC0000000065",
+        "amend_published_date": "2024-06-26",
+        "compare_url": "https://laws.e-gov.go.jp/law/416AC0000000059/20260924_506AC0000000065?occasion_date=20260924&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "325CO0000000089",
+    "law_no": "昭和二十五年政令第八十九号",
+    "law_name": "公職選挙法施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/325CO0000000089",
+    "updates": [
+      {
+        "law_data_id": 627491,
+        "sub_revision": "4",
+        "published_date": "1950-04-20",
+        "effective_date": "2026-09-24",
+        "effective_comment": "",
+        "amend_name": "地方自治法施行令等の一部を改正する政令",
+        "amend_no": "令和七年政令第二百三十七号",
+        "amendment_id": "507CO0000000237",
+        "amend_published_date": "2025-07-02",
+        "compare_url": "https://laws.e-gov.go.jp/law/325CO0000000089/20260924_507CO0000000237?occasion_date=20260924&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "327CO0000000403",
+    "law_no": "昭和二十七年政令第四百三号",
+    "law_name": "地方公営企業法施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/327CO0000000403",
+    "updates": [
+      {
+        "law_data_id": 627488,
+        "sub_revision": "1",
+        "published_date": "1952-09-03",
+        "effective_date": "2026-09-24",
+        "effective_comment": "",
+        "amend_name": "地方自治法施行令等の一部を改正する政令",
+        "amend_no": "令和七年政令第二百三十七号",
+        "amendment_id": "507CO0000000237",
+        "amend_published_date": "2025-07-02",
+        "compare_url": "https://laws.e-gov.go.jp/law/327CO0000000403/20260924_507CO0000000237?occasion_date=20260924&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "322CO0000000016",
+    "law_no": "昭和二十二年政令第十六号",
+    "law_name": "地方自治法施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/322CO0000000016",
+    "updates": [
+      {
+        "law_data_id": 627490,
+        "sub_revision": "19",
+        "published_date": "1947-05-03",
+        "effective_date": "2026-09-24",
+        "effective_comment": "",
+        "amend_name": "地方自治法施行令等の一部を改正する政令",
+        "amend_no": "令和七年政令第二百三十七号",
+        "amendment_id": "507CO0000000237",
+        "amend_published_date": "2025-07-02",
+        "compare_url": "https://laws.e-gov.go.jp/law/322CO0000000016/20260924_507CO0000000237?occasion_date=20260924&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "417CO0000000055",
+    "law_no": "平成十七年政令第五十五号",
+    "law_name": "市町村の合併の特例に関する法律施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/417CO0000000055",
+    "updates": [
+      {
+        "law_data_id": 627489,
         "sub_revision": "2",
-        "published_date": "1953-08-21",
-        "effective_date": "2028-12-11",
-        "effective_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
-        "amend_name": "医療法等の一部を改正する法律",
-        "amend_no": "令和七年法律第八十七号",
-        "amendment_id": "507AC0000000087",
-        "amend_published_date": "2025-12-12",
-        "compare_url": "https://laws.e-gov.go.jp/law/328AC0000000245/20281211_507AC0000000087?occasion_date=20281211&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627021,
-        "sub_revision": "3",
-        "published_date": "1953-08-21",
-        "effective_date": "2028-09-01",
+        "published_date": "2005-03-18",
+        "effective_date": "2026-09-24",
         "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/328AC0000000245/20280901_507AC0000000074?occasion_date=20280901&tab=compare",
-        "pending": true
-      },
+        "amend_name": "地方自治法施行令等の一部を改正する政令",
+        "amend_no": "令和七年政令第二百三十七号",
+        "amendment_id": "507CO0000000237",
+        "amend_published_date": "2025-07-02",
+        "compare_url": "https://laws.e-gov.go.jp/law/417CO0000000055/20260924_507CO0000000237?occasion_date=20260924&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "420CO0000000389",
+    "law_no": "平成二十年政令第三百八十九号",
+    "law_name": "職員の退職管理に関する政令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/420CO0000000389",
+    "updates": [
       {
-        "law_data_id": 636724,
-        "sub_revision": "1",
-        "published_date": "1953-08-21",
-        "effective_date": "2028-06-04",
-        "effective_comment": "公布の日から起算して二年を超えない範囲内において政令で定める日",
-        "amend_name": "健康保険法等の一部を改正する法律",
-        "amend_no": "令和八年法律第三十一号",
-        "amendment_id": "508AC0000000031",
-        "amend_published_date": "2026-06-05",
-        "compare_url": "https://laws.e-gov.go.jp/law/328AC0000000245/20280604_508AC0000000031?occasion_date=20280604&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627015,
-        "sub_revision": "3",
-        "published_date": "1953-08-21",
-        "effective_date": "2028-04-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/328AC0000000245/20280401_507AC0000000074?occasion_date=20280401&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627268,
-        "sub_revision": "3",
-        "published_date": "1953-08-21",
-        "effective_date": "2027-10-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/328AC0000000245/20271001_507AC0000000074?occasion_date=20271001&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 627010,
-        "sub_revision": "3",
-        "published_date": "1953-08-21",
-        "effective_date": "2027-09-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/328AC0000000245/20270901_507AC0000000074?occasion_date=20270901&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 636704,
-        "sub_revision": "1",
-        "published_date": "1953-08-21",
+        "law_data_id": 628411,
+        "sub_revision": "7",
+        "published_date": "2008-12-25",
         "effective_date": "2027-04-01",
         "effective_comment": "",
-        "amend_name": "健康保険法等の一部を改正する法律",
-        "amend_no": "令和八年法律第三十一号",
-        "amendment_id": "508AC0000000031",
-        "amend_published_date": "2026-06-05",
-        "compare_url": "https://laws.e-gov.go.jp/law/328AC0000000245/20270401_508AC0000000031?occasion_date=20270401&tab=compare",
+        "amend_name": "出入国管理及び難民認定法及び外国人の技能実習の適正な実施及び技能実習生の保護に関する法律の一部を改正する法律の施行に伴う関係政令の整備及び経過措置に関する政令",
+        "amend_no": "令和七年政令第三百四十一号",
+        "amendment_id": "507CO0000000341",
+        "amend_published_date": "2025-10-01",
+        "compare_url": "https://laws.e-gov.go.jp/law/420CO0000000389/20270401_507CO0000000341?occasion_date=20270401&tab=compare",
         "pending": true
       },
       {
-        "law_data_id": 624450,
-        "sub_revision": "2",
-        "published_date": "1953-08-21",
+        "law_data_id": 642830,
+        "sub_revision": "1",
+        "published_date": "2008-12-25",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "医療法等の一部を改正する法律の一部の施行に伴う関係政令の整備及び経過措置に関する政令",
+        "amend_no": "令和八年政令第二百七十四号",
+        "amendment_id": "508CO0000000274",
+        "amend_published_date": "2026-09-11",
+        "compare_url": "https://laws.e-gov.go.jp/law/420CO0000000389/20261001_508CO0000000274?occasion_date=20261001&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "504M60000400061",
+    "law_no": "令和四年経済産業省令第六十一号",
+    "law_name": "一般送配電事業者による託送供給等に係る収入の見通しに関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/504M60000400061",
+    "updates": [
+      {
+        "law_data_id": 638390,
+        "sub_revision": "1",
+        "published_date": "2022-07-22",
+        "effective_date": "2026-05-29",
+        "effective_comment": "",
+        "amend_name": "一般送配電事業者による託送供給等に係る収入の見通しに関する省令等の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第五十四号",
+        "amendment_id": "508M60000400054",
+        "amend_published_date": "2026-05-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/504M60000400061/20260529_508M60000400054?occasion_date=20260529&tab=compare",
+        "pending": false
+      },
+      {
+        "law_data_id": 637023,
+        "sub_revision": "1",
+        "published_date": "2022-07-22",
+        "effective_date": "2026-03-31",
+        "effective_comment": "",
+        "amend_name": "電気事業法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第二十七号",
+        "amendment_id": "508M60000400027",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/504M60000400061/20260331_508M60000400027?occasion_date=20260331&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "428M60000400022",
+    "law_no": "平成二十八年経済産業省令第二十二号",
+    "law_name": "一般送配電事業託送供給等約款料金算定規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/428M60000400022",
+    "updates": [
+      {
+        "law_data_id": 638387,
+        "sub_revision": "1",
+        "published_date": "2016-03-18",
+        "effective_date": "2026-05-29",
+        "effective_comment": "",
+        "amend_name": "一般送配電事業者による託送供給等に係る収入の見通しに関する省令等の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第五十四号",
+        "amendment_id": "508M60000400054",
+        "amend_published_date": "2026-05-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/428M60000400022/20260529_508M60000400054?occasion_date=20260529&tab=compare",
+        "pending": false
+      },
+      {
+        "law_data_id": 637022,
+        "sub_revision": "1",
+        "published_date": "2016-03-18",
+        "effective_date": "2026-03-31",
+        "effective_comment": "",
+        "amend_name": "電気事業法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第二十七号",
+        "amendment_id": "508M60000400027",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/428M60000400022/20260331_508M60000400027?occasion_date=20260331&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "424M60000400046",
+    "law_no": "平成二十四年経済産業省令第四十六号",
+    "law_name": "再生可能エネルギー電気の利用の促進に関する特別措置法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/424M60000400046",
+    "updates": [
+      {
+        "law_data_id": 637033,
+        "sub_revision": "1",
+        "published_date": "2012-06-18",
         "effective_date": "2027-04-01",
         "effective_comment": "",
-        "amend_name": "医療法等の一部を改正する法律",
-        "amend_no": "令和七年法律第八十七号",
-        "amendment_id": "507AC0000000087",
-        "amend_published_date": "2025-12-12",
-        "compare_url": "https://laws.e-gov.go.jp/law/328AC0000000245/20270401_507AC0000000087?occasion_date=20270401&tab=compare",
+        "amend_name": "再生可能エネルギー電気の利用の促進に関する特別措置法施行規則の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第二十九号",
+        "amendment_id": "508M60000400029",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/424M60000400046/20270401_508M60000400029?occasion_date=20270401&tab=compare",
         "pending": true
       },
       {
-        "law_data_id": 624412,
-        "sub_revision": "2",
-        "published_date": "1953-08-21",
+        "law_data_id": 637032,
+        "sub_revision": "1",
+        "published_date": "2012-06-18",
         "effective_date": "2026-10-01",
         "effective_comment": "",
-        "amend_name": "医療法等の一部を改正する法律",
-        "amend_no": "令和七年法律第八十七号",
-        "amendment_id": "507AC0000000087",
-        "amend_published_date": "2025-12-12",
-        "compare_url": "https://laws.e-gov.go.jp/law/328AC0000000245/20261001_507AC0000000087?occasion_date=20261001&tab=compare",
+        "amend_name": "再生可能エネルギー電気の利用の促進に関する特別措置法施行規則の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第二十九号",
+        "amendment_id": "508M60000400029",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/424M60000400046/20261001_508M60000400029?occasion_date=20261001&tab=compare",
         "pending": true
       },
       {
-        "law_data_id": 627269,
-        "sub_revision": "3",
-        "published_date": "1953-08-21",
-        "effective_date": "2026-10-01",
-        "effective_comment": "",
-        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-        "amend_no": "令和七年法律第七十四号",
-        "amendment_id": "507AC0000000074",
-        "amend_published_date": "2025-06-20",
-        "compare_url": "https://laws.e-gov.go.jp/law/328AC0000000245/20261001_507AC0000000074?occasion_date=20261001&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "504AC0000000043",
-    "law_no": "令和四年法律第四十三号",
-    "law_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/504AC0000000043",
-    "updates": [
-      {
-        "law_data_id": 636763,
+        "law_data_id": 637031,
         "sub_revision": "1",
-        "published_date": "2022-05-18",
-        "effective_date": "2026-09-18",
+        "published_date": "2012-06-18",
+        "effective_date": "2026-05-21",
         "effective_comment": "",
-        "amend_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律及び株式会社国際協力銀行法の一部を改正する法律",
-        "amend_no": "令和八年法律第三十八号",
-        "amendment_id": "508AC0000000038",
-        "amend_published_date": "2026-06-17",
-        "compare_url": "https://laws.e-gov.go.jp/law/504AC0000000043/20260918_508AC0000000038?occasion_date=20260918&tab=compare",
+        "amend_name": "再生可能エネルギー電気の利用の促進に関する特別措置法施行規則の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第二十九号",
+        "amendment_id": "508M60000400029",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/424M60000400046/20260521_508M60000400029?occasion_date=20260521&tab=compare",
         "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "417CO0000000298",
-    "law_no": "平成十七年政令第二百九十八号",
-    "law_name": "物資の流通の効率化に関する法律施行令",
-    "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/417CO0000000298",
-    "updates": [
+      },
       {
-        "law_data_id": 641879,
+        "law_data_id": 637030,
         "sub_revision": "1",
-        "published_date": "2005-09-09",
-        "effective_date": "2026-10-16",
-        "effective_comment": "",
-        "amend_name": "租税特別措置法施行令及び物資の流通の効率化に関する法律施行令の一部を改正する政令",
-        "amend_no": "令和八年政令第二百七十号",
-        "amendment_id": "508CO0000000270",
-        "amend_published_date": "2026-09-04",
-        "compare_url": "https://laws.e-gov.go.jp/law/417CO0000000298/20261016_508CO0000000270?occasion_date=20261016&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "508CO0000000272",
-    "law_no": "令和八年政令第二百七十二号",
-    "law_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律の一部の施行に伴う経過措置に関する政令",
-    "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/508CO0000000272",
-    "updates": [
-      {
-        "law_data_id": 641882,
-        "sub_revision": "1",
-        "published_date": "2026-09-04",
-        "effective_date": "2026-10-01",
-        "effective_comment": "",
-        "amend_name": "新規制定",
-        "amend_no": "",
-        "amendment_id": null,
-        "amend_published_date": "2026-09-04",
-        "compare_url": null,
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "350M50002000020",
-    "law_no": "昭和五十年労働省令第二十号",
-    "law_name": "作業環境測定法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/350M50002000020",
-    "updates": [
-      {
-        "law_data_id": 641430,
-        "sub_revision": "1",
-        "published_date": "1975-08-01",
-        "effective_date": "2026-10-01",
-        "effective_comment": "",
-        "amend_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
-        "amend_no": "令和八年厚生労働省令第百十六号",
-        "amendment_id": "508M60000100116",
-        "amend_published_date": "2026-07-29",
-        "compare_url": "https://laws.e-gov.go.jp/law/350M50002000020/20261001_508M60000100116?occasion_date=20261001&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "505M60000102006",
-    "law_no": "令和五年内閣府・厚生労働省令第六号",
-    "law_name": "内閣府・厚生労働省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/505M60000102006",
-    "updates": [
-      {
-        "law_data_id": 641246,
-        "sub_revision": "1",
-        "published_date": "2023-08-09",
-        "effective_date": "2026-09-18",
-        "effective_comment": "",
-        "amend_name": "内閣府・厚生労働省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-        "amend_no": "令和八年内閣府・厚生労働省令第十二号",
-        "amendment_id": "508M60000102012",
-        "amend_published_date": "2026-07-14",
-        "compare_url": "https://laws.e-gov.go.jp/law/505M60000102006/20260918_508M60000102012?occasion_date=20260918&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "505M60000052001",
-    "law_no": "令和五年内閣府・法務省・財務省令第一号",
-    "law_name": "内閣府・法務省・財務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/505M60000052001",
-    "updates": [
-      {
-        "law_data_id": 641243,
-        "sub_revision": "1",
-        "published_date": "2023-08-09",
-        "effective_date": "2026-09-18",
-        "effective_comment": "",
-        "amend_name": "内閣府・法務省・財務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-        "amend_no": "令和八年内閣府・法務省・財務省令第三号",
-        "amendment_id": "508M60000052003",
-        "amend_published_date": "2026-07-14",
-        "compare_url": "https://laws.e-gov.go.jp/law/505M60000052001/20260918_508M60000052003?occasion_date=20260918&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "505M60000012002",
-    "law_no": "令和五年内閣府・法務省令第二号",
-    "law_name": "内閣府・法務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/505M60000012002",
-    "updates": [
-      {
-        "law_data_id": 641242,
-        "sub_revision": "1",
-        "published_date": "2023-08-09",
-        "effective_date": "2026-09-18",
-        "effective_comment": "",
-        "amend_name": "内閣府・法務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-        "amend_no": "令和八年内閣府・法務省令第二号",
-        "amendment_id": "508M60000012002",
-        "amend_published_date": "2026-07-14",
-        "compare_url": "https://laws.e-gov.go.jp/law/505M60000012002/20260918_508M60000012002?occasion_date=20260918&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "505M60000242002",
-    "law_no": "令和五年内閣府・財務省・農林水産省令第二号",
-    "law_name": "内閣府・財務省・農林水産省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/505M60000242002",
-    "updates": [
-      {
-        "law_data_id": 641245,
-        "sub_revision": "1",
-        "published_date": "2023-08-09",
-        "effective_date": "2026-09-18",
-        "effective_comment": "",
-        "amend_name": "内閣府・財務省・農林水産省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-        "amend_no": "令和八年内閣府・財務省・農林水産省令第一号",
-        "amendment_id": "508M60000242001",
-        "amend_published_date": "2026-07-14",
-        "compare_url": "https://laws.e-gov.go.jp/law/505M60000242002/20260918_508M60000242001?occasion_date=20260918&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "505M60000042006",
-    "law_no": "令和五年内閣府・財務省令第六号",
-    "law_name": "内閣府・財務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/505M60000042006",
-    "updates": [
-      {
-        "law_data_id": 641244,
-        "sub_revision": "1",
-        "published_date": "2023-08-09",
-        "effective_date": "2026-09-18",
-        "effective_comment": "",
-        "amend_name": "内閣府・財務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-        "amend_no": "令和八年内閣府・財務省令第四号",
-        "amendment_id": "508M60000042004",
-        "amend_published_date": "2026-07-14",
-        "compare_url": "https://laws.e-gov.go.jp/law/505M60000042006/20260918_508M60000042004?occasion_date=20260918&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "505M60000202004",
-    "law_no": "令和五年内閣府・農林水産省令第四号",
-    "law_name": "内閣府・農林水産省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/505M60000202004",
-    "updates": [
-      {
-        "law_data_id": 641247,
-        "sub_revision": "1",
-        "published_date": "2023-08-09",
-        "effective_date": "2026-09-18",
-        "effective_comment": "",
-        "amend_name": "内閣府・農林水産省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-        "amend_no": "令和八年内閣府・農林水産省令第十号",
-        "amendment_id": "508M60000202010",
-        "amend_published_date": "2026-07-14",
-        "compare_url": "https://laws.e-gov.go.jp/law/505M60000202004/20260918_508M60000202010?occasion_date=20260918&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "505M60000800062",
-    "law_no": "令和五年国土交通省令第六十二号",
-    "law_name": "国土交通省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/505M60000800062",
-    "updates": [
-      {
-        "law_data_id": 641257,
-        "sub_revision": "1",
-        "published_date": "2023-08-09",
-        "effective_date": "2026-09-18",
-        "effective_comment": "",
-        "amend_name": "国土交通省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令の一部を改正する省令",
-        "amend_no": "令和八年国土交通省令第六十七号",
-        "amendment_id": "508M60000800067",
-        "amend_published_date": "2026-07-15",
-        "compare_url": "https://laws.e-gov.go.jp/law/505M60000800062/20260918_508M60000800067?occasion_date=20260918&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "335M50000100012",
-    "law_no": "昭和三十五年厚生省令第十二号",
-    "law_name": "国民年金法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/335M50000100012",
-    "updates": [
-      {
-        "law_data_id": 637048,
-        "sub_revision": "1",
-        "published_date": "1960-04-23",
+        "published_date": "2012-06-18",
         "effective_date": "2026-04-01",
         "effective_comment": "",
-        "amend_name": "国民年金法施行規則等の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第五十号",
-        "amendment_id": "508M60000100050",
-        "amend_published_date": "2026-03-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/335M50000100012/20260401_508M60000100050?occasion_date=20260401&tab=compare",
+        "amend_name": "再生可能エネルギー電気の利用の促進に関する特別措置法施行規則の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第二十九号",
+        "amendment_id": "508M60000400029",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/424M60000400046/20260401_508M60000400029?occasion_date=20260401&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "505M60000002061",
-    "law_no": "令和五年内閣府令第六十一号",
-    "law_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する内閣府令",
+    "law_id": "415M60000040071",
+    "law_no": "平成十五年財務省令第七十一号",
+    "law_name": "国税関係法令に係る情報通信技術を活用した行政の推進等に関する省令",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/505M60000002061",
+    "url": "https://laws.e-gov.go.jp/law/415M60000040071",
     "updates": [
       {
-        "law_data_id": 641238,
-        "sub_revision": "1",
-        "published_date": "2023-08-09",
-        "effective_date": "2026-09-18",
+        "law_data_id": 619522,
+        "sub_revision": "2",
+        "published_date": "2003-07-14",
+        "effective_date": "2026-09-24",
         "effective_comment": "",
-        "amend_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する内閣府令の一部を改正する内閣府令",
-        "amend_no": "令和八年内閣府令第六十一号",
-        "amendment_id": "508M60000002061",
-        "amend_published_date": "2026-07-14",
-        "compare_url": "https://laws.e-gov.go.jp/law/505M60000002061/20260918_508M60000002061?occasion_date=20260918&tab=compare",
+        "amend_name": "国税関係法令に係る情報通信技術を活用した行政の推進等に関する省令の一部を改正する省令",
+        "amend_no": "令和六年財務省令第三十一号",
+        "amendment_id": "506M60000040031",
+        "amend_published_date": "2024-03-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/415M60000040071/20260924_506M60000040031?occasion_date=20260924&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "505M60000400041",
-    "law_no": "令和五年経済産業省令第四十一号",
-    "law_name": "経済産業省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令",
+    "law_id": "327M50000002073",
+    "law_no": "昭和二十七年総理府令第七十三号",
+    "law_name": "地方公営企業法施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/505M60000400041",
+    "url": "https://laws.e-gov.go.jp/law/327M50000002073",
     "updates": [
       {
-        "law_data_id": 641249,
-        "sub_revision": "1",
-        "published_date": "2023-08-09",
-        "effective_date": "2026-09-18",
+        "law_data_id": 627988,
+        "sub_revision": "2",
+        "published_date": "1952-09-29",
+        "effective_date": "2026-09-24",
         "effective_comment": "",
-        "amend_name": "経済産業省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令の一部を改正する省令",
-        "amend_no": "令和八年経済産業省令第六十一号",
-        "amendment_id": "508M60000400061",
-        "amend_published_date": "2026-07-14",
-        "compare_url": "https://laws.e-gov.go.jp/law/505M60000400041/20260918_508M60000400061?occasion_date=20260918&tab=compare",
+        "amend_name": "地方自治法施行規則等の一部を改正する省令",
+        "amend_no": "令和七年総務省令第八十七号",
+        "amendment_id": "507M60000008087",
+        "amend_published_date": "2025-08-26",
+        "compare_url": "https://laws.e-gov.go.jp/law/327M50000002073/20260924_507M60000008087?occasion_date=20260924&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "505M60000008064",
-    "law_no": "令和五年総務省令第六十四号",
-    "law_name": "総務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令",
+    "law_id": "322M40000008029",
+    "law_no": "昭和二十二年内務省令第二十九号",
+    "law_name": "地方自治法施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/505M60000008064",
+    "url": "https://laws.e-gov.go.jp/law/322M40000008029",
     "updates": [
       {
-        "law_data_id": 641248,
-        "sub_revision": "1",
-        "published_date": "2023-08-09",
-        "effective_date": "2026-09-18",
+        "law_data_id": 627987,
+        "sub_revision": "4",
+        "published_date": "1947-05-03",
+        "effective_date": "2026-09-24",
         "effective_comment": "",
-        "amend_name": "総務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令の一部を改正する省令",
-        "amend_no": "令和八年総務省令第八十八号",
-        "amendment_id": "508M60000008088",
-        "amend_published_date": "2026-07-14",
-        "compare_url": "https://laws.e-gov.go.jp/law/505M60000008064/20260918_508M60000008088?occasion_date=20260918&tab=compare",
+        "amend_name": "地方自治法施行規則等の一部を改正する省令",
+        "amend_no": "令和七年総務省令第八十七号",
+        "amendment_id": "507M60000008087",
+        "amend_published_date": "2025-08-26",
+        "compare_url": "https://laws.e-gov.go.jp/law/322M40000008029/20260924_507M60000008087?occasion_date=20260924&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "508M60000F5A004",
-    "law_no": "令和八年内閣府・総務省・法務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省令第四号",
-    "law_name": "重要電子計算機に対する不正な行為による被害の防止に関する法律に基づく特別社会基盤事業者による特定侵害事象等の報告等に関する命令",
+    "law_id": "417M60000008043",
+    "law_no": "平成十七年総務省令第四十三号",
+    "law_name": "市町村の合併の特例に関する法律施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/508M60000F5A004",
+    "url": "https://laws.e-gov.go.jp/law/417M60000008043",
     "updates": [
       {
-        "law_data_id": 641857,
+        "law_data_id": 627989,
         "sub_revision": "1",
-        "published_date": "2026-05-28",
-        "effective_date": "2026-09-18",
+        "published_date": "2005-03-28",
+        "effective_date": "2026-09-24",
         "effective_comment": "",
-        "amend_name": "重要電子計算機に対する不正な行為による被害の防止に関する法律に基づく特別社会基盤事業者による特定侵害事象等の報告等に関する命令の一部を改正する命令",
-        "amend_no": "令和八年内閣府・総務省・法務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省令第七号",
-        "amendment_id": "508M60000F5A007",
-        "amend_published_date": "2026-08-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/508M60000F5A004/20260918_508M60000F5A007?occasion_date=20260918&tab=compare",
+        "amend_name": "地方自治法施行規則等の一部を改正する省令",
+        "amend_no": "令和七年総務省令第八十七号",
+        "amendment_id": "507M60000008087",
+        "amend_published_date": "2025-08-26",
+        "compare_url": "https://laws.e-gov.go.jp/law/417M60000008043/20260924_507M60000008087?occasion_date=20260924&tab=compare",
         "pending": false
       }
     ]

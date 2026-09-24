@@ -1,317 +1,86 @@
 {
-  "date": "20260918",
+  "date": "20260924",
   "summaries": [
     {
       "summary_input": {
-        "law_id": "211AC0000000070",
-        "law_name": "健康保険法",
+        "law_id": "414AC1000000101",
+        "law_name": "入札談合等関与行為の排除及び防止並びに職員による入札等の公正を害すべき行為の処罰に関する法律",
         "revisions": [
           {
-            "law_data_id": 624517,
-            "sub_revision": "2",
-            "amendment_id": "507AC0000000087",
-            "amendment_name": "医療法等の一部を改正する法律",
-            "amendment_num": "令和七年法律第八十七号",
-            "enforcement_date": "2026-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 627040,
-            "sub_revision": "3",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2026-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 637515,
+            "law_data_id": 617482,
             "sub_revision": "1",
-            "amendment_id": "508AC0000000051",
-            "amendment_name": "社会福祉法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第五十一号",
-            "enforcement_date": "2027-04-01",
+            "amendment_id": "506AC0000000065",
+            "amendment_name": "地方自治法の一部を改正する法律",
+            "amendment_num": "令和六年法律第六十五号",
+            "enforcement_date": "2026-09-24",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 636717,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000031",
-            "amendment_name": "健康保険法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第三十一号",
-            "enforcement_date": "2027-04-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 624530,
-            "sub_revision": "2",
-            "amendment_id": "507AC0000000087",
-            "amendment_name": "医療法等の一部を改正する法律",
-            "amendment_num": "令和七年法律第八十七号",
-            "enforcement_date": "2027-04-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 637274,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000037",
-            "amendment_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律",
-            "amendment_num": "令和七年法律第三十七号",
-            "enforcement_date": "2027-05-20",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 636726,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000031",
-            "amendment_name": "健康保険法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第三十一号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2027-06-04",
-            "enforcement_comment": "公布の日から起算して一年を超えない範囲内において政令で定める日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 627034,
-            "sub_revision": "3",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2027-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 636735,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000031",
-            "amendment_name": "健康保険法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第三十一号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2028-06-04",
-            "enforcement_comment": "公布の日から起算して二年を超えない範囲内において政令で定める日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 624534,
-            "sub_revision": "2",
-            "amendment_id": "507AC0000000087",
-            "amendment_name": "医療法等の一部を改正する法律",
-            "amendment_num": "令和七年法律第八十七号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2028-12-11",
-            "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 637549,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000051",
-            "amendment_name": "社会福祉法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第五十一号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2029-06-24",
-            "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 627043,
-            "sub_revision": "3",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2029-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
+            "is_current": true
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "出産給付の再編や短時間労働者への適用拡大など",
-          "body": "被保険者や被扶養者の出産に関し、従来の出産育児一時金などの給付制度が再編され、新たに「分娩費」や「出産時一時金」が創設されます。これに伴い、指定助産所や登録助産師に関する制度が整備され、マイナンバーカードなどを用いた電子資格確認による受給や、分娩手当等の内容・費用に関する情報提供および公表の仕組みが導入されます。\n\n短時間労働者に対する健康保険の適用について、最低賃金法の特例等により報酬が基準未満の者であっても申出等により被保険者となれる特例や、短時間労働者への適用拡大に伴う事業主の保険料負担を緩和するための保険料負担割合の特例（経過措置）が設けられます。さらに、適用事業所の範囲が見直され、常時5人以上の従業員を使用する事業所が原則としてすべて適用対象となります。\n\n社会保険診療報酬支払基金が「医療情報基盤・診療報酬審査支払機構」へと改組され、審査支払事務や出産交付金の交付などの事務が引き継がれます。また、個人情報の保護に配慮しつつ医療情報の利活用を進めるため、仮名診療等関連情報の利用や、国・研究機関・民間事業者への情報提供および他情報との連結利用に関する規定が新たに整備されます。\n\nその他、一般用医薬品等との代替性が高い薬剤等を対象に一部を保険給付外とする「一部保険外療養」が導入され、保険外併用療養費の支給対象とされます。また、保険医療機関における従業員の勤務環境改善等の努力義務の追加や、地域医療構想を踏まえた病床過剰地域での保険医療機関の指定制限に関する規定の整備、医師手当拠出金等に伴う国庫補助制度の導入などが行われます。"
+          "title": "職員に対する損害賠償請求規定における引用条項の変更",
+          "body": "地方自治法の改正に伴い、入札談合等関与行為を行った職員への損害賠償請求に関する規定が変更されます。具体的には、当該職員が地方自治法の規定により賠償の責任を負うべき場合において、引用している地方自治法の条項を「第二百四十三条の二の八」から「第二百四十三条の二の九」へと改める整理が行われます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 73675,
-          "output_tokens": 436,
-          "thoughts_tokens": 1784,
-          "total_tokens": 75895,
-          "elapsed_seconds": 14.607404395999993,
-          "response_id": "1LCtaqDoF5-qmecP7dqbuQ0"
+          "prompt_tokens": 1393,
+          "output_tokens": 111,
+          "thoughts_tokens": 1348,
+          "total_tokens": 2852,
+          "elapsed_seconds": 9.261836027000001,
+          "response_id": "a6S1aqKPLfnDodAP7rCb0QQ"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "329AC0000000115",
-        "law_name": "厚生年金保険法",
+        "law_id": "327AC0000000292",
+        "law_name": "地方公営企業法",
         "revisions": [
           {
-            "law_data_id": 627039,
+            "law_data_id": 617492,
             "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2026-10-01",
+            "amendment_id": "506AC0000000065",
+            "amendment_name": "地方自治法の一部を改正する法律",
+            "amendment_num": "令和六年法律第六十五号",
+            "enforcement_date": "2026-09-24",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": false
-          },
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "職員の賠償責任に関して準用する地方自治法の条項を変更",
+          "body": "地方自治法の改正に伴い、地方公営企業の業務に従事する職員の賠償責任に関して準用する地方自治法の条項が変更されます。\\n\\n具体的には、職員の賠償責任について準用している地方自治法の規定が「第二百四十三条の二の八」から「第二百四十三条の二の九」に改められることに伴い、同条に関する読み替え規定が整理されます。\\n\\nまた、企業職員に対して行政不服審査法を適用しない規定の例外とされる「賠償責任に基づく処分」について、準用する地方自治法の該当条項も同様に「第二百四十三条の二の九第三項」へと改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 1585,
+          "output_tokens": 177,
+          "thoughts_tokens": 1622,
+          "total_tokens": 3384,
+          "elapsed_seconds": 11.988086535000008,
+          "response_id": "dqS1apuDBunJodAP7OeHuAM"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "415AC0000000118",
+        "law_name": "地方独立行政法人法",
+        "revisions": [
           {
-            "law_data_id": 629477,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2026-12-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 627028,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2027-09-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 627033,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2027-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 627036,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2028-04-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 612265,
+            "law_data_id": 617486,
             "sub_revision": "4",
-            "amendment_id": "505AC0000000053",
-            "amendment_name": "民事関係手続等における情報通信技術の活用等の推進を図るための関係法律の整備に関する法律",
-            "amendment_num": "令和五年法律第五十三号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2028-06-13",
-            "enforcement_comment": "公布の日から起算して五年を超えない範囲内において政令で定める日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 627041,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2028-09-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 627044,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2029-04-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 627045,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2029-06-19",
-            "enforcement_comment": "公布の日から起算して四年を超えない範囲内において政令で定める日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 627046,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2029-09-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 627047,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2029-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "短時間労働者への適用拡大と各種給付・保険料の見直し",
-          "body": "厚生年金保険法などの一部改正により、制度が以下のように見直されます。　■短時間労働者等に対する適用および保険料負担の特例：最低賃金法に基づく減額特例の適用を受ける労働者で、報酬が一定額未満のものについて、原則として適用除外としつつも、申し出により被保険者となれる特例（適用除外の特例）を設けます。また、特定適用事業所以外の事業所における短時間労働者の適用について経過措置を整備し、あわせて短時間被保険者に係る事業主の保険料負担を一定期間増加できる特例を定めます。　■加給年金および遺族厚生年金等の給付内容の見直し：老齢厚生年金における子に係る加給年金額について、被保険者期間120か月以上の要件等を整理し、子が日本国外に住所を有しない場合の支給停止措置などを導入します。障害厚生年金については、障害等級1級または2級の受給権者に子に係る加給年金額を新たに追加します。また、遺族厚生年金では、60歳未満の配偶者に支給される遺族厚生年金の所得制限（基準日から5年経過後等）や支給停止ルール、配偶者・子に対する加給年金額の加算制度を新設します。　■死別配偶者における標準報酬の特例の新設：被保険者と死別した配偶者が特定の受給権者である場合等に、婚姻期間等の標準報酬について、一定の割合に基づき改定または決定を実施機関に請求できる特例を新たに設けます。　■標準報酬月額の最高等級の段階的引き上げ：標準報酬月額の最高等級について、段階的に引き上げを行い、新たに上位の等級（65万円、68万円、71万円、75万円）を追加します。　■脱退一時金の要件見直しとその他：日本国籍を有しない者に対する脱退一時金について、日本国内の滞在や再入国許可を受けている場合の支給要件等を整理します。そのほか、事実婚の定義を「配偶者」に統一するなどの用語整理や、適用事業所における事務所の統合等を行います。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 102001,
-          "output_tokens": 517,
-          "thoughts_tokens": 3638,
-          "total_tokens": 106156,
-          "elapsed_seconds": 26.564870974000087,
-          "response_id": "8LCtav34EqK8m9IP1cLi6As"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "411AC0000000200",
-        "law_name": "独立行政法人経済産業研究所法",
-        "revisions": [
-          {
-            "law_data_id": 636759,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000038",
-            "amendment_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律及び株式会社国際協力銀行法の一部を改正する法律",
-            "amendment_num": "令和八年法律第三十八号",
-            "enforcement_date": "2026-09-18",
+            "amendment_id": "506AC0000000065",
+            "amendment_name": "地方自治法の一部を改正する法律",
+            "amendment_num": "令和六年法律第六十五号",
+            "enforcement_date": "2026-09-24",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": true
@@ -320,221 +89,326 @@
       },
       "response": {
         "summary": {
-          "title": "経済安保関連業務の追加と主務大臣の分担化",
-          "body": "独立行政法人経済産業研究所の業務範囲に、経済安保推進法に基づく特定の業務が新たに追加されます。これに伴い、主務大臣が事項ごとに分担されます。役員や職員、財務、会計などの管理業務、および安全保障関連以外の業務については経済産業大臣が主務大臣となります。一方で、新たに追加された安全保障関連の業務とその附帯業務については、内閣総理大臣が主務大臣となります。また、これまで経済産業省令とされていた主務省令は、それぞれの主務大臣が発する命令に変更されます。"
+          "title": "役員の損害賠償に関する地方自治法の準用条項を変更",
+          "body": "地方自治法の改正に伴い、地方独立行政法人の役員等の損害賠償責任に関する規定が整理されます。具体的には、役員等の損害賠償責任を軽減等する条例の制定または改廃において準用する地方自治法の条項が、「第二百四十三条の二の七第二項及び第三項」から「第二百四十三条の二の八第二項及び第三項」へと改められます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 959,
-          "output_tokens": 144,
-          "thoughts_tokens": 1752,
-          "total_tokens": 2855,
-          "elapsed_seconds": 11.624144763999993,
-          "response_id": "DLGtatGvGoqrr8kP_ZKF4AQ"
+          "prompt_tokens": 641,
+          "output_tokens": 118,
+          "thoughts_tokens": 865,
+          "total_tokens": 1624,
+          "elapsed_seconds": 6.192808197000005,
+          "response_id": "g6S1apSUEfGrodAPluKwsAI"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "419AC0000000104",
-        "law_name": "社会保障協定の実施に伴う厚生年金保険法等の特例等に関する法律",
+        "law_id": "325AC0000000226",
+        "law_name": "地方税法",
         "revisions": [
           {
-            "law_data_id": 627003,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2026-10-01",
+            "law_data_id": 617491,
+            "sub_revision": "17",
+            "amendment_id": "506AC0000000065",
+            "amendment_name": "地方自治法の一部を改正する法律",
+            "amendment_num": "令和六年法律第六十五号",
+            "enforcement_date": "2026-09-24",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 626994,
-            "sub_revision": "1",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2028-04-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
+            "is_current": true
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "社会保障協定特例における加算額の計算や支給停止等の見直し",
-          "body": "2026年10月施行の改正により、特定の社会保障協定に係る日本国内就労者に対する厚生年金保険の任意単独加入等に関する制限が追加されます。2028年4月施行の改正では、社会保障協定の特例が適用される年金給付について、各種加算額の計算や支給停止等の調整ルールが整備されます。具体的には、老齢・障害基礎年金の子に係る加算部分の支給停止や調整に関する事項が整備されるほか、老齢・障害・遺族厚生年金における加給年金額等の按分計算の特例が新設・見直されます。また、基礎年金の加算等が支給停止されている場合の最低保障的な調整ルールが設けられるほか、遺族厚生年金の経過的寡婦加算への整理などが行われます。"
+          "title": "機構の業務範囲への地方自治法関連業務の追加",
+          "body": "地方自治法の一部を改正する法律の施行に伴い、機構の業務範囲が拡張されるほか、関連する改正規定の施行期日が定められます。\n\n【機構の業務範囲の追加】\n機構が行う業務として、従来の業務のほか、地方自治法第二百四十三条の二の七第一項（市町村の合併の特例に関する法律第四十七条において準用する場合を含む。）に規定する業務を行うことが追加されます。\n\n【施行期日の整備】\n改正法は原則として公布の日から起算して三月を経過した日から施行されます。ただし、地方自治法における指定公金事務取扱取扱者等に関連する改正規定や、特定の附則の規定などについては、公布の日から起算して二年六月を超えない範囲内において政令で定める日から施行することとされています。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 11919,
-          "output_tokens": 209,
-          "thoughts_tokens": 1885,
-          "total_tokens": 14013,
-          "elapsed_seconds": 13.310884619000035,
-          "response_id": "GrGtapr0Ls6ezvgPvZTF-QE"
+          "prompt_tokens": 1721,
+          "output_tokens": 202,
+          "thoughts_tokens": 1445,
+          "total_tokens": 3368,
+          "elapsed_seconds": 9.750307332999995,
+          "response_id": "j6S1aoasFrqjq8YPqOXI2Ak"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "328AC0000000245",
-        "law_name": "私立学校教職員共済法",
+        "law_id": "322AC0000000067",
+        "law_name": "地方自治法",
         "revisions": [
           {
-            "law_data_id": 624412,
-            "sub_revision": "2",
-            "amendment_id": "507AC0000000087",
-            "amendment_name": "医療法等の一部を改正する法律",
-            "amendment_num": "令和七年法律第八十七号",
-            "enforcement_date": "2026-10-01",
+            "law_data_id": 617480,
+            "sub_revision": "15",
+            "amendment_id": "506AC0000000065",
+            "amendment_name": "地方自治法の一部を改正する法律",
+            "amendment_num": "令和六年法律第六十五号",
+            "enforcement_date": "2026-09-24",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
-            "is_current": false
-          },
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "地方税共同機構への特定歳入等収納事務の委託を新設",
+          "body": "今回の改正により、歳入等の収納に関する事務の合理化と住民の利便性向上を目的に、地方税共同機構に「特定歳入等」の収納事務を行わせる制度が新たに設けられます。普通地方公共団体の長は、一定の要件を満たす特定歳入等の収納事務を同機構に行わせることとし、これに伴い公金取扱いの制限の例外として同機構が追加されます。また、期限までに納付されない場合の徴収ルールや、システムの故障時等における総務大臣による納期限の延長措置などが整備されます。さらに、この規定の新設に伴って、普通地方公共団体の長等の損害賠償責任の一部免責や職員の賠償責任に関する規定の条番号が繰り下がり、住民訴訟や特例一部事務組合の参照条文などの整理が行われます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 8763,
+          "output_tokens": 208,
+          "thoughts_tokens": 2038,
+          "total_tokens": 11009,
+          "elapsed_seconds": 13.56730889299999,
+          "response_id": "n6S1arjvLtCi998P0uyzkQ4"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "416AC0000000059",
+        "law_name": "市町村の合併の特例に関する法律",
+        "revisions": [
           {
-            "law_data_id": 627269,
-            "sub_revision": "3",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2026-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 636704,
+            "law_data_id": 617488,
             "sub_revision": "1",
-            "amendment_id": "508AC0000000031",
-            "amendment_name": "健康保険法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第三十一号",
+            "amendment_id": "506AC0000000065",
+            "amendment_name": "地方自治法の一部を改正する法律",
+            "amendment_num": "令和六年法律第六十五号",
+            "enforcement_date": "2026-09-24",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "合併特例区の財務等で準用する地方自治法の条項を整理",
+          "body": "地方自治法の改正に伴い、合併特例区の財務に関して準用する地方自治法の規定が整理されました。具体的には、合併特例区の財務において準用・読替えを行う地方自治法の条項が変更されています。またこれに伴い、合併特例区の長が合併特例区規則を定めるにあたって合併特例区協議会の同意を得る必要がある規定についても、準用する条項の変更に伴う整理が行われました。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 2283,
+          "output_tokens": 124,
+          "thoughts_tokens": 1339,
+          "total_tokens": 3746,
+          "elapsed_seconds": 9.361183005999976,
+          "response_id": "rqS1atjPIuaaq8YP-tixyA8"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "325CO0000000089",
+        "law_name": "公職選挙法施行令",
+        "revisions": [
+          {
+            "law_data_id": 627491,
+            "sub_revision": "4",
+            "amendment_id": "507CO0000000237",
+            "amendment_name": "地方自治法施行令等の一部を改正する政令",
+            "amendment_num": "令和七年政令第二百三十七号",
+            "enforcement_date": "2026-09-24",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "参議院合同選管への地方自治法等適用条項を整理",
+          "body": "参議院合同選挙区選挙管理委員会に対する地方自治法などの適用および準用に関する条項が整理されます。\\n\\n同委員会に適用される地方自治法の条項について、「第二百四十三条の二の七第一項」が「第二百四十三条の二の八第一項」に改められます。\\n\\nまた、同委員会の委員に準用される地方自治法施行令の条項について、「第百七十三条の四第一項」が「第百七十三条の五第一項」に改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 2196,
+          "output_tokens": 145,
+          "thoughts_tokens": 1507,
+          "total_tokens": 3848,
+          "elapsed_seconds": 10.463922505,
+          "response_id": "uaS1apvuEvGrodAPluKwsAI"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "327CO0000000403",
+        "law_name": "地方公営企業法施行令",
+        "revisions": [
+          {
+            "law_data_id": 627488,
+            "sub_revision": "1",
+            "amendment_id": "507CO0000000237",
+            "amendment_name": "地方自治法施行令等の一部を改正する政令",
+            "amendment_num": "令和七年政令第二百三十七号",
+            "enforcement_date": "2026-09-24",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "職員の賠償責任に関する引用条文の整理",
+          "body": "地方公営企業の適用の廃止の際における職員の賠償責任について、引用する地方自治法の条項が整理されます。地方公営企業の適用が廃止される日より前の事実に伴う地方公共団体の職員の賠償責任については、地方自治法の規定にかかわらず、なお従前の例によることとされています。今回の改正により、この例外規定において参照されている地方自治法の条項が、従来の「第二百四十三条の二の八」から「第二百四十三条の二の九」へと改められます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 685,
+          "output_tokens": 137,
+          "thoughts_tokens": 1442,
+          "total_tokens": 2264,
+          "elapsed_seconds": 9.770431757000011,
+          "response_id": "xaS1asVupZH33w_w0rqRBA"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "322CO0000000016",
+        "law_name": "地方自治法施行令",
+        "revisions": [
+          {
+            "law_data_id": 627490,
+            "sub_revision": "19",
+            "amendment_id": "507CO0000000237",
+            "amendment_name": "地方自治法施行令等の一部を改正する政令",
+            "amendment_num": "令和七年政令第二百三十七号",
+            "enforcement_date": "2026-09-24",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "特定歳入等の収納範囲の画定と関係規定の整備",
+          "body": "地方税共同機構に特定収納事務を行わせることができる「特定歳入等」の具体的な範囲が新たに定められました。これには、地方税（督促手数料や延滞金等を含む）、旧地方法人特別税、森林環境税、特別法人事業税に係る徴収金が含まれます。あわせて、特定収納事務を行わせる場合における地方税法施行令の規定の準用と、必要な読み替えについて規定されました。また、この規定の整備に伴い、普通地方公共団体の長等の損害賠償責任の一部免責の基準に関する規定など、後続の条文について条番号の繰り下げや引用条文の番号変更が行われました。そのほか、特別区財政調整交付金に関する規定などにおいて、他の法令の引用表記を整理するなどの文言の修正が行われています。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 6518,
+          "output_tokens": 199,
+          "thoughts_tokens": 2488,
+          "total_tokens": 9205,
+          "elapsed_seconds": 14.705245890000015,
+          "response_id": "0KS1araOIfGrodAPluKwsAI"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "417CO0000000055",
+        "law_name": "市町村の合併の特例に関する法律施行令",
+        "revisions": [
+          {
+            "law_data_id": 627489,
+            "sub_revision": "2",
+            "amendment_id": "507CO0000000237",
+            "amendment_name": "地方自治法施行令等の一部を改正する政令",
+            "amendment_num": "令和七年政令第二百三十七号",
+            "enforcement_date": "2026-09-24",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": {
+        "summary": {
+          "title": "合併特例区の財務に関する準用・読替え規定の整備",
+          "body": "地方自治法施行令等の改正に伴い、合併特例区の財務に関する規定が整理されます。\\n\\n具体的には、合併特例区の財務に地方自治法の財務規定を準用する際、準用から除外する条項の範囲が改められるとともに、技術的読替え表における各条項の整理が行われます。\\n\\nまた、地方自治法施行令の財務規定を準用する規定においても、準用対象となる条項の範囲が更新され、それに伴う除外規定の変更や読替え表における条番号・文言等の修正が実施されます。"
+        },
+        "usage": {
+          "model": "gemini-3.5-flash",
+          "prompt_tokens": 10067,
+          "output_tokens": 155,
+          "thoughts_tokens": 1853,
+          "total_tokens": 12075,
+          "elapsed_seconds": 10.426401417999983,
+          "response_id": "4KS1aufeHsyqodAPxtycqQs"
+        }
+      }
+    },
+    {
+      "summary_input": {
+        "law_id": "420CO0000000389",
+        "law_name": "職員の退職管理に関する政令",
+        "revisions": [
+          {
+            "law_data_id": 642830,
+            "sub_revision": "1",
+            "amendment_id": "508CO0000000274",
+            "amendment_name": "医療法等の一部を改正する法律の一部の施行に伴う関係政令の整備及び経過措置に関する政令",
+            "amendment_num": "令和八年政令第二百七十四号",
+            "enforcement_date": "2026-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 628411,
+            "sub_revision": "7",
+            "amendment_id": "507CO0000000341",
+            "amendment_name": "出入国管理及び難民認定法及び外国人の技能実習の適正な実施及び技能実習生の保護に関する法律の一部を改正する法律の施行に伴う関係政令の整備及び経過措置に関する政令",
+            "amendment_num": "令和七年政令第三百四十一号",
             "enforcement_date": "2027-04-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": false
-          },
-          {
-            "law_data_id": 624450,
-            "sub_revision": "2",
-            "amendment_id": "507AC0000000087",
-            "amendment_name": "医療法等の一部を改正する法律",
-            "amendment_num": "令和七年法律第八十七号",
-            "enforcement_date": "2027-04-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 627010,
-            "sub_revision": "3",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2027-09-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 627268,
-            "sub_revision": "3",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2027-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 627015,
-            "sub_revision": "3",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2028-04-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 636724,
-            "sub_revision": "1",
-            "amendment_id": "508AC0000000031",
-            "amendment_name": "健康保険法等の一部を改正する法律",
-            "amendment_num": "令和八年法律第三十一号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2028-06-04",
-            "enforcement_comment": "公布の日から起算して二年を超えない範囲内において政令で定める日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 627021,
-            "sub_revision": "3",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2028-09-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          },
-          {
-            "law_data_id": 624479,
-            "sub_revision": "2",
-            "amendment_id": "507AC0000000087",
-            "amendment_name": "医療法等の一部を改正する法律",
-            "amendment_num": "令和七年法律第八十七号",
-            "enforcement_date": null,
-            "scheduled_enforcement_date": "2028-12-11",
-            "enforcement_comment": "公布の日から起算して三年を超えない範囲内において政令で定める日",
-            "is_current": false
-          },
-          {
-            "law_data_id": 627027,
-            "sub_revision": "3",
-            "amendment_id": "507AC0000000074",
-            "amendment_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律",
-            "amendment_num": "令和七年法律第七十四号",
-            "enforcement_date": "2029-09-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "出産・分娩給付の見直しや標準報酬月額上限の段階的引上げ",
-          "body": "分娩や出産に係る給付が見直され、従来の「出産費」および「家族出産費」が「分娩費」および「家族分娩費」に改められるとともに、新たに「出産時一時金」および「家族出産時一時金」が創設されます。また、これらの適正な支払いのために、分娩取扱医療機関や指定助産所に対する報告請求や実地検査、必要に応じた支払の一時差し止めに関する規定が整備されます。\\n\\n標準報酬月額の等級上限が段階的に引き上げられます。これにより、特定の標準報酬月額に該当する加入者の標準報酬月額を改定するための経過措置が設けられます。\\n\\nさらに、出産育児交付金の交付元や事業団による事務の委託先が「社会保険診療報酬支払基金」から「医療情報基盤・診療報酬審査支払機構」へと変更されるほか、短期給付等事務の範囲に「医師手当拠出金等」の徴収が追加されます。このほか、年金制度の機能強化に伴い、特定の短時間労働者である加入者の掛金負担割合や納付義務の特例が設けられます。"
+          "title": "退職手当通算法人や届出対象法人の名称を変更する改正",
+          "body": "職員の退職管理に関する政令について、関係する法律の改正に伴い、規定されている対象法人の名称が変更されます。\\n\\n2026年10月1日の施行では、退職手当通算法人の一つである「社会保険診療報酬支払基金」が「医療情報基盤・診療報酬審査支払機構」に改められます。\\n\\n2027年4月1日の施行では、退職手当通算法人および内閣総理大臣への事前の再就職の届出に係る認可法人として規定されている「外国人技能実習機構」の名称が、それぞれ「外国人育成就労機構」に改められます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 53299,
-          "output_tokens": 281,
-          "thoughts_tokens": 1703,
-          "total_tokens": 55283,
-          "elapsed_seconds": 11.396262861999958,
-          "response_id": "NLGtarOFA4qrr8kP_ZKF4AQ"
+          "prompt_tokens": 1131,
+          "output_tokens": 176,
+          "thoughts_tokens": 1404,
+          "total_tokens": 2711,
+          "elapsed_seconds": 9.13861736199999,
+          "response_id": "7aS1au-RHdGoq8YPi82c2A8"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "504AC0000000043",
-        "law_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律",
+        "law_id": "504M60000400061",
+        "law_name": "一般送配電事業者による託送供給等に係る収入の見通しに関する省令",
         "revisions": [
           {
-            "law_data_id": 636763,
+            "law_data_id": 637023,
             "sub_revision": "1",
-            "amendment_id": "508AC0000000038",
-            "amendment_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律及び株式会社国際協力銀行法の一部を改正する法律",
-            "amendment_num": "令和八年法律第三十八号",
-            "enforcement_date": "2026-09-18",
+            "amendment_id": "508M60000400027",
+            "amendment_name": "電気事業法施行規則等の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第二十七号",
+            "enforcement_date": "2026-03-31",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 638390,
+            "sub_revision": "1",
+            "amendment_id": "508M60000400054",
+            "amendment_name": "一般送配電事業者による託送供給等に係る収入の見通しに関する省令等の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第五十四号",
+            "enforcement_date": "2026-05-29",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": true
@@ -543,134 +417,43 @@
       },
       "response": {
         "summary": {
-          "title": "海外事業の促進や官民協議会の創設、物資供給役務の追加など",
-          "body": "この改正により、経済安全保障の確保を推進するため、以下の制度創設や見直しが行われます。まず、国際輸送網の強靱化を図る港湾整備や特定社会基盤役務の維持に資する「特定海外事業」の促進制度を創設します。事業者が作成する特定海外事業計画を主務大臣が認定し、認定事業者に対し国が情報提供や助言を行うほか、株式会社国際協力銀行による資金の貸付けや出資などの金融支援を行います。次に、経済安全を害する行為を未然に防止するため、官民での情報共有や対策を協議する「官民協議会」を組織します。また、経済施策を効果的に推進するための調査研究制度を整備し、外部の専門機関への委託や秘密保持義務等を定めます。さらに、特定重要物資の安定供給を確保するため、物資の供給に不可欠な役務を安定供給確保の対象に追加し、関係者の協力努力義務や主務大臣による計画作成の促進措置、報告徴収制度を整備します。特定社会基盤事業者については、重要設備の導入・委託時の届出除外範囲を整理するとともに、事業譲渡や合併・分割による事業承継時の届出経過措置の例外規定を設けます。そのほか、各制度における秘密保持義務や報告義務の違反に対する罰則を設けています。"
+          "title": "託送供給等の収入見通しにおける費用算定や乖離値調整の変更",
+          "body": "本改正では、一般送配電事業者による託送供給等に係る収入の見通しに関する算定方法や乖離値の調整等について、主に以下の見直しが行われました。\\n\\n系統整備関連費用等の除外および調整：\\n各区分費用（第一区分〜第三区分、事後検証費用）や事業報酬、追加事業報酬の算定において、承認を受けた「系統整備回収金」が除外されます。一方で、制御不能費用については、系統整備回収金や特定系統整備準備金引当などの額を加算して算定することとされました。また、事業報酬等の算定において、特定系統整備準備引当金の平均残高を控除するなどの見直しが行われています。\\n\\n制御不能費用における項目追加等：\\n制御不能費用項目に「物価等の変動に伴う費用の増減額」が追加されたほか、法人税等の算定において我が国の防衛力の抜本的な強化等のために必要な財源の確保に関する特別措置法の定めによる額が考慮されることとなりました。また、再給電に要する費用などの算定範囲が調整されています。\\n\\n乖離値調整および需要・供給変動への対応：\\n想定値と実績値との乖離値を翌規制期間に反映する際、実績値に加えて「合理的に推計した規制期間最終年度の推計値」を合わせた合計値をもとに算出する方式に変更されました。また、規制期間中に見通しへ算入可能な乖離値の対象に、従来の制御不能費用だけでなく、事業報酬や追加事業報酬が追加されています。さらに、従来の需要変動に加え、供給変動に起因する乖離値も調整対象となりました。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 14896,
-          "output_tokens": 330,
-          "thoughts_tokens": 2843,
-          "total_tokens": 18069,
-          "elapsed_seconds": 19.748449146999974,
-          "response_id": "QbGtaoyYB_GMi-8Pu9zk-QI"
+          "prompt_tokens": 14988,
+          "output_tokens": 395,
+          "thoughts_tokens": 2271,
+          "total_tokens": 17654,
+          "elapsed_seconds": 14.331944099999987,
+          "response_id": "-KS1aoD6N8Cpq8YPqtmn6Q0"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "417CO0000000298",
-        "law_name": "物資の流通の効率化に関する法律施行令",
+        "law_id": "428M60000400022",
+        "law_name": "一般送配電事業託送供給等約款料金算定規則",
         "revisions": [
           {
-            "law_data_id": 641879,
+            "law_data_id": 637022,
             "sub_revision": "1",
-            "amendment_id": "508CO0000000270",
-            "amendment_name": "租税特別措置法施行令及び物資の流通の効率化に関する法律施行令の一部を改正する政令",
-            "amendment_num": "令和八年政令第二百七十号",
-            "enforcement_date": "2026-10-16",
+            "amendment_id": "508M60000400027",
+            "amendment_name": "電気事業法施行規則等の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第二十七号",
+            "enforcement_date": "2026-03-31",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": false
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "主務大臣の規定における引用法令の号数変更",
-          "body": "物資の流通の効率化に関する法律施行令における、主務大臣に関する規定の一部が変更されます。\\n\\n具体的には、主務大臣を特定するための規定において引用されている「地域公共交通の活性化及び再生に関する法律」について、貨客運送効率化事業の定義が記載されている号数が「第二条第十二号」から「第二条第十五号」へと改められます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 949,
-          "output_tokens": 108,
-          "thoughts_tokens": 1289,
-          "total_tokens": 2346,
-          "elapsed_seconds": 9.688451928999939,
-          "response_id": "VrGtarvOGuaf7rcP1svw6A4"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "508CO0000000272",
-        "law_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律の一部の施行に伴う経過措置に関する政令",
-        "revisions": [
+          },
           {
-            "law_data_id": 641882,
+            "law_data_id": 638387,
             "sub_revision": "1",
-            "amendment_id": null,
-            "amendment_name": null,
-            "amendment_num": null,
-            "enforcement_date": "2026-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "短時間被保険者の保険料調整や申請制限に関する経過措置",
-          "body": "本政令は、社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律の施行に伴い、短時間被保険者に係る厚生年金保険および健康保険の保険料調整などに関する経過措置を定めるものです。\n\nまず、保険料調整額等の具体的な算定方法として、標準報酬月額等級に応じた増加負担割合を定めるとともに、算定時の端数処理（50銭未満切り捨て、50銭以上1円未満切り上げ）の方法や、存続厚生年金基金の加入員を使用する事業所における保険料率の読替え規定を設けています。\n\nまた、保険料調整等に関する申出を行うことができない適用事業所の基準を定めています。さらに、申出をした事業主が負担すべき短時間被保険者に係る厚生年金保険料または健康保険料を負担していないときは、その負担をしていない月以降の保険料について調整規定を適用しないこととしています。\n\nこのほか、対象となる適用事業所や実施日の区分、準用規定における技術的な読替え、および被保険者の資格取得月にその資格を喪失した場合の届出といった詳細な手続を主務省令に委任することなどを規定しています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 2709,
-          "output_tokens": 296,
-          "thoughts_tokens": 1236,
-          "total_tokens": 4241,
-          "elapsed_seconds": 13.309751688999995,
-          "response_id": "YbGtaomkGLSCzvgPuaHC6Qk"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "350M50002000020",
-        "law_name": "作業環境測定法施行規則",
-        "revisions": [
-          {
-            "law_data_id": 641430,
-            "sub_revision": "1",
-            "amendment_id": "508M60000100116",
-            "amendment_name": "労働安全衛生法及び作業環境測定法の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
-            "amendment_num": "令和八年厚生労働省令第百十六号",
-            "enforcement_date": "2026-10-01",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": false
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "個人ばく露測定の導入や測定士の資格要件等の見直し",
-          "body": "指定作業場における個人ばく露測定の導入に伴い、実施時のデザイン、サンプリング、分析の基準が整備されました。また、個人ばく露測定のサンプリング業務を補助する者を養成する「サンプリング補助者講習」の制度が新たに創設され、講習を実施する登録機関の登録基準や監督規定、作業環境測定機関の要件などが定められました。\\n\\n作業環境測定士の資格要件について、受験資格に定められていた労働衛生の実務経験が整理され、試験合格後の資格登録に必要な実務経験として移行されました。また、個人ばく露測定のサンプリング等に限定した第二種作業環境測定士の資格が新設されました。\\n\\nその他、登録大学等や登録試験免除講習機関の名称等に変更があった際の届出期限について、従来の事前届出から変更後二週間以内の事後届出に変更されました。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 18810,
-          "output_tokens": 231,
-          "thoughts_tokens": 2913,
-          "total_tokens": 21954,
-          "elapsed_seconds": 18.382716139999957,
-          "response_id": "cLGtatKEJrSCzvgPuaHC6Qk"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "505M60000102006",
-        "law_name": "内閣府・厚生労働省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
-        "revisions": [
-          {
-            "law_data_id": 641246,
-            "sub_revision": "1",
-            "amendment_id": "508M60000102012",
-            "amendment_name": "内閣府・厚生労働省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-            "amendment_num": "令和八年内閣府・厚生労働省令第十二号",
-            "enforcement_date": "2026-09-18",
+            "amendment_id": "508M60000400054",
+            "amendment_name": "一般送配電事業者による託送供給等に係る収入の見通しに関する省令等の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第五十四号",
+            "enforcement_date": "2026-05-29",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": true
@@ -679,270 +462,99 @@
       },
       "response": {
         "summary": {
-          "title": "構成設備の定義変更と主務省令で定める具体的事項の規定",
-          "body": "特定妨害行為の手段として使用されるおそれがある「構成設備」の定義について、「主務省令で定めるもの」という文言が追加されました。これに関連して、主務省令で定める具体的な事項として、構成設備の種類、名称、機能や、供給者の名称、役員情報、議決権の保有状況、外国政府等との取引売上高の割合、製造工場の所在地などが新たに規定されました。"
+          "title": "系統整備関連費の追加と料金算定ルールの整備",
+          "body": "一般送配電事業の託送供給等約款料金算定規則が改正され、系統整備関連費用の追加や料金の変更・算定に関する新たなルールが整備されました。　まず、系統整備回収金、託送回収金相当金、系統整備負担金相当金、特定系統整備準備金引当、特定系統整備準備引当金取崩し（貸方）、系統整備負担金相当収益、および託送回収金の回収に係る託送収益などの系統整備に関連する諸費用が、新たな期間原価項目として追加されました。これらの費用は送配電関連費の整理対象となり、原則として送配電関連固定費に分類されます。　また、これら追加項目の変動や、外生的要因による送配電関連固定費の変動を基に料金を変更するための算定ルールが新設されました。このルールでは、変動額を発電側と需要側の特別変動固定費にそれぞれ配分し、承認された収入の見通しを上回らない範囲で料金を設定します。発電側料金の設定基準や割引制度、二部料金と完全従量料金の選択制度、変更に伴う収入変動の比較表作成手続きなども併せて整備されました。　そのほか、料金算定における各種用語が整理され、需要側と発電側の区分に応じた料金収入変動の算定方法への変更や、特別可変変動額への呼称変更、関連する条文参照の適正化などが行われました。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 1237,
-          "output_tokens": 119,
-          "thoughts_tokens": 1756,
-          "total_tokens": 3112,
-          "elapsed_seconds": 12.785180141999945,
-          "response_id": "hLGtaumnCsWEqMgPwdmrwQo"
+          "prompt_tokens": 15625,
+          "output_tokens": 344,
+          "thoughts_tokens": 3131,
+          "total_tokens": 19100,
+          "elapsed_seconds": 18.98227433400001,
+          "response_id": "CaW1aoHXG8Cpq8YPqtmn6Q0"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "505M60000052001",
-        "law_name": "内閣府・法務省・財務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
+        "law_id": "424M60000400046",
+        "law_name": "再生可能エネルギー電気の利用の促進に関する特別措置法施行規則",
         "revisions": [
           {
-            "law_data_id": 641243,
+            "law_data_id": 637030,
             "sub_revision": "1",
-            "amendment_id": "508M60000052003",
-            "amendment_name": "内閣府・法務省・財務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-            "amendment_num": "令和八年内閣府・法務省・財務省令第三号",
-            "enforcement_date": "2026-09-18",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "特定重要設備の構成設備の定義と届出事項の整備",
-          "body": "特定重要設備の一部を構成する構成設備の定義について、主務省令で定めるものであることが明記されました。これに伴い、構成設備に関して主務省令で定める具体的な事項が整理されました。具体的には、構成設備の種類や名称、機能のほか、供給者の名称、代表者、議決権の保有状況、役員の国籍等の情報、外国政府等との取引に係る売上高の割合、製造工場の所在地などが規定されています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1245,
-          "output_tokens": 119,
-          "thoughts_tokens": 2018,
-          "total_tokens": 3382,
-          "elapsed_seconds": 12.189431286999934,
-          "response_id": "krGtao7iL-af7rcP1svw6A4"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "505M60000012002",
-        "law_name": "内閣府・法務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
-        "revisions": [
-          {
-            "law_data_id": 641242,
-            "sub_revision": "1",
-            "amendment_id": "508M60000012002",
-            "amendment_name": "内閣府・法務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-            "amendment_num": "令和八年内閣府・法務省令第二号",
-            "enforcement_date": "2026-09-18",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "構成設備の定義見直しと届出事項の整理",
-          "body": "特定妨害行為の手段として使用されるおそれがある「構成設備」（特定重要設備の一部を構成する設備やプログラムなど）の定義について、主務省令で定めるものであることが明確化されました。\\n\\nこれに伴い、主務省令で定める具体的な事項として、構成設備の種類や機能、供給者の代表者や大株主の情報、役員の国籍、一定以上の割合を占める外国政府等との取引状況、ならびに製造工場の所在地などが整理・明示されました。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1236,
-          "output_tokens": 127,
-          "thoughts_tokens": 1563,
-          "total_tokens": 2926,
-          "elapsed_seconds": 10.689133247999962,
-          "response_id": "oLGtarrKF9XJ5usPxdaC4AI"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "505M60000242002",
-        "law_name": "内閣府・財務省・農林水産省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
-        "revisions": [
-          {
-            "law_data_id": 641245,
-            "sub_revision": "1",
-            "amendment_id": "508M60000242001",
-            "amendment_name": "内閣府・財務省・農林水産省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-            "amendment_num": "令和八年内閣府・財務省・農林水産省令第一号",
-            "enforcement_date": "2026-09-18",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "特定重要設備の構成設備の定義と届出事項の明確化",
-          "body": "今回の改正では、特定重要設備の一部を構成する設備、機器、装置またはプログラム（構成設備）に関する定義の明確化と、これに関連する事項の規定の整理が行われました。\n\n具体的には、構成設備の定義について、これまでの表現から「特定妨害行為の手段として使用されるおそれがあるものとして主務省令で定めるもの」へと改められました。\n\nまた、構成設備に関する事項の規定において、条文の表現を「主務省令で定める事項」に整理し、見出しを「構成設備に関する事項」に変更しました。これにより、構成設備の種類、供給者の情報、製造工場の所在地といった主務省令で定める具体的な事項の規定が明確化されています。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1251,
-          "output_tokens": 186,
-          "thoughts_tokens": 1354,
-          "total_tokens": 2791,
-          "elapsed_seconds": 9.283003334000114,
-          "response_id": "rLGtatWsINS5qMgPvcXYmA8"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "505M60000042006",
-        "law_name": "内閣府・財務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
-        "revisions": [
-          {
-            "law_data_id": 641244,
-            "sub_revision": "1",
-            "amendment_id": "508M60000042004",
-            "amendment_name": "内閣府・財務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-            "amendment_num": "令和八年内閣府・財務省令第四号",
-            "enforcement_date": "2026-09-18",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "特定重要設備の構成設備に関する文言の整理・明確化",
-          "body": "特定重要設備の一部を構成する設備、機器、装置又はプログラム（構成設備）に関する規定について、文言の整理が行われました。\n\n具体的には、第十二条において構成設備の定義の中に「主務省令で定めるもの」という文言が追加されました。これに伴い、第十三条の見出しが「構成設備に関する事項」に変更されたほか、同条において「主務省令で定めるもの」として掲げられていた内容が「主務省令で定める事項」へと改められ、表現の整合性が図られました。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1233,
-          "output_tokens": 143,
-          "thoughts_tokens": 913,
-          "total_tokens": 2289,
-          "elapsed_seconds": 7.145678347999819,
-          "response_id": "t7Gtaq7NEpf5qMgPi4GqsQ8"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "505M60000202004",
-        "law_name": "内閣府・農林水産省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令",
-        "revisions": [
-          {
-            "law_data_id": 641247,
-            "sub_revision": "1",
-            "amendment_id": "508M60000202010",
-            "amendment_name": "内閣府・農林水産省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する命令の一部を改正する命令",
-            "amendment_num": "令和八年内閣府・農林水産省令第十号",
-            "enforcement_date": "2026-09-18",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "構成設備の定義と主務省令で定める事項の整理",
-          "body": "今回の改正では、特定妨害行為の手段として使用されるおそれがある「構成設備」に関する規定が整理、明確化されました。\\n\\n第十二条において、構成設備の定義に「主務省令で定めるもの」とする文言が追加されました。これに伴い、第十三条の見出しが「構成設備に関する事項」に変更され、同条第一項の規定が「主務省令で定める事項は、次に掲げるものとする」という表現へと整理されました。\\n\\nこれにより、法に基づき主務省令で定める構成設備に関する事項の位置付けがより明確な形に改められます。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1243,
-          "output_tokens": 160,
-          "thoughts_tokens": 1831,
-          "total_tokens": 3234,
-          "elapsed_seconds": 17.948103994999883,
-          "response_id": "v7GtapWwOvWrr8kPlIbrsAQ"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "505M60000800062",
-        "law_name": "国土交通省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令",
-        "revisions": [
-          {
-            "law_data_id": 641257,
-            "sub_revision": "1",
-            "amendment_id": "508M60000800067",
-            "amendment_name": "国土交通省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令の一部を改正する省令",
-            "amendment_num": "令和八年国土交通省令第六十七号",
-            "enforcement_date": "2026-09-18",
-            "scheduled_enforcement_date": null,
-            "enforcement_comment": null,
-            "is_current": true
-          }
-        ]
-      },
-      "response": {
-        "summary": {
-          "title": "特定重要設備の構成設備等に関する規定の明確化",
-          "body": "今回の改正では、特定重要設備の一部を構成する「構成設備」の定義や、これに関連して主務省令で定める事項の規定について、表現の整理および明確化が行われました。\\n\\n具体的には、構成設備の定義において「特定妨害行為の手段として使用されるおそれがあるものとして主務省令で定めるもの」という表現に改められました。これに伴い、関連する条文の見出しが「構成設備に関する事項」に変更され、本文中の記述についても「主務省令で定める事項は、次に掲げるものとする」へと改められ、規定の内容がより明確に整理されました。"
-        },
-        "usage": {
-          "model": "gemini-3.5-flash",
-          "prompt_tokens": 1212,
-          "output_tokens": 160,
-          "thoughts_tokens": 1423,
-          "total_tokens": 2795,
-          "elapsed_seconds": 10.254016703000161,
-          "response_id": "07GtasORIbSCzvgPuaHC6Qk"
-        }
-      }
-    },
-    {
-      "summary_input": {
-        "law_id": "335M50000100012",
-        "law_name": "国民年金法施行規則",
-        "revisions": [
-          {
-            "law_data_id": 637048,
-            "sub_revision": "1",
-            "amendment_id": "508M60000100050",
-            "amendment_name": "国民年金法施行規則等の一部を改正する省令",
-            "amendment_num": "令和八年厚生労働省令第五十号",
+            "amendment_id": "508M60000400029",
+            "amendment_name": "再生可能エネルギー電気の利用の促進に関する特別措置法施行規則の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第二十九号",
             "enforcement_date": "2026-04-01",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 637031,
+            "sub_revision": "1",
+            "amendment_id": "508M60000400029",
+            "amendment_name": "再生可能エネルギー電気の利用の促進に関する特別措置法施行規則の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第二十九号",
+            "enforcement_date": "2026-05-21",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
             "is_current": true
+          },
+          {
+            "law_data_id": 637032,
+            "sub_revision": "1",
+            "amendment_id": "508M60000400029",
+            "amendment_name": "再生可能エネルギー電気の利用の促進に関する特別措置法施行規則の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第二十九号",
+            "enforcement_date": "2026-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
+          },
+          {
+            "law_data_id": 637033,
+            "sub_revision": "1",
+            "amendment_id": "508M60000400029",
+            "amendment_name": "再生可能エネルギー電気の利用の促進に関する特別措置法施行規則の一部を改正する省令",
+            "amendment_num": "令和八年経済産業省令第二十九号",
+            "enforcement_date": "2027-04-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": false
           }
         ]
       },
       "response": {
         "summary": {
-          "title": "学生納付特例の対象に一時保護施設の養成施設を追加",
-          "body": "国民年金保険料の学生納付特例などの対象となる教育施設として、「一時保護施設の設備及び運営に関する基準」に規定する学校その他の養成施設を新たに追加します。\\n\\nこの改正に伴い、令和6年4月から令和8年3月までの期間において当該養成施設に在学していた被保険者等から申請があった際、施行時にすでに保険料が免除されている期間などの取扱いについては、なお従前の例によることとする経過措置が設けられます。\\n\\n改正省令は、令和8年4月1日から施行されます。"
+          "title": "発電設備区分の廃止や風力への積立金適用などの改正",
+          "body": "本改正では、発電設備の区分見直し、風力発電設備への解体等積立金制度の適用、系統設置交付金の算定対象費用の追加、および公示送達方法の新設などが段階的に実施されます。\\n\\n1. 発電設備の区分見直しと経過措置\\n2026年4月1日より、出力1万キロワット以上の固体バイオマス（木質や農産物由来）および出力50キロワット以上の液体バイオマスに関する設備区分が削除されます。また、2027年4月1日からは、出力10キロワット以上から1000キロワット以上まで各段階の太陽光発電設備に関する区分が削除されます。なお、改正前に認定等を受けた設備等については、引き続き従前の区分が適用される経過措置が設けられます。\\n\\n2. 風力発電設備に対する解体等積立金制度の適用\\n2026年10月1日より、これまで太陽光発電設備のみを対象としていた解体等積立金の積立方法の変更に関する規定が風力発電設備にも適用されるようになります。また、風力発電設備における積立期間は、交付期間または調達期間の終了日から起算して10年前の日（その日が2027年4月1日より前である場合は2027年4月1日）以降に最初に検針等が行われた日から、終了日までと定められます。\\n\\n3. 系統設置交付金の算定対象費用の追加\\n2026年4月1日より、系統設置交付金等の額を算定する際の費用として、従来の支払利息や損害保険料等に加え、広域系統整備計画の対象費のうち減価償却費および固定資産除却費の合計額に一定の割合を乗じた額が追加されます。\\n\\n4. 公示送達方法の新設および法律名の変更\\n2026年5月21日より、公示送達の方法として、電子情報処理組織を使用する方法や、インターネットに接続された自動公衆送信装置を使用する方法が新たに規定されます。また、2026年4月1日より「海洋再生可能エネルギー発電設備の整備に係る海域の利用の促進に関する法律」の名称が「海洋再生可能エネルギー発電設備の整備に関する法律」に変更されることに伴い、関係規定の表記が変更されます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 4272,
-          "output_tokens": 148,
-          "thoughts_tokens": 1974,
-          "total_tokens": 6394,
-          "elapsed_seconds": 11.306097880999914,
-          "response_id": "37GtaoDUGLSCzvgPuaHC6Qk"
+          "prompt_tokens": 4982,
+          "output_tokens": 561,
+          "thoughts_tokens": 2128,
+          "total_tokens": 7671,
+          "elapsed_seconds": 14.041531008999982,
+          "response_id": "IKW1aujDFaWR998P8NK6kQQ"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "505M60000002061",
-        "law_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する内閣府令",
+        "law_id": "415M60000040071",
+        "law_name": "国税関係法令に係る情報通信技術を活用した行政の推進等に関する省令",
         "revisions": [
           {
-            "law_data_id": 641238,
-            "sub_revision": "1",
-            "amendment_id": "508M60000002061",
-            "amendment_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者の指定等に関する内閣府令の一部を改正する内閣府令",
-            "amendment_num": "令和八年内閣府令第六十一号",
-            "enforcement_date": "2026-09-18",
+            "law_data_id": 619522,
+            "sub_revision": "2",
+            "amendment_id": "506M60000040031",
+            "amendment_name": "国税関係法令に係る情報通信技術を活用した行政の推進等に関する省令の一部を改正する省令",
+            "amendment_num": "令和六年財務省令第三十一号",
+            "enforcement_date": "2026-09-24",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": true
@@ -951,32 +563,32 @@
       },
       "response": {
         "summary": {
-          "title": "構成設備の定義や関連する主務省令事項の規定整備",
-          "body": "本改正では、特定社会基盤事業者が導入する特定重要設備の一部を構成する「構成設備」の定義、およびこれに関連する主務省令で定める事項についての規定が整備されました。\n\n具体的には、特定重要設備の一部を構成し特定妨害行為の手段として使用されるおそれがある設備等のうち、「主務省令で定めるもの」を「構成設備」と定義することが明確化されました。\n\nまた、法第52条第2項第2号ハの主務省令で定める事項として、以下の内容が明記され、第13条の見出しが「構成設備に関する事項」に変更されました。\n・構成設備の種類、名称、機能、および製造する工場・事業場の所在地\n・構成設備の供給者に関する情報（名称、代表者の氏名・住所・設立準拠法国等、役員の氏名・生年月日・国籍等）\n・供給者の総株主等の議決権を5パーセント以上直接保有する者の情報\n・直近3事業年度のいずれかで同一の外国政府等との取引割合が売上高の25パーセント以上である場合の、当該事業年度や外国政府等の名称、取引割合に関する情報"
+          "title": "処分通知等のオンライン化対象拡大と受領意思表示の変更",
+          "body": "国税関係の処分通知等を電子情報処理組織（オンライン）で行う際の手続き等について、以下の変更が行われます。\n\nまず、オンラインで行うことができる処分通知等の範囲が変更されます。これまでは法令に基づく処分通知等のうち「国税庁長官が定めるもの」とされていましたが、改正後は、法令の規定に基づき税務署長等が行う処分通知等の全体が対象となります。\n\n次に、処分通知等をオンラインで受領する意思表示の方式が変更されます。改正前は申請等に併せて入力して送信する方式でしたが、改正後は、あらかじめ電子メールアドレスおよびオンラインで処分通知等を受ける旨を入力して送信する方式となります。\n\nまた、オンラインによる処分通知等を受け取らない旨の意思表示に関する規定が新たに設けられます。受取人がオンラインで処分通知等を受け取らない旨を表示したときは、再び受け取る旨の表示をしない限り、税務署長等はオンラインによる処分通知等を行ってはならないこととされます。\n\nこのほか、特定電子計算機の定義の適用範囲が変更されます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 1228,
-          "output_tokens": 288,
-          "thoughts_tokens": 1530,
-          "total_tokens": 3046,
-          "elapsed_seconds": 9.54006814200011,
-          "response_id": "7LGtasHvDbK8gLUP0qmWsAg"
+          "prompt_tokens": 1305,
+          "output_tokens": 257,
+          "thoughts_tokens": 977,
+          "total_tokens": 2539,
+          "elapsed_seconds": 7.640646368999967,
+          "response_id": "L6W1avjrMtGoq8YPi82c2A8"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "505M60000400041",
-        "law_name": "経済産業省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令",
+        "law_id": "327M50000002073",
+        "law_name": "地方公営企業法施行規則",
         "revisions": [
           {
-            "law_data_id": 641249,
-            "sub_revision": "1",
-            "amendment_id": "508M60000400061",
-            "amendment_name": "経済産業省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令の一部を改正する省令",
-            "amendment_num": "令和八年経済産業省令第六十一号",
-            "enforcement_date": "2026-09-18",
+            "law_data_id": 627988,
+            "sub_revision": "2",
+            "amendment_id": "507M60000008087",
+            "amendment_name": "地方自治法施行規則等の一部を改正する省令",
+            "amendment_num": "令和七年総務省令第八十七号",
+            "enforcement_date": "2026-09-24",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": true
@@ -985,32 +597,32 @@
       },
       "response": {
         "summary": {
-          "title": "構成設備の定義規定の整理と関係条文の明確化",
-          "body": "本改正では、特定重要設備の一部を構成する設備やプログラム等である「構成設備」の定義規定の整備と、それに関連する条項の文言等の明確化が行われました。　まず、これまで導入等計画書の届出に関する第九条に置かれていた「構成設備」の定義について、定義規定を第十二条へ移設し、第九条は第十二条の定義を参照する形式に変更しました。　これに合わせて、第十三条の見出しを「構成設備に関する事項」に変更するとともに、本文の表現を「主務省令で定める事項」へと改め、構成設備の種類、供給者や役員の各種情報、外国政府等との取引実績などの届出事項を整理しました。"
+          "title": "公金の徴収委託等に関する準用条項の整理",
+          "body": "地方公営企業における公金の徴収や収納事務の委託に関して、準用される地方自治法施行規則の範囲が一部改正されます。具体的には、準用対象として規定されている「第十二条の二の二十」について、対象が「同条第一項」に限定されるよう規定が整理されます。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 1506,
-          "output_tokens": 182,
-          "thoughts_tokens": 2235,
-          "total_tokens": 3923,
-          "elapsed_seconds": 13.264490669999986,
-          "response_id": "97Gtas6BD-yq7rcPp4zPwAY"
+          "prompt_tokens": 831,
+          "output_tokens": 92,
+          "thoughts_tokens": 606,
+          "total_tokens": 1529,
+          "elapsed_seconds": 4.8637085120000165,
+          "response_id": "OKW1ap7QMKCZ9LsPop7yyQk"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "505M60000008064",
-        "law_name": "総務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令",
+        "law_id": "322M40000008029",
+        "law_name": "地方自治法施行規則",
         "revisions": [
           {
-            "law_data_id": 641248,
-            "sub_revision": "1",
-            "amendment_id": "508M60000008088",
-            "amendment_name": "総務省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく特定社会基盤事業者等に関する省令の一部を改正する省令",
-            "amendment_num": "令和八年総務省令第八十八号",
-            "enforcement_date": "2026-09-18",
+            "law_data_id": 627987,
+            "sub_revision": "4",
+            "amendment_id": "507M60000008087",
+            "amendment_name": "地方自治法施行規則等の一部を改正する省令",
+            "amendment_num": "令和七年総務省令第八十七号",
+            "enforcement_date": "2026-09-24",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": true
@@ -1019,32 +631,32 @@
       },
       "response": {
         "summary": {
-          "title": "構成設備の定義と主務省令で定める事項の明確化",
-          "body": "構成設備に関する定義および関連する届出事項の明確化が行われました。\n\nまず、特定重要設備の一部を構成する設備やプログラムなどのうち、特定妨害行為の手段として使用されるおそれがある「構成設備」の規定において、「主務省令で定めるもの」という文言が追加されました。\n\nまた、これに関連して、構成設備に関して主務省令で定める事項についての見出しや規定の文言が整理されました。具体的な事項として、構成設備の種類や機能、供給者の名称や代表者情報、役員や大株主に関する情報、一定の割合を占める外国政府等との取引実績、および製造工場の所在地などが明確に定められています。"
+          "title": "歳入等の電子的な納付方法に関する手続の整備",
+          "body": "普通地方公共団体の歳入等を電子的に納付する方法や手続きが新たに整備されました。\\n\\n地方税共同機構のシステムを利用するための符号や、個々の納付を識別する符号を用いた納付方法が定められたほか、特定の入出力用プログラムのみを使用して納付手続を行う者に対し、氏名、住所、預金口座または貯金口座などの情報をあらかじめ同機構に届け出ることが義務付けられました。これに伴い、地方税法施行規則における電子納付関連の規定を、歳入等の納付手続において準用・読み替えて適用するための詳細な規定が置かれました。\\n\\nこのほか、関係法令の改正等に伴い、基準給与年額の算定方法における参照条文の更新や、条番号の整理などの形式的な調整が行われています。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 1212,
-          "output_tokens": 182,
-          "thoughts_tokens": 1107,
-          "total_tokens": 2501,
-          "elapsed_seconds": 7.548790781999969,
-          "response_id": "BbKtavCAOI-z88AP2cue0Qo"
+          "prompt_tokens": 2905,
+          "output_tokens": 200,
+          "thoughts_tokens": 2336,
+          "total_tokens": 5441,
+          "elapsed_seconds": 13.770817878999992,
+          "response_id": "P6W1auj4CPGrodAPluKwsAI"
         }
       }
     },
     {
       "summary_input": {
-        "law_id": "508M60000F5A004",
-        "law_name": "重要電子計算機に対する不正な行為による被害の防止に関する法律に基づく特別社会基盤事業者による特定侵害事象等の報告等に関する命令",
+        "law_id": "417M60000008043",
+        "law_name": "市町村の合併の特例に関する法律施行規則",
         "revisions": [
           {
-            "law_data_id": 641857,
+            "law_data_id": 627989,
             "sub_revision": "1",
-            "amendment_id": "508M60000F5A007",
-            "amendment_name": "重要電子計算機に対する不正な行為による被害の防止に関する法律に基づく特別社会基盤事業者による特定侵害事象等の報告等に関する命令の一部を改正する命令",
-            "amendment_num": "令和八年内閣府・総務省・法務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省令第七号",
-            "enforcement_date": "2026-09-18",
+            "amendment_id": "507M60000008087",
+            "amendment_name": "地方自治法施行規則等の一部を改正する省令",
+            "amendment_num": "令和七年総務省令第八十七号",
+            "enforcement_date": "2026-09-24",
             "scheduled_enforcement_date": null,
             "enforcement_comment": null,
             "is_current": true
@@ -1053,17 +665,17 @@
       },
       "response": {
         "summary": {
-          "title": "届出や報告の特例からの特定事業者の除外と構成設備定義の変更",
-          "body": "この改正では、特定重要電子計算機の届出や特定侵害事象等の報告に関する特例の適用範囲、および構成設備の定義が見直されました。\n\n具体的には、特定重要電子計算機の届出期限を「指定から六月以内」とする特例や、指定から六月以内に発生した事象の報告に関する特例の対象から、経済安全保障推進法に規定される特定の事由により基準に該当することとなった特別社会基盤事業者を除外します。\n\nまた、代替書類による届出の対象となる「構成設備」の定義について、経済安全保障推進法に規定される特定妨害行為の手段として使用されるおそれがあるものから、同法の主務省令で定める設備、機器、装置又はプログラムへと変更しました。"
+          "title": "合併特例区の歳入収納委託や納付方法等の規定整備",
+          "body": "合併特例区における歳入等の取り扱いに関し、地方自治法施行規則の規定を準用するための各規定が整備されました。\n\n主な改正内容は以下の通りです。\n\n収納の委託や納付方法に関する規定の整備\n合併特例区に係る収納の委託に適さない歳入等の基準について、準用する地方自治法施行規則の規定が細分化および追加されました。また、合併特例区における特定歳入等の納付方法、および納付に関する事項等について、新たに地方自治法施行規則の関連規定を準用する条文が設けられました。\n\n基準給与年額の算定方法における準用条文の変更\n合併特例区に係る基準給与年額の算定方法に関し、準用先となる地方自治法施行令や地方自治法の条項の変更（地方自治法施行令第百七十三条の五第一項や地方自治法第二百四十三条の二の八第一項などへの変更）に伴い、必要な条文上の整理が行われました。"
         },
         "usage": {
           "model": "gemini-3.5-flash",
-          "prompt_tokens": 1954,
-          "output_tokens": 193,
-          "thoughts_tokens": 1608,
-          "total_tokens": 3755,
-          "elapsed_seconds": 9.854606545000024,
-          "response_id": "D7KtaoqyFMaG1dkPvOCsuQY"
+          "prompt_tokens": 2778,
+          "output_tokens": 260,
+          "thoughts_tokens": 1443,
+          "total_tokens": 4481,
+          "elapsed_seconds": 9.732680904000006,
+          "response_id": "TqW1aurAC-aaq8YP-tixyA8"
         }
       }
     }
