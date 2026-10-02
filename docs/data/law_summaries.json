@@ -9531,6 +9531,26 @@
     },
     {
       "summary_input": {
+        "law_id": "412M50000100015",
+        "law_name": "水道施設の技術的基準を定める省令",
+        "revisions": [
+          {
+            "law_data_id": 637185,
+            "sub_revision": "1",
+            "amendment_id": "508M60000800040",
+            "amendment_name": "水道施設の技術的基準を定める省令の一部を改正する省令",
+            "amendment_num": "令和八年国土交通省令第四十号",
+            "enforcement_date": "2026-10-01",
+            "scheduled_enforcement_date": null,
+            "enforcement_comment": null,
+            "is_current": true
+          }
+        ]
+      },
+      "response": null
+    },
+    {
+      "summary_input": {
         "law_id": "340M50000040012",
         "law_name": "法人税法施行規則",
         "revisions": [

@@ -21,6 +21,7 @@ from models import (
     AiStatistics,
     LawSummary,
     AiSummaryLog,
+    SummaryResponse,
 )
 
 
@@ -273,10 +274,22 @@ def load_law_summaries(
         )
         return {}
 
-    summaries = [
-        from_dict(LawSummary, item)
-        for item in data["summaries"]
-    ]
+    summaries = []
+
+    for item in data["summaries"]:
+
+        law_summary = from_dict(
+            LawSummary,
+            item,
+        )
+
+        if item["response"] is not None:
+            law_summary.response = from_dict(
+                SummaryResponse,
+                item["response"],
+            )
+
+        summaries.append(law_summary)
 
     return {
         summary.summary_input.law_id: summary
