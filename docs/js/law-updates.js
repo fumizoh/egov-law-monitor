@@ -55,7 +55,7 @@ function renderLaws(
                 ${law.law_type}
             </p>
 
-            ${summary ? `
+            ${summary && summary.response ? `
 
                 <div class="ai-summary">
 

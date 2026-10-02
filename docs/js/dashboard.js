@@ -92,6 +92,10 @@ function renderLaws(
 
     summaries.forEach(summary => {
 
+        if (!summary.response) {
+            return;
+        }
+
         summaryMap.set(
             summary.summary_input.law_id,
             summary.response.summary,
