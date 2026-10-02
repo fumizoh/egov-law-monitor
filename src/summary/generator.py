@@ -241,9 +241,6 @@ def generate(
                     summary_input.law_name,
                 )
 
-            if response is None:
-                continue
-
             law_summary = LawSummary(
                 summary_input=summary_input,
                 response=response,
@@ -255,11 +252,12 @@ def generate(
                 paths=storage_paths,
             )
 
-            logs.append(
-                log.create_law_summary_log(
-                    law_summary=law_summary,
-                )
-            )            
+            if response is not None:
+                logs.append(
+                    log.create_law_summary_log(
+                        law_summary=law_summary,
+                    )
+                )            
 
         law_summaries.append(
             law_summary,

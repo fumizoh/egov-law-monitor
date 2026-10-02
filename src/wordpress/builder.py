@@ -78,7 +78,11 @@ def _build_wp_law(
         law_type=law["law_type"],
         law_url=law["url"],
         wp_revisions=wp_revisions,
-        summary=law_summary.response.summary if law_summary else None
+        summary=(
+            law_summary.response.summary
+            if law_summary.response
+            else None
+        )
     )
 
 

@@ -271,7 +271,7 @@ class LawSummary:
 
     summary_input: LawSummaryInput
 
-    response: SummaryResponse
+    response: SummaryResponse | None
 
 
 @dataclass(slots=True)
