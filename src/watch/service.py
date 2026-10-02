@@ -63,6 +63,7 @@ def build_notifications(
     summaries = {
         law_summary.summary_input.law_id: law_summary.response.summary
         for law_summary in law_summaries
+        if law_summary.response is not None
     }
 
     return [
