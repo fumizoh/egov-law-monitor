@@ -209,6 +209,7 @@ def generate(
 
         reused = (
             previous_summary is not None
+            and previous_summary.response is not None
             and previous_summary.summary_input == summary_input
         )
 
