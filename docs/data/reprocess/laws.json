@@ -1,22 +1,149 @@
 [
   {
-    "law_id": "402CO0000000238",
-    "law_no": "平成二年政令第二百三十八号",
-    "law_name": "麻薬、麻薬原料植物、向精神薬、麻薬向精神薬原料等を指定する政令",
+    "law_id": "508CO0000000287",
+    "law_no": "令和八年政令第二百八十七号",
+    "law_name": "日本学術会議評価委員会令",
     "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/402CO0000000238",
+    "url": "https://laws.e-gov.go.jp/law/508CO0000000287",
     "updates": [
       {
-        "law_data_id": 641716,
+        "law_data_id": 650112,
         "sub_revision": "1",
-        "published_date": "1990-08-01",
-        "effective_date": "2026-09-06",
+        "published_date": "2026-09-16",
+        "effective_date": "2026-10-01",
         "effective_comment": "",
-        "amend_name": "麻薬、麻薬原料植物、向精神薬、麻薬向精神薬原料等を指定する政令の一部を改正する政令",
-        "amend_no": "令和八年政令第二百五十八号",
-        "amendment_id": "508CO0000000258",
-        "amend_published_date": "2026-08-07",
-        "compare_url": "https://laws.e-gov.go.jp/law/402CO0000000238/20260906_508CO0000000258?occasion_date=20260906&tab=compare",
+        "amend_name": "新規制定",
+        "amend_no": "",
+        "amendment_id": null,
+        "amend_published_date": "2026-09-16",
+        "compare_url": null,
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "429CO0000000282",
+    "law_no": "平成二十九年政令第二百八十二号",
+    "law_name": "衛星リモートセンシング記録の適正な取扱いの確保に関する法律施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/429CO0000000282",
+    "updates": [
+      {
+        "law_data_id": 650122,
+        "sub_revision": "1",
+        "published_date": "2017-11-15",
+        "effective_date": "2027-01-04",
+        "effective_comment": "",
+        "amend_name": "外国為替及び外国貿易法の一部を改正する法律の施行に伴う関係政令の整備等に関する政令",
+        "amend_no": "令和八年政令第二百九十六号",
+        "amendment_id": "508CO0000000296",
+        "amend_published_date": "2026-09-16",
+        "compare_url": "https://laws.e-gov.go.jp/law/429CO0000000282/20270104_508CO0000000296?occasion_date=20270104&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "329M50000100037",
+    "law_no": "昭和二十九年厚生省令第三十七号",
+    "law_name": "厚生年金保険法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/329M50000100037",
+    "updates": [
+      {
+        "law_data_id": 642894,
+        "sub_revision": "1",
+        "published_date": "1954-07-01",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "社会経済の変化を踏まえた年金制度の機能強化のための国民年金法等の一部を改正する等の法律の一部の施行に伴う厚生労働省関係省令の整備に関する省令",
+        "amend_no": "令和八年厚生労働省令第百三十八号",
+        "amendment_id": "508M60000100138",
+        "amend_published_date": "2026-09-11",
+        "compare_url": "https://laws.e-gov.go.jp/law/329M50000100037/20261001_508M60000100138?occasion_date=20261001&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "346M50000100035",
+    "law_no": "昭和四十六年厚生省令第三十五号",
+    "law_name": "廃棄物の処理及び清掃に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/346M50000100035",
+    "updates": [
+      {
+        "law_data_id": 637016,
+        "sub_revision": "3",
+        "published_date": "1971-09-23",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "廃棄物の処理及び清掃に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和八年環境省令第十号",
+        "amendment_id": "508M60001000010",
+        "amend_published_date": "2026-03-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/346M50000100035/20270401_508M60001000010?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 626439,
+        "sub_revision": "6",
+        "published_date": "1971-09-23",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "廃棄物の処理及び清掃に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和七年環境省令第十五号",
+        "amendment_id": "507M60001000015",
+        "amend_published_date": "2025-04-22",
+        "compare_url": "https://laws.e-gov.go.jp/law/346M50000100035/20270401_507M60001000015?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 642885,
+        "sub_revision": "1",
+        "published_date": "1971-09-23",
+        "effective_date": "2026-09-16",
+        "effective_comment": "",
+        "amend_name": "廃棄物の処理及び清掃に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和八年環境省令第二十五号",
+        "amendment_id": "508M60001000025",
+        "amend_published_date": "2026-09-15",
+        "compare_url": "https://laws.e-gov.go.jp/law/346M50000100035/20260916_508M60001000025?occasion_date=20260916&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "508M60000F5A004",
+    "law_no": "令和八年内閣府・総務省・法務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省令第四号",
+    "law_name": "重要電子計算機に対する不正な行為による被害の防止に関する法律に基づく特別社会基盤事業者による特定侵害事象等の報告等に関する命令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/508M60000F5A004",
+    "updates": [
+      {
+        "law_data_id": 638348,
+        "sub_revision": "1",
+        "published_date": "2026-05-28",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "新規制定",
+        "amend_no": "",
+        "amendment_id": null,
+        "amend_published_date": "2026-05-28",
+        "compare_url": null,
+        "pending": false
+      },
+      {
+        "law_data_id": 641857,
+        "sub_revision": "1",
+        "published_date": "2026-05-28",
+        "effective_date": "2026-09-18",
+        "effective_comment": "",
+        "amend_name": "重要電子計算機に対する不正な行為による被害の防止に関する法律に基づく特別社会基盤事業者による特定侵害事象等の報告等に関する命令の一部を改正する命令",
+        "amend_no": "令和八年内閣府・総務省・法務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省令第七号",
+        "amendment_id": "508M60000F5A007",
+        "amend_published_date": "2026-08-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/508M60000F5A004/20260918_508M60000F5A007?occasion_date=20260918&tab=compare",
         "pending": false
       }
     ]

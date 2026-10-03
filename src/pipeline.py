@@ -8,10 +8,6 @@ import storage
 import law_group
 import law_builder
 
-from summary import generator
-
-import summary.statistics as summary_statistics
-
 from statistics import create_source_statistics
 
 
@@ -73,27 +69,5 @@ def process_egov(
         date,
         storage_paths=storage_paths,
     )
-
-    storage.prepare_law_summaries(
-        date=date,
-        paths=storage_paths,
-    )
-
-    for law_group_item in law_groups:
-        law_summaries, logs = generator.generate(
-            [law_group_item],
-            date=date,
-            storage_paths=storage_paths,
-        )
-
-        storage.append_ai_summary_logs(logs)
-
-    all_logs = storage.load_ai_summary_logs()
-
-    statistics = summary_statistics.create_statistics(
-        all_logs,
-    )
-
-    storage.save_ai_statistics(statistics)
 
     return laws

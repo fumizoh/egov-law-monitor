@@ -328,9 +328,7 @@ class WPLawRevision:
     amendment_name: str | None
     amendment_num: str | None
     enforcement_date: str | None
-    scheduled_enforcement_date: str | None
     enforcement_comment: str | None
-    is_current: bool
     published_date: str | None
     amend_published_date: str | None
     compare_url: str | None

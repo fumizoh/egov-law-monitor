@@ -139,10 +139,7 @@ def _build_revision(
 ) -> str:
     """Build HTML for one revision."""
 
-    effective_date = (
-        revision.enforcement_date
-        or revision.scheduled_enforcement_date
-    )
+    effective_date = revision.enforcement_date
 
     if effective_date:
         if revision.pending:

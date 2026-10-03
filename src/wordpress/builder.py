@@ -3,7 +3,6 @@
 from models import (
     Law,
     LawSummary,
-    RevisionHistory,
     Update,
     WPPost,
     WPLaw,
@@ -31,20 +30,17 @@ def _build_statistics(
 
 def _build_wp_revision(
     update: Update,
-    revision: RevisionHistory,
 ) -> WPLawRevision:
     """Build one WordPress law revision."""
 
     return WPLawRevision(
-        law_data_id=revision.law_data_id,
-        sub_revision=revision.sub_revision,
-        amendment_id=revision.amendment_id,
-        amendment_name=revision.amendment_name,
-        amendment_num=revision.amendment_num,
-        enforcement_date=revision.enforcement_date,
-        scheduled_enforcement_date=revision.scheduled_enforcement_date,
-        enforcement_comment=revision.enforcement_comment,
-        is_current=revision.is_current,
+        law_data_id=update["law_data_id"],
+        sub_revision=update["sub_revision"],
+        amendment_id=update["amendment_id"],
+        amendment_name=update["amend_name"],
+        amendment_num=update["amend_no"],
+        enforcement_date=update["effective_date"],
+        enforcement_comment=update["effective_comment"],
         published_date=update["published_date"],
         amend_published_date=update["amend_published_date"],
         compare_url=update["compare_url"],
@@ -54,20 +50,12 @@ def _build_wp_revision(
 
 def _build_wp_law(
     law: Law,
-    law_summary: LawSummary,
+    law_summary: LawSummary | None,
 ) -> WPLaw:
     """Build one WordPress law."""
 
-    revisions = {
-        revision.law_data_id: revision
-        for revision in law_summary.summary_input.revisions
-    }
-
     wp_revisions = [
-        _build_wp_revision(
-            update=update,
-            revision=revisions[update["law_data_id"]],
-        )
+        _build_wp_revision(update)
         for update in law["updates"]
     ]
 
@@ -80,7 +68,7 @@ def _build_wp_law(
         wp_revisions=wp_revisions,
         summary=(
             law_summary.response.summary
-            if law_summary.response
+            if law_summary and law_summary.response
             else None
         )
     )
