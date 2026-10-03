@@ -20,7 +20,11 @@ from summary.input import (
 )
 
 from sources.lawtext_api import fetch_law_text
-from sources.revision import get_revision_history
+
+from sources.revision import (
+    get_revision_history,
+    get_revisions_for_effective_date,
+)
 
 from lawtext_parser import parse_law_text
 
@@ -202,4 +206,23 @@ def build_law_summary_input(
         law_id=law_group.law_id,
         law_name=law_group.law_name,
         revisions=summary_revisions,
+    )
+
+
+def build_law_summary_input_for_effective_date(
+    law_id: str,
+    law_name: str,
+    effective_date: str,
+) -> LawSummaryInput:
+    """Build AI summary input for a specific effective date."""
+
+    revisions = get_revisions_for_effective_date(
+        law_id=law_id,
+        effective_date=effective_date,
+    )
+
+    return LawSummaryInput(
+        law_id=law_id,
+        law_name=law_name,
+        revisions=revisions,
     )

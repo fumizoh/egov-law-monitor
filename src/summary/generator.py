@@ -268,3 +268,27 @@ def generate(
         law_summaries,
         logs,
     )
+
+
+def generate_for_effective_date(
+    law_id: str,
+    law_name: str,
+    effective_date: str,
+) -> LawSummary | None:
+    """Generate an AI summary for a specific effective date."""
+
+    summary_input = builder.build_law_summary_input_for_effective_date(
+        law_id=law_id,
+        law_name=law_name,
+        effective_date=effective_date,
+    )
+
+    response = _generate_law_summary(summary_input)
+
+    if response is None:
+        return None
+
+    return LawSummary(
+        summary_input=summary_input,
+        response=response,
+    )

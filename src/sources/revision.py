@@ -79,3 +79,21 @@ def get_revision_history(
     return comparison.parse_revision_history(
         raw["result"]["Amendment_History"],
     )
+
+
+def get_revisions_for_effective_date(
+    law_id: str,
+    effective_date: str,
+) -> list[RevisionHistory]:
+    """Fetch revisions for a specific effective date."""
+
+    revisions = get_revision_history(law_id)
+
+    return [
+        revision
+        for revision in revisions
+        if (
+            revision.enforcement_date
+            or revision.scheduled_enforcement_date
+        ) == effective_date
+    ]
