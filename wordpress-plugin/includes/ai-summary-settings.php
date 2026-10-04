@@ -143,6 +143,82 @@ add_action(
 );
 
 /**
+ * Test AI Summary generation through Cloud Run.
+ */
+add_action(
+    'admin_post_egov_law_monitor_test_ai_summary',
+    function () {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( '権限がありません。' );
+        }
+
+        check_admin_referer(
+            'egov_law_monitor_test_ai_summary'
+        );
+
+        $law_id = isset( $_POST['egov_law_monitor_test_law_id'] )
+            ? sanitize_text_field(
+                wp_unslash( $_POST['egov_law_monitor_test_law_id'] )
+            )
+            : '';
+
+        $effective_date = isset( $_POST['egov_law_monitor_test_effective_date'] )
+            ? sanitize_text_field(
+                wp_unslash( $_POST['egov_law_monitor_test_effective_date'] )
+            )
+            : '';
+
+        if ( $law_id === '' ) {
+            wp_die( '法令IDを入力してください。' );
+        }
+
+        if ( ! preg_match( '/^\\d{4}-\\d{2}-\\d{2}$/', $effective_date ) ) {
+            wp_die( '施行日はYYYY-MM-DD形式で入力してください。' );
+        }
+
+        $result = egov_law_monitor_generate_ai_summary(
+            $law_id,
+            $effective_date
+        );
+
+        $user_id = get_current_user_id();
+        $transient_key =
+            'egov_law_monitor_ai_summary_test_' . $user_id;
+
+        if ( is_wp_error( $result ) ) {
+            set_transient(
+                $transient_key,
+                [
+                    'success' => false,
+                    'message' => $result->get_error_message(),
+                ],
+                5 * MINUTE_IN_SECONDS
+            );
+        } else {
+            set_transient(
+                $transient_key,
+                [
+                    'success' => true,
+                    'result'  => $result,
+                ],
+                5 * MINUTE_IN_SECONDS
+            );
+        }
+
+        wp_safe_redirect(
+            add_query_arg(
+                [
+                    'page'         => 'egov-law-monitor-ai-settings',
+                    'summary_test' => '1',
+                ],
+                admin_url( 'options-general.php' )
+            )
+        );
+        exit;
+    }
+);
+
+/**
  * AI Summary settings page.
  */
 function egov_law_monitor_ai_settings_page() {
@@ -164,6 +240,17 @@ function egov_law_monitor_ai_settings_page() {
         'egov_law_monitor_gcp_private_key',
         ''
     );
+
+    $summary_test_result = null;
+
+    if ( isset( $_GET['summary_test'] ) ) {
+        $transient_key =
+            'egov_law_monitor_ai_summary_test_' .
+            get_current_user_id();
+
+        $summary_test_result = get_transient( $transient_key );
+        delete_transient( $transient_key );
+    }
     ?>
     <div class="wrap">
         <?php if ( isset( $_GET['ai_test'] ) ) : ?>
@@ -339,6 +426,126 @@ function egov_law_monitor_ai_settings_page() {
                 'secondary'
             );
             ?>
+        </form>
+
+        <hr>
+
+        <h2>AIサマリー生成テスト</h2>
+
+        <?php if ( is_array( $summary_test_result ) ) : ?>
+
+            <?php if ( ! empty( $summary_test_result['success'] ) ) : ?>
+
+                <?php $result = $summary_test_result['result']; ?>
+
+                <div class="notice notice-success">
+                    <p>
+                        <strong>AIサマリー生成に成功しました。</strong>
+                    </p>
+                </div>
+
+                <?php if ( is_array( $result ) ) : ?>
+                    <table class="widefat striped" style="max-width: 1000px; margin-bottom: 20px;">
+                        <tbody>
+                            <?php if ( ! empty( $result['law_id'] ) ) : ?>
+                                <tr>
+                                    <th style="width: 180px;">法令ID</th>
+                                    <td><?php echo esc_html( $result['law_id'] ); ?></td>
+                                </tr>
+                            <?php endif; ?>
+
+                            <?php if ( ! empty( $result['law_name'] ) ) : ?>
+                                <tr>
+                                    <th>法令名</th>
+                                    <td><?php echo esc_html( $result['law_name'] ); ?></td>
+                                </tr>
+                            <?php endif; ?>
+
+                            <?php if ( ! empty( $result['effective_date'] ) ) : ?>
+                                <tr>
+                                    <th>施行日</th>
+                                    <td><?php echo esc_html( $result['effective_date'] ); ?></td>
+                                </tr>
+                            <?php endif; ?>
+
+                            <?php if ( ! empty( $result['summary']['title'] ) ) : ?>
+                                <tr>
+                                    <th>AIサマリータイトル</th>
+                                    <td><?php echo esc_html( $result['summary']['title'] ); ?></td>
+                                </tr>
+                            <?php endif; ?>
+
+                            <?php if ( ! empty( $result['summary']['body'] ) ) : ?>
+                                <tr>
+                                    <th>AIサマリー本文</th>
+                                    <td>
+                                        <div style="white-space: pre-wrap;"><?php echo esc_html( $result['summary']['body'] ); ?></div>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
+
+            <?php else : ?>
+
+                <div class="notice notice-error">
+                    <p><strong>AIサマリー生成に失敗しました。</strong></p>
+                    <p><?php echo esc_html( $summary_test_result['message'] ); ?></p>
+                </div>
+
+            <?php endif; ?>
+
+        <?php endif; ?>
+
+        <form
+            method="post"
+            action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"
+        >
+            <input
+                type="hidden"
+                name="action"
+                value="egov_law_monitor_test_ai_summary"
+            >
+
+            <?php wp_nonce_field( 'egov_law_monitor_test_ai_summary' ); ?>
+
+            <table class="form-table">
+                <tr>
+                    <th scope="row">
+                        <label for="egov_law_monitor_test_law_id">法令ID</label>
+                    </th>
+                    <td>
+                        <input
+                            type="text"
+                            id="egov_law_monitor_test_law_id"
+                            name="egov_law_monitor_test_law_id"
+                            value="508M60000F5A004"
+                            class="regular-text"
+                        >
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">
+                        <label for="egov_law_monitor_test_effective_date">施行日</label>
+                    </th>
+                    <td>
+                        <input
+                            type="date"
+                            id="egov_law_monitor_test_effective_date"
+                            name="egov_law_monitor_test_effective_date"
+                            value="2026-10-01"
+                        >
+                    </td>
+                </tr>
+            </table>
+
+            <p>
+                指定した法令IDと施行日でCloud RunのAIサマリー生成APIを実行します。
+            </p>
+
+            <?php submit_button( 'AIサマリー生成テスト', 'secondary' ); ?>
         </form>
 
     </div>
