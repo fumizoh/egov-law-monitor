@@ -1,4 +1,5 @@
 import sys
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
@@ -17,7 +18,7 @@ app = FastAPI(
 
 class SummaryRequest(BaseModel):
     law_id: str
-    effective_date: str
+    effective_date: date
 
 
 @app.get("/")
@@ -30,13 +31,26 @@ def health_check():
 
 @app.post("/summary")
 def generate_summary(request: SummaryRequest):
-    law_name = fetch_law_name(request.law_id)
+    try:
+        law_name = fetch_law_name(request.law_id)
 
-    result = generator.generate_for_effective_date(
-        law_id=request.law_id,
-        law_name=law_name,
-        effective_date=request.effective_date,
-    )
+        result = generator.generate_for_effective_date(
+            law_id=request.law_id,
+            law_name=law_name,
+            effective_date=request.effective_date.isoformat(),
+        )
+
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail=str(exc),
+        ) from exc
+
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to generate AI summary.",
+        ) from exc
 
     if result is None:
         raise HTTPException(
@@ -46,7 +60,8 @@ def generate_summary(request: SummaryRequest):
 
     return {
         "law_id": result.summary_input.law_id,
-        "effective_date": request.effective_date,
+        "law_name": result.summary_input.law_name,
+        "effective_date": request.effective_date.isoformat(),
         "summary": {
             "title": result.response.summary.title,
             "body": result.response.summary.body,
