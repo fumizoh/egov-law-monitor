@@ -4,6 +4,9 @@ from __future__ import annotations
 
 import logging
 
+import hashlib
+import json
+
 import law_change
 import table_change
 import comparison
@@ -270,6 +273,30 @@ def generate(
     )
 
 
+def _calculate_revision_hash(
+    revisions: list[RevisionHistory],
+) -> str:
+    """Calculate a stable hash for a revision set."""
+
+    revision_data = sorted(
+        (
+            revision.law_data_id,
+            revision.sub_revision,
+        )
+        for revision in revisions
+    )
+
+    payload = json.dumps(
+        revision_data,
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+
+    return hashlib.sha256(
+        payload.encode("utf-8")
+    ).hexdigest()
+
+
 def generate_for_effective_date(
     law_id: str,
     law_name: str,
@@ -281,6 +308,10 @@ def generate_for_effective_date(
         law_id=law_id,
         law_name=law_name,
         effective_date=effective_date,
+    )
+
+    revision_hash = _calculate_revision_hash(
+        summary_input.revisions
     )
 
     response = _generate_law_summary(summary_input)
