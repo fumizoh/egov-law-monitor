@@ -58,12 +58,14 @@ def generate_summary(request: SummaryRequest):
             detail="Summary could not be generated.",
         )
 
+    law_summary = result.law_summary
+
     return {
-        "law_id": result.summary_input.law_id,
-        "law_name": result.summary_input.law_name,
-        "effective_date": request.effective_date.isoformat(),
+        "law_id": law_summary.summary_input.law_id,
+        "effective_date": request.effective_date,
+        "revision_hash": result.revision_hash,
         "summary": {
-            "title": result.response.summary.title,
-            "body": result.response.summary.body,
+            "title": law_summary.response.summary.title,
+            "body": law_summary.response.summary.body,
         },
     }

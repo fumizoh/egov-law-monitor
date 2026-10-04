@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from dataclasses import dataclass
 
 import hashlib
 import json
@@ -36,6 +37,10 @@ from summary.input import (
     PromptDocument,
 )
 
+@dataclass(slots=True)
+class EffectiveDateSummaryResult:
+    law_summary: LawSummary
+    revision_hash: str
 
 logger = logging.getLogger(__name__)
 
@@ -301,7 +306,7 @@ def generate_for_effective_date(
     law_id: str,
     law_name: str,
     effective_date: str,
-) -> LawSummary | None:
+) -> EffectiveDateSummaryResult | None:
     """Generate an AI summary for a specific effective date."""
 
     summary_input = builder.build_law_summary_input_for_effective_date(
@@ -319,7 +324,10 @@ def generate_for_effective_date(
     if response is None:
         return None
 
-    return LawSummary(
-        summary_input=summary_input,
-        response=response,
+    return EffectiveDateSummaryResult(
+        law_summary=LawSummary(
+            summary_input=summary_input,
+            response=response,
+        ),
+        revision_hash=revision_hash,
     )
