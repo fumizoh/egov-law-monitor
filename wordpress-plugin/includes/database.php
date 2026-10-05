@@ -47,6 +47,31 @@ function egov_law_monitor_create_tables() {
     ) {$charset_collate};";
 
     dbDelta( $sql );
+
+    $history_table = $wpdb->prefix . 'egov_law_ai_summary_history';
+
+    $sql = "CREATE TABLE {$history_table} (
+        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+        user_id BIGINT UNSIGNED NOT NULL,
+        law_id VARCHAR(32) NOT NULL,
+        effective_date DATE NOT NULL,
+        revision_hash CHAR(64) NOT NULL,
+        summary_title TEXT NOT NULL,
+        summary_body LONGTEXT NOT NULL,
+        used_at DATETIME NOT NULL,
+        PRIMARY KEY (id),
+        UNIQUE KEY user_summary (
+            user_id,
+            law_id,
+            effective_date,
+            revision_hash
+        ),
+        KEY user_id (user_id),
+        KEY law_id (law_id),
+        KEY effective_date (effective_date)
+    ) {$charset_collate};";
+
+    dbDelta( $sql );
 }
 
 /**
@@ -122,6 +147,140 @@ function egov_law_monitor_save_ai_summary_cache(
             '%s',
             '%s',
         )
+    );
+}
+
+/**
+ * Check whether a user has used an AI summary.
+ *
+ * @param int    $user_id        User ID.
+ * @param string $law_id         Law ID.
+ * @param string $effective_date Effective date.
+ * @param string $revision_hash  Revision hash.
+ * @return bool
+ */
+function egov_law_monitor_has_ai_summary_history(
+    $user_id,
+    $law_id,
+    $effective_date,
+    $revision_hash
+) {
+    global $wpdb;
+
+    $table_name =
+        $wpdb->prefix . 'egov_law_ai_summary_history';
+
+    $count = $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT COUNT(*)
+             FROM {$table_name}
+             WHERE user_id = %d
+             AND law_id = %s
+             AND effective_date = %s
+             AND revision_hash = %s",
+            $user_id,
+            $law_id,
+            $effective_date,
+            $revision_hash
+        )
+    );
+
+    return (int) $count > 0;
+}
+
+/**
+ * Save AI summary usage history.
+ *
+ * @param int    $user_id        User ID.
+ * @param string $law_id         Law ID.
+ * @param string $effective_date Effective date.
+ * @param string $revision_hash  Revision hash.
+ * @return int|false
+ */
+function egov_law_monitor_save_ai_summary_history(
+    $user_id,
+    $law_id,
+    $effective_date,
+    $revision_hash,
+    $summary_title,
+    $summary_body
+) {
+    global $wpdb;
+
+    $table_name =
+        $wpdb->prefix . 'egov_law_ai_summary_history';
+
+    return $wpdb->replace(
+        $table_name,
+        array(
+            'user_id'        => $user_id,
+            'law_id'         => $law_id,
+            'effective_date' => $effective_date,
+            'revision_hash'  => $revision_hash,
+            'summary_title'  => $summary_title,
+            'summary_body'   => $summary_body,
+            'used_at'        => current_time( 'mysql' ),
+        ),
+        array(
+            '%d',
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+        )
+    );
+}
+
+/**
+ * Get AI summary usage count for a user.
+ *
+ * @param int $user_id User ID.
+ * @return int
+ */
+function egov_law_monitor_get_ai_summary_usage_count(
+    $user_id
+) {
+    global $wpdb;
+
+    $table_name =
+        $wpdb->prefix . 'egov_law_ai_summary_history';
+
+    $count = $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT COUNT(*)
+             FROM {$table_name}
+             WHERE user_id = %d",
+            $user_id
+        )
+    );
+
+    return (int) $count;
+}
+
+/**
+ * Get AI summary usage history for a user.
+ *
+ * @param int $user_id User ID.
+ * @return array
+ */
+function egov_law_monitor_get_ai_summary_history(
+    $user_id
+) {
+    global $wpdb;
+
+    $table_name =
+        $wpdb->prefix . 'egov_law_ai_summary_history';
+
+    return $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT *
+             FROM {$table_name}
+             WHERE user_id = %d
+             ORDER BY used_at DESC",
+            $user_id
+        ),
+        ARRAY_A
     );
 }
 

@@ -90,6 +90,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/internal-api.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-auth.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-settings.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-client.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-page.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/user-settings.php';
 
