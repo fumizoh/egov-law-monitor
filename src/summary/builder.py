@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-
 from models import (
     LawGroup,
     LawChange,
@@ -30,7 +28,7 @@ from lawtext_parser import parse_law_text
 
 from law_group import match_revisions
 
-from sources import egov_xml
+from sources import egov_api
 
 
 def _build_summary_changes(
@@ -60,9 +58,9 @@ def _build_summary_changes(
 
 def _enrich_summary_changes(
     changes: list[SummaryChange],
-    xml_path: Path,
+    law_data: dict,
 ) -> None:
-    """Enrich summary changes with XML provision text."""
+    """Enrich summary changes with e-Gov API provision text."""
 
     for change in changes:
         if change.change_type != "added":
@@ -71,8 +69,8 @@ def _enrich_summary_changes(
         if change.location.paragraph or change.location.item:
             continue
 
-        _, provision_text = egov_xml.get_provision_text(
-            xml_path,
+        _, provision_text = egov_api.get_provision_text(
+            law_data,
             change.location,
         )
 
@@ -128,11 +126,15 @@ def enrich_amendment_summary_input(
     revision: RevisionHistory,
     amendment: AmendmentSummaryInput,
 ) -> None:
-    """Enrich amendment summary input with XML provision text."""
+    """Enrich amendment summary input with e-Gov API provision text."""
 
-    xml_path = egov_xml.find_xml(
+    revision_id = egov_api.find_revision_id(
         law_id,
         revision,
+    )
+
+    law_data = egov_api.fetch_law_data(
+        revision_id,
     )
 
     changes = [
@@ -143,7 +145,7 @@ def enrich_amendment_summary_input(
 
     _enrich_summary_changes(
         changes,
-        xml_path,
+        law_data,
     )
 
 
