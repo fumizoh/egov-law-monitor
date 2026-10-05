@@ -468,6 +468,13 @@ function egov_law_monitor_ai_settings_page() {
                                 </tr>
                             <?php endif; ?>
 
+                            <?php if ( ! empty( $result['revision_hash'] ) ) : ?>
+                                <tr>
+                                    <th>Revisionハッシュ</th>
+                                    <td><?php echo esc_html( $result['revision_hash'] ); ?></td>
+                                </tr>
+                            <?php endif; ?>
+
                             <?php if ( ! empty( $result['summary']['title'] ) ) : ?>
                                 <tr>
                                     <th>AIサマリータイトル</th>

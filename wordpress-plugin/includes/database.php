@@ -28,6 +28,25 @@ function egov_law_monitor_create_tables() {
     ) {$charset_collate};";
 
     dbDelta( $sql );
+
+    $summary_table = $wpdb->prefix . 'egov_law_ai_summaries';
+
+    $sql = "CREATE TABLE {$summary_table} (
+        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+        law_id VARCHAR(32) NOT NULL,
+        effective_date DATE NOT NULL,
+        revision_hash CHAR(64) NOT NULL,
+        summary_title TEXT NOT NULL,
+        summary_body LONGTEXT NOT NULL,
+        created_at DATETIME NOT NULL,
+        updated_at DATETIME NOT NULL,
+        PRIMARY KEY (id),
+        UNIQUE KEY law_effective_date (law_id, effective_date),
+        KEY law_id (law_id),
+        KEY effective_date (effective_date)
+    ) {$charset_collate};";
+
+    dbDelta( $sql );
 }
 
 /**
