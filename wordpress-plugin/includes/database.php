@@ -50,6 +50,82 @@ function egov_law_monitor_create_tables() {
 }
 
 /**
+ * Get cached AI summary.
+ *
+ * @param string $law_id         Law ID.
+ * @param string $effective_date Effective date.
+ * @return array|null
+ */
+function egov_law_monitor_get_ai_summary_cache(
+    $law_id,
+    $effective_date
+) {
+    global $wpdb;
+
+    $table_name =
+        $wpdb->prefix . 'egov_law_ai_summaries';
+
+    return $wpdb->get_row(
+        $wpdb->prepare(
+            "SELECT *
+             FROM {$table_name}
+             WHERE law_id = %s
+             AND effective_date = %s
+             LIMIT 1",
+            $law_id,
+            $effective_date
+        ),
+        ARRAY_A
+    );
+}
+
+/**
+ * Save AI summary cache.
+ *
+ * @param string $law_id          Law ID.
+ * @param string $effective_date  Effective date.
+ * @param string $revision_hash   Revision hash.
+ * @param string $summary_title   Summary title.
+ * @param string $summary_body    Summary body.
+ * @return int|false
+ */
+function egov_law_monitor_save_ai_summary_cache(
+    $law_id,
+    $effective_date,
+    $revision_hash,
+    $summary_title,
+    $summary_body
+) {
+    global $wpdb;
+
+    $table_name =
+        $wpdb->prefix . 'egov_law_ai_summaries';
+
+    $now = current_time( 'mysql' );
+
+    return $wpdb->replace(
+        $table_name,
+        array(
+            'law_id'          => $law_id,
+            'effective_date'  => $effective_date,
+            'revision_hash'   => $revision_hash,
+            'summary_title'   => $summary_title,
+            'summary_body'    => $summary_body,
+            'created_at'      => $now,
+            'updated_at'      => $now,
+        ),
+        array(
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+        )
+    );
+}
+
+/**
  * Delete law watch settings when a user is deleted.
  */
 function egov_law_monitor_delete_user_data( $user_id ) {

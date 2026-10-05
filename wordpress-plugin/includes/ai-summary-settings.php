@@ -475,6 +475,19 @@ function egov_law_monitor_ai_settings_page() {
                                 </tr>
                             <?php endif; ?>
 
+                            <?php if ( isset( $result['cached'] ) ) : ?>
+                                <tr>
+                                    <th>生成方法</th>
+                                    <td>
+                                        <?php if ( $result['cached'] ) : ?>
+                                            キャッシュ利用（Gemini APIは実行していません）
+                                        <?php else : ?>
+                                            新規生成（Gemini APIを実行）
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+
                             <?php if ( ! empty( $result['summary']['title'] ) ) : ?>
                                 <tr>
                                     <th>AIサマリータイトル</th>
@@ -527,7 +540,7 @@ function egov_law_monitor_ai_settings_page() {
                             type="text"
                             id="egov_law_monitor_test_law_id"
                             name="egov_law_monitor_test_law_id"
-                            value="508M60000F5A004"
+                            value=""
                             class="regular-text"
                         >
                     </td>
@@ -542,7 +555,7 @@ function egov_law_monitor_ai_settings_page() {
                             type="date"
                             id="egov_law_monitor_test_effective_date"
                             name="egov_law_monitor_test_effective_date"
-                            value="2026-10-01"
+                            value=""
                         >
                     </td>
                 </tr>

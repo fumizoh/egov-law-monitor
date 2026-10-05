@@ -273,6 +273,22 @@ function egov_law_monitor_generate_ai_summary(
     $law_id,
     $effective_date
 ) {
+    /*
+     * Get cached AI summary.
+     */
+    $cache =
+        egov_law_monitor_get_ai_summary_cache(
+            $law_id,
+            $effective_date
+        );
+
+    $revision_hash = '';
+
+    if ( is_array( $cache ) ) {
+        $revision_hash =
+            $cache['revision_hash'] ?? '';
+    }
+
     $settings =
         egov_law_monitor_get_ai_cloud_settings();
 
@@ -314,6 +330,7 @@ function egov_law_monitor_generate_ai_summary(
                 [
                     'law_id' => $law_id,
                     'effective_date' => $effective_date,
+                    'revision_hash' => $revision_hash,
                 ]
             ),
         ]
@@ -343,13 +360,78 @@ function egov_law_monitor_generate_ai_summary(
         );
     }
 
+    if ( ! is_array( $body ) ) {
+        return new WP_Error(
+            'egov_law_monitor_ai_invalid_response',
+            'Cloud Run returned an invalid AI Summary response.'
+        );
+    }
+
+    /*
+     * Current revision is unchanged.
+     * Return the existing WordPress cache.
+     */
     if (
-        ! is_array( $body ) ||
-        empty( $body['summary'] )
+        ! empty( $body['cached'] ) &&
+        is_array( $cache )
+    ) {
+        return [
+            'law_id' => $law_id,
+            'effective_date' => $effective_date,
+            'revision_hash' => $cache['revision_hash'],
+            'summary' => [
+                'title' => $cache['summary_title'],
+                'body' => $cache['summary_body'],
+            ],
+            'cached' => true,
+        ];
+    }
+
+    /*
+     * A new summary was generated.
+     */
+    if (
+        empty( $body['revision_hash'] ) ||
+        empty( $body['summary'] ) ||
+        ! is_array( $body['summary'] )
     ) {
         return new WP_Error(
             'egov_law_monitor_ai_invalid_response',
             'Cloud Run returned an invalid AI Summary response.'
+        );
+    }
+
+    $new_revision_hash =
+        $body['revision_hash'];
+
+    $summary_title =
+        $body['summary']['title'] ?? '';
+
+    $summary_body =
+        $body['summary']['body'] ?? '';
+
+    if (
+        $summary_title === '' ||
+        $summary_body === ''
+    ) {
+        return new WP_Error(
+            'egov_law_monitor_ai_invalid_response',
+            'Cloud Run returned an incomplete AI Summary response.'
+        );
+    }
+
+    $saved = egov_law_monitor_save_ai_summary_cache(
+        $law_id,
+        $effective_date,
+        $new_revision_hash,
+        $summary_title,
+        $summary_body
+    );
+
+    if ( $saved === false ) {
+        return new WP_Error(
+            'egov_law_monitor_ai_cache_error',
+            'Failed to save AI Summary cache.'
         );
     }
 
