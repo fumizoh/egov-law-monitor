@@ -302,6 +302,24 @@ def _calculate_revision_hash(
     ).hexdigest()
 
 
+def get_revision_hash_for_effective_date(
+    law_id: str,
+    law_name: str,
+    effective_date: str,
+) -> str:
+    """Get the current revision hash for a specific effective date."""
+
+    summary_input = builder.build_law_summary_input_for_effective_date(
+        law_id=law_id,
+        law_name=law_name,
+        effective_date=effective_date,
+    )
+
+    return _calculate_revision_hash(
+        summary_input.revisions
+    )
+
+
 def generate_for_effective_date(
     law_id: str,
     law_name: str,

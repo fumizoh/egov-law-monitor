@@ -19,6 +19,7 @@ app = FastAPI(
 class SummaryRequest(BaseModel):
     law_id: str
     effective_date: date
+    revision_hash: str = ""
 
 
 @app.get("/")
@@ -33,6 +34,25 @@ def health_check():
 def generate_summary(request: SummaryRequest):
     try:
         law_name = fetch_law_name(request.law_id)
+
+        current_revision_hash = (
+            generator.get_revision_hash_for_effective_date(
+                law_id=request.law_id,
+                law_name=law_name,
+                effective_date=request.effective_date.isoformat(),
+            )
+        )
+
+        if (
+            request.revision_hash
+            and request.revision_hash == current_revision_hash
+        ):
+            return {
+                "law_id": request.law_id,
+                "effective_date": request.effective_date,
+                "revision_hash": current_revision_hash,
+                "cached": True,
+            }
 
         result = generator.generate_for_effective_date(
             law_id=request.law_id,
@@ -64,6 +84,7 @@ def generate_summary(request: SummaryRequest):
         "law_id": law_summary.summary_input.law_id,
         "effective_date": request.effective_date,
         "revision_hash": result.revision_hash,
+        "cached": False,
         "summary": {
             "title": law_summary.response.summary.title,
             "body": law_summary.response.summary.body,
