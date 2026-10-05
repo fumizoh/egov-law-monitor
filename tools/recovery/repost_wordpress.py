@@ -14,7 +14,7 @@ from wordpress.service import sync_daily_post
 
 def main() -> None:
     if len(sys.argv) != 2:
-        print("Usage: python tools/repost_wordpress.py YYYYMMDD")
+        print("Usage: python tools/recovery/repost_wordpress.py YYYYMMDD")
         sys.exit(1)
 
     date = sys.argv[1]
