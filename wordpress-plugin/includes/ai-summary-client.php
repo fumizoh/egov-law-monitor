@@ -377,6 +377,7 @@ function egov_law_monitor_generate_ai_summary(
     ) {
         return [
             'law_id' => $law_id,
+            'law_name' => $body['law_name'] ?? '',
             'effective_date' => $effective_date,
             'revision_hash' => $cache['revision_hash'],
             'summary' => [

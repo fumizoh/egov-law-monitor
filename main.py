@@ -1,3 +1,5 @@
+import logging
+
 import sys
 from datetime import date
 from pathlib import Path
@@ -49,6 +51,7 @@ def generate_summary(request: SummaryRequest):
         ):
             return {
                 "law_id": request.law_id,
+                "law_name": law_name,
                 "effective_date": request.effective_date,
                 "revision_hash": current_revision_hash,
                 "cached": True,
@@ -67,6 +70,11 @@ def generate_summary(request: SummaryRequest):
         ) from exc
 
     except Exception as exc:
+        logging.exception(
+            "Failed to generate AI summary: law_id=%s, effective_date=%s",
+            request.law_id,
+            request.effective_date,
+        )
         raise HTTPException(
             status_code=500,
             detail="Failed to generate AI summary.",
@@ -82,6 +90,7 @@ def generate_summary(request: SummaryRequest):
 
     return {
         "law_id": law_summary.summary_input.law_id,
+        "law_name": law_name,
         "effective_date": request.effective_date,
         "revision_hash": result.revision_hash,
         "cached": False,

@@ -54,6 +54,7 @@ function egov_law_monitor_create_tables() {
         id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
         user_id BIGINT UNSIGNED NOT NULL,
         law_id VARCHAR(32) NOT NULL,
+        law_name TEXT NOT NULL,
         effective_date DATE NOT NULL,
         revision_hash CHAR(64) NOT NULL,
         summary_title TEXT NOT NULL,
@@ -200,6 +201,7 @@ function egov_law_monitor_has_ai_summary_history(
 function egov_law_monitor_save_ai_summary_history(
     $user_id,
     $law_id,
+    $law_name,
     $effective_date,
     $revision_hash,
     $summary_title,
@@ -215,6 +217,7 @@ function egov_law_monitor_save_ai_summary_history(
         array(
             'user_id'        => $user_id,
             'law_id'         => $law_id,
+            'law_name'       => $law_name,
             'effective_date' => $effective_date,
             'revision_hash'  => $revision_hash,
             'summary_title'  => $summary_title,
@@ -223,6 +226,7 @@ function egov_law_monitor_save_ai_summary_history(
         ),
         array(
             '%d',
+            '%s',
             '%s',
             '%s',
             '%s',

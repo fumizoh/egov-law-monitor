@@ -145,6 +145,7 @@ function egov_law_monitor_ai_summary_shortcode() {
                             egov_law_monitor_save_ai_summary_history(
                                 $user_id,
                                 $law_id,
+                                $summary_result['law_name'],
                                 $effective_date,
                                 $revision_hash,
                                 $summary_result['summary']['title'],
@@ -302,9 +303,8 @@ function egov_law_monitor_ai_summary_shortcode() {
 
                         <li>
                             <a href="<?php echo esc_url( $history_url ); ?>">
-                                <?php echo esc_html( $item['law_id'] ); ?>
+                                <?php echo esc_html( $item['law_name'] ); ?>
                             </a>
-
                             <div>
                                 施行日：
                                 <?php echo esc_html( $item['effective_date'] ); ?>
