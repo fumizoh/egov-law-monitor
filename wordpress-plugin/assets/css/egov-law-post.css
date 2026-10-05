@@ -239,6 +239,92 @@
 }
 
 
+/* AI Summary page */
+
+.egov-ai-summary-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+}
+
+.egov-ai-summary-heading .la-robot {
+    font-size: 0.9em;
+}
+
+.egov-ai-summary-usage {
+    margin-bottom: 28px;
+}
+
+.egov-ai-summary-law-name {
+    margin: 0 0 12px;
+    font-size: 1.35rem;
+    line-height: 1.4;
+}
+
+.egov-ai-summary-title {
+    margin: 0 0 12px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+/* AI Summary history */
+
+.egov-ai-summary-history {
+    margin-top: 32px;
+}
+
+.egov-ai-summary-history h3 {
+    margin: 0 0 16px;
+}
+
+.egov-ai-summary-history ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+}
+
+.egov-ai-summary-history-item {
+    margin: 0 !important;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid #e1e5e8;
+    border-radius: 8px;
+}
+
+.egov-ai-summary-history-law {
+    display: inline-block;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.egov-ai-summary-history-law:link {
+    color: #0066cc;
+}
+
+.egov-ai-summary-history-law:visited {
+    color: #551A8B;
+}
+
+.egov-ai-summary-history-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    margin-top: 6px;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    .egov-ai-summary-history-meta {
+        flex-direction: column;
+        gap: 2px;
+    }
+}
+
 /* Law Watch */
 
 .egov-law-search h2 {

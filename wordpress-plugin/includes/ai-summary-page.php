@@ -194,7 +194,7 @@ function egov_law_monitor_ai_summary_shortcode() {
 
     <div class="egov-ai-summary-page">
 
-        <h2>AI要約</h2>
+        <h2 class="egov-ai-summary-heading"><i class="las la-robot" aria-hidden="true"></i> AI要約</h2>
 
         <div class="egov-ai-summary-usage">
 
@@ -232,14 +232,23 @@ function egov_law_monitor_ai_summary_shortcode() {
                 $summary_body =
                     $summary['body'] ?? '';
 
+                $law_name =
+                    $summary_result['law_name'] ?? '';
+
                 $revision_hash =
                     $summary_result['revision_hash'] ?? '';
                 ?>
 
-                <h3>
-                    <?php
-                    echo esc_html( $summary_title );
-                    ?>
+                <?php if ( $law_name !== '' ) : ?>
+
+                    <h2 class="egov-ai-summary-law-name">
+                        <?php echo esc_html( $law_name ); ?>
+                    </h2>
+
+                <?php endif; ?>
+
+                <h3 class="egov-ai-summary-title">
+                    <?php echo esc_html( $summary_title ); ?>
                 </h3>
 
                 <p>
@@ -301,18 +310,34 @@ function egov_law_monitor_ai_summary_shortcode() {
                         );
                         ?>
 
-                        <li>
-                            <a href="<?php echo esc_url( $history_url ); ?>">
+                        <?php
+                        $used_at = $item['used_at'] ?? '';
+
+                        if (
+                            $used_at === ''
+                            || $used_at === '0000-00-00 00:00:00'
+                        ) {
+                            $used_at_display = '未記録';
+                        } else {
+                            $used_at_display = $used_at;
+                        }
+                        ?>
+
+                        <li class="egov-ai-summary-history-item">
+                            <a
+                                class="egov-ai-summary-history-law"
+                                href="<?php echo esc_url( $history_url ); ?>"
+                            >
                                 <?php echo esc_html( $item['law_name'] ); ?>
                             </a>
-                            <div>
-                                施行日：
-                                <?php echo esc_html( $item['effective_date'] ); ?>
 
-                                ／
-
-                                利用日：
-                                <?php echo esc_html( $item['used_at'] ); ?>
+                            <div class="egov-ai-summary-history-meta">
+                                <span>
+                                    施行日：<?php echo esc_html( $item['effective_date'] ); ?>
+                                </span>
+                                <span>
+                                    利用日：<?php echo esc_html( $used_at_display ); ?>
+                                </span>
                             </div>
                         </li>
 
