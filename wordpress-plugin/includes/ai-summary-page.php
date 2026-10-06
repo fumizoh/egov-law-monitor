@@ -40,7 +40,7 @@ function egov_law_monitor_ai_summary_shortcode() {
         ? absint( $_GET['history_id'] )
         : 0;
 
-    $free_limit = 5;
+    $free_limit = EGOV_AI_SUMMARY_FREE_LIMIT;
 
     /*
      * AI Summary request.

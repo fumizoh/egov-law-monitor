@@ -20,7 +20,7 @@ function egov_law_monitor_ai_summary_management_shortcode() {
     }
 
     $user_id    = get_current_user_id();
-    $free_limit = 5;
+    $free_limit = EGOV_AI_SUMMARY_FREE_LIMIT;
 
     $usage_count =
         egov_law_monitor_get_ai_summary_usage_count(

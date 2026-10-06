@@ -14,6 +14,11 @@ define(
     'https://fumizoh.github.io/egov-law-monitor/'
 );
 
+define(
+    'EGOV_AI_SUMMARY_FREE_LIMIT',
+    5
+);
+
 add_action(
     'wp_enqueue_scripts',
     function () {
@@ -77,7 +82,7 @@ add_action(
             }
         }
 
-        $ai_free_limit = 5;
+        $ai_free_limit = EGOV_AI_SUMMARY_FREE_LIMIT;
         $ai_usage_count = is_user_logged_in()
             ? egov_law_monitor_get_ai_summary_usage_count( get_current_user_id() )
             : 0;
