@@ -486,10 +486,18 @@ function egov_law_monitor_get_ai_summary_history(
 
     return $wpdb->get_results(
         $wpdb->prepare(
-            "SELECT *
-             FROM {$table_name}
-             WHERE user_id = %d
-             ORDER BY used_at DESC",
+            "SELECT
+                 history.*,
+                 cache.amendment_name,
+                 cache.comparison_effective_date
+             FROM {$table_name} AS history
+             LEFT JOIN {$wpdb->prefix}egov_law_ai_summaries AS cache
+                 ON cache.law_id = history.law_id
+                 AND cache.effective_date = history.effective_date
+                 AND cache.law_data_id = history.law_data_id
+                 AND cache.sub_revision = history.sub_revision
+             WHERE history.user_id = %d
+             ORDER BY history.used_at DESC",
             $user_id
         ),
         ARRAY_A

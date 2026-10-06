@@ -250,6 +250,16 @@ function egov_law_monitor_ai_summary_shortcode() {
                 $summary_body =
                     $summary['body'] ?? '';
 
+                /*
+                 * The AI response may contain literal \n                 * escape sequences. Convert them to real line breaks
+                 * before wpautop() formats the body.
+                 */
+                $summary_body = str_replace(
+                    array( '\\r\\n', '\\n', '\\r' ),
+                    array( "\r\n", "\n", "\r" ),
+                    $summary_body
+                );
+
                 $law_name =
                     $summary_result['law_name'] ?? '';
 
@@ -374,10 +384,27 @@ function egov_law_monitor_ai_summary_shortcode() {
                                 <?php echo esc_html( $item['law_name'] ); ?>
                             </a>
 
+                            <?php if ( ! empty( $item['amendment_name'] ) ) : ?>
+                                <div class="egov-ai-summary-history-amendment">
+                                    改正法令：<?php echo esc_html( $item['amendment_name'] ); ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ( ! empty( $item['summary_title'] ) ) : ?>
+                                <div class="egov-ai-summary-history-title">
+                                    <?php echo esc_html( $item['summary_title'] ); ?>
+                                </div>
+                            <?php endif; ?>
+
                             <div class="egov-ai-summary-history-meta">
                                 <span>
                                     施行日：<?php echo esc_html( $item['effective_date'] ); ?>
                                 </span>
+                                <?php if ( ! empty( $item['comparison_effective_date'] ) ) : ?>
+                                    <span>
+                                        比較対象：<?php echo esc_html( $item['comparison_effective_date'] ); ?>
+                                    </span>
+                                <?php endif; ?>
                                 <span>
                                     利用日：<?php echo esc_html( $used_at_display ); ?>
                                 </span>

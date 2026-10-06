@@ -253,6 +253,8 @@
 
 .egov-ai-summary-usage {
     margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e1e5e8;
 }
 
 .egov-ai-summary-law-name {
@@ -306,6 +308,17 @@
 
 .egov-ai-summary-history-law:visited {
     color: #551A8B;
+}
+
+.egov-ai-summary-history-amendment {
+    margin-top: 6px;
+    line-height: 1.5;
+}
+
+.egov-ai-summary-history-title {
+    margin-top: 6px;
+    font-weight: 600;
+    line-height: 1.5;
 }
 
 .egov-ai-summary-history-meta {
@@ -449,4 +462,42 @@
 
 .egov-law-search-form button {
     margin: 0;
+}
+/* AI Summary action */
+
+.egov-amend-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+}
+
+.egov-amend-actions .egov-amend-name {
+    flex: 1 1 auto;
+}
+
+.egov-ai-summary-action {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 6px 12px;
+    border: 1px solid #004080;
+    border-radius: 5px;
+    background: #fff;
+    color: #004080;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.egov-ai-summary-action:hover {
+    background: #004080;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .egov-amend-actions {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
 }

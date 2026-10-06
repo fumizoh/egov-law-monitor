@@ -62,6 +62,26 @@ add_action(
             true
         );
 
+        $ai_summary_url = '';
+
+        $pages = get_pages(
+            array(
+                'post_status' => 'publish',
+            )
+        );
+
+        foreach ( $pages as $page ) {
+            if ( has_shortcode( $page->post_content, 'egov_ai_summary' ) ) {
+                $ai_summary_url = get_permalink( $page );
+                break;
+            }
+        }
+
+        $ai_free_limit = 5;
+        $ai_usage_count = is_user_logged_in()
+            ? egov_law_monitor_get_ai_summary_usage_count( get_current_user_id() )
+            : 0;
+
         wp_localize_script(
             'egov-law-watch',
             'egovLawMonitor',
@@ -70,7 +90,115 @@ add_action(
                 'restNonce' => wp_create_nonce( 'wp_rest' ),
                 'restUrl'   => rest_url( 'egov-law-monitor/v1/watches' ),
                 'lawSearchUrl' => rest_url( 'egov-law-monitor/v1/law-search' ),
+                'aiSummary' => array(
+                    'url' => $ai_summary_url,
+                    'isLoggedIn' => is_user_logged_in(),
+                    'remaining' => max( 0, $ai_free_limit - $ai_usage_count ),
+                    'freeLimit' => $ai_free_limit,
+                ),
             )
+        );
+
+        wp_add_inline_script(
+            'egov-law-watch',
+            <<<'JS'
+(function () {
+
+    function initAiSummaryActions() {
+
+        const settings =
+            window.egovLawMonitor &&
+            window.egovLawMonitor.aiSummary;
+
+        const buttons =
+            document.querySelectorAll(
+                '.egov-ai-summary-action'
+            );
+
+        if (!settings || !buttons.length) {
+            return;
+        }
+
+        if (!settings.isLoggedIn) {
+            buttons.forEach((button) => {
+                button.hidden = true;
+            });
+            return;
+        }
+
+        buttons.forEach((button) => {
+
+            button.addEventListener('click', () => {
+
+                if (!settings.url) {
+                    window.alert(
+                        'AI要約ページが設定されていません。'
+                    );
+                    return;
+                }
+
+                const remaining =
+                    Number(settings.remaining || 0);
+
+                const amendmentName =
+                    button.dataset.amendmentName ||
+                    'この改正';
+
+                const message =
+                    remaining > 0
+                        ? 'この改正をAIで要約します。\n\n' +
+                          '無料利用の残り：' +
+                          remaining +
+                          '回\n\n' +
+                          amendmentName
+                        : '無料利用回数を使い切っています。\n\n' +
+                          'この改正のAI要約を利用済みの場合は、\n' +
+                          'AI要約ページから再度表示できます。';
+
+                if (!window.confirm(message)) {
+                    return;
+                }
+
+                const url =
+                    new URL(settings.url, window.location.origin);
+
+                url.searchParams.set(
+                    'law_id',
+                    button.dataset.lawId || ''
+                );
+                url.searchParams.set(
+                    'effective_date',
+                    button.dataset.effectiveDate || ''
+                );
+                url.searchParams.set(
+                    'law_data_id',
+                    button.dataset.lawDataId || ''
+                );
+                url.searchParams.set(
+                    'sub_revision',
+                    button.dataset.subRevision || ''
+                );
+
+                window.open(
+                    url.toString(),
+                    '_blank',
+                    'noopener,noreferrer'
+                );
+            });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            initAiSummaryActions
+        );
+    } else {
+        initAiSummaryActions();
+    }
+
+})();
+JS
         );
     }
 );

@@ -1,5 +1,7 @@
 """Build WordPress post content."""
 
+import html
+
 import markdown
 
 from models import (
@@ -135,6 +137,7 @@ def _build_dashboard(
 
 
 def _build_revision(
+    law_id: str,
     revision: WPLawRevision,
 ) -> str:
     """Build HTML for one revision."""
@@ -172,15 +175,36 @@ def _build_revision(
     else:
         amendment_html = revision.amendment_name or ""
 
+    ai_summary_html = ""
+
+    if not revision.pending and not revision.is_new_law:
+        amendment_name = html.escape(
+            revision.amendment_name or "",
+            quote=True,
+        )
+        ai_summary_html = (
+            f'<button type="button" class="egov-ai-summary-action" '
+            f'data-law-id="{html.escape(law_id, quote=True)}" '
+            f'data-effective-date="{html.escape(revision.enforcement_date or "", quote=True)}" '
+            f'data-law-data-id="{revision.law_data_id}" '
+            f'data-sub-revision="{html.escape(revision.sub_revision, quote=True)}" '
+            f'data-amendment-name="{amendment_name}">'
+            f"AIで要約"
+            f"</button>"
+        )
+
     return f"""
 <div class="egov-update-history">
     <div class="egov-effective-info">
         <span class="egov-effective-date">{effective_info}</span>{enforcement_comment}
     </div>
 
-    <p class="egov-amend-name">
-        {amendment_html}
-    </p>
+    <div class="egov-amend-actions">
+        <p class="egov-amend-name">
+            {amendment_html}
+        </p>
+        {ai_summary_html}
+    </div>
 </div>
 """
 
@@ -208,7 +232,7 @@ def _build_law_section(
 """
 
     revisions_html = "".join(
-        _build_revision(revision)
+        _build_revision(law.law_id, revision)
         for revision in law.wp_revisions
     )
 
