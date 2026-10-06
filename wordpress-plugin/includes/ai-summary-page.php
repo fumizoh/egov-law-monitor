@@ -270,8 +270,6 @@ function egov_law_monitor_ai_summary_shortcode() {
 
     <div class="egov-ai-summary-page">
 
-        <h2 class="egov-ai-summary-heading">🤖 AI要約</h2>
-
         <div class="egov-ai-summary-current">
 
             <?php if ( $summary_error ) : ?>
@@ -326,16 +324,23 @@ function egov_law_monitor_ai_summary_shortcode() {
 
                 <?php if ( $amendment_name !== '' ) : ?>
 
-                    <p>
+                    <p class="egov-ai-summary-meta">
                         改正法令：
                         <?php echo esc_html( $amendment_name ); ?>
                     </p>
 
                 <?php endif; ?>
 
+                <p class="egov-ai-summary-meta">
+                    施行日：
+                    <?php
+                    echo esc_html( $effective_date );
+                    ?>
+                </p>
+
                 <?php if ( $comparison_effective_date !== '' ) : ?>
 
-                    <p>
+                    <p class="egov-ai-summary-meta">
                         比較対象の施行日：
                         <?php echo esc_html( $comparison_effective_date ); ?>
                     </p>
@@ -343,15 +348,8 @@ function egov_law_monitor_ai_summary_shortcode() {
                 <?php endif; ?>
 
                 <h3 class="egov-ai-summary-title">
-                    <?php echo esc_html( $summary_title ); ?>
+                    🤖 <?php echo esc_html( $summary_title ); ?>
                 </h3>
-
-                <p>
-                    施行日：
-                    <?php
-                    echo esc_html( $effective_date );
-                    ?>
-                </p>
 
                 <div class="egov-ai-summary-body">
 

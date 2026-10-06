@@ -259,13 +259,19 @@
 
 .egov-ai-summary-law-name {
     margin: 0 0 12px;
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     line-height: 1.4;
 }
 
 .egov-ai-summary-title {
     margin: 0 0 12px;
     font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.entry-content .egov-ai-summary-page .egov-ai-summary-meta {
+    margin-top: 0 !important;
+    margin-bottom: 4px !important;
     line-height: 1.5;
 }
 
@@ -463,6 +469,7 @@
 .egov-law-search-form button {
     margin: 0;
 }
+
 /* AI Summary action */
 
 .egov-amend-actions {
