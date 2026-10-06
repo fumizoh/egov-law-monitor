@@ -168,6 +168,18 @@ add_action(
             )
             : '';
 
+        $law_data_id = isset( $_POST['egov_law_monitor_test_law_data_id'] )
+            ? sanitize_text_field(
+                wp_unslash( $_POST['egov_law_monitor_test_law_data_id'] )
+            )
+            : '';
+
+        $sub_revision = isset( $_POST['egov_law_monitor_test_sub_revision'] )
+            ? sanitize_text_field(
+                wp_unslash( $_POST['egov_law_monitor_test_sub_revision'] )
+            )
+            : '';
+
         if ( $law_id === '' ) {
             wp_die( '法令IDを入力してください。' );
         }
@@ -176,9 +188,19 @@ add_action(
             wp_die( '施行日はYYYY-MM-DD形式で入力してください。' );
         }
 
+        if ( $law_data_id === '' ) {
+            wp_die( 'Law Data IDを入力してください。' );
+        }
+
+        if ( $sub_revision === '' ) {
+            wp_die( 'Sub Revisionを入力してください。' );
+        }
+
         $result = egov_law_monitor_generate_ai_summary(
             $law_id,
-            $effective_date
+            $effective_date,
+            $law_data_id,
+            $sub_revision
         );
 
         $user_id = get_current_user_id();
@@ -468,6 +490,34 @@ function egov_law_monitor_ai_settings_page() {
                                 </tr>
                             <?php endif; ?>
 
+                            <?php if ( ! empty( $result['law_data_id'] ) ) : ?>
+                                <tr>
+                                    <th>Law Data ID</th>
+                                    <td><?php echo esc_html( $result['law_data_id'] ); ?></td>
+                                </tr>
+                            <?php endif; ?>
+
+                            <?php if ( ! empty( $result['sub_revision'] ) ) : ?>
+                                <tr>
+                                    <th>Sub Revision</th>
+                                    <td><?php echo esc_html( $result['sub_revision'] ); ?></td>
+                                </tr>
+                            <?php endif; ?>
+
+                            <?php if ( ! empty( $result['amendment_name'] ) ) : ?>
+                                <tr>
+                                    <th>改正法令名</th>
+                                    <td><?php echo esc_html( $result['amendment_name'] ); ?></td>
+                                </tr>
+                            <?php endif; ?>
+
+                            <?php if ( ! empty( $result['comparison_effective_date'] ) ) : ?>
+                                <tr>
+                                    <th>比較対象の施行日</th>
+                                    <td><?php echo esc_html( $result['comparison_effective_date'] ); ?></td>
+                                </tr>
+                            <?php endif; ?>
+
                             <?php if ( ! empty( $result['revision_hash'] ) ) : ?>
                                 <tr>
                                     <th>Revisionハッシュ</th>
@@ -556,6 +606,36 @@ function egov_law_monitor_ai_settings_page() {
                             id="egov_law_monitor_test_effective_date"
                             name="egov_law_monitor_test_effective_date"
                             value=""
+                        >
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">
+                        <label for="egov_law_monitor_test_law_data_id">Law Data ID</label>
+                    </th>
+                    <td>
+                        <input
+                            type="text"
+                            id="egov_law_monitor_test_law_data_id"
+                            name="egov_law_monitor_test_law_data_id"
+                            value=""
+                            class="regular-text"
+                        >
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">
+                        <label for="egov_law_monitor_test_sub_revision">Sub Revision</label>
+                    </th>
+                    <td>
+                        <input
+                            type="text"
+                            id="egov_law_monitor_test_sub_revision"
+                            name="egov_law_monitor_test_sub_revision"
+                            value=""
+                            class="regular-text"
                         >
                     </td>
                 </tr>

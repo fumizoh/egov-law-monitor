@@ -42,6 +42,14 @@ class EffectiveDateSummaryResult:
     law_summary: LawSummary
     revision_hash: str
 
+
+@dataclass(slots=True)
+class RevisionSummaryResult:
+    law_summary: LawSummary
+    revision_hash: str
+    amendment_name: str | None
+    comparison_effective_date: str | None
+
 logger = logging.getLogger(__name__)
 
 MAX_XML_CHANGES = 50
@@ -302,50 +310,122 @@ def _calculate_revision_hash(
     ).hexdigest()
 
 
-def get_revision_hash_for_effective_date(
-    law_id: str,
-    law_name: str,
-    effective_date: str,
+def _calculate_single_revision_hash(
+    revision: RevisionHistory,
 ) -> str:
-    """Get the current revision hash for a specific effective date."""
+    """Calculate a stable hash for one revision."""
 
-    summary_input = builder.build_law_summary_input_for_effective_date(
-        law_id=law_id,
-        law_name=law_name,
-        effective_date=effective_date,
-    )
-
-    return _calculate_revision_hash(
-        summary_input.revisions
-    )
+    return _calculate_revision_hash([revision])
 
 
-def generate_for_effective_date(
+def get_revision_hash_for_revision(
     law_id: str,
     law_name: str,
     effective_date: str,
-) -> EffectiveDateSummaryResult | None:
-    """Generate an AI summary for a specific effective date."""
+    law_data_id: int,
+    sub_revision: str,
+) -> str:
+    """Get the current revision hash for one specific revision."""
 
-    summary_input = builder.build_law_summary_input_for_effective_date(
+    summary_input = builder.build_law_summary_input_for_revision(
         law_id=law_id,
         law_name=law_name,
         effective_date=effective_date,
+        law_data_id=law_data_id,
+        sub_revision=sub_revision,
     )
 
-    revision_hash = _calculate_revision_hash(
-        summary_input.revisions
+    return _calculate_single_revision_hash(
+        summary_input.revisions[0]
     )
+
+
+def get_revision_metadata_for_revision(
+    law_id: str,
+    law_name: str,
+    effective_date: str,
+    law_data_id: int,
+    sub_revision: str,
+) -> tuple[str | None, str | None]:
+    """Get metadata for one revision without generating an AI summary."""
+
+    summary_input = builder.build_law_summary_input_for_revision(
+        law_id=law_id,
+        law_name=law_name,
+        effective_date=effective_date,
+        law_data_id=law_data_id,
+        sub_revision=sub_revision,
+    )
+
+    revision = summary_input.revisions[0]
+
+    compare_json = compare_api.fetch_compare(
+        new_law_data_id=revision.law_data_id,
+        new_sub_revision=revision.sub_revision,
+    )
+
+    compare_result = comparison.parse_compare_result(compare_json)
+
+    comparison_effective_date = None
+    if compare_result is not None:
+        comparison_effective_date = (
+            compare_result.old.enforcement_date
+            or compare_result.old.scheduled_enforcement_date
+        )
+
+    return revision.amendment_name, comparison_effective_date
+
+
+def generate_for_revision(
+    law_id: str,
+    law_name: str,
+    effective_date: str,
+    law_data_id: int,
+    sub_revision: str,
+) -> RevisionSummaryResult | None:
+    """Generate an AI summary for one specific revision."""
+
+    summary_input = builder.build_law_summary_input_for_revision(
+        law_id=law_id,
+        law_name=law_name,
+        effective_date=effective_date,
+        law_data_id=law_data_id,
+        sub_revision=sub_revision,
+    )
+
+    revision = summary_input.revisions[0]
+
+    revision_hash = _calculate_single_revision_hash(
+        revision
+    )
+
+    # The comparison target date is obtained from the exact
+    # Compare API result for this revision.
+    compare_json = compare_api.fetch_compare(
+        new_law_data_id=revision.law_data_id,
+        new_sub_revision=revision.sub_revision,
+    )
+
+    compare_result = comparison.parse_compare_result(compare_json)
+
+    comparison_effective_date = None
+    if compare_result is not None:
+        comparison_effective_date = (
+            compare_result.old.enforcement_date
+            or compare_result.old.scheduled_enforcement_date
+        )
 
     response = _generate_law_summary(summary_input)
 
     if response is None:
         return None
 
-    return EffectiveDateSummaryResult(
+    return RevisionSummaryResult(
         law_summary=LawSummary(
             summary_input=summary_input,
             response=response,
         ),
         revision_hash=revision_hash,
+        amendment_name=revision.amendment_name,
+        comparison_effective_date=comparison_effective_date,
     )

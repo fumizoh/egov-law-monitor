@@ -267,11 +267,15 @@ function egov_law_monitor_get_cloud_run_id_token(
  *
  * @param string $law_id         Law ID.
  * @param string $effective_date Effective date.
+ * @param string $law_data_id    e-Gov law data ID.
+ * @param string $sub_revision   e-Gov sub revision.
  * @return array|WP_Error
  */
 function egov_law_monitor_generate_ai_summary(
     $law_id,
-    $effective_date
+    $effective_date,
+    $law_data_id,
+    $sub_revision
 ) {
     /*
      * Get cached AI summary.
@@ -279,7 +283,9 @@ function egov_law_monitor_generate_ai_summary(
     $cache =
         egov_law_monitor_get_ai_summary_cache(
             $law_id,
-            $effective_date
+            $effective_date,
+            $law_data_id,
+            $sub_revision
         );
 
     $revision_hash = '';
@@ -330,6 +336,8 @@ function egov_law_monitor_generate_ai_summary(
                 [
                     'law_id' => $law_id,
                     'effective_date' => $effective_date,
+                    'law_data_id' => $law_data_id,
+                    'sub_revision' => $sub_revision,
                     'revision_hash' => $revision_hash,
                 ]
             ),
@@ -375,10 +383,56 @@ function egov_law_monitor_generate_ai_summary(
         ! empty( $body['cached'] ) &&
         is_array( $cache )
     ) {
+        $amendment_name =
+            $body['amendment_name'] ??
+            $cache['amendment_name'] ??
+            '';
+
+        $comparison_effective_date =
+            $body['comparison_effective_date'] ??
+            $cache['comparison_effective_date'] ??
+            '';
+
+        if (
+            $amendment_name !== '' ||
+            $comparison_effective_date !== ''
+        ) {
+            $saved = egov_law_monitor_save_ai_summary_cache(
+                $law_id,
+                $effective_date,
+                $law_data_id,
+                $sub_revision,
+                $amendment_name,
+                $comparison_effective_date,
+                $cache['revision_hash'],
+                $cache['summary_title'],
+                $cache['summary_body']
+            );
+
+            if ( $saved === false ) {
+                global $wpdb;
+
+                $db_error = $wpdb->last_error;
+
+                if ( $db_error === '' ) {
+                    $db_error = 'Unknown database error.';
+                }
+
+                return new WP_Error(
+                    'egov_law_monitor_ai_cache_error',
+                    'Failed to update AI Summary cache: ' . $db_error
+                );
+            }
+        }
+
         return [
             'law_id' => $law_id,
             'law_name' => $body['law_name'] ?? '',
             'effective_date' => $effective_date,
+            'law_data_id' => $law_data_id,
+            'sub_revision' => $sub_revision,
+            'amendment_name' => $amendment_name,
+            'comparison_effective_date' => $comparison_effective_date,
             'revision_hash' => $cache['revision_hash'],
             'summary' => [
                 'title' => $cache['summary_title'],
@@ -421,9 +475,19 @@ function egov_law_monitor_generate_ai_summary(
         );
     }
 
+    $amendment_name =
+        $body['amendment_name'] ?? '';
+
+    $comparison_effective_date =
+        $body['comparison_effective_date'] ?? '';
+
     $saved = egov_law_monitor_save_ai_summary_cache(
         $law_id,
         $effective_date,
+        $law_data_id,
+        $sub_revision,
+        $amendment_name,
+        $comparison_effective_date,
         $new_revision_hash,
         $summary_title,
         $summary_body
@@ -435,6 +499,11 @@ function egov_law_monitor_generate_ai_summary(
             'Failed to save AI Summary cache.'
         );
     }
+
+    $body['law_id'] = $law_id;
+    $body['effective_date'] = $effective_date;
+    $body['law_data_id'] = $law_data_id;
+    $body['sub_revision'] = $sub_revision;
 
     return $body;
 }

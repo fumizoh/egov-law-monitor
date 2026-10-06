@@ -211,6 +211,41 @@ def build_law_summary_input(
     )
 
 
+def build_law_summary_input_for_revision(
+    law_id: str,
+    law_name: str,
+    effective_date: str,
+    law_data_id: int,
+    sub_revision: str,
+) -> LawSummaryInput:
+    """Build AI summary input for one specific revision."""
+
+    revisions = get_revisions_for_effective_date(
+        law_id=law_id,
+        effective_date=effective_date,
+    )
+
+    matched = [
+        revision
+        for revision in revisions
+        if (
+            revision.law_data_id == law_data_id
+            and revision.sub_revision == sub_revision
+        )
+    ]
+
+    if not matched:
+        raise ValueError(
+            "Specified revision was not found for the effective date."
+        )
+
+    return LawSummaryInput(
+        law_id=law_id,
+        law_name=law_name,
+        revisions=[matched[0]],
+    )
+
+
 def build_law_summary_input_for_effective_date(
     law_id: str,
     law_name: str,

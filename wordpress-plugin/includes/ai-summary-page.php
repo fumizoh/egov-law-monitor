@@ -24,6 +24,18 @@ function egov_law_monitor_ai_summary_shortcode() {
         )
         : '';
 
+    $law_data_id = isset( $_GET['law_data_id'] )
+        ? sanitize_text_field(
+            wp_unslash( $_GET['law_data_id'] )
+        )
+        : '';
+
+    $sub_revision = isset( $_GET['sub_revision'] )
+        ? sanitize_text_field(
+            wp_unslash( $_GET['sub_revision'] )
+        )
+        : '';
+
     $free_limit = 5;
 
     /*
@@ -32,7 +44,12 @@ function egov_law_monitor_ai_summary_shortcode() {
     $summary_result = null;
     $summary_error  = null;
 
-    if ( $law_id && $effective_date ) {
+    if (
+        $law_id &&
+        $effective_date &&
+        $law_data_id &&
+        $sub_revision
+    ) {
 
         $usage_count =
             egov_law_monitor_get_ai_summary_usage_count(
@@ -40,41 +57,29 @@ function egov_law_monitor_ai_summary_shortcode() {
             );
 
         /*
-         * If the user has already used this exact summary,
-         * it can still be displayed even when the free limit
-         * has been reached.
-         *
-         * We can determine this immediately when the current
-         * WordPress cache exists.
+         * If the user has already used this exact revision,
+         * it can still be displayed after the free limit.
          */
         $cache =
             egov_law_monitor_get_ai_summary_cache(
                 $law_id,
-                $effective_date
+                $effective_date,
+                $law_data_id,
+                $sub_revision
             );
 
-        $already_used = false;
-
-        if ( is_array( $cache ) ) {
-
-            $cached_revision_hash =
-                $cache['revision_hash'] ?? '';
-
-            if ( $cached_revision_hash !== '' ) {
-
-                $already_used =
-                    egov_law_monitor_has_ai_summary_history(
-                        $user_id,
-                        $law_id,
-                        $effective_date,
-                        $cached_revision_hash
-                    );
-            }
-        }
+        $already_used =
+            egov_law_monitor_has_ai_summary_history(
+                $user_id,
+                $law_id,
+                $effective_date,
+                $law_data_id,
+                $sub_revision
+            );
 
         /*
          * Do not call Cloud Run when the user has reached
-         * the free limit and this summary has not been used.
+         * the free limit and this exact revision has not been used.
          */
         if (
             $usage_count >= $free_limit &&
@@ -92,7 +97,9 @@ function egov_law_monitor_ai_summary_shortcode() {
             $summary_result =
                 egov_law_monitor_generate_ai_summary(
                     $law_id,
-                    $effective_date
+                    $effective_date,
+                    $law_data_id,
+                    $sub_revision
                 );
 
             if ( is_wp_error( $summary_result ) ) {
@@ -123,7 +130,7 @@ function egov_law_monitor_ai_summary_shortcode() {
                 } else {
 
                     /*
-                     * Same summary:
+                     * Same revision:
                      * do not consume another free use.
                      */
                     $already_used =
@@ -131,11 +138,12 @@ function egov_law_monitor_ai_summary_shortcode() {
                             $user_id,
                             $law_id,
                             $effective_date,
-                            $revision_hash
+                            $law_data_id,
+                            $sub_revision
                         );
 
                     /*
-                     * New summary:
+                     * New revision:
                      * record the usage only after the summary
                      * has been successfully obtained.
                      */
@@ -145,11 +153,13 @@ function egov_law_monitor_ai_summary_shortcode() {
                             egov_law_monitor_save_ai_summary_history(
                                 $user_id,
                                 $law_id,
-                                $summary_result['law_name'],
+                                $summary_result['law_name'] ?? '',
                                 $effective_date,
+                                $law_data_id,
+                                $sub_revision,
                                 $revision_hash,
-                                $summary_result['summary']['title'],
-                                $summary_result['summary']['body']
+                                $summary_result['summary']['title'] ?? '',
+                                $summary_result['summary']['body'] ?? ''
                             );
 
                         if ( $saved === false ) {
@@ -166,6 +176,14 @@ function egov_law_monitor_ai_summary_shortcode() {
                 }
             }
         }
+
+    } elseif ( $law_id || $effective_date || $law_data_id || $sub_revision ) {
+
+        $summary_error =
+            new WP_Error(
+                'egov_law_monitor_ai_invalid_request',
+                'AI要約の対象となる改正情報が不足しています。'
+            );
     }
 
     /*
@@ -235,8 +253,11 @@ function egov_law_monitor_ai_summary_shortcode() {
                 $law_name =
                     $summary_result['law_name'] ?? '';
 
-                $revision_hash =
-                    $summary_result['revision_hash'] ?? '';
+                $amendment_name =
+                    $summary_result['amendment_name'] ?? '';
+
+                $comparison_effective_date =
+                    $summary_result['comparison_effective_date'] ?? '';
                 ?>
 
                 <?php if ( $law_name !== '' ) : ?>
@@ -244,6 +265,24 @@ function egov_law_monitor_ai_summary_shortcode() {
                     <h2 class="egov-ai-summary-law-name">
                         <?php echo esc_html( $law_name ); ?>
                     </h2>
+
+                <?php endif; ?>
+
+                <?php if ( $amendment_name !== '' ) : ?>
+
+                    <p>
+                        改正法令：
+                        <?php echo esc_html( $amendment_name ); ?>
+                    </p>
+
+                <?php endif; ?>
+
+                <?php if ( $comparison_effective_date !== '' ) : ?>
+
+                    <p>
+                        比較対象の施行日：
+                        <?php echo esc_html( $comparison_effective_date ); ?>
+                    </p>
 
                 <?php endif; ?>
 
@@ -303,6 +342,10 @@ function egov_law_monitor_ai_summary_shortcode() {
                                     $item['law_id'],
                                 'effective_date' =>
                                     $item['effective_date'],
+                                'law_data_id' =>
+                                    $item['law_data_id'] ?? '',
+                                'sub_revision' =>
+                                    $item['sub_revision'] ?? '',
                                 'history_id' =>
                                     $item['id'],
                             ),
