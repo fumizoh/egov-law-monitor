@@ -36,6 +36,10 @@ function egov_law_monitor_ai_summary_shortcode() {
         )
         : '';
 
+    $history_id = isset( $_GET['history_id'] )
+        ? absint( $_GET['history_id'] )
+        : 0;
+
     $free_limit = 5;
 
     /*
@@ -44,7 +48,69 @@ function egov_law_monitor_ai_summary_shortcode() {
     $summary_result = null;
     $summary_error  = null;
 
-    if (
+    /*
+     * History view.
+     *
+     * A history link must be served entirely from WordPress data.
+     * Do not call Cloud Run when displaying a previously generated
+     * summary.
+     */
+    if ( $history_id > 0 ) {
+
+        $history_item =
+            egov_law_monitor_get_ai_summary_history_by_id(
+                $user_id,
+                $history_id
+            );
+
+        if ( ! is_array( $history_item ) ) {
+
+            $summary_error =
+                new WP_Error(
+                    'egov_law_monitor_ai_history_not_found',
+                    '指定されたAI要約の履歴が見つかりません。'
+                );
+
+        } else {
+
+            $summary_result = array(
+                'law_id' => $history_item['law_id'],
+                'law_name' => $history_item['law_name'],
+                'effective_date' => $history_item['effective_date'],
+                'law_data_id' => $history_item['law_data_id'] ?? '',
+                'sub_revision' => $history_item['sub_revision'] ?? '',
+                'revision_hash' => $history_item['revision_hash'],
+                'amendment_name' => '',
+                'comparison_effective_date' => '',
+                'summary' => array(
+                    'title' => $history_item['summary_title'],
+                    'body' => $history_item['summary_body'],
+                ),
+                'cached' => true,
+            );
+
+            /*
+             * The cache is also local WordPress data. Use it only to
+             * restore the amendment metadata shown on the summary page.
+             */
+            $history_cache =
+                egov_law_monitor_get_ai_summary_cache(
+                    $history_item['law_id'],
+                    $history_item['effective_date'],
+                    $history_item['law_data_id'] ?? '',
+                    $history_item['sub_revision'] ?? ''
+                );
+
+            if ( is_array( $history_cache ) ) {
+                $summary_result['amendment_name'] =
+                    $history_cache['amendment_name'] ?? '';
+
+                $summary_result['comparison_effective_date'] =
+                    $history_cache['comparison_effective_date'] ?? '';
+            }
+        }
+
+    } elseif (
         $law_id &&
         $effective_date &&
         $law_data_id &&
@@ -199,32 +265,12 @@ function egov_law_monitor_ai_summary_shortcode() {
         $free_limit - $usage_count
     );
 
-    /*
-     * Get history after processing.
-     */
-    $history =
-        egov_law_monitor_get_ai_summary_history(
-            $user_id
-        );
-
     ob_start();
     ?>
 
     <div class="egov-ai-summary-page">
 
-        <h2 class="egov-ai-summary-heading"><i class="las la-robot" aria-hidden="true"></i> AI要約</h2>
-
-        <div class="egov-ai-summary-usage">
-
-            <p>
-                AI要約の無料利用：
-                <strong>
-                    残り <?php echo esc_html( $remaining ); ?>
-                    / <?php echo esc_html( $free_limit ); ?> 回
-                </strong>
-            </p>
-
-        </div>
+        <h2 class="egov-ai-summary-heading">🤖 AI要約</h2>
 
         <div class="egov-ai-summary-current">
 
@@ -251,7 +297,7 @@ function egov_law_monitor_ai_summary_shortcode() {
                     $summary['body'] ?? '';
 
                 /*
-                 * The AI response may contain literal \n                 * escape sequences. Convert them to real line breaks
+                 * The AI response may contain literal \\n                 * escape sequences. Convert them to real line breaks
                  * before wpautop() formats the body.
                  */
                 $summary_body = str_replace(
@@ -331,93 +377,6 @@ function egov_law_monitor_ai_summary_shortcode() {
 
         </div>
 
-        <div class="egov-ai-summary-history">
-
-            <h3>AI要約の履歴</h3>
-
-            <?php if ( empty( $history ) ) : ?>
-
-                <p>AI要約の利用履歴はありません。</p>
-
-            <?php else : ?>
-
-                <ul>
-
-                    <?php foreach ( $history as $item ) : ?>
-
-                        <?php
-                        $history_url = add_query_arg(
-                            array(
-                                'law_id' =>
-                                    $item['law_id'],
-                                'effective_date' =>
-                                    $item['effective_date'],
-                                'law_data_id' =>
-                                    $item['law_data_id'] ?? '',
-                                'sub_revision' =>
-                                    $item['sub_revision'] ?? '',
-                                'history_id' =>
-                                    $item['id'],
-                            ),
-                            get_permalink()
-                        );
-                        ?>
-
-                        <?php
-                        $used_at = $item['used_at'] ?? '';
-
-                        if (
-                            $used_at === ''
-                            || $used_at === '0000-00-00 00:00:00'
-                        ) {
-                            $used_at_display = '未記録';
-                        } else {
-                            $used_at_display = $used_at;
-                        }
-                        ?>
-
-                        <li class="egov-ai-summary-history-item">
-                            <a
-                                class="egov-ai-summary-history-law"
-                                href="<?php echo esc_url( $history_url ); ?>"
-                            >
-                                <?php echo esc_html( $item['law_name'] ); ?>
-                            </a>
-
-                            <?php if ( ! empty( $item['amendment_name'] ) ) : ?>
-                                <div class="egov-ai-summary-history-amendment">
-                                    改正法令：<?php echo esc_html( $item['amendment_name'] ); ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <?php if ( ! empty( $item['summary_title'] ) ) : ?>
-                                <div class="egov-ai-summary-history-title">
-                                    <?php echo esc_html( $item['summary_title'] ); ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <div class="egov-ai-summary-history-meta">
-                                <span>
-                                    施行日：<?php echo esc_html( $item['effective_date'] ); ?>
-                                </span>
-                                <?php if ( ! empty( $item['comparison_effective_date'] ) ) : ?>
-                                    <span>
-                                        比較対象：<?php echo esc_html( $item['comparison_effective_date'] ); ?>
-                                    </span>
-                                <?php endif; ?>
-                                <span>
-                                    利用日：<?php echo esc_html( $used_at_display ); ?>
-                                </span>
-                            </div>
-                        </li>
-
-                    <?php endforeach; ?>
-
-                </ul>
-
-            <?php endif; ?>
-
-        </div>
 
     </div>
 

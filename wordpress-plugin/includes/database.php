@@ -476,6 +476,42 @@ function egov_law_monitor_get_ai_summary_usage_count(
  * @param int $user_id User ID.
  * @return array
  */
+/**
+ * Get one AI summary history record for the current user.
+ *
+ * @param int $user_id    User ID.
+ * @param int $history_id History record ID.
+ * @return array|null
+ */
+function egov_law_monitor_get_ai_summary_history_by_id(
+    $user_id,
+    $history_id
+) {
+    global $wpdb;
+
+    $table_name =
+        $wpdb->prefix . 'egov_law_ai_summary_history';
+
+    return $wpdb->get_row(
+        $wpdb->prepare(
+            "SELECT *
+             FROM {$table_name}
+             WHERE id = %d
+             AND user_id = %d
+             LIMIT 1",
+            $history_id,
+            $user_id
+        ),
+        ARRAY_A
+    );
+}
+
+/**
+ * Get AI summary usage history for a user.
+ *
+ * @param int $user_id User ID.
+ * @return array
+ */
 function egov_law_monitor_get_ai_summary_history(
     $user_id
 ) {
@@ -486,18 +522,10 @@ function egov_law_monitor_get_ai_summary_history(
 
     return $wpdb->get_results(
         $wpdb->prepare(
-            "SELECT
-                 history.*,
-                 cache.amendment_name,
-                 cache.comparison_effective_date
-             FROM {$table_name} AS history
-             LEFT JOIN {$wpdb->prefix}egov_law_ai_summaries AS cache
-                 ON cache.law_id = history.law_id
-                 AND cache.effective_date = history.effective_date
-                 AND cache.law_data_id = history.law_data_id
-                 AND cache.sub_revision = history.sub_revision
-             WHERE history.user_id = %d
-             ORDER BY history.used_at DESC",
+            "SELECT *
+             FROM {$table_name}
+             WHERE user_id = %d
+             ORDER BY used_at DESC",
             $user_id
         ),
         ARRAY_A
