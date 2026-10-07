@@ -298,7 +298,8 @@ function egov_law_monitor_ai_summary_shortcode() {
                     array( '\r\n', '\n', '\r' ),
                     array( "
 ", "
-", "" ),
+", "
+" ),
                     $summary_body
                 );
 
@@ -310,6 +311,21 @@ function egov_law_monitor_ai_summary_shortcode() {
 
                 $comparison_effective_date =
                     $summary_result['comparison_effective_date'] ?? '';
+
+                /*
+                 * AI要約の対象種別。
+                 *
+                 * 新規制定は改正法令名・比較対象施行日の両方がないことで判定する。
+                 * 改正の未施行は、施行日が現在日より後の場合に判定する。
+                 */
+                $is_new_law =
+                    $amendment_name === ''
+                    && $comparison_effective_date === '';
+
+                $is_pending =
+                    ! $is_new_law
+                    && $effective_date !== ''
+                    && $effective_date > current_time( 'Y-m-d' );
                 ?>
 
                 <?php if ( $law_name !== '' ) : ?>
@@ -320,7 +336,17 @@ function egov_law_monitor_ai_summary_shortcode() {
 
                 <?php endif; ?>
 
-                <?php if ( $amendment_name !== '' ) : ?>
+                <?php if ( $is_new_law ) : ?>
+
+                    <p class="egov-ai-summary-meta">
+                        新規制定
+                    </p>
+
+                <?php elseif ( $amendment_name !== '' ) : ?>
+
+                    <p class="egov-ai-summary-meta">
+                        改正・<?php echo $is_pending ? '未施行' : '施行済み'; ?>
+                    </p>
 
                     <p class="egov-ai-summary-meta">
                         改正法令：
@@ -333,6 +359,9 @@ function egov_law_monitor_ai_summary_shortcode() {
                     施行日：
                     <?php
                     echo esc_html( $effective_date );
+                    if ( $is_pending ) {
+                        echo '（未施行）';
+                    }
                     ?>
                 </p>
 

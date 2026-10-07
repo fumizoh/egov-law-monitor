@@ -177,21 +177,21 @@ def _build_revision(
 
     ai_summary_html = ""
 
-    if not revision.pending and not revision.is_new_law:
-        amendment_name = html.escape(
-            revision.amendment_name or "",
-            quote=True,
-        )
-        ai_summary_html = (
-            f'<button type="button" class="egov-ai-summary-action" '
-            f'data-law-id="{html.escape(law_id, quote=True)}" '
-            f'data-effective-date="{html.escape(revision.enforcement_date or "", quote=True)}" '
-            f'data-law-data-id="{revision.law_data_id}" '
-            f'data-sub-revision="{html.escape(revision.sub_revision, quote=True)}" '
-            f'data-amendment-name="{amendment_name}">'
-            f"AIで要約"
-            f"</button>"
-        )
+    # AI要約は、新規制定・施行済み改正・未施行改正のすべてで利用可能。
+    amendment_name = html.escape(
+        revision.amendment_name or "",
+        quote=True,
+    )
+    ai_summary_html = (
+        f'<button type="button" class="egov-ai-summary-action" '
+        f'data-law-id="{html.escape(law_id, quote=True)}" '
+        f'data-effective-date="{html.escape(revision.enforcement_date or "", quote=True)}" '
+        f'data-law-data-id="{revision.law_data_id}" '
+        f'data-sub-revision="{html.escape(revision.sub_revision, quote=True)}" '
+        f'data-amendment-name="{amendment_name}">'
+        f"AIで要約"
+        f"</button>"
+    )
 
     return f"""
 <div class="egov-update-history">

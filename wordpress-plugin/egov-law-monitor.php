@@ -95,6 +95,10 @@ add_action(
                 'lawSearchUrl' => rest_url( 'egov-law-monitor/v1/law-search' ),
                 'aiSummary' => array(
                     'url' => $ai_summary_url,
+                    'usageUrl' => rest_url(
+                        'egov-law-monitor/v1/ai-summary-usage'
+                    ),
+                    'restNonce' => wp_create_nonce( 'wp_rest' ),
                     'isLoggedIn' => is_user_logged_in(),
                     'remaining' => max( 0, $ai_summary_limit - $ai_usage_count ),
                     'limit' => $ai_summary_limit,
@@ -131,7 +135,7 @@ add_action(
 
         buttons.forEach((button) => {
 
-            button.addEventListener('click', () => {
+            button.addEventListener('click', async () => {
 
                 if (!settings.url) {
                     window.alert(
@@ -140,8 +144,47 @@ add_action(
                     return;
                 }
 
+                if (!settings.usageUrl) {
+                    window.alert(
+                        'AI要約の利用状況を取得できません。'
+                    );
+                    return;
+                }
+
+                let usage;
+
+                try {
+                    const response =
+                        await fetch(
+                            settings.usageUrl,
+                            {
+                                method: 'GET',
+                                credentials: 'same-origin',
+                                headers: {
+                                    'X-WP-Nonce':
+                                        settings.restNonce
+                                }
+                            }
+                        );
+
+                    if (!response.ok) {
+                        throw new Error(
+                            'AI要約の利用状況を取得できませんでした。'
+                        );
+                    }
+
+                    usage = await response.json();
+
+                } catch (error) {
+                    window.alert(
+                        'AI要約の利用状況を取得できませんでした。\n' +
+                        'ページを再読み込みしてから、もう一度お試しください。'
+                    );
+                    return;
+                }
+
                 const remaining =
-                    Number(settings.remaining || 0);
+                    Number(usage.remaining || 0);
 
                 const amendmentName =
                     button.dataset.amendmentName ||
@@ -225,6 +268,54 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-page.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-management.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/user-settings.php';
+
+/*
+ * AI要約の最新利用状況を取得するREST API。
+ *
+ * 法令ページを開いた後に別タブ等でAI要約を利用した場合でも、
+ * 「AIで要約」クリック時点の最新残り回数を確認できるようにする。
+ */
+add_action(
+    'rest_api_init',
+    function () {
+        register_rest_route(
+            'egov-law-monitor/v1',
+            '/ai-summary-usage',
+            array(
+                'methods' => WP_REST_Server::READABLE,
+                'permission_callback' => function () {
+                    return is_user_logged_in();
+                },
+                'callback' => function () {
+
+                    $user_id =
+                        get_current_user_id();
+
+                    $limit =
+                        egov_law_monitor_get_ai_summary_limit(
+                            $user_id
+                        );
+
+                    $usage_count =
+                        egov_law_monitor_get_ai_summary_usage_count(
+                            $user_id
+                        );
+
+                    return rest_ensure_response(
+                        array(
+                            'remaining' => max(
+                                0,
+                                $limit - $usage_count
+                            ),
+                            'limit' => $limit,
+                            'usageCount' => $usage_count,
+                        )
+                    );
+                },
+            )
+        );
+    }
+);
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-users.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-menu.php';

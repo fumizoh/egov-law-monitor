@@ -359,6 +359,11 @@ def get_revision_metadata_for_revision(
 
     revision = summary_input.revisions[0]
 
+    # 新規制定には比較対象となる旧法令がないため、
+    # Compare APIを呼び出さない。
+    if revision.is_new_law:
+        return None, None
+
     compare_json = compare_api.fetch_compare(
         new_law_data_id=revision.law_data_id,
         new_sub_revision=revision.sub_revision,
@@ -399,21 +404,23 @@ def generate_for_revision(
         revision
     )
 
-    # The comparison target date is obtained from the exact
-    # Compare API result for this revision.
-    compare_json = compare_api.fetch_compare(
-        new_law_data_id=revision.law_data_id,
-        new_sub_revision=revision.sub_revision,
-    )
-
-    compare_result = comparison.parse_compare_result(compare_json)
-
     comparison_effective_date = None
-    if compare_result is not None:
-        comparison_effective_date = (
-            compare_result.old.enforcement_date
-            or compare_result.old.scheduled_enforcement_date
+
+    # 新規制定には比較対象となる旧法令がないため、
+    # Compare APIを呼び出さず、新規制定用の要約処理へ進む。
+    if not revision.is_new_law:
+        compare_json = compare_api.fetch_compare(
+            new_law_data_id=revision.law_data_id,
+            new_sub_revision=revision.sub_revision,
         )
+
+        compare_result = comparison.parse_compare_result(compare_json)
+
+        if compare_result is not None:
+            comparison_effective_date = (
+                compare_result.old.enforcement_date
+                or compare_result.old.scheduled_enforcement_date
+            )
 
     response = _generate_law_summary(summary_input)
 
