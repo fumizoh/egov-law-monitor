@@ -134,8 +134,8 @@ function egov_law_monitor_ai_summary_shortcode() {
                 $sub_revision
             );
 
-        $already_used =
-            egov_law_monitor_has_ai_summary_history(
+        $history_item =
+            egov_law_monitor_get_ai_summary_history_by_revision(
                 $user_id,
                 $law_id,
                 $effective_date,
@@ -143,13 +143,57 @@ function egov_law_monitor_ai_summary_shortcode() {
                 $sub_revision
             );
 
+        $already_used = is_array( $history_item );
+
+        /*
+         * If this exact revision has already been summarized for this user,
+         * use the saved WordPress history directly.
+         *
+         * Cloud Run is not called in this path.
+         */
+        if ( $already_used ) {
+
+            $summary_result = array(
+                'law_id' => $history_item['law_id'],
+                'law_name' => $history_item['law_name'],
+                'effective_date' => $history_item['effective_date'],
+                'law_data_id' => $history_item['law_data_id'] ?? '',
+                'sub_revision' => $history_item['sub_revision'] ?? '',
+                'revision_hash' => $history_item['revision_hash'],
+                'amendment_name' => '',
+                'comparison_effective_date' => '',
+                'summary' => array(
+                    'title' => $history_item['summary_title'],
+                    'body' => $history_item['summary_body'],
+                ),
+                'cached' => true,
+            );
+
+            /*
+             * Restore display metadata from the local WordPress cache.
+             */
+            $history_cache =
+                egov_law_monitor_get_ai_summary_cache(
+                    $history_item['law_id'],
+                    $history_item['effective_date'],
+                    $history_item['law_data_id'] ?? '',
+                    $history_item['sub_revision'] ?? ''
+                );
+
+            if ( is_array( $history_cache ) ) {
+                $summary_result['amendment_name'] =
+                    $history_cache['amendment_name'] ?? '';
+
+                $summary_result['comparison_effective_date'] =
+                    $history_cache['comparison_effective_date'] ?? '';
+            }
+
         /*
          * Do not call Cloud Run when the user has reached
-         * the free limit and this exact revision has not been used.
+         * the monthly limit and this exact revision has not been used.
          */
-        if (
-            $usage_count >= $ai_summary_limit &&
-            ! $already_used
+        } elseif (
+            $usage_count >= $ai_summary_limit
         ) {
 
             $summary_error =

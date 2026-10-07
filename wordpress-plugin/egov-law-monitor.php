@@ -111,6 +111,193 @@ add_action(
             <<<'JS'
 (function () {
 
+    function showAiSummaryModal(options) {
+        const {
+            amendmentName,
+            remaining,
+            onConfirm
+        } = options;
+
+        const existing = document.getElementById('egov-ai-summary-modal');
+        if (existing) {
+            existing.remove();
+        }
+
+        const overlay = document.createElement('div');
+        overlay.id = 'egov-ai-summary-modal';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'AI要約の確認');
+
+        overlay.innerHTML = `
+            <div class="egov-ai-summary-modal-overlay">
+                <div class="egov-ai-summary-modal" role="document">
+                    <div class="egov-ai-summary-modal-title">AI要約</div>
+                    <div class="egov-ai-summary-modal-body">
+                        ${
+                            remaining > 0
+                                ? '<p>この改正をAIで要約します。</p>' +
+                                  '<p>今月のAI要約の残り：<strong>' +
+                                  remaining +
+                                  '回</strong></p>' +
+                                  '<p class="egov-ai-summary-modal-amendment">' +
+                                  amendmentName +
+                                  '</p>'
+                                : '<p>今月のAI要約利用回数を使い切っています。</p>' +
+                                  '<p>この改正のAI要約を利用済みの場合は、<br>' +
+                                  'AI要約ページから再度表示できます。</p>'
+                        }
+                    </div>
+                    <div class="egov-ai-summary-modal-actions">
+                        <button type="button" class="egov-ai-summary-modal-cancel">
+                            閉じる
+                        </button>
+                        ${
+                            remaining > 0
+                                ? '<button type="button" class="egov-ai-summary-modal-confirm">' +
+                                  'AI要約する' +
+                                  '</button>'
+                                : ''
+                        }
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const style = document.createElement('style');
+        style.id = 'egov-ai-summary-modal-style';
+        style.textContent = `
+            #egov-ai-summary-modal {
+                position: fixed;
+                inset: 0;
+                z-index: 999999;
+            }
+
+            .egov-ai-summary-modal-overlay {
+                position: fixed;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                background: rgba(0, 0, 0, 0.45);
+            }
+
+            .egov-ai-summary-modal {
+                width: min(440px, 100%);
+                box-sizing: border-box;
+                background: #fff;
+                border-radius: 10px;
+                padding: 24px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+                color: #333;
+            }
+
+            .egov-ai-summary-modal-title {
+                margin: 0 0 16px;
+                font-size: 20px;
+                font-weight: 700;
+            }
+
+            .egov-ai-summary-modal-body {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+
+            .egov-ai-summary-modal-body p {
+                margin: 0 0 10px;
+            }
+
+            .egov-ai-summary-modal-body p:last-child {
+                margin-bottom: 0;
+            }
+
+            .egov-ai-summary-modal-amendment {
+                padding: 10px 12px;
+                background: #f6f6f6;
+                border-radius: 6px;
+                font-size: 14px;
+            }
+
+            .egov-ai-summary-modal-actions {
+                display: flex;
+                justify-content: flex-end;
+                gap: 8px;
+                margin-top: 20px;
+            }
+
+            .egov-ai-summary-modal-actions button {
+                appearance: none;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                padding: 8px 16px;
+                font-size: 14px;
+                line-height: 1.4;
+                cursor: pointer;
+            }
+
+            .egov-ai-summary-modal-cancel {
+                background: #fff;
+                color: #333;
+            }
+
+            .egov-ai-summary-modal-confirm {
+                border-color: var(--theme-palette-color-1, #1e73be) !important;
+                background: var(--theme-palette-color-1, #1e73be);
+                color: #fff;
+            }
+
+            @media (max-width: 480px) {
+                .egov-ai-summary-modal {
+                    padding: 20px;
+                }
+
+                .egov-ai-summary-modal-actions {
+                    flex-direction: column-reverse;
+                }
+
+                .egov-ai-summary-modal-actions button {
+                    width: 100%;
+                }
+            }
+        `;
+
+        document.head.appendChild(style);
+        document.body.appendChild(overlay);
+
+        const close = () => {
+            overlay.remove();
+            const modalStyle = document.getElementById('egov-ai-summary-modal-style');
+            if (modalStyle) {
+                modalStyle.remove();
+            }
+        };
+
+        overlay.querySelector('.egov-ai-summary-modal-overlay')
+            .addEventListener('click', (event) => {
+                if (event.target === event.currentTarget) {
+                    close();
+                }
+            });
+
+        overlay.querySelector('.egov-ai-summary-modal-cancel')
+            .addEventListener('click', close);
+
+        const confirmButton =
+            overlay.querySelector('.egov-ai-summary-modal-confirm');
+
+        if (confirmButton) {
+            confirmButton.addEventListener('click', () => {
+                close();
+                onConfirm();
+            });
+
+            confirmButton.focus();
+        } else {
+            overlay.querySelector('.egov-ai-summary-modal-cancel').focus();
+        }
+    }
+
     function initAiSummaryActions() {
 
         const settings =
@@ -190,46 +377,42 @@ add_action(
                     button.dataset.amendmentName ||
                     'この改正';
 
-                const message =
-                    remaining > 0
-                        ? 'この改正をAIで要約します。\n\n' +
-                          '今月のAI要約の残り：' +
-                          remaining +
-                          '回\n\n' +
-                          amendmentName
-                        : '今月のAI要約利用回数を使い切っています。\n\n' +
-                          'この改正のAI要約を利用済みの場合は、\n' +
-                          'AI要約ページから再度表示できます。';
+                showAiSummaryModal({
+                    amendmentName: amendmentName,
+                    remaining: remaining,
+                    onConfirm: () => {
 
-                if (!window.confirm(message)) {
-                    return;
-                }
+                        const url =
+                            new URL(
+                                settings.url,
+                                window.location.origin
+                            );
 
-                const url =
-                    new URL(settings.url, window.location.origin);
+                        url.searchParams.set(
+                            'law_id',
+                            button.dataset.lawId || ''
+                        );
 
-                url.searchParams.set(
-                    'law_id',
-                    button.dataset.lawId || ''
-                );
-                url.searchParams.set(
-                    'effective_date',
-                    button.dataset.effectiveDate || ''
-                );
-                url.searchParams.set(
-                    'law_data_id',
-                    button.dataset.lawDataId || ''
-                );
-                url.searchParams.set(
-                    'sub_revision',
-                    button.dataset.subRevision || ''
-                );
+                        url.searchParams.set(
+                            'effective_date',
+                            button.dataset.effectiveDate || ''
+                        );
 
-                window.open(
-                    url.toString(),
-                    '_blank',
-                    'noopener,noreferrer'
-                );
+                        url.searchParams.set(
+                            'law_data_id',
+                            button.dataset.lawDataId || ''
+                        );
+
+                        url.searchParams.set(
+                            'sub_revision',
+                            button.dataset.subRevision || ''
+                        );
+
+                        // ポップアップを使わず、同じタブでAI要約ページへ移動する。
+                        close();
+                        window.location.href = url.toString();
+                    }
+                });
             });
         });
     }

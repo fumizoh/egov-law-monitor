@@ -392,6 +392,49 @@ function egov_law_monitor_has_ai_summary_history(
 }
 
 /**
+ * Get the user's existing AI summary history for an exact revision.
+ *
+ * @param int    $user_id        User ID.
+ * @param string $law_id         Law ID.
+ * @param string $effective_date Effective date.
+ * @param string $law_data_id    e-Gov law data ID.
+ * @param string $sub_revision   e-Gov sub revision.
+ * @return array|null
+ */
+function egov_law_monitor_get_ai_summary_history_by_revision(
+    $user_id,
+    $law_id,
+    $effective_date,
+    $law_data_id,
+    $sub_revision
+) {
+    global $wpdb;
+
+    $table_name =
+        $wpdb->prefix . 'egov_law_ai_summary_history';
+
+    return $wpdb->get_row(
+        $wpdb->prepare(
+            "SELECT *
+             FROM {$table_name}
+             WHERE user_id = %d
+             AND law_id = %s
+             AND effective_date = %s
+             AND law_data_id = %s
+             AND sub_revision = %s
+             ORDER BY used_at DESC
+             LIMIT 1",
+            $user_id,
+            $law_id,
+            $effective_date,
+            $law_data_id,
+            $sub_revision
+        ),
+        ARRAY_A
+    );
+}
+
+/**
  * Save AI summary usage history.
  *
  * @param int    $user_id        User ID.
