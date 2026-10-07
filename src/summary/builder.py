@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from models import (
-    LawGroup,
     LawChange,
     RevisionHistory,
     LawSummaryInput,
@@ -19,17 +18,11 @@ from summary.input import (
 
 from sources.lawtext_api import fetch_law_text
 
-from sources.revision import (
-    get_revision_history,
-    get_revisions_for_effective_date,
-)
+from sources.revision import get_revisions_for_effective_date
 
 from lawtext_parser import parse_law_text
 
-from law_group import match_revisions
-
 from sources import egov_api
-
 
 def _build_summary_changes(
     changes: list[LawChange],
@@ -55,7 +48,6 @@ def _build_summary_changes(
 
     return summary_changes
 
-
 def _enrich_summary_changes(
     changes: list[SummaryChange],
     law_data: dict,
@@ -75,7 +67,6 @@ def _enrich_summary_changes(
         )
 
         change.provision_text = provision_text
-
 
 def _build_summary_articles(
     changes: list[SummaryChange],
@@ -98,7 +89,6 @@ def _build_summary_articles(
         for article, article_changes in grouped.items()
     ]
 
-
 def build_amendment_summary_input(
     revision: RevisionHistory,
     changes: list[LawChange],
@@ -119,7 +109,6 @@ def build_amendment_summary_input(
         articles=summary_articles,
         table_changes=table_changes,
     )
-
 
 def enrich_amendment_summary_input(
     law_id: str,
@@ -148,7 +137,6 @@ def enrich_amendment_summary_input(
         law_data,
     )
 
-
 def build_new_law_summary_input(
     law_id: str,
     revision: RevisionHistory,
@@ -170,7 +158,6 @@ def build_new_law_summary_input(
         articles=articles,
     )
 
-
 def build_summary_input(
     law_name: str,
     amendments: list[AmendmentSummaryInput],
@@ -181,35 +168,6 @@ def build_summary_input(
         law_name=law_name,
         amendments=amendments,
     )
-
-
-def build_law_summary_input(
-    law_group: LawGroup,
-) -> LawSummaryInput:
-
-    revisions = get_revision_history(
-        law_group.law_id,
-    )
-
-    summary_revisions = match_revisions(
-        law_group,
-        revisions,
-    )
-
-    summary_revisions.sort(
-        key=lambda revision: (
-            revision.enforcement_date
-            or revision.scheduled_enforcement_date
-            or ""
-        )
-    )
-
-    return LawSummaryInput(
-        law_id=law_group.law_id,
-        law_name=law_group.law_name,
-        revisions=summary_revisions,
-    )
-
 
 def build_law_summary_input_for_revision(
     law_id: str,
@@ -243,23 +201,4 @@ def build_law_summary_input_for_revision(
         law_id=law_id,
         law_name=law_name,
         revisions=[matched[0]],
-    )
-
-
-def build_law_summary_input_for_effective_date(
-    law_id: str,
-    law_name: str,
-    effective_date: str,
-) -> LawSummaryInput:
-    """Build AI summary input for a specific effective date."""
-
-    revisions = get_revisions_for_effective_date(
-        law_id=law_id,
-        effective_date=effective_date,
-    )
-
-    return LawSummaryInput(
-        law_id=law_id,
-        law_name=law_name,
-        revisions=revisions,
     )

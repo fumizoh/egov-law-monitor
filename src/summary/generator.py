@@ -12,7 +12,6 @@ import law_change
 import table_change
 import comparison
 import toc_parser
-import storage
 
 from sources import toc_api
 from sources import compare_api
@@ -21,27 +20,18 @@ from summary import builder
 from summary import prompt
 from summary import gemini_client
 from summary import prompt_renderer
-from summary import log
 
 from models import (
-    LawGroup,
     RevisionHistory,
     LawSummaryInput,
     SummaryResponse,
     LawSummary,
-    AiSummaryLog,
 )
 
 from summary.input import (
     AmendmentSummaryInput,
     PromptDocument,
 )
-
-@dataclass(slots=True)
-class EffectiveDateSummaryResult:
-    law_summary: LawSummary
-    revision_hash: str
-
 
 @dataclass(slots=True)
 class RevisionSummaryResult:
@@ -53,7 +43,6 @@ class RevisionSummaryResult:
 logger = logging.getLogger(__name__)
 
 MAX_XML_CHANGES = 50
-
 
 def _build_amendment_input(
     revision: RevisionHistory,
@@ -96,7 +85,6 @@ def _build_amendment_input(
 
     return amendment_summary_input
 
-
 def _generate_summary(
     prompt_document: PromptDocument,
 ) -> SummaryResponse:
@@ -104,7 +92,6 @@ def _generate_summary(
     prompt = prompt_renderer.render_prompt(prompt_document)
 
     return gemini_client.summarize(prompt)
-
 
 def _generate_new_law_summary(
     law_id: str,
@@ -123,7 +110,6 @@ def _generate_new_law_summary(
     )
 
     return _generate_summary(prompt_document)
-
 
 def _generate_law_summary(
     summary_input: LawSummaryInput,
@@ -195,97 +181,6 @@ def _generate_law_summary(
 
     return _generate_summary(prompt_document)
 
-
-def generate(
-    law_groups: list[LawGroup],
-    date: str,
-    storage_paths: storage.StoragePaths = storage.DEFAULT_STORAGE,
-) -> tuple[
-    list[LawSummary],
-    list[AiSummaryLog],
-]:
-
-    cached_summaries = storage.load_law_summaries(
-        paths=storage_paths,
-    )
-
-    law_summaries: list[LawSummary] = []
-
-    logs: list[AiSummaryLog] = []
-
-    for law_group in law_groups:
-
-        summary_input = builder.build_law_summary_input(
-            law_group,
-        )
-
-        previous_summary = cached_summaries.get(
-            summary_input.law_id,
-        )
-
-        reused = (
-            previous_summary is not None
-            and previous_summary.response is not None
-            and previous_summary.summary_input == summary_input
-        )
-
-        if reused:
-            logger.info(
-                "Reuse summary: %s",
-                summary_input.law_name,
-            )
-
-            law_summary = previous_summary
-
-        else:
-            logger.info(
-                "Generate summary: %s",
-                summary_input.law_name,
-            )
-
-            response = _generate_law_summary(
-                summary_input,
-            )
-
-            if response is None:
-                logger.info(
-                    "FAILED: %s",
-                    summary_input.law_name,
-                )
-            else:
-                logger.info(
-                    "OK: %s",
-                    summary_input.law_name,
-                )
-
-            law_summary = LawSummary(
-                summary_input=summary_input,
-                response=response,
-            )
-
-            storage.upsert_law_summaries(
-                [law_summary],
-                date=date,
-                paths=storage_paths,
-            )
-
-            if response is not None:
-                logs.append(
-                    log.create_law_summary_log(
-                        law_summary=law_summary,
-                    )
-                )            
-
-        law_summaries.append(
-            law_summary,
-        )
-
-    return (
-        law_summaries,
-        logs,
-    )
-
-
 def _calculate_revision_hash(
     revisions: list[RevisionHistory],
 ) -> str:
@@ -309,13 +204,32 @@ def _calculate_revision_hash(
         payload.encode("utf-8")
     ).hexdigest()
 
-
 def _calculate_single_revision_hash(
     revision: RevisionHistory,
 ) -> str:
     """Calculate a stable hash for one revision."""
 
     return _calculate_revision_hash([revision])
+
+def _get_comparison_effective_date(
+    revision: RevisionHistory,
+) -> str | None:
+    """Get the effective date of the revision used for comparison."""
+
+    compare_json = compare_api.fetch_compare(
+        new_law_data_id=revision.law_data_id,
+        new_sub_revision=revision.sub_revision,
+    )
+
+    compare_result = comparison.parse_compare_result(compare_json)
+
+    if compare_result is None:
+        return None
+
+    return (
+        compare_result.old.enforcement_date
+        or compare_result.old.scheduled_enforcement_date
+    )
 
 
 def get_revision_hash_for_revision(
@@ -338,7 +252,6 @@ def get_revision_hash_for_revision(
     return _calculate_single_revision_hash(
         summary_input.revisions[0]
     )
-
 
 def get_revision_metadata_for_revision(
     law_id: str,
@@ -364,22 +277,11 @@ def get_revision_metadata_for_revision(
     if revision.is_new_law:
         return None, None
 
-    compare_json = compare_api.fetch_compare(
-        new_law_data_id=revision.law_data_id,
-        new_sub_revision=revision.sub_revision,
+    comparison_effective_date = _get_comparison_effective_date(
+        revision
     )
 
-    compare_result = comparison.parse_compare_result(compare_json)
-
-    comparison_effective_date = None
-    if compare_result is not None:
-        comparison_effective_date = (
-            compare_result.old.enforcement_date
-            or compare_result.old.scheduled_enforcement_date
-        )
-
     return revision.amendment_name, comparison_effective_date
-
 
 def generate_for_revision(
     law_id: str,
@@ -409,18 +311,9 @@ def generate_for_revision(
     # 新規制定には比較対象となる旧法令がないため、
     # Compare APIを呼び出さず、新規制定用の要約処理へ進む。
     if not revision.is_new_law:
-        compare_json = compare_api.fetch_compare(
-            new_law_data_id=revision.law_data_id,
-            new_sub_revision=revision.sub_revision,
+        comparison_effective_date = _get_comparison_effective_date(
+            revision
         )
-
-        compare_result = comparison.parse_compare_result(compare_json)
-
-        if compare_result is not None:
-            comparison_effective_date = (
-                compare_result.old.enforcement_date
-                or compare_result.old.scheduled_enforcement_date
-            )
 
     response = _generate_law_summary(summary_input)
 
