@@ -529,6 +529,44 @@ function egov_law_monitor_get_ai_summary_usage_count(
 }
 
 /**
+ * Clear AI summary usage history for the current month.
+ *
+ * @param int $user_id User ID.
+ * @return int|false Number of deleted rows, or false on error.
+ */
+function egov_law_monitor_clear_ai_summary_usage( $user_id ) {
+
+    global $wpdb;
+
+    $table_name =
+        $wpdb->prefix . 'egov_law_ai_summary_history';
+
+    $now = current_time( 'timestamp' );
+
+    $month_start = wp_date(
+        'Y-m-01 00:00:00',
+        $now
+    );
+
+    $next_month_start = wp_date(
+        'Y-m-01 00:00:00',
+        strtotime( '+1 month', $now )
+    );
+
+    return $wpdb->query(
+        $wpdb->prepare(
+            "DELETE FROM {$table_name}
+             WHERE user_id = %d
+             AND used_at >= %s
+             AND used_at < %s",
+            $user_id,
+            $month_start,
+            $next_month_start
+        )
+    );
+}
+
+/**
  * Get AI summary usage history for a user.
  *
  * @param int $user_id User ID.
