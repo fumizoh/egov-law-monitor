@@ -27,6 +27,15 @@ function egov_law_monitor_render_admin_users() {
             ? sanitize_key( $_POST['plan'] )
             : EGOV_LAW_MONITOR_PLAN_FREE;
 
+        $allowed_plans = array(
+            EGOV_LAW_MONITOR_PLAN_FREE,
+            EGOV_LAW_MONITOR_PLAN_STANDARD,
+        );
+
+        if ( ! in_array( $plan, $allowed_plans, true ) ) {
+            $plan = EGOV_LAW_MONITOR_PLAN_FREE;
+        }
+
         $notifications = isset( $_POST['notifications'] )
             ? 1
             : 0;
@@ -131,6 +140,12 @@ function egov_law_monitor_render_admin_users() {
                                         <?php selected( $plan, EGOV_LAW_MONITOR_PLAN_FREE ); ?>
                                     >
                                         無料
+                                    </option>
+                                    <option
+                                        value="<?php echo esc_attr( EGOV_LAW_MONITOR_PLAN_STANDARD ); ?>"
+                                        <?php selected( $plan, EGOV_LAW_MONITOR_PLAN_STANDARD ); ?>
+                                    >
+                                        スタンダード
                                     </option>
                                 </select>
                             </td>

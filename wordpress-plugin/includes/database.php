@@ -440,6 +440,7 @@ function egov_law_monitor_save_ai_summary_history(
             '%s',
             '%s',
             '%s',
+            '%s',
         )
     );
 }
@@ -458,12 +459,26 @@ function egov_law_monitor_get_ai_summary_usage_count(
     $table_name =
         $wpdb->prefix . 'egov_law_ai_summary_history';
 
+    $now = current_time( 'timestamp' );
+    $month_start = wp_date(
+        'Y-m-01 00:00:00',
+        $now
+    );
+    $next_month_start = wp_date(
+        'Y-m-01 00:00:00',
+        strtotime( '+1 month', $now )
+    );
+
     $count = $wpdb->get_var(
         $wpdb->prepare(
             "SELECT COUNT(*)
              FROM {$table_name}
-             WHERE user_id = %d",
-            $user_id
+             WHERE user_id = %d
+             AND used_at >= %s
+             AND used_at < %s",
+            $user_id,
+            $month_start,
+            $next_month_start
         )
     );
 

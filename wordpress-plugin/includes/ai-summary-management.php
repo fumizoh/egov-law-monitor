@@ -19,8 +19,12 @@ function egov_law_monitor_ai_summary_management_shortcode() {
         return '<p>AI要約を利用するにはログインしてください。</p>';
     }
 
-    $user_id    = get_current_user_id();
-    $free_limit = EGOV_AI_SUMMARY_FREE_LIMIT;
+    $user_id = get_current_user_id();
+
+    $ai_summary_limit =
+        egov_law_monitor_get_ai_summary_limit(
+            $user_id
+        );
 
     $usage_count =
         egov_law_monitor_get_ai_summary_usage_count(
@@ -29,7 +33,7 @@ function egov_law_monitor_ai_summary_management_shortcode() {
 
     $remaining = max(
         0,
-        $free_limit - $usage_count
+        $ai_summary_limit - $usage_count
     );
 
     $history =
@@ -97,10 +101,10 @@ function egov_law_monitor_ai_summary_management_shortcode() {
         <div class="egov-ai-summary-usage">
 
             <p>
-                AI要約の無料利用：
+                今月のAI要約利用：
                 <strong>
                     残り <?php echo esc_html( $remaining ); ?>
-                    / <?php echo esc_html( $free_limit ); ?> 回
+                    / <?php echo esc_html( $ai_summary_limit ); ?> 回
                 </strong>
             </p>
 

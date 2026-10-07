@@ -14,11 +14,6 @@ define(
     'https://fumizoh.github.io/egov-law-monitor/'
 );
 
-define(
-    'EGOV_AI_SUMMARY_FREE_LIMIT',
-    5
-);
-
 add_action(
     'wp_enqueue_scripts',
     function () {
@@ -82,7 +77,10 @@ add_action(
             }
         }
 
-        $ai_free_limit = EGOV_AI_SUMMARY_FREE_LIMIT;
+        $ai_summary_limit = is_user_logged_in()
+            ? egov_law_monitor_get_ai_summary_limit( get_current_user_id() )
+            : 0;
+
         $ai_usage_count = is_user_logged_in()
             ? egov_law_monitor_get_ai_summary_usage_count( get_current_user_id() )
             : 0;
@@ -98,8 +96,8 @@ add_action(
                 'aiSummary' => array(
                     'url' => $ai_summary_url,
                     'isLoggedIn' => is_user_logged_in(),
-                    'remaining' => max( 0, $ai_free_limit - $ai_usage_count ),
-                    'freeLimit' => $ai_free_limit,
+                    'remaining' => max( 0, $ai_summary_limit - $ai_usage_count ),
+                    'limit' => $ai_summary_limit,
                 ),
             )
         );
@@ -152,11 +150,11 @@ add_action(
                 const message =
                     remaining > 0
                         ? 'この改正をAIで要約します。\n\n' +
-                          '無料利用の残り：' +
+                          '今月のAI要約の残り：' +
                           remaining +
                           '回\n\n' +
                           amendmentName
-                        : '無料利用回数を使い切っています。\n\n' +
+                        : '今月のAI要約利用回数を使い切っています。\n\n' +
                           'この改正のAI要約を利用済みの場合は、\n' +
                           'AI要約ページから再度表示できます。';
 

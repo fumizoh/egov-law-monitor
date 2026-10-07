@@ -40,7 +40,7 @@ function egov_law_monitor_ai_summary_shortcode() {
         ? absint( $_GET['history_id'] )
         : 0;
 
-    $free_limit = EGOV_AI_SUMMARY_FREE_LIMIT;
+    $ai_summary_limit = egov_law_monitor_get_ai_summary_limit( $user_id );
 
     /*
      * AI Summary request.
@@ -148,14 +148,14 @@ function egov_law_monitor_ai_summary_shortcode() {
          * the free limit and this exact revision has not been used.
          */
         if (
-            $usage_count >= $free_limit &&
+            $usage_count >= $ai_summary_limit &&
             ! $already_used
         ) {
 
             $summary_error =
                 new WP_Error(
                     'egov_law_monitor_ai_limit_reached',
-                    'AI要約の無料利用回数の上限に達しています。'
+                    '今月のAI要約利用回数の上限に達しています。'
                 );
 
         } else {
@@ -260,11 +260,6 @@ function egov_law_monitor_ai_summary_shortcode() {
             $user_id
         );
 
-    $remaining = max(
-        0,
-        $free_limit - $usage_count
-    );
-
     ob_start();
     ?>
 
@@ -295,12 +290,15 @@ function egov_law_monitor_ai_summary_shortcode() {
                     $summary['body'] ?? '';
 
                 /*
-                 * The AI response may contain literal \\n                 * escape sequences. Convert them to real line breaks
+                 * The AI response may contain literal \n
+                 * escape sequences. Convert them to real line breaks
                  * before wpautop() formats the body.
                  */
                 $summary_body = str_replace(
-                    array( '\\r\\n', '\\n', '\\r' ),
-                    array( "\r\n", "\n", "\r" ),
+                    array( '\r\n', '\n', '\r' ),
+                    array( "
+", "
+", "" ),
                     $summary_body
                 );
 
