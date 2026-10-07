@@ -301,24 +301,6 @@ class WatchNotification:
 
 
 @dataclass(slots=True)
-class AiSummaryLog:
-    """AI summary generation log."""
-
-    timestamp: str
-    service: str
-    target: str | None
-
-    usage: SummaryUsage
-
-
-@dataclass(slots=True)
-class AiStatistics:
-    """Aggregated AI statistics."""
-
-    law_summary: SummaryStatistics
-
-
-@dataclass(slots=True)
 class WPLawRevision:
     """Revision data for a WordPress post."""
 

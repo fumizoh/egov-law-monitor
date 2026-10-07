@@ -19,9 +19,6 @@ LAWS_JSON = DOCS_DATA / "laws.json"
 LAW_SUMMARIES_JSON = DOCS_DATA / "law_summaries.json"
 
 STATISTICS_JSON = DOCS_DATA / "statistics.json"
-AI_STATISTICS_JSON = DOCS_DATA / "ai_statistics.json"
-
-AI_SUMMARY_LOG_JSONL = DOCS_DATA / "ai_summary_log.jsonl"
 
 APP_JSON = DOCS_DATA / "app.json"
 

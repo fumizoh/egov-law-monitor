@@ -18,9 +18,7 @@ from utils.dataclass import from_dict
 
 from models import (
     Law,
-    AiStatistics,
     LawSummary,
-    AiSummaryLog,
     SummaryResponse,
 )
 
@@ -33,8 +31,6 @@ from config import (
     LAWS_JSON,
     LAW_SUMMARIES_JSON,
     STATISTICS_JSON,
-    AI_STATISTICS_JSON,
-    AI_SUMMARY_LOG_JSONL,
     APP_JSON,
     WATCH_STATUS_JSON,
 )
@@ -368,88 +364,6 @@ def upsert_law_summaries(
         date=date,
         paths=paths,
     )
-
-
-def save_ai_statistics(statistics: AiStatistics):
-    """
-    Save AI statistics as ai_statistics.json.
-    """
-
-    save_json(
-        statistics,
-        AI_STATISTICS_JSON,
-    )
-
-
-def reset_ai_summary_logs() -> None:
-    """Clear AI summary logs."""
-    AI_SUMMARY_LOG_JSONL.parent.mkdir(parents=True, exist_ok=True)
-    AI_SUMMARY_LOG_JSONL.write_text("", encoding="utf-8")
-
-
-def load_ai_summary_logs() -> list[AiSummaryLog]:
-    """
-    Load AI summary logs.
-    """
-
-    if not AI_SUMMARY_LOG_JSONL.exists():
-        return []
-
-    logs: list[AiSummaryLog] = []
-
-    with open(
-        AI_SUMMARY_LOG_JSONL,
-        "r",
-        encoding="utf-8",
-    ) as f:
-
-        for line in f:
-
-            line = line.strip()
-
-            if not line:
-                continue
-
-            try:
-
-                logs.append(
-                    from_dict(
-                        AiSummaryLog,
-                        json.loads(line),
-                    )
-                )
-
-            except json.JSONDecodeError as e:
-                raise RuntimeError(
-                    f"Invalid JSONL: {AI_SUMMARY_LOG_JSONL}"
-                ) from e
-
-    return logs
-
-
-def append_ai_summary_logs(
-    logs: list[AiSummaryLog],
-):
-    """
-    Append AI summary logs.
-    """
-
-    with open(
-        AI_SUMMARY_LOG_JSONL,
-        "a",
-        encoding="utf-8",
-    ) as f:
-
-        for log in logs:
-
-            json.dump(
-                log,
-                f,
-                ensure_ascii=False,
-                default=json_default,
-            )
-
-            f.write("\n")
 
 
 def load_watch_status(
