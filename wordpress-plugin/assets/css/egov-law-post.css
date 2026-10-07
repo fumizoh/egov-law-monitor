@@ -474,18 +474,18 @@
 
 .egov-amend-actions {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    align-items: flex-start;
     gap: 8px 12px;
 }
 
 .egov-amend-actions .egov-amend-name {
     flex: 1 1 auto;
+    min-width: 0;
 }
 
 .egov-ai-summary-action {
     flex: 0 0 auto;
-    margin: 0;
+    margin: 0 0 0 auto;
     padding: 6px 12px;
     border: 1px solid #004080;
     border-radius: 5px;
@@ -493,6 +493,7 @@
     color: #004080;
     font-size: 0.9rem;
     line-height: 1.4;
+    white-space: nowrap;
     cursor: pointer;
 }
 
@@ -506,5 +507,9 @@
         align-items: flex-start;
         flex-direction: column;
         gap: 6px;
+    }
+
+    .egov-ai-summary-action {
+        margin-left: 0;
     }
 }
