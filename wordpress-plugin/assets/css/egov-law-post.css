@@ -481,6 +481,7 @@
 .egov-amend-actions .egov-amend-name {
     flex: 1 1 auto;
     min-width: 0;
+    margin: 0;
 }
 
 .egov-ai-summary-action {
