@@ -341,9 +341,35 @@ add_action(
                 let usage;
 
                 try {
+                    const usageUrl =
+                        new URL(
+                            settings.usageUrl,
+                            window.location.origin
+                        );
+
+                    usageUrl.searchParams.set(
+                        'law_id',
+                        button.dataset.lawId || ''
+                    );
+
+                    usageUrl.searchParams.set(
+                        'effective_date',
+                        button.dataset.effectiveDate || ''
+                    );
+
+                    usageUrl.searchParams.set(
+                        'law_data_id',
+                        button.dataset.lawDataId || ''
+                    );
+
+                    usageUrl.searchParams.set(
+                        'sub_revision',
+                        button.dataset.subRevision || ''
+                    );
+
                     const response =
                         await fetch(
-                            settings.usageUrl,
+                            usageUrl.toString(),
                             {
                                 method: 'GET',
                                 credentials: 'same-origin',
@@ -376,6 +402,50 @@ add_action(
                 const amendmentName =
                     button.dataset.amendmentName ||
                     'この改正';
+
+                /*
+                * If the user has already used an AI summary
+                * for this exact revision, show the existing
+                * history directly without displaying the modal.
+                */
+                if (
+                    usage.alreadyUsed &&
+                    Number(usage.historyId || 0) > 0
+                ) {
+                    const url =
+                        new URL(
+                            settings.url,
+                            window.location.origin
+                        );
+
+                    url.searchParams.set(
+                        'law_id',
+                        button.dataset.lawId || ''
+                    );
+
+                    url.searchParams.set(
+                        'effective_date',
+                        button.dataset.effectiveDate || ''
+                    );
+
+                    url.searchParams.set(
+                        'law_data_id',
+                        button.dataset.lawDataId || ''
+                    );
+
+                    url.searchParams.set(
+                        'sub_revision',
+                        button.dataset.subRevision || ''
+                    );
+
+                    url.searchParams.set(
+                        'history_id',
+                        String( usage.historyId )
+                    );
+
+                    window.location.href = url.toString();
+                    return;
+                }
 
                 showAiSummaryModal({
                     amendmentName: amendmentName,
@@ -484,6 +554,52 @@ add_action(
                             $user_id
                         );
 
+                    /*
+                    * Check whether the user has already used
+                    * an AI summary for this exact revision.
+                    */
+                    $law_id = isset( $_GET['law_id'] )
+                        ? sanitize_text_field(
+                            wp_unslash( $_GET['law_id'] )
+                        )
+                        : '';
+
+                    $effective_date = isset( $_GET['effective_date'] )
+                        ? sanitize_text_field(
+                            wp_unslash( $_GET['effective_date'] )
+                        )
+                        : '';
+
+                    $law_data_id = isset( $_GET['law_data_id'] )
+                        ? sanitize_text_field(
+                            wp_unslash( $_GET['law_data_id'] )
+                        )
+                        : '';
+
+                    $sub_revision = isset( $_GET['sub_revision'] )
+                        ? sanitize_text_field(
+                            wp_unslash( $_GET['sub_revision'] )
+                        )
+                        : '';
+
+                    $history = null;
+
+                    if (
+                        $law_id !== ''
+                        && $effective_date !== ''
+                        && $law_data_id !== ''
+                        && $sub_revision !== ''
+                    ) {
+                        $history =
+                            egov_law_monitor_get_ai_summary_history_by_revision(
+                                $user_id,
+                                $law_id,
+                                $effective_date,
+                                $law_data_id,
+                                $sub_revision
+                            );
+                    }
+
                     return rest_ensure_response(
                         array(
                             'remaining' => max(
@@ -492,6 +608,10 @@ add_action(
                             ),
                             'limit' => $limit,
                             'usageCount' => $usage_count,
+                            'alreadyUsed' => ! empty( $history ),
+                            'historyId' => ! empty( $history )
+                                ? (int) $history['id']
+                                : 0,
                         )
                     );
                 },
