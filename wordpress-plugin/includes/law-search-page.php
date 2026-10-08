@@ -13,6 +13,8 @@ function egov_law_monitor_render_search_page() {
     $rest_nonce = wp_create_nonce( 'wp_rest' );
 
     $watches = egov_law_monitor_get_watches();
+    $watch_count = count( $watches );
+    $watch_limit = egov_law_monitor_get_watch_limit( get_current_user_id() );
 
     ob_start();
     ?>
@@ -40,6 +42,9 @@ function egov_law_monitor_render_search_page() {
         <?php if ( ! empty( $watches ) ) : ?>
 
             <h3>現在ウォッチ中のキーワード</h3>
+            <p class="egov-law-watch-count">
+                現在の登録数：<strong><?php echo esc_html( $watch_count ); ?> / <?php echo esc_html( $watch_limit ); ?>件</strong>
+            </p>
 
             <div class="egov-law-watches">
 

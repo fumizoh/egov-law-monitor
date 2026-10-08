@@ -359,6 +359,11 @@
     margin-top: 0 !important;
 }
 
+.egov-law-watch-count {
+    margin: 0 0 12px !important;
+    line-height: 1.5;
+}
+
 .egov-law-watches {
     display: flex;
     flex-direction: column;

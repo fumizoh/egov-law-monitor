@@ -182,6 +182,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
+            if (!targetContainer.hidden) {
+                targetContainer.hidden = true;
+                button.textContent = '対象法令を確認';
+                return;
+            }
+
             const title = targetContainer.querySelector('h4');
             const list = targetContainer.querySelector('ul');
             const lawSearchUrl = window.egovLawMonitor?.lawSearchUrl;
@@ -293,6 +299,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 renderPage(1);
 
                 targetContainer.hidden = false;
+                button.textContent = '対象法令を閉じる';
 
             } catch (error) {
                 console.error(error);
@@ -302,7 +309,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 );
             } finally {
                 button.disabled = false;
-                button.textContent = '対象法令を確認';
+                if (!targetContainer.hidden) {
+                    button.textContent = '対象法令を閉じる';
+                } else {
+                    button.textContent = '対象法令を確認';
+                }
             }
         });
     });
