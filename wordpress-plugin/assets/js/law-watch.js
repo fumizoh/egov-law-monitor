@@ -210,19 +210,87 @@ document.addEventListener('DOMContentLoaded', async () => {
                 title.textContent =
                     `「${keyword}」の対象法令（${laws.length}件）`;
 
-                list.replaceChildren();
+                const perPage = 20;
+                let currentPage = 1;
+                const totalPages = Math.ceil(laws.length / perPage);
 
-                if (laws.length === 0) {
-                    const item = document.createElement('li');
-                    item.textContent = '該当する法令がありません。';
-                    list.appendChild(item);
-                } else {
-                    laws.forEach((law) => {
-                        const item = document.createElement('li');
-                        item.textContent = law.law_name;
-                        list.appendChild(item);
-                    });
+                let pagination = targetContainer.querySelector(
+                    '.egov-law-watch-pagination'
+                );
+
+                if (!pagination) {
+                    pagination = document.createElement('div');
+                    pagination.className =
+                        'egov-law-watch-pagination';
+                    targetContainer.appendChild(pagination);
                 }
+
+                const renderPage = (page) => {
+                    currentPage = page;
+                    list.replaceChildren();
+
+                    if (laws.length === 0) {
+                        const item = document.createElement('li');
+                        item.textContent = '該当する法令がありません。';
+                        list.appendChild(item);
+                    } else {
+                        const start = (currentPage - 1) * perPage;
+                        const pageLaws = laws.slice(
+                            start,
+                            start + perPage
+                        );
+
+                        pageLaws.forEach((law) => {
+                            const item = document.createElement('li');
+                            item.textContent = law.law_name;
+                            list.appendChild(item);
+                        });
+                    }
+
+                    pagination.replaceChildren();
+
+                    if (totalPages <= 1) {
+                        return;
+                    }
+
+                    const createButton = (label, page, disabled = false) => {
+                        const pageButton =
+                            document.createElement('button');
+
+                        pageButton.type = 'button';
+                        pageButton.textContent = label;
+                        pageButton.disabled = disabled;
+
+                        pageButton.addEventListener('click', () => {
+                            renderPage(page);
+                        });
+
+                        return pageButton;
+                    };
+
+                    pagination.appendChild(
+                        createButton(
+                            '前へ',
+                            currentPage - 1,
+                            currentPage === 1
+                        )
+                    );
+
+                    const pageInfo = document.createElement('span');
+                    pageInfo.textContent =
+                        `${currentPage} / ${totalPages}`;
+                    pagination.appendChild(pageInfo);
+
+                    pagination.appendChild(
+                        createButton(
+                            '次へ',
+                            currentPage + 1,
+                            currentPage === totalPages
+                        )
+                    );
+                };
+
+                renderPage(1);
 
                 targetContainer.hidden = false;
 
