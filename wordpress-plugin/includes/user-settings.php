@@ -56,6 +56,22 @@ function egov_law_monitor_get_plan( $user_id ) {
 }
 
 /**
+ * 料金プランの表示名を取得
+ *
+ * @param string $plan プラン識別子。
+ * @return string
+ */
+function egov_law_monitor_get_plan_label( $plan ) {
+
+    $labels = array(
+        EGOV_LAW_MONITOR_PLAN_FREE     => 'Free',
+        EGOV_LAW_MONITOR_PLAN_STANDARD => 'Standard',
+    );
+
+    return $labels[ $plan ] ?? $plan;
+}
+
+/**
  * 通知設定を取得
  */
 function egov_law_monitor_get_notifications( $user_id ) {

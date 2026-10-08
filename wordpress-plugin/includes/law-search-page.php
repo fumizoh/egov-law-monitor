@@ -27,10 +27,7 @@ function egov_law_monitor_render_search_page() {
             ご利用プラン：<strong>
                 <?php
                 $plan = egov_law_monitor_get_plan( get_current_user_id() );
-
-                echo $plan === EGOV_LAW_MONITOR_PLAN_FREE
-                    ? '無料'
-                    : esc_html( $plan );
+                echo esc_html( egov_law_monitor_get_plan_label( $plan ) );
                 ?>
             </strong>
         </p>
