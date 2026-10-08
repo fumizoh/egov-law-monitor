@@ -351,12 +351,18 @@
     margin-bottom: 16px;
 }
 
+.entry-content .egov-law-search>h3 {
+    margin: 0 0 16px !important;
+}
+
 .egov-law-watch-plan {
     margin-bottom: 0.5rem !important;
 }
 
 .egov-law-watch-last-checked {
     margin-top: 0 !important;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e1e5e8;
 }
 
 .egov-law-watch-count {
