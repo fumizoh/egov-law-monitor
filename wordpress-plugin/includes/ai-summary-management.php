@@ -36,9 +36,41 @@ function egov_law_monitor_ai_summary_management_shortcode() {
         $ai_summary_limit - $usage_count
     );
 
-    $history =
-        egov_law_monitor_get_ai_summary_history(
+    /*
+     * AI summary history pagination.
+     */
+    $history_per_page = 10;
+
+    $history_page = isset( $_GET['ai_summary_page'] )
+        ? absint( $_GET['ai_summary_page'] )
+        : 1;
+
+    $history_page = max( 1, $history_page );
+
+    $history_count =
+        egov_law_monitor_get_ai_summary_history_count(
             $user_id
+        );
+
+    $history_total_pages = max(
+        1,
+        (int) ceil(
+            $history_count / $history_per_page
+        )
+    );
+
+    if ( $history_page > $history_total_pages ) {
+        $history_page = $history_total_pages;
+    }
+
+    $history_offset =
+        ( $history_page - 1 ) * $history_per_page;
+
+    $history =
+        egov_law_monitor_get_ai_summary_history_page(
+            $user_id,
+            $history_per_page,
+            $history_offset
         );
 
     /*
@@ -94,8 +126,7 @@ function egov_law_monitor_ai_summary_management_shortcode() {
     <div class="egov-ai-summary-management">
 
         <h2 class="egov-ai-summary-heading">
-            <i class="las la-robot" aria-hidden="true"></i>
-            AI要約
+            🤖 AI要約
         </h2>
 
         <div class="egov-ai-summary-usage">
@@ -183,12 +214,6 @@ function egov_law_monitor_ai_summary_management_shortcode() {
                                 </div>
                             <?php endif; ?>
 
-                            <?php if ( ! empty( $item['summary_title'] ) ) : ?>
-                                <div class="egov-ai-summary-history-title">
-                                    <?php echo esc_html( $item['summary_title'] ); ?>
-                                </div>
-                            <?php endif; ?>
-
                             <div class="egov-ai-summary-history-meta">
 
                                 <span>
@@ -215,6 +240,86 @@ function egov_law_monitor_ai_summary_management_shortcode() {
                     <?php endforeach; ?>
 
                 </ul>
+
+                <?php if ( $history_total_pages > 1 ) : ?>
+
+                    <nav
+                        class="egov-ai-summary-pagination"
+                        aria-label="AI要約履歴のページ"
+                    >
+
+                        <?php if ( $history_page > 1 ) : ?>
+
+                            <a
+                                href="<?php echo esc_url(
+                                    add_query_arg(
+                                        'ai_summary_page',
+                                        $history_page - 1,
+                                        get_permalink()
+                                    )
+                                ); ?>"
+                                class="egov-ai-summary-pagination-link"
+                            >
+                                ‹ 前へ
+                            </a>
+
+                        <?php endif; ?>
+
+                        <?php for (
+                            $page = 1;
+                            $page <= $history_total_pages;
+                            $page++
+                        ) : ?>
+
+                            <?php if ( $page === $history_page ) : ?>
+
+                                <span
+                                    class="egov-ai-summary-pagination-current"
+                                >
+                                    <?php echo esc_html( $page ); ?>
+                                </span>
+
+                            <?php else : ?>
+
+                                <a
+                                    href="<?php echo esc_url(
+                                        add_query_arg(
+                                            'ai_summary_page',
+                                            $page,
+                                            get_permalink()
+                                        )
+                                    ); ?>"
+                                    class="egov-ai-summary-pagination-link"
+                                >
+                                    <?php echo esc_html( $page ); ?>
+                                </a>
+
+                            <?php endif; ?>
+
+                        <?php endfor; ?>
+
+                        <?php if (
+                            $history_page < $history_total_pages
+                        ) : ?>
+
+                            <a
+                                href="<?php echo esc_url(
+                                    add_query_arg(
+                                        'ai_summary_page',
+                                        $history_page + 1,
+                                        get_permalink()
+                                    )
+                                ); ?>"
+                                class="egov-ai-summary-pagination-link"
+                            >
+                                次へ ›
+                            </a>
+
+                        <?php endif; ?>
+
+                    </nav>
+
+                <?php endif; ?>
 
             <?php endif; ?>
 

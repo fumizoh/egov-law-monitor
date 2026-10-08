@@ -19,7 +19,7 @@ function egov_law_monitor_render_search_page() {
 
     <div class="egov-law-search">
 
-        <h2>法令ウォッチ</h2>
+        <h2>🔭 法令ウォッチ</h2>
 
         <p class="egov-law-watch-plan">
             ご利用プラン：<strong>

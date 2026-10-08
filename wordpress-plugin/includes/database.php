@@ -629,6 +629,68 @@ function egov_law_monitor_get_ai_summary_history(
 }
 
 /**
+ * Get the total number of AI summary history records for a user.
+ *
+ * @param int $user_id User ID.
+ * @return int
+ */
+function egov_law_monitor_get_ai_summary_history_count(
+    $user_id
+) {
+    global $wpdb;
+
+    $table_name =
+        $wpdb->prefix . 'egov_law_ai_summary_history';
+
+    $count = $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT COUNT(*)
+             FROM {$table_name}
+             WHERE user_id = %d",
+            $user_id
+        )
+    );
+
+    return (int) $count;
+}
+
+/**
+ * Get one page of AI summary usage history for a user.
+ *
+ * @param int $user_id   User ID.
+ * @param int $per_page  Number of records per page.
+ * @param int $offset    Offset.
+ * @return array
+ */
+function egov_law_monitor_get_ai_summary_history_page(
+    $user_id,
+    $per_page,
+    $offset
+) {
+    global $wpdb;
+
+    $table_name =
+        $wpdb->prefix . 'egov_law_ai_summary_history';
+
+    $per_page = max( 1, (int) $per_page );
+    $offset   = max( 0, (int) $offset );
+
+    return $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT *
+             FROM {$table_name}
+             WHERE user_id = %d
+             ORDER BY used_at DESC, id DESC
+             LIMIT %d OFFSET %d",
+            $user_id,
+            $per_page,
+            $offset
+        ),
+        ARRAY_A
+    );
+}
+
+/**
  * Delete law watch settings when a user is deleted.
  */
 function egov_law_monitor_delete_user_data( $user_id ) {

@@ -514,3 +514,37 @@
         margin-left: 0;
     }
 }
+
+/* AI Summary pagination */
+
+.egov-ai-summary-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+}
+
+.egov-ai-summary-pagination-link,
+.egov-ai-summary-pagination-current {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.egov-ai-summary-pagination-link {
+    border: 1px solid #d5dbe3;
+    background: #fff;
+}
+
+.egov-ai-summary-pagination-current {
+    background: #3f67a8;
+    color: #fff;
+    font-weight: 600;
+}
