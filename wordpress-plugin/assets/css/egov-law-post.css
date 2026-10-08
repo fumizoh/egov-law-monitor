@@ -269,6 +269,10 @@
     line-height: 1.5;
 }
 
+.egov-ai-summary-law-link {
+    margin-top: 16px !important;
+}
+
 .entry-content .egov-ai-summary-page .egov-ai-summary-meta {
     margin-top: 0 !important;
     margin-bottom: 4px !important;

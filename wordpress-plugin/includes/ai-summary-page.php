@@ -356,6 +356,15 @@ function egov_law_monitor_ai_summary_shortcode() {
                 $comparison_effective_date =
                     $summary_result['comparison_effective_date'] ?? '';
 
+                $law_url = '';
+                if ( $law_id !== '' && $effective_date !== '' ) {
+                    $law_url = add_query_arg(
+                        'occasion_date',
+                        $effective_date,
+                        'https://laws.e-gov.go.jp/law/' . rawurlencode( $law_id )
+                    );
+                }
+
                 /*
                  * AI要約の対象種別。
                  *
@@ -431,6 +440,18 @@ function egov_law_monitor_ai_summary_shortcode() {
                     ?>
 
                 </div>
+
+                <?php if ( $law_url !== '' ) : ?>
+                    <p class="egov-ai-summary-law-link">
+                        <a
+                            href="<?php echo esc_url( $law_url ); ?>"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            法令を見る
+                        </a>
+                    </p>
+                <?php endif; ?>
 
             <?php elseif ( $law_id && $effective_date ) : ?>
 
