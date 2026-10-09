@@ -17,6 +17,19 @@ def build_update_url(
     )
 
 
+def _matched_keywords(
+    law_name: str,
+    watches: list[WatchSetting],
+) -> list[str]:
+    """Return watched keywords contained in the law name."""
+
+    return [
+        watch.keyword
+        for watch in watches
+        if watch.keyword in law_name
+    ]
+
+
 def build_subject(
     notifications: list[WatchNotification],
 ) -> str:
@@ -24,7 +37,7 @@ def build_subject(
 
     count = len(notifications)
 
-    return f"【法令ウォッチ】{count}件の法令が更新されました"
+    return f"法令が{count}件更新されました"
 
 
 def build_body(
@@ -35,7 +48,7 @@ def build_body(
     """Build plain-text email body."""
 
     lines: list[str] = [
-        "法令ウォッチ対象の法令が更新されました。",
+        "ウォッチ対象の法令に更新がありました。",
         "",
         "今回更新された法令",
         "",
@@ -43,39 +56,21 @@ def build_body(
 
     for notification in notifications:
         law = notification.law
-        summary = notification.summary
-
         law_url = build_update_url(
             update_date,
             law["law_id"],
         )
+        keywords = _matched_keywords(law["law_name"], watches)
 
+        lines.append(f"・{law['law_name']}")
         lines.append(
-            f"・{law['law_name']}"
+            f"  対象キーワード：{'、'.join(keywords)}"
         )
         lines.append(law_url)
-
-        if summary is not None:
-            lines.append(summary.title)
-        else:
-            lines.append("AIサマリなし")
-
         lines.append(law["url"])
         lines.append("")
 
-    lines.extend(
-        [
-            "──────────────────",
-            "",
-            f"現在設定中のキーワード（{len(watches)}件）",
-            "",
-        ]
-    )
-
-    for watch in watches:
-        lines.append(f"・{watch.keyword}")
-
-    return "\n".join(lines)
+    return "\\n".join(lines)
 
 
 def build_html(
@@ -111,9 +106,8 @@ def build_html(
 ">
 
 <p style="margin: 0 0 24px;">
-    ウォッチ対象の法令が
+    ウォッチ対象の法令に更新がありました。
     <strong>{count}件</strong>
-    更新されました。
 </p>
 
 <h2 style="
@@ -128,10 +122,7 @@ def build_html(
 
     for notification in notifications:
         law = notification.law
-        summary = notification.summary
-
         law_name = escape(law["law_name"])
-
         law_url = escape(
             build_update_url(
                 update_date,
@@ -139,12 +130,8 @@ def build_html(
             ),
             quote=True,
         )
-
-        title = (
-            escape(summary.title)
-            if summary is not None
-            else "AIサマリなし"
-        )
+        keywords = _matched_keywords(law["law_name"], watches)
+        keyword_text = escape("、".join(keywords))
 
         parts.append(
             f"""
@@ -155,7 +142,7 @@ def build_html(
     border: 1px solid #e1e5e8;
     border-radius: 8px;
 ">
-    <div style="margin-bottom: 4px;">
+    <div style="margin-bottom: 8px;">
         <a href="{law_url}" style="
             color: #1a5fb4;
             font-size: 15px;
@@ -167,10 +154,10 @@ def build_html(
     </div>
 
     <div style="
-        font-size: 14px;
-        color: #555555;
+        font-size: 13px;
+        color: #666666;
     ">
-        {title}
+        対象キーワード：{keyword_text}
     </div>
 </div>
 """
@@ -178,46 +165,6 @@ def build_html(
 
     parts.append(
         """
-<div style="
-    margin-top: 32px;
-    padding-top: 20px;
-    border-top: 1px solid #d9dde1;
-">
-
-<h2 style="
-    margin: 0 0 12px;
-    font-size: 15px;
-    font-weight: 600;
-">
-    現在設定中のキーワード（{watch_count}件）
-</h2>
-
-<ul style="
-    margin: 0;
-    padding-left: 20px;
-    font-size: 13px;
-    color: #666666;
-">
-""".format(watch_count=len(watches))
-    )
-
-    for watch in watches:
-        keyword = escape(watch.keyword)
-
-        parts.append(
-            f"""
-<li style="margin: 4px 0;">
-    {keyword}
-</li>
-"""
-        )
-
-    parts.append(
-        """
-</ul>
-
-</div>
-
 <p style="
     margin: 24px 0 0;
     font-size: 12px;
