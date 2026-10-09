@@ -112,8 +112,20 @@ add_action(
 (function () {
 
     function showAiSummaryModal(options) {
+        function escapeHtml(value) {
+            return String(value || '').replace(/[&<>"']/g, (char) => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            })[char]);
+        }
+
         const {
+            lawName,
             amendmentName,
+            isNewLaw,
             remaining,
             onConfirm
         } = options;
@@ -140,9 +152,20 @@ add_action(
                                   '<p>今月のAI要約の残り：<strong>' +
                                   remaining +
                                   '回</strong></p>' +
-                                  '<p class="egov-ai-summary-modal-amendment">' +
-                                  amendmentName +
-                                  '</p>'
+
+                                    '<div class="egov-ai-summary-modal-amendment">' +
+                                    '<p><strong>法令名</strong><br>' +
+                                    escapeHtml(lawName) +
+                                    '</p>' +
+                                    (
+                                        isNewLaw
+                                            ? '<p>新規制定</p>'
+                                            : '<p><strong>改正法令</strong><br>' +
+                                                escapeHtml(amendmentName) +
+                                                '</p>'
+                                    ) +
+                                    '</div>'
+
                                 : '<p>今月のAI要約利用回数を使い切っています。</p>' +
                                   '<p>この改正のAI要約を利用済みの場合は、<br>' +
                                   'AI要約ページから再度表示できます。</p>'
@@ -448,7 +471,9 @@ add_action(
                 }
 
                 showAiSummaryModal({
+                    lawName: button.dataset.lawName || '',
                     amendmentName: amendmentName,
+                    isNewLaw: button.dataset.isNewLaw === 'true',
                     remaining: remaining,
                     onConfirm: () => {
 

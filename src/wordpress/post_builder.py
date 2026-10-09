@@ -138,6 +138,7 @@ def _build_dashboard(
 
 def _build_revision(
     law_id: str,
+    law_name: str,
     revision: WPLawRevision,
 ) -> str:
     """Build HTML for one revision."""
@@ -182,12 +183,18 @@ def _build_revision(
         revision.amendment_name or "",
         quote=True,
     )
+    law_name = html.escape(
+        law_name,
+        quote=True,
+    )
     ai_summary_html = (
         f'<button type="button" class="egov-ai-summary-action" '
         f'data-law-id="{html.escape(law_id, quote=True)}" '
         f'data-effective-date="{html.escape(revision.enforcement_date or "", quote=True)}" '
         f'data-law-data-id="{revision.law_data_id}" '
         f'data-sub-revision="{html.escape(revision.sub_revision, quote=True)}" '
+        f'data-law-name="{law_name}" '
+        f'data-is-new-law="{"true" if revision.is_new_law else "false"}" '
         f'data-amendment-name="{amendment_name}">'
         f"AIで要約"
         f"</button>"
@@ -232,7 +239,7 @@ def _build_law_section(
 """
 
     revisions_html = "".join(
-        _build_revision(law.law_id, revision)
+        _build_revision(law.law_id, law.law_name, revision)
         for revision in law.wp_revisions
     )
 
