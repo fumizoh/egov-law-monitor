@@ -37,7 +37,7 @@ def build_subject(
 
     count = len(notifications)
 
-    return f"法令が{count}件更新されました"
+    return f"【法令ウォッチ】{count}件の法令が更新されました"
 
 
 def build_body(
@@ -49,6 +49,7 @@ def build_body(
 
     lines: list[str] = [
         "ウォッチ対象の法令に更新がありました。",
+        f"更新件数：{len(notifications)}件",
         "",
         "今回更新された法令",
         "",
@@ -70,7 +71,7 @@ def build_body(
         lines.append(law["url"])
         lines.append("")
 
-    return "\\n".join(lines)
+    return "\n".join(lines)
 
 
 def build_html(
@@ -106,8 +107,8 @@ def build_html(
 ">
 
 <p style="margin: 0 0 24px;">
-    ウォッチ対象の法令に更新がありました。
-    <strong>{count}件</strong>
+    ウォッチ対象の法令に更新がありました。<br>
+    更新件数：<strong style="white-space: nowrap;">{count}件</strong>
 </p>
 
 <h2 style="
