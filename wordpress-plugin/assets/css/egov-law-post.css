@@ -394,6 +394,11 @@
     gap: 16px;
 }
 
+.egov-law-watch-header .egov-law-watch-status {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
 .egov-law-watch-header p {
     margin: 0 !important;
     font-size: 1.1rem;
