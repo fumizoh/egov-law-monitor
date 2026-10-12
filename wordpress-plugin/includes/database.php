@@ -21,6 +21,7 @@ function egov_law_monitor_create_tables() {
         keyword VARCHAR(255) NOT NULL,
         created_at DATETIME NOT NULL,
         updated_at DATETIME NOT NULL,
+        is_active TINYINT(1) NOT NULL DEFAULT 1,
         PRIMARY KEY  (id),
         UNIQUE KEY user_keyword (user_id, keyword),
         KEY user_id (user_id),

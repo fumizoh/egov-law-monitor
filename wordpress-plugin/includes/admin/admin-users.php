@@ -53,6 +53,8 @@ function egov_law_monitor_render_admin_users() {
                 $notifications
             );
 
+            egov_law_monitor_enforce_watch_limit( $user_id );
+
             echo '<div class="notice notice-success is-dismissible">';
             echo '<p>ユーザー設定を保存しました。</p>';
             echo '</div>';

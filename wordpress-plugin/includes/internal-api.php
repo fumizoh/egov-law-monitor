@@ -37,6 +37,7 @@ function egov_law_monitor_get_all_watch_settings() {
          FROM {$table_name} AS w
          INNER JOIN {$wpdb->users} AS u
             ON w.user_id = u.ID
+         WHERE w.is_active = 1
          ORDER BY w.user_id ASC, w.created_at ASC",
         ARRAY_A
     );

@@ -13,7 +13,13 @@ function egov_law_monitor_render_search_page() {
     $rest_nonce = wp_create_nonce( 'wp_rest' );
 
     $watches = egov_law_monitor_get_watches();
-    $watch_count = count( $watches );
+    $active_watch_count = count( array_filter(
+        $watches,
+        static function ( $watch ) {
+            return ! empty( $watch['is_active'] );
+        }
+    ) );
+    $stopped_watch_count = count( $watches ) - $active_watch_count;
     $watch_limit = egov_law_monitor_get_watch_limit( get_current_user_id() );
 
     ob_start();
@@ -38,9 +44,10 @@ function egov_law_monitor_render_search_page() {
 
         <?php if ( ! empty( $watches ) ) : ?>
 
-            <h3>現在ウォッチ中のキーワード</h3>
+            <h3>登録済みキーワード</h3>
             <p class="egov-law-watch-count">
-                現在の登録数：<strong><?php echo esc_html( $watch_count ); ?> / <?php echo esc_html( $watch_limit ); ?>件</strong>
+                有効：<strong><?php echo esc_html( $active_watch_count ); ?> / <?php echo esc_html( $watch_limit ); ?>件</strong>
+                （停止中：<?php echo esc_html( $stopped_watch_count ); ?>件）
             </p>
 
             <div class="egov-law-watches">
@@ -50,9 +57,18 @@ function egov_law_monitor_render_search_page() {
                     <article class="egov-law-watch">
 
                         <div class="egov-law-watch-header">
-                            <p>
-                                「<?php echo esc_html( $watch['keyword'] ); ?>」
-                            </p>
+                            <div>
+                                <p>
+                                    「<?php echo esc_html( $watch['keyword'] ); ?>」
+                                </p>
+                                <p class="egov-law-watch-status">
+                                    <?php if ( ! empty( $watch['is_active'] ) ) : ?>
+                                        <span>有効</span>
+                                    <?php else : ?>
+                                        <span>停止中</span>
+                                    <?php endif; ?>
+                                </p>
+                            </div>
 
                             <div class="egov-law-watch-actions">
                                 <button

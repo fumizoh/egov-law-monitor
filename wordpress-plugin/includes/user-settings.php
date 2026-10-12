@@ -21,7 +21,7 @@ function egov_law_monitor_get_watch_limit( $user_id ) {
         EGOV_LAW_MONITOR_PLAN_STANDARD => 10,
     );
 
-    return $limits[ $plan ] ?? 0;
+    return $limits[ $plan ] ?? $limits[ EGOV_LAW_MONITOR_PLAN_FREE ];
 }
 
 /**
@@ -35,7 +35,7 @@ function egov_law_monitor_get_ai_summary_limit( $user_id ) {
         EGOV_LAW_MONITOR_PLAN_STANDARD => 30,
     );
 
-    return $limits[ $plan ] ?? 0;
+    return $limits[ $plan ] ?? $limits[ EGOV_LAW_MONITOR_PLAN_FREE ];
 }
 
 /**

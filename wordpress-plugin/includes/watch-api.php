@@ -18,6 +18,9 @@ function egov_law_monitor_get_watches() {
         return [];
     }
 
+    // プラン上限を超えている場合は、新しいキーワードから停止する。
+    egov_law_monitor_enforce_watch_limit( $user_id );
+
     $table_name = $wpdb->prefix . 'law_watch_settings';
 
     $results = $wpdb->get_results(
@@ -25,10 +28,11 @@ function egov_law_monitor_get_watches() {
             "SELECT
                 keyword,
                 created_at,
-                updated_at
+                updated_at,
+                is_active
              FROM {$table_name}
              WHERE user_id = %d
-             ORDER BY created_at ASC",
+             ORDER BY created_at ASC, id ASC",
             $user_id
         ),
         ARRAY_A
@@ -44,10 +48,66 @@ function egov_law_monitor_get_watches() {
                 'keyword'    => $watch['keyword'],
                 'created_at' => $watch['created_at'],
                 'updated_at' => $watch['updated_at'],
+                'is_active'  => (int) $watch['is_active'],
             ];
         },
         $results
     );
+}
+
+/**
+ * Enforce the user's current watch limit without reactivating stopped keywords.
+ * Older active keywords are kept; excess newer active keywords are stopped.
+ *
+ * @param int $user_id User ID.
+ * @return void
+ */
+function egov_law_monitor_enforce_watch_limit( $user_id ) {
+
+    global $wpdb;
+
+    $user_id = (int) $user_id;
+
+    if ( ! $user_id ) {
+        return;
+    }
+
+    $table_name = $wpdb->prefix . 'law_watch_settings';
+    $watch_limit = egov_law_monitor_get_watch_limit( $user_id );
+
+    $active_watches = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT id
+             FROM {$table_name}
+             WHERE user_id = %d
+               AND is_active = 1
+             ORDER BY created_at ASC, id ASC",
+            $user_id
+        ),
+        ARRAY_A
+    );
+
+    if ( ! is_array( $active_watches ) || count( $active_watches ) <= $watch_limit ) {
+        return;
+    }
+
+    $excess_watches = array_slice( $active_watches, $watch_limit );
+
+    foreach ( $excess_watches as $watch ) {
+        $wpdb->update(
+            $table_name,
+            array(
+                'is_active'  => 0,
+                'updated_at' => current_time( 'mysql' ),
+            ),
+            array(
+                'id'      => (int) $watch['id'],
+                'user_id' => $user_id,
+            ),
+            array( '%d', '%s' ),
+            array( '%d', '%d' )
+        );
+    }
 }
 
 
@@ -136,15 +196,18 @@ add_action(
                         $table_name = $wpdb->prefix . 'law_watch_settings';
 
                         /*
-                        * Check watch keyword limit by plan.
-                        */
+                         * Apply the current plan limit, then count active keywords.
+                         */
+                        egov_law_monitor_enforce_watch_limit( $user_id );
+
                         $watch_limit = egov_law_monitor_get_watch_limit( $user_id );
 
                         $watch_count = (int) $wpdb->get_var(
                             $wpdb->prepare(
                                 "SELECT COUNT(*)
                                 FROM {$table_name}
-                                WHERE user_id = %d",
+                                WHERE user_id = %d
+                                  AND is_active = 1",
                                 $user_id
                             )
                         );
@@ -228,12 +291,14 @@ add_action(
                                 'keyword'    => $keyword,
                                 'created_at' => $now,
                                 'updated_at' => $now,
+                                'is_active'  => 1,
                             ],
                             [
                                 '%d',
                                 '%s',
                                 '%s',
                                 '%s',
+                                '%d',
                             ]
                         );
 
