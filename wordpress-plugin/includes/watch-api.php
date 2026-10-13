@@ -325,6 +325,145 @@ add_action(
 
         register_rest_route(
             'egov-law-monitor/v1',
+            '/watches/(?P<keyword>[^/]+)/resume',
+            [
+                'methods'             => WP_REST_Server::CREATABLE,
+                'callback'            => function ( WP_REST_Request $request ) {
+
+                    global $wpdb;
+
+                    $user_id = get_current_user_id();
+
+                    if ( ! $user_id ) {
+                        return new WP_Error(
+                            'not_logged_in',
+                            'ログインが必要です。',
+                            [
+                                'status' => 401,
+                            ]
+                        );
+                    }
+
+                    $keyword = $request->get_param( 'keyword' );
+
+                    if ( ! is_string( $keyword ) ) {
+                        return new WP_Error(
+                            'invalid_keyword',
+                            'キーワードが指定されていません。',
+                            [
+                                'status' => 400,
+                            ]
+                        );
+                    }
+
+                    $keyword = trim( rawurldecode( $keyword ) );
+
+                    if ( $keyword === '' ) {
+                        return new WP_Error(
+                            'empty_keyword',
+                            'キーワードが指定されていません。',
+                            [
+                                'status' => 400,
+                            ]
+                        );
+                    }
+
+                    $table_name = $wpdb->prefix . 'law_watch_settings';
+
+                    $watch = $wpdb->get_row(
+                        $wpdb->prepare(
+                            "SELECT id, is_active
+                             FROM {$table_name}
+                             WHERE user_id = %d
+                               AND keyword = %s
+                             LIMIT 1",
+                            $user_id,
+                            $keyword
+                        ),
+                        ARRAY_A
+                    );
+
+                    if ( ! is_array( $watch ) ) {
+                        return new WP_Error(
+                            'not_watched',
+                            'このキーワードは登録されていません。',
+                            [
+                                'status' => 404,
+                            ]
+                        );
+                    }
+
+                    if ( (int) $watch['is_active'] === 1 ) {
+                        return new WP_Error(
+                            'already_active',
+                            'このキーワードはすでに有効です。',
+                            [
+                                'status' => 409,
+                            ]
+                        );
+                    }
+
+                    // 現在のプラン上限を適用し、有効なキーワード数を確認する。
+                    egov_law_monitor_enforce_watch_limit( $user_id );
+
+                    $watch_limit = egov_law_monitor_get_watch_limit( $user_id );
+
+                    $active_count = (int) $wpdb->get_var(
+                        $wpdb->prepare(
+                            "SELECT COUNT(*)
+                             FROM {$table_name}
+                             WHERE user_id = %d
+                               AND is_active = 1",
+                            $user_id
+                        )
+                    );
+
+                    if ( $active_count >= $watch_limit ) {
+                        return new WP_Error(
+                            'watch_limit_reached',
+                            'プランの有効キーワード上限に達しています。既存のキーワードを解除するか、プランを変更してから再開してください。',
+                            [
+                                'status' => 409,
+                            ]
+                        );
+                    }
+
+                    $updated = $wpdb->update(
+                        $table_name,
+                        [
+                            'is_active'  => 1,
+                            'updated_at' => current_time( 'mysql' ),
+                        ],
+                        [
+                            'id'      => (int) $watch['id'],
+                            'user_id' => $user_id,
+                        ],
+                        [ '%d', '%s' ],
+                        [ '%d', '%d' ]
+                    );
+
+                    if ( false === $updated ) {
+                        return new WP_Error(
+                            'watch_resume_failed',
+                            'キーワードの再開に失敗しました。',
+                            [
+                                'status' => 500,
+                            ]
+                        );
+                    }
+
+                    return [
+                        'keyword' => $keyword,
+                        'success' => true,
+                    ];
+                },
+                'permission_callback' => 'egov_law_monitor_watch_permission',
+            ]
+        );
+
+
+        register_rest_route(
+            'egov-law-monitor/v1',
             '/watches/(?P<keyword>[^/]+)',
             [
                 'methods'             => WP_REST_Server::DELETABLE,

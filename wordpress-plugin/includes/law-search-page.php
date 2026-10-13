@@ -71,6 +71,18 @@ function egov_law_monitor_render_search_page() {
                             </div>
 
                             <div class="egov-law-watch-actions">
+                                <?php if ( empty( $watch['is_active'] ) && $active_watch_count < $watch_limit ) : ?>
+                                    <button
+                                        type="button"
+                                        class="egov-law-resume-button"
+                                        data-keyword="<?php echo esc_attr( $watch['keyword'] ); ?>"
+                                        data-rest-url="<?php echo esc_url( rest_url( 'egov-law-monitor/v1/watches/' . rawurlencode( $watch['keyword'] ) . '/resume' ) ); ?>"
+                                        data-rest-nonce="<?php echo esc_attr( $rest_nonce ); ?>"
+                                    >
+                                        再開
+                                    </button>
+                                <?php endif; ?>
+
                                 <button
                                     type="button"
                                     class="egov-law-unwatch-button"

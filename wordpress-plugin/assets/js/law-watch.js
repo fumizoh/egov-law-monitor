@@ -164,6 +164,59 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     /*
+     * Resume stopped keyword
+     */
+    const resumeButtons = document.querySelectorAll(
+        '.egov-law-resume-button'
+    );
+
+    resumeButtons.forEach((button) => {
+        button.addEventListener('click', async () => {
+            const restUrl = button.dataset.restUrl;
+            const restNonce = button.dataset.restNonce;
+
+            if (!restUrl || !restNonce) {
+                alert('再開に必要な情報を取得できませんでした。');
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = '再開中…';
+
+            try {
+                const response = await fetch(restUrl, {
+                    method: 'POST',
+                    headers: {
+                        'X-WP-Nonce': restNonce,
+                    },
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.message || 'キーワードの再開に失敗しました。'
+                    );
+                }
+
+                window.location.reload();
+
+            } catch (error) {
+                console.error(error);
+
+                button.disabled = false;
+                button.textContent = '再開';
+
+                alert(
+                    error.message ||
+                    'キーワードの再開に失敗しました。'
+                );
+            }
+        });
+    });
+
+
+    /*
     * Check target laws
     */
     const targetButtons = document.querySelectorAll(
