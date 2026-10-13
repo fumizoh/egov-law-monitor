@@ -336,16 +336,16 @@ add_action(
             return;
         }
 
-        if (!settings.isLoggedIn) {
-            buttons.forEach((button) => {
-                button.hidden = true;
-            });
-            return;
-        }
-
         buttons.forEach((button) => {
 
             button.addEventListener('click', async () => {
+
+                if (!settings.isLoggedIn) {
+                    window.alert(
+                        'AI要約を利用するには、会員登録・ログインが必要です。'
+                    );
+                    return;
+                }
 
                 if (!settings.url) {
                     window.alert(
