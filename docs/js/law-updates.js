@@ -1,26 +1,11 @@
-function renderLaws(
-    laws,
-    lawSummaries,
-) {
+function renderLaws(laws) {
 
     const container =
         document.getElementById("updates-detail");
 
     container.innerHTML = "";
 
-    const summaryMap = new Map(
-        lawSummaries.map(summary => [
-            summary.summary_input.law_id,
-            summary,
-        ])
-    );
-
     laws.forEach(law => {
-
-        const summary =
-            summaryMap.get(
-                law.law_id,
-            );
 
         const latest = law.updates[0];
 
@@ -54,22 +39,6 @@ function renderLaws(
                 <strong>種別</strong>
                 ${law.law_type}
             </p>
-
-            ${summary && summary.response ? `
-
-                <div class="ai-summary">
-
-                    <h3>
-                        🤖 ${summary.response.summary.title}
-                    </h3>
-
-                    <div class="summary-body">
-                        ${summary.response.summary.body}
-                    </div>
-
-                </div>
-
-            ` : ""}
 
             <details>
 
@@ -194,18 +163,9 @@ function renderLaws(
 
 async function main() {
 
-    const [
-        laws,
-        lawSummaryData,
-    ] = await Promise.all([
-        fetchJson("data/laws.json"),
-        fetchJson("data/law_summaries.json"),
-    ]);
+    const laws = await fetchJson("data/laws.json");
 
-    renderLaws(
-        laws,
-        lawSummaryData.summaries,
-    );
+    renderLaws(laws);
 
 }
 

@@ -78,30 +78,12 @@ async function loadStatistics() {
 
 }
 
-function renderLaws(
-    laws,
-    summaries,
-) {
+function renderLaws(laws) {
 
     const ul =
         document.getElementById("update-list");
 
     ul.innerHTML = "";
-
-    const summaryMap = new Map();
-
-    summaries.forEach(summary => {
-
-        if (!summary.response) {
-            return;
-        }
-
-        summaryMap.set(
-            summary.summary_input.law_id,
-            summary.response.summary,
-        );
-
-    });
 
     laws.forEach((law) => {
 
@@ -124,26 +106,6 @@ function renderLaws(
 
         li.appendChild(link);
 
-        const summary =
-            summaryMap.get(
-                law.law_id,
-            );
-
-        if (summary) {
-
-            const p =
-                document.createElement("p");
-
-            p.className =
-                "law-summary-title";
-
-            p.textContent =
-                summary.title;
-
-            li.appendChild(p);
-
-        }
-
         ul.appendChild(li);
 
     });
@@ -152,20 +114,9 @@ function renderLaws(
 
 async function loadLaws() {
 
-    const laws =
-        await fetchJson(
-            "data/laws.json"
-        );
+    const laws = await fetchJson("data/laws.json");
 
-    const summaries =
-        await fetchJson(
-            "data/law_summaries.json"
-        );
-
-    renderLaws(
-        laws,
-        summaries.summaries,
-    );
+    renderLaws(laws);
 
 }
 
