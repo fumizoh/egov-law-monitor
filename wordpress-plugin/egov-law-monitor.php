@@ -504,7 +504,6 @@ add_action(
                         );
 
                         // ポップアップを使わず、同じタブでAI要約ページへ移動する。
-                        close();
                         window.location.href = url.toString();
                     }
                 });
