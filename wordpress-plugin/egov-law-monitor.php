@@ -149,6 +149,10 @@ add_action(
                         ${
                             remaining > 0
                                 ? '<p>この改正をAIで要約します。</p>' +
+                                  '<div class="egov-ai-summary-modal-notice">' +
+                                  '<p><strong>要約対象について</strong></p>' +
+                                  '<p>AI要約の対象は、条・項・号の本文です。別表・帳票・図は要約の対象外です。</p>' +
+                                  '</div>' +
                                   '<p>今月のAI要約の残り：<strong>' +
                                   remaining +
                                   '回</strong></p>' +
@@ -187,113 +191,10 @@ add_action(
             </div>
         `;
 
-        const style = document.createElement('style');
-        style.id = 'egov-ai-summary-modal-style';
-        style.textContent = `
-            #egov-ai-summary-modal {
-                position: fixed;
-                inset: 0;
-                z-index: 999999;
-            }
-
-            .egov-ai-summary-modal-overlay {
-                position: fixed;
-                inset: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-                background: rgba(0, 0, 0, 0.45);
-            }
-
-            .egov-ai-summary-modal {
-                width: min(440px, 100%);
-                box-sizing: border-box;
-                background: #fff;
-                border-radius: 10px;
-                padding: 24px;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-                color: #333;
-            }
-
-            .egov-ai-summary-modal-title {
-                margin: 0 0 16px;
-                font-size: 20px;
-                font-weight: 700;
-            }
-
-            .egov-ai-summary-modal-body {
-                font-size: 15px;
-                line-height: 1.7;
-            }
-
-            .egov-ai-summary-modal-body p {
-                margin: 0 0 10px;
-            }
-
-            .egov-ai-summary-modal-body p:last-child {
-                margin-bottom: 0;
-            }
-
-            .egov-ai-summary-modal-amendment {
-                padding: 10px 12px;
-                background: #f6f6f6;
-                border-radius: 6px;
-                font-size: 14px;
-            }
-
-            .egov-ai-summary-modal-actions {
-                display: flex;
-                justify-content: flex-end;
-                gap: 8px;
-                margin-top: 20px;
-            }
-
-            .egov-ai-summary-modal-actions button {
-                appearance: none;
-                border: 1px solid #ccc;
-                border-radius: 6px;
-                padding: 8px 16px;
-                font-size: 14px;
-                line-height: 1.4;
-                cursor: pointer;
-            }
-
-            .egov-ai-summary-modal-cancel {
-                background: #fff;
-                color: #333;
-            }
-
-            .egov-ai-summary-modal-confirm {
-                border-color: var(--theme-palette-color-1, #1e73be) !important;
-                background: var(--theme-palette-color-1, #1e73be);
-                color: #fff;
-            }
-
-            @media (max-width: 480px) {
-                .egov-ai-summary-modal {
-                    padding: 20px;
-                }
-
-                .egov-ai-summary-modal-actions {
-                    flex-direction: column-reverse;
-                }
-
-                .egov-ai-summary-modal-actions button {
-                    width: 100%;
-                }
-            }
-        `;
-
-        document.head.appendChild(style);
         document.body.appendChild(overlay);
 
         const close = () => {
             overlay.remove();
-            const modalStyle = document.getElementById('egov-ai-summary-modal-style');
-            if (modalStyle) {
-                modalStyle.remove();
-            }
         };
 
         overlay.querySelector('.egov-ai-summary-modal-overlay')

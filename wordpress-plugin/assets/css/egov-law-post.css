@@ -238,6 +238,117 @@
     }
 }
 
+/* AI Summary modal */
+
+#egov-ai-summary-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+}
+
+.egov-ai-summary-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.egov-ai-summary-modal {
+    width: min(440px, 100%);
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    color: #333;
+}
+
+.egov-ai-summary-modal-title {
+    margin: 0 0 16px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.egov-ai-summary-modal-body {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.egov-ai-summary-modal-body p {
+    margin: 0 0 10px;
+}
+
+.egov-ai-summary-modal-body p:last-child {
+    margin-bottom: 0;
+}
+
+.egov-ai-summary-modal-amendment {
+    padding: 10px 12px;
+    background: #f6f6f6;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.egov-ai-summary-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.egov-ai-summary-modal-actions button {
+    appearance: none;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.egov-ai-summary-modal-cancel {
+    background: #fff;
+    color: #333;
+}
+
+.egov-ai-summary-modal-confirm {
+    border-color: var(--theme-palette-color-1, #1e73be) !important;
+    background: var(--theme-palette-color-1, #1e73be);
+    color: #fff;
+}
+
+@media (max-width: 480px) {
+    .egov-ai-summary-modal {
+        padding: 20px;
+    }
+
+    .egov-ai-summary-modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .egov-ai-summary-modal-actions button {
+        width: 100%;
+    }
+}
+
+.egov-ai-summary-modal-notice {
+    margin: 12px 0;
+    padding: 10px 12px;
+    background: #f6f6f6;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.egov-ai-summary-modal-notice p {
+    margin: 0 0 4px;
+}
+
+.egov-ai-summary-modal-notice p:last-child {
+    margin-bottom: 0;
+}
 
 /* AI Summary page */
 
@@ -346,6 +457,85 @@
         flex-direction: column;
         gap: 2px;
     }
+}
+
+/* AI Summary action */
+
+.egov-amend-actions {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px 12px;
+}
+
+.egov-amend-actions .egov-amend-name {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+}
+
+.egov-ai-summary-action {
+    flex: 0 0 auto;
+    margin: 0 0 0 auto;
+    padding: 6px 12px;
+    border: 1px solid #004080;
+    border-radius: 5px;
+    background: #fff;
+    color: #004080;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.egov-ai-summary-action:hover {
+    background: #004080;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .egov-amend-actions {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .egov-ai-summary-action {
+        margin-left: 0;
+    }
+}
+
+/* AI Summary pagination */
+
+.egov-ai-summary-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+}
+
+.egov-ai-summary-pagination-link,
+.egov-ai-summary-pagination-current {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.egov-ai-summary-pagination-link {
+    border: 1px solid #d5dbe3;
+    background: #fff;
+}
+
+.egov-ai-summary-pagination-current {
+    background: #3f67a8;
+    color: #fff;
+    font-weight: 600;
 }
 
 /* Law Watch */
@@ -524,83 +714,4 @@
 
 .egov-law-search-form button {
     margin: 0;
-}
-
-/* AI Summary action */
-
-.egov-amend-actions {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px 12px;
-}
-
-.egov-amend-actions .egov-amend-name {
-    flex: 1 1 auto;
-    min-width: 0;
-    margin: 0;
-}
-
-.egov-ai-summary-action {
-    flex: 0 0 auto;
-    margin: 0 0 0 auto;
-    padding: 6px 12px;
-    border: 1px solid #004080;
-    border-radius: 5px;
-    background: #fff;
-    color: #004080;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.egov-ai-summary-action:hover {
-    background: #004080;
-    color: #fff;
-}
-
-@media (max-width: 600px) {
-    .egov-amend-actions {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 6px;
-    }
-
-    .egov-ai-summary-action {
-        margin-left: 0;
-    }
-}
-
-/* AI Summary pagination */
-
-.egov-ai-summary-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    margin-top: 24px;
-}
-
-.egov-ai-summary-pagination-link,
-.egov-ai-summary-pagination-current {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 36px;
-    height: 36px;
-    padding: 0 10px;
-    border-radius: 4px;
-    text-decoration: none;
-    box-sizing: border-box;
-}
-
-.egov-ai-summary-pagination-link {
-    border: 1px solid #d5dbe3;
-    background: #fff;
-}
-
-.egov-ai-summary-pagination-current {
-    background: #3f67a8;
-    color: #fff;
-    font-weight: 600;
 }
