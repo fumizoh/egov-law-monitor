@@ -584,16 +584,16 @@
     gap: 16px;
 }
 
-.egov-law-watch-header .egov-law-watch-status {
-    font-size: 0.9rem;
-    font-weight: 400;
-}
-
 .egov-law-watch-header p {
     margin: 0 !important;
     font-size: 1.1rem;
     line-height: 1.5;
     font-weight: 600;
+}
+
+.egov-law-watch-header .egov-law-watch-status {
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
 .egov-law-watch-actions {
@@ -603,21 +603,32 @@
     flex: 0 0 auto;
 }
 
-@media (max-width: 600px) {
+.egov-law-watch-actions button {
+    margin: 0;
+}
+
+@media (max-width: 1000px) {
     .egov-law-watch-header {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .egov-law-watch-header>div:first-child {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .egov-law-watch-header>div:first-child>p:first-child {
+        overflow-wrap: normal;
+        word-break: keep-all;
     }
 
     .egov-law-watch-actions {
         width: 100%;
+        flex-wrap: wrap;
         justify-content: flex-start;
     }
-}
-
-.egov-law-watch-actions button {
-    margin: 0;
 }
 
 .egov-law-watch-targets {
