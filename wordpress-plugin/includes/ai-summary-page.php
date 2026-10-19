@@ -347,6 +347,15 @@ function egov_law_monitor_ai_summary_shortcode() {
                     $summary_body
                 );
 
+                /*
+                 * 【...】形式の見出しの直前で段落を分ける。
+                 */
+                $summary_body = preg_replace(
+                    '/(?<!^)(?<!\n)\s*(【[^】]+】)/u',
+                    "\n\n$1",
+                    $summary_body
+                );
+
                 $law_name =
                     $summary_result['law_name'] ?? '';
 
