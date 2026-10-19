@@ -1,4 +1,3 @@
-
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -60,7 +59,6 @@ function egov_law_monitor_render_admin_ai_summary_cache() {
             sub_revision,
             amendment_name,
             comparison_effective_date,
-            revision_hash,
             created_at,
             updated_at
         FROM {$table_name}
@@ -126,7 +124,6 @@ function egov_law_monitor_render_admin_ai_summary_cache() {
                     <th>Sub Revision</th>
                     <th>改正法令名</th>
                     <th>比較対象の施行日</th>
-                    <th>リビジョンハッシュ</th>
                     <th>作成日時</th>
                     <th>更新日時</th>
                 </tr>
@@ -135,7 +132,7 @@ function egov_law_monitor_render_admin_ai_summary_cache() {
             <tbody>
                 <?php if ( empty( $items ) ) : ?>
                     <tr>
-                        <td colspan="9">該当するキャッシュはありません。</td>
+                        <td colspan="8">該当するキャッシュはありません。</td>
                     </tr>
                 <?php else : ?>
                     <?php foreach ( $items as $item ) : ?>
@@ -169,15 +166,6 @@ function egov_law_monitor_render_admin_ai_summary_cache() {
                                     $item['comparison_effective_date']
                                 );
                                 ?>
-                            </td>
-                            <td>
-                                <code title="<?php echo esc_attr( $item['revision_hash'] ); ?>">
-                                    <?php
-                                    echo esc_html(
-                                        substr( $item['revision_hash'], 0, 12 )
-                                    );
-                                    ?>…
-                                </code>
                             </td>
                             <td>
                                 <?php echo esc_html( $item['created_at'] ); ?>
