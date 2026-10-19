@@ -26,6 +26,15 @@ function egov_law_monitor_admin_menu() {
         'egov-law-monitor',
         'egov_law_monitor_render_admin_users'
     );
+
+    add_submenu_page(
+        'egov-law-monitor',
+        'AI要約キャッシュ',
+        'AI要約キャッシュ',
+        'manage_options',
+        'egov-law-monitor-ai-summary-cache',
+        'egov_law_monitor_render_admin_ai_summary_cache'
+    );
 }
 
 add_action( 'admin_menu', 'egov_law_monitor_admin_menu' );

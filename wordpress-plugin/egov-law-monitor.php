@@ -547,6 +547,7 @@ add_action(
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-users.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-menu.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-ai-summary-cache.php';
 
 
 register_activation_hook(
