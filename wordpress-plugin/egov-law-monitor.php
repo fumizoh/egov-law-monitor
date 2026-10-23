@@ -149,10 +149,6 @@ add_action(
                         ${
                             remaining > 0
                                 ? '<p>この改正をAIで要約します。</p>' +
-                                  '<div class="egov-ai-summary-modal-notice">' +
-                                  '<p><strong>要約対象について</strong></p>' +
-                                  '<p>AI要約の対象は、条・項・号の本文です。別表・帳票・図は要約の対象外です。</p>' +
-                                  '</div>' +
                                   '<p>今月のAI要約の残り：<strong>' +
                                   remaining +
                                   '回</strong></p>' +
@@ -168,6 +164,11 @@ add_action(
                                                 escapeHtml(amendmentName) +
                                                 '</p>'
                                     ) +
+                                    '</div>' +
+
+                                    '<div class="egov-ai-summary-modal-notice">' +
+                                    '<p><strong>要約対象について</strong></p>' +
+                                    '<p>AI要約の対象は、条・項・号の本文です。別表・帳票・図は要約の対象外です。</p>' +
                                     '</div>'
 
                                 : '<p>今月のAI要約利用回数を使い切っています。</p>' +
