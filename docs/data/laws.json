@@ -1,70 +1,176 @@
 [
   {
-    "law_id": "324CO0000000378",
-    "law_no": "昭和二十四年政令第三百七十八号",
-    "law_name": "輸出貿易管理令",
-    "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/324CO0000000378",
+    "law_id": "342AC0000000081",
+    "law_no": "昭和四十二年法律第八十一号",
+    "law_name": "住民基本台帳法",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/342AC0000000081",
     "updates": [
       {
-        "law_data_id": 650560,
+        "law_data_id": 641205,
         "sub_revision": "1",
-        "published_date": "1949-12-01",
-        "effective_date": "2026-10-16",
+        "published_date": "1967-07-25",
+        "effective_date": "2026-10-24",
         "effective_comment": "",
-        "amend_name": "輸出貿易管理令の一部を改正する政令",
-        "amend_no": "令和八年政令第三百二十五号",
-        "amendment_id": "508CO0000000325",
-        "amend_published_date": "2026-10-09",
-        "compare_url": "https://laws.e-gov.go.jp/law/324CO0000000378/20261016_508CO0000000325?occasion_date=20261016&tab=compare",
+        "amend_name": "皇室典範等の一部を改正する法律",
+        "amend_no": "令和八年法律第六十六号",
+        "amendment_id": "508AC0000000066",
+        "amend_published_date": "2026-07-24",
+        "compare_url": "https://laws.e-gov.go.jp/law/342AC0000000081/20261024_508AC0000000066?occasion_date=20261024&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "346M50000100035",
-    "law_no": "昭和四十六年厚生省令第三十五号",
-    "law_name": "廃棄物の処理及び清掃に関する法律施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/346M50000100035",
+    "law_id": "419AC1000000051",
+    "law_no": "平成十九年法律第五十一号",
+    "law_name": "日本国憲法の改正手続に関する法律",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/419AC1000000051",
     "updates": [
       {
-        "law_data_id": 637016,
-        "sub_revision": "3",
-        "published_date": "1971-09-23",
-        "effective_date": "2027-04-01",
-        "effective_comment": "",
-        "amend_name": "廃棄物の処理及び清掃に関する法律施行規則の一部を改正する省令",
-        "amend_no": "令和八年環境省令第十号",
-        "amendment_id": "508M60001000010",
-        "amend_published_date": "2026-03-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/346M50000100035/20270401_508M60001000010?occasion_date=20270401&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 626439,
-        "sub_revision": "6",
-        "published_date": "1971-09-23",
-        "effective_date": "2027-04-01",
-        "effective_comment": "",
-        "amend_name": "廃棄物の処理及び清掃に関する法律施行規則の一部を改正する省令",
-        "amend_no": "令和七年環境省令第十五号",
-        "amendment_id": "507M60001000015",
-        "amend_published_date": "2025-04-22",
-        "compare_url": "https://laws.e-gov.go.jp/law/346M50000100035/20270401_507M60001000015?occasion_date=20270401&tab=compare",
-        "pending": true
-      },
-      {
-        "law_data_id": 642885,
+        "law_data_id": 641201,
         "sub_revision": "1",
-        "published_date": "1971-09-23",
-        "effective_date": "2026-09-16",
+        "published_date": "2007-05-18",
+        "effective_date": "2026-10-24",
         "effective_comment": "",
-        "amend_name": "廃棄物の処理及び清掃に関する法律施行規則の一部を改正する省令",
-        "amend_no": "令和八年環境省令第二十五号",
-        "amendment_id": "508M60001000025",
-        "amend_published_date": "2026-09-15",
-        "compare_url": "https://laws.e-gov.go.jp/law/346M50000100035/20260916_508M60001000025?occasion_date=20260916&tab=compare",
+        "amend_name": "皇室典範等の一部を改正する法律",
+        "amend_no": "令和八年法律第六十六号",
+        "amendment_id": "508AC0000000066",
+        "amend_published_date": "2026-07-24",
+        "compare_url": "https://laws.e-gov.go.jp/law/419AC1000000051/20261024_508AC0000000066?occasion_date=20261024&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "322AC0000000003",
+    "law_no": "昭和二十二年法律第三号",
+    "law_name": "皇室典範",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/322AC0000000003",
+    "updates": [
+      {
+        "law_data_id": 641203,
+        "sub_revision": "1",
+        "published_date": "1947-01-16",
+        "effective_date": "2026-10-24",
+        "effective_comment": "",
+        "amend_name": "皇室典範等の一部を改正する法律",
+        "amend_no": "令和八年法律第六十六号",
+        "amendment_id": "508AC0000000066",
+        "amend_published_date": "2026-07-24",
+        "compare_url": "https://laws.e-gov.go.jp/law/322AC0000000003/20261024_508AC0000000066?occasion_date=20261024&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "322AC0000000004",
+    "law_no": "昭和二十二年法律第四号",
+    "law_name": "皇室経済法",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/322AC0000000004",
+    "updates": [
+      {
+        "law_data_id": 641204,
+        "sub_revision": "1",
+        "published_date": "1947-01-16",
+        "effective_date": "2026-10-24",
+        "effective_comment": "",
+        "amend_name": "皇室典範等の一部を改正する法律",
+        "amend_no": "令和八年法律第六十六号",
+        "amendment_id": "508AC0000000066",
+        "amend_published_date": "2026-07-24",
+        "compare_url": "https://laws.e-gov.go.jp/law/322AC0000000004/20261024_508AC0000000066?occasion_date=20261024&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "322AC0000000111",
+    "law_no": "昭和二十二年法律第百十一号",
+    "law_name": "皇族の身分を離れた者等の戸籍の取扱い等に関する法律",
+    "law_type": "法律",
+    "url": "https://laws.e-gov.go.jp/law/322AC0000000111",
+    "updates": [
+      {
+        "law_data_id": 641202,
+        "sub_revision": "1",
+        "published_date": "1947-09-26",
+        "effective_date": "2026-10-24",
+        "effective_comment": "",
+        "amend_name": "皇室典範等の一部を改正する法律",
+        "amend_no": "令和八年法律第六十六号",
+        "amendment_id": "508AC0000000066",
+        "amend_published_date": "2026-07-24",
+        "compare_url": "https://laws.e-gov.go.jp/law/322AC0000000111/20261024_508AC0000000066?occasion_date=20261024&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "342CO0000000292",
+    "law_no": "昭和四十二年政令第二百九十二号",
+    "law_name": "住民基本台帳法施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/342CO0000000292",
+    "updates": [
+      {
+        "law_data_id": 650096,
+        "sub_revision": "1",
+        "published_date": "1967-09-11",
+        "effective_date": "2026-10-24",
+        "effective_comment": "",
+        "amend_name": "住民基本台帳法施行令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百八十一号",
+        "amendment_id": "508CO0000000281",
+        "amend_published_date": "2026-09-16",
+        "compare_url": "https://laws.e-gov.go.jp/law/342CO0000000292/20261024_508CO0000000281?occasion_date=20261024&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "322CO0000000001",
+    "law_no": "昭和二十二年政令第一号",
+    "law_name": "皇統譜令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/322CO0000000001",
+    "updates": [
+      {
+        "law_data_id": 650095,
+        "sub_revision": "1",
+        "published_date": "1947-05-03",
+        "effective_date": "2026-10-24",
+        "effective_comment": "",
+        "amend_name": "皇統譜令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百八十号",
+        "amendment_id": "508CO0000000280",
+        "amend_published_date": "2026-09-16",
+        "compare_url": "https://laws.e-gov.go.jp/law/322CO0000000001/20261024_508CO0000000280?occasion_date=20261024&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "508M60000010049",
+    "law_no": "令和八年法務省令第四十九号",
+    "law_name": "皇族の身分を離れた者等の戸籍の取扱い等に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/508M60000010049",
+    "updates": [
+      {
+        "law_data_id": 650132,
+        "sub_revision": "1",
+        "published_date": "2026-09-16",
+        "effective_date": "2026-10-24",
+        "effective_comment": "",
+        "amend_name": "新規制定",
+        "amend_no": "",
+        "amendment_id": null,
+        "amend_published_date": "2026-09-16",
+        "compare_url": null,
         "pending": false
       }
     ]
