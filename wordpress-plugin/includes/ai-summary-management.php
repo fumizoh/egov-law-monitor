@@ -21,15 +21,31 @@ function egov_law_monitor_ai_summary_management_shortcode() {
 
     $user_id = get_current_user_id();
 
+    $plan = egov_law_monitor_get_plan( $user_id );
+
+    $is_free_plan = (
+        $plan === EGOV_LAW_MONITOR_PLAN_FREE
+    );
+
     $ai_summary_limit =
         egov_law_monitor_get_ai_summary_limit(
             $user_id
         );
 
-    $usage_count =
-        egov_law_monitor_get_ai_summary_usage_count(
-            $user_id
-        );
+    if ( $is_free_plan ) {
+
+        $usage_count =
+            egov_law_monitor_get_ai_summary_trial_usage_count(
+                $user_id
+            );
+
+    } else {
+
+        $usage_count =
+            egov_law_monitor_get_ai_summary_usage_count(
+                $user_id
+            );
+    }
 
     $remaining = max(
         0,
@@ -132,7 +148,13 @@ function egov_law_monitor_ai_summary_management_shortcode() {
         <div class="egov-ai-summary-usage">
 
             <p>
-                今月のAI要約利用：
+                <?php
+                    echo esc_html(
+                        $is_free_plan
+                            ? 'AI要約のお試し利用：'
+                            : '今月のAI要約利用：'
+                    );
+                ?>
                 <strong>
                     残り <?php echo esc_html( $remaining ); ?>
                     / <?php echo esc_html( $ai_summary_limit ); ?> 回

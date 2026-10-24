@@ -17,7 +17,7 @@ function egov_law_monitor_get_watch_limit( $user_id ) {
     $plan = egov_law_monitor_get_plan( $user_id );
 
     $limits = array(
-        EGOV_LAW_MONITOR_PLAN_FREE     => 1,
+        EGOV_LAW_MONITOR_PLAN_FREE     => 5,
         EGOV_LAW_MONITOR_PLAN_STANDARD => 10,
     );
 
@@ -31,8 +31,8 @@ function egov_law_monitor_get_ai_summary_limit( $user_id ) {
     $plan = egov_law_monitor_get_plan( $user_id );
 
     $limits = array(
-        EGOV_LAW_MONITOR_PLAN_FREE     => 5,
-        EGOV_LAW_MONITOR_PLAN_STANDARD => 30,
+        EGOV_LAW_MONITOR_PLAN_FREE     => 3,
+        EGOV_LAW_MONITOR_PLAN_STANDARD => 100,
     );
 
     return $limits[ $plan ] ?? $limits[ EGOV_LAW_MONITOR_PLAN_FREE ];

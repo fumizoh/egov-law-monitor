@@ -40,6 +40,12 @@ function egov_law_monitor_ai_summary_shortcode() {
         ? absint( $_GET['history_id'] )
         : 0;
 
+    $plan = egov_law_monitor_get_plan( $user_id );
+
+    $is_free_plan = (
+        $plan === EGOV_LAW_MONITOR_PLAN_FREE
+    );
+
     $ai_summary_limit = egov_law_monitor_get_ai_summary_limit( $user_id );
 
     /*
@@ -117,10 +123,20 @@ function egov_law_monitor_ai_summary_shortcode() {
         $sub_revision
     ) {
 
-        $usage_count =
-            egov_law_monitor_get_ai_summary_usage_count(
-                $user_id
-            );
+        if ( $is_free_plan ) {
+
+            $usage_count =
+                egov_law_monitor_get_ai_summary_trial_usage_count(
+                    $user_id
+                );
+
+        } else {
+
+            $usage_count =
+                egov_law_monitor_get_ai_summary_usage_count(
+                    $user_id
+                );
+        }
 
         /*
          * If the user has already used this exact revision,
@@ -196,10 +212,19 @@ function egov_law_monitor_ai_summary_shortcode() {
             $usage_count >= $ai_summary_limit
         ) {
 
+            if ( $is_free_plan ) {
+
+                $message = 'AI要約のお試し利用回数（3回）の上限に達しています。';
+
+            } else {
+
+                $message = '今月のAI要約利用回数の上限に達しています。';
+            }
+
             $summary_error =
                 new WP_Error(
                     'egov_law_monitor_ai_limit_reached',
-                    '今月のAI要約利用回数の上限に達しています。'
+                    $message
                 );
 
         } else {
@@ -281,6 +306,21 @@ function egov_law_monitor_ai_summary_shortcode() {
                                 );
 
                             $summary_result = null;
+
+                        } elseif ( $is_free_plan ) {
+
+                            $incremented =
+                                egov_law_monitor_increment_ai_summary_trial_usage_count(
+                                    $user_id
+                                );
+
+                            if ( ! $incremented ) {
+
+                                error_log(
+                                    'e-Gov Law Monitor: Failed to increment AI summary trial usage count. User ID: '
+                                    . $user_id
+                                );
+                            }
                         }
                     }
                 }
@@ -299,10 +339,20 @@ function egov_law_monitor_ai_summary_shortcode() {
     /*
      * Get the latest usage count after processing.
      */
-    $usage_count =
-        egov_law_monitor_get_ai_summary_usage_count(
-            $user_id
-        );
+    if ( $is_free_plan ) {
+
+        $usage_count =
+            egov_law_monitor_get_ai_summary_trial_usage_count(
+                $user_id
+            );
+
+    } else {
+
+        $usage_count =
+            egov_law_monitor_get_ai_summary_usage_count(
+                $user_id
+            );
+    }
 
     ob_start();
     ?>

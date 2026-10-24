@@ -77,13 +77,26 @@ add_action(
             }
         }
 
+        $current_user_id = get_current_user_id();
+
         $ai_summary_limit = is_user_logged_in()
-            ? egov_law_monitor_get_ai_summary_limit( get_current_user_id() )
+            ? egov_law_monitor_get_ai_summary_limit( $current_user_id )
             : 0;
 
-        $ai_usage_count = is_user_logged_in()
-            ? egov_law_monitor_get_ai_summary_usage_count( get_current_user_id() )
-            : 0;
+        $is_free_plan = is_user_logged_in()
+            ? egov_law_monitor_get_plan( $current_user_id ) === EGOV_LAW_MONITOR_PLAN_FREE
+            : false;
+
+        if ( is_user_logged_in() ) {
+
+            $ai_usage_count = $is_free_plan
+                ? egov_law_monitor_get_ai_summary_trial_usage_count( $current_user_id )
+                : egov_law_monitor_get_ai_summary_usage_count( $current_user_id );
+
+        } else {
+
+            $ai_usage_count = 0;
+        }
 
         wp_localize_script(
             'egov-law-watch',
@@ -102,6 +115,7 @@ add_action(
                     'isLoggedIn' => is_user_logged_in(),
                     'remaining' => max( 0, $ai_summary_limit - $ai_usage_count ),
                     'limit' => $ai_summary_limit,
+                    'isFreePlan' => $is_free_plan,
                 ),
             )
         );
@@ -127,6 +141,7 @@ add_action(
             amendmentName,
             isNewLaw,
             remaining,
+            isFreePlan,
             onConfirm
         } = options;
 
@@ -149,9 +164,11 @@ add_action(
                         ${
                             remaining > 0
                                 ? '<p>この改正をAIで要約します。</p>' +
-                                  '<p>今月のAI要約の残り：<strong>' +
-                                  remaining +
-                                  '回</strong></p>' +
+                                  '<p>' +
+                                  (isFreePlan
+                                      ? 'お試し利用の残り：'
+                                      : '今月のAI要約の残り：') +
+                                  '<strong>' + remaining + '回</strong></p>' +
 
                                     '<div class="egov-ai-summary-modal-amendment">' +
                                     '<p><strong>法令名</strong><br>' +
@@ -171,9 +188,13 @@ add_action(
                                     '<p>AI要約の対象は、条・項・号の本文です。別表・帳票・図は要約の対象外です。</p>' +
                                     '</div>'
 
-                                : '<p>今月のAI要約利用回数を使い切っています。</p>' +
-                                  '<p>この改正のAI要約を利用済みの場合は、<br>' +
-                                  'AI要約ページから再度表示できます。</p>'
+                                : '<p>' +
+                                (isFreePlan
+                                    ? 'AI要約のお試し利用回数（3回）を使い切っています。'
+                                    : '今月のAI要約利用回数を使い切っています。') +
+                                '</p>' +
+                                '<p>この改正のAI要約を利用済みの場合は、<br>' +
+                                'AI要約ページから再度表示できます。</p>'
                         }
                     </div>
                     <div class="egov-ai-summary-modal-actions">
@@ -377,6 +398,7 @@ add_action(
                     amendmentName: amendmentName,
                     isNewLaw: button.dataset.isNewLaw === 'true',
                     remaining: remaining,
+                    isFreePlan: settings.isFreePlan,
                     onConfirm: () => {
 
                         const url =
@@ -475,10 +497,24 @@ add_action(
                             $user_id
                         );
 
-                    $usage_count =
-                        egov_law_monitor_get_ai_summary_usage_count(
-                            $user_id
-                        );
+                    $is_free_plan =
+                        egov_law_monitor_get_plan( $user_id )
+                        === EGOV_LAW_MONITOR_PLAN_FREE;
+
+                    if ( $is_free_plan ) {
+
+                        $usage_count =
+                            egov_law_monitor_get_ai_summary_trial_usage_count(
+                                $user_id
+                            );
+
+                    } else {
+
+                        $usage_count =
+                            egov_law_monitor_get_ai_summary_usage_count(
+                                $user_id
+                            );
+                    }
 
                     /*
                     * Check whether the user has already used

@@ -530,6 +530,39 @@ function egov_law_monitor_get_ai_summary_usage_count(
 }
 
 /**
+ * Get the lifetime AI summary trial usage count for a user.
+ *
+ * @param int $user_id User ID.
+ * @return int
+ */
+function egov_law_monitor_get_ai_summary_trial_usage_count( $user_id ) {
+    return max(
+        0,
+        (int) get_user_meta(
+            $user_id,
+            'egov_law_monitor_ai_summary_trial_usage',
+            true
+        )
+    );
+}
+
+/**
+ * Increment the lifetime AI summary trial usage count for a user.
+ *
+ * @param int $user_id User ID.
+ * @return bool
+ */
+function egov_law_monitor_increment_ai_summary_trial_usage_count( $user_id ) {
+    $current_count = egov_law_monitor_get_ai_summary_trial_usage_count( $user_id );
+
+    return update_user_meta(
+        $user_id,
+        'egov_law_monitor_ai_summary_trial_usage',
+        $current_count + 1
+    ) !== false;
+}
+
+/**
  * Clear AI summary usage history for the current month.
  *
  * @param int $user_id User ID.

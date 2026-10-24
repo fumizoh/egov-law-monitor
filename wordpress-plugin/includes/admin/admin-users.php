@@ -285,10 +285,22 @@ function egov_law_monitor_render_admin_users() {
 
                                 <td>
                                     <?php
-                                    $ai_summary_usage =
-                                        egov_law_monitor_get_ai_summary_usage_count(
-                                            $user->ID
-                                        );
+                                    $plan = egov_law_monitor_get_plan( $user->ID );
+
+                                    if ( $plan === EGOV_LAW_MONITOR_PLAN_FREE ) {
+
+                                        $ai_summary_usage =
+                                            egov_law_monitor_get_ai_summary_trial_usage_count(
+                                                $user->ID
+                                            );
+
+                                    } else {
+
+                                        $ai_summary_usage =
+                                            egov_law_monitor_get_ai_summary_usage_count(
+                                                $user->ID
+                                            );
+                                    }
 
                                     $ai_summary_limit =
                                         egov_law_monitor_get_ai_summary_limit(
@@ -302,7 +314,12 @@ function egov_law_monitor_render_admin_users() {
                                         <?php echo esc_html( $ai_summary_limit ); ?>回
                                     </strong>
 
-                                    <?php if ( $ai_summary_usage > 0 ) : ?>
+                                    <?php
+                                    if (
+                                        $plan === EGOV_LAW_MONITOR_PLAN_STANDARD
+                                        && $ai_summary_usage > 0
+                                    ) :
+                                    ?>
 
                                         <form
                                             method="post"
