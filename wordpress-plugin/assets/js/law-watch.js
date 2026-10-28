@@ -93,7 +93,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     );
                 }
 
-                window.location.reload();
+                const pageUrl = new URL(window.location.href);
+                pageUrl.searchParams.set('show_watch_targets', keyword);
+                window.location.href = pageUrl.toString();
 
             } catch (error) {
                 console.error(error);
@@ -370,4 +372,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     });
+
+    const pageUrl = new URL(window.location.href);
+    const keywordToShow =
+        pageUrl.searchParams.get('show_watch_targets');
+
+    if (keywordToShow !== null) {
+        pageUrl.searchParams.delete('show_watch_targets');
+        window.history.replaceState({}, '', pageUrl.toString());
+
+        const targetButton = Array.from(targetButtons).find(
+            (button) => button.dataset.keyword === keywordToShow
+        );
+
+        if (targetButton) {
+            targetButton.click();
+        }
+    }
 });
