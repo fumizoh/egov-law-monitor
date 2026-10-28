@@ -29,6 +29,11 @@ function egov_law_monitor_render_search_page() {
 
         <h2>🔭 法令ウォッチ</h2>
 
+        <p class="egov-law-watch-notice">
+            メール通知が有効な場合、有効なキーワードに一致する法令の更新をメールでお知らせします。<br>
+            停止中のキーワードは通知対象外です。
+        </p>
+
         <p class="egov-law-watch-plan">
             ご利用プラン：<strong>
                 <?php
