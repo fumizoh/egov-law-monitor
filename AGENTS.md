@@ -3,7 +3,16 @@
 ## Git・ブランチ運用
 
 - 作業開始前に、リポジトリのパス、現在のブランチ、作業ツリーの状態を確認する。
-- 作業開始前にリモートの `main` の最新状態を確認する。
+- 作業開始前に `git fetch origin main` を実行し、リモートの `main` を取得する。fetch 成功後は `git rev-parse main origin/main` で両方のコミットハッシュを比較し、一致することを確認する。作業ツリーがクリーンであることも別途確認する。
+- `git fetch origin main` が失敗した場合は、エラー内容をユーザーに報告する。アクセス権限の変更やロックファイルの削除など、原因調査・対処のための変更を独断で行わない。
+- Codex の実行環境で fetch できず、ユーザー側の操作が必要な場合は、Codex 自身が PowerShell を実行できると決めつけず、次の手順を案内してユーザーに実行を依頼する。
+  ```powershell
+  Set-Location C:\GitHub\egov-law-monitor
+  git fetch origin main
+  git rev-parse main origin/main
+  git status --short --branch
+  ```
+- リモートの最新状態を確認できない場合、`main` と `origin/main` のハッシュが一致しない場合、または作業ツリーがクリーンでない場合は、その状態を報告し、最新のリモート `main` を基準とする作業ブランチでの作業を開始しない。
 - 新しい作業は、最新のリモート `main` を基準に専用ブランチを作成して行う。
 - 新しいWorktreeは作成しない。
 - 既存の未コミット変更を破棄・上書きしない。
