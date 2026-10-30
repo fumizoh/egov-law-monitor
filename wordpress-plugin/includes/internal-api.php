@@ -56,7 +56,6 @@ function egov_law_monitor_get_all_watch_settings() {
             $users[ $user_id ] = [
                 'user_id'       => $user_id,
                 'email'         => $row['user_email'],
-                'plan'          => egov_law_monitor_get_plan( $user_id ),
                 'notifications' => egov_law_monitor_get_notifications( $user_id ),
                 'watches'       => [],
             ];

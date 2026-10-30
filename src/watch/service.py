@@ -20,7 +20,6 @@ def get_watch_users() -> list[WatchUser]:
         WatchUser(
             user_id=user["user_id"],
             email=user["email"],
-            plan=user["plan"],
             notifications=user["notifications"],
             watches=[
                 WatchSetting(
