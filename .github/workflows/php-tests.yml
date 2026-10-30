@@ -1,0 +1,39 @@
+name: PHP tests
+
+on:
+  push:
+    branches: [main, feature/square-subscription-management]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  php-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          coverage: none
+
+      - name: Validate Composer configuration
+        run: composer validate --strict
+
+      - name: Install locked dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Lint PHP files
+        shell: bash
+        run: |
+          find wordpress-plugin tests -type f -name '*.php' -print0 \
+            | xargs -0 -n1 php -l
+
+      - name: Run PHPUnit
+        run: composer test

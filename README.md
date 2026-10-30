@@ -96,6 +96,41 @@ GitHub Actionsにより、法令更新情報の取得とデータ更新などを
 
 AI要約は別のAPI処理として実行されます。
 
+## PHPテスト
+
+### 単体テスト
+
+PHP 8.3とComposerを用意し、リポジトリのルートで依存関係をインストールして実行します。
+
+```powershell
+composer install
+composer test
+```
+
+`composer test` はWordPress本体やデータベースを使わない単体テストです。
+
+### WordPress DB統合テスト
+
+Docker Desktopを起動してから、リポジトリのルートで以下を実行します。
+
+```powershell
+docker compose -f compose.wordpress-tests.yml build wordpress-tests
+docker compose -f compose.wordpress-tests.yml up -d wp-test-db
+docker compose -f compose.wordpress-tests.yml run --rm wordpress-tests
+```
+
+統合テストコンテナはPHP 8.3、WordPress 6.8.3のコアと公式テストライブラリ、PHPUnit 9.6.29を使用します。WordPressのテストスイートはテストDBのテーブルを初期化するため、必ずComposeが用意する `egov_law_monitor_test` のみを使用してください。DBポートはホストに公開せず、テスト専用の内部ネットワークに限定しています。
+
+テスト実行中は停止コマンドを実行しないでください。`run --rm` が終了し、テスト処理が終わったことを確認してから、専用Composeプロジェクトのコンテナ・ネットワーク・テストDBボリュームを削除します。このComposeファイルが定義するDB用ボリュームは `wp-test-db-data` のみです。
+
+```powershell
+docker compose -f compose.wordpress-tests.yml down --volumes
+```
+
+このコマンドは、`name: egov-law-monitor-wp-tests` で識別されるこのComposeプロジェクトのリソースを対象にします。`--volumes` は同プロジェクトで宣言された名前付きボリュームと、同プロジェクトのコンテナに付いた匿名ボリュームを削除します。ほかのComposeプロジェクトのボリュームやイメージは削除しません。
+
+統合テストのブートストラップは、許可済みのDBホスト・DB名・ユーザー、テスト実行フラグ、WordPressテスト依存ディレクトリが一致しない場合は停止します。CIでも同じCompose構成とコマンドを使用します。
+
 ## 公開データ
 
 GitHub Pagesでは、構造化されたJSONデータを公開しています。

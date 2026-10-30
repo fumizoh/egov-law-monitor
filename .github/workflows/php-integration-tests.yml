@@ -1,0 +1,27 @@
+name: PHP database integration tests
+
+on:
+  push:
+    branches: [main, feature/square-subscription-management]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  wordpress-db-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build pinned PHP, WordPress test suite, and PHPUnit image
+        run: docker compose -f compose.wordpress-tests.yml build wordpress-tests
+
+      - name: Run WordPress database integration tests
+        run: docker compose -f compose.wordpress-tests.yml run --rm wordpress-tests
+
+      - name: Stop and remove isolated test containers
+        if: always()
+        run: docker compose -f compose.wordpress-tests.yml down --remove-orphans

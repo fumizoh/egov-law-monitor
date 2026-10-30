@@ -1,0 +1,49 @@
+name: egov-law-monitor-wp-tests
+
+services:
+  wp-test-db:
+    image: mysql:8.4
+    volumes:
+      - wp-test-db-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: egov_law_monitor_test
+      MYSQL_USER: egov_test
+      MYSQL_PASSWORD: egov_test_password
+      MYSQL_ROOT_PASSWORD: egov_test_root_password
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping --host=127.0.0.1 --user=root --password=egov_test_root_password --silent"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+    networks:
+      - wp-test-network
+
+  wordpress-tests:
+    build:
+      context: ./docker/wordpress-tests
+      dockerfile: Dockerfile
+      args:
+        WORDPRESS_VERSION: "6.8.3"
+    working_dir: /workspace
+    volumes:
+      - .:/workspace:ro
+    environment:
+      EGOV_ALLOW_TEST_DATABASE: "1"
+      WP_TEST_DB_HOST: wp-test-db
+      WP_TEST_DB_NAME: egov_law_monitor_test
+      WP_TEST_DB_USER: egov_test
+      WP_TESTS_DIR: /opt/wordpress-tests
+      WP_CORE_DIR: /opt/wordpress
+      WP_TEST_TOOLS_DIR: /opt/wp-test-tools
+    depends_on:
+      wp-test-db:
+        condition: service_healthy
+    networks:
+      - wp-test-network
+
+networks:
+  wp-test-network:
+    internal: true
+
+volumes:
+  wp-test-db-data:
