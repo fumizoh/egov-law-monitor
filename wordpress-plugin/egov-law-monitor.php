@@ -77,27 +77,6 @@ add_action(
             }
         }
 
-        $current_user_id = get_current_user_id();
-
-        $ai_summary_limit = is_user_logged_in()
-            ? egov_law_monitor_get_ai_summary_limit( $current_user_id )
-            : 0;
-
-        $is_free_plan = is_user_logged_in()
-            ? egov_law_monitor_get_plan( $current_user_id ) === EGOV_LAW_MONITOR_PLAN_FREE
-            : false;
-
-        if ( is_user_logged_in() ) {
-
-            $ai_usage_count = $is_free_plan
-                ? egov_law_monitor_get_ai_summary_trial_usage_count( $current_user_id )
-                : egov_law_monitor_get_ai_summary_usage_count( $current_user_id );
-
-        } else {
-
-            $ai_usage_count = 0;
-        }
-
         wp_localize_script(
             'egov-law-watch',
             'egovLawMonitor',
@@ -113,9 +92,6 @@ add_action(
                     ),
                     'restNonce' => wp_create_nonce( 'wp_rest' ),
                     'isLoggedIn' => is_user_logged_in(),
-                    'remaining' => max( 0, $ai_summary_limit - $ai_usage_count ),
-                    'limit' => $ai_summary_limit,
-                    'isFreePlan' => $is_free_plan,
                 ),
             )
         );
@@ -140,8 +116,9 @@ add_action(
             lawName,
             amendmentName,
             isNewLaw,
+            effectivePlan,
             remaining,
-            isFreePlan,
+            limit,
             onConfirm
         } = options;
 
@@ -165,10 +142,10 @@ add_action(
                             remaining > 0
                                 ? '<p>この改正をAIで要約します。</p>' +
                                   '<p>' +
-                                  (isFreePlan
+                                  (effectivePlan === 'free'
                                       ? 'お試し利用の残り：'
                                       : '今月のAI要約の残り：') +
-                                  '<strong>' + remaining + '回</strong></p>' +
+                                  '<strong>' + remaining + ' / ' + limit + '回</strong></p>' +
 
                                     '<div class="egov-ai-summary-modal-amendment">' +
                                     '<p><strong>法令名</strong><br>' +
@@ -189,9 +166,9 @@ add_action(
                                     '</div>'
 
                                 : '<p>' +
-                                (isFreePlan
-                                    ? 'AI要約のお試し利用回数（3回）を使い切っています。'
-                                    : '今月のAI要約利用回数を使い切っています。') +
+                                (effectivePlan === 'free'
+                                    ? 'AI要約のお試し利用回数（' + limit + '回）を使い切っています。'
+                                    : '今月のAI要約利用回数（' + limit + '回）を使い切っています。') +
                                 '</p>' +
                                 '<p>この改正のAI要約を利用済みの場合は、<br>' +
                                 'AI要約ページから再度表示できます。</p>'
@@ -342,8 +319,24 @@ add_action(
                     return;
                 }
 
-                const remaining =
-                    Number(usage.remaining || 0);
+                const effectivePlan = usage && usage.effectivePlan;
+                const remaining = usage && usage.remaining;
+                const limit = usage && usage.limit;
+
+                if (
+                    (effectivePlan !== 'free' && effectivePlan !== 'standard') ||
+                    !Number.isInteger(remaining) ||
+                    !Number.isInteger(limit) ||
+                    remaining < 0 ||
+                    limit < 1 ||
+                    remaining > limit
+                ) {
+                    window.alert(
+                        'AI要約の利用状況を取得できませんでした。\n' +
+                        'ページを再読み込みしてから、もう一度お試しください。'
+                    );
+                    return;
+                }
 
                 const amendmentName =
                     button.dataset.amendmentName ||
@@ -397,8 +390,9 @@ add_action(
                     lawName: button.dataset.lawName || '',
                     amendmentName: amendmentName,
                     isNewLaw: button.dataset.isNewLaw === 'true',
+                    effectivePlan: effectivePlan,
                     remaining: remaining,
-                    isFreePlan: settings.isFreePlan,
+                    limit: limit,
                     onConfirm: () => {
 
                         const url =
@@ -451,6 +445,8 @@ JS
 );
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/database.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-usage.php';
+add_action( 'plugins_loaded', 'egov_law_monitor_maybe_upgrade_subscription_schema' );
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/permissions.php';
 
@@ -469,118 +465,10 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-page.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-management.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/user-settings.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/entitlement-policy.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/entitlement-service.php';
 
-/*
- * AI要約の最新利用状況を取得するREST API。
- *
- * 法令ページを開いた後に別タブ等でAI要約を利用した場合でも、
- * 「AIで要約」クリック時点の最新残り回数を確認できるようにする。
- */
-add_action(
-    'rest_api_init',
-    function () {
-        register_rest_route(
-            'egov-law-monitor/v1',
-            '/ai-summary-usage',
-            array(
-                'methods' => WP_REST_Server::READABLE,
-                'permission_callback' => function () {
-                    return is_user_logged_in();
-                },
-                'callback' => function () {
-
-                    $user_id =
-                        get_current_user_id();
-
-                    $limit =
-                        egov_law_monitor_get_ai_summary_limit(
-                            $user_id
-                        );
-
-                    $is_free_plan =
-                        egov_law_monitor_get_plan( $user_id )
-                        === EGOV_LAW_MONITOR_PLAN_FREE;
-
-                    if ( $is_free_plan ) {
-
-                        $usage_count =
-                            egov_law_monitor_get_ai_summary_trial_usage_count(
-                                $user_id
-                            );
-
-                    } else {
-
-                        $usage_count =
-                            egov_law_monitor_get_ai_summary_usage_count(
-                                $user_id
-                            );
-                    }
-
-                    /*
-                    * Check whether the user has already used
-                    * an AI summary for this exact revision.
-                    */
-                    $law_id = isset( $_GET['law_id'] )
-                        ? sanitize_text_field(
-                            wp_unslash( $_GET['law_id'] )
-                        )
-                        : '';
-
-                    $effective_date = isset( $_GET['effective_date'] )
-                        ? sanitize_text_field(
-                            wp_unslash( $_GET['effective_date'] )
-                        )
-                        : '';
-
-                    $law_data_id = isset( $_GET['law_data_id'] )
-                        ? sanitize_text_field(
-                            wp_unslash( $_GET['law_data_id'] )
-                        )
-                        : '';
-
-                    $sub_revision = isset( $_GET['sub_revision'] )
-                        ? sanitize_text_field(
-                            wp_unslash( $_GET['sub_revision'] )
-                        )
-                        : '';
-
-                    $history = null;
-
-                    if (
-                        $law_id !== ''
-                        && $effective_date !== ''
-                        && $law_data_id !== ''
-                        && $sub_revision !== ''
-                    ) {
-                        $history =
-                            egov_law_monitor_get_ai_summary_history_by_revision(
-                                $user_id,
-                                $law_id,
-                                $effective_date,
-                                $law_data_id,
-                                $sub_revision
-                            );
-                    }
-
-                    return rest_ensure_response(
-                        array(
-                            'remaining' => max(
-                                0,
-                                $limit - $usage_count
-                            ),
-                            'limit' => $limit,
-                            'usageCount' => $usage_count,
-                            'alreadyUsed' => ! empty( $history ),
-                            'historyId' => ! empty( $history )
-                                ? (int) $history['id']
-                                : 0,
-                        )
-                    );
-                },
-            )
-        );
-    }
-);
+require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-usage-api.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-users.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-menu.php';
@@ -591,6 +479,7 @@ register_activation_hook(
     __FILE__,
     function () {
         egov_law_monitor_create_tables();
+        egov_law_monitor_maybe_upgrade_subscription_schema();
         egov_law_monitor_setup_api_user();
     }
 );

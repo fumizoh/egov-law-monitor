@@ -40,13 +40,8 @@ function egov_law_monitor_ai_summary_shortcode() {
         ? absint( $_GET['history_id'] )
         : 0;
 
-    $plan = egov_law_monitor_get_plan( $user_id );
-
-    $is_free_plan = (
-        $plan === EGOV_LAW_MONITOR_PLAN_FREE
-    );
-
-    $ai_summary_limit = egov_law_monitor_get_ai_summary_limit( $user_id );
+    $entitlement = egov_law_monitor_get_effective_entitlement( $user_id );
+    $entitlement_error = is_wp_error( $entitlement );
 
     /*
      * AI Summary request.
@@ -123,21 +118,6 @@ function egov_law_monitor_ai_summary_shortcode() {
         $sub_revision
     ) {
 
-        if ( $is_free_plan ) {
-
-            $usage_count =
-                egov_law_monitor_get_ai_summary_trial_usage_count(
-                    $user_id
-                );
-
-        } else {
-
-            $usage_count =
-                egov_law_monitor_get_ai_summary_usage_count(
-                    $user_id
-                );
-        }
-
         /*
          * If the user has already used this exact revision,
          * it can still be displayed after the free limit.
@@ -204,30 +184,39 @@ function egov_law_monitor_ai_summary_shortcode() {
                     $history_cache['comparison_effective_date'] ?? '';
             }
 
-        /*
-         * Do not call Cloud Run when the user has reached
-         * the monthly limit and this exact revision has not been used.
-         */
-        } elseif (
-            $usage_count >= $ai_summary_limit
-        ) {
+        } else {
 
-            if ( $is_free_plan ) {
-
-                $message = 'AI要約のお試し利用回数（3回）の上限に達しています。';
-
-            } else {
-
-                $message = '今月のAI要約利用回数の上限に達しています。';
+            $usage_reservation = null;
+            $bypass_usage = current_user_can( 'manage_options' );
+            if ( ! $bypass_usage && $entitlement_error ) {
+                $summary_error = new WP_Error(
+                    'egov_law_monitor_entitlement_unavailable',
+                    'プラン情報を確認できません。時間をおいて再度お試しください。'
+                );
+            } elseif ( ! $bypass_usage ) {
+                // Use this single resolved plan for idempotency and quota reservation.
+                $request_key = hash( 'sha256', implode( '|', array( $user_id, $entitlement['effective_plan'], $law_id, $effective_date, $law_data_id, $sub_revision ) ) );
+                $usage_reservation = egov_law_monitor_ai_usage_service()->reserve(
+                    $user_id,
+                    $entitlement['effective_plan'],
+                    $request_key
+                );
+                if ( is_wp_error( $usage_reservation ) ) {
+                    $summary_error = $usage_reservation;
+                } elseif ( ! empty( $usage_reservation['already_reserved'] ) ) {
+                    $summary_error = new WP_Error(
+                        'egov_law_monitor_ai_request_in_progress',
+                        '同じAI要約の処理を実行中です。しばらくしてから履歴をご確認ください。'
+                    );
+                } elseif ( ! empty( $usage_reservation['already_committed'] ) ) {
+                    $summary_error = new WP_Error(
+                        'egov_law_monitor_ai_usage_history_missing',
+                        'AI要約の利用記録を確認できませんでした。'
+                    );
+                }
             }
 
-            $summary_error =
-                new WP_Error(
-                    'egov_law_monitor_ai_limit_reached',
-                    $message
-                );
-
-        } else {
+            if ( ! is_wp_error( $summary_error ) ) {
 
             $summary_result =
                 egov_law_monitor_generate_ai_summary(
@@ -243,6 +232,9 @@ function egov_law_monitor_ai_summary_shortcode() {
                     $summary_result;
 
                 $summary_result = null;
+                if ( is_array( $usage_reservation ) ) {
+                    egov_law_monitor_ai_usage_service()->release( $usage_reservation['id'], $user_id );
+                }
 
             } else {
 
@@ -261,6 +253,9 @@ function egov_law_monitor_ai_summary_shortcode() {
                         );
 
                     $summary_result = null;
+                    if ( is_array( $usage_reservation ) ) {
+                        egov_law_monitor_ai_usage_service()->release( $usage_reservation['id'], $user_id );
+                    }
 
                 } else {
 
@@ -277,15 +272,33 @@ function egov_law_monitor_ai_summary_shortcode() {
                             $sub_revision
                         );
 
+                    if ( $already_used && ! $bypass_usage ) {
+                        $existing_history = egov_law_monitor_get_ai_summary_history_by_revision( $user_id, $law_id, $effective_date, $law_data_id, $sub_revision );
+                        $history_id = is_array( $existing_history ) ? absint( $existing_history['id'] ?? 0 ) : 0;
+                        if ( $history_id ) {
+                            $completion = egov_law_monitor_ai_usage_service()->commit_with_history(
+                                $usage_reservation['id'],
+                                $user_id,
+                                function () use ( $history_id ) { return $history_id; }
+                            );
+                            if ( is_wp_error( $completion ) ) {
+                                $summary_error = $completion;
+                                $summary_result = null;
+                            }
+                        } else {
+                            $summary_error = new WP_Error( 'egov_law_monitor_ai_history_not_found', '利用済みAI要約の履歴を確認できませんでした。' );
+                            $summary_result = null;
+                        }
+                    }
+
                     /*
                      * New revision:
                      * record the usage only after the summary
                      * has been successfully obtained.
                      */
-                    if ( ! $already_used ) {
-
-                        $saved =
-                            egov_law_monitor_save_ai_summary_history(
+                    if ( ! $already_used && ! is_wp_error( $summary_error ) ) {
+                        $save_history = function () use ( $user_id, $law_id, $summary_result, $effective_date, $law_data_id, $sub_revision, $revision_hash ) {
+                            $saved = egov_law_monitor_save_ai_summary_history(
                                 $user_id,
                                 $law_id,
                                 $summary_result['law_name'] ?? '',
@@ -296,34 +309,33 @@ function egov_law_monitor_ai_summary_shortcode() {
                                 $summary_result['summary']['title'] ?? '',
                                 $summary_result['summary']['body'] ?? ''
                             );
+                            if ( false === $saved ) {
+                                return false;
+                            }
+                            $history = egov_law_monitor_get_ai_summary_history_by_revision( $user_id, $law_id, $effective_date, $law_data_id, $sub_revision );
+                            return is_array( $history ) && ! empty( $history['id'] ) ? (int) $history['id'] : false;
+                        };
 
-                        if ( $saved === false ) {
+                        if ( ! $bypass_usage ) {
+                            $completion = egov_law_monitor_ai_usage_service()->commit_with_history( $usage_reservation['id'], $user_id, $save_history );
+                            $saved = is_wp_error( $completion ) ? false : $completion['history_id'];
+                        } else {
+                            $saved = $save_history();
+                        }
+
+                        if ( empty( $saved ) ) {
 
                             $summary_error =
                                 new WP_Error(
-                                    'egov_law_monitor_ai_history_error',
-                                    'AI要約の利用履歴を保存できませんでした。'
+                                    'egov_law_monitor_ai_usage_commit_error',
+                                    'AI要約の利用を確定できませんでした。'
                                 );
 
                             $summary_result = null;
-
-                        } elseif ( $is_free_plan ) {
-
-                            $incremented =
-                                egov_law_monitor_increment_ai_summary_trial_usage_count(
-                                    $user_id
-                                );
-
-                            if ( ! $incremented ) {
-
-                                error_log(
-                                    'e-Gov Law Monitor: Failed to increment AI summary trial usage count. User ID: '
-                                    . $user_id
-                                );
-                            }
                         }
                     }
                 }
+            }
             }
         }
 
@@ -333,24 +345,6 @@ function egov_law_monitor_ai_summary_shortcode() {
             new WP_Error(
                 'egov_law_monitor_ai_invalid_request',
                 'AI要約の対象となる改正情報が不足しています。'
-            );
-    }
-
-    /*
-     * Get the latest usage count after processing.
-     */
-    if ( $is_free_plan ) {
-
-        $usage_count =
-            egov_law_monitor_get_ai_summary_trial_usage_count(
-                $user_id
-            );
-
-    } else {
-
-        $usage_count =
-            egov_law_monitor_get_ai_summary_usage_count(
-                $user_id
             );
     }
 

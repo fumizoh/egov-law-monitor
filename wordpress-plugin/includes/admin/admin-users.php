@@ -23,19 +23,6 @@ function egov_law_monitor_render_admin_users() {
             ? absint( $_POST['user_id'] )
             : 0;
 
-        $plan = isset( $_POST['plan'] )
-            ? sanitize_key( $_POST['plan'] )
-            : EGOV_LAW_MONITOR_PLAN_FREE;
-
-        $allowed_plans = array(
-            EGOV_LAW_MONITOR_PLAN_FREE,
-            EGOV_LAW_MONITOR_PLAN_STANDARD,
-        );
-
-        if ( ! in_array( $plan, $allowed_plans, true ) ) {
-            $plan = EGOV_LAW_MONITOR_PLAN_FREE;
-        }
-
         $notifications = isset( $_POST['notifications'] )
             ? 1
             : 0;
@@ -43,20 +30,12 @@ function egov_law_monitor_render_admin_users() {
         if ( $user_id > 0 && get_userdata( $user_id ) ) {
             update_user_meta(
                 $user_id,
-                EGOV_LAW_MONITOR_META_PLAN,
-                $plan
-            );
-
-            update_user_meta(
-                $user_id,
                 EGOV_LAW_MONITOR_META_NOTIFICATIONS,
                 $notifications
             );
 
-            egov_law_monitor_enforce_watch_limit( $user_id );
-
             echo '<div class="notice notice-success is-dismissible">';
-            echo '<p>ユーザー設定を保存しました。</p>';
+            echo '<p>通知設定を保存しました。</p>';
             echo '</div>';
         }
     }
@@ -201,7 +180,7 @@ function egov_law_monitor_render_admin_users() {
                         <th>ユーザーID</th>
                         <th>ユーザー</th>
                         <th>メールアドレス</th>
-                        <th>プラン</th>
+                        <th>実効プラン</th>
                         <th>通知</th>                    
                         <th>ウォッチキーワード</th>
                         <th>AI要約</th>
@@ -217,6 +196,19 @@ function egov_law_monitor_render_admin_users() {
                         </tr>
                     <?php else : ?>
                         <?php foreach ( $users as $user ) : ?>
+                            <?php
+                            $entitlement = egov_law_monitor_get_effective_entitlement( $user->ID );
+                            $entitlement_error = is_wp_error( $entitlement );
+                            $usage_error = $entitlement_error;
+
+                            if ( ! $entitlement_error ) {
+                                $effective_plan = $entitlement['effective_plan'];
+                                $ai_summary_limit = $entitlement['ai_summary_limit'];
+                                $usage_period = $entitlement['ai_summary_period'];
+                                $ai_summary_usage = egov_law_monitor_get_ai_summary_usage_count_for_plan( $user->ID, $effective_plan );
+                                $usage_error = is_wp_error( $ai_summary_usage );
+                            }
+                            ?>
                             <tr>
                                 <td>
                                     <?php echo esc_html( $user->ID ); ?>
@@ -231,27 +223,11 @@ function egov_law_monitor_render_admin_users() {
                                 </td>
 
                                 <td>
-                                    <?php
-                                    $plan = egov_law_monitor_get_plan( $user->ID );
-                                    ?>
-
-                                    <select
-                                        name="plan"
-                                        form="egov-law-monitor-user-<?php echo esc_attr( $user->ID ); ?>"
-                                    >
-                                        <option
-                                            value="<?php echo esc_attr( EGOV_LAW_MONITOR_PLAN_FREE ); ?>"
-                                            <?php selected( $plan, EGOV_LAW_MONITOR_PLAN_FREE ); ?>
-                                        >
-                                            無料
-                                        </option>
-                                        <option
-                                            value="<?php echo esc_attr( EGOV_LAW_MONITOR_PLAN_STANDARD ); ?>"
-                                            <?php selected( $plan, EGOV_LAW_MONITOR_PLAN_STANDARD ); ?>
-                                        >
-                                            スタンダード
-                                        </option>
-                                    </select>
+                                    <?php if ( $entitlement_error ) : ?>
+                                        <span class="egov-entitlement-error">取得できません</span>
+                                    <?php else : ?>
+                                        <?php echo esc_html( egov_law_monitor_get_plan_label( $effective_plan ) ); ?>
+                                    <?php endif; ?>
                                 </td>
 
                                 <td>
@@ -284,39 +260,20 @@ function egov_law_monitor_render_admin_users() {
                                 </td>
 
                                 <td>
-                                    <?php
-                                    $plan = egov_law_monitor_get_plan( $user->ID );
-
-                                    if ( $plan === EGOV_LAW_MONITOR_PLAN_FREE ) {
-
-                                        $ai_summary_usage =
-                                            egov_law_monitor_get_ai_summary_trial_usage_count(
-                                                $user->ID
-                                            );
-
-                                    } else {
-
-                                        $ai_summary_usage =
-                                            egov_law_monitor_get_ai_summary_usage_count(
-                                                $user->ID
-                                            );
-                                    }
-
-                                    $ai_summary_limit =
-                                        egov_law_monitor_get_ai_summary_limit(
-                                            $user->ID
-                                        );
-                                    ?>
-
-                                    <strong>
-                                        <?php echo esc_html( $ai_summary_usage ); ?>
-                                        /
-                                        <?php echo esc_html( $ai_summary_limit ); ?>回
-                                    </strong>
+                                    <?php if ( $usage_error ) : ?>
+                                        <span class="egov-ai-summary-usage-error">利用状況を取得できません</span>
+                                    <?php else : ?>
+                                        <strong>
+                                            <?php echo 'lifetime' === $usage_period ? '生涯' : '今月'; ?>
+                                            <?php echo esc_html( $ai_summary_usage ); ?> / <?php echo esc_html( $ai_summary_limit ); ?>回
+                                        </strong>
+                                    <?php endif; ?>
 
                                     <?php
                                     if (
-                                        $plan === EGOV_LAW_MONITOR_PLAN_STANDARD
+                                        ! $usage_error
+                                        && ! $entitlement_error
+                                        && 'standard' === $effective_plan
                                         && $ai_summary_usage > 0
                                     ) :
                                     ?>
@@ -342,9 +299,9 @@ function egov_law_monitor_render_admin_users() {
                                                 type="submit"
                                                 name="egov_law_monitor_clear_ai_summary"
                                                 class="button button-secondary"
-                                                onclick="return confirm('今月のAI要約利用履歴を削除して、利用回数をリセットします。よろしいですか？');"
+                                                onclick="return confirm('今月のAI要約履歴を削除します。利用枠の消費記録は削除されません。よろしいですか？');"
                                             >
-                                                今月をリセット
+                                                今月の履歴を削除
                                             </button>
                                         </form>
 

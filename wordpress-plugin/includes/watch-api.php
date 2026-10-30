@@ -18,9 +18,6 @@ function egov_law_monitor_get_watches() {
         return [];
     }
 
-    // プラン上限を超えている場合は、新しいキーワードから停止する。
-    egov_law_monitor_enforce_watch_limit( $user_id );
-
     $table_name = $wpdb->prefix . 'law_watch_settings';
 
     $results = $wpdb->get_results(
@@ -56,58 +53,83 @@ function egov_law_monitor_get_watches() {
 }
 
 /**
- * Enforce the user's current watch limit without reactivating stopped keywords.
- * Older active keywords are kept; excess newer active keywords are stopped.
+ * Check whether the user can add or resume a watch under their effective plan.
+ *
+ * This check never changes existing watch rows. Entitlement and database
+ * errors are converted to generic REST-safe errors so internal details are
+ * not exposed to the client.
  *
  * @param int $user_id User ID.
- * @return void
+ * @return array|WP_Error Effective entitlement and active watch count, or an error.
  */
-function egov_law_monitor_enforce_watch_limit( $user_id ) {
+function egov_law_monitor_check_watch_capacity( $user_id ) {
+	global $wpdb;
 
-    global $wpdb;
+	$entitlement = egov_law_monitor_get_effective_entitlement( (int) $user_id );
+	if ( is_wp_error( $entitlement ) ) {
+		return new WP_Error(
+			'watch_entitlement_unavailable',
+			'プラン情報を確認できません。時間をおいて再度お試しください。',
+			array( 'status' => 503 )
+		);
+	}
 
-    $user_id = (int) $user_id;
+	$expected_limits = array(
+		'free'     => 5,
+		'standard' => 10,
+	);
+	if ( ! is_array( $entitlement ) ) {
+		return new WP_Error(
+			'watch_entitlement_unavailable',
+			'プラン情報を確認できません。時間をおいて再度お試しください。',
+			array( 'status' => 503 )
+		);
+	}
 
-    if ( ! $user_id ) {
-        return;
-    }
+	$plan = $entitlement['effective_plan'] ?? '';
+	if (
+		! is_string( $plan )
+		|| ! isset( $expected_limits[ $plan ] )
+		|| ! isset( $entitlement['watch_limit'] )
+		|| $entitlement['watch_limit'] !== $expected_limits[ $plan ]
+	) {
+		return new WP_Error(
+			'watch_entitlement_unavailable',
+			'プラン情報を確認できません。時間をおいて再度お試しください。',
+			array( 'status' => 503 )
+		);
+	}
 
-    $table_name = $wpdb->prefix . 'law_watch_settings';
-    $watch_limit = egov_law_monitor_get_watch_limit( $user_id );
+	$table_name = $wpdb->prefix . 'law_watch_settings';
+	$wpdb->last_error = '';
+	$count = $wpdb->get_var(
+		$wpdb->prepare(
+			"SELECT COUNT(*) FROM {$table_name} WHERE user_id = %d AND is_active = 1",
+			(int) $user_id
+		)
+	);
 
-    $active_watches = $wpdb->get_results(
-        $wpdb->prepare(
-            "SELECT id
-             FROM {$table_name}
-             WHERE user_id = %d
-               AND is_active = 1
-             ORDER BY created_at ASC, id ASC",
-            $user_id
-        ),
-        ARRAY_A
-    );
+	if ( '' !== $wpdb->last_error || null === $count || ! is_numeric( $count ) ) {
+		return new WP_Error(
+			'watch_limit_check_failed',
+			'ウォッチ登録数を確認できません。時間をおいて再度お試しください。',
+			array( 'status' => 503 )
+		);
+	}
 
-    if ( ! is_array( $active_watches ) || count( $active_watches ) <= $watch_limit ) {
-        return;
-    }
+	$count = (int) $count;
+	if ( $count >= $entitlement['watch_limit'] ) {
+		return new WP_Error(
+			'watch_limit_reached',
+			'現在のプランでは、これ以上キーワードを登録できません。',
+			array( 'status' => 409 )
+		);
+	}
 
-    $excess_watches = array_slice( $active_watches, $watch_limit );
-
-    foreach ( $excess_watches as $watch ) {
-        $wpdb->update(
-            $table_name,
-            array(
-                'is_active'  => 0,
-                'updated_at' => current_time( 'mysql' ),
-            ),
-            array(
-                'id'      => (int) $watch['id'],
-                'user_id' => $user_id,
-            ),
-            array( '%d', '%s' ),
-            array( '%d', '%d' )
-        );
-    }
+	return array(
+		'entitlement' => $entitlement,
+		'active_count' => $count,
+	);
 }
 
 
@@ -195,32 +217,10 @@ add_action(
 
                         $table_name = $wpdb->prefix . 'law_watch_settings';
 
-                        /*
-                         * Apply the current plan limit, then count active keywords.
-                         */
-                        egov_law_monitor_enforce_watch_limit( $user_id );
-
-                        $watch_limit = egov_law_monitor_get_watch_limit( $user_id );
-
-                        $watch_count = (int) $wpdb->get_var(
-                            $wpdb->prepare(
-                                "SELECT COUNT(*)
-                                FROM {$table_name}
-                                WHERE user_id = %d
-                                  AND is_active = 1",
-                                $user_id
-                            )
-                        );
-
-                        if ( $watch_count >= $watch_limit ) {
-                            return new WP_Error(
-                                'watch_limit_reached',
-                                '現在のプランでは、これ以上キーワードを登録できません。',
-                                [
-                                    'status' => 409,
-                                ]
-                            );
-                        }
+						$capacity = egov_law_monitor_check_watch_capacity( $user_id );
+						if ( is_wp_error( $capacity ) ) {
+							return $capacity;
+						}
 
                         /*
                          * Prevent duplicate keyword registration.
@@ -403,30 +403,17 @@ add_action(
                         );
                     }
 
-                    // 現在のプラン上限を適用し、有効なキーワード数を確認する。
-                    egov_law_monitor_enforce_watch_limit( $user_id );
-
-                    $watch_limit = egov_law_monitor_get_watch_limit( $user_id );
-
-                    $active_count = (int) $wpdb->get_var(
-                        $wpdb->prepare(
-                            "SELECT COUNT(*)
-                             FROM {$table_name}
-                             WHERE user_id = %d
-                               AND is_active = 1",
-                            $user_id
-                        )
-                    );
-
-                    if ( $active_count >= $watch_limit ) {
-                        return new WP_Error(
-                            'watch_limit_reached',
-                            'プランの有効キーワード上限に達しています。既存のキーワードを解除するか、プランを変更してから再開してください。',
-                            [
-                                'status' => 409,
-                            ]
-                        );
-                    }
+					$capacity = egov_law_monitor_check_watch_capacity( $user_id );
+					if ( is_wp_error( $capacity ) ) {
+						if ( 'watch_limit_reached' === $capacity->get_error_code() ) {
+							return new WP_Error(
+								'watch_limit_reached',
+								'プランの有効キーワード上限に達しています。既存のキーワードを解除するか、プランを変更してから再開してください。',
+								array( 'status' => 409 )
+							);
+						}
+						return $capacity;
+					}
 
                     $updated = $wpdb->update(
                         $table_name,
