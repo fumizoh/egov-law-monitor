@@ -1,88 +1,22 @@
 [
   {
-    "law_id": "411AC0000000089",
-    "law_no": "平成十一年法律第八十九号",
-    "law_name": "内閣府設置法",
+    "law_id": "419AC1000000051",
+    "law_no": "平成十九年法律第五十一号",
+    "law_name": "日本国憲法の改正手続に関する法律",
     "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/411AC0000000089",
+    "url": "https://laws.e-gov.go.jp/law/419AC1000000051",
     "updates": [
       {
-        "law_data_id": 641473,
+        "law_data_id": 641472,
         "sub_revision": "1",
-        "published_date": "1999-07-16",
-        "effective_date": "2026-10-30",
+        "published_date": "2007-05-18",
+        "effective_date": "2026-10-31",
         "effective_comment": "",
-        "amend_name": "国家社会機能継続性確保施策及び副首都の整備に係る施策の推進に関する法律",
-        "amend_no": "令和八年法律第七十八号",
-        "amendment_id": "508AC1000000078",
+        "amend_name": "日本国憲法の改正手続に関する法律の一部を改正する法律",
+        "amend_no": "令和八年法律第七十三号",
+        "amendment_id": "508AC1000000073",
         "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/411AC0000000089/20261030_508AC1000000078?occasion_date=20261030&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "508AC1000000078",
-    "law_no": "令和八年法律第七十八号",
-    "law_name": "国家社会機能継続性確保施策及び副首都の整備に係る施策の推進に関する法律",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/508AC1000000078",
-    "updates": [
-      {
-        "law_data_id": 641475,
-        "sub_revision": "1",
-        "published_date": "2026-07-31",
-        "effective_date": "2026-10-30",
-        "effective_comment": "",
-        "amend_name": "新規制定",
-        "amend_no": "",
-        "amendment_id": null,
-        "amend_published_date": "2026-07-31",
-        "compare_url": null,
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "424AC1000000080",
-    "law_no": "平成二十四年法律第八十号",
-    "law_name": "大都市地域における特別区の設置に関する法律",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/424AC1000000080",
-    "updates": [
-      {
-        "law_data_id": 641474,
-        "sub_revision": "1",
-        "published_date": "2012-09-05",
-        "effective_date": "2026-10-30",
-        "effective_comment": "",
-        "amend_name": "国家社会機能継続性確保施策及び副首都の整備に係る施策の推進に関する法律",
-        "amend_no": "令和八年法律第七十八号",
-        "amendment_id": "508AC1000000078",
-        "amend_published_date": "2026-07-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/424AC1000000080/20261030_508AC1000000078?occasion_date=20261030&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "412CO0000000245",
-    "law_no": "平成十二年政令第二百四十五号",
-    "law_name": "内閣府本府組織令",
-    "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/412CO0000000245",
-    "updates": [
-      {
-        "law_data_id": 650259,
-        "sub_revision": "1",
-        "published_date": "2000-06-07",
-        "effective_date": "2026-10-30",
-        "effective_comment": "",
-        "amend_name": "内閣府本府組織令の一部を改正する政令",
-        "amend_no": "令和八年政令第三百二号",
-        "amendment_id": "508CO0000000302",
-        "amend_published_date": "2026-09-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/412CO0000000245/20261030_508CO0000000302?occasion_date=20261030&tab=compare",
+        "compare_url": "https://laws.e-gov.go.jp/law/419AC1000000051/20261031_508AC1000000073?occasion_date=20261031&tab=compare",
         "pending": false
       }
     ]
