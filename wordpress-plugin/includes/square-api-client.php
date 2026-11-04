@@ -134,6 +134,7 @@ class Egov_Law_Monitor_Square_Api_Client {
 			? wp_remote_retrieve_body( $response )
 			: '';
 		$decoded = is_string( $body ) ? json_decode( $body, true ) : null;
+		$json_error = json_last_error();
 
 		if ( is_array( $decoded ) && ! empty( $decoded['errors'] ) ) {
 			return new WP_Error(
@@ -163,6 +164,7 @@ class Egov_Law_Monitor_Square_Api_Client {
 			|| ! is_string( $link['order_id'] )
 			|| ! $this->is_square_checkout_url( $url )
 		) {
+			$this->log_invalid_payment_link_response( $response, $decoded, $json_error );
 			return new WP_Error( 'square_response_invalid', 'Squareから有効な決済リンク情報を取得できませんでした。' );
 		}
 
@@ -284,5 +286,95 @@ class Egov_Law_Monitor_Square_Api_Client {
 		}
 
 		return in_array( strtolower( $parts['host'] ?? '' ), array( 'square.link', 'checkout.square.site' ), true );
+	}
+
+	/** Log redacted response metadata only when explicitly enabled on Sandbox staging. */
+	private function log_invalid_payment_link_response( $response, $decoded, $json_error ) {
+		if (
+			! defined( 'EGOV_LAW_MONITOR_SQUARE_DIAGNOSTICS' )
+			|| true !== EGOV_LAW_MONITOR_SQUARE_DIAGNOSTICS
+			|| ! defined( 'WP_ENVIRONMENT_TYPE' )
+			|| 'staging' !== WP_ENVIRONMENT_TYPE
+			|| ! defined( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT' )
+			|| 'sandbox' !== EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT
+		) {
+			return;
+		}
+
+		$payment_link_exists = is_array( $decoded ) && array_key_exists( 'payment_link', $decoded );
+		$link                = $payment_link_exists && is_array( $decoded['payment_link'] ) ? $decoded['payment_link'] : array();
+		$url                 = isset( $link['url'] ) && is_string( $link['url'] ) ? $link['url'] : '';
+		$parts               = '' !== $url ? wp_parse_url( $url ) : false;
+		$host                = is_array( $parts ) && isset( $parts['host'] ) ? strtolower( (string) $parts['host'] ) : '';
+		if ( ! preg_match( '/\A[a-z0-9.-]{1,253}\z/', $host ) ) {
+			$host = '' === $host ? 'unavailable' : 'invalid';
+		}
+
+		$content_type = function_exists( 'wp_remote_retrieve_header' ) ? wp_remote_retrieve_header( $response, 'content-type' ) : '';
+		if ( is_array( $content_type ) ) {
+			$content_type = reset( $content_type );
+		}
+		$media_type = is_string( $content_type ) && preg_match( '/\A\s*([a-z0-9!#$&^_.+-]+\/[a-z0-9!#$&^_.+-]+)/i', $content_type, $matches )
+			? strtolower( $matches[1] )
+			: 'unavailable';
+
+		$reason = $this->payment_link_response_failure_reason( $decoded, $json_error, $link, $url );
+		$fields = array();
+		foreach ( array( 'id', 'order_id', 'url' ) as $field ) {
+			$exists            = array_key_exists( $field, $link );
+			$fields[ $field ] = array(
+				'present' => $exists,
+				'type'    => $exists ? gettype( $link[ $field ] ) : 'missing',
+			);
+		}
+
+		$diagnostics = array(
+			'http_status'              => function_exists( 'wp_remote_retrieve_response_code' ) ? (int) wp_remote_retrieve_response_code( $response ) : 0,
+			'content_type'             => $media_type,
+			'json_decoded'             => JSON_ERROR_NONE === $json_error,
+			'payment_link_present'     => $payment_link_exists,
+			'payment_link_type'        => $payment_link_exists ? gettype( $decoded['payment_link'] ) : 'missing',
+			'payment_link_fields'      => $fields,
+			'url_host'                 => $host,
+			'validation_failure_code'  => $reason,
+		);
+
+		$encoded = function_exists( 'wp_json_encode' ) ? wp_json_encode( $diagnostics ) : false;
+		if ( is_string( $encoded ) ) {
+			error_log( 'e-Gov Law Monitor Square diagnostic: ' . $encoded );
+		}
+	}
+
+	/** Return a stable non-sensitive code for the first failed response check. */
+	private function payment_link_response_failure_reason( $decoded, $json_error, $link, $url ) {
+		if ( JSON_ERROR_NONE !== $json_error ) {
+			return 'json_decode_failed';
+		}
+		if ( ! is_array( $decoded ) ) {
+			return 'response_not_object';
+		}
+		if ( ! array_key_exists( 'payment_link', $decoded ) ) {
+			return 'payment_link_missing';
+		}
+		if ( ! is_array( $decoded['payment_link'] ) ) {
+			return 'payment_link_not_object';
+		}
+		if ( empty( $link['id'] ) ) {
+			return 'payment_link_id_missing_or_empty';
+		}
+		if ( ! is_string( $link['id'] ) ) {
+			return 'payment_link_id_not_string';
+		}
+		if ( empty( $link['order_id'] ) ) {
+			return 'order_id_missing_or_empty';
+		}
+		if ( ! is_string( $link['order_id'] ) ) {
+			return 'order_id_not_string';
+		}
+		if ( ! $this->is_square_checkout_url( $url ) ) {
+			return 'url_not_allowed';
+		}
+
+		return 'response_validation_failed';
 	}
 }

@@ -8,6 +8,7 @@ final class SquareApiClientTest extends TestCase {
 	private $request_count = 0;
 	private $response_body;
 	private $response_status = 200;
+	private $response_headers = array();
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -19,12 +20,13 @@ final class SquareApiClientTest extends TestCase {
 				'url'      => 'https://square.link/u/test-link',
 			),
 		);
+		$this->response_headers = array( 'content-type' => 'application/json; charset=utf-8' );
 		$this->filter = function ( $preempt, $args, $url ) {
 			++$this->request_count;
 			$this->request = array( 'args' => $args, 'url' => $url );
 
 			return array(
-				'headers'  => array(),
+				'headers'  => $this->response_headers,
 				'body'     => wp_json_encode( $this->response_body ),
 				'response' => array( 'code' => $this->response_status, 'message' => 'mocked' ),
 				'cookies'  => array(),
@@ -100,6 +102,90 @@ final class SquareApiClientTest extends TestCase {
 		$invalid               = $client->create_payment_link( '6f1c9802-3225-4e0a-80c1-b4de60d9bb90', 'another-key' );
 		$this->assertTrue( is_wp_error( $invalid ) );
 		$this->assertSame( 'square_response_invalid', $invalid->get_error_code() );
+	}
+
+	/**
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
+	public function test_staging_sandbox_diagnostics_log_only_redacted_response_metadata(): void {
+		$log = $this->capture_diagnostic_log( true, 'staging', 'sandbox', array( 'payment_link' => array( 'id' => 'private-link-id', 'url' => 'https://square.link/u/private-checkout-url' ) ) );
+		$this->assertMatchesRegularExpression( '/e-Gov Law Monitor Square diagnostic: (.+)/', $log );
+		preg_match( '/e-Gov Law Monitor Square diagnostic: (.+)/', $log, $matches );
+		$diagnostics = isset( $matches[1] ) ? json_decode( $matches[1], true ) : null;
+		$this->assertIsArray( $diagnostics );
+
+		$this->assertSame( 200, $diagnostics['http_status'] );
+		$this->assertSame( 'application/json', $diagnostics['content_type'] );
+		$this->assertTrue( $diagnostics['json_decoded'] );
+		$this->assertTrue( $diagnostics['payment_link_present'] );
+		$this->assertSame( 'array', $diagnostics['payment_link_type'] );
+		$this->assertSame( 'order_id_missing_or_empty', $diagnostics['validation_failure_code'] );
+		$this->assertSame( 'square.link', $diagnostics['url_host'] );
+		$this->assertSame( array( 'present' => true, 'type' => 'string' ), $diagnostics['payment_link_fields']['id'] );
+		$this->assertSame( array( 'present' => false, 'type' => 'missing' ), $diagnostics['payment_link_fields']['order_id'] );
+		$this->assertSame( array( 'present' => true, 'type' => 'string' ), $diagnostics['payment_link_fields']['url'] );
+		$this->assertStringNotContainsString( 'private-link-id', $log );
+		$this->assertStringNotContainsString( 'private-checkout-url', $log );
+		$this->assertStringNotContainsString( 'test-sandbox-token', $log );
+	}
+
+	/**
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
+	public function test_diagnostics_are_disabled_when_flag_is_false(): void {
+		$this->assertSame( '', $this->capture_diagnostic_log( false, 'staging', 'sandbox', array( 'payment_link' => array() ) ) );
+	}
+
+	/**
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
+	public function test_diagnostics_are_disabled_when_flag_is_undefined(): void {
+		$this->assertSame( '', $this->capture_diagnostic_log( null, 'staging', 'sandbox', array( 'payment_link' => array() ) ) );
+	}
+
+	/**
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
+	public function test_diagnostics_are_disabled_in_wordpress_production(): void {
+		$this->assertSame( '', $this->capture_diagnostic_log( true, 'production', 'sandbox', array( 'payment_link' => array() ) ) );
+	}
+
+	/**
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
+	public function test_diagnostics_are_disabled_for_square_production(): void {
+		$this->assertSame( '', $this->capture_diagnostic_log( true, 'staging', 'production', array( 'payment_link' => array() ) ) );
+	}
+
+	private function capture_diagnostic_log( $enabled, $wp_environment, $square_environment, $response_body ) {
+		if ( null !== $enabled ) {
+			define( 'EGOV_LAW_MONITOR_SQUARE_DIAGNOSTICS', $enabled );
+		}
+		define( 'WP_ENVIRONMENT_TYPE', $wp_environment );
+		define( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT', $square_environment );
+		$log_path = tempnam( sys_get_temp_dir(), 'egov-square-diagnostic-' );
+		$this->assertNotFalse( $log_path );
+		$previous_log = ini_get( 'error_log' );
+		ini_set( 'error_log', $log_path );
+
+		try {
+			$this->response_body = $response_body;
+			$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+			$result = $client->create_payment_link( '6f1c9802-3225-4e0a-80c1-b4de60d9bb90', 'attempt-idempotency-key' );
+			$this->assertTrue( is_wp_error( $result ) );
+			$this->assertSame( 'square_response_invalid', $result->get_error_code() );
+			return (string) file_get_contents( $log_path );
+		} finally {
+			ini_set( 'error_log', $previous_log );
+			if ( is_string( $log_path ) && file_exists( $log_path ) ) {
+				unlink( $log_path );
+			}
+		}
 	}
 
 	private function config( $environment ): array {
