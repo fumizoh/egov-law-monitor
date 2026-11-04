@@ -470,6 +470,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/entitlement-policy.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/entitlement-service.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-usage-api.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/square-checkout.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-users.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-menu.php';

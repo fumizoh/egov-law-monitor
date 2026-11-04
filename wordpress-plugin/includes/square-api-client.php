@@ -173,6 +173,79 @@ class Egov_Law_Monitor_Square_Api_Client {
 		);
 	}
 
+	/**
+	 * Return non-secret configuration used to partition local checkout rows.
+	 *
+	 * @return array|WP_Error
+	 */
+	public function get_checkout_scope() {
+		$required = array( 'environment', 'merchant_id', 'location_id', 'catalog_item_variation_id', 'subscription_plan_variation_id' );
+		foreach ( $required as $key ) {
+			if ( ! isset( $this->config[ $key ] ) || ! is_string( $this->config[ $key ] ) || '' === trim( $this->config[ $key ] ) ) {
+				return new WP_Error( 'square_configuration_invalid', 'Squareのサーバー設定が不足しています。' );
+			}
+		}
+		if ( ! in_array( $this->config['environment'], array( 'sandbox', 'production' ), true ) ) {
+			return new WP_Error( 'square_configuration_invalid', 'Squareの環境設定が不正です。' );
+		}
+		return array_intersect_key( $this->config, array_flip( $required ) );
+	}
+
+	/**
+	 * Retrieve a payment link before reusing it for another checkout response.
+	 *
+	 * @param string $payment_link_id Square Payment Link ID.
+	 * @return array|WP_Error Normalized link or a safe error.
+	 */
+	public function retrieve_payment_link( $payment_link_id ) {
+		$scope = $this->get_checkout_scope();
+		if ( is_wp_error( $scope ) || ! isset( $this->config['access_token'] ) || ! is_string( $this->config['access_token'] ) || '' === trim( $this->config['access_token'] ) ) {
+			return new WP_Error( 'square_configuration_invalid', 'Squareのサーバー設定が不足しています。' );
+		}
+		if ( ! is_string( $payment_link_id ) || '' === trim( $payment_link_id ) ) {
+			return new WP_Error( 'square_payment_link_id_invalid', '決済リンクを確認できません。' );
+		}
+		if ( ! function_exists( 'wp_remote_get' ) ) {
+			return new WP_Error( 'square_http_api_unavailable', 'Square決済サービスを利用できません。' );
+		}
+
+		$host = 'sandbox' === $scope['environment'] ? 'https://connect.squareupsandbox.com' : 'https://connect.squareup.com';
+		$response = wp_remote_get(
+			$host . '/v2/online-checkout/payment-links/' . rawurlencode( $payment_link_id ),
+			array(
+				'timeout'     => 20,
+				'redirection' => 0,
+				'sslverify'   => true,
+				'headers'     => array(
+					'Authorization' => 'Bearer ' . $this->config['access_token'],
+					'Square-Version' => self::API_VERSION,
+					'Accept'         => 'application/json',
+				),
+			)
+		);
+		if ( is_wp_error( $response ) ) {
+			return new WP_Error( 'square_link_verification_failed', '既存の決済リンクを確認できませんでした。' );
+		}
+		$status = (int) wp_remote_retrieve_response_code( $response );
+		if ( 404 === $status ) {
+			return new WP_Error( 'square_payment_link_not_found', '決済リンクが見つかりません。', array( 'http_status' => $status ) );
+		}
+		$decoded = json_decode( (string) wp_remote_retrieve_body( $response ), true );
+		if ( $status < 200 || $status >= 300 || ! is_array( $decoded ) || ! empty( $decoded['errors'] ) ) {
+			return new WP_Error( 'square_link_verification_failed', '既存の決済リンクを確認できませんでした。', array( 'http_status' => $status ) );
+		}
+		$link = isset( $decoded['payment_link'] ) && is_array( $decoded['payment_link'] ) ? $decoded['payment_link'] : array();
+		$url  = isset( $link['url'] ) && is_string( $link['url'] ) ? $link['url'] : '';
+		if ( ! empty( $link['is_deleted'] ) || empty( $link['id'] ) || ! is_string( $link['id'] ) || empty( $link['order_id'] ) || ! is_string( $link['order_id'] ) || ! $this->is_square_checkout_url( $url ) ) {
+			return new WP_Error( 'square_link_verification_failed', '既存の決済リンクを確認できませんでした。' );
+		}
+		return array(
+			'payment_link_id' => $link['id'],
+			'order_id'        => $link['order_id'],
+			'url'             => $url,
+		);
+	}
+
 	private function validate_request( $attempt_uuid, $idempotency_key ) {
 		$required = array(
 			'environment',

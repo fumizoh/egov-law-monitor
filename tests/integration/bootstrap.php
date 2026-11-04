@@ -59,6 +59,7 @@ require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/entitlement-pol
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/entitlement-service.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/user-settings.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/ai-summary-usage-api.php';
+require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-checkout.php';
 
 /* Keep network-dependent plugin boundaries deterministic in the DB suite. */
 if ( ! function_exists( 'egov_law_monitor_search_laws' ) ) {

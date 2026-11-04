@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 final class DatabaseSchemaTest extends TestCase {
 	private $tables = array();
 	private const SCHEMA_VERSION_OPTION = 'egov_law_monitor_square_schema_version';
-	private const CURRENT_SCHEMA_VERSION = 2;
+	private const CURRENT_SCHEMA_VERSION = 3;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -137,10 +137,45 @@ final class DatabaseSchemaTest extends TestCase {
 		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
 		$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
 		$this->assertTableExists( $attempts_table );
+		$this->assertSame( 'last_error_code', $wpdb->get_var( $wpdb->prepare( "SHOW COLUMNS FROM `{$attempts_table}` LIKE %s", 'last_error_code' ) ) );
 		$this->assertSame(
 			'preserve-on-v2-upgrade',
 			$wpdb->get_var( $wpdb->prepare( "SELECT keyword FROM {$watch_table} WHERE user_id = %d", 845 ) )
 		);
+	}
+
+	public function test_version_two_migration_adds_checkout_error_tracking_without_losing_attempts(): void {
+		global $wpdb;
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$table = $wpdb->prefix . 'egov_law_checkout_attempts';
+		$attempt_uuid = wp_generate_uuid4();
+		$inserted = $wpdb->insert(
+			$table,
+			array(
+				'attempt_uuid' => $attempt_uuid,
+				'user_id' => 856,
+				'environment' => 'sandbox',
+				'merchant_id' => 'schema-migration-merchant',
+				'square_location_id' => 'schema-location',
+				'plan_code' => 'standard',
+				'catalog_item_variation_id' => 'schema-item',
+				'subscription_plan_variation_id' => 'schema-plan',
+				'status' => 'creating',
+				'idempotency_key' => wp_generate_uuid4(),
+				'created_at' => '2026-03-01 00:00:00',
+				'updated_at' => '2026-03-01 00:00:00',
+			)
+		);
+		$this->assertSame( 1, $inserted );
+		$wpdb->query( "ALTER TABLE `{$table}` DROP COLUMN last_error_code" );
+		update_option( self::SCHEMA_VERSION_OPTION, 2, false );
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT attempt_uuid, status, last_error_code FROM {$table} WHERE attempt_uuid = %s", $attempt_uuid ), ARRAY_A );
+		$this->assertIsArray( $row );
+		$this->assertSame( 'creating', $row['status'] );
+		$this->assertSame( '', $row['last_error_code'] );
 	}
 
 	public function test_subscription_migration_recovers_after_a_table_was_skipped(): void {
