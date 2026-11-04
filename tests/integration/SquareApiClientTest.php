@@ -17,7 +17,7 @@ final class SquareApiClientTest extends TestCase {
 			'payment_link' => array(
 				'id'       => 'sandbox-link-id',
 				'order_id' => 'sandbox-order-id',
-				'url'      => 'https://square.link/u/test-link',
+				'url'      => 'https://sandbox.square.link/u/test-link',
 			),
 		);
 		$this->response_headers = array( 'content-type' => 'application/json; charset=utf-8' );
@@ -49,7 +49,7 @@ final class SquareApiClientTest extends TestCase {
 			array(
 				'payment_link_id' => 'sandbox-link-id',
 				'order_id'        => 'sandbox-order-id',
-				'url'             => 'https://square.link/u/test-link',
+				'url'             => 'https://sandbox.square.link/u/test-link',
 			),
 			$result
 		);
@@ -80,12 +80,40 @@ final class SquareApiClientTest extends TestCase {
 	}
 
 	public function test_production_host_is_selected_only_for_explicit_production_configuration(): void {
+		$this->response_body['payment_link']['url'] = 'https://square.link/u/test-link';
 		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'production' ) );
 		$result = $client->create_payment_link( '6f1c9802-3225-4e0a-80c1-b4de60d9bb90', 'production-config-test-key' );
 
 		$this->assertFalse( is_wp_error( $result ) );
 		$this->assertSame( 'https://connect.squareup.com/v2/online-checkout/payment-links', $this->request['url'] );
 		$this->assertSame( 1, $this->request_count );
+	}
+
+	public function test_production_accepts_existing_checkout_square_site_host(): void {
+		$this->response_body['payment_link']['url'] = 'https://checkout.square.site/pay/test-link';
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'production' ) );
+		$result = $client->create_payment_link( '6f1c9802-3225-4e0a-80c1-b4de60d9bb90', 'production-checkout-site-key' );
+
+		$this->assertFalse( is_wp_error( $result ) );
+		$this->assertSame( 'https://checkout.square.site/pay/test-link', $result['url'] );
+	}
+
+	public function test_production_rejects_sandbox_payment_link_host(): void {
+		$this->response_body['payment_link']['url'] = 'https://sandbox.square.link/u/test-link';
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'production' ) );
+		$result = $client->create_payment_link( '6f1c9802-3225-4e0a-80c1-b4de60d9bb90', 'production-sandbox-link-key' );
+
+		$this->assertTrue( is_wp_error( $result ) );
+		$this->assertSame( 'square_response_invalid', $result->get_error_code() );
+	}
+
+	public function test_sandbox_rejects_lookalike_payment_link_hosts(): void {
+		$this->response_body['payment_link']['url'] = 'https://sandbox.square.link.attacker.example/u/test-link';
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->create_payment_link( '6f1c9802-3225-4e0a-80c1-b4de60d9bb90', 'sandbox-lookalike-key' );
+
+		$this->assertTrue( is_wp_error( $result ) );
+		$this->assertSame( 'square_response_invalid', $result->get_error_code() );
 	}
 
 	public function test_square_api_error_and_invalid_response_are_not_returned_as_success(): void {
@@ -109,7 +137,7 @@ final class SquareApiClientTest extends TestCase {
 	 * @preserveGlobalState disabled
 	 */
 	public function test_staging_sandbox_diagnostics_log_only_redacted_response_metadata(): void {
-		$log = $this->capture_diagnostic_log( true, 'staging', 'sandbox', array( 'payment_link' => array( 'id' => 'private-link-id', 'url' => 'https://square.link/u/private-checkout-url' ) ) );
+		$log = $this->capture_diagnostic_log( true, 'staging', 'sandbox', array( 'payment_link' => array( 'id' => 'private-link-id', 'url' => 'https://sandbox.square.link/u/private-checkout-url' ) ) );
 		$this->assertMatchesRegularExpression( '/e-Gov Law Monitor Square diagnostic: (.+)/', $log );
 		preg_match( '/e-Gov Law Monitor Square diagnostic: (.+)/', $log, $matches );
 		$diagnostics = isset( $matches[1] ) ? json_decode( $matches[1], true ) : null;
@@ -121,7 +149,7 @@ final class SquareApiClientTest extends TestCase {
 		$this->assertTrue( $diagnostics['payment_link_present'] );
 		$this->assertSame( 'array', $diagnostics['payment_link_type'] );
 		$this->assertSame( 'order_id_missing_or_empty', $diagnostics['validation_failure_code'] );
-		$this->assertSame( 'square.link', $diagnostics['url_host'] );
+		$this->assertSame( 'sandbox.square.link', $diagnostics['url_host'] );
 		$this->assertSame( array( 'present' => true, 'type' => 'string' ), $diagnostics['payment_link_fields']['id'] );
 		$this->assertSame( array( 'present' => false, 'type' => 'missing' ), $diagnostics['payment_link_fields']['order_id'] );
 		$this->assertSame( array( 'present' => true, 'type' => 'string' ), $diagnostics['payment_link_fields']['url'] );

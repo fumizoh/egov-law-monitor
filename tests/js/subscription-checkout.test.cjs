@@ -72,6 +72,15 @@ test('POSTs with the WordPress REST nonce and redirects only to a Square checkou
     assert.equal(result.destination, 'https://square.link/u/checkout-test');
 });
 
+test('redirects to the exact Square Sandbox checkout host', async () => {
+    const result = await clickCheckout({
+        ok: true,
+        json: async () => ({ checkout_url: 'https://sandbox.square.link/u/sandbox-checkout' }),
+    });
+
+    assert.equal(result.destination, 'https://sandbox.square.link/u/sandbox-checkout');
+});
+
 test('shows the server reconciliation message and restores the button after API error', async () => {
     const result = await clickCheckout({
         ok: false,

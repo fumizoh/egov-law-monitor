@@ -42,7 +42,7 @@
                     }
 
                     const checkoutUrl = new URL(payload.checkout_url);
-                    const allowedHosts = ['square.link', 'checkout.square.site'];
+                    const allowedHosts = ['square.link', 'checkout.square.site', 'sandbox.square.link'];
                     if (
                         checkoutUrl.protocol !== 'https:' ||
                         !allowedHosts.includes(checkoutUrl.hostname.toLowerCase()) ||

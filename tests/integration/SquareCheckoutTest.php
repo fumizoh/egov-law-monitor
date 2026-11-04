@@ -10,7 +10,7 @@ final class SquareCheckoutTest extends TestCase {
 	private $link = array(
 		'payment_link_id' => 'test-payment-link',
 		'order_id'        => 'test-order',
-		'url'             => 'https://square.link/u/test-checkout',
+		'url'             => 'https://sandbox.square.link/u/test-checkout',
 	);
 	private $http_mode = 'success';
 	private $post_attempts = 0;
@@ -37,7 +37,7 @@ final class SquareCheckoutTest extends TestCase {
 					$this->link = array(
 						'payment_link_id' => 'test-link-' . $id_suffix,
 						'order_id'        => 'test-order-' . $id_suffix,
-						'url'             => 'https://square.link/u/test-' . $id_suffix,
+						'url'             => 'https://sandbox.square.link/u/test-' . $id_suffix,
 					);
 				}
 				$body = 200 === $this->post_status

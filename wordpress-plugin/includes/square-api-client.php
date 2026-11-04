@@ -285,7 +285,11 @@ class Egov_Law_Monitor_Square_Api_Client {
 			return false;
 		}
 
-		return in_array( strtolower( $parts['host'] ?? '' ), array( 'square.link', 'checkout.square.site' ), true );
+		$allowed_hosts = 'sandbox' === ( $this->config['environment'] ?? '' )
+			? array( 'sandbox.square.link' )
+			: array( 'square.link', 'checkout.square.site' );
+
+		return in_array( strtolower( $parts['host'] ?? '' ), $allowed_hosts, true );
 	}
 
 	/** Log redacted response metadata only when explicitly enabled on Sandbox staging. */
