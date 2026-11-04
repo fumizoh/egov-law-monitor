@@ -62,6 +62,28 @@ class Egov_Law_Monitor_Checkout_Repository {
 		return isset( $rows[0] ) ? $rows[0] : null;
 	}
 
+	/** Read the current user's open-attempt state without locking or changing it. */
+	public function get_open_attempt_status( $user_id, $environment, $merchant_id ) {
+		$table = $this->wpdb->prefix . 'egov_law_checkout_attempts';
+		$this->wpdb->last_error = '';
+		$rows = $this->wpdb->get_results(
+			$this->wpdb->prepare(
+				"SELECT status FROM {$table} WHERE user_id = %d AND environment = %s AND merchant_id = %s AND status IN ('creating', 'pending', 'reconciliation_required') ORDER BY id DESC",
+				$user_id,
+				$environment,
+				$merchant_id
+			),
+			ARRAY_A
+		);
+		if ( ! is_array( $rows ) || '' !== (string) $this->wpdb->last_error ) {
+			return new WP_Error( 'checkout_database_unavailable', '申込状況を確認できません。' );
+		}
+		if ( count( $rows ) > 1 ) {
+			return new WP_Error( 'checkout_attempts_inconsistent', '申込状況を確認できません。' );
+		}
+		return isset( $rows[0]['status'] ) ? (string) $rows[0]['status'] : null;
+	}
+
 	public function insert_creating_attempt( $user_id, $scope, $attempt_uuid, $idempotency_key ) {
 		$table = $this->wpdb->prefix . 'egov_law_checkout_attempts';
 		$now = current_time( 'mysql', true );
@@ -251,6 +273,19 @@ class Egov_Law_Monitor_Square_Checkout_Service {
 			return $this->verify_and_reuse( $attempt );
 		}
 		return $this->create_for_attempt( $user_id, $attempt, $is_retry );
+	}
+
+	/** Return the current user's server-stored checkout state without Square API calls. */
+	public function get_attempt_status_for_user( $user_id ) {
+		$user_id = absint( $user_id );
+		if ( ! $user_id ) {
+			return new WP_Error( 'checkout_user_invalid', '申込状況を確認できません。' );
+		}
+		$scope = $this->client->get_checkout_scope();
+		if ( is_wp_error( $scope ) ) {
+			return new WP_Error( 'checkout_configuration_unavailable', '申込状況を確認できません。' );
+		}
+		return $this->repository->get_open_attempt_status( $user_id, $scope['environment'], $scope['merchant_id'] );
 	}
 
 	private function verify_and_reuse( $attempt ) {

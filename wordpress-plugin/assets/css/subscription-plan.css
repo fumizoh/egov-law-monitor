@@ -1,0 +1,52 @@
+.egov-subscription-plan-card {
+	max-width: 42rem;
+	padding: 1.25rem;
+	border: 1px solid #dcdcde;
+	border-radius: 0.5rem;
+	background: #fff;
+}
+
+.egov-subscription-plan-card h2,
+.egov-subscription-plan-offer h3 {
+	margin-top: 0;
+}
+
+.egov-subscription-plan-name {
+	font-size: 1.25rem;
+	font-weight: 700;
+}
+
+.egov-subscription-plan-price {
+	font-size: 1.15rem;
+	font-weight: 700;
+}
+
+.egov-subscription-checkout-button {
+	min-height: 2.75rem;
+	padding: 0.65rem 1rem;
+	border: 0;
+	border-radius: 0.25rem;
+	background: #135e96;
+	color: #fff;
+	cursor: pointer;
+}
+
+.egov-subscription-checkout-button:disabled {
+	opacity: 0.65;
+	cursor: wait;
+}
+
+.egov-subscription-plan-message,
+.egov-subscription-checkout-status {
+	margin-top: 0.75rem;
+}
+
+@media (max-width: 600px) {
+	.egov-subscription-plan-card {
+		padding: 1rem;
+	}
+
+	.egov-subscription-checkout-button {
+		width: 100%;
+	}
+}
