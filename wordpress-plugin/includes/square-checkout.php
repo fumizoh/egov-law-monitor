@@ -223,6 +223,9 @@ class Egov_Law_Monitor_Square_Checkout_Service {
 		if ( ! $user_id ) {
 			return new WP_Error( 'checkout_unavailable', '決済リンクを準備できません。' );
 		}
+		if ( ! egov_law_monitor_square_checkout_test_user_is_allowed( $user_id, $this ) ) {
+			return new WP_Error( 'checkout_test_user_not_allowed', 'Sandboxの許可されたテストユーザーのみお申し込みいただけます。' );
+		}
 		$scope = $this->client->get_checkout_scope();
 		if ( is_wp_error( $scope ) ) {
 			return new WP_Error( 'checkout_configuration_unavailable', '決済リンクを準備できません。' );
@@ -286,6 +289,15 @@ class Egov_Law_Monitor_Square_Checkout_Service {
 			return new WP_Error( 'checkout_configuration_unavailable', '申込状況を確認できません。' );
 		}
 		return $this->repository->get_open_attempt_status( $user_id, $scope['environment'], $scope['merchant_id'] );
+	}
+
+	/** Return the validated server-configured environment, or an error if invalid. */
+	public function get_checkout_environment() {
+		$scope = $this->client->get_checkout_scope();
+		if ( is_wp_error( $scope ) ) {
+			return new WP_Error( 'checkout_configuration_unavailable', '決済環境を確認できません。' );
+		}
+		return $scope['environment'];
 	}
 
 	private function verify_and_reuse( $attempt ) {
@@ -371,6 +383,42 @@ class Egov_Law_Monitor_Square_Checkout_Service {
 	}
 }
 
+/**
+ * Validate the Sandbox-only test-user allowlist without coercing its values.
+ * Configure EGOV_LAW_MONITOR_SQUARE_TEST_USER_IDS as an integer array in wp-config.php.
+ */
+function egov_law_monitor_square_checkout_test_access_is_allowed( $user_id, $environment, $allowed_user_ids ) {
+	if ( ! is_int( $user_id ) || $user_id < 1 || 'sandbox' !== $environment || ! is_array( $allowed_user_ids ) || empty( $allowed_user_ids ) ) {
+		return false;
+	}
+
+	foreach ( $allowed_user_ids as $allowed_user_id ) {
+		if ( ! is_int( $allowed_user_id ) || $allowed_user_id < 1 ) {
+			return false;
+		}
+	}
+
+	return in_array( $user_id, $allowed_user_ids, true );
+}
+
+/** Check the current request against server-side Sandbox and user settings. */
+function egov_law_monitor_square_checkout_test_user_is_allowed( $user_id, $service ) {
+	if (
+		! is_user_logged_in()
+		|| (int) get_current_user_id() !== (int) $user_id
+		|| ! $service instanceof Egov_Law_Monitor_Square_Checkout_Service
+	) {
+		return false;
+	}
+
+	$environment = $service->get_checkout_environment();
+	$allowed_user_ids = defined( 'EGOV_LAW_MONITOR_SQUARE_TEST_USER_IDS' )
+		? constant( 'EGOV_LAW_MONITOR_SQUARE_TEST_USER_IDS' )
+		: null;
+
+	return egov_law_monitor_square_checkout_test_access_is_allowed( $user_id, $environment, $allowed_user_ids );
+}
+
 /** Build the configured checkout service; filters allow isolated tests. */
 function egov_law_monitor_square_checkout_service() {
 	global $wpdb;
@@ -409,9 +457,16 @@ add_action(
 					if ( is_wp_error( $service ) ) {
 						return new WP_Error( 'checkout_unavailable', '決済リンクを準備できません。時間をおいて再度お試しください。', array( 'status' => 503 ) );
 					}
-					$result = $service->create_or_reuse_for_user( get_current_user_id() );
+					$user_id = get_current_user_id();
+					if ( ! egov_law_monitor_square_checkout_test_user_is_allowed( $user_id, $service ) ) {
+						return new WP_Error( 'checkout_test_user_not_allowed', 'Sandboxの許可されたテストユーザーのみお申し込みいただけます。', array( 'status' => 403 ) );
+					}
+					$result = $service->create_or_reuse_for_user( $user_id );
 					if ( is_wp_error( $result ) ) {
 						$code = $result->get_error_code();
+						if ( 'checkout_test_user_not_allowed' === $code ) {
+							return new WP_Error( 'checkout_test_user_not_allowed', 'Sandboxの許可されたテストユーザーのみお申し込みいただけます。', array( 'status' => 403 ) );
+						}
 						if ( 'checkout_standard_active' === $code ) {
 							return new WP_Error( 'checkout_standard_active', 'Standardプランはすでに有効です。', array( 'status' => 409 ) );
 						}

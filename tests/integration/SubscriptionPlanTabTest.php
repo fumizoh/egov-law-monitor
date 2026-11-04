@@ -5,6 +5,8 @@ use PHPUnit\Framework\TestCase;
 final class SubscriptionPlanTabTest extends TestCase {
 	private $user_id;
 	private $checkout_service_filter;
+	private $checkout_environment = 'sandbox';
+	private $unallowed_user_id;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -12,25 +14,16 @@ final class SubscriptionPlanTabTest extends TestCase {
 		$this->assertSame( 'egov_law_monitor_test', $wpdb->get_var( 'SELECT DATABASE()' ) );
 		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
 
-		$suffix  = wp_generate_password( 10, false, false );
-		$user_id = wp_insert_user(
-			array(
-				'user_login' => 'subscription-tab-' . $suffix,
-				'user_pass'  => wp_generate_password(),
-				'user_email' => 'subscription-tab-' . $suffix . '@example.org',
-				'role'       => 'subscriber',
-			)
-		);
-		$this->assertFalse( is_wp_error( $user_id ) );
-		$this->user_id = (int) $user_id;
+		$this->user_id = 1;
+		$this->assertNotFalse( get_userdata( $this->user_id ), "The WordPress test site's seeded administrator should be present." );
 		wp_set_current_user( $this->user_id );
 
-		$this->checkout_service_filter = static function ( $service, $wpdb_instance ) {
+		$this->checkout_service_filter = function ( $service, $wpdb_instance ) {
 			return new Egov_Law_Monitor_Square_Checkout_Service(
 				new Egov_Law_Monitor_Checkout_Repository( $wpdb_instance ),
 				new Egov_Law_Monitor_Square_Api_Client(
 					array(
-						'environment'                    => 'sandbox',
+						'environment'                    => $this->checkout_environment,
 						'access_token'                   => 'test-token',
 						'merchant_id'                    => 'test-merchant',
 						'location_id'                    => 'test-location',
@@ -49,11 +42,14 @@ final class SubscriptionPlanTabTest extends TestCase {
 		if ( DB_NAME === 'egov_law_monitor_test' && DB_HOST === 'wp-test-db' && DB_USER === 'egov_test' && $this->user_id ) {
 			$wpdb->delete( $wpdb->prefix . 'egov_law_checkout_attempts', array( 'user_id' => $this->user_id ), array( '%d' ) );
 			$wpdb->delete( $wpdb->prefix . 'egov_law_subscriptions', array( 'user_id' => $this->user_id ), array( '%d' ) );
-			$removed_plugin_delete_hook = function_exists( 'egov_law_monitor_delete_user_data' )
-				&& remove_action( 'delete_user', 'egov_law_monitor_delete_user_data' );
-			wp_delete_user( $this->user_id );
-			if ( $removed_plugin_delete_hook ) {
-				add_action( 'delete_user', 'egov_law_monitor_delete_user_data' );
+			delete_user_meta( $this->user_id, 'egov_law_monitor_plan' );
+			if ( $this->unallowed_user_id ) {
+				$removed_plugin_delete_hook = function_exists( 'egov_law_monitor_delete_user_data' )
+					&& remove_action( 'delete_user', 'egov_law_monitor_delete_user_data' );
+				wp_delete_user( $this->unallowed_user_id );
+				if ( $removed_plugin_delete_hook ) {
+					add_action( 'delete_user', 'egov_law_monitor_delete_user_data' );
+				}
 			}
 		}
 		wp_set_current_user( 0 );
@@ -113,6 +109,32 @@ final class SubscriptionPlanTabTest extends TestCase {
 		wp_set_current_user( 0 );
 		$html = do_shortcode( '[egov_law_subscription_plan]' );
 		$this->assertStringContainsString( 'ログインするとご利用プランを確認できます。', $html );
+		$this->assertStringNotContainsString( 'egov-subscription-checkout-button', $html );
+	}
+
+	public function test_production_environment_keeps_plan_visible_but_hides_checkout_button(): void {
+		$this->checkout_environment = 'production';
+		$html = do_shortcode( '[egov_law_subscription_plan]' );
+		$this->assertStringContainsString( '>Free</p>', $html );
+		$this->assertStringContainsString( 'Sandbox環境の許可されたテストユーザーのみ', $html );
+		$this->assertStringNotContainsString( 'egov-subscription-checkout-button', $html );
+	}
+
+	public function test_sandbox_user_outside_allowlist_sees_plan_but_not_checkout_button(): void {
+		$suffix = wp_generate_password( 8, false, false );
+		$user_id = wp_insert_user(
+			array(
+				'user_login' => 'subscription-tab-denied-' . $suffix,
+				'user_pass'  => wp_generate_password(),
+				'user_email' => 'subscription-tab-denied-' . $suffix . '@example.org',
+				'role'       => 'subscriber',
+			)
+		);
+		$this->assertFalse( is_wp_error( $user_id ) );
+		$this->unallowed_user_id = (int) $user_id;
+		wp_set_current_user( $this->unallowed_user_id );
+		$html = do_shortcode( '[egov_law_subscription_plan]' );
+		$this->assertStringContainsString( '>Free</p>', $html );
 		$this->assertStringNotContainsString( 'egov-subscription-checkout-button', $html );
 	}
 

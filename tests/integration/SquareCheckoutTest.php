@@ -16,6 +16,8 @@ final class SquareCheckoutTest extends TestCase {
 	private $post_attempts = 0;
 	private $post_status = 200;
 	private $get_status = 200;
+	private $checkout_environment = 'sandbox';
+	private $denied_user_id;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -67,7 +69,7 @@ final class SquareCheckoutTest extends TestCase {
 		add_filter( 'pre_http_request', $this->http_filter, 10, 3 );
 		$this->service_filter = function ( $service, $wpdb_instance ) {
 			$config = array(
-				'environment'                   => 'sandbox',
+				'environment'                   => $this->checkout_environment,
 				'access_token'                  => 'test-token-never-logged',
 				'merchant_id'                   => 'test-merchant',
 				'location_id'                   => 'test-location',
@@ -81,17 +83,8 @@ final class SquareCheckoutTest extends TestCase {
 		};
 		add_filter( 'egov_law_monitor_square_checkout_service_override', $this->service_filter, 10, 2 );
 
-		$suffix = wp_generate_password( 10, false, false );
-		$user_id = wp_insert_user(
-			array(
-				'user_login' => 'checkout-' . $suffix,
-				'user_pass'  => wp_generate_password(),
-				'user_email' => 'checkout-' . $suffix . '@example.org',
-				'role'       => 'subscriber',
-			)
-		);
-		$this->assertFalse( is_wp_error( $user_id ) );
-		$this->user_id = (int) $user_id;
+		$this->user_id = 1;
+		$this->assertNotFalse( get_userdata( $this->user_id ), "The WordPress test site's seeded administrator should be present." );
 	}
 
 	protected function tearDown(): void {
@@ -108,7 +101,14 @@ final class SquareCheckoutTest extends TestCase {
 				$wpdb->delete( $invoices, array( 'subscription_id' => (int) $subscription_id ), array( '%d' ) );
 			}
 			$wpdb->delete( $subscriptions, array( 'user_id' => $this->user_id ), array( '%d' ) );
-			wp_delete_user( $this->user_id );
+			if ( $this->denied_user_id ) {
+				$removed_plugin_delete_hook = function_exists( 'egov_law_monitor_delete_user_data' )
+					&& remove_action( 'delete_user', 'egov_law_monitor_delete_user_data' );
+				wp_delete_user( $this->denied_user_id );
+				if ( $removed_plugin_delete_hook ) {
+					add_action( 'delete_user', 'egov_law_monitor_delete_user_data' );
+				}
+			}
 		}
 		wp_set_current_user( 0 );
 		parent::tearDown();
@@ -229,6 +229,56 @@ final class SquareCheckoutTest extends TestCase {
 		wp_set_current_user( $this->user_id );
 		$this->assertContains( $this->dispatch_checkout( array(), 'invalid-nonce' )->get_status(), array( 401, 403 ) );
 		$this->assertSame( 0, $this->post_attempts );
+	}
+
+	public function test_sandbox_allowlist_is_enforced_by_rest_even_if_request_names_allowed_user(): void {
+		$suffix = wp_generate_password( 8, false, false );
+		$user_id = wp_insert_user(
+			array(
+				'user_login' => 'checkout-denied-' . $suffix,
+				'user_pass'  => wp_generate_password(),
+				'user_email' => 'checkout-denied-' . $suffix . '@example.org',
+				'role'       => 'subscriber',
+			)
+		);
+		$this->assertFalse( is_wp_error( $user_id ) );
+		$this->denied_user_id = (int) $user_id;
+		wp_set_current_user( $this->denied_user_id );
+
+		$response = $this->dispatch_checkout( array( 'user_id' => $this->user_id ) );
+		$this->assertSame( 403, $response->get_status() );
+		$this->assertSame( 'checkout_test_user_not_allowed', $response->get_data()['code'] );
+		$this->assertSame( 0, $this->post_attempts );
+		global $wpdb;
+		$this->assertSame( 0, (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}egov_law_checkout_attempts WHERE user_id = %d", $this->denied_user_id ) ) );
+	}
+
+	public function test_production_and_invalid_environment_are_rejected_before_checkout(): void {
+		wp_set_current_user( $this->user_id );
+		foreach ( array( 'production', 'invalid-environment' ) as $environment ) {
+			$this->checkout_environment = $environment;
+			$response = $this->dispatch_checkout();
+			$this->assertSame( 403, $response->get_status(), 'environment=' . $environment );
+			$this->assertSame( 0, $this->post_attempts );
+		}
+	}
+
+	public function test_missing_or_malformed_allowlist_and_non_sandbox_environment_fail_closed(): void {
+		$cases = array(
+			array( null, array( 1 ) ),
+			array( 'sandbox', null ),
+			array( 'sandbox', array() ),
+			array( 'sandbox', '1' ),
+			array( 'sandbox', array( 1, '2' ) ),
+			array( 'sandbox', array( 0 ) ),
+			array( '', array( 1 ) ),
+			array( 'production', array( 1 ) ),
+			array( 'invalid-environment', array( 1 ) ),
+		);
+		foreach ( $cases as $case ) {
+			$this->assertFalse( egov_law_monitor_square_checkout_test_access_is_allowed( 1, $case[0], $case[1] ) );
+		}
+		$this->assertTrue( egov_law_monitor_square_checkout_test_access_is_allowed( 1, 'sandbox', array( 1 ) ) );
 	}
 
 	public function test_square_link_404_requires_reconciliation_and_blocks_new_attempts(): void {

@@ -24,6 +24,9 @@ function egov_law_monitor_subscription_plan_shortcode( $attributes = array(), $c
 	if ( is_wp_error( $service ) || ! $service instanceof Egov_Law_Monitor_Square_Checkout_Service ) {
 		return egov_law_monitor_subscription_plan_offer( false, '申込状況を確認できないため、現在お申し込みいただけません。時間をおいて再度ご確認ください。' );
 	}
+	if ( ! egov_law_monitor_square_checkout_test_user_is_allowed( $user_id, $service ) ) {
+		return egov_law_monitor_subscription_plan_offer( false, '現在はSandbox環境の許可されたテストユーザーのみお申し込みいただけます。' );
+	}
 
 	$attempt_status = $service->get_attempt_status_for_user( $user_id );
 	if ( is_wp_error( $attempt_status ) ) {
