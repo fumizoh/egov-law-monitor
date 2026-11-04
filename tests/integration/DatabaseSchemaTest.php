@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 final class DatabaseSchemaTest extends TestCase {
 	private $tables = array();
 	private const SCHEMA_VERSION_OPTION = 'egov_law_monitor_square_schema_version';
+	private const CURRENT_SCHEMA_VERSION = 2;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -19,6 +20,7 @@ final class DatabaseSchemaTest extends TestCase {
 			$wpdb->prefix . 'egov_law_subscription_invoices',
 			$wpdb->prefix . 'egov_law_square_events',
 			$wpdb->prefix . 'egov_law_ai_summary_usage',
+			$wpdb->prefix . 'egov_law_checkout_attempts',
 		);
 	}
 
@@ -108,6 +110,39 @@ final class DatabaseSchemaTest extends TestCase {
 		);
 	}
 
+	public function test_version_one_migration_adds_checkout_attempts_and_preserves_existing_data(): void {
+		global $wpdb;
+
+		// The data-preservation assertion uses the plugin's existing watch table.
+		egov_law_monitor_create_tables();
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$watch_table    = $wpdb->prefix . 'law_watch_settings';
+		$attempts_table = $wpdb->prefix . 'egov_law_checkout_attempts';
+		$this->assertSame(
+			1,
+			$wpdb->insert(
+				$watch_table,
+				array(
+					'user_id'    => 845,
+					'keyword'    => 'preserve-on-v2-upgrade',
+					'created_at' => '2026-02-01 00:00:00',
+					'updated_at' => '2026-02-01 00:00:00',
+					'is_active'  => 1,
+				)
+			)
+		);
+		$wpdb->query( "DROP TABLE `{$attempts_table}`" );
+		update_option( self::SCHEMA_VERSION_OPTION, 1, false );
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+		$this->assertTableExists( $attempts_table );
+		$this->assertSame(
+			'preserve-on-v2-upgrade',
+			$wpdb->get_var( $wpdb->prepare( "SELECT keyword FROM {$watch_table} WHERE user_id = %d", 845 ) )
+		);
+	}
+
 	public function test_subscription_migration_recovers_after_a_table_was_skipped(): void {
 		global $wpdb;
 
@@ -130,7 +165,7 @@ final class DatabaseSchemaTest extends TestCase {
 		$this->assertTableDoesNotExist( $invoice_table );
 
 		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
-		$this->assertSame( 1, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+		$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
 		$this->assertTableExists( $invoice_table );
 	}
 
@@ -165,6 +200,30 @@ final class DatabaseSchemaTest extends TestCase {
 			$wpdb->prefix . 'egov_law_ai_summary_usage',
 			'user_request',
 			array( 'environment', 'user_id', 'request_key' ),
+			true
+		);
+		$this->assertIndex(
+			$wpdb->prefix . 'egov_law_checkout_attempts',
+			'attempt_uuid',
+			array( 'attempt_uuid' ),
+			true
+		);
+		$this->assertIndex(
+			$wpdb->prefix . 'egov_law_checkout_attempts',
+			'attempt_idempotency',
+			array( 'environment', 'merchant_id', 'idempotency_key' ),
+			true
+		);
+		$this->assertIndex(
+			$wpdb->prefix . 'egov_law_checkout_attempts',
+			'payment_link',
+			array( 'environment', 'merchant_id', 'square_payment_link_id' ),
+			true
+		);
+		$this->assertIndex(
+			$wpdb->prefix . 'egov_law_checkout_attempts',
+			'order_lookup',
+			array( 'environment', 'merchant_id', 'square_order_id' ),
 			true
 		);
 		$this->assertSame( 'InnoDB', $this->getTableEngine( $wpdb->users ) );
@@ -222,7 +281,7 @@ final class DatabaseSchemaTest extends TestCase {
 		$wpdb->query( "ALTER TABLE `{$table}` DROP COLUMN last_error_message" );
 		try {
 			$this->assertFalse( egov_law_monitor_maybe_upgrade_subscription_schema() );
-			$this->assertSame( 1, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+			$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
 		} finally {
 			$wpdb->query( "ALTER TABLE `{$table}` ADD COLUMN last_error_message TEXT NULL AFTER last_error_code" );
 		}
@@ -236,7 +295,7 @@ final class DatabaseSchemaTest extends TestCase {
 		$wpdb->query( "ALTER TABLE `{$table}` DROP INDEX square_event, ADD INDEX square_event (event_type, received_at)" );
 		try {
 			$this->assertFalse( egov_law_monitor_maybe_upgrade_subscription_schema() );
-			$this->assertSame( 1, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+			$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
 		} finally {
 			$wpdb->query( "ALTER TABLE `{$table}` DROP INDEX square_event, ADD UNIQUE KEY square_event (environment, merchant_id, square_event_id)" );
 		}

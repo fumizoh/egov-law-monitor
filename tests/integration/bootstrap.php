@@ -53,6 +53,7 @@ if ( $wpdb->get_var( 'SELECT DATABASE()' ) !== 'egov_law_monitor_test' ) {
 }
 
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/database.php';
+require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-api-client.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/ai-summary-usage.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/entitlement-policy.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/entitlement-service.php';

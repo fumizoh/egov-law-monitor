@@ -445,6 +445,7 @@ JS
 );
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/database.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/square-api-client.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-usage.php';
 add_action( 'plugins_loaded', 'egov_law_monitor_maybe_upgrade_subscription_schema' );
 

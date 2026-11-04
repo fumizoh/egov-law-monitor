@@ -285,6 +285,7 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 	$invoices      = $wpdb->prefix . 'egov_law_subscription_invoices';
 	$square_events = $wpdb->prefix . 'egov_law_square_events';
 	$usage         = $wpdb->prefix . 'egov_law_ai_summary_usage';
+	$checkout_attempts = $wpdb->prefix . 'egov_law_checkout_attempts';
 
 	/*
 	 * Store only the normalized Square event fields required for retry.
@@ -474,6 +475,51 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				'summary_history_id'   => array( false, array( 'summary_history_id' ) ),
 			),
 		),
+		$checkout_attempts => array(
+			'sql'     => "CREATE TABLE {$checkout_attempts} (
+				id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+				attempt_uuid CHAR(36) NOT NULL,
+				user_id BIGINT UNSIGNED NOT NULL,
+				environment VARCHAR(16) NOT NULL,
+				merchant_id VARCHAR(64) NOT NULL,
+				square_location_id VARCHAR(64) NOT NULL,
+				plan_code VARCHAR(32) NOT NULL DEFAULT 'standard',
+				catalog_item_variation_id VARCHAR(255) NOT NULL,
+				subscription_plan_variation_id VARCHAR(255) NOT NULL,
+				status VARCHAR(24) NOT NULL DEFAULT 'pending',
+				idempotency_key VARCHAR(192) NOT NULL,
+				square_payment_link_id VARCHAR(255) NULL DEFAULT NULL,
+				square_order_id VARCHAR(192) NULL DEFAULT NULL,
+				payment_url VARCHAR(255) NOT NULL DEFAULT '',
+				square_customer_id VARCHAR(191) NULL DEFAULT NULL,
+				square_subscription_id VARCHAR(255) NULL DEFAULT NULL,
+				expires_at DATETIME NULL DEFAULT NULL,
+				created_at DATETIME NOT NULL,
+				updated_at DATETIME NOT NULL,
+				PRIMARY KEY  (id),
+				UNIQUE KEY attempt_uuid (attempt_uuid),
+				UNIQUE KEY attempt_idempotency (environment, merchant_id, idempotency_key),
+				UNIQUE KEY payment_link (environment, merchant_id, square_payment_link_id),
+				UNIQUE KEY order_lookup (environment, merchant_id, square_order_id),
+				KEY user_state (user_id, environment, status, created_at),
+				KEY expiry_queue (status, expires_at)
+			) ENGINE=InnoDB {$charset_collate};",
+			'columns' => array(
+				'id', 'attempt_uuid', 'user_id', 'environment', 'merchant_id', 'square_location_id',
+				'plan_code', 'catalog_item_variation_id', 'subscription_plan_variation_id', 'status',
+				'idempotency_key', 'square_payment_link_id', 'square_order_id', 'payment_url',
+				'square_customer_id', 'square_subscription_id', 'expires_at', 'created_at', 'updated_at',
+			),
+			'indexes' => array(
+				'PRIMARY'             => array( true, array( 'id' ) ),
+				'attempt_uuid'        => array( true, array( 'attempt_uuid' ) ),
+				'attempt_idempotency' => array( true, array( 'environment', 'merchant_id', 'idempotency_key' ) ),
+				'payment_link'        => array( true, array( 'environment', 'merchant_id', 'square_payment_link_id' ) ),
+				'order_lookup'        => array( true, array( 'environment', 'merchant_id', 'square_order_id' ) ),
+				'user_state'          => array( false, array( 'user_id', 'environment', 'status', 'created_at' ) ),
+				'expiry_queue'        => array( false, array( 'status', 'expires_at' ) ),
+			),
+		),
 	);
 }
 
@@ -641,7 +687,7 @@ function egov_law_monitor_maybe_upgrade_subscription_schema() {
 	global $wpdb;
 
 	$schema_version_option = 'egov_law_monitor_square_schema_version';
-	$current_version       = 1;
+	$current_version       = 2;
 	$stored_version        = (int) get_option( $schema_version_option, 0 );
 
 	if ( $stored_version > $current_version ) {
