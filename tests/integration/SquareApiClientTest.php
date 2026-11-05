@@ -61,6 +61,7 @@ final class SquareApiClientTest extends TestCase {
 		$this->assertSame( 'attempt-idempotency-key', $payload['idempotency_key'] );
 		$this->assertSame( '6f1c9802-3225-4e0a-80c1-b4de60d9bb90', $payload['order']['reference_id'] );
 		$this->assertSame( 'test-location', $payload['order']['location_id'] );
+		$this->assertSame( array( 'auto_apply_taxes' => true ), $payload['order']['pricing_options'] );
 		$this->assertSame( 'test-item-variation', $payload['order']['line_items'][0]['catalog_object_id'] );
 		$this->assertSame( 500, $payload['order']['line_items'][0]['base_price_money']['amount'] );
 		$this->assertSame( 'JPY', $payload['order']['line_items'][0]['base_price_money']['currency'] );

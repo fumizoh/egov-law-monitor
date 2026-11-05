@@ -87,6 +87,9 @@ class Egov_Law_Monitor_Square_Api_Client {
 			'order'           => array(
 				'location_id' => $this->config['location_id'],
 				'reference_id' => $attempt_uuid,
+				'pricing_options' => array(
+					'auto_apply_taxes' => true,
+				),
 				'line_items'   => array(
 					array(
 						'quantity'         => '1',
