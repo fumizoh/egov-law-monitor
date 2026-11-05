@@ -337,10 +337,13 @@ class Egov_Law_Monitor_Square_Api_Client {
 		if ( ! hash_equals( $invoice_id, $resource['id'] ) ) {
 			return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
 		}
+		if ( array_key_exists( 'subscription_id', $resource ) && ( ! is_string( $resource['subscription_id'] ) || '' === $resource['subscription_id'] ) ) {
+			return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
+		}
 
 		$normalized = array_intersect_key(
 			$resource,
-			array_flip( array( 'id', 'location_id', 'order_id', 'status', 'version', 'created_at', 'updated_at', 'scheduled_at', 'timezone' ) )
+			array_flip( array( 'id', 'location_id', 'order_id', 'subscription_id', 'status', 'version', 'created_at', 'updated_at', 'scheduled_at', 'timezone' ) )
 		);
 		foreach ( array( 'created_at', 'updated_at', 'scheduled_at', 'timezone' ) as $key ) {
 			if ( array_key_exists( $key, $normalized ) && ! is_string( $normalized[ $key ] ) ) {

@@ -574,6 +574,227 @@ class Egov_Law_Monitor_Square_Initial_Payment_Confirmation_Service {
 	}
 }
 
+/** Read-only match of a Square Subscription to the exact Checkout Attempt and initial payment. */
+class Egov_Law_Monitor_Square_Subscription_Attempt_Matcher {
+	private $repository;
+	private $client;
+	private $payment_confirmation;
+
+	public function __construct( Egov_Law_Monitor_Checkout_Repository $repository, Egov_Law_Monitor_Square_Api_Client $client, Egov_Law_Monitor_Square_Initial_Payment_Confirmation_Service $payment_confirmation ) {
+		$this->repository          = $repository;
+		$this->client               = $client;
+		$this->payment_confirmation = $payment_confirmation;
+	}
+
+	/**
+	 * Match only when a subscription invoice's Order is the exact Checkout Order.
+	 * Other subscription invoices are checked for subscription/location integrity;
+	 * they cannot independently establish the WordPress user relationship.
+	 *
+	 * @param string $subscription_id Square Subscription ID.
+	 * @return array|WP_Error Read-only match state; never updates DB or entitlement.
+	 */
+	public function match_subscription( $subscription_id ) {
+		if ( ! is_string( $subscription_id ) || '' === trim( $subscription_id ) || preg_match( '/[\x00-\x1F\x7F]/', $subscription_id ) ) {
+			return $this->state_result( 'reconciliation_required', 'subscription_id_invalid' );
+		}
+
+		$scope = $this->client->get_checkout_scope();
+		if ( is_wp_error( $scope ) ) {
+			return $this->state_result( 'square_api_error', 'square_configuration_unavailable' );
+		}
+
+		$subscription = $this->client->retrieve_subscription( $subscription_id );
+		if ( is_wp_error( $subscription ) ) {
+			return $this->classify_square_error( $subscription, 'subscription' );
+		}
+		if (
+			! isset( $subscription['id'], $subscription['location_id'], $subscription['customer_id'], $subscription['plan_variation_id'], $subscription['status'] )
+			|| ! is_string( $subscription['id'] )
+			|| ! is_string( $subscription['location_id'] )
+			|| ! is_string( $subscription['customer_id'] )
+			|| ! is_string( $subscription['plan_variation_id'] )
+			|| ! is_string( $subscription['status'] )
+			|| ! hash_equals( $subscription_id, $subscription['id'] )
+			|| ! hash_equals( $scope['location_id'], $subscription['location_id'] )
+			|| ! hash_equals( $scope['subscription_plan_variation_id'], $subscription['plan_variation_id'] )
+			|| '' === $subscription['customer_id']
+		) {
+			return $this->state_result( 'reconciliation_required', 'subscription_identity_mismatch' );
+		}
+
+		if ( ! isset( $subscription['invoice_ids'] ) || ! is_array( $subscription['invoice_ids'] ) || empty( $subscription['invoice_ids'] ) ) {
+			return $this->state_result( 'subscription_pending', 'subscription_invoice_not_available' );
+		}
+
+		$matched_attempts = array();
+		foreach ( $subscription['invoice_ids'] as $invoice_id ) {
+			if ( ! is_string( $invoice_id ) || '' === $invoice_id ) {
+				return $this->state_result( 'reconciliation_required', 'subscription_invoice_id_invalid' );
+			}
+
+			$invoice = $this->client->get_invoice( $invoice_id );
+			if ( is_wp_error( $invoice ) ) {
+				return $this->classify_square_error( $invoice, 'invoice' );
+			}
+			if (
+				! isset( $invoice['id'], $invoice['subscription_id'], $invoice['location_id'], $invoice['order_id'] )
+				|| ! is_string( $invoice['id'] )
+				|| ! is_string( $invoice['subscription_id'] )
+				|| ! is_string( $invoice['location_id'] )
+				|| ! is_string( $invoice['order_id'] )
+				|| ! hash_equals( $invoice_id, $invoice['id'] )
+				|| ! hash_equals( $subscription_id, $invoice['subscription_id'] )
+				|| ! hash_equals( $scope['location_id'], $invoice['location_id'] )
+				|| '' === $invoice['order_id']
+			) {
+				return $this->state_result( 'reconciliation_required', 'invoice_identity_mismatch' );
+			}
+
+			$order = $this->client->retrieve_order( $invoice['order_id'] );
+			if ( is_wp_error( $order ) ) {
+				return $this->classify_square_error( $order, 'order' );
+			}
+			if (
+				! isset( $order['id'], $order['location_id'] )
+				|| ! is_string( $order['id'] )
+				|| ! is_string( $order['location_id'] )
+				|| ! hash_equals( $invoice['order_id'], $order['id'] )
+				|| ! hash_equals( $scope['location_id'], $order['location_id'] )
+			) {
+				return $this->state_result( 'reconciliation_required', 'invoice_order_identity_mismatch' );
+			}
+
+			// Subscription billing can create later invoices with their own Orders.
+			// Only an Order carrying a local Attempt UUID can be considered as the
+			// original Checkout; an absent/unrecognized reference is not a match.
+			if ( ! isset( $order['reference_id'] ) || ! is_string( $order['reference_id'] ) || ! preg_match( '/\A[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}\z/i', $order['reference_id'] ) ) {
+				continue;
+			}
+
+			$attempts = $this->repository->find_attempts_by_uuid( $order['reference_id'] );
+			if ( is_wp_error( $attempts ) ) {
+				return new WP_Error( 'subscription_attempt_database_unavailable', '申込情報を照合できませんでした。' );
+			}
+			if ( ! is_array( $attempts ) ) {
+				return $this->state_result( 'reconciliation_required', 'attempt_lookup_invalid' );
+			}
+			if ( empty( $attempts ) ) {
+				continue;
+			}
+			if ( 1 !== count( $attempts ) || ! is_array( $attempts[0] ) || empty( $attempts[0]['id'] ) ) {
+				return $this->state_result( 'reconciliation_required', 'attempt_not_unique' );
+			}
+
+			$attempt = $this->repository->get_attempt( (int) $attempts[0]['id'] );
+			if ( is_wp_error( $attempt ) ) {
+				return new WP_Error( 'subscription_attempt_database_unavailable', '申込情報を照合できませんでした。' );
+			}
+			if ( ! is_array( $attempt ) || ! $this->attempt_matches_subscription( $attempt, $subscription, $scope, $order['reference_id'], $invoice['order_id'] ) ) {
+				return $this->state_result( 'reconciliation_required', 'attempt_subscription_identity_mismatch' );
+			}
+
+			$matched_attempts[ (int) $attempt['id'] ] = array(
+				'attempt'    => $attempt,
+				'invoice_id' => $invoice['id'],
+				'order_id'   => $invoice['order_id'],
+			);
+		}
+
+		if ( 0 === count( $matched_attempts ) ) {
+			return $this->state_result( 'reconciliation_required', 'checkout_order_link_not_proven' );
+		}
+		if ( 1 !== count( $matched_attempts ) ) {
+			return $this->state_result( 'reconciliation_required', 'multiple_checkout_attempts' );
+		}
+
+		$match = reset( $matched_attempts );
+		$attempt = $match['attempt'];
+		$payment = $this->payment_confirmation->confirm_attempt_payment( $attempt, (int) $attempt['user_id'] );
+		if ( is_wp_error( $payment ) ) {
+			if ( false !== strpos( $payment->get_error_code(), 'database_unavailable' ) || false !== strpos( $payment->get_error_code(), 'attempt_unavailable' ) ) {
+				return new WP_Error( 'subscription_attempt_database_unavailable', '申込情報を照合できませんでした。' );
+			}
+			return $this->state_result( 'reconciliation_required', 'initial_payment_confirmation_failed' );
+		}
+		if ( ! is_array( $payment ) || ! isset( $payment['status'] ) ) {
+			return $this->state_result( 'reconciliation_required', 'initial_payment_confirmation_invalid' );
+		}
+		if ( 'square_api_error' === $payment['status'] ) {
+			return $this->state_result( 'square_api_error', 'initial_payment_api_unavailable' );
+		}
+		if ( 'payment_pending' === $payment['status'] ) {
+			return $this->state_result( 'subscription_pending', 'initial_payment_not_confirmed' );
+		}
+		if ( 'payment_confirmed' !== $payment['status'] ) {
+			return $this->state_result( 'reconciliation_required', 'initial_payment_not_verified' );
+		}
+
+		$result = $this->state_result( 'subscription_matched', 'subscription_attempt_and_initial_payment_verified' );
+		$result['user_id']         = (int) $attempt['user_id'];
+		$result['attempt_uuid']    = $attempt['attempt_uuid'];
+		$result['subscription_id'] = $subscription['id'];
+		$result['invoice_id']      = $match['invoice_id'];
+		$result['order_id']        = $match['order_id'];
+		$result['payment_id']      = $payment['payment_id'];
+		$result['customer_id']     = $subscription['customer_id'];
+		$result['environment']    = $scope['environment'];
+		$result['merchant_id']    = $scope['merchant_id'];
+		$result['location_id']    = $scope['location_id'];
+		$result['plan_variation_id'] = $subscription['plan_variation_id'];
+		$result['square_status']  = $subscription['status'];
+		return $result;
+	}
+
+	private function attempt_matches_subscription( array $attempt, array $subscription, array $scope, $attempt_uuid, $invoice_order_id ) {
+		if (
+			! isset( $attempt['id'], $attempt['attempt_uuid'], $attempt['user_id'], $attempt['environment'], $attempt['merchant_id'], $attempt['square_location_id'], $attempt['subscription_plan_variation_id'], $attempt['status'], $attempt['square_order_id'], $attempt['square_customer_id'] )
+			|| ! is_scalar( $attempt['id'] )
+			|| ! preg_match( '/\A[1-9][0-9]*\z/', (string) $attempt['id'] )
+			|| ! is_scalar( $attempt['user_id'] )
+			|| ! preg_match( '/\A[1-9][0-9]*\z/', (string) $attempt['user_id'] )
+			|| ! is_string( $attempt['attempt_uuid'] )
+			|| ! hash_equals( $attempt_uuid, $attempt['attempt_uuid'] )
+			|| ! is_string( $attempt['environment'] )
+			|| ! hash_equals( $scope['environment'], $attempt['environment'] )
+			|| ! is_string( $attempt['merchant_id'] )
+			|| ! hash_equals( $scope['merchant_id'], $attempt['merchant_id'] )
+			|| ! is_string( $attempt['square_location_id'] )
+			|| ! hash_equals( $scope['location_id'], $attempt['square_location_id'] )
+			|| ! is_string( $attempt['subscription_plan_variation_id'] )
+			|| ! hash_equals( $scope['subscription_plan_variation_id'], $attempt['subscription_plan_variation_id'] )
+			|| ! hash_equals( $subscription['plan_variation_id'], $attempt['subscription_plan_variation_id'] )
+			|| ! is_string( $attempt['square_order_id'] )
+			|| ! hash_equals( $invoice_order_id, $attempt['square_order_id'] )
+			|| ! is_string( $attempt['square_customer_id'] )
+			|| '' === $attempt['square_customer_id']
+			|| ! hash_equals( $subscription['customer_id'], $attempt['square_customer_id'] )
+			|| ! in_array( $attempt['status'], array( 'pending', 'reconciliation_required' ), true )
+			|| ( isset( $attempt['square_subscription_id'] ) && null !== $attempt['square_subscription_id'] && '' !== $attempt['square_subscription_id'] && ( ! is_string( $attempt['square_subscription_id'] ) || ! hash_equals( $subscription['id'], $attempt['square_subscription_id'] ) ) )
+		) {
+			return false;
+		}
+
+		$user = get_userdata( (int) $attempt['user_id'] );
+		return is_object( $user ) && isset( $user->ID ) && (int) $user->ID === (int) $attempt['user_id'];
+	}
+
+	private function classify_square_error( $error, $resource ) {
+		$code = is_wp_error( $error ) ? $error->get_error_code() : '';
+		if ( false !== strpos( $code, '_response_invalid' ) || false !== strpos( $code, '_id_invalid' ) ) {
+			return $this->state_result( 'reconciliation_required', $resource . '_response_invalid' );
+		}
+		return $this->state_result( 'square_api_error', $resource . '_api_unavailable' );
+	}
+
+	private function state_result( $status, $reason_code ) {
+		return array(
+			'status'      => $status,
+			'reason_code' => $reason_code,
+		);
+	}
+}
+
 /** Persist a Customer ID only after the existing Square Payment matcher succeeds. */
 class Egov_Law_Monitor_Square_Payment_Customer_Service {
 	private $repository;
