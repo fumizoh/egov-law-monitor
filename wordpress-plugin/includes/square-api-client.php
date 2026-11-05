@@ -346,6 +346,79 @@ class Egov_Law_Monitor_Square_Api_Client {
 		return $normalized;
 	}
 
+	/**
+	 * Retrieve and normalize a Square Payment without exposing buyer or card details.
+	 *
+	 * @param string $payment_id Square Payment ID.
+	 * @return array|WP_Error A validated, limited Payment snapshot.
+	 */
+	public function get_payment( $payment_id ) {
+		$resource = $this->get_square_resource( 'payments', $payment_id, 'payment' );
+		if ( is_wp_error( $resource ) ) {
+			return $resource;
+		}
+
+		$required = array( 'id', 'order_id', 'location_id', 'status', 'created_at' );
+		foreach ( $required as $key ) {
+			if ( ! isset( $resource[ $key ] ) || ! is_string( $resource[ $key ] ) || '' === $resource[ $key ] ) {
+				return new WP_Error( 'square_payment_response_invalid', 'Squareの決済情報を確認できませんでした。' );
+			}
+		}
+		if ( ! hash_equals( $payment_id, $resource['id'] ) ) {
+			return new WP_Error( 'square_payment_response_invalid', 'Squareの決済情報を確認できませんでした。' );
+		}
+
+		$normalized = array_intersect_key(
+			$resource,
+			array_flip( array( 'id', 'order_id', 'customer_id', 'location_id', 'status', 'created_at', 'updated_at' ) )
+		);
+		foreach ( array( 'customer_id', 'updated_at' ) as $key ) {
+			if ( array_key_exists( $key, $normalized ) && ( ! is_string( $normalized[ $key ] ) || '' === $normalized[ $key ] ) ) {
+				return new WP_Error( 'square_payment_response_invalid', 'Squareの決済情報を確認できませんでした。' );
+			}
+		}
+
+		return $normalized;
+	}
+
+	/**
+	 * Retrieve and normalize a Square Order without returning payment or buyer details.
+	 *
+	 * @param string $order_id Square Order ID.
+	 * @return array|WP_Error A validated, limited Order snapshot.
+	 */
+	public function retrieve_order( $order_id ) {
+		$resource = $this->get_square_resource( 'orders', $order_id, 'order' );
+		if ( is_wp_error( $resource ) ) {
+			return $resource;
+		}
+
+		$required = array( 'id', 'location_id', 'state' );
+		foreach ( $required as $key ) {
+			if ( ! isset( $resource[ $key ] ) || ! is_string( $resource[ $key ] ) || '' === $resource[ $key ] ) {
+				return new WP_Error( 'square_order_response_invalid', 'Squareの注文情報を確認できませんでした。' );
+			}
+		}
+		if ( ! hash_equals( $order_id, $resource['id'] ) ) {
+			return new WP_Error( 'square_order_response_invalid', 'Squareの注文情報を確認できませんでした。' );
+		}
+
+		$normalized = array_intersect_key(
+			$resource,
+			array_flip( array( 'id', 'reference_id', 'location_id', 'state', 'version', 'created_at', 'updated_at' ) )
+		);
+		foreach ( array( 'reference_id', 'created_at', 'updated_at' ) as $key ) {
+			if ( array_key_exists( $key, $normalized ) && ( ! is_string( $normalized[ $key ] ) || ( 'reference_id' === $key && '' === $normalized[ $key ] ) ) ) {
+				return new WP_Error( 'square_order_response_invalid', 'Squareの注文情報を確認できませんでした。' );
+			}
+		}
+		if ( array_key_exists( 'version', $normalized ) && ! is_int( $normalized['version'] ) ) {
+			return new WP_Error( 'square_order_response_invalid', 'Squareの注文情報を確認できませんでした。' );
+		}
+
+		return $normalized;
+	}
+
 	/** Perform a sandbox-or-production GET and return the named Square object. */
 	private function get_square_resource( $resource_path, $resource_id, $response_key ) {
 		if (

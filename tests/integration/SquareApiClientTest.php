@@ -212,6 +212,218 @@ final class SquareApiClientTest extends TestCase {
 		$this->assertSame( 'square_invoice_response_invalid', $mismatched->get_error_code() );
 	}
 
+	public function test_get_payment_uses_sandbox_get_and_returns_only_allowed_fields(): void {
+		$this->response_body = array(
+			'payment' => array(
+				'id'                  => 'payment-123',
+				'order_id'            => 'order-123',
+				'customer_id'         => 'customer-123',
+				'location_id'         => 'location-123',
+				'status'              => 'COMPLETED',
+				'created_at'          => '2026-11-05T01:02:03Z',
+				'updated_at'          => '2026-11-05T01:02:04Z',
+				'card_details'        => array( 'card' => 'private-card-data' ),
+				'billing_address'     => array( 'address_line_1' => 'private-address' ),
+				'buyer_email_address' => 'private@example.test',
+			),
+		);
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->get_payment( 'payment-123' );
+
+		$this->assertSame(
+			array(
+				'id'          => 'payment-123',
+				'order_id'    => 'order-123',
+				'customer_id' => 'customer-123',
+				'location_id' => 'location-123',
+				'status'      => 'COMPLETED',
+				'created_at'  => '2026-11-05T01:02:03Z',
+				'updated_at'  => '2026-11-05T01:02:04Z',
+			),
+			$result
+		);
+		$this->assertSame( 'https://connect.squareupsandbox.com/v2/payments/payment-123', $this->request['url'] );
+		$this->assertSame( 'GET', $this->request['args']['method'] );
+		$this->assertSame( 'Bearer test-sandbox-token', $this->request['args']['headers']['Authorization'] );
+		$this->assertSame( '2026-09-16', $this->request['args']['headers']['Square-Version'] );
+		$this->assertArrayNotHasKey( 'card_details', $result );
+		$this->assertArrayNotHasKey( 'billing_address', $result );
+		$this->assertArrayNotHasKey( 'buyer_email_address', $result );
+	}
+
+	public function test_get_payment_accepts_response_without_customer_id(): void {
+		$this->response_body = array(
+			'payment' => array(
+				'id'          => 'payment-123',
+				'order_id'    => 'order-123',
+				'location_id' => 'location-123',
+				'status'      => 'COMPLETED',
+				'created_at'  => '2026-11-05T01:02:03Z',
+			),
+		);
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->get_payment( 'payment-123' );
+
+		$this->assertFalse( is_wp_error( $result ) );
+		$this->assertArrayNotHasKey( 'customer_id', $result );
+	}
+
+	public function test_retrieve_order_uses_sandbox_get_and_returns_only_allowed_fields(): void {
+		$this->response_body = array(
+			'order' => array(
+				'id'             => 'order-123',
+				'reference_id'   => 'attempt-uuid',
+				'location_id'    => 'location-123',
+				'state'          => 'OPEN',
+				'version'        => 2,
+				'created_at'     => '2026-11-05T01:02:03Z',
+				'updated_at'     => '2026-11-05T01:02:04Z',
+				'customer_id'    => 'private-customer-id',
+				'tenders'        => array( array( 'payment_id' => 'private-payment-id' ) ),
+			),
+		);
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->retrieve_order( 'order-123' );
+
+		$this->assertSame(
+			array(
+				'id'           => 'order-123',
+				'reference_id' => 'attempt-uuid',
+				'location_id'  => 'location-123',
+				'state'        => 'OPEN',
+				'version'      => 2,
+				'created_at'   => '2026-11-05T01:02:03Z',
+				'updated_at'   => '2026-11-05T01:02:04Z',
+			),
+			$result
+		);
+		$this->assertSame( 'https://connect.squareupsandbox.com/v2/orders/order-123', $this->request['url'] );
+		$this->assertSame( 'GET', $this->request['args']['method'] );
+		$this->assertSame( 'Bearer test-sandbox-token', $this->request['args']['headers']['Authorization'] );
+		$this->assertSame( '2026-09-16', $this->request['args']['headers']['Square-Version'] );
+	}
+
+	public function test_retrieve_order_accepts_response_without_reference_id(): void {
+		$this->response_body = array(
+			'order' => array(
+				'id'          => 'order-123',
+				'location_id' => 'location-123',
+				'state'       => 'OPEN',
+			),
+		);
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->retrieve_order( 'order-123' );
+
+		$this->assertFalse( is_wp_error( $result ) );
+		$this->assertArrayNotHasKey( 'reference_id', $result );
+	}
+
+	public function test_payment_and_order_reject_invalid_ids_and_mismatched_response_ids(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$invalid_ids = array(
+			array( 'method' => 'get_payment', 'id' => '' ),
+			array( 'method' => 'get_payment', 'id' => array( 'invalid' ) ),
+			array( 'method' => 'retrieve_order', 'id' => '' ),
+			array( 'method' => 'retrieve_order', 'id' => array( 'invalid' ) ),
+		);
+		foreach ( $invalid_ids as $case ) {
+			$result = $client->{$case['method']}( $case['id'] );
+			$this->assertTrue( is_wp_error( $result ) );
+			$this->assertSame( 'square_resource_id_invalid', $result->get_error_code() );
+		}
+		$this->assertSame( 0, $this->request_count );
+
+		$this->response_body = array( 'payment' => array( 'id' => 'different-payment', 'order_id' => 'order', 'location_id' => 'location', 'status' => 'COMPLETED', 'created_at' => '2026-11-05T00:00:00Z' ) );
+		$payment = $client->get_payment( 'payment-123' );
+		$this->assertTrue( is_wp_error( $payment ) );
+		$this->assertSame( 'square_payment_response_invalid', $payment->get_error_code() );
+
+		$this->response_body = array( 'order' => array( 'id' => 'different-order', 'location_id' => 'location', 'state' => 'OPEN' ) );
+		$order = $client->retrieve_order( 'order-123' );
+		$this->assertTrue( is_wp_error( $order ) );
+		$this->assertSame( 'square_order_response_invalid', $order->get_error_code() );
+	}
+
+	public function test_payment_and_order_reject_api_http_transport_and_invalid_json_errors(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+
+		$this->response_status = 503;
+		$this->response_body = array( 'errors' => array( array( 'detail' => 'private Square error' ) ) );
+		$payment_api_error = $client->get_payment( 'payment-123' );
+		$this->assertTrue( is_wp_error( $payment_api_error ) );
+		$this->assertSame( 'square_resource_api_error', $payment_api_error->get_error_code() );
+		$this->assertStringNotContainsString( 'private Square error', $payment_api_error->get_error_message() );
+
+		$this->response_status = 500;
+		$this->response_body = array( 'unexpected' => true );
+		$order_http_error = $client->retrieve_order( 'order-123' );
+		$this->assertTrue( is_wp_error( $order_http_error ) );
+		$this->assertSame( 'square_resource_http_error', $order_http_error->get_error_code() );
+
+		$this->transport_error = new WP_Error( 'http_request_failed', 'private transport detail' );
+		$transport_error = $client->get_payment( 'payment-123' );
+		$this->assertTrue( is_wp_error( $transport_error ) );
+		$this->assertSame( 'square_resource_request_failed', $transport_error->get_error_code() );
+		$this->assertStringNotContainsString( 'private transport detail', $transport_error->get_error_message() );
+		$this->transport_error = null;
+
+		$this->response_body = 'not-json';
+		$invalid_json = $client->retrieve_order( 'order-123' );
+		$this->assertTrue( is_wp_error( $invalid_json ) );
+		$this->assertSame( 'square_resource_response_invalid', $invalid_json->get_error_code() );
+	}
+
+	public function test_payment_and_order_reject_missing_required_fields_and_invalid_types(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$this->response_body = array(
+			'payment' => array(
+				'id'         => 'payment-123',
+				'location_id' => 'location',
+				'status'     => 'COMPLETED',
+				'created_at' => '2026-11-05T00:00:00Z',
+			),
+		);
+		$missing_payment_field = $client->get_payment( 'payment-123' );
+		$this->assertTrue( is_wp_error( $missing_payment_field ) );
+		$this->assertSame( 'square_payment_response_invalid', $missing_payment_field->get_error_code() );
+
+		$this->response_body = array(
+			'payment' => array(
+				'id'          => 'payment-123',
+				'order_id'    => 'order',
+				'location_id' => 'location',
+				'status'      => 'COMPLETED',
+				'created_at'  => '2026-11-05T00:00:00Z',
+				'customer_id' => 42,
+			),
+		);
+		$invalid_payment_type = $client->get_payment( 'payment-123' );
+		$this->assertTrue( is_wp_error( $invalid_payment_type ) );
+		$this->assertSame( 'square_payment_response_invalid', $invalid_payment_type->get_error_code() );
+
+		$this->response_body = array(
+			'order' => array(
+				'id'          => 'order-123',
+				'location_id' => 'location',
+			),
+		);
+		$missing_order_field = $client->retrieve_order( 'order-123' );
+		$this->assertTrue( is_wp_error( $missing_order_field ) );
+		$this->assertSame( 'square_order_response_invalid', $missing_order_field->get_error_code() );
+
+		$this->response_body = array(
+			'order' => array(
+				'id'          => 'order-123',
+				'location_id' => 'location',
+				'state'       => 'OPEN',
+				'version'     => '2',
+			),
+		);
+		$invalid_order_type = $client->retrieve_order( 'order-123' );
+		$this->assertTrue( is_wp_error( $invalid_order_type ) );
+		$this->assertSame( 'square_order_response_invalid', $invalid_order_type->get_error_code() );
+	}
+
 	public function test_sandbox_rejects_lookalike_payment_link_hosts(): void {
 		$this->response_body['payment_link']['url'] = 'https://sandbox.square.link.attacker.example/u/test-link';
 		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
