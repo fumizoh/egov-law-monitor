@@ -1,22 +1,16 @@
 {
   "egov": {
-    "last_update": "20261102",
-    "update_count": 140,
-    "updated_law_count": 136,
+    "last_update": "20261104",
+    "update_count": 6,
+    "updated_law_count": 6,
     "source": {
-      "egov": 140
+      "egov": 6
     },
     "law_type": {
-      "法律": 71,
-      "政令": 50,
-      "府省令": 18,
-      "規則": 1
+      "府省令": 6
     },
     "law_count": {
-      "法律": 71,
-      "政令": 50,
-      "府省令": 14,
-      "規則": 1
+      "府省令": 6
     }
   }
 }
