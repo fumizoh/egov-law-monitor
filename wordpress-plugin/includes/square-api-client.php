@@ -196,6 +196,14 @@ class Egov_Law_Monitor_Square_Api_Client {
 		return array_intersect_key( $this->config, array_flip( $required ) );
 	}
 
+	/** Return the server-defined Standard subscription charge in minor currency units. */
+	public function get_standard_plan_price() {
+		return array(
+			'amount'   => self::PRICE_AMOUNT,
+			'currency' => self::PRICE_CURRENCY,
+		);
+	}
+
 	/**
 	 * Retrieve a payment link before reusing it for another checkout response.
 	 *

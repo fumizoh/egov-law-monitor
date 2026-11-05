@@ -379,6 +379,201 @@ class Egov_Law_Monitor_Square_Payment_Attempt_Matcher {
 	}
 }
 
+/** Read-only confirmation of the initial payment for a server-loaded checkout attempt. */
+class Egov_Law_Monitor_Square_Initial_Payment_Confirmation_Service {
+	private $repository;
+	private $client;
+	private $matcher;
+
+	public function __construct( Egov_Law_Monitor_Checkout_Repository $repository, Egov_Law_Monitor_Square_Api_Client $client, Egov_Law_Monitor_Square_Payment_Attempt_Matcher $matcher ) {
+		$this->repository = $repository;
+		$this->client     = $client;
+		$this->matcher    = $matcher;
+	}
+
+	/**
+	 * Confirm one completed 500 JPY payment for an attempt owned by the requesting user.
+	 * The requester ID must come from the authenticated server-side request context.
+	 *
+	 * @return array|WP_Error A safe payment state; never mutates the database or entitlement.
+	 */
+	public function confirm_attempt_payment( array $attempt, $requesting_user_id ) {
+		if ( ! is_int( $requesting_user_id ) || $requesting_user_id < 1 || ! isset( $attempt['id'] ) || ! is_scalar( $attempt['id'] ) || ! preg_match( '/\\A[1-9][0-9]*\\z/', (string) $attempt['id'] ) ) {
+			return new WP_Error( 'payment_confirmation_attempt_invalid', '申込情報を確認できません。' );
+		}
+
+		$stored = $this->repository->get_attempt( (int) $attempt['id'] );
+		if ( is_wp_error( $stored ) ) {
+			return new WP_Error( 'payment_confirmation_attempt_unavailable', '申込情報を確認できません。' );
+		}
+		if ( ! is_array( $stored ) || ! $this->same_attempt_snapshot( $attempt, $stored ) ) {
+			return new WP_Error( 'payment_confirmation_attempt_mismatch', '申込情報を確認できません。' );
+		}
+		if ( ! isset( $stored['user_id'] ) || ! preg_match( '/\\A[1-9][0-9]*\\z/', (string) $stored['user_id'] ) || (int) $stored['user_id'] !== $requesting_user_id ) {
+			return new WP_Error( 'payment_confirmation_attempt_forbidden', 'この申込情報を確認できません。' );
+		}
+		$user = get_userdata( $requesting_user_id );
+		if ( ! is_object( $user ) || ! isset( $user->ID ) || (int) $user->ID !== $requesting_user_id ) {
+			return new WP_Error( 'payment_confirmation_attempt_forbidden', 'この申込情報を確認できません。' );
+		}
+		if ( ! in_array( $stored['status'], array( 'pending', 'reconciliation_required' ), true ) ) {
+			return $this->state_result( 'reconciliation_required', 'attempt_state_not_confirmable' );
+		}
+
+		$scope = $this->client->get_checkout_scope();
+		if ( is_wp_error( $scope ) ) {
+			return $this->state_result( 'square_api_error', 'square_configuration_unavailable' );
+		}
+		if (
+			! isset( $stored['attempt_uuid'], $stored['environment'], $stored['merchant_id'], $stored['square_location_id'], $stored['square_order_id'] )
+			|| ! is_string( $stored['attempt_uuid'] )
+			|| ! preg_match( '/\\A[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}\\z/i', $stored['attempt_uuid'] )
+			|| ! is_string( $stored['square_order_id'] )
+			|| '' === $stored['square_order_id']
+		) {
+			return $this->state_result( 'reconciliation_required', 'attempt_data_missing_or_invalid' );
+		}
+		foreach ( array( 'environment' => 'environment', 'merchant_id' => 'merchant_id', 'square_location_id' => 'location_id' ) as $attempt_key => $scope_key ) {
+			if ( ! is_string( $stored[ $attempt_key ] ) || ! isset( $scope[ $scope_key ] ) || ! is_string( $scope[ $scope_key ] ) || ! hash_equals( $scope[ $scope_key ], $stored[ $attempt_key ] ) ) {
+				return $this->state_result( 'reconciliation_required', 'attempt_scope_mismatch' );
+			}
+		}
+
+		$order = $this->client->retrieve_order( $stored['square_order_id'] );
+		if ( is_wp_error( $order ) ) {
+			return $this->classify_square_error( $order, 'order' );
+		}
+		if (
+			! isset( $order['id'], $order['location_id'], $order['reference_id'] )
+			|| ! is_string( $order['id'] )
+			|| ! is_string( $order['location_id'] )
+			|| ! is_string( $order['reference_id'] )
+			|| ! hash_equals( $stored['square_order_id'], $order['id'] )
+			|| ! hash_equals( $scope['location_id'], $order['location_id'] )
+			|| ! hash_equals( $stored['attempt_uuid'], $order['reference_id'] )
+		) {
+			return $this->state_result( 'reconciliation_required', 'order_identity_mismatch' );
+		}
+		if ( ! isset( $order['tenders'] ) || ! is_array( $order['tenders'] ) ) {
+			return $this->state_result( 'reconciliation_required', 'order_tenders_invalid' );
+		}
+		if ( empty( $order['tenders'] ) ) {
+			return $this->state_result( 'payment_pending', 'payment_tender_not_available' );
+		}
+		if ( 1 !== count( $order['tenders'] ) || ! isset( $order['tenders'][0] ) || ! is_array( $order['tenders'][0] ) ) {
+			return $this->state_result( 'reconciliation_required', 'multiple_or_unexpected_tenders' );
+		}
+		$payment_id = isset( $order['tenders'][0]['payment_id'] ) ? $order['tenders'][0]['payment_id'] : null;
+		if ( ! is_string( $payment_id ) || '' === $payment_id ) {
+			return $this->state_result( 'reconciliation_required', 'tender_payment_id_missing' );
+		}
+
+		$payment = $this->client->get_payment( $payment_id );
+		if ( is_wp_error( $payment ) ) {
+			return $this->classify_square_error( $payment, 'payment' );
+		}
+		if ( ! isset( $payment['status'] ) || ! is_string( $payment['status'] ) || 'COMPLETED' !== $payment['status'] ) {
+			return $this->state_result( 'payment_pending', 'payment_not_completed' );
+		}
+
+		$price = $this->client->get_standard_plan_price();
+		if ( ! $this->money_matches_price( isset( $order['total_money'] ) ? $order['total_money'] : null, $price ) ) {
+			return $this->state_result( 'reconciliation_required', 'order_amount_or_currency_mismatch' );
+		}
+		if ( ! $this->money_matches_price( isset( $payment['amount_money'] ) ? $payment['amount_money'] : null, $price ) || ! $this->money_matches_price( isset( $payment['total_money'] ) ? $payment['total_money'] : null, $price ) ) {
+			return $this->state_result( 'reconciliation_required', 'payment_amount_or_currency_mismatch' );
+		}
+		if (
+			! isset( $payment['id'], $payment['order_id'], $payment['location_id'] )
+			|| ! is_string( $payment['id'] )
+			|| ! is_string( $payment['order_id'] )
+			|| ! is_string( $payment['location_id'] )
+			|| ! hash_equals( $payment_id, $payment['id'] )
+			|| ! hash_equals( $stored['square_order_id'], $payment['order_id'] )
+			|| ! hash_equals( $scope['location_id'], $payment['location_id'] )
+		) {
+			return $this->state_result( 'reconciliation_required', 'payment_identity_mismatch' );
+		}
+
+		$match = $this->matcher->match_payment( $payment_id );
+		if ( is_wp_error( $match ) ) {
+			if ( 'payment_attempt_payment_not_completed' === $match->get_error_code() ) {
+				return $this->state_result( 'payment_pending', 'payment_not_completed' );
+			}
+			if ( 'payment_attempt_database_unavailable' === $match->get_error_code() ) {
+				return new WP_Error( 'payment_confirmation_database_unavailable', '申込情報を確認できません。' );
+			}
+			if ( in_array( $match->get_error_code(), array( 'payment_attempt_payment_unavailable', 'payment_attempt_order_unavailable', 'payment_attempt_configuration_unavailable' ), true ) ) {
+				return $this->state_result( 'square_api_error', 'payment_match_api_unavailable' );
+			}
+			return $this->state_result( 'reconciliation_required', 'payment_attempt_match_failed' );
+		}
+		if ( ! $this->match_is_for_attempt( $match, $stored, $scope, $payment_id ) ) {
+			return $this->state_result( 'reconciliation_required', 'payment_attempt_match_mismatch' );
+		}
+
+		$result = $this->state_result( 'payment_confirmed', 'payment_completed_and_verified' );
+		$result['user_id']      = $requesting_user_id;
+		$result['attempt_uuid'] = $stored['attempt_uuid'];
+		$result['order_id']     = $stored['square_order_id'];
+		$result['payment_id']   = $payment_id;
+		$result['environment']  = $scope['environment'];
+		$result['merchant_id']  = $scope['merchant_id'];
+		$result['location_id']  = $scope['location_id'];
+		$result['amount']       = $price['amount'];
+		$result['currency']     = $price['currency'];
+		if ( isset( $payment['customer_id'] ) && is_string( $payment['customer_id'] ) ) {
+			$result['customer_id'] = $payment['customer_id'];
+		}
+		return $result;
+	}
+
+	private function same_attempt_snapshot( array $provided, array $stored ) {
+		$fields = array( 'id', 'attempt_uuid', 'user_id', 'environment', 'merchant_id', 'square_location_id', 'square_order_id', 'status' );
+		foreach ( $fields as $field ) {
+			if ( ! isset( $provided[ $field ], $stored[ $field ] ) || ! is_scalar( $provided[ $field ] ) || ! is_scalar( $stored[ $field ] ) || (string) $provided[ $field ] !== (string) $stored[ $field ] ) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private function money_matches_price( $money, array $price ) {
+		return is_array( $money )
+			&& isset( $money['amount'], $money['currency'] )
+			&& is_int( $money['amount'] )
+			&& is_string( $money['currency'] )
+			&& $money['amount'] === $price['amount']
+			&& hash_equals( $price['currency'], $money['currency'] );
+	}
+
+	private function match_is_for_attempt( array $match, array $attempt, array $scope, $payment_id ) {
+		return isset( $match['user_id'], $match['attempt_uuid'], $match['payment_id'], $match['order_id'], $match['environment'], $match['merchant_id'], $match['location_id'] )
+			&& (int) $match['user_id'] === (int) $attempt['user_id']
+			&& is_string( $match['attempt_uuid'] ) && hash_equals( $attempt['attempt_uuid'], $match['attempt_uuid'] )
+			&& is_string( $match['payment_id'] ) && hash_equals( $payment_id, $match['payment_id'] )
+			&& is_string( $match['order_id'] ) && hash_equals( $attempt['square_order_id'], $match['order_id'] )
+			&& is_string( $match['environment'] ) && hash_equals( $scope['environment'], $match['environment'] )
+			&& is_string( $match['merchant_id'] ) && hash_equals( $scope['merchant_id'], $match['merchant_id'] )
+			&& is_string( $match['location_id'] ) && hash_equals( $scope['location_id'], $match['location_id'] );
+	}
+
+	private function classify_square_error( $error, $resource ) {
+		$code = is_wp_error( $error ) ? $error->get_error_code() : '';
+		if ( in_array( $code, array( 'square_resource_id_invalid', 'square_resource_response_invalid', 'square_payment_response_invalid', 'square_order_response_invalid' ), true ) ) {
+			return $this->state_result( 'reconciliation_required', $resource . '_response_invalid' );
+		}
+		return $this->state_result( 'square_api_error', $resource . '_api_unavailable' );
+	}
+
+	private function state_result( $status, $reason_code ) {
+		return array(
+			'status'      => $status,
+			'reason_code' => $reason_code,
+		);
+	}
+}
+
 /** Persist a Customer ID only after the existing Square Payment matcher succeeds. */
 class Egov_Law_Monitor_Square_Payment_Customer_Service {
 	private $repository;
