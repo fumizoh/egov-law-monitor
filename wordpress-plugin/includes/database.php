@@ -288,9 +288,9 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 	$checkout_attempts = $wpdb->prefix . 'egov_law_checkout_attempts';
 
 	/*
-	 * Store only the normalized Square event fields required for retry.
-	 * Future webhook code must exclude card numbers, security codes, and
-	 * payment credentials before writing normalized_payload.
+	 * The webhook receiver stores the signature-verified original JSON in
+	 * normalized_payload for retryable processing. Never store or log webhook
+	 * signature headers, card numbers, security codes, or payment credentials.
 	 *
 	 * For quota reservations, serialize by locking the stable wp_users row
 	 * (`SELECT ID ... FOR UPDATE`) before counting/inserting usage rows. The
