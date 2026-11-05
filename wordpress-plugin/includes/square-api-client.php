@@ -251,6 +251,156 @@ class Egov_Law_Monitor_Square_Api_Client {
 		);
 	}
 
+	/**
+	 * Retrieve and normalize a Square Subscription without associating it with a user.
+	 *
+	 * Personal and payment-method fields are deliberately omitted from the returned
+	 * snapshot. The caller must independently verify all relevant IDs before use.
+	 *
+	 * @param string $subscription_id Square Subscription ID.
+	 * @return array|WP_Error A validated, limited Subscription snapshot.
+	 */
+	public function retrieve_subscription( $subscription_id ) {
+		$resource = $this->get_square_resource( 'subscriptions', $subscription_id, 'subscription' );
+		if ( is_wp_error( $resource ) ) {
+			return $resource;
+		}
+
+		$required = array( 'id', 'location_id', 'plan_variation_id', 'customer_id', 'status' );
+		foreach ( $required as $key ) {
+			if ( ! isset( $resource[ $key ] ) || ! is_string( $resource[ $key ] ) || '' === $resource[ $key ] ) {
+				return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+			}
+		}
+		if ( ! hash_equals( $subscription_id, $resource['id'] ) ) {
+			return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+		}
+
+		$normalized = array_intersect_key(
+			$resource,
+			array_flip(
+				array(
+					'id', 'location_id', 'plan_variation_id', 'customer_id', 'status',
+					'start_date', 'canceled_date', 'charged_through_date', 'paid_until_date',
+					'created_at', 'invoice_ids', 'version', 'timezone',
+				)
+			)
+		);
+		foreach ( array( 'start_date', 'canceled_date', 'charged_through_date', 'paid_until_date', 'created_at', 'timezone' ) as $key ) {
+			if ( array_key_exists( $key, $normalized ) && ! is_string( $normalized[ $key ] ) ) {
+				return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+			}
+		}
+		if ( array_key_exists( 'version', $normalized ) && ! is_int( $normalized['version'] ) ) {
+			return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+		}
+		if ( array_key_exists( 'invoice_ids', $normalized ) ) {
+			if ( ! is_array( $normalized['invoice_ids'] ) ) {
+				return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+			}
+			foreach ( $normalized['invoice_ids'] as $invoice_id ) {
+				if ( ! is_string( $invoice_id ) || '' === $invoice_id ) {
+					return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+				}
+			}
+		}
+
+		return $normalized;
+	}
+
+	/**
+	 * Retrieve and normalize a Square Invoice without exposing recipient details.
+	 *
+	 * @param string $invoice_id Square Invoice ID.
+	 * @return array|WP_Error A validated, limited Invoice snapshot.
+	 */
+	public function get_invoice( $invoice_id ) {
+		$resource = $this->get_square_resource( 'invoices', $invoice_id, 'invoice' );
+		if ( is_wp_error( $resource ) ) {
+			return $resource;
+		}
+
+		$required = array( 'id', 'location_id', 'order_id', 'status' );
+		foreach ( $required as $key ) {
+			if ( ! isset( $resource[ $key ] ) || ! is_string( $resource[ $key ] ) || '' === $resource[ $key ] ) {
+				return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
+			}
+		}
+		if ( ! hash_equals( $invoice_id, $resource['id'] ) ) {
+			return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
+		}
+
+		$normalized = array_intersect_key(
+			$resource,
+			array_flip( array( 'id', 'location_id', 'order_id', 'status', 'version', 'created_at', 'updated_at', 'scheduled_at', 'timezone' ) )
+		);
+		foreach ( array( 'created_at', 'updated_at', 'scheduled_at', 'timezone' ) as $key ) {
+			if ( array_key_exists( $key, $normalized ) && ! is_string( $normalized[ $key ] ) ) {
+				return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
+			}
+		}
+		if ( array_key_exists( 'version', $normalized ) && ! is_int( $normalized['version'] ) ) {
+			return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
+		}
+
+		return $normalized;
+	}
+
+	/** Perform a sandbox-or-production GET and return the named Square object. */
+	private function get_square_resource( $resource_path, $resource_id, $response_key ) {
+		if (
+			! isset( $this->config['environment'], $this->config['access_token'] )
+			|| ! in_array( $this->config['environment'], array( 'sandbox', 'production' ), true )
+			|| ! is_string( $this->config['access_token'] )
+			|| '' === trim( $this->config['access_token'] )
+		) {
+			return new WP_Error( 'square_configuration_invalid', 'Squareのサーバー設定が不足しています。' );
+		}
+		if ( ! is_string( $resource_id ) || ! preg_match( '/\A[A-Za-z0-9._:-]{1,255}\z/', $resource_id ) ) {
+			return new WP_Error( 'square_resource_id_invalid', 'Squareの情報を確認できませんでした。' );
+		}
+		if ( ! function_exists( 'wp_remote_get' ) ) {
+			return new WP_Error( 'square_http_api_unavailable', 'Square情報を取得できません。' );
+		}
+
+		$host = 'sandbox' === $this->config['environment']
+			? 'https://connect.squareupsandbox.com'
+			: 'https://connect.squareup.com';
+		$response = wp_remote_get(
+			$host . '/v2/' . $resource_path . '/' . rawurlencode( $resource_id ),
+			array(
+				'timeout'     => 20,
+				'redirection' => 0,
+				'sslverify'   => true,
+				'headers'     => array(
+					'Authorization' => 'Bearer ' . $this->config['access_token'],
+					'Square-Version' => self::API_VERSION,
+					'Accept'         => 'application/json',
+				),
+			)
+		);
+		if ( is_wp_error( $response ) ) {
+			return new WP_Error( 'square_resource_request_failed', 'Square情報を取得できませんでした。' );
+		}
+
+		$status = (int) wp_remote_retrieve_response_code( $response );
+		if ( 404 === $status ) {
+			return new WP_Error( 'square_resource_not_found', 'Square情報が見つかりません。', array( 'http_status' => $status ) );
+		}
+		$decoded = json_decode( (string) wp_remote_retrieve_body( $response ), true );
+		if ( is_array( $decoded ) && ! empty( $decoded['errors'] ) ) {
+			return new WP_Error( 'square_resource_api_error', 'Square情報を取得できませんでした。', array( 'http_status' => $status ) );
+		}
+		if ( $status < 200 || $status >= 300 ) {
+			return new WP_Error( 'square_resource_http_error', 'Square情報を取得できませんでした。', array( 'http_status' => $status ) );
+		}
+		if ( ! is_array( $decoded ) || ! isset( $decoded[ $response_key ] ) || ! is_array( $decoded[ $response_key ] ) ) {
+			return new WP_Error( 'square_resource_response_invalid', 'Squareから有効な情報を取得できませんでした。' );
+		}
+
+		return $decoded[ $response_key ];
+	}
+
 	private function validate_request( $attempt_uuid, $idempotency_key ) {
 		$required = array(
 			'environment',

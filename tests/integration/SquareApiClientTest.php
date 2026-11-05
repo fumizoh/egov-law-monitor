@@ -9,6 +9,7 @@ final class SquareApiClientTest extends TestCase {
 	private $response_body;
 	private $response_status = 200;
 	private $response_headers = array();
+	private $transport_error = null;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -24,6 +25,9 @@ final class SquareApiClientTest extends TestCase {
 		$this->filter = function ( $preempt, $args, $url ) {
 			++$this->request_count;
 			$this->request = array( 'args' => $args, 'url' => $url );
+			if ( is_wp_error( $this->transport_error ) ) {
+				return $this->transport_error;
+			}
 
 			return array(
 				'headers'  => $this->response_headers,
@@ -106,6 +110,106 @@ final class SquareApiClientTest extends TestCase {
 
 		$this->assertTrue( is_wp_error( $result ) );
 		$this->assertSame( 'square_response_invalid', $result->get_error_code() );
+	}
+
+	public function test_retrieve_subscription_uses_sandbox_and_returns_validated_non_sensitive_fields(): void {
+		$this->response_body = array(
+			'subscription' => array(
+				'id'                   => 'subscription-123',
+				'location_id'          => 'location-123',
+				'plan_variation_id'    => 'variation-123',
+				'customer_id'          => 'customer-123',
+				'status'               => 'ACTIVE',
+				'start_date'           => '2026-11-05',
+				'charged_through_date' => '2026-12-04',
+				'invoice_ids'          => array( 'invoice-123' ),
+				'version'              => 1,
+				'card_id'              => 'private-card-id',
+			),
+		);
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->retrieve_subscription( 'subscription-123' );
+
+		$this->assertSame( 'subscription-123', $result['id'] );
+		$this->assertSame( 'location-123', $result['location_id'] );
+		$this->assertSame( 'variation-123', $result['plan_variation_id'] );
+		$this->assertSame( 'customer-123', $result['customer_id'] );
+		$this->assertSame( 'ACTIVE', $result['status'] );
+		$this->assertSame( array( 'invoice-123' ), $result['invoice_ids'] );
+		$this->assertArrayNotHasKey( 'card_id', $result );
+		$this->assertSame( 'https://connect.squareupsandbox.com/v2/subscriptions/subscription-123', $this->request['url'] );
+		$this->assertSame( 'GET', $this->request['args']['method'] );
+		$this->assertSame( 'Bearer test-sandbox-token', $this->request['args']['headers']['Authorization'] );
+		$this->assertSame( '2026-09-16', $this->request['args']['headers']['Square-Version'] );
+	}
+
+	public function test_get_invoice_uses_sandbox_and_returns_validated_non_sensitive_fields(): void {
+		$this->response_body = array(
+			'invoice' => array(
+				'id'          => 'invoice-123',
+				'location_id' => 'location-123',
+				'order_id'    => 'order-123',
+				'status'      => 'PAID',
+				'version'     => 2,
+				'created_at'  => '2026-11-05T00:00:00Z',
+				'primary_recipient' => array( 'email_address' => 'private@example.test' ),
+			),
+		);
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->get_invoice( 'invoice-123' );
+
+		$this->assertSame( 'invoice-123', $result['id'] );
+		$this->assertSame( 'location-123', $result['location_id'] );
+		$this->assertSame( 'order-123', $result['order_id'] );
+		$this->assertSame( 'PAID', $result['status'] );
+		$this->assertArrayNotHasKey( 'primary_recipient', $result );
+		$this->assertSame( 'https://connect.squareupsandbox.com/v2/invoices/invoice-123', $this->request['url'] );
+		$this->assertSame( 'GET', $this->request['args']['method'] );
+	}
+
+	public function test_retrieve_subscription_reports_http_errors_without_exposing_square_body(): void {
+		$this->response_status = 500;
+		$this->response_body = array( 'errors' => array( array( 'detail' => 'private square detail' ) ) );
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->retrieve_subscription( 'subscription-123' );
+
+		$this->assertTrue( is_wp_error( $result ) );
+		$this->assertSame( 'square_resource_api_error', $result->get_error_code() );
+		$this->assertStringNotContainsString( 'private square detail', $result->get_error_message() );
+		$this->assertSame( 1, $this->request_count );
+	}
+
+	public function test_get_invoice_reports_transport_errors(): void {
+		$this->transport_error = new WP_Error( 'http_request_failed', 'private transport details' );
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->get_invoice( 'invoice-123' );
+
+		$this->assertTrue( is_wp_error( $result ) );
+		$this->assertSame( 'square_resource_request_failed', $result->get_error_code() );
+		$this->assertStringNotContainsString( 'private transport details', $result->get_error_message() );
+		$this->assertSame( 1, $this->request_count );
+	}
+
+	public function test_retrieve_subscription_rejects_invalid_json(): void {
+		$this->response_body = 'not-json';
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->retrieve_subscription( 'subscription-123' );
+
+		$this->assertTrue( is_wp_error( $result ) );
+		$this->assertSame( 'square_resource_response_invalid', $result->get_error_code() );
+	}
+
+	public function test_get_invoice_rejects_unexpected_response_shape_and_mismatched_id(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$this->response_body = array( 'invoice' => 'not-an-object' );
+		$unexpected = $client->get_invoice( 'invoice-123' );
+		$this->assertTrue( is_wp_error( $unexpected ) );
+		$this->assertSame( 'square_resource_response_invalid', $unexpected->get_error_code() );
+
+		$this->response_body = array( 'invoice' => array( 'id' => 'other-invoice', 'location_id' => 'location', 'order_id' => 'order', 'status' => 'PAID' ) );
+		$mismatched = $client->get_invoice( 'invoice-123' );
+		$this->assertTrue( is_wp_error( $mismatched ) );
+		$this->assertSame( 'square_invoice_response_invalid', $mismatched->get_error_code() );
 	}
 
 	public function test_sandbox_rejects_lookalike_payment_link_hosts(): void {
