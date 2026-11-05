@@ -84,6 +84,23 @@ class Egov_Law_Monitor_Checkout_Repository {
 		return isset( $rows[0]['status'] ) ? (string) $rows[0]['status'] : null;
 	}
 
+	/** Read all checkout attempts for a Square order reference without changing data. */
+	public function find_attempts_by_uuid( $attempt_uuid ) {
+		$table = $this->wpdb->prefix . 'egov_law_checkout_attempts';
+		$this->wpdb->last_error = '';
+		$rows = $this->wpdb->get_results(
+			$this->wpdb->prepare(
+				"SELECT id, attempt_uuid, user_id, environment, merchant_id, square_location_id, status, square_order_id FROM {$table} WHERE attempt_uuid = %s",
+				$attempt_uuid
+			),
+			ARRAY_A
+		);
+		if ( ! is_array( $rows ) || '' !== (string) $this->wpdb->last_error ) {
+			return new WP_Error( 'checkout_database_unavailable', '申込情報を読み取れません。' );
+		}
+		return $rows;
+	}
+
 	public function insert_creating_attempt( $user_id, $scope, $attempt_uuid, $idempotency_key ) {
 		$table = $this->wpdb->prefix . 'egov_law_checkout_attempts';
 		$now = current_time( 'mysql', true );
@@ -205,6 +222,116 @@ class Egov_Law_Monitor_Checkout_Repository {
 
 	public function rollback() {
 		$this->wpdb->query( 'ROLLBACK' );
+	}
+}
+
+/** Read-only matching of a completed Square Payment to its WordPress checkout attempt. */
+class Egov_Law_Monitor_Square_Payment_Attempt_Matcher {
+	private $repository;
+	private $client;
+
+	public function __construct( Egov_Law_Monitor_Checkout_Repository $repository, Egov_Law_Monitor_Square_Api_Client $client ) {
+		$this->repository = $repository;
+		$this->client     = $client;
+	}
+
+	/**
+	 * Match a completed Payment through its Order.reference_id to one local attempt.
+	 *
+	 * Only `pending` and `reconciliation_required` attempts are eligible. The
+	 * former is the normal link-created state; the latter can be resolved by the
+	 * authoritative Payment and Order reads performed here. This method never
+	 * changes the attempt or grants a subscription entitlement.
+	 *
+	 * @param string $payment_id Square Payment ID.
+	 * @return array|WP_Error A minimal identity mapping or a safe error.
+	 */
+	public function match_payment( $payment_id ) {
+		$scope = $this->client->get_checkout_scope();
+		if ( is_wp_error( $scope ) ) {
+			return new WP_Error( 'payment_attempt_configuration_unavailable', '決済情報を照合できませんでした。' );
+		}
+
+		$payment = $this->client->get_payment( $payment_id );
+		if ( is_wp_error( $payment ) ) {
+			return new WP_Error( 'payment_attempt_payment_unavailable', '決済情報を照合できませんでした。' );
+		}
+		if ( ! is_string( $payment_id ) || ! isset( $payment['id'] ) || ! is_string( $payment['id'] ) || ! hash_equals( $payment_id, $payment['id'] ) ) {
+			return new WP_Error( 'payment_attempt_payment_mismatch', '決済情報を照合できませんでした。' );
+		}
+		if ( ! isset( $payment['status'] ) || ! is_string( $payment['status'] ) || 'COMPLETED' !== $payment['status'] ) {
+			return new WP_Error( 'payment_attempt_payment_not_completed', '決済が完了していないため照合できません。' );
+		}
+		if ( ! isset( $payment['order_id'] ) || ! is_string( $payment['order_id'] ) || '' === $payment['order_id'] ) {
+			return new WP_Error( 'payment_attempt_order_missing', '決済情報を照合できませんでした。' );
+		}
+
+		$order = $this->client->retrieve_order( $payment['order_id'] );
+		if ( is_wp_error( $order ) ) {
+			return new WP_Error( 'payment_attempt_order_unavailable', '注文情報を照合できませんでした。' );
+		}
+		if (
+			! isset( $order['id'], $order['location_id'] )
+			|| ! is_string( $order['id'] )
+			|| ! isset( $payment['location_id'] )
+			|| ! is_string( $payment['location_id'] )
+			|| ! is_string( $order['location_id'] )
+			|| ! hash_equals( $payment['order_id'], $order['id'] )
+			|| ! isset( $order['reference_id'] )
+			|| ! is_string( $order['reference_id'] )
+			|| ! preg_match( '/\A[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}\z/i', $order['reference_id'] )
+		) {
+			return new WP_Error( 'payment_attempt_order_mismatch', '注文情報を照合できませんでした。' );
+		}
+
+		$attempts = $this->repository->find_attempts_by_uuid( $order['reference_id'] );
+		if ( is_wp_error( $attempts ) ) {
+			return new WP_Error( 'payment_attempt_database_unavailable', '申込情報を照合できませんでした。' );
+		}
+		if ( ! is_array( $attempts ) || 1 !== count( $attempts ) ) {
+			return new WP_Error( 'payment_attempt_not_unique', '対応する申込情報を一意に特定できません。' );
+		}
+
+		$attempt = $attempts[0];
+		if (
+			! is_array( $attempt )
+			|| ! isset( $attempt['attempt_uuid'], $attempt['user_id'], $attempt['environment'], $attempt['merchant_id'], $attempt['square_location_id'], $attempt['status'], $attempt['square_order_id'] )
+			|| ! is_string( $attempt['attempt_uuid'] )
+			|| ! hash_equals( $order['reference_id'], $attempt['attempt_uuid'] )
+			|| ! preg_match( '/\A[1-9][0-9]*\z/', (string) $attempt['user_id'] )
+			|| ! in_array( $attempt['status'], array( 'pending', 'reconciliation_required' ), true )
+			|| ! is_string( $attempt['square_order_id'] )
+			|| ! hash_equals( $payment['order_id'], $attempt['square_order_id'] )
+			|| ! is_string( $attempt['environment'] )
+			|| ! hash_equals( $scope['environment'], $attempt['environment'] )
+			|| ! is_string( $attempt['merchant_id'] )
+			|| ! hash_equals( $scope['merchant_id'], $attempt['merchant_id'] )
+			|| ! is_string( $attempt['square_location_id'] )
+			|| ! hash_equals( $scope['location_id'], $attempt['square_location_id'] )
+			|| ! hash_equals( $scope['location_id'], $payment['location_id'] )
+			|| ! hash_equals( $scope['location_id'], $order['location_id'] )
+		) {
+			return new WP_Error( 'payment_attempt_mismatch', '決済情報と申込情報が一致しません。' );
+		}
+
+		$user_id = (int) $attempt['user_id'];
+		$user    = get_userdata( $user_id );
+		if ( ! is_object( $user ) || ! isset( $user->ID ) || $user_id !== (int) $user->ID ) {
+			return new WP_Error( 'payment_attempt_user_unavailable', '申込ユーザーを確認できません。' );
+		}
+
+		$result = array(
+			'user_id'      => $user_id,
+			'attempt_uuid' => $attempt['attempt_uuid'],
+			'payment_id'   => $payment['id'],
+			'order_id'     => $payment['order_id'],
+			'environment'  => $scope['environment'],
+			'merchant_id'  => $scope['merchant_id'],
+		);
+		if ( isset( $payment['customer_id'] ) ) {
+			$result['customer_id'] = $payment['customer_id'];
+		}
+		return $result;
 	}
 }
 
