@@ -99,7 +99,7 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 		$this->wpdb->last_error = '';
 		$rows = $this->wpdb->get_results(
 			$this->wpdb->prepare(
-				"SELECT id, environment, merchant_id, square_event_id, event_type, square_created_at, received_at, processing_status, retry_count, next_retry_at, processing_started_at, claim_generation, normalized_payload FROM {$table} WHERE processing_status = 'received' OR (processing_status = 'retry' AND next_retry_at IS NOT NULL AND next_retry_at <= %s) OR (processing_status = 'processing' AND processing_started_at IS NOT NULL AND processing_started_at <= %s) ORDER BY received_at ASC, id ASC LIMIT %d",
+				"SELECT id, environment, merchant_id, square_event_id, event_type, square_created_at, received_at, processing_status, retry_count, next_retry_at, processing_started_at, claim_generation, payload_hash, normalized_payload FROM {$table} WHERE processing_status = 'received' OR (processing_status = 'retry' AND next_retry_at IS NOT NULL AND next_retry_at <= %s) OR (processing_status = 'processing' AND processing_started_at IS NOT NULL AND processing_started_at <= %s) ORDER BY received_at ASC, id ASC LIMIT %d",
 				$now,
 				$stale_before,
 				$limit
@@ -159,7 +159,7 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 		$this->wpdb->last_error = '';
 		$row = $this->wpdb->get_row(
 			$this->wpdb->prepare(
-				"SELECT id, environment, merchant_id, square_event_id, event_type, square_created_at, received_at, processing_status, retry_count, next_retry_at, processing_started_at, claim_generation, normalized_payload FROM {$table} WHERE id = %d",
+				"SELECT id, environment, merchant_id, square_event_id, event_type, square_created_at, received_at, processing_status, retry_count, next_retry_at, processing_started_at, claim_generation, payload_hash, normalized_payload FROM {$table} WHERE id = %d",
 				(int) $event_row_id
 			),
 			ARRAY_A
@@ -358,6 +358,279 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 		$code = sanitize_key( is_scalar( $error_code ) ? (string) $error_code : '' );
 		return '' === $code ? 'webhook_processing_failed' : substr( $code, 0, 100 );
 	}
+}
+
+/**
+ * Process persisted, signature-verified Square webhook events outside the REST
+ * request. This worker only matches; it never writes checkout, subscription,
+ * invoice, user-meta, or entitlement records.
+ */
+class Egov_Law_Monitor_Square_Webhook_Event_Worker {
+	private const MAX_BATCH_SIZE = 100;
+	private const MAX_PAYLOAD_BYTES = 262144;
+	private const SUPPORTED_EVENTS = array( 'subscription.created', 'subscription.updated', 'invoice.payment_made' );
+
+	private $repository;
+	private $client;
+	private $matcher;
+
+	public function __construct( Egov_Law_Monitor_Square_Webhook_Repository $repository, Egov_Law_Monitor_Square_Api_Client $client, Egov_Law_Monitor_Square_Subscription_Attempt_Matcher $matcher ) {
+		$this->repository = $repository;
+		$this->client     = $client;
+		$this->matcher    = $matcher;
+	}
+
+	/**
+	 * Process up to the requested number of ready events.
+	 *
+	 * @param int $limit Batch size, capped at 100.
+	 * @return array|WP_Error Safe aggregate counts, or a database/configuration error.
+	 */
+	public function process_batch( $limit = 25 ) {
+		if ( ! is_scalar( $limit ) || ! preg_match( '/\A[1-9][0-9]*\z/', (string) $limit ) ) {
+			return new WP_Error( 'square_webhook_worker_arguments_invalid', 'Webhook処理件数を確認できません。' );
+		}
+		$limit = min( self::MAX_BATCH_SIZE, (int) $limit );
+		$events = $this->repository->get_events_ready_for_processing( $limit );
+		if ( is_wp_error( $events ) ) {
+			return new WP_Error( 'square_webhook_worker_queue_unavailable', 'Webhook処理対象を取得できません。' );
+		}
+
+		$summary = array(
+			'found'                    => count( $events ),
+			'claimed'                  => 0,
+			'processed'                => 0,
+			'retry'                    => 0,
+			'reconciliation_required' => 0,
+			'skipped'                  => 0,
+			'claim_errors'             => 0,
+			'result_write_errors'      => 0,
+			'lost_claims'              => 0,
+		);
+
+		foreach ( $events as $event_row ) {
+			if ( ! isset( $event_row['id'] ) ) {
+				$summary['claim_errors']++;
+				continue;
+			}
+			$claim = $this->repository->claim_event( $event_row['id'] );
+			if ( is_wp_error( $claim ) ) {
+				$summary['claim_errors']++;
+				continue;
+			}
+			if ( false === $claim ) {
+				$summary['skipped']++;
+				continue;
+			}
+			$summary['claimed']++;
+			if ( ! is_array( $claim ) || ! isset( $claim['id'], $claim['claim_generation'] ) ) {
+				$summary['result_write_errors']++;
+				continue;
+			}
+
+			try {
+				$decision = $this->decide( $claim );
+			} catch ( Throwable $exception ) {
+				// Do not expose exception details. Leave a retryable, fixed-code trail.
+				$decision = $this->decision( 'retry', 'webhook_worker_unexpected_error' );
+			}
+
+			try {
+				$result = $this->record_decision( $claim, $decision );
+			} catch ( Throwable $exception ) {
+				$summary['result_write_errors']++;
+				continue;
+			}
+			if ( is_wp_error( $result ) ) {
+				$summary['result_write_errors']++;
+				continue;
+			}
+			if ( false === $result ) {
+				$summary['lost_claims']++;
+				continue;
+			}
+			$status = is_array( $result ) && isset( $result['status'] ) ? $result['status'] : $decision['status'];
+			if ( isset( $summary[ $status ] ) ) {
+				$summary[ $status ]++;
+			}
+		}
+
+		return $summary;
+	}
+
+	private function decide( array $row ) {
+		$payload = isset( $row['normalized_payload'] ) ? $row['normalized_payload'] : null;
+		$payload_hash = isset( $row['payload_hash'] ) ? $row['payload_hash'] : null;
+		if (
+			! is_string( $payload )
+			|| '' === $payload
+			|| strlen( $payload ) > self::MAX_PAYLOAD_BYTES
+			|| ! is_string( $payload_hash )
+			|| ! preg_match( '/\A[a-f0-9]{64}\z/i', $payload_hash )
+			|| ! hash_equals( strtolower( $payload_hash ), hash( 'sha256', $payload ) )
+		) {
+			return $this->decision( 'reconciliation_required', 'stored_event_payload_invalid' );
+		}
+
+		$event = json_decode( $payload, true );
+		if (
+			JSON_ERROR_NONE !== json_last_error()
+			|| ! is_array( $event )
+			|| ! isset( $event['event_id'], $event['type'], $event['merchant_id'] )
+			|| ! is_string( $event['event_id'] )
+			|| ! is_string( $event['type'] )
+			|| ! is_string( $event['merchant_id'] )
+			|| ! isset( $row['square_event_id'], $row['event_type'], $row['merchant_id'], $row['environment'] )
+			|| ! is_string( $row['square_event_id'] )
+			|| ! is_string( $row['event_type'] )
+			|| ! is_string( $row['merchant_id'] )
+			|| ! is_string( $row['environment'] )
+			|| ! hash_equals( $row['square_event_id'], $event['event_id'] )
+			|| ! hash_equals( $row['event_type'], $event['type'] )
+			|| ! hash_equals( $row['merchant_id'], $event['merchant_id'] )
+			|| 'sandbox' !== $row['environment']
+		) {
+			return $this->decision( 'reconciliation_required', 'stored_event_identity_invalid' );
+		}
+
+		if ( ! in_array( $event['type'], self::SUPPORTED_EVENTS, true ) ) {
+			return $this->decision( 'processed', '' );
+		}
+
+		$scope = $this->client->get_checkout_scope();
+		if ( is_wp_error( $scope ) || ! isset( $scope['environment'], $scope['merchant_id'], $scope['location_id'] ) || 'sandbox' !== $scope['environment'] || ! is_string( $scope['merchant_id'] ) || ! is_string( $scope['location_id'] ) || ! hash_equals( $row['merchant_id'], $scope['merchant_id'] ) ) {
+			// Fail closed: never make a Production request for a persisted event.
+			return $this->decision( 'retry', 'square_sandbox_scope_unavailable' );
+		}
+
+		if ( 'subscription.created' === $event['type'] || 'subscription.updated' === $event['type'] ) {
+			$subscription_id = $this->extract_resource_id( $event, 'subscription' );
+			if ( is_wp_error( $subscription_id ) ) {
+				return $this->decision( 'reconciliation_required', 'subscription_event_id_invalid' );
+			}
+			return $this->decide_match_result( $this->matcher->match_subscription( $subscription_id ) );
+		}
+
+		$invoice_id = $this->extract_resource_id( $event, 'invoice' );
+		if ( is_wp_error( $invoice_id ) ) {
+			return $this->decision( 'reconciliation_required', 'invoice_event_id_invalid' );
+		}
+		$invoice = $this->client->get_invoice( $invoice_id );
+		if ( is_wp_error( $invoice ) ) {
+			return $this->is_invalid_square_response( $invoice )
+				? $this->decision( 'reconciliation_required', 'invoice_response_invalid' )
+				: $this->decision( 'retry', 'invoice_api_unavailable' );
+		}
+		if ( ! isset( $invoice['id'], $invoice['subscription_id'], $invoice['location_id'] ) || ! is_string( $invoice['id'] ) || ! is_string( $invoice['location_id'] ) || ! hash_equals( $invoice_id, $invoice['id'] ) || ! hash_equals( $scope['location_id'], $invoice['location_id'] ) ) {
+			return $this->decision( 'reconciliation_required', 'invoice_identity_invalid' );
+		}
+		if ( ! is_string( $invoice['subscription_id'] ) || ! preg_match( '/\A[A-Za-z0-9._:-]{1,255}\z/', $invoice['subscription_id'] ) ) {
+			return $this->decision( 'reconciliation_required', 'invoice_subscription_id_missing_or_invalid' );
+		}
+
+		return $this->decide_match_result( $this->matcher->match_subscription( $invoice['subscription_id'] ) );
+	}
+
+	/** Extract a resource ID, requiring duplicate representations to agree. */
+	private function extract_resource_id( array $event, $resource_type ) {
+		if ( ! isset( $event['data'] ) || ! is_array( $event['data'] ) ) {
+			return new WP_Error( 'square_webhook_event_resource_missing', 'Webhook対象を確認できません。' );
+		}
+		$data = $event['data'];
+		if ( isset( $data['type'] ) && ( ! is_string( $data['type'] ) || $resource_type !== $data['type'] ) ) {
+			return new WP_Error( 'square_webhook_event_resource_type_invalid', 'Webhook対象を確認できません。' );
+		}
+		$ids = array();
+		if ( array_key_exists( 'id', $data ) ) {
+			$ids[] = $data['id'];
+		}
+		if ( isset( $data['object'] ) ) {
+			if ( ! is_array( $data['object'] ) ) {
+				return new WP_Error( 'square_webhook_event_resource_invalid', 'Webhook対象を確認できません。' );
+			}
+			if ( isset( $data['object'][ $resource_type ] ) ) {
+				if ( ! is_array( $data['object'][ $resource_type ] ) ) {
+					return new WP_Error( 'square_webhook_event_resource_invalid', 'Webhook対象を確認できません。' );
+				}
+				if ( array_key_exists( 'id', $data['object'][ $resource_type ] ) ) {
+					$ids[] = $data['object'][ $resource_type ]['id'];
+				}
+			}
+		}
+		if ( empty( $ids ) ) {
+			return new WP_Error( 'square_webhook_event_resource_missing', 'Webhook対象を確認できません。' );
+		}
+		$resource_id = null;
+		foreach ( $ids as $id ) {
+			if ( ! is_string( $id ) || ! preg_match( '/\A[A-Za-z0-9._:-]{1,255}\z/', $id ) || ( null !== $resource_id && ! hash_equals( $resource_id, $id ) ) ) {
+				return new WP_Error( 'square_webhook_event_resource_invalid', 'Webhook対象を確認できません。' );
+			}
+			$resource_id = $id;
+		}
+		return $resource_id;
+	}
+
+	private function decide_match_result( $result ) {
+		if ( is_wp_error( $result ) ) {
+			return $this->decision( 'retry', 'subscription_match_unavailable' );
+		}
+		if ( ! is_array( $result ) || ! isset( $result['status'] ) || ! is_string( $result['status'] ) ) {
+			return $this->decision( 'reconciliation_required', 'subscription_match_result_invalid' );
+		}
+		switch ( $result['status'] ) {
+			case 'subscription_matched':
+				return $this->decision( 'processed', '' );
+			case 'subscription_pending':
+				return $this->decision( 'retry', 'subscription_pending' );
+			case 'square_api_error':
+				return $this->decision( 'retry', 'square_subscription_api_unavailable' );
+			case 'reconciliation_required':
+				return $this->decision( 'reconciliation_required', 'subscription_match_requires_review' );
+			default:
+				return $this->decision( 'reconciliation_required', 'subscription_match_result_invalid' );
+		}
+	}
+
+	private function is_invalid_square_response( $error ) {
+		$code = is_wp_error( $error ) ? $error->get_error_code() : '';
+		return false !== strpos( $code, '_response_invalid' ) || false !== strpos( $code, '_id_invalid' );
+	}
+
+	private function decision( $status, $error_code ) {
+		return array( 'status' => $status, 'error_code' => $error_code );
+	}
+
+	private function record_decision( array $claim, array $decision ) {
+		switch ( $decision['status'] ) {
+			case 'processed':
+				return $this->repository->mark_event_processed( $claim['id'], (int) $claim['claim_generation'] );
+			case 'retry':
+				return $this->repository->mark_event_retry( $claim['id'], (int) $claim['claim_generation'], $decision['error_code'] );
+			case 'reconciliation_required':
+				return $this->repository->mark_event_reconciliation_required( $claim['id'], (int) $claim['claim_generation'], $decision['error_code'] );
+			default:
+				return new WP_Error( 'square_webhook_worker_decision_invalid', 'Webhook処理結果を確認できません。' );
+		}
+	}
+}
+
+/** Build a Sandbox-only webhook event worker. No cron hook is registered. */
+function egov_law_monitor_square_webhook_event_worker() {
+	global $wpdb;
+	$client = Egov_Law_Monitor_Square_Api_Client::from_wordpress_config();
+	if ( is_wp_error( $client ) ) {
+		return new WP_Error( 'square_webhook_worker_configuration_unavailable', 'Webhook処理を利用できません。' );
+	}
+	$scope = $client->get_checkout_scope();
+	if ( is_wp_error( $scope ) || ! isset( $scope['environment'] ) || 'sandbox' !== $scope['environment'] ) {
+		return new WP_Error( 'square_webhook_worker_environment_disabled', 'Webhook処理を利用できません。' );
+	}
+
+	$checkout_repository = new Egov_Law_Monitor_Checkout_Repository( $wpdb );
+	$payment_matcher = new Egov_Law_Monitor_Square_Payment_Attempt_Matcher( $checkout_repository, $client );
+	$payment_confirmation = new Egov_Law_Monitor_Square_Initial_Payment_Confirmation_Service( $checkout_repository, $client, $payment_matcher );
+	$subscription_matcher = new Egov_Law_Monitor_Square_Subscription_Attempt_Matcher( $checkout_repository, $client, $payment_confirmation );
+	return new Egov_Law_Monitor_Square_Webhook_Event_Worker( new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb ), $client, $subscription_matcher );
 }
 
 class Egov_Law_Monitor_Square_Webhook_Service {
