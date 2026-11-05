@@ -76,6 +76,7 @@ final class SquarePaymentAttemptMatcherTest extends TestCase {
 				'order_id'     => $this->payment['order_id'],
 				'environment'  => 'sandbox',
 				'merchant_id'  => 'matcher-merchant',
+				'location_id'  => 'matcher-location',
 				'customer_id'  => 'matcher-customer',
 			),
 			$result
@@ -92,6 +93,83 @@ final class SquarePaymentAttemptMatcherTest extends TestCase {
 
 		$this->assertFalse( is_wp_error( $result ) );
 		$this->assertArrayNotHasKey( 'customer_id', $result );
+	}
+
+	public function test_saves_customer_id_only_and_returns_saved(): void {
+		$this->insert_attempt( 1 );
+		$before = $this->get_attempt_row();
+		$result = $this->customer_service()->save_customer_id_for_payment( $this->payment['id'] );
+		$after  = $this->get_attempt_row();
+
+		$this->assertSame( 'saved', $result['status'] );
+		$this->assertSame( 'matcher-customer', $after['square_customer_id'] );
+		$this->assertSame( null, $after['square_subscription_id'] );
+		unset( $before['square_customer_id'], $after['square_customer_id'] );
+		$this->assertSame( $before, $after, 'Only square_customer_id may change.' );
+	}
+
+	public function test_repeated_save_of_same_customer_is_idempotent(): void {
+		$this->insert_attempt( 1 );
+		$service = $this->customer_service();
+
+		$this->assertSame( 'saved', $service->save_customer_id_for_payment( $this->payment['id'] )['status'] );
+		$this->assertSame( 'already_saved', $service->save_customer_id_for_payment( $this->payment['id'] )['status'] );
+	}
+
+	public function test_missing_customer_id_is_pending_and_does_not_change_attempt(): void {
+		unset( $this->payment['customer_id'] );
+		$this->insert_attempt( 1 );
+		$before = $this->get_attempt_row();
+		$result = $this->customer_service()->save_customer_id_for_payment( $this->payment['id'] );
+		$after  = $this->get_attempt_row();
+
+		$this->assertSame( 'pending_customer_id', $result['status'] );
+		$this->assertArrayNotHasKey( 'customer_id', $result );
+		$this->assertSame( $before, $after );
+	}
+
+	public function test_different_saved_customer_id_is_a_conflict_and_is_not_overwritten(): void {
+		$this->insert_attempt( 1 );
+		$this->attempts_table_update( array( 'square_customer_id' => 'already-associated-customer' ) );
+		$before = $this->get_attempt_row();
+		$result = $this->customer_service()->save_customer_id_for_payment( $this->payment['id'] );
+		$after  = $this->get_attempt_row();
+
+		$this->assertTrue( is_wp_error( $result ) );
+		$this->assertSame( 'payment_attempt_customer_id_conflict', $result->get_error_code() );
+		$this->assertSame( $before, $after );
+	}
+
+	public function test_match_failure_does_not_change_attempt(): void {
+		$this->insert_attempt( 1 );
+		$this->payment['status'] = 'APPROVED';
+		$before = $this->get_attempt_row();
+		$result = $this->customer_service()->save_customer_id_for_payment( $this->payment['id'] );
+		$after  = $this->get_attempt_row();
+
+		$this->assertTrue( is_wp_error( $result ) );
+		$this->assertSame( $before, $after );
+	}
+
+	public function test_database_update_error_is_returned_without_claiming_success(): void {
+		$this->insert_attempt( 1 );
+		$repository = new Egov_Test_Customer_Save_Failure_Repository( $GLOBALS['wpdb'] );
+		$result = $this->customer_service( $repository )->save_customer_id_for_payment( $this->payment['id'] );
+
+		$this->assertTrue( is_wp_error( $result ) );
+		$this->assertSame( 'payment_attempt_database_unavailable', $result->get_error_code() );
+		$this->assertNull( $this->get_attempt_row()['square_customer_id'] );
+	}
+
+	public function test_conditional_update_does_not_overwrite_customer_saved_after_read(): void {
+		$this->insert_attempt( 1 );
+		$attempt = ( new Egov_Law_Monitor_Checkout_Repository( $GLOBALS['wpdb'] ) )->get_attempt_for_customer_id_save( $this->order['reference_id'] );
+		$this->attempts_table_update( array( 'square_customer_id' => 'concurrent-customer' ) );
+
+		$updated = ( new Egov_Law_Monitor_Checkout_Repository( $GLOBALS['wpdb'] ) )->save_customer_id_if_empty( $attempt, 'matcher-customer' );
+
+		$this->assertSame( 0, $updated );
+		$this->assertSame( 'concurrent-customer', $this->get_attempt_row()['square_customer_id'] );
 	}
 
 	public function test_matches_reconciliation_required_attempt_but_rejects_other_states(): void {
@@ -231,11 +309,16 @@ final class SquarePaymentAttemptMatcherTest extends TestCase {
 		$this->assertSame( $before, $after );
 	}
 
-	private function matcher(): Egov_Law_Monitor_Square_Payment_Attempt_Matcher {
+	private function matcher( $repository = null ): Egov_Law_Monitor_Square_Payment_Attempt_Matcher {
 		return new Egov_Law_Monitor_Square_Payment_Attempt_Matcher(
-			new Egov_Law_Monitor_Checkout_Repository( $GLOBALS['wpdb'] ),
+			$repository ?: new Egov_Law_Monitor_Checkout_Repository( $GLOBALS['wpdb'] ),
 			$this->client()
 		);
+	}
+
+	private function customer_service( $repository = null ): Egov_Law_Monitor_Square_Payment_Customer_Service {
+		$repository = $repository ?: new Egov_Law_Monitor_Checkout_Repository( $GLOBALS['wpdb'] );
+		return new Egov_Law_Monitor_Square_Payment_Customer_Service( $repository, $this->matcher( $repository ) );
 	}
 
 	private function client(): Egov_Law_Monitor_Square_Api_Client {
@@ -309,5 +392,11 @@ final class Egov_Test_Duplicate_Attempt_Repository extends Egov_Law_Monitor_Chec
 
 	public function find_attempts_by_uuid( $attempt_uuid ) {
 		return $this->rows;
+	}
+}
+
+final class Egov_Test_Customer_Save_Failure_Repository extends Egov_Law_Monitor_Checkout_Repository {
+	public function save_customer_id_if_empty( array $attempt, $customer_id ) {
+		return new WP_Error( 'checkout_database_unavailable', 'test failure' );
 	}
 }

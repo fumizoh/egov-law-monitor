@@ -101,6 +101,49 @@ class Egov_Law_Monitor_Checkout_Repository {
 		return $rows;
 	}
 
+	/** Read the identity fields needed before saving a matched Customer ID. */
+	public function get_attempt_for_customer_id_save( $attempt_uuid ) {
+		$table = $this->wpdb->prefix . 'egov_law_checkout_attempts';
+		$this->wpdb->last_error = '';
+		$rows = $this->wpdb->get_results(
+			$this->wpdb->prepare(
+				"SELECT id, attempt_uuid, user_id, environment, merchant_id, square_location_id, status, square_order_id, square_customer_id FROM {$table} WHERE attempt_uuid = %s",
+				$attempt_uuid
+			),
+			ARRAY_A
+		);
+		if ( ! is_array( $rows ) || '' !== (string) $this->wpdb->last_error ) {
+			return new WP_Error( 'checkout_database_unavailable', '申込情報を読み取れません。' );
+		}
+		if ( count( $rows ) > 1 ) {
+			return new WP_Error( 'checkout_attempts_inconsistent', '申込情報を確認できません。' );
+		}
+		return isset( $rows[0] ) ? $rows[0] : null;
+	}
+
+	/** Set only square_customer_id when it is still empty and identity still matches. */
+	public function save_customer_id_if_empty( array $attempt, $customer_id ) {
+		$table = $this->wpdb->prefix . 'egov_law_checkout_attempts';
+		$this->wpdb->last_error = '';
+		$updated = $this->wpdb->query(
+			$this->wpdb->prepare(
+				"UPDATE {$table} SET square_customer_id = %s WHERE id = %d AND attempt_uuid = %s AND user_id = %d AND environment = %s AND merchant_id = %s AND square_location_id = %s AND square_order_id = %s AND (square_customer_id IS NULL OR square_customer_id = '')",
+				$customer_id,
+				$attempt['id'],
+				$attempt['attempt_uuid'],
+				$attempt['user_id'],
+				$attempt['environment'],
+				$attempt['merchant_id'],
+				$attempt['square_location_id'],
+				$attempt['square_order_id']
+			)
+		);
+		if ( false === $updated || '' !== (string) $this->wpdb->last_error ) {
+			return new WP_Error( 'checkout_database_unavailable', '申込情報を更新できません。' );
+		}
+		return $updated;
+	}
+
 	public function insert_creating_attempt( $user_id, $scope, $attempt_uuid, $idempotency_key ) {
 		$table = $this->wpdb->prefix . 'egov_law_checkout_attempts';
 		$now = current_time( 'mysql', true );
@@ -327,11 +370,138 @@ class Egov_Law_Monitor_Square_Payment_Attempt_Matcher {
 			'order_id'     => $payment['order_id'],
 			'environment'  => $scope['environment'],
 			'merchant_id'  => $scope['merchant_id'],
+			'location_id'  => $scope['location_id'],
 		);
 		if ( isset( $payment['customer_id'] ) ) {
 			$result['customer_id'] = $payment['customer_id'];
 		}
 		return $result;
+	}
+}
+
+/** Persist a Customer ID only after the existing Square Payment matcher succeeds. */
+class Egov_Law_Monitor_Square_Payment_Customer_Service {
+	private $repository;
+	private $matcher;
+
+	public function __construct( Egov_Law_Monitor_Checkout_Repository $repository, Egov_Law_Monitor_Square_Payment_Attempt_Matcher $matcher ) {
+		$this->repository = $repository;
+		$this->matcher    = $matcher;
+	}
+
+	/**
+	 * Match a completed Payment and safely save its Customer ID on the exact attempt.
+	 *
+	 * @param string $payment_id Square Payment ID.
+	 * @return array|WP_Error A minimal result with `saved`, `already_saved`, or `pending_customer_id` status.
+	 */
+	public function save_customer_id_for_payment( $payment_id ) {
+		$match = $this->matcher->match_payment( $payment_id );
+		if ( is_wp_error( $match ) ) {
+			return $match;
+		}
+
+		$identity = array( 'user_id', 'attempt_uuid', 'payment_id', 'order_id', 'environment', 'merchant_id', 'location_id' );
+		foreach ( $identity as $key ) {
+			if ( ! isset( $match[ $key ] ) ) {
+				return new WP_Error( 'payment_attempt_mismatch', '決済情報と申込情報が一致しません。' );
+			}
+		}
+		if ( ! isset( $match['customer_id'] ) ) {
+			return array(
+				'status'       => 'pending_customer_id',
+				'user_id'      => $match['user_id'],
+				'attempt_uuid' => $match['attempt_uuid'],
+				'payment_id'   => $match['payment_id'],
+				'order_id'     => $match['order_id'],
+				'environment'  => $match['environment'],
+				'merchant_id'  => $match['merchant_id'],
+				'location_id'  => $match['location_id'],
+			);
+		}
+
+		$customer_id = $match['customer_id'];
+		if ( ! is_string( $customer_id ) || '' === trim( $customer_id ) || strlen( $customer_id ) > 191 || preg_match( '/[\x00-\x1F\x7F]/', $customer_id ) ) {
+			return new WP_Error( 'payment_attempt_customer_id_invalid', '決済情報を安全に保存できません。' );
+		}
+
+		$attempt = $this->repository->get_attempt_for_customer_id_save( $match['attempt_uuid'] );
+		if ( is_wp_error( $attempt ) ) {
+			return new WP_Error( 'payment_attempt_database_unavailable', '申込情報を確認できません。' );
+		}
+		if ( ! is_array( $attempt ) || ! $this->attempt_matches_result( $attempt, $match ) ) {
+			return new WP_Error( 'payment_attempt_mismatch', '決済情報と申込情報が一致しません。' );
+		}
+
+		if ( null !== $attempt['square_customer_id'] && '' !== $attempt['square_customer_id'] ) {
+			if ( ! is_string( $attempt['square_customer_id'] ) || ! hash_equals( $customer_id, $attempt['square_customer_id'] ) ) {
+				return new WP_Error( 'payment_attempt_customer_id_conflict', '申込情報の顧客識別子が一致しません。' );
+			}
+			return $this->customer_save_result( 'already_saved', $match, $customer_id );
+		}
+
+		$updated = $this->repository->save_customer_id_if_empty( $attempt, $customer_id );
+		if ( is_wp_error( $updated ) ) {
+			return new WP_Error( 'payment_attempt_database_unavailable', '申込情報を更新できません。' );
+		}
+		if ( 1 === $updated ) {
+			return $this->customer_save_result( 'saved', $match, $customer_id );
+		}
+
+		// Another request may have saved the same ID after our read. Re-read to
+		// distinguish that idempotent outcome from a conflicting value or race.
+		$latest = $this->repository->get_attempt_for_customer_id_save( $match['attempt_uuid'] );
+		if ( is_wp_error( $latest ) ) {
+			return new WP_Error( 'payment_attempt_database_unavailable', '申込情報を確認できません。' );
+		}
+		if ( ! is_array( $latest ) || ! $this->attempt_matches_result( $latest, $match ) ) {
+			return new WP_Error( 'payment_attempt_mismatch', '決済情報と申込情報が一致しません。' );
+		}
+		if ( is_string( $latest['square_customer_id'] ) && hash_equals( $customer_id, $latest['square_customer_id'] ) ) {
+			return $this->customer_save_result( 'already_saved', $match, $customer_id );
+		}
+		if ( null !== $latest['square_customer_id'] && '' !== $latest['square_customer_id'] ) {
+			return new WP_Error( 'payment_attempt_customer_id_conflict', '申込情報の顧客識別子が一致しません。' );
+		}
+		return new WP_Error( 'payment_attempt_database_unavailable', '申込情報を更新できません。' );
+	}
+
+	private function attempt_matches_result( array $attempt, array $match ) {
+		if (
+			! isset( $attempt['id'], $attempt['attempt_uuid'], $attempt['user_id'], $attempt['environment'], $attempt['merchant_id'], $attempt['square_location_id'], $attempt['status'], $attempt['square_order_id'] )
+			|| ! is_string( $attempt['attempt_uuid'] )
+			|| ! hash_equals( $match['attempt_uuid'], $attempt['attempt_uuid'] )
+			|| ! is_scalar( $attempt['user_id'] )
+			|| ! preg_match( '/\A[1-9][0-9]*\z/', (string) $attempt['user_id'] )
+			|| (int) $attempt['user_id'] !== (int) $match['user_id']
+			|| ! is_string( $attempt['environment'] )
+			|| ! hash_equals( $match['environment'], $attempt['environment'] )
+			|| ! is_string( $attempt['merchant_id'] )
+			|| ! hash_equals( $match['merchant_id'], $attempt['merchant_id'] )
+			|| ! is_string( $attempt['square_location_id'] )
+			|| ! hash_equals( $match['location_id'], $attempt['square_location_id'] )
+			|| ! is_string( $attempt['square_order_id'] )
+			|| ! hash_equals( $match['order_id'], $attempt['square_order_id'] )
+			|| ! in_array( $attempt['status'], array( 'pending', 'reconciliation_required' ), true )
+			|| ! is_object( get_userdata( (int) $attempt['user_id'] ) )
+		) {
+			return false;
+		}
+		return true;
+	}
+
+	private function customer_save_result( $status, array $match, $customer_id ) {
+		return array(
+			'status'       => $status,
+			'user_id'      => (int) $match['user_id'],
+			'attempt_uuid' => $match['attempt_uuid'],
+			'payment_id'   => $match['payment_id'],
+			'order_id'     => $match['order_id'],
+			'environment'  => $match['environment'],
+			'merchant_id'  => $match['merchant_id'],
+			'location_id'  => $match['location_id'],
+			'customer_id'  => $customer_id,
+		);
 	}
 }
 
