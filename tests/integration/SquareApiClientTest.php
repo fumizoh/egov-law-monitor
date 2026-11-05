@@ -222,6 +222,8 @@ final class SquareApiClientTest extends TestCase {
 				'status'              => 'COMPLETED',
 				'created_at'          => '2026-11-05T01:02:03Z',
 				'updated_at'          => '2026-11-05T01:02:04Z',
+				'amount_money'        => array( 'amount' => 500, 'currency' => 'JPY' ),
+				'total_money'         => array( 'amount' => 550, 'currency' => 'JPY' ),
 				'card_details'        => array( 'card' => 'private-card-data' ),
 				'billing_address'     => array( 'address_line_1' => 'private-address' ),
 				'buyer_email_address' => 'private@example.test',
@@ -239,6 +241,8 @@ final class SquareApiClientTest extends TestCase {
 				'status'      => 'COMPLETED',
 				'created_at'  => '2026-11-05T01:02:03Z',
 				'updated_at'  => '2026-11-05T01:02:04Z',
+				'amount_money' => array( 'amount' => 500, 'currency' => 'JPY' ),
+				'total_money'  => array( 'amount' => 550, 'currency' => 'JPY' ),
 			),
 			$result
 		);
@@ -249,6 +253,8 @@ final class SquareApiClientTest extends TestCase {
 		$this->assertArrayNotHasKey( 'card_details', $result );
 		$this->assertArrayNotHasKey( 'billing_address', $result );
 		$this->assertArrayNotHasKey( 'buyer_email_address', $result );
+		$this->assertSame( array( 'amount' => 500, 'currency' => 'JPY' ), $result['amount_money'] );
+		$this->assertSame( array( 'amount' => 550, 'currency' => 'JPY' ), $result['total_money'] );
 	}
 
 	public function test_get_payment_accepts_response_without_customer_id(): void {
@@ -266,6 +272,8 @@ final class SquareApiClientTest extends TestCase {
 
 		$this->assertFalse( is_wp_error( $result ) );
 		$this->assertArrayNotHasKey( 'customer_id', $result );
+		$this->assertArrayNotHasKey( 'amount_money', $result );
+		$this->assertArrayNotHasKey( 'total_money', $result );
 	}
 
 	public function test_retrieve_order_uses_sandbox_get_and_returns_only_allowed_fields(): void {
@@ -279,7 +287,8 @@ final class SquareApiClientTest extends TestCase {
 				'created_at'     => '2026-11-05T01:02:03Z',
 				'updated_at'     => '2026-11-05T01:02:04Z',
 				'customer_id'    => 'private-customer-id',
-				'tenders'        => array( array( 'payment_id' => 'private-payment-id' ) ),
+				'tenders'        => array( array( 'payment_id' => 'payment-123' ), array( 'payment_id' => 'payment-456' ) ),
+				'total_money'    => array( 'amount' => 500, 'currency' => 'JPY' ),
 			),
 		);
 		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
@@ -294,6 +303,8 @@ final class SquareApiClientTest extends TestCase {
 				'version'      => 2,
 				'created_at'   => '2026-11-05T01:02:03Z',
 				'updated_at'   => '2026-11-05T01:02:04Z',
+				'tenders'      => array( array( 'payment_id' => 'payment-123' ), array( 'payment_id' => 'payment-456' ) ),
+				'total_money'  => array( 'amount' => 500, 'currency' => 'JPY' ),
 			),
 			$result
 		);
@@ -301,6 +312,7 @@ final class SquareApiClientTest extends TestCase {
 		$this->assertSame( 'GET', $this->request['args']['method'] );
 		$this->assertSame( 'Bearer test-sandbox-token', $this->request['args']['headers']['Authorization'] );
 		$this->assertSame( '2026-09-16', $this->request['args']['headers']['Square-Version'] );
+		$this->assertSame( array( 'amount' => 500, 'currency' => 'JPY' ), $result['total_money'] );
 	}
 
 	public function test_retrieve_order_accepts_response_without_reference_id(): void {
@@ -316,6 +328,57 @@ final class SquareApiClientTest extends TestCase {
 
 		$this->assertFalse( is_wp_error( $result ) );
 		$this->assertArrayNotHasKey( 'reference_id', $result );
+		$this->assertSame( array(), $result['tenders'] );
+		$this->assertArrayNotHasKey( 'total_money', $result );
+	}
+
+	public function test_order_preserves_missing_tender_payment_id_and_partial_money_without_defaults(): void {
+		$this->response_body = array(
+			'order' => array(
+				'id'          => 'order-123',
+				'location_id' => 'location-123',
+				'state'       => 'OPEN',
+				'tenders'     => array(
+					array( 'type' => 'CARD' ),
+					array( 'payment_id' => 'payment-456' ),
+				),
+				'total_money' => array( 'currency' => 'JPY' ),
+			),
+		);
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->retrieve_order( 'order-123' );
+
+		$this->assertFalse( is_wp_error( $result ) );
+		$this->assertSame( array( array( 'payment_id' => null ), array( 'payment_id' => 'payment-456' ) ), $result['tenders'] );
+		$this->assertSame( array( 'currency' => 'JPY' ), $result['total_money'] );
+	}
+
+	public function test_order_without_tenders_returns_empty_array(): void {
+		$this->response_body = array( 'order' => array( 'id' => 'order-123', 'location_id' => 'location-123', 'state' => 'OPEN' ) );
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->retrieve_order( 'order-123' );
+
+		$this->assertSame( array(), $result['tenders'] );
+	}
+
+	public function test_payment_preserves_partial_money_without_zero_or_currency_defaults(): void {
+		$this->response_body = array(
+			'payment' => array(
+				'id'           => 'payment-123',
+				'order_id'     => 'order-123',
+				'location_id'  => 'location-123',
+				'status'       => 'COMPLETED',
+				'created_at'   => '2026-11-05T01:02:03Z',
+				'amount_money' => array( 'amount' => 500 ),
+			),
+		);
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->get_payment( 'payment-123' );
+
+		$this->assertFalse( is_wp_error( $result ) );
+		$this->assertSame( array( 'amount' => 500 ), $result['amount_money'] );
+		$this->assertArrayNotHasKey( 'currency', $result['amount_money'] );
+		$this->assertArrayNotHasKey( 'total_money', $result );
 	}
 
 	public function test_payment_and_order_reject_invalid_ids_and_mismatched_response_ids(): void {
@@ -367,6 +430,7 @@ final class SquareApiClientTest extends TestCase {
 		$this->assertStringNotContainsString( 'private transport detail', $transport_error->get_error_message() );
 		$this->transport_error = null;
 
+		$this->response_status = 200;
 		$this->response_body = 'not-json';
 		$invalid_json = $client->retrieve_order( 'order-123' );
 		$this->assertTrue( is_wp_error( $invalid_json ) );

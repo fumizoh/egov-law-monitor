@@ -42,7 +42,10 @@ RUN mkdir -p "${WP_TEST_TOOLS_DIR}/phpunit-polyfills" \
         | tar -xz --strip-components=1 -C "${WP_CORE_DIR}" \
     && svn export --quiet \
         "https://develop.svn.wordpress.org/tags/${WORDPRESS_VERSION}/tests/phpunit" \
-        "${WP_TESTS_DIR}"
+        "${WP_TESTS_DIR}" \
+    && svn export --quiet --force --revision 60693 \
+        https://develop.svn.wordpress.org/trunk/tests/phpunit/includes/phpunit6/compat.php \
+        "${WP_TESTS_DIR}/includes/phpunit6/compat.php"
 
 WORKDIR /workspace
 

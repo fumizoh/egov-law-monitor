@@ -377,6 +377,15 @@ class Egov_Law_Monitor_Square_Api_Client {
 				return new WP_Error( 'square_payment_response_invalid', 'Squareの決済情報を確認できませんでした。' );
 			}
 		}
+		foreach ( array( 'amount_money', 'total_money' ) as $key ) {
+			if ( array_key_exists( $key, $resource ) ) {
+				$money = $this->normalize_optional_money( $resource[ $key ], 'square_payment_response_invalid' );
+				if ( is_wp_error( $money ) ) {
+					return $money;
+				}
+				$normalized[ $key ] = $money;
+			}
+		}
 
 		return $normalized;
 	}
@@ -414,6 +423,52 @@ class Egov_Law_Monitor_Square_Api_Client {
 		}
 		if ( array_key_exists( 'version', $normalized ) && ! is_int( $normalized['version'] ) ) {
 			return new WP_Error( 'square_order_response_invalid', 'Squareの注文情報を確認できませんでした。' );
+		}
+		$normalized['tenders'] = array();
+		if ( array_key_exists( 'tenders', $resource ) ) {
+			if ( ! is_array( $resource['tenders'] ) ) {
+				return new WP_Error( 'square_order_response_invalid', 'Squareの注文情報を確認できませんでした。' );
+			}
+			foreach ( $resource['tenders'] as $tender ) {
+				if ( ! is_array( $tender ) ) {
+					return new WP_Error( 'square_order_response_invalid', 'Squareの注文情報を確認できませんでした。' );
+				}
+				$payment_id = array_key_exists( 'payment_id', $tender ) ? $tender['payment_id'] : null;
+				if ( null !== $payment_id && ( ! is_string( $payment_id ) || '' === $payment_id ) ) {
+					return new WP_Error( 'square_order_response_invalid', 'Squareの注文情報を確認できませんでした。' );
+				}
+				$normalized['tenders'][] = array( 'payment_id' => $payment_id );
+			}
+		}
+		if ( array_key_exists( 'total_money', $resource ) ) {
+			$money = $this->normalize_optional_money( $resource['total_money'], 'square_order_response_invalid' );
+			if ( is_wp_error( $money ) ) {
+				return $money;
+			}
+			$normalized['total_money'] = $money;
+		}
+
+		return $normalized;
+	}
+
+	/** Normalize only the amount and currency fields of an optional Square Money object. */
+	private function normalize_optional_money( $money, $error_code ) {
+		if ( ! is_array( $money ) ) {
+			return new WP_Error( $error_code, 'Squareの金額情報を確認できませんでした。' );
+		}
+
+		$normalized = array();
+		if ( array_key_exists( 'amount', $money ) ) {
+			if ( ! is_int( $money['amount'] ) ) {
+				return new WP_Error( $error_code, 'Squareの金額情報を確認できませんでした。' );
+			}
+			$normalized['amount'] = $money['amount'];
+		}
+		if ( array_key_exists( 'currency', $money ) ) {
+			if ( ! is_string( $money['currency'] ) || ! preg_match( '/\\A[A-Z]{3}\\z/', $money['currency'] ) ) {
+				return new WP_Error( $error_code, 'Squareの金額情報を確認できませんでした。' );
+			}
+			$normalized['currency'] = $money['currency'];
 		}
 
 		return $normalized;
