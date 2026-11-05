@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 final class SquareWebhookTest extends TestCase {
 	private $config_filter;
 	private $service_filter;
+	private $repository;
 	private $config_filter_called = false;
 	private $event_ids = array();
 	private $merchant_id = 'webhook-test-merchant';
@@ -16,6 +17,7 @@ final class SquareWebhookTest extends TestCase {
 		global $wpdb;
 		$this->assertSame( 'egov_law_monitor_test', $wpdb->get_var( 'SELECT DATABASE()' ) );
 		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->repository = new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb );
 		$this->config_filter = function ( $config ) {
 			$this->config_filter_called = true;
 			return array(
@@ -181,6 +183,197 @@ final class SquareWebhookTest extends TestCase {
 		$this->assertSame( $before, (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$subscriptions} WHERE user_id = %d", $user_id ) ) );
 	}
 
+	public function test_repository_lists_received_due_retry_and_stale_processing_events_in_receive_order(): void {
+		$received_id = $this->insert_repository_event( 'received', array( 'received_at' => '2026-01-01 00:00:00' ) );
+		$due_retry_id = $this->insert_repository_event( 'retry', array( 'received_at' => '2026-01-02 00:00:00', 'next_retry_at' => '2026-01-01 00:00:00' ) );
+		$this->insert_repository_event( 'retry', array( 'received_at' => '2026-01-03 00:00:00', 'next_retry_at' => gmdate( 'Y-m-d H:i:s', time() + 3600 ) ) );
+		$stale_processing_id = $this->insert_repository_event( 'processing', array( 'received_at' => '2026-01-04 00:00:00', 'processing_started_at' => gmdate( 'Y-m-d H:i:s', time() - 600 ), 'claim_generation' => 2 ) );
+		$this->insert_repository_event( 'processing', array( 'received_at' => '2026-01-05 00:00:00', 'processing_started_at' => current_time( 'mysql', true ), 'claim_generation' => 1 ) );
+
+		$rows = $this->repository->get_events_ready_for_processing( 10, 300 );
+		$this->assertIsArray( $rows );
+		$this->assertSame( array( $received_id, $due_retry_id, $stale_processing_id ), array_map( 'intval', array_column( $rows, 'id' ) ) );
+		$this->assertSame( $received_id, (int) $rows[0]['id'] );
+		$this->assertInstanceOf( WP_Error::class, $this->repository->get_events_ready_for_processing( 0, 300 ) );
+	}
+
+	public function test_claim_is_exclusive_increments_generation_and_fences_old_worker(): void {
+		$event_id = $this->insert_repository_event( 'received' );
+		$first = $this->repository->claim_event( $event_id );
+		$this->assertIsArray( $first );
+		$this->assertSame( 'processing', $first['processing_status'] );
+		$this->assertSame( '1', (string) $first['claim_generation'] );
+		$this->assertFalse( $this->repository->claim_event( $event_id ) );
+
+		$old_generation = (int) $first['claim_generation'];
+		$table = $this->event_table();
+		$wpdb = $GLOBALS['wpdb'];
+		$wpdb->update( $table, array( 'processing_started_at' => gmdate( 'Y-m-d H:i:s', time() - 600 ) ), array( 'id' => $event_id ), array( '%s' ), array( '%d' ) );
+		$reclaimed = $this->repository->claim_event( $event_id );
+		$this->assertIsArray( $reclaimed );
+		$this->assertSame( '2', (string) $reclaimed['claim_generation'] );
+		$this->assertFalse( $this->repository->mark_event_processed( $event_id, $old_generation ) );
+		$this->assertTrue( $this->repository->mark_event_processed( $event_id, (int) $reclaimed['claim_generation'] ) );
+
+		$row = $this->get_repository_event( $event_id );
+		$this->assertSame( 'processed', $row['processing_status'] );
+		$this->assertNotNull( $row['processed_at'] );
+		$this->assertSame( $reclaimed['normalized_payload'], $row['normalized_payload'] );
+	}
+
+	public function test_claim_lost_does_not_modify_event(): void {
+		$event_id = $this->insert_repository_event( 'processed' );
+		$before = $this->get_repository_event( $event_id );
+		$this->assertFalse( $this->repository->claim_event( $event_id ) );
+		$this->assertSame( $before, $this->get_repository_event( $event_id ) );
+	}
+
+	public function test_independent_workers_can_claim_an_event_only_once(): void {
+		if ( ! function_exists( 'proc_open' ) ) {
+			$this->markTestSkipped( 'proc_open is required for the independent-connection claim test.' );
+		}
+
+		$event_id = $this->insert_repository_event( 'received' );
+		$barrier_id = bin2hex( random_bytes( 8 ) );
+		$barrier_dir = sys_get_temp_dir() . '/egov-square-webhook-' . $barrier_id;
+		$this->assertTrue( mkdir( $barrier_dir, 0700 ) );
+		$worker = __DIR__ . '/square-webhook-claim-worker.php';
+		$processes = array();
+		$results = array();
+		$diagnostics = array();
+
+		for ( $i = 1; $i <= 2; $i++ ) {
+			$descriptors = array(
+				0 => array( 'pipe', 'r' ),
+				1 => array( 'pipe', 'w' ),
+				2 => array( 'pipe', 'w' ),
+			);
+			$process = proc_open( array( PHP_BINARY, $worker, (string) $event_id, (string) $i, $barrier_id ), $descriptors, $pipes );
+			$this->assertIsResource( $process );
+			fclose( $pipes[0] );
+			stream_set_blocking( $pipes[1], false );
+			stream_set_blocking( $pipes[2], false );
+			$processes[] = array( 'process' => $process, 'pipes' => $pipes, 'number' => $i );
+		}
+
+		$deadline = microtime( true ) + 8;
+		while ( microtime( true ) < $deadline && ( ! file_exists( $barrier_dir . '/ready-1' ) || ! file_exists( $barrier_dir . '/ready-2' ) ) ) {
+			usleep( 10000 );
+		}
+		$both_ready = file_exists( $barrier_dir . '/ready-1' ) && file_exists( $barrier_dir . '/ready-2' );
+		touch( $barrier_dir . '/go' );
+
+		foreach ( $processes as $index => $worker_process ) {
+			$stdout = '';
+			$stderr = '';
+			$observed_exit_code = null;
+			$worker_deadline = microtime( true ) + 8;
+			do {
+				$stdout .= stream_get_contents( $worker_process['pipes'][1] );
+				$stderr .= stream_get_contents( $worker_process['pipes'][2] );
+				$process_status = proc_get_status( $worker_process['process'] );
+				if ( ! $process_status['running'] ) {
+					$observed_exit_code = (int) $process_status['exitcode'];
+					break;
+				}
+				usleep( 10000 );
+			} while ( microtime( true ) < $worker_deadline );
+			if ( isset( $process_status['running'] ) && $process_status['running'] ) {
+				proc_terminate( $worker_process['process'] );
+			}
+			$stdout .= stream_get_contents( $worker_process['pipes'][1] );
+			$stderr .= stream_get_contents( $worker_process['pipes'][2] );
+			fclose( $worker_process['pipes'][1] );
+			fclose( $worker_process['pipes'][2] );
+			$exit_code = proc_close( $worker_process['process'] );
+			if ( -1 === $exit_code && null !== $observed_exit_code ) {
+				$exit_code = $observed_exit_code;
+			}
+			$results[] = array( 'stdout' => $stdout, 'stderr' => $stderr, 'exit_code' => $exit_code );
+			$diagnostics[] = sprintf(
+				'worker=%d ready=%s exit=%d stdout=%s stderr=%s',
+				$worker_process['number'],
+				file_exists( $barrier_dir . '/ready-' . $worker_process['number'] ) ? 'yes' : 'no',
+				$exit_code,
+				trim( $stdout ),
+				trim( $stderr )
+			);
+		}
+
+		foreach ( glob( $barrier_dir . '/*' ) as $barrier_file ) {
+			unlink( $barrier_file );
+		}
+		rmdir( $barrier_dir );
+
+		$this->assertTrue( $both_ready, "Both independent workers must reach the claim barrier.\n" . implode( "\n", $diagnostics ) );
+		$this->assertSame( array( 0, 0 ), array_column( $results, 'exit_code' ), implode( "\n", $diagnostics ) );
+		$worker_results = array_map( static function ( $result ) { return json_decode( trim( $result['stdout'] ), true ); }, $results );
+		$claimed_count = count( array_filter( $worker_results, static function ( $result ) { return isset( $result['claimed'] ) && true === $result['claimed']; } ) );
+		$lost_count = count( array_filter( $worker_results, static function ( $result ) { return isset( $result['claimed'] ) && false === $result['claimed']; } ) );
+		$this->assertSame( 1, $claimed_count, implode( "\n", $diagnostics ) );
+		$this->assertSame( 1, $lost_count, implode( "\n", $diagnostics ) );
+		$this->assertSame( '1', (string) $this->get_repository_event( $event_id )['claim_generation'] );
+	}
+
+	public function test_retry_uses_exponential_backoff_and_preserves_payload(): void {
+		$payload = wp_json_encode( array( 'id' => 'retry-payload' ) );
+		$event_id = $this->insert_repository_event( 'received', array( 'normalized_payload' => $payload ) );
+		$claim = $this->repository->claim_event( $event_id );
+		$this->assertIsArray( $claim );
+		$result = $this->repository->mark_event_retry( $event_id, (int) $claim['claim_generation'], 'square_api_unavailable' );
+		$this->assertSame( 'retry', $result['status'] );
+		$this->assertSame( 1, $result['retry_count'] );
+		$this->assertGreaterThanOrEqual( 58, strtotime( $result['next_retry_at'] ) - time() );
+		$this->assertLessThanOrEqual( 60, strtotime( $result['next_retry_at'] ) - time() );
+		$row = $this->get_repository_event( $event_id );
+		$this->assertSame( $payload, $row['normalized_payload'] );
+		$this->assertSame( 'square_api_unavailable', $row['last_error_code'] );
+
+		$wpdb = $GLOBALS['wpdb'];
+		$wpdb->update( $this->event_table(), array( 'next_retry_at' => gmdate( 'Y-m-d H:i:s', time() - 1 ) ), array( 'id' => $event_id ), array( '%s' ), array( '%d' ) );
+		$second_claim = $this->repository->claim_event( $event_id );
+		$this->assertSame( '2', (string) $second_claim['claim_generation'] );
+		$second_result = $this->repository->mark_event_retry( $event_id, (int) $second_claim['claim_generation'], 'temporary_failure' );
+		$this->assertSame( 2, $second_result['retry_count'] );
+		$this->assertGreaterThanOrEqual( 118, strtotime( $second_result['next_retry_at'] ) - time() );
+		$this->assertLessThanOrEqual( 120, strtotime( $second_result['next_retry_at'] ) - time() );
+
+		for ( $retry_count = 3; $retry_count <= 4; $retry_count++ ) {
+			$wpdb->update( $this->event_table(), array( 'next_retry_at' => gmdate( 'Y-m-d H:i:s', time() - 1 ) ), array( 'id' => $event_id ), array( '%s' ), array( '%d' ) );
+			$next_claim = $this->repository->claim_event( $event_id );
+			$next_result = $this->repository->mark_event_retry( $event_id, (int) $next_claim['claim_generation'], 'temporary_failure' );
+			$expected_delay = 60 * ( 2 ** ( $retry_count - 1 ) );
+			$actual_delay = strtotime( $next_result['next_retry_at'] ) - time();
+			$this->assertSame( $retry_count, $next_result['retry_count'] );
+			$this->assertGreaterThanOrEqual( $expected_delay - 2, $actual_delay );
+			$this->assertLessThanOrEqual( $expected_delay, $actual_delay );
+		}
+	}
+
+	public function test_retry_limit_and_manual_reconciliation_transition(): void {
+		$event_id = $this->insert_repository_event( 'received', array( 'retry_count' => 4 ) );
+		$claim = $this->repository->claim_event( $event_id );
+		$last_retry = $this->repository->mark_event_retry( $event_id, (int) $claim['claim_generation'], 'temporary_failure' );
+		$this->assertSame( 'retry', $last_retry['status'] );
+		$this->assertSame( 5, $last_retry['retry_count'] );
+		$this->assertGreaterThanOrEqual( 958, strtotime( $last_retry['next_retry_at'] ) - time() );
+		$this->assertLessThanOrEqual( 960, strtotime( $last_retry['next_retry_at'] ) - time() );
+
+		$wpdb = $GLOBALS['wpdb'];
+		$wpdb->update( $this->event_table(), array( 'next_retry_at' => gmdate( 'Y-m-d H:i:s', time() - 1 ) ), array( 'id' => $event_id ), array( '%s' ), array( '%d' ) );
+		$claim_after_limit = $this->repository->claim_event( $event_id );
+		$exhausted = $this->repository->mark_event_retry( $event_id, (int) $claim_after_limit['claim_generation'], 'still_failing' );
+		$this->assertSame( 'reconciliation_required', $exhausted['status'] );
+		$this->assertSame( 5, $exhausted['retry_count'] );
+		$this->assertNull( $exhausted['next_retry_at'] );
+		$this->assertSame( 'reconciliation_required', $this->get_repository_event( $event_id )['processing_status'] );
+
+		$other_event_id = $this->insert_repository_event( 'received' );
+		$other_claim = $this->repository->claim_event( $other_event_id );
+		$this->assertTrue( $this->repository->mark_event_reconciliation_required( $other_event_id, (int) $other_claim['claim_generation'], 'manual_review_needed' ) );
+		$this->assertSame( 'reconciliation_required', $this->get_repository_event( $other_event_id )['processing_status'] );
+	}
+
 	private function dispatch( $body, $signature ) {
 		$request = new WP_REST_Request( 'POST', '/egov-law-monitor/v1/square-webhook' );
 		$request->set_header( 'Content-Type', 'application/json' );
@@ -229,5 +422,47 @@ final class SquareWebhookTest extends TestCase {
 		global $wpdb;
 		$table = $wpdb->prefix . 'egov_law_square_events';
 		return (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE environment = %s AND merchant_id = %s AND square_event_id = %s", $environment, null === $merchant_id ? $this->merchant_id : $merchant_id, $event_id ) );
+	}
+
+	private function insert_repository_event( $status, $overrides = array() ) {
+		global $wpdb;
+		$event_uuid = wp_generate_uuid4();
+		$this->event_ids[] = $event_uuid;
+		$now = current_time( 'mysql', true );
+		$data = array_merge(
+			array(
+				'environment' => 'sandbox',
+				'merchant_id' => $this->merchant_id,
+				'square_event_id' => $event_uuid,
+				'event_type' => 'subscription.created',
+				'received_at' => $now,
+				'processing_status' => $status,
+				'retry_count' => 0,
+				'next_retry_at' => null,
+				'processing_started_at' => null,
+				'claim_generation' => 0,
+				'processed_at' => null,
+				'payload_hash' => hash( 'sha256', $event_uuid ),
+				'normalized_payload' => wp_json_encode( array( 'event_id' => $event_uuid, 'type' => 'subscription.created' ) ),
+				'last_error_code' => '',
+				'last_error_message' => null,
+				'created_at' => $now,
+				'updated_at' => $now,
+			),
+			$overrides
+		);
+		$this->assertSame( 1, $wpdb->insert( $this->event_table(), $data ) );
+		return (int) $wpdb->insert_id;
+	}
+
+	private function get_repository_event( $event_row_id ) {
+		global $wpdb;
+		$table = $this->event_table();
+		return $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE id = %d", $event_row_id ), ARRAY_A );
+	}
+
+	private function event_table() {
+		global $wpdb;
+		return $wpdb->prefix . 'egov_law_square_events';
 	}
 }

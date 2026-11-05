@@ -406,10 +406,11 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				event_type VARCHAR(100) NOT NULL,
 				square_created_at DATETIME NULL DEFAULT NULL,
 				received_at DATETIME NOT NULL,
-				processing_status VARCHAR(20) NOT NULL DEFAULT 'received',
+				processing_status VARCHAR(32) NOT NULL DEFAULT 'received',
 				retry_count INT UNSIGNED NOT NULL DEFAULT 0,
 				next_retry_at DATETIME NULL DEFAULT NULL,
 				processing_started_at DATETIME NULL DEFAULT NULL,
+				claim_generation BIGINT UNSIGNED NOT NULL DEFAULT 0,
 				processed_at DATETIME NULL DEFAULT NULL,
 				payload_hash CHAR(64) NOT NULL DEFAULT '',
 				normalized_payload LONGTEXT NULL,
@@ -425,7 +426,7 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 			'columns' => array(
 				'id', 'environment', 'merchant_id', 'square_event_id', 'event_type',
 				'square_created_at', 'received_at', 'processing_status', 'retry_count',
-				'next_retry_at', 'processing_started_at', 'processed_at', 'payload_hash',
+				'next_retry_at', 'processing_started_at', 'claim_generation', 'processed_at', 'payload_hash',
 				'normalized_payload', 'last_error_code', 'last_error_message', 'created_at', 'updated_at',
 			),
 			'indexes' => array(
@@ -688,7 +689,7 @@ function egov_law_monitor_maybe_upgrade_subscription_schema() {
 	global $wpdb;
 
 	$schema_version_option = 'egov_law_monitor_square_schema_version';
-	$current_version       = 3;
+	$current_version       = 4;
 	$stored_version        = (int) get_option( $schema_version_option, 0 );
 
 	if ( $stored_version > $current_version ) {

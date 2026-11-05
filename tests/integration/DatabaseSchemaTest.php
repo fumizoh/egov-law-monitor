@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 final class DatabaseSchemaTest extends TestCase {
 	private $tables = array();
 	private const SCHEMA_VERSION_OPTION = 'egov_law_monitor_square_schema_version';
-	private const CURRENT_SCHEMA_VERSION = 3;
+	private const CURRENT_SCHEMA_VERSION = 4;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -176,6 +176,53 @@ final class DatabaseSchemaTest extends TestCase {
 		$this->assertIsArray( $row );
 		$this->assertSame( 'creating', $row['status'] );
 		$this->assertSame( '', $row['last_error_code'] );
+	}
+
+	public function test_version_three_migration_adds_webhook_claim_generation_and_preserves_events(): void {
+		global $wpdb;
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+
+		$table = $wpdb->prefix . 'egov_law_square_events';
+		$event_id = wp_generate_uuid4();
+		$payload = wp_json_encode( array( 'event_id' => $event_id, 'type' => 'subscription.created' ) );
+		$this->assertSame(
+			1,
+			$wpdb->insert(
+				$table,
+				array(
+					'environment' => 'sandbox',
+					'merchant_id' => 'schema-migration-merchant',
+					'square_event_id' => $event_id,
+					'event_type' => 'subscription.created',
+					'received_at' => '2026-05-01 00:00:00',
+					'processing_status' => 'received',
+					'payload_hash' => hash( 'sha256', $payload ),
+					'normalized_payload' => $payload,
+					'created_at' => '2026-05-01 00:00:00',
+					'updated_at' => '2026-05-01 00:00:00',
+				)
+			)
+		);
+
+		$this->assertNotFalse( $wpdb->query( "ALTER TABLE `{$table}` MODIFY processing_status VARCHAR(20) NOT NULL DEFAULT 'received', DROP COLUMN claim_generation" ) );
+		update_option( self::SCHEMA_VERSION_OPTION, 3, false );
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+		$column = $wpdb->get_row( $wpdb->prepare( "SHOW COLUMNS FROM `{$table}` LIKE %s", 'claim_generation' ), ARRAY_A );
+		$this->assertIsArray( $column );
+		$this->assertSame( 'bigint unsigned', strtolower( $column['Type'] ) );
+		$this->assertSame( '0', (string) $column['Default'] );
+		$this->assertSame( 'varchar(32)', strtolower( $wpdb->get_var( $wpdb->prepare( "SELECT COLUMN_TYPE FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'processing_status'", $table ) ) ) );
+
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT event_type, processing_status, claim_generation, normalized_payload FROM {$table} WHERE square_event_id = %s", $event_id ), ARRAY_A );
+		$this->assertSame( 'subscription.created', $row['event_type'] );
+		$this->assertSame( 'received', $row['processing_status'] );
+		$this->assertSame( '0', (string) $row['claim_generation'] );
+		$this->assertSame( $payload, $row['normalized_payload'] );
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->assertSame( $payload, $wpdb->get_var( $wpdb->prepare( "SELECT normalized_payload FROM {$table} WHERE square_event_id = %s", $event_id ) ) );
 	}
 
 	public function test_subscription_migration_recovers_after_a_table_was_skipped(): void {
