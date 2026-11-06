@@ -471,6 +471,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/entitlement-service.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-usage-api.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-checkout.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/square-billing-period-candidate.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-admin-review.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-subscription-sync.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-recurring-payment-read-service.php';
