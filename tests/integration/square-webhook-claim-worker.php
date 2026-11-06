@@ -41,7 +41,9 @@ require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-webhook.
 $event_row_id = isset( $argv[1] ) ? $argv[1] : '';
 $worker_number = isset( $argv[2] ) ? $argv[2] : '';
 $barrier_id = isset( $argv[3] ) ? $argv[3] : '';
-if ( ! preg_match( '/\A[1-9][0-9]*\z/', $event_row_id ) || ! in_array( $worker_number, array( '1', '2' ), true ) || ! preg_match( '/\A[a-f0-9]{16}\z/', $barrier_id ) ) {
+$environment = isset( $argv[4] ) ? $argv[4] : '';
+$merchant_id = isset( $argv[5] ) ? $argv[5] : '';
+if ( ! preg_match( '/\A[1-9][0-9]*\z/', $event_row_id ) || ! in_array( $worker_number, array( '1', '2' ), true ) || ! preg_match( '/\A[a-f0-9]{16}\z/', $barrier_id ) || ! in_array( $environment, array( 'sandbox', 'production' ), true ) || ! preg_match( '/\A[A-Za-z0-9._:-]{1,64}\z/', $merchant_id ) ) {
 	fwrite( STDERR, "Refusing worker: invalid synchronization identifier.\n" );
 	exit( 1 );
 }
@@ -61,7 +63,7 @@ if ( ! file_exists( $barrier_dir . '/go' ) ) {
 }
 
 $worker_stage = 'event claim';
-$result = ( new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb ) )->claim_event( (int) $event_row_id );
+$result = ( new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb ) )->claim_event( (int) $event_row_id, $environment, $merchant_id );
 if ( is_wp_error( $result ) ) {
 	fwrite( STDOUT, wp_json_encode( array( 'error' => $result->get_error_code() ) ) . "\n" );
 	exit( 2 );

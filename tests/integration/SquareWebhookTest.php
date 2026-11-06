@@ -8,6 +8,8 @@ final class SquareWebhookTest extends TestCase {
 	private $repository;
 	private $config_filter_called = false;
 	private $event_ids = array();
+	private $event_scopes = array();
+	private $environment = 'sandbox';
 	private $merchant_id = 'webhook-test-merchant';
 	private $signature_key = 'webhook-test-signature-key';
 	private $notification_url = 'https://staging.example.test/wp-json/egov-law-monitor/v1/square-webhook';
@@ -21,7 +23,7 @@ final class SquareWebhookTest extends TestCase {
 		$this->config_filter = function ( $config ) {
 			$this->config_filter_called = true;
 			return array(
-				'environment'      => 'sandbox',
+				'environment'      => $this->environment,
 				'signature_key'    => $this->signature_key,
 				'notification_url' => $this->notification_url,
 				'merchant_id'      => $this->merchant_id,
@@ -42,7 +44,8 @@ final class SquareWebhookTest extends TestCase {
 		if ( DB_NAME === 'egov_law_monitor_test' && DB_HOST === 'wp-test-db' && DB_USER === 'egov_test' ) {
 			$table = $wpdb->prefix . 'egov_law_square_events';
 			foreach ( $this->event_ids as $event_id ) {
-				$wpdb->delete( $table, array( 'environment' => 'sandbox', 'merchant_id' => $this->merchant_id, 'square_event_id' => $event_id ), array( '%s', '%s', '%s' ) );
+				$scope = isset( $this->event_scopes[ $event_id ] ) ? $this->event_scopes[ $event_id ] : array( 'sandbox', $this->merchant_id );
+				$wpdb->delete( $table, array( 'environment' => $scope[0], 'merchant_id' => $scope[1], 'square_event_id' => $event_id ), array( '%s', '%s', '%s' ) );
 			}
 		}
 		wp_set_current_user( 0 );
@@ -60,6 +63,57 @@ final class SquareWebhookTest extends TestCase {
 		$this->assertSame( $this->merchant_id, $row['merchant_id'] );
 		$this->assertSame( 'payment.updated', $row['event_type'] );
 		$this->assertSame( 'received', $row['processing_status'] );
+		$this->assertSame( $body, $row['normalized_payload'] );
+	}
+
+	public function test_production_webhook_is_rejected_without_explicit_activation(): void {
+		$this->environment = 'production';
+		$body = $this->event_body();
+		$response = $this->dispatch( $body, $this->sign( $body ) );
+		$this->assert_webhook_status( 403, $response );
+		$this->assertSame( 0, $this->count_event( end( $this->event_ids ), 'production' ) );
+	}
+
+	/**
+	 * Production activation is constant-scoped, so exercise the enabled path in
+	 * a separate PHP process without changing the normal test process setting.
+	 *
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
+	public function test_production_webhook_accepts_and_persists_with_strict_true_activation(): void {
+		$required_constants = array(
+			'EGOV_LAW_MONITOR_SQUARE_PRODUCTION_WEBHOOKS_ENABLED',
+			'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT',
+			'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_PRODUCTION',
+			'EGOV_LAW_MONITOR_SQUARE_MERCHANT_ID_PRODUCTION',
+			'EGOV_LAW_MONITOR_SQUARE_LOCATION_ID_PRODUCTION',
+			'EGOV_LAW_MONITOR_SQUARE_CATALOG_ITEM_VARIATION_ID_PRODUCTION',
+			'EGOV_LAW_MONITOR_SQUARE_SUBSCRIPTION_PLAN_VARIATION_ID_PRODUCTION',
+		);
+		foreach ( $required_constants as $constant_name ) {
+			if ( defined( $constant_name ) ) {
+				$this->markTestSkipped( 'The separate test process inherited a Production configuration constant.' );
+			}
+		}
+		define( 'EGOV_LAW_MONITOR_SQUARE_PRODUCTION_WEBHOOKS_ENABLED', true );
+		define( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT', 'production' );
+		define( 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_PRODUCTION', 'mock-production-token' );
+		define( 'EGOV_LAW_MONITOR_SQUARE_MERCHANT_ID_PRODUCTION', $this->merchant_id );
+		define( 'EGOV_LAW_MONITOR_SQUARE_LOCATION_ID_PRODUCTION', 'mock-production-location' );
+		define( 'EGOV_LAW_MONITOR_SQUARE_CATALOG_ITEM_VARIATION_ID_PRODUCTION', 'mock-production-item' );
+		define( 'EGOV_LAW_MONITOR_SQUARE_SUBSCRIPTION_PLAN_VARIATION_ID_PRODUCTION', 'mock-production-plan' );
+		$this->assertTrue( egov_law_monitor_square_webhook_production_settings_ready( array( 'merchant_id' => $this->merchant_id ) ) );
+		$this->environment = 'production';
+		$body = $this->event_body();
+		$response = $this->dispatch( $body, $this->sign( $body ) );
+		$this->assert_webhook_status( 200, $response );
+		$duplicate_response = $this->dispatch( $body, $this->sign( $body ) );
+		$this->assert_webhook_status( 200, $duplicate_response );
+		$this->assertSame( array( 'received' => true, 'duplicate' => true ), $duplicate_response->get_data() );
+		$row = $this->get_event_by_scope( end( $this->event_ids ), 'production', $this->merchant_id );
+		$this->assertSame( 'production', $row['environment'] );
+		$this->assertSame( $this->merchant_id, $row['merchant_id'] );
 		$this->assertSame( $body, $row['normalized_payload'] );
 	}
 
@@ -126,7 +180,7 @@ final class SquareWebhookTest extends TestCase {
 			$database = new class() {
 				public $prefix = 'wptests_';
 				public $last_error = '';
-				public function insert( $table, $data, $formats ) {
+				public function query( $query ) {
 					$this->last_error = 'private database detail';
 					return false;
 				}
@@ -144,6 +198,7 @@ final class SquareWebhookTest extends TestCase {
 		$body = $this->event_body();
 		$response = $this->dispatch( $body, $this->sign( $body ) );
 		$this->assert_webhook_status( 500, $response );
+		$this->assertSame( 'square_webhook_rejected', $response->get_data()['code'] );
 		$this->assertStringNotContainsString( 'private database detail', wp_json_encode( $response->get_data() ) );
 	}
 
@@ -190,26 +245,40 @@ final class SquareWebhookTest extends TestCase {
 		$stale_processing_id = $this->insert_repository_event( 'processing', array( 'received_at' => '2026-01-04 00:00:00', 'processing_started_at' => gmdate( 'Y-m-d H:i:s', time() - 600 ), 'claim_generation' => 2 ) );
 		$this->insert_repository_event( 'processing', array( 'received_at' => '2026-01-05 00:00:00', 'processing_started_at' => current_time( 'mysql', true ), 'claim_generation' => 1 ) );
 
-		$rows = $this->repository->get_events_ready_for_processing( 10, 300 );
+		$rows = $this->repository->get_events_ready_for_processing( 'sandbox', $this->merchant_id, 10, 300 );
 		$this->assertIsArray( $rows );
 		$this->assertSame( array( $received_id, $due_retry_id, $stale_processing_id ), array_map( 'intval', array_column( $rows, 'id' ) ) );
 		$this->assertSame( $received_id, (int) $rows[0]['id'] );
-		$this->assertInstanceOf( WP_Error::class, $this->repository->get_events_ready_for_processing( 0, 300 ) );
+		$this->assertInstanceOf( WP_Error::class, $this->repository->get_events_ready_for_processing( 'sandbox', $this->merchant_id, 0, 300 ) );
+	}
+
+	public function test_repository_scope_filters_environment_and_merchant_for_list_and_claim(): void {
+		$sandbox_match = $this->insert_repository_event( 'received' );
+		$production = $this->insert_repository_event( 'received', array( 'environment' => 'production', 'merchant_id' => 'production-merchant' ) );
+		$other_merchant = $this->insert_repository_event( 'received', array( 'merchant_id' => 'other-merchant' ) );
+
+		$rows = $this->repository->get_events_ready_for_processing( 'sandbox', $this->merchant_id, 20, 300 );
+		$this->assertSame( array( $sandbox_match ), array_map( 'intval', array_column( $rows, 'id' ) ) );
+		$this->assertFalse( $this->repository->claim_event( $production, 'sandbox', $this->merchant_id ) );
+		$this->assertFalse( $this->repository->claim_event( $other_merchant, 'sandbox', $this->merchant_id ) );
+		$this->assertSame( array(), $this->repository->get_events_ready_for_processing( 'production', 'different-merchant', 20, 300 ) );
+		$this->assertSame( 'received', $this->get_repository_event( $production )['processing_status'] );
+		$this->assertSame( 'received', $this->get_repository_event( $other_merchant )['processing_status'] );
 	}
 
 	public function test_claim_is_exclusive_increments_generation_and_fences_old_worker(): void {
 		$event_id = $this->insert_repository_event( 'received' );
-		$first = $this->repository->claim_event( $event_id );
+		$first = $this->repository->claim_event( $event_id, 'sandbox', $this->merchant_id );
 		$this->assertIsArray( $first );
 		$this->assertSame( 'processing', $first['processing_status'] );
 		$this->assertSame( '1', (string) $first['claim_generation'] );
-		$this->assertFalse( $this->repository->claim_event( $event_id ) );
+		$this->assertFalse( $this->repository->claim_event( $event_id, 'sandbox', $this->merchant_id ) );
 
 		$old_generation = (int) $first['claim_generation'];
 		$table = $this->event_table();
 		$wpdb = $GLOBALS['wpdb'];
 		$wpdb->update( $table, array( 'processing_started_at' => gmdate( 'Y-m-d H:i:s', time() - 600 ) ), array( 'id' => $event_id ), array( '%s' ), array( '%d' ) );
-		$reclaimed = $this->repository->claim_event( $event_id );
+		$reclaimed = $this->repository->claim_event( $event_id, 'sandbox', $this->merchant_id );
 		$this->assertIsArray( $reclaimed );
 		$this->assertSame( '2', (string) $reclaimed['claim_generation'] );
 		$this->assertFalse( $this->repository->mark_event_processed( $event_id, $old_generation ) );
@@ -224,7 +293,7 @@ final class SquareWebhookTest extends TestCase {
 	public function test_claim_lost_does_not_modify_event(): void {
 		$event_id = $this->insert_repository_event( 'processed' );
 		$before = $this->get_repository_event( $event_id );
-		$this->assertFalse( $this->repository->claim_event( $event_id ) );
+		$this->assertFalse( $this->repository->claim_event( $event_id, 'sandbox', $this->merchant_id ) );
 		$this->assertSame( $before, $this->get_repository_event( $event_id ) );
 	}
 
@@ -248,7 +317,7 @@ final class SquareWebhookTest extends TestCase {
 				1 => array( 'pipe', 'w' ),
 				2 => array( 'pipe', 'w' ),
 			);
-			$process = proc_open( array( PHP_BINARY, $worker, (string) $event_id, (string) $i, $barrier_id ), $descriptors, $pipes );
+			$process = proc_open( array( PHP_BINARY, $worker, (string) $event_id, (string) $i, $barrier_id, 'sandbox', $this->merchant_id ), $descriptors, $pipes );
 			$this->assertIsResource( $process );
 			fclose( $pipes[0] );
 			stream_set_blocking( $pipes[1], false );
@@ -318,7 +387,7 @@ final class SquareWebhookTest extends TestCase {
 	public function test_retry_uses_exponential_backoff_and_preserves_payload(): void {
 		$payload = wp_json_encode( array( 'id' => 'retry-payload' ) );
 		$event_id = $this->insert_repository_event( 'received', array( 'normalized_payload' => $payload ) );
-		$claim = $this->repository->claim_event( $event_id );
+		$claim = $this->repository->claim_event( $event_id, 'sandbox', $this->merchant_id );
 		$this->assertIsArray( $claim );
 		$result = $this->repository->mark_event_retry( $event_id, (int) $claim['claim_generation'], 'square_api_unavailable' );
 		$this->assertSame( 'retry', $result['status'] );
@@ -331,7 +400,7 @@ final class SquareWebhookTest extends TestCase {
 
 		$wpdb = $GLOBALS['wpdb'];
 		$wpdb->update( $this->event_table(), array( 'next_retry_at' => gmdate( 'Y-m-d H:i:s', time() - 1 ) ), array( 'id' => $event_id ), array( '%s' ), array( '%d' ) );
-		$second_claim = $this->repository->claim_event( $event_id );
+		$second_claim = $this->repository->claim_event( $event_id, 'sandbox', $this->merchant_id );
 		$this->assertSame( '2', (string) $second_claim['claim_generation'] );
 		$second_result = $this->repository->mark_event_retry( $event_id, (int) $second_claim['claim_generation'], 'temporary_failure' );
 		$this->assertSame( 2, $second_result['retry_count'] );
@@ -340,7 +409,7 @@ final class SquareWebhookTest extends TestCase {
 
 		for ( $retry_count = 3; $retry_count <= 4; $retry_count++ ) {
 			$wpdb->update( $this->event_table(), array( 'next_retry_at' => gmdate( 'Y-m-d H:i:s', time() - 1 ) ), array( 'id' => $event_id ), array( '%s' ), array( '%d' ) );
-			$next_claim = $this->repository->claim_event( $event_id );
+			$next_claim = $this->repository->claim_event( $event_id, 'sandbox', $this->merchant_id );
 			$next_result = $this->repository->mark_event_retry( $event_id, (int) $next_claim['claim_generation'], 'temporary_failure' );
 			$expected_delay = 60 * ( 2 ** ( $retry_count - 1 ) );
 			$actual_delay = strtotime( $next_result['next_retry_at'] ) - time();
@@ -352,7 +421,7 @@ final class SquareWebhookTest extends TestCase {
 
 	public function test_retry_limit_and_manual_reconciliation_transition(): void {
 		$event_id = $this->insert_repository_event( 'received', array( 'retry_count' => 4 ) );
-		$claim = $this->repository->claim_event( $event_id );
+		$claim = $this->repository->claim_event( $event_id, 'sandbox', $this->merchant_id );
 		$last_retry = $this->repository->mark_event_retry( $event_id, (int) $claim['claim_generation'], 'temporary_failure' );
 		$this->assertSame( 'retry', $last_retry['status'] );
 		$this->assertSame( 5, $last_retry['retry_count'] );
@@ -361,7 +430,7 @@ final class SquareWebhookTest extends TestCase {
 
 		$wpdb = $GLOBALS['wpdb'];
 		$wpdb->update( $this->event_table(), array( 'next_retry_at' => gmdate( 'Y-m-d H:i:s', time() - 1 ) ), array( 'id' => $event_id ), array( '%s' ), array( '%d' ) );
-		$claim_after_limit = $this->repository->claim_event( $event_id );
+		$claim_after_limit = $this->repository->claim_event( $event_id, 'sandbox', $this->merchant_id );
 		$exhausted = $this->repository->mark_event_retry( $event_id, (int) $claim_after_limit['claim_generation'], 'still_failing' );
 		$this->assertSame( 'reconciliation_required', $exhausted['status'] );
 		$this->assertSame( 5, $exhausted['retry_count'] );
@@ -369,7 +438,7 @@ final class SquareWebhookTest extends TestCase {
 		$this->assertSame( 'reconciliation_required', $this->get_repository_event( $event_id )['processing_status'] );
 
 		$other_event_id = $this->insert_repository_event( 'received' );
-		$other_claim = $this->repository->claim_event( $other_event_id );
+		$other_claim = $this->repository->claim_event( $other_event_id, 'sandbox', $this->merchant_id );
 		$this->assertTrue( $this->repository->mark_event_reconciliation_required( $other_event_id, (int) $other_claim['claim_generation'], 'manual_review_needed' ) );
 		$this->assertSame( 'reconciliation_required', $this->get_repository_event( $other_event_id )['processing_status'] );
 	}
@@ -397,6 +466,7 @@ final class SquareWebhookTest extends TestCase {
 	private function event_body() {
 		$event_id = wp_generate_uuid4();
 		$this->event_ids[] = $event_id;
+		$this->event_scopes[ $event_id ] = array( $this->environment, $this->merchant_id );
 		return wp_json_encode(
 			array(
 				'event_id'    => $event_id,
@@ -428,6 +498,9 @@ final class SquareWebhookTest extends TestCase {
 		global $wpdb;
 		$event_uuid = wp_generate_uuid4();
 		$this->event_ids[] = $event_uuid;
+		$environment = isset( $overrides['environment'] ) ? $overrides['environment'] : 'sandbox';
+		$merchant_id = isset( $overrides['merchant_id'] ) ? $overrides['merchant_id'] : $this->merchant_id;
+		$this->event_scopes[ $event_uuid ] = array( $environment, $merchant_id );
 		$now = current_time( 'mysql', true );
 		$data = array_merge(
 			array(
@@ -459,6 +532,12 @@ final class SquareWebhookTest extends TestCase {
 		global $wpdb;
 		$table = $this->event_table();
 		return $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE id = %d", $event_row_id ), ARRAY_A );
+	}
+
+	private function get_event_by_scope( $event_id, $environment, $merchant_id ) {
+		global $wpdb;
+		$table = $wpdb->prefix . 'egov_law_square_events';
+		return $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE environment = %s AND merchant_id = %s AND square_event_id = %s", $environment, $merchant_id, $event_id ), ARRAY_A );
 	}
 
 	private function event_table() {

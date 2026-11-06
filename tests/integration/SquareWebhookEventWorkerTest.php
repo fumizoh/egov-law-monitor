@@ -7,10 +7,10 @@ final class Egov_Law_Monitor_Test_Webhook_Subscription_Matcher extends Egov_Law_
 	public $calls = array();
 	public $callback;
 
-	public function __construct( $callback = null ) {
+	public function __construct( $callback = null, $environment = 'sandbox', $merchant_id = 'worker-merchant' ) {
 		global $wpdb;
 		$client = new Egov_Law_Monitor_Square_Api_Client( array(
-			'environment' => 'sandbox', 'access_token' => 'mock-token', 'merchant_id' => 'worker-merchant',
+			'environment' => $environment, 'access_token' => 'mock-token', 'merchant_id' => $merchant_id,
 			'location_id' => 'worker-location', 'catalog_item_variation_id' => 'worker-item',
 			'subscription_plan_variation_id' => 'worker-plan',
 		) );
@@ -33,10 +33,13 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 	private $client;
 	private $worker;
 	private $event_ids = array();
+	private $event_scopes = array();
 	private $http_filter;
 	private $http_calls = array();
 	private $invoice_response;
 	private $http_status = 200;
+	private $environment = 'sandbox';
+	private $merchant_id = 'worker-merchant';
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -45,7 +48,7 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
 		$this->repository = new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb );
 		$this->client = new Egov_Law_Monitor_Square_Api_Client( array(
-			'environment' => 'sandbox', 'access_token' => 'mock-token', 'merchant_id' => 'worker-merchant',
+			'environment' => $this->environment, 'access_token' => 'mock-token', 'merchant_id' => $this->merchant_id,
 			'location_id' => 'worker-location', 'catalog_item_variation_id' => 'worker-item',
 			'subscription_plan_variation_id' => 'worker-plan',
 		) );
@@ -71,7 +74,8 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 		if ( DB_NAME === 'egov_law_monitor_test' && DB_HOST === 'wp-test-db' && DB_USER === 'egov_test' ) {
 			$table = $wpdb->prefix . 'egov_law_square_events';
 			foreach ( $this->event_ids as $event_id ) {
-				$wpdb->delete( $table, array( 'environment' => 'sandbox', 'merchant_id' => 'worker-merchant', 'square_event_id' => $event_id ), array( '%s', '%s', '%s' ) );
+				$scope = isset( $this->event_scopes[ $event_id ] ) ? $this->event_scopes[ $event_id ] : array( 'sandbox', 'worker-merchant' );
+				$wpdb->delete( $table, array( 'environment' => $scope[0], 'merchant_id' => $scope[1], 'square_event_id' => $event_id ), array( '%s', '%s', '%s' ) );
 			}
 		}
 		parent::tearDown();
@@ -157,6 +161,99 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 		$this->assertCount( 0, $this->matcher->calls );
 	}
 
+	public function test_sandbox_worker_ignores_production_and_other_merchant_events(): void {
+		$production_id = $this->insert_event( 'subscription.created', 'subscription', 'production-subscription', array(), 'production', $this->merchant_id );
+		$other_merchant_id = $this->insert_event( 'subscription.created', 'subscription', 'other-merchant-subscription', array(), 'sandbox', 'another-merchant' );
+		$sandbox_id = $this->insert_event( 'subscription.created', 'subscription', 'sandbox-subscription' );
+
+		$result = $this->worker->process_batch( 10 );
+		$this->assertSame( 1, $result['processed'] );
+		$this->assertSame( array( 'sandbox-subscription' ), $this->matcher->calls );
+		$this->assertSame( 'received', $this->event_row( $production_id )['processing_status'] );
+		$this->assertSame( 'received', $this->event_row( $other_merchant_id )['processing_status'] );
+		$this->assertSame( 'processed', $this->event_row( $sandbox_id )['processing_status'] );
+		$this->assertFalse( $this->repository->claim_event( $production_id, 'sandbox', $this->merchant_id ) );
+		$this->assertFalse( $this->repository->claim_event( $other_merchant_id, 'sandbox', $this->merchant_id ) );
+	}
+
+	public function test_production_activation_accepts_only_boolean_true(): void {
+		$this->assertTrue( egov_law_monitor_square_webhook_activation_value_enabled( true ) );
+		$this->assertFalse( egov_law_monitor_square_webhook_activation_value_enabled( false ) );
+		$this->assertFalse( egov_law_monitor_square_webhook_activation_value_enabled( 1 ) );
+		$this->assertFalse( egov_law_monitor_square_webhook_activation_value_enabled( 'true' ) );
+		$this->assertFalse( egov_law_monitor_square_webhook_activation_value_enabled( null ) );
+	}
+
+	public function test_production_worker_is_disabled_without_exact_true_constant(): void {
+		if ( defined( 'EGOV_LAW_MONITOR_SQUARE_PRODUCTION_WEBHOOKS_ENABLED' ) ) {
+			$this->markTestSkipped( 'Production activation constant is defined by this test process.' );
+		}
+		$this->environment = 'production';
+		$this->client = new Egov_Law_Monitor_Square_Api_Client( array(
+			'environment' => 'production', 'access_token' => 'mock-token', 'merchant_id' => $this->merchant_id,
+			'location_id' => 'worker-location', 'catalog_item_variation_id' => 'worker-item',
+			'subscription_plan_variation_id' => 'worker-plan',
+		) );
+		$this->matcher = new Egov_Law_Monitor_Test_Webhook_Subscription_Matcher( null, 'production', $this->merchant_id );
+		$this->worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( $this->repository, $this->client, $this->matcher );
+		$event_id = $this->insert_event( 'subscription.created', 'subscription', 'production-subscription', array(), 'production', $this->merchant_id );
+		$result = $this->worker->process_batch( 1 );
+		$this->assertInstanceOf( WP_Error::class, $result );
+		$this->assertSame( 'square_webhook_worker_environment_disabled', $result->get_error_code() );
+		$this->assertSame( 'received', $this->event_row( $event_id )['processing_status'] );
+		$this->assertCount( 0, $this->http_calls );
+	}
+
+	/**
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
+	public function test_production_worker_processes_only_production_events_when_explicitly_enabled(): void {
+		$required_constants = array(
+			'EGOV_LAW_MONITOR_SQUARE_PRODUCTION_WEBHOOKS_ENABLED',
+			'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT',
+			'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_PRODUCTION',
+			'EGOV_LAW_MONITOR_SQUARE_MERCHANT_ID_PRODUCTION',
+			'EGOV_LAW_MONITOR_SQUARE_LOCATION_ID_PRODUCTION',
+			'EGOV_LAW_MONITOR_SQUARE_CATALOG_ITEM_VARIATION_ID_PRODUCTION',
+			'EGOV_LAW_MONITOR_SQUARE_SUBSCRIPTION_PLAN_VARIATION_ID_PRODUCTION',
+		);
+		foreach ( $required_constants as $constant_name ) {
+			if ( defined( $constant_name ) ) {
+				$this->markTestSkipped( 'A Production configuration constant is already defined in the isolated process.' );
+			}
+		}
+		define( 'EGOV_LAW_MONITOR_SQUARE_PRODUCTION_WEBHOOKS_ENABLED', true );
+		define( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT', 'production' );
+		define( 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_PRODUCTION', 'mock-production-token' );
+		define( 'EGOV_LAW_MONITOR_SQUARE_MERCHANT_ID_PRODUCTION', $this->merchant_id );
+		define( 'EGOV_LAW_MONITOR_SQUARE_LOCATION_ID_PRODUCTION', 'worker-location' );
+		define( 'EGOV_LAW_MONITOR_SQUARE_CATALOG_ITEM_VARIATION_ID_PRODUCTION', 'worker-item' );
+		define( 'EGOV_LAW_MONITOR_SQUARE_SUBSCRIPTION_PLAN_VARIATION_ID_PRODUCTION', 'worker-plan' );
+		$this->environment = 'production';
+		$this->client = new Egov_Law_Monitor_Square_Api_Client( array(
+			'environment' => 'production', 'access_token' => 'mock-token', 'merchant_id' => $this->merchant_id,
+			'location_id' => 'worker-location', 'catalog_item_variation_id' => 'worker-item',
+			'subscription_plan_variation_id' => 'worker-plan',
+		) );
+		$this->matcher = new Egov_Law_Monitor_Test_Webhook_Subscription_Matcher( null, 'production', $this->merchant_id );
+		$this->worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( $this->repository, $this->client, $this->matcher );
+		$production_id = $this->insert_event( 'subscription.created', 'subscription', 'production-subscription', array(), 'production', $this->merchant_id );
+		$sandbox_id = $this->insert_event( 'subscription.created', 'subscription', 'sandbox-subscription', array(), 'sandbox', $this->merchant_id );
+		$result = $this->worker->process_batch( 10 );
+		$this->assertSame( 1, $result['processed'] );
+		$this->assertSame( array( 'production-subscription' ), $this->matcher->calls );
+		$this->assertSame( 'processed', $this->event_row( $production_id )['processing_status'] );
+		$this->assertSame( 'received', $this->event_row( $sandbox_id )['processing_status'] );
+		$this->assertCount( 0, $this->http_calls );
+
+		$factory_event_id = $this->insert_event( 'payment.updated', 'payment', 'production-payment', array(), 'production', $this->merchant_id );
+		$factory_worker = egov_law_monitor_square_webhook_event_worker();
+		$this->assertInstanceOf( Egov_Law_Monitor_Square_Webhook_Event_Worker::class, $factory_worker );
+		$this->assertSame( 1, $factory_worker->process_batch( 1 )['processed'] );
+		$this->assertSame( 'processed', $this->event_row( $factory_event_id )['processing_status'] );
+	}
+
 	public function test_unexpected_matcher_exception_becomes_safe_retry_without_exposing_details(): void {
 		$this->matcher->callback = static function () {
 			throw new RuntimeException( 'sensitive exception detail' );
@@ -202,7 +299,7 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 			global $wpdb;
 			$table = $wpdb->prefix . 'egov_law_square_events';
 			$wpdb->update( $table, array( 'processing_started_at' => gmdate( 'Y-m-d H:i:s', time() - 600 ) ), array( 'id' => $event_id ), array( '%s' ), array( '%d' ) );
-			$new_claim = $this->repository->claim_event( $event_id );
+			$new_claim = $this->repository->claim_event( $event_id, 'sandbox', $this->merchant_id );
 			$this->assertSame( '2', (string) $new_claim['claim_generation'] );
 			return array( 'status' => 'subscription_matched' );
 		};
@@ -229,12 +326,13 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 		$this->assertSame( $before_invoices, (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}egov_law_subscription_invoices" ) );
 	}
 
-	private function insert_event( $event_type, $resource_type, $resource_id, array $overrides = array() ): int {
+	private function insert_event( $event_type, $resource_type, $resource_id, array $overrides = array(), $environment = 'sandbox', $merchant_id = 'worker-merchant' ): int {
 		$event_id = 'worker-event-' . wp_generate_uuid4();
 		$this->event_ids[] = $event_id;
-		$payload = $this->make_payload( $event_type, $resource_type, $resource_id, $event_id );
+		$this->event_scopes[ $event_id ] = array( $environment, $merchant_id );
+		$payload = $this->make_payload( $event_type, $resource_type, $resource_id, $event_id, $merchant_id );
 		$event = json_decode( $payload, true );
-		$result = $this->repository->insert_event( $event, 'sandbox', 'worker-merchant', $payload );
+		$result = $this->repository->insert_event( $event, $environment, $merchant_id, $payload );
 		$this->assertFalse( $result['duplicate'] );
 		if ( ! empty( $overrides ) ) {
 			global $wpdb;
@@ -244,13 +342,13 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 		return (int) $row['id'];
 	}
 
-	private function make_payload( $event_type, $resource_type, $resource_id, $event_id ): string {
+	private function make_payload( $event_type, $resource_type, $resource_id, $event_id, $merchant_id = 'worker-merchant' ): string {
 		$data = array( 'type' => $resource_type );
 		if ( null !== $resource_id ) {
 			$data['id'] = $resource_id;
 			$data['object'][ $resource_type ] = array( 'id' => $resource_id );
 		}
-		return wp_json_encode( array( 'event_id' => $event_id, 'type' => $event_type, 'merchant_id' => 'worker-merchant', 'data' => $data ) );
+		return wp_json_encode( array( 'event_id' => $event_id, 'type' => $event_type, 'merchant_id' => $merchant_id, 'data' => $data ) );
 	}
 
 	private function event_row( $id ): array {

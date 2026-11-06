@@ -21,6 +21,18 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 
 	/** Save a verified event once, relying on the database unique key for races. */
 	public function insert_event( $event, $environment, $merchant_id, $raw_body ) {
+		if (
+			! $this->valid_scope( $environment, $merchant_id )
+			|| ! is_array( $event )
+			|| ! isset( $event['event_id'], $event['type'], $event['merchant_id'] )
+			|| ! is_string( $event['event_id'] )
+			|| ! is_string( $event['type'] )
+			|| ! is_string( $event['merchant_id'] )
+			|| ! hash_equals( $merchant_id, $event['merchant_id'] )
+			|| ! is_string( $raw_body )
+		) {
+			return new WP_Error( 'square_webhook_event_invalid', 'Webhookイベントを確認できません。' );
+		}
 		$table = $this->wpdb->prefix . 'egov_law_square_events';
 		$now   = current_time( 'mysql', true );
 		$created_at = null;
@@ -35,30 +47,32 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 		}
 
 		$this->wpdb->last_error = '';
-		$inserted = $this->wpdb->insert(
-			$table,
-			array(
-				'environment'       => $environment,
-				'merchant_id'       => $merchant_id,
-				'square_event_id'   => $event['event_id'],
-				'event_type'         => $event['type'],
-				'square_created_at'  => $created_at,
-				'received_at'        => $now,
-				'processing_status'  => 'received',
-				'payload_hash'       => hash( 'sha256', $raw_body ),
-				'normalized_payload' => $raw_body,
-				'created_at'         => $now,
-				'updated_at'         => $now,
-			),
-			array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
+		$inserted = $this->wpdb->query(
+			$this->wpdb->prepare(
+				"INSERT INTO {$table} (environment, merchant_id, square_event_id, event_type, square_created_at, received_at, processing_status, payload_hash, normalized_payload, created_at, updated_at) VALUES (%s, %s, %s, %s, NULLIF(%s, ''), %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE id = id",
+				$environment,
+				$merchant_id,
+				$event['event_id'],
+				$event['type'],
+				$created_at,
+				$now,
+				'received',
+				hash( 'sha256', $raw_body ),
+				$raw_body,
+				$now,
+				$now
+			)
 		);
 
-		if ( 1 === $inserted && '' === (string) $this->wpdb->last_error ) {
+		if ( 1 === (int) $inserted && '' === (string) $this->wpdb->last_error ) {
 			return array( 'duplicate' => false );
 		}
+		if ( false === $inserted || '' !== (string) $this->wpdb->last_error ) {
+			return new WP_Error( 'square_webhook_storage_failed', 'Webhookイベントを保存できません。' );
+		}
 
-		// A concurrent insert can fail on the unique key. Only acknowledge it as
-		// a duplicate if the exact environment/merchant/event tuple now exists.
+		// The no-op duplicate-key update avoids surfacing an expected SQL error.
+		// Only acknowledge a duplicate if the exact scoped event now exists.
 		$this->wpdb->last_error = '';
 		$existing_id = $this->wpdb->get_var(
 			$this->wpdb->prepare(
@@ -78,12 +92,17 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 	/**
 	 * Read events that are ready for a worker, without claiming them.
 	 *
+	 * @param string $environment Square environment scope.
+	 * @param string $merchant_id Square merchant scope.
 	 * @param int $limit Maximum number of rows (clamped to 1..100).
 	 * @param int $stale_after_seconds Age after which a processing claim is stale.
 	 * @return array|WP_Error Rows ordered by receive time, or a database error.
 	 */
-	public function get_events_ready_for_processing( $limit = self::DEFAULT_BATCH_SIZE, $stale_after_seconds = self::DEFAULT_STALE_AFTER_SECONDS ) {
+	public function get_events_ready_for_processing( $environment, $merchant_id, $limit = self::DEFAULT_BATCH_SIZE, $stale_after_seconds = self::DEFAULT_STALE_AFTER_SECONDS ) {
 		$table = $this->wpdb->prefix . 'egov_law_square_events';
+		if ( ! $this->valid_scope( $environment, $merchant_id ) ) {
+			return new WP_Error( 'square_webhook_repository_scope_invalid', 'Webhook処理条件を確認できません。' );
+		}
 		$limit = $this->normalize_limit( $limit );
 		$stale_after_seconds = $this->normalize_stale_after( $stale_after_seconds );
 		if ( false === $limit || false === $stale_after_seconds ) {
@@ -99,7 +118,9 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 		$this->wpdb->last_error = '';
 		$rows = $this->wpdb->get_results(
 			$this->wpdb->prepare(
-				"SELECT id, environment, merchant_id, square_event_id, event_type, square_created_at, received_at, processing_status, retry_count, next_retry_at, processing_started_at, claim_generation, payload_hash, normalized_payload FROM {$table} WHERE processing_status = 'received' OR (processing_status = 'retry' AND next_retry_at IS NOT NULL AND next_retry_at <= %s) OR (processing_status = 'processing' AND processing_started_at IS NOT NULL AND processing_started_at <= %s) ORDER BY received_at ASC, id ASC LIMIT %d",
+				"SELECT id, environment, merchant_id, square_event_id, event_type, square_created_at, received_at, processing_status, retry_count, next_retry_at, processing_started_at, claim_generation, payload_hash, normalized_payload FROM {$table} WHERE environment = %s AND merchant_id = %s AND (processing_status = 'received' OR (processing_status = 'retry' AND next_retry_at IS NOT NULL AND next_retry_at <= %s) OR (processing_status = 'processing' AND processing_started_at IS NOT NULL AND processing_started_at <= %s)) ORDER BY received_at ASC, id ASC LIMIT %d",
+				$environment,
+				$merchant_id,
 				$now,
 				$stale_before,
 				$limit
@@ -119,12 +140,14 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 	 * return means another worker already claimed it or it is not due yet.
 	 *
 	 * @param int $event_row_id Local event-table primary key.
+	 * @param string $environment Square environment scope.
+	 * @param string $merchant_id Square merchant scope.
 	 * @param int $stale_after_seconds Stale processing threshold.
 	 * @return array|false|WP_Error Claimed row, false if claim lost, or DB error.
 	 */
-	public function claim_event( $event_row_id, $stale_after_seconds = self::DEFAULT_STALE_AFTER_SECONDS ) {
+	public function claim_event( $event_row_id, $environment, $merchant_id, $stale_after_seconds = self::DEFAULT_STALE_AFTER_SECONDS ) {
 		$table = $this->wpdb->prefix . 'egov_law_square_events';
-		if ( ! $this->is_positive_integer( $event_row_id ) ) {
+		if ( ! $this->is_positive_integer( $event_row_id ) || ! $this->valid_scope( $environment, $merchant_id ) ) {
 			return new WP_Error( 'square_webhook_repository_arguments_invalid', 'Webhook処理条件を確認できません。' );
 		}
 		$stale_after_seconds = $this->normalize_stale_after( $stale_after_seconds );
@@ -141,10 +164,12 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 		$this->wpdb->last_error = '';
 		$claimed = $this->wpdb->query(
 			$this->wpdb->prepare(
-				"UPDATE {$table} SET processing_status = 'processing', claim_generation = claim_generation + 1, processing_started_at = %s, next_retry_at = NULL, updated_at = %s WHERE id = %d AND (processing_status = 'received' OR (processing_status = 'retry' AND next_retry_at IS NOT NULL AND next_retry_at <= %s) OR (processing_status = 'processing' AND processing_started_at IS NOT NULL AND processing_started_at <= %s))",
+				"UPDATE {$table} SET processing_status = 'processing', claim_generation = claim_generation + 1, processing_started_at = %s, next_retry_at = NULL, updated_at = %s WHERE id = %d AND environment = %s AND merchant_id = %s AND (processing_status = 'received' OR (processing_status = 'retry' AND next_retry_at IS NOT NULL AND next_retry_at <= %s) OR (processing_status = 'processing' AND processing_started_at IS NOT NULL AND processing_started_at <= %s))",
 				$now,
 				$now,
 				(int) $event_row_id,
+				$environment,
+				$merchant_id,
 				$now,
 				$stale_before
 			)
@@ -159,8 +184,10 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 		$this->wpdb->last_error = '';
 		$row = $this->wpdb->get_row(
 			$this->wpdb->prepare(
-				"SELECT id, environment, merchant_id, square_event_id, event_type, square_created_at, received_at, processing_status, retry_count, next_retry_at, processing_started_at, claim_generation, payload_hash, normalized_payload FROM {$table} WHERE id = %d",
-				(int) $event_row_id
+				"SELECT id, environment, merchant_id, square_event_id, event_type, square_created_at, received_at, processing_status, retry_count, next_retry_at, processing_started_at, claim_generation, payload_hash, normalized_payload FROM {$table} WHERE id = %d AND environment = %s AND merchant_id = %s",
+				(int) $event_row_id,
+				$environment,
+				$merchant_id
 			),
 			ARRAY_A
 		);
@@ -330,6 +357,13 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 		return min( self::MAX_BATCH_SIZE, (int) $limit );
 	}
 
+	private function valid_scope( $environment, $merchant_id ) {
+		return is_string( $environment )
+			&& in_array( $environment, array( 'sandbox', 'production' ), true )
+			&& is_string( $merchant_id )
+			&& preg_match( '/\A[A-Za-z0-9._:-]{1,64}\z/', $merchant_id );
+	}
+
 	private function normalize_stale_after( $seconds ) {
 		if ( ! is_scalar( $seconds ) || ! preg_match( '/\A[0-9]+\z/', (string) $seconds ) ) {
 			return false;
@@ -391,7 +425,11 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 			return new WP_Error( 'square_webhook_worker_arguments_invalid', 'Webhook処理件数を確認できません。' );
 		}
 		$limit = min( self::MAX_BATCH_SIZE, (int) $limit );
-		$events = $this->repository->get_events_ready_for_processing( $limit );
+		$scope = $this->client->get_checkout_scope();
+		if ( is_wp_error( $scope ) || ! isset( $scope['environment'], $scope['merchant_id'] ) || ! egov_law_monitor_square_webhook_environment_enabled( $scope['environment'] ) ) {
+			return new WP_Error( 'square_webhook_worker_environment_disabled', 'Webhook処理を利用できません。' );
+		}
+		$events = $this->repository->get_events_ready_for_processing( $scope['environment'], $scope['merchant_id'], $limit );
 		if ( is_wp_error( $events ) ) {
 			return new WP_Error( 'square_webhook_worker_queue_unavailable', 'Webhook処理対象を取得できません。' );
 		}
@@ -413,7 +451,7 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 				$summary['claim_errors']++;
 				continue;
 			}
-			$claim = $this->repository->claim_event( $event_row['id'] );
+			$claim = $this->repository->claim_event( $event_row['id'], $scope['environment'], $scope['merchant_id'] );
 			if ( is_wp_error( $claim ) ) {
 				$summary['claim_errors']++;
 				continue;
@@ -429,7 +467,7 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 			}
 
 			try {
-				$decision = $this->decide( $claim );
+				$decision = $this->decide( $claim, $scope );
 			} catch ( Throwable $exception ) {
 				// Do not expose exception details. Leave a retryable, fixed-code trail.
 				$decision = $this->decision( 'retry', 'webhook_worker_unexpected_error' );
@@ -458,7 +496,7 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 		return $summary;
 	}
 
-	private function decide( array $row ) {
+	private function decide( array $row, array $scope ) {
 		$payload = isset( $row['normalized_payload'] ) ? $row['normalized_payload'] : null;
 		$payload_hash = isset( $row['payload_hash'] ) ? $row['payload_hash'] : null;
 		if (
@@ -488,7 +526,8 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 			|| ! hash_equals( $row['square_event_id'], $event['event_id'] )
 			|| ! hash_equals( $row['event_type'], $event['type'] )
 			|| ! hash_equals( $row['merchant_id'], $event['merchant_id'] )
-			|| 'sandbox' !== $row['environment']
+			|| ! hash_equals( $scope['environment'], $row['environment'] )
+			|| ! hash_equals( $scope['merchant_id'], $row['merchant_id'] )
 		) {
 			return $this->decision( 'reconciliation_required', 'stored_event_identity_invalid' );
 		}
@@ -497,10 +536,8 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 			return $this->decision( 'processed', '' );
 		}
 
-		$scope = $this->client->get_checkout_scope();
-		if ( is_wp_error( $scope ) || ! isset( $scope['environment'], $scope['merchant_id'], $scope['location_id'] ) || 'sandbox' !== $scope['environment'] || ! is_string( $scope['merchant_id'] ) || ! is_string( $scope['location_id'] ) || ! hash_equals( $row['merchant_id'], $scope['merchant_id'] ) ) {
-			// Fail closed: never make a Production request for a persisted event.
-			return $this->decision( 'retry', 'square_sandbox_scope_unavailable' );
+		if ( ! isset( $scope['location_id'] ) || ! is_string( $scope['location_id'] ) ) {
+			return $this->decision( 'retry', 'square_scope_unavailable' );
 		}
 
 		if ( 'subscription.created' === $event['type'] || 'subscription.updated' === $event['type'] ) {
@@ -614,7 +651,7 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 	}
 }
 
-/** Build a Sandbox-only webhook event worker. No cron hook is registered. */
+/** Build an environment-scoped webhook event worker. No cron hook is registered. */
 function egov_law_monitor_square_webhook_event_worker() {
 	global $wpdb;
 	$client = Egov_Law_Monitor_Square_Api_Client::from_wordpress_config();
@@ -622,7 +659,7 @@ function egov_law_monitor_square_webhook_event_worker() {
 		return new WP_Error( 'square_webhook_worker_configuration_unavailable', 'Webhook処理を利用できません。' );
 	}
 	$scope = $client->get_checkout_scope();
-	if ( is_wp_error( $scope ) || ! isset( $scope['environment'] ) || 'sandbox' !== $scope['environment'] ) {
+	if ( is_wp_error( $scope ) || ! isset( $scope['environment'] ) || ! egov_law_monitor_square_webhook_environment_enabled( $scope['environment'] ) ) {
 		return new WP_Error( 'square_webhook_worker_environment_disabled', 'Webhook処理を利用できません。' );
 	}
 
@@ -643,7 +680,7 @@ class Egov_Law_Monitor_Square_Webhook_Service {
 
 	/** Verify and persist a webhook. No event-specific business processing occurs. */
 	public function receive( $raw_body, $signature, $config ) {
-		if ( ! is_array( $config ) || ! isset( $config['environment'] ) || 'sandbox' !== $config['environment'] ) {
+		if ( ! is_array( $config ) || ! isset( $config['environment'] ) || ! egov_law_monitor_square_webhook_environment_enabled( $config['environment'] ) ) {
 			return new WP_Error( 'square_webhook_production_disabled', 'Webhook受信は現在利用できません。' );
 		}
 		foreach ( array( 'signature_key', 'notification_url', 'merchant_id' ) as $key ) {
@@ -655,6 +692,9 @@ class Egov_Law_Monitor_Square_Webhook_Service {
 			return new WP_Error( 'square_webhook_configuration_invalid', 'Webhook設定を確認できません。' );
 		}
 		if ( ! $this->is_valid_notification_url( $config['notification_url'] ) ) {
+			return new WP_Error( 'square_webhook_configuration_invalid', 'Webhook設定を確認できません。' );
+		}
+		if ( 'production' === $config['environment'] && ! egov_law_monitor_square_webhook_production_settings_ready( $config ) ) {
 			return new WP_Error( 'square_webhook_configuration_invalid', 'Webhook設定を確認できません。' );
 		}
 		if ( ! is_string( $raw_body ) || strlen( $raw_body ) > self::MAX_BODY_BYTES ) {
@@ -689,7 +729,7 @@ class Egov_Law_Monitor_Square_Webhook_Service {
 			return new WP_Error( 'square_webhook_event_invalid', 'Webhookイベント形式を確認できません。' );
 		}
 
-		return $this->repository->insert_event( $event, 'sandbox', $config['merchant_id'], $raw_body );
+		return $this->repository->insert_event( $event, $config['environment'], $config['merchant_id'], $raw_body );
 	}
 
 	private function is_valid_notification_url( $url ) {
@@ -701,6 +741,42 @@ class Egov_Law_Monitor_Square_Webhook_Service {
 			&& ! isset( $parts['user'], $parts['pass'], $parts['fragment'] )
 			&& 0 === preg_match( '/\s/', $url );
 	}
+}
+
+/** Return whether a specific Square environment is enabled for webhook work. */
+function egov_law_monitor_square_webhook_environment_enabled( $environment ) {
+	if ( 'sandbox' === $environment ) {
+		return true;
+	}
+	return 'production' === $environment
+		&& defined( 'EGOV_LAW_MONITOR_SQUARE_PRODUCTION_WEBHOOKS_ENABLED' )
+		&& egov_law_monitor_square_webhook_activation_value_enabled( EGOV_LAW_MONITOR_SQUARE_PRODUCTION_WEBHOOKS_ENABLED );
+}
+
+/** Strict boolean check kept separate so non-boolean settings cannot enable Production. */
+function egov_law_monitor_square_webhook_activation_value_enabled( $value ) {
+	return true === $value;
+}
+
+/** Validate all server-side Production API settings without making a request. */
+function egov_law_monitor_square_webhook_production_settings_ready( array $webhook_config ) {
+	if (
+		! egov_law_monitor_square_webhook_environment_enabled( 'production' )
+		|| ! isset( $webhook_config['merchant_id'] )
+		|| ! is_string( $webhook_config['merchant_id'] )
+	) {
+		return false;
+	}
+	$client = Egov_Law_Monitor_Square_Api_Client::from_wordpress_config();
+	if ( is_wp_error( $client ) ) {
+		return false;
+	}
+	$scope = $client->get_checkout_scope();
+	return ! is_wp_error( $scope )
+		&& isset( $scope['environment'], $scope['merchant_id'], $scope['location_id'], $scope['subscription_plan_variation_id'] )
+		&& 'production' === $scope['environment']
+		&& is_string( $scope['merchant_id'] )
+		&& hash_equals( $scope['merchant_id'], $webhook_config['merchant_id'] );
 }
 
 /** Read environment-specific webhook settings; never reuse Square API tokens. */
@@ -747,7 +823,7 @@ add_action(
 					if ( is_wp_error( $config ) ) {
 						return new WP_Error( 'square_webhook_unavailable', 'Webhook受信を利用できません。', array( 'status' => 503 ) );
 					}
-					if ( ! is_array( $config ) || ! isset( $config['environment'] ) || 'sandbox' !== $config['environment'] ) {
+					if ( ! is_array( $config ) || ! isset( $config['environment'] ) || ! egov_law_monitor_square_webhook_environment_enabled( $config['environment'] ) ) {
 						return new WP_Error( 'square_webhook_disabled', 'Webhook受信は現在利用できません。', array( 'status' => 403 ) );
 					}
 					$service = egov_law_monitor_square_webhook_service();

@@ -597,6 +597,20 @@ final class SquareApiClientTest extends TestCase {
 		}
 	}
 
+	public function test_checkout_scope_requires_server_api_access_token_without_returning_it(): void {
+		$config = $this->config( 'production' );
+		$client = new Egov_Law_Monitor_Square_Api_Client( $config );
+		$scope = $client->get_checkout_scope();
+		$this->assertIsArray( $scope );
+		$this->assertArrayNotHasKey( 'access_token', $scope );
+
+		unset( $config['access_token'] );
+		$client_without_token = new Egov_Law_Monitor_Square_Api_Client( $config );
+		$error = $client_without_token->get_checkout_scope();
+		$this->assertTrue( is_wp_error( $error ) );
+		$this->assertSame( 'square_configuration_invalid', $error->get_error_code() );
+	}
+
 	private function config( $environment ): array {
 		return array(
 			'environment'                    => $environment,

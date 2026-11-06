@@ -184,6 +184,9 @@ class Egov_Law_Monitor_Square_Api_Client {
 	 * @return array|WP_Error
 	 */
 	public function get_checkout_scope() {
+		if ( ! isset( $this->config['access_token'] ) || ! is_string( $this->config['access_token'] ) || '' === trim( $this->config['access_token'] ) ) {
+			return new WP_Error( 'square_configuration_invalid', 'Squareのサーバー設定が不足しています。' );
+		}
 		$required = array( 'environment', 'merchant_id', 'location_id', 'catalog_item_variation_id', 'subscription_plan_variation_id' );
 		foreach ( $required as $key ) {
 			if ( ! isset( $this->config[ $key ] ) || ! is_string( $this->config[ $key ] ) || '' === trim( $this->config[ $key ] ) ) {
