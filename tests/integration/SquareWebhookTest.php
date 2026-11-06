@@ -103,7 +103,15 @@ final class SquareWebhookTest extends TestCase {
 		define( 'EGOV_LAW_MONITOR_SQUARE_LOCATION_ID_PRODUCTION', 'mock-production-location' );
 		define( 'EGOV_LAW_MONITOR_SQUARE_CATALOG_ITEM_VARIATION_ID_PRODUCTION', 'mock-production-item' );
 		define( 'EGOV_LAW_MONITOR_SQUARE_SUBSCRIPTION_PLAN_VARIATION_ID_PRODUCTION', 'mock-production-plan' );
-		$this->assertTrue( egov_law_monitor_square_webhook_production_settings_ready( array( 'merchant_id' => $this->merchant_id ) ) );
+		$this->assertTrue(
+			egov_law_monitor_square_webhook_production_settings_ready(
+				array(
+					'merchant_id'      => $this->merchant_id,
+					'signature_key'    => $this->signature_key,
+					'notification_url' => $this->notification_url,
+				)
+			)
+		);
 		$this->environment = 'production';
 		$body = $this->event_body();
 		$response = $this->dispatch( $body, $this->sign( $body ) );

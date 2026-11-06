@@ -426,7 +426,7 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 		}
 		$limit = min( self::MAX_BATCH_SIZE, (int) $limit );
 		$scope = $this->client->get_checkout_scope();
-		if ( is_wp_error( $scope ) || ! isset( $scope['environment'], $scope['merchant_id'] ) || ! egov_law_monitor_square_webhook_environment_enabled( $scope['environment'] ) ) {
+		if ( is_wp_error( $scope ) || ! isset( $scope['environment'], $scope['merchant_id'] ) || ! egov_law_monitor_square_webhook_worker_environment_ready( $scope['environment'] ) ) {
 			return new WP_Error( 'square_webhook_worker_environment_disabled', 'Webhook処理を利用できません。' );
 		}
 		$events = $this->repository->get_events_ready_for_processing( $scope['environment'], $scope['merchant_id'], $limit );
@@ -659,7 +659,7 @@ function egov_law_monitor_square_webhook_event_worker() {
 		return new WP_Error( 'square_webhook_worker_configuration_unavailable', 'Webhook処理を利用できません。' );
 	}
 	$scope = $client->get_checkout_scope();
-	if ( is_wp_error( $scope ) || ! isset( $scope['environment'] ) || ! egov_law_monitor_square_webhook_environment_enabled( $scope['environment'] ) ) {
+	if ( is_wp_error( $scope ) || ! isset( $scope['environment'] ) || ! egov_law_monitor_square_webhook_worker_environment_ready( $scope['environment'] ) ) {
 		return new WP_Error( 'square_webhook_worker_environment_disabled', 'Webhook処理を利用できません。' );
 	}
 
@@ -667,7 +667,8 @@ function egov_law_monitor_square_webhook_event_worker() {
 	$payment_matcher = new Egov_Law_Monitor_Square_Payment_Attempt_Matcher( $checkout_repository, $client );
 	$payment_confirmation = new Egov_Law_Monitor_Square_Initial_Payment_Confirmation_Service( $checkout_repository, $client, $payment_matcher );
 	$subscription_matcher = new Egov_Law_Monitor_Square_Subscription_Attempt_Matcher( $checkout_repository, $client, $payment_confirmation );
-	return new Egov_Law_Monitor_Square_Webhook_Event_Worker( new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb ), $client, $subscription_matcher );
+	$worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb ), $client, $subscription_matcher );
+	return apply_filters( 'egov_law_monitor_square_webhook_event_worker', $worker );
 }
 
 class Egov_Law_Monitor_Square_Webhook_Service {
@@ -691,7 +692,7 @@ class Egov_Law_Monitor_Square_Webhook_Service {
 		if ( strlen( $config['merchant_id'] ) > 64 ) {
 			return new WP_Error( 'square_webhook_configuration_invalid', 'Webhook設定を確認できません。' );
 		}
-		if ( ! $this->is_valid_notification_url( $config['notification_url'] ) ) {
+		if ( ! egov_law_monitor_square_webhook_notification_url_is_valid( $config['notification_url'] ) ) {
 			return new WP_Error( 'square_webhook_configuration_invalid', 'Webhook設定を確認できません。' );
 		}
 		if ( 'production' === $config['environment'] && ! egov_law_monitor_square_webhook_production_settings_ready( $config ) ) {
@@ -732,15 +733,6 @@ class Egov_Law_Monitor_Square_Webhook_Service {
 		return $this->repository->insert_event( $event, $config['environment'], $config['merchant_id'], $raw_body );
 	}
 
-	private function is_valid_notification_url( $url ) {
-		$parts = wp_parse_url( $url );
-		return is_array( $parts )
-			&& isset( $parts['scheme'], $parts['host'] )
-			&& 'https' === strtolower( $parts['scheme'] )
-			&& '' !== $parts['host']
-			&& ! isset( $parts['user'], $parts['pass'], $parts['fragment'] )
-			&& 0 === preg_match( '/\s/', $url );
-	}
 }
 
 /** Return whether a specific Square environment is enabled for webhook work. */
@@ -762,8 +754,12 @@ function egov_law_monitor_square_webhook_activation_value_enabled( $value ) {
 function egov_law_monitor_square_webhook_production_settings_ready( array $webhook_config ) {
 	if (
 		! egov_law_monitor_square_webhook_environment_enabled( 'production' )
-		|| ! isset( $webhook_config['merchant_id'] )
+		|| ! isset( $webhook_config['merchant_id'], $webhook_config['signature_key'], $webhook_config['notification_url'] )
 		|| ! is_string( $webhook_config['merchant_id'] )
+		|| ! is_string( $webhook_config['signature_key'] )
+		|| '' === $webhook_config['signature_key']
+		|| ! is_string( $webhook_config['notification_url'] )
+		|| ! egov_law_monitor_square_webhook_notification_url_is_valid( $webhook_config['notification_url'] )
 	) {
 		return false;
 	}
@@ -778,6 +774,98 @@ function egov_law_monitor_square_webhook_production_settings_ready( array $webho
 		&& is_string( $scope['merchant_id'] )
 		&& hash_equals( $scope['merchant_id'], $webhook_config['merchant_id'] );
 }
+
+/** Validate the registered HTTPS endpoint without exposing it in diagnostics. */
+function egov_law_monitor_square_webhook_notification_url_is_valid( $url ) {
+	if ( ! is_string( $url ) ) {
+		return false;
+	}
+	$parts = wp_parse_url( $url );
+	return is_array( $parts )
+		&& isset( $parts['scheme'], $parts['host'] )
+		&& 'https' === strtolower( $parts['scheme'] )
+		&& '' !== $parts['host']
+		&& ! isset( $parts['user'], $parts['pass'], $parts['fragment'] )
+		&& 0 === preg_match( '/\s/', $url );
+}
+
+/** True when the worker may run under the currently selected Square scope. */
+function egov_law_monitor_square_webhook_worker_environment_ready( $environment ) {
+	if ( ! in_array( $environment, array( 'sandbox', 'production' ), true ) ) {
+		return false;
+	}
+	if ( 'sandbox' === $environment ) {
+		return true;
+	}
+	if ( ! egov_law_monitor_square_webhook_environment_enabled( 'production' ) ) {
+		return false;
+	}
+	$config = egov_law_monitor_square_webhook_config();
+	return is_array( $config )
+		&& isset( $config['environment'] )
+		&& 'production' === $config['environment']
+		&& egov_law_monitor_square_webhook_production_settings_ready( $config );
+}
+
+/** Whether automatic worker execution is explicitly enabled for this scope. */
+function egov_law_monitor_square_webhook_worker_automation_enabled() {
+	if (
+		! defined( 'EGOV_LAW_MONITOR_SQUARE_WEBHOOK_WORKER_ENABLED' )
+		|| ! egov_law_monitor_square_webhook_activation_value_enabled( EGOV_LAW_MONITOR_SQUARE_WEBHOOK_WORKER_ENABLED )
+		|| ! defined( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT' )
+	) {
+		return false;
+	}
+	return egov_law_monitor_square_webhook_worker_environment_ready( EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT );
+}
+
+/** Register or remove only this worker's recurring event. */
+function egov_law_monitor_square_webhook_worker_schedule() {
+	$hook = 'egov_law_monitor_square_webhook_worker_cron';
+	if ( ! egov_law_monitor_square_webhook_worker_automation_enabled() ) {
+		wp_clear_scheduled_hook( $hook );
+		return false;
+	}
+	if ( ! wp_next_scheduled( $hook ) ) {
+		return (bool) wp_schedule_event( time() + 5 * MINUTE_IN_SECONDS, 'egov_law_monitor_five_minutes', $hook );
+	}
+	return true;
+}
+
+/** Clear only this worker's recurring event during plugin deactivation. */
+function egov_law_monitor_square_webhook_worker_deactivate() {
+	wp_clear_scheduled_hook( 'egov_law_monitor_square_webhook_worker_cron' );
+}
+
+/** Run one bounded batch; never log payloads, credentials, or exception details. */
+function egov_law_monitor_square_webhook_worker_cron_callback() {
+	try {
+		if ( ! egov_law_monitor_square_webhook_worker_automation_enabled() ) {
+			return new WP_Error( 'square_webhook_worker_disabled', 'Webhook処理を利用できません。' );
+		}
+		$worker = egov_law_monitor_square_webhook_event_worker();
+		if ( is_wp_error( $worker ) || ! $worker instanceof Egov_Law_Monitor_Square_Webhook_Event_Worker ) {
+			return new WP_Error( 'square_webhook_worker_unavailable', 'Webhook処理を利用できません。' );
+		}
+		return $worker->process_batch( 25 );
+	} catch ( Throwable $exception ) {
+		return new WP_Error( 'square_webhook_worker_failed', 'Webhook処理を完了できませんでした。' );
+	}
+}
+
+add_filter(
+	'cron_schedules',
+	static function ( $schedules ) {
+		$schedules['egov_law_monitor_five_minutes'] = array(
+			'interval' => 5 * MINUTE_IN_SECONDS,
+			'display'  => 'Every five minutes (e-Gov Law Monitor)',
+		);
+		return $schedules;
+	}
+);
+add_action( 'init', 'egov_law_monitor_square_webhook_worker_schedule' );
+add_action( 'egov_law_monitor_square_webhook_worker_cron', 'egov_law_monitor_square_webhook_worker_cron_callback' );
+register_deactivation_hook( dirname( __DIR__ ) . '/egov-law-monitor.php', 'egov_law_monitor_square_webhook_worker_deactivate' );
 
 /** Read environment-specific webhook settings; never reuse Square API tokens. */
 function egov_law_monitor_square_webhook_config() {

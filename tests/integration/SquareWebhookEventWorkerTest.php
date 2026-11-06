@@ -211,12 +211,15 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 	public function test_production_worker_processes_only_production_events_when_explicitly_enabled(): void {
 		$required_constants = array(
 			'EGOV_LAW_MONITOR_SQUARE_PRODUCTION_WEBHOOKS_ENABLED',
+			'EGOV_LAW_MONITOR_SQUARE_WEBHOOK_WORKER_ENABLED',
 			'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT',
 			'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_PRODUCTION',
 			'EGOV_LAW_MONITOR_SQUARE_MERCHANT_ID_PRODUCTION',
 			'EGOV_LAW_MONITOR_SQUARE_LOCATION_ID_PRODUCTION',
 			'EGOV_LAW_MONITOR_SQUARE_CATALOG_ITEM_VARIATION_ID_PRODUCTION',
 			'EGOV_LAW_MONITOR_SQUARE_SUBSCRIPTION_PLAN_VARIATION_ID_PRODUCTION',
+			'EGOV_LAW_MONITOR_SQUARE_WEBHOOK_SIGNATURE_KEY_PRODUCTION',
+			'EGOV_LAW_MONITOR_SQUARE_WEBHOOK_NOTIFICATION_URL_PRODUCTION',
 		);
 		foreach ( $required_constants as $constant_name ) {
 			if ( defined( $constant_name ) ) {
@@ -224,12 +227,16 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 			}
 		}
 		define( 'EGOV_LAW_MONITOR_SQUARE_PRODUCTION_WEBHOOKS_ENABLED', true );
+		define( 'EGOV_LAW_MONITOR_SQUARE_WEBHOOK_WORKER_ENABLED', true );
 		define( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT', 'production' );
 		define( 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_PRODUCTION', 'mock-production-token' );
 		define( 'EGOV_LAW_MONITOR_SQUARE_MERCHANT_ID_PRODUCTION', $this->merchant_id );
 		define( 'EGOV_LAW_MONITOR_SQUARE_LOCATION_ID_PRODUCTION', 'worker-location' );
 		define( 'EGOV_LAW_MONITOR_SQUARE_CATALOG_ITEM_VARIATION_ID_PRODUCTION', 'worker-item' );
 		define( 'EGOV_LAW_MONITOR_SQUARE_SUBSCRIPTION_PLAN_VARIATION_ID_PRODUCTION', 'worker-plan' );
+		define( 'EGOV_LAW_MONITOR_SQUARE_WEBHOOK_SIGNATURE_KEY_PRODUCTION', 'worker-signature' );
+		define( 'EGOV_LAW_MONITOR_SQUARE_WEBHOOK_NOTIFICATION_URL_PRODUCTION', 'https://example.test/wp-json/egov-law-monitor/v1/square-webhook' );
+		$this->assertTrue( egov_law_monitor_square_webhook_worker_automation_enabled() );
 		$this->environment = 'production';
 		$this->client = new Egov_Law_Monitor_Square_Api_Client( array(
 			'environment' => 'production', 'access_token' => 'mock-token', 'merchant_id' => $this->merchant_id,
