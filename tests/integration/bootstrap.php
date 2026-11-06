@@ -65,6 +65,8 @@ require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-recurrin
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-initial-payment-read-service.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-webhook.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/subscription-plan-page.php';
+require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/admin/admin-square-payments.php';
+require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/admin/admin-menu.php';
 
 /* Keep network-dependent plugin boundaries deterministic in the DB suite. */
 if ( ! function_exists( 'egov_law_monitor_search_laws' ) ) {

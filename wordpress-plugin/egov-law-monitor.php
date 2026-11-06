@@ -480,6 +480,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/subscription-plan-page.php'
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-users.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-menu.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-ai-summary-cache.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-square-payments.php';
 
 
 register_activation_hook(

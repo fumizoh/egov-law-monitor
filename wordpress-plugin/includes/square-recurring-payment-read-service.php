@@ -267,6 +267,7 @@ class Egov_Law_Monitor_Square_Recurring_Payment_Read_Service {
 			'subscription' => is_array( $subscription ) ? array( 'id' => $subscription['id'] ?? null, 'status' => $subscription['status'] ?? null ) : null,
 			'invoice' => is_array( $invoice ) ? array(
 				'id' => $invoice['id'] ?? null,
+				'order_id' => $invoice['order_id'] ?? null,
 				'status' => $invoice['status'] ?? null,
 				'payment_state' => $invoice['payment_state'] ?? null,
 				'amount' => $invoice['requested_amount_money']['amount'] ?? null,

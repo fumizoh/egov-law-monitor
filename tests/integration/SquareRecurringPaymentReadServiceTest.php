@@ -112,6 +112,7 @@ final class SquareRecurringPaymentReadServiceTest extends TestCase {
 		$this->assertSame( 'confirmed', $result['payment_evidence']['status'] );
 		$this->assertTrue( $result['payment_evidence']['confirmed'] );
 		$this->assertSame( 'none_reported_at_lookup', $result['payment_evidence']['refund_status'] );
+		$this->assertSame( $this->invoice['order_id'], $result['invoice']['order_id'] );
 		$this->assertSame( 'required', $result['review_status'] );
 		$this->assertFalse( $result['automatic_approval_candidate'] );
 		$this->assertSame( $this->invoice['id'], $result['invoice']['id'] );

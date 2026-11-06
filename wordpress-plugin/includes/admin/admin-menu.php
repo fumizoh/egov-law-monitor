@@ -35,6 +35,15 @@ function egov_law_monitor_admin_menu() {
         'egov-law-monitor-ai-summary-cache',
         'egov_law_monitor_render_admin_ai_summary_cache'
     );
+
+    add_submenu_page(
+        'egov-law-monitor',
+        'Square決済管理',
+        'Square決済管理',
+        'manage_options',
+        'egov-law-monitor-square-payments',
+        'egov_law_monitor_render_admin_square_payments'
+    );
 }
 
 add_action( 'admin_menu', 'egov_law_monitor_admin_menu' );
