@@ -2,34 +2,24 @@
 
 use PHPUnit\Framework\TestCase;
 
-/** Test double for the read-only subscription matcher. */
-final class Egov_Law_Monitor_Test_Webhook_Subscription_Matcher extends Egov_Law_Monitor_Square_Subscription_Attempt_Matcher {
+/** Test double for the independent contract snapshot sync service. */
+final class Egov_Law_Monitor_Test_Webhook_Subscription_Sync_Service extends Egov_Law_Monitor_Square_Subscription_Sync_Service {
 	public $calls = array();
 	public $callback;
 
-	public function __construct( $callback = null, $environment = 'sandbox', $merchant_id = 'worker-merchant' ) {
-		global $wpdb;
-		$client = new Egov_Law_Monitor_Square_Api_Client( array(
-			'environment' => $environment, 'access_token' => 'mock-token', 'merchant_id' => $merchant_id,
-			'location_id' => 'worker-location', 'catalog_item_variation_id' => 'worker-item',
-			'subscription_plan_variation_id' => 'worker-plan',
-		) );
-		$repository = new Egov_Law_Monitor_Checkout_Repository( $wpdb );
-		$payment_matcher = new Egov_Law_Monitor_Square_Payment_Attempt_Matcher( $repository, $client );
-		$confirmation = new Egov_Law_Monitor_Square_Initial_Payment_Confirmation_Service( $repository, $client, $payment_matcher );
-		parent::__construct( $repository, $client, $confirmation );
+	public function __construct( $callback = null ) {
 		$this->callback = $callback;
 	}
 
-	public function match_subscription( $subscription_id ) {
+	public function sync_subscription( $subscription_id ) {
 		$this->calls[] = $subscription_id;
-		return is_callable( $this->callback ) ? call_user_func( $this->callback, $subscription_id ) : array( 'status' => 'subscription_matched' );
+		return is_callable( $this->callback ) ? call_user_func( $this->callback, $subscription_id ) : array( 'status' => 'saved' );
 	}
 }
 
 final class SquareWebhookEventWorkerTest extends TestCase {
 	private $repository;
-	private $matcher;
+	private $sync_service;
 	private $client;
 	private $worker;
 	private $event_ids = array();
@@ -52,8 +42,8 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 			'location_id' => 'worker-location', 'catalog_item_variation_id' => 'worker-item',
 			'subscription_plan_variation_id' => 'worker-plan',
 		) );
-		$this->matcher = new Egov_Law_Monitor_Test_Webhook_Subscription_Matcher();
-		$this->worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( $this->repository, $this->client, $this->matcher );
+		$this->sync_service = new Egov_Law_Monitor_Test_Webhook_Subscription_Sync_Service();
+		$this->worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( $this->repository, $this->client, $this->sync_service );
 		$this->invoice_response = array( 'id' => 'worker-invoice', 'subscription_id' => 'worker-subscription', 'location_id' => 'worker-location', 'order_id' => 'worker-order', 'status' => 'PAID' );
 		$this->http_filter = function ( $preempt, $args, $url ) {
 			$this->http_calls[] = $url;
@@ -81,15 +71,30 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 		parent::tearDown();
 	}
 
-	public function test_subscription_created_and_updated_events_are_matched(): void {
+	public function test_subscription_created_and_updated_events_call_sync_service(): void {
 		foreach ( array( 'subscription.created', 'subscription.updated' ) as $type ) {
 			$event_id = $this->insert_event( $type, 'subscription', 'worker-subscription' );
 			$result = $this->worker->process_batch( 1 );
 			$this->assertSame( 1, $result['processed'] );
 			$this->assertSame( 'processed', $this->event_row( $event_id )['processing_status'] );
 		}
-		$this->assertSame( array( 'worker-subscription', 'worker-subscription' ), $this->matcher->calls );
+		$this->assertSame( array( 'worker-subscription', 'worker-subscription' ), $this->sync_service->calls );
 		$this->assertCount( 0, $this->http_calls );
+	}
+
+	public function test_only_saved_and_unchanged_sync_results_mark_events_processed(): void {
+		$this->sync_service->callback = static function ( $subscription_id ) {
+			return array( 'status' => 'saved' === $subscription_id ? 'saved' : ( 'unchanged' === $subscription_id ? 'unchanged' : 'subscription_matched' ) );
+		};
+		$saved_id = $this->insert_event( 'subscription.created', 'subscription', 'saved' );
+		$unchanged_id = $this->insert_event( 'subscription.updated', 'subscription', 'unchanged' );
+		$matcher_only_id = $this->insert_event( 'subscription.updated', 'subscription', 'matcher-only' );
+		$result = $this->worker->process_batch( 3 );
+		$this->assertSame( 2, $result['processed'] );
+		$this->assertSame( 1, $result['reconciliation_required'] );
+		$this->assertSame( 'processed', $this->event_row( $saved_id )['processing_status'] );
+		$this->assertSame( 'processed', $this->event_row( $unchanged_id )['processing_status'] );
+		$this->assertSame( 'reconciliation_required', $this->event_row( $matcher_only_id )['processing_status'] );
 	}
 
 	public function test_invoice_payment_made_is_retrieved_before_matching_subscription(): void {
@@ -97,7 +102,7 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 		$result = $this->worker->process_batch( 1 );
 		$this->assertSame( 1, $result['processed'] );
 		$this->assertSame( 'processed', $this->event_row( $event_id )['processing_status'] );
-		$this->assertSame( array( 'worker-subscription' ), $this->matcher->calls );
+		$this->assertSame( array( 'worker-subscription' ), $this->sync_service->calls );
 		$this->assertSame( array( 'https://connect.squareupsandbox.com/v2/invoices/worker-invoice' ), $this->http_calls );
 	}
 
@@ -107,15 +112,15 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 		$result = $this->worker->process_batch( 1 );
 		$this->assertSame( 1, $result['reconciliation_required'] );
 		$this->assertSame( 'reconciliation_required', $this->event_row( $event_id )['processing_status'] );
-		$this->assertCount( 0, $this->matcher->calls );
+		$this->assertCount( 0, $this->sync_service->calls );
 	}
 
-	public function test_unsupported_event_is_completed_without_square_or_matcher_calls(): void {
+	public function test_unsupported_event_is_completed_without_square_or_sync_calls(): void {
 		$event_id = $this->insert_event( 'payment.updated', 'payment', 'worker-payment' );
 		$result = $this->worker->process_batch( 1 );
 		$this->assertSame( 1, $result['processed'] );
 		$this->assertSame( 'processed', $this->event_row( $event_id )['processing_status'] );
-		$this->assertCount( 0, $this->matcher->calls );
+		$this->assertCount( 0, $this->sync_service->calls );
 		$this->assertCount( 0, $this->http_calls );
 	}
 
@@ -126,39 +131,45 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 		$this->assertSame( 2, $result['reconciliation_required'] );
 		$this->assertSame( 'reconciliation_required', $this->event_row( $missing_id )['processing_status'] );
 		$this->assertSame( 'reconciliation_required', $this->event_row( $invalid_id )['processing_status'] );
-		$this->assertCount( 0, $this->matcher->calls );
+		$this->assertCount( 0, $this->sync_service->calls );
 	}
 
-	public function test_matcher_pending_api_error_and_reconciliation_results_map_to_repository_states(): void {
-		$this->matcher->callback = static function () { return array( 'status' => 'subscription_pending' ); };
+	public function test_sync_pending_retry_and_reconciliation_results_map_to_repository_states(): void {
+		$this->sync_service->callback = static function () { return array( 'status' => 'pending', 'reason_code' => 'subscription_match_pending' ); };
 		$pending_id = $this->insert_event( 'subscription.created', 'subscription', 'pending-subscription' );
 		$pending = $this->worker->process_batch( 1 );
 		$this->assertSame( 1, $pending['retry'] );
 		$this->assertSame( 'retry', $this->event_row( $pending_id )['processing_status'] );
 		$this->assertSame( '1', (string) $this->event_row( $pending_id )['retry_count'] );
 
-		$this->matcher->callback = static function () { return array( 'status' => 'square_api_error' ); };
+		$this->sync_service->callback = static function () { return array( 'status' => 'retry', 'reason_code' => 'square_api_unavailable' ); };
 		$api_error_id = $this->insert_event( 'subscription.updated', 'subscription', 'api-error-subscription' );
 		$api_error = $this->worker->process_batch( 1 );
 		$this->assertSame( 1, $api_error['retry'] );
 		$this->assertSame( 'retry', $this->event_row( $api_error_id )['processing_status'] );
-		$this->assertSame( 'square_subscription_api_unavailable', $this->event_row( $api_error_id )['last_error_code'] );
+		$this->assertSame( 'subscription_sync_retry', $this->event_row( $api_error_id )['last_error_code'] );
 
-		$this->matcher->callback = static function () { return array( 'status' => 'reconciliation_required' ); };
+		$this->sync_service->callback = static function () { return array( 'status' => 'retry', 'reason_code' => 'contract_database_unavailable' ); };
+		$database_error_id = $this->insert_event( 'subscription.updated', 'subscription', 'database-error-subscription' );
+		$database_error = $this->worker->process_batch( 1 );
+		$this->assertSame( 1, $database_error['retry'] );
+		$this->assertSame( 'retry', $this->event_row( $database_error_id )['processing_status'] );
+
+		$this->sync_service->callback = static function () { return array( 'status' => 'reconciliation_required' ); };
 		$review_id = $this->insert_event( 'subscription.created', 'subscription', 'review-subscription' );
 		$review = $this->worker->process_batch( 1 );
 		$this->assertSame( 1, $review['reconciliation_required'] );
 		$this->assertSame( 'reconciliation_required', $this->event_row( $review_id )['processing_status'] );
 	}
 
-	public function test_invoice_api_error_is_retryable_and_does_not_call_matcher(): void {
+	public function test_invoice_api_error_is_retryable_and_does_not_call_sync_service(): void {
 		$this->http_status = 503;
 		$event_id = $this->insert_event( 'invoice.payment_made', 'invoice', 'worker-invoice' );
 		$result = $this->worker->process_batch( 1 );
 		$this->assertSame( 1, $result['retry'] );
 		$this->assertSame( 'retry', $this->event_row( $event_id )['processing_status'] );
 		$this->assertSame( 'invoice_api_unavailable', $this->event_row( $event_id )['last_error_code'] );
-		$this->assertCount( 0, $this->matcher->calls );
+		$this->assertCount( 0, $this->sync_service->calls );
 	}
 
 	public function test_sandbox_worker_ignores_production_and_other_merchant_events(): void {
@@ -168,7 +179,7 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 
 		$result = $this->worker->process_batch( 10 );
 		$this->assertSame( 1, $result['processed'] );
-		$this->assertSame( array( 'sandbox-subscription' ), $this->matcher->calls );
+		$this->assertSame( array( 'sandbox-subscription' ), $this->sync_service->calls );
 		$this->assertSame( 'received', $this->event_row( $production_id )['processing_status'] );
 		$this->assertSame( 'received', $this->event_row( $other_merchant_id )['processing_status'] );
 		$this->assertSame( 'processed', $this->event_row( $sandbox_id )['processing_status'] );
@@ -194,8 +205,8 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 			'location_id' => 'worker-location', 'catalog_item_variation_id' => 'worker-item',
 			'subscription_plan_variation_id' => 'worker-plan',
 		) );
-		$this->matcher = new Egov_Law_Monitor_Test_Webhook_Subscription_Matcher( null, 'production', $this->merchant_id );
-		$this->worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( $this->repository, $this->client, $this->matcher );
+		$this->sync_service = new Egov_Law_Monitor_Test_Webhook_Subscription_Sync_Service();
+		$this->worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( $this->repository, $this->client, $this->sync_service );
 		$event_id = $this->insert_event( 'subscription.created', 'subscription', 'production-subscription', array(), 'production', $this->merchant_id );
 		$result = $this->worker->process_batch( 1 );
 		$this->assertInstanceOf( WP_Error::class, $result );
@@ -243,13 +254,13 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 			'location_id' => 'worker-location', 'catalog_item_variation_id' => 'worker-item',
 			'subscription_plan_variation_id' => 'worker-plan',
 		) );
-		$this->matcher = new Egov_Law_Monitor_Test_Webhook_Subscription_Matcher( null, 'production', $this->merchant_id );
-		$this->worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( $this->repository, $this->client, $this->matcher );
+		$this->sync_service = new Egov_Law_Monitor_Test_Webhook_Subscription_Sync_Service();
+		$this->worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( $this->repository, $this->client, $this->sync_service );
 		$production_id = $this->insert_event( 'subscription.created', 'subscription', 'production-subscription', array(), 'production', $this->merchant_id );
 		$sandbox_id = $this->insert_event( 'subscription.created', 'subscription', 'sandbox-subscription', array(), 'sandbox', $this->merchant_id );
 		$result = $this->worker->process_batch( 10 );
 		$this->assertSame( 1, $result['processed'] );
-		$this->assertSame( array( 'production-subscription' ), $this->matcher->calls );
+		$this->assertSame( array( 'production-subscription' ), $this->sync_service->calls );
 		$this->assertSame( 'processed', $this->event_row( $production_id )['processing_status'] );
 		$this->assertSame( 'received', $this->event_row( $sandbox_id )['processing_status'] );
 		$this->assertCount( 0, $this->http_calls );
@@ -261,8 +272,8 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 		$this->assertSame( 'processed', $this->event_row( $factory_event_id )['processing_status'] );
 	}
 
-	public function test_unexpected_matcher_exception_becomes_safe_retry_without_exposing_details(): void {
-		$this->matcher->callback = static function () {
+	public function test_unexpected_sync_exception_becomes_safe_retry_without_exposing_details(): void {
+		$this->sync_service->callback = static function () {
 			throw new RuntimeException( 'sensitive exception detail' );
 		};
 		$event_id = $this->insert_event( 'subscription.created', 'subscription', 'worker-subscription' );
@@ -275,7 +286,7 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 	}
 
 	public function test_retry_limit_moves_pending_event_to_reconciliation_required(): void {
-		$this->matcher->callback = static function () { return array( 'status' => 'subscription_pending' ); };
+		$this->sync_service->callback = static function () { return array( 'status' => 'pending' ); };
 		$event_id = $this->insert_event( 'subscription.created', 'subscription', 'pending-subscription', array( 'processing_status' => 'retry', 'retry_count' => 5, 'next_retry_at' => gmdate( 'Y-m-d H:i:s', time() - 1 ) ) );
 		$result = $this->worker->process_batch( 1 );
 		$this->assertSame( 1, $result['reconciliation_required'] );
@@ -295,20 +306,20 @@ final class SquareWebhookEventWorkerTest extends TestCase {
 		$this->assertSame( 2, $result['processed'] );
 		$this->assertSame( 'processed', $this->event_row( $event_id )['processing_status'] );
 		$this->assertSame( 'processed', $this->event_row( $second_id )['processing_status'] );
-		$this->assertSame( array( 'worker-subscription' ), $this->matcher->calls );
+		$this->assertSame( array( 'worker-subscription' ), $this->sync_service->calls );
 		$this->assertSame( 0, $this->worker->process_batch( 2 )['found'] );
-		$this->assertSame( array( 'worker-subscription' ), $this->matcher->calls );
+		$this->assertSame( array( 'worker-subscription' ), $this->sync_service->calls );
 	}
 
 	public function test_old_claim_generation_cannot_overwrite_new_worker_result(): void {
 		$event_id = $this->insert_event( 'subscription.created', 'subscription', 'worker-subscription' );
-		$this->matcher->callback = function () use ( $event_id ) {
+		$this->sync_service->callback = function () use ( $event_id ) {
 			global $wpdb;
 			$table = $wpdb->prefix . 'egov_law_square_events';
 			$wpdb->update( $table, array( 'processing_started_at' => gmdate( 'Y-m-d H:i:s', time() - 600 ) ), array( 'id' => $event_id ), array( '%s' ), array( '%d' ) );
 			$new_claim = $this->repository->claim_event( $event_id, 'sandbox', $this->merchant_id );
 			$this->assertSame( '2', (string) $new_claim['claim_generation'] );
-			return array( 'status' => 'subscription_matched' );
+			return array( 'status' => 'saved' );
 		};
 		$result = $this->worker->process_batch( 1 );
 		$this->assertSame( 1, $result['lost_claims'] );

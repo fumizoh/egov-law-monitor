@@ -679,10 +679,12 @@ class Egov_Law_Monitor_Square_Subscription_Sync_Service {
 }
 
 /** Build the independent contract snapshot persistence service. No hooks are registered. */
-function egov_law_monitor_square_subscription_sync_service() {
+function egov_law_monitor_square_subscription_sync_service( $client = null ) {
 	global $wpdb;
-	$client = Egov_Law_Monitor_Square_Api_Client::from_wordpress_config();
-	if ( is_wp_error( $client ) ) {
+	if ( null === $client ) {
+		$client = Egov_Law_Monitor_Square_Api_Client::from_wordpress_config();
+	}
+	if ( is_wp_error( $client ) || ! $client instanceof Egov_Law_Monitor_Square_Api_Client ) {
 		return new WP_Error( 'square_subscription_sync_unavailable', '契約同期を利用できません。' );
 	}
 	$checkout_repository = new Egov_Law_Monitor_Checkout_Repository( $wpdb );

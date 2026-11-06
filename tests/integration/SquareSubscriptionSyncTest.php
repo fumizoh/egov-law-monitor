@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 final class SquareSubscriptionSyncTest extends TestCase {
 	private $attempt_uuid;
+	private $webhook_event_ids = array();
 	private $http_filter;
 	private $http_calls = array();
 	private $subscription;
@@ -112,6 +113,7 @@ final class SquareSubscriptionSyncTest extends TestCase {
 		remove_filter( 'pre_http_request', $this->http_filter, 10 );
 		if ( DB_NAME === 'egov_law_monitor_test' && DB_HOST === 'wp-test-db' && DB_USER === 'egov_test' ) {
 			$attempts = $wpdb->prefix . 'egov_law_checkout_attempts';
+			$events = $wpdb->prefix . 'egov_law_square_events';
 			$subscriptions = $wpdb->prefix . 'egov_law_subscriptions';
 			$invoices = $wpdb->prefix . 'egov_law_subscription_invoices';
 			$rows = $wpdb->get_results( $wpdb->prepare( "SELECT id FROM {$subscriptions} WHERE checkout_attempt_uuid = %s", $this->attempt_uuid ), ARRAY_A );
@@ -122,6 +124,9 @@ final class SquareSubscriptionSyncTest extends TestCase {
 			$wpdb->delete( $invoices, array( 'environment' => $this->scope['environment'], 'merchant_id' => $this->scope['merchant_id'] ), array( '%s', '%s' ) );
 			$wpdb->delete( $subscriptions, array( 'environment' => $this->scope['environment'], 'merchant_id' => $this->scope['merchant_id'] ), array( '%s', '%s' ) );
 			$wpdb->delete( $attempts, array( 'attempt_uuid' => $this->attempt_uuid ), array( '%s' ) );
+			foreach ( $this->webhook_event_ids as $event_id ) {
+				$wpdb->delete( $events, array( 'environment' => $this->scope['environment'], 'merchant_id' => $this->scope['merchant_id'], 'square_event_id' => $event_id ), array( '%s', '%s', '%s' ) );
+			}
 		}
 		parent::tearDown();
 	}
@@ -359,8 +364,47 @@ final class SquareSubscriptionSyncTest extends TestCase {
 		}
 	}
 
-	private function service( Egov_Law_Monitor_Square_Subscription_Contract_Repository $repository = null ) {
-		$client = new Egov_Law_Monitor_Square_Api_Client( array_merge( $this->scope, array( 'access_token' => 'integration-test-token' ) ) );
+	public function test_webhook_worker_saves_once_for_duplicate_subscription_events_and_keeps_entitlement_free(): void {
+		global $wpdb;
+		$client = $this->client();
+		$checkout_repository = new Egov_Law_Monitor_Checkout_Repository( $wpdb );
+		$payment_matcher = new Egov_Law_Monitor_Square_Payment_Attempt_Matcher( $checkout_repository, $client );
+		$confirmation = new Egov_Law_Monitor_Square_Initial_Payment_Confirmation_Service( $checkout_repository, $client, $payment_matcher );
+		$matcher = new Egov_Law_Monitor_Square_Subscription_Attempt_Matcher( $checkout_repository, $client, $confirmation );
+		$sync_service = new Egov_Law_Monitor_Square_Subscription_Sync_Service( new Egov_Law_Monitor_Square_Subscription_Contract_Repository( $wpdb ), $client, $matcher );
+		$event_repository = new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb );
+		$worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( $event_repository, $client, $sync_service );
+		$attempts_table = $wpdb->prefix . 'egov_law_checkout_attempts';
+		$attempt_before = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$attempts_table} WHERE attempt_uuid = %s", $this->attempt_uuid ), ARRAY_A );
+
+		foreach ( array( 'subscription.created', 'subscription.updated' ) as $event_type ) {
+			$event_id = 'sync-worker-event-' . wp_generate_uuid4();
+			$this->webhook_event_ids[] = $event_id;
+			$payload = wp_json_encode( array(
+				'event_id' => $event_id,
+				'type' => $event_type,
+				'merchant_id' => $this->scope['merchant_id'],
+				'data' => array( 'type' => 'subscription', 'id' => $this->subscription['id'], 'object' => array( 'subscription' => array( 'id' => $this->subscription['id'] ) ) ),
+			) );
+			$saved_event = $event_repository->insert_event( json_decode( $payload, true ), $this->scope['environment'], $this->scope['merchant_id'], $payload );
+			$this->assertFalse( $saved_event['duplicate'] );
+		}
+
+		$result = $worker->process_batch( 2 );
+		$this->assertSame( 2, $result['processed'] );
+		$this->assertSame( 1, $this->count_rows( 'egov_law_subscriptions' ) );
+		$this->assertSame( 1, $this->count_rows( 'egov_law_subscription_invoices' ) );
+		$this->assertSame( $attempt_before, $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$attempts_table} WHERE attempt_uuid = %s", $this->attempt_uuid ), ARRAY_A ) );
+		$snapshot = ( new Egov_Law_Monitor_Subscription_Repository( $wpdb ) )->get_entitlement_snapshot( 1, 'sandbox' );
+		$decision = egov_law_monitor_resolve_entitlement( $snapshot, new DateTimeImmutable( '2026-11-06T12:00:00Z' ) );
+		$this->assertSame( 'free', $decision['effective_plan'] );
+		$this->assertSame( 'pending', $this->subscription_row()['internal_status'] );
+		$this->assertNull( $this->subscription_row()['current_slot'] );
+		$this->assertSame( 'unknown', $this->subscription_row()['sync_state'] );
+	}
+
+	private function service( Egov_Law_Monitor_Square_Subscription_Contract_Repository $repository = null, Egov_Law_Monitor_Square_Api_Client $client = null ) {
+		$client = $client ?: $this->client();
 		$checkout_repository = new Egov_Law_Monitor_Checkout_Repository( $this->wpdb() );
 		$payment_matcher = new Egov_Law_Monitor_Square_Payment_Attempt_Matcher( $checkout_repository, $client );
 		$confirmation = new Egov_Law_Monitor_Square_Initial_Payment_Confirmation_Service( $checkout_repository, $client, $payment_matcher );
@@ -472,6 +516,10 @@ final class SquareSubscriptionSyncTest extends TestCase {
 	private function wpdb() {
 		global $wpdb;
 		return $wpdb;
+	}
+
+	private function client(): Egov_Law_Monitor_Square_Api_Client {
+		return new Egov_Law_Monitor_Square_Api_Client( array_merge( $this->scope, array( 'access_token' => 'integration-test-token' ) ) );
 	}
 }
 

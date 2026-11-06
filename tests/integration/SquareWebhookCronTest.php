@@ -101,7 +101,9 @@ final class SquareWebhookCronTest extends TestCase {
 		$payment_matcher = new Egov_Law_Monitor_Square_Payment_Attempt_Matcher( $checkout_repository, $client );
 		$confirmation = new Egov_Law_Monitor_Square_Initial_Payment_Confirmation_Service( $checkout_repository, $client, $payment_matcher );
 		$matcher = new Egov_Law_Monitor_Square_Subscription_Attempt_Matcher( $checkout_repository, $client, $confirmation );
-		$spy = new Egov_Law_Monitor_Test_Spy_Square_Webhook_Worker( new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb ), $client, $matcher );
+		$contract_repository = new Egov_Law_Monitor_Square_Subscription_Contract_Repository( $wpdb );
+		$sync_service = new Egov_Law_Monitor_Square_Subscription_Sync_Service( $contract_repository, $client, $matcher );
+		$spy = new Egov_Law_Monitor_Test_Spy_Square_Webhook_Worker( new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb ), $client, $sync_service );
 		$this->worker_filter_callback = static function () use ( $spy ) { return $spy; };
 		add_filter( 'egov_law_monitor_square_webhook_event_worker', $this->worker_filter_callback );
 		$result = egov_law_monitor_square_webhook_worker_cron_callback();

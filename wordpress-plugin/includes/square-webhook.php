@@ -396,8 +396,8 @@ class Egov_Law_Monitor_Square_Webhook_Repository {
 
 /**
  * Process persisted, signature-verified Square webhook events outside the REST
- * request. This worker only matches; it never writes checkout, subscription,
- * invoice, user-meta, or entitlement records.
+ * request. This worker delegates strict matching and snapshot persistence to
+ * the independent contract-sync service; it never changes entitlement state.
  */
 class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 	private const MAX_BATCH_SIZE = 100;
@@ -406,12 +406,12 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 
 	private $repository;
 	private $client;
-	private $matcher;
+	private $subscription_sync_service;
 
-	public function __construct( Egov_Law_Monitor_Square_Webhook_Repository $repository, Egov_Law_Monitor_Square_Api_Client $client, Egov_Law_Monitor_Square_Subscription_Attempt_Matcher $matcher ) {
-		$this->repository = $repository;
-		$this->client     = $client;
-		$this->matcher    = $matcher;
+	public function __construct( Egov_Law_Monitor_Square_Webhook_Repository $repository, Egov_Law_Monitor_Square_Api_Client $client, Egov_Law_Monitor_Square_Subscription_Sync_Service $subscription_sync_service ) {
+		$this->repository               = $repository;
+		$this->client                   = $client;
+		$this->subscription_sync_service = $subscription_sync_service;
 	}
 
 	/**
@@ -545,7 +545,7 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 			if ( is_wp_error( $subscription_id ) ) {
 				return $this->decision( 'reconciliation_required', 'subscription_event_id_invalid' );
 			}
-			return $this->decide_match_result( $this->matcher->match_subscription( $subscription_id ) );
+			return $this->decide_sync_result( $this->subscription_sync_service->sync_subscription( $subscription_id ) );
 		}
 
 		$invoice_id = $this->extract_resource_id( $event, 'invoice' );
@@ -565,7 +565,7 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 			return $this->decision( 'reconciliation_required', 'invoice_subscription_id_missing_or_invalid' );
 		}
 
-		return $this->decide_match_result( $this->matcher->match_subscription( $invoice['subscription_id'] ) );
+		return $this->decide_sync_result( $this->subscription_sync_service->sync_subscription( $invoice['subscription_id'] ) );
 	}
 
 	/** Extract a resource ID, requiring duplicate representations to agree. */
@@ -607,24 +607,27 @@ class Egov_Law_Monitor_Square_Webhook_Event_Worker {
 		return $resource_id;
 	}
 
-	private function decide_match_result( $result ) {
+	private function decide_sync_result( $result ) {
 		if ( is_wp_error( $result ) ) {
-			return $this->decision( 'retry', 'subscription_match_unavailable' );
+			return $this->decision( 'retry', 'subscription_sync_unavailable' );
 		}
 		if ( ! is_array( $result ) || ! isset( $result['status'] ) || ! is_string( $result['status'] ) ) {
-			return $this->decision( 'reconciliation_required', 'subscription_match_result_invalid' );
+			return $this->decision( 'reconciliation_required', 'subscription_sync_result_invalid' );
 		}
 		switch ( $result['status'] ) {
-			case 'subscription_matched':
+			case 'saved':
+			case 'unchanged':
 				return $this->decision( 'processed', '' );
-			case 'subscription_pending':
-				return $this->decision( 'retry', 'subscription_pending' );
-			case 'square_api_error':
-				return $this->decision( 'retry', 'square_subscription_api_unavailable' );
+			case 'pending':
+				// Pending can represent asynchronous Square propagation. Retry under
+				// the repository's bounded attempts, then stop for reconciliation.
+				return $this->decision( 'retry', 'subscription_sync_pending' );
+			case 'retry':
+				return $this->decision( 'retry', 'subscription_sync_retry' );
 			case 'reconciliation_required':
-				return $this->decision( 'reconciliation_required', 'subscription_match_requires_review' );
+				return $this->decision( 'reconciliation_required', 'subscription_sync_requires_review' );
 			default:
-				return $this->decision( 'reconciliation_required', 'subscription_match_result_invalid' );
+				return $this->decision( 'reconciliation_required', 'subscription_sync_result_invalid' );
 		}
 	}
 
@@ -663,11 +666,11 @@ function egov_law_monitor_square_webhook_event_worker() {
 		return new WP_Error( 'square_webhook_worker_environment_disabled', 'Webhook処理を利用できません。' );
 	}
 
-	$checkout_repository = new Egov_Law_Monitor_Checkout_Repository( $wpdb );
-	$payment_matcher = new Egov_Law_Monitor_Square_Payment_Attempt_Matcher( $checkout_repository, $client );
-	$payment_confirmation = new Egov_Law_Monitor_Square_Initial_Payment_Confirmation_Service( $checkout_repository, $client, $payment_matcher );
-	$subscription_matcher = new Egov_Law_Monitor_Square_Subscription_Attempt_Matcher( $checkout_repository, $client, $payment_confirmation );
-	$worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb ), $client, $subscription_matcher );
+	$subscription_sync_service = egov_law_monitor_square_subscription_sync_service( $client );
+	if ( is_wp_error( $subscription_sync_service ) || ! $subscription_sync_service instanceof Egov_Law_Monitor_Square_Subscription_Sync_Service ) {
+		return new WP_Error( 'square_webhook_worker_sync_unavailable', 'Webhook処理を利用できません。' );
+	}
+	$worker = new Egov_Law_Monitor_Square_Webhook_Event_Worker( new Egov_Law_Monitor_Square_Webhook_Repository( $wpdb ), $client, $subscription_sync_service );
 	return apply_filters( 'egov_law_monitor_square_webhook_event_worker', $worker );
 }
 
