@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 final class DatabaseSchemaTest extends TestCase {
 	private $tables = array();
 	private const SCHEMA_VERSION_OPTION = 'egov_law_monitor_square_schema_version';
-	private const CURRENT_SCHEMA_VERSION = 4;
+	private const CURRENT_SCHEMA_VERSION = 5;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -225,6 +225,252 @@ final class DatabaseSchemaTest extends TestCase {
 		$this->assertSame( $payload, $wpdb->get_var( $wpdb->prepare( "SELECT normalized_payload FROM {$table} WHERE square_event_id = %s", $event_id ) ) );
 	}
 
+	public function test_version_four_migration_adds_contract_reconciliation_columns_and_preserves_data(): void {
+		global $wpdb;
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$subscriptions         = $wpdb->prefix . 'egov_law_subscriptions';
+		$invoices              = $wpdb->prefix . 'egov_law_subscription_invoices';
+		$subscription_id = 'preserved-subscription-v4';
+		$invoice_id      = 'preserved-invoice-v4';
+
+		$this->assertSame(
+			1,
+			$wpdb->insert(
+				$subscriptions,
+				array(
+					'user_id'                => 865,
+					'environment'            => 'sandbox',
+					'merchant_id'            => 'migration-merchant',
+					'square_location_id'     => 'migration-location',
+					'square_customer_id'     => 'migration-customer',
+					'square_subscription_id' => $subscription_id,
+					'square_plan_variation_id' => 'migration-plan',
+					'internal_status'       => 'active',
+					'initial_payment_status' => 'succeeded',
+					'current_slot'            => 1,
+					'current_period_end'      => '2027-06-01 00:00:00',
+					'sync_state'              => 'ok',
+					'created_at'              => '2026-06-01 00:00:00',
+					'updated_at'              => '2026-06-01 00:00:00',
+				)
+			)
+		);
+		$local_subscription_id = (int) $wpdb->insert_id;
+		$repository = new Egov_Law_Monitor_Subscription_Repository( $wpdb );
+		$snapshot_before = $repository->get_entitlement_snapshot( 865, 'sandbox' );
+		$this->assertIsArray( $snapshot_before );
+		$entitlement_before = egov_law_monitor_resolve_entitlement( $snapshot_before, new DateTimeImmutable( '2026-06-15 00:00:00', new DateTimeZone( 'UTC' ) ) );
+		$this->assertSame( 'standard', $entitlement_before['effective_plan'] );
+		$this->assertSame(
+			1,
+			$wpdb->insert(
+				$invoices,
+				array(
+					'subscription_id'   => $local_subscription_id,
+					'user_id'           => 865,
+					'environment'       => 'sandbox',
+					'merchant_id'       => 'migration-merchant',
+					'square_invoice_id' => $invoice_id,
+					'amount'            => 500,
+					'currency'          => 'JPY',
+					'payment_status'    => 'paid',
+					'created_at'        => '2026-06-01 00:00:00',
+					'updated_at'        => '2026-06-01 00:00:00',
+				)
+			)
+		);
+
+		// Restore the v4 contract-table shape while retaining the original rows.
+		$this->assertNotFalse(
+			$wpdb->query(
+				"ALTER TABLE `{$subscriptions}` MODIFY square_customer_id VARCHAR(64) NOT NULL, MODIFY square_subscription_id VARCHAR(64) NOT NULL, MODIFY square_plan_variation_id VARCHAR(64) NOT NULL DEFAULT '', DROP INDEX checkout_attempt_uuid, DROP COLUMN checkout_attempt_uuid, DROP COLUMN square_version"
+			)
+		);
+		$this->assertNotFalse(
+			$wpdb->query(
+				"ALTER TABLE `{$invoices}` MODIFY square_invoice_id VARCHAR(64) NOT NULL, MODIFY square_payment_id VARCHAR(64) NULL DEFAULT NULL, DROP COLUMN square_version, DROP COLUMN completed_amount"
+			)
+		);
+		update_option( self::SCHEMA_VERSION_OPTION, 4, false );
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+		$this->assertColumn( $subscriptions, 'square_subscription_id', 'varchar(255)', 'NO', '' );
+		$this->assertColumn( $subscriptions, 'checkout_attempt_uuid', 'char(36)', 'YES', null );
+		$this->assertColumn( $subscriptions, 'square_version', 'bigint unsigned', 'YES', null );
+		$this->assertColumn( $invoices, 'square_invoice_id', 'varchar(255)', 'NO', '' );
+		$this->assertColumn( $invoices, 'square_payment_id', 'varchar(192)', 'YES', null );
+		$this->assertColumn( $invoices, 'square_version', 'bigint unsigned', 'YES', null );
+		$this->assertColumn( $invoices, 'completed_amount', 'bigint', 'YES', null );
+
+		$subscription = $wpdb->get_row( $wpdb->prepare( "SELECT square_subscription_id, square_customer_id, current_slot, square_version, checkout_attempt_uuid FROM {$subscriptions} WHERE id = %d", $local_subscription_id ), ARRAY_A );
+		$this->assertSame( $subscription_id, $subscription['square_subscription_id'] );
+		$this->assertSame( 'migration-customer', $subscription['square_customer_id'] );
+		$this->assertSame( '1', (string) $subscription['current_slot'] );
+		$this->assertNull( $subscription['square_version'] );
+		$this->assertNull( $subscription['checkout_attempt_uuid'] );
+
+		$invoice = $wpdb->get_row( $wpdb->prepare( "SELECT square_invoice_id, amount, completed_amount, currency, payment_status FROM {$invoices} WHERE square_invoice_id = %s", $invoice_id ), ARRAY_A );
+		$this->assertSame( $invoice_id, $invoice['square_invoice_id'] );
+		$this->assertSame( '500', (string) $invoice['amount'] );
+		$this->assertNull( $invoice['completed_amount'] );
+		$this->assertSame( 'JPY', $invoice['currency'] );
+		$this->assertSame( 'paid', $invoice['payment_status'] );
+		$snapshot_after = $repository->get_entitlement_snapshot( 865, 'sandbox' );
+		$this->assertIsArray( $snapshot_after );
+		$entitlement_after = egov_law_monitor_resolve_entitlement( $snapshot_after, new DateTimeImmutable( '2026-06-15 00:00:00', new DateTimeZone( 'UTC' ) ) );
+		$this->assertSame( $entitlement_before, $entitlement_after );
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->assertSame( $subscription_id, $wpdb->get_var( $wpdb->prepare( "SELECT square_subscription_id FROM {$subscriptions} WHERE id = %d", $local_subscription_id ) ) );
+	}
+
+	public function test_failed_version_four_migration_does_not_advance_schema_version(): void {
+		global $wpdb;
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$subscriptions = $wpdb->prefix . 'egov_law_subscriptions';
+		$invoices      = $wpdb->prefix . 'egov_law_subscription_invoices';
+		$this->assertNotFalse( $wpdb->query( "ALTER TABLE `{$subscriptions}` MODIFY square_subscription_id VARCHAR(64) NOT NULL, DROP INDEX checkout_attempt_uuid, DROP COLUMN checkout_attempt_uuid, DROP COLUMN square_version" ) );
+		$this->assertNotFalse( $wpdb->query( "ALTER TABLE `{$invoices}` MODIFY square_invoice_id VARCHAR(64) NOT NULL, MODIFY square_payment_id VARCHAR(64) NULL DEFAULT NULL, DROP COLUMN square_version, DROP COLUMN completed_amount" ) );
+		update_option( self::SCHEMA_VERSION_OPTION, 4, false );
+
+		$skip_subscription_upgrade = static function ( $queries ) use ( $subscriptions ) {
+			unset( $queries[ $subscriptions ] );
+			return $queries;
+		};
+		add_filter( 'dbdelta_create_queries', $skip_subscription_upgrade );
+		try {
+			$this->assertFalse( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		} finally {
+			remove_filter( 'dbdelta_create_queries', $skip_subscription_upgrade );
+		}
+
+		$this->assertSame( 4, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+		$this->assertColumn( $subscriptions, 'square_subscription_id', 'varchar(64)', 'NO', '' );
+		$this->assertNull( $wpdb->get_var( $wpdb->prepare( "SHOW COLUMNS FROM `{$subscriptions}` LIKE %s", 'square_version' ) ) );
+	}
+
+	public function test_schema_v5_accepts_square_id_lengths_and_keeps_unique_constraints(): void {
+		global $wpdb;
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+
+		$subscriptions         = $wpdb->prefix . 'egov_law_subscriptions';
+		$invoices              = $wpdb->prefix . 'egov_law_subscription_invoices';
+		$attempt_uuid          = wp_generate_uuid4();
+		$long_subscription_id = str_repeat( 's', 255 );
+		$long_plan_id          = str_repeat( 'p', 255 );
+		$long_customer_id      = str_repeat( 'c', 191 );
+		$this->assertSame(
+			1,
+			$wpdb->insert(
+				$subscriptions,
+				array(
+					'user_id'                 => 866,
+					'environment'             => 'sandbox',
+					'merchant_id'             => 'long-id-merchant',
+					'square_location_id'      => 'location',
+					'square_customer_id'      => $long_customer_id,
+					'square_subscription_id'  => $long_subscription_id,
+					'square_plan_variation_id' => $long_plan_id,
+					'checkout_attempt_uuid'   => $attempt_uuid,
+					'square_version'          => '18446744073709551615',
+					'current_slot'            => 1,
+					'created_at'              => '2026-07-01 00:00:00',
+					'updated_at'              => '2026-07-01 00:00:00',
+				)
+			)
+		);
+		$local_subscription_id = (int) $wpdb->insert_id;
+		$this->assertSame( $long_subscription_id, $wpdb->get_var( $wpdb->prepare( "SELECT square_subscription_id FROM {$subscriptions} WHERE id = %d", $local_subscription_id ) ) );
+		$this->assertSame( $attempt_uuid, $wpdb->get_var( $wpdb->prepare( "SELECT checkout_attempt_uuid FROM {$subscriptions} WHERE id = %d", $local_subscription_id ) ) );
+		$this->assertSame( '18446744073709551615', (string) $wpdb->get_var( $wpdb->prepare( "SELECT square_version FROM {$subscriptions} WHERE id = %d", $local_subscription_id ) ) );
+
+		$this->assertSame(
+			1,
+			$wpdb->insert(
+				$invoices,
+				array(
+					'subscription_id'   => $local_subscription_id,
+					'user_id'           => 866,
+					'environment'       => 'sandbox',
+					'merchant_id'       => 'long-id-merchant',
+					'square_invoice_id' => str_repeat( 'i', 255 ),
+					'square_payment_id' => str_repeat( 'x', 192 ),
+					'square_version'    => 2147483647,
+					'amount'            => 500,
+					'completed_amount'  => 0,
+					'currency'          => 'JPY',
+					'created_at'        => '2026-07-01 00:00:00',
+					'updated_at'        => '2026-07-01 00:00:00',
+				)
+			)
+		);
+		$this->assertColumn( $subscriptions, 'square_subscription_id', 'varchar(255)', 'NO', '' );
+		$this->assertColumn( $invoices, 'square_invoice_id', 'varchar(255)', 'NO', '' );
+		$this->assertColumn( $invoices, 'square_payment_id', 'varchar(192)', 'YES', null );
+		$this->assertColumn( $invoices, 'completed_amount', 'bigint', 'YES', null );
+		$this->assertIndex( $subscriptions, 'square_subscription', array( 'environment', 'merchant_id', 'square_subscription_id' ), true );
+		$this->assertIndex( $subscriptions, 'checkout_attempt_uuid', array( 'checkout_attempt_uuid' ), true );
+		$this->assertIndex( $subscriptions, 'current_user_subscription', array( 'user_id', 'environment', 'merchant_id', 'current_slot' ), true );
+		$this->assertIndex( $invoices, 'square_invoice', array( 'environment', 'merchant_id', 'square_invoice_id' ), true );
+		$this->assertIndex( $invoices, 'square_payment', array( 'environment', 'merchant_id', 'square_payment_id' ), true );
+
+		$old_suppress = $wpdb->suppress_errors( true );
+		try {
+			$duplicate_subscription = array(
+				'user_id'                => 867,
+				'environment'            => 'sandbox',
+				'merchant_id'            => 'long-id-merchant',
+				'square_customer_id'     => 'another-customer',
+				'square_subscription_id' => $long_subscription_id,
+				'created_at'             => '2026-07-01 00:00:00',
+				'updated_at'             => '2026-07-01 00:00:00',
+			);
+			$this->assertFalse( $wpdb->insert( $subscriptions, $duplicate_subscription ) );
+			$duplicate_invoice = array(
+				'subscription_id'   => $local_subscription_id,
+				'user_id'           => 866,
+				'environment'       => 'sandbox',
+				'merchant_id'       => 'long-id-merchant',
+				'square_invoice_id' => str_repeat( 'i', 255 ),
+				'square_payment_id' => 'a-different-payment',
+				'created_at'        => '2026-07-01 00:00:00',
+				'updated_at'        => '2026-07-01 00:00:00',
+			);
+			$this->assertFalse( $wpdb->insert( $invoices, $duplicate_invoice ) );
+			$duplicate_payment = $duplicate_invoice;
+			$duplicate_payment['square_invoice_id'] = 'a-different-invoice';
+			$duplicate_payment['square_payment_id'] = str_repeat( 'x', 192 );
+			$this->assertFalse( $wpdb->insert( $invoices, $duplicate_payment ) );
+			$duplicate_attempt = array(
+				'user_id'                => 868,
+				'environment'            => 'production',
+				'merchant_id'            => 'other-merchant',
+				'square_customer_id'     => 'customer',
+				'square_subscription_id' => 'different-subscription',
+				'checkout_attempt_uuid'  => $attempt_uuid,
+				'created_at'             => '2026-07-01 00:00:00',
+				'updated_at'             => '2026-07-01 00:00:00',
+			);
+			$this->assertFalse( $wpdb->insert( $subscriptions, $duplicate_attempt ) );
+			$duplicate_slot = array(
+				'user_id'                => 866,
+				'environment'            => 'sandbox',
+				'merchant_id'            => 'long-id-merchant',
+				'square_customer_id'     => 'customer-2',
+				'square_subscription_id' => 'another-subscription',
+				'current_slot'           => 1,
+				'created_at'             => '2026-07-01 00:00:00',
+				'updated_at'             => '2026-07-01 00:00:00',
+			);
+			$this->assertFalse( $wpdb->insert( $subscriptions, $duplicate_slot ) );
+		} finally {
+			$wpdb->suppress_errors( $old_suppress );
+		}
+	}
+
 	public function test_subscription_migration_recovers_after_a_table_was_skipped(): void {
 		global $wpdb;
 
@@ -407,6 +653,9 @@ final class DatabaseSchemaTest extends TestCase {
 		$production_subscription                = $base_subscription;
 		$production_subscription['environment'] = 'production';
 		$this->assertSame( 1, $wpdb->insert( $subscription_table, $production_subscription ) );
+		$other_merchant_subscription = $base_subscription;
+		$other_merchant_subscription['merchant_id'] = 'merchant-test-other';
+		$this->assertSame( 1, $wpdb->insert( $subscription_table, $other_merchant_subscription ) );
 
 		$old_suppress = $wpdb->suppress_errors( true );
 		try {
@@ -453,6 +702,9 @@ final class DatabaseSchemaTest extends TestCase {
 		$production_invoice                = $base_invoice;
 		$production_invoice['environment'] = 'production';
 		$this->assertSame( 1, $wpdb->insert( $invoice_table, $production_invoice ) );
+		$other_merchant_invoice = $base_invoice;
+		$other_merchant_invoice['merchant_id'] = 'merchant-test-other';
+		$this->assertSame( 1, $wpdb->insert( $invoice_table, $other_merchant_invoice ) );
 
 		$old_suppress = $wpdb->suppress_errors( true );
 		try {
@@ -500,6 +752,23 @@ final class DatabaseSchemaTest extends TestCase {
 		$this->assertNull(
 			$wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) ) )
 		);
+	}
+
+	private function assertColumn( string $table, string $column_name, string $type, string $nullable, $default ): void {
+		global $wpdb;
+
+		$column = $wpdb->get_row(
+			$wpdb->prepare( "SHOW COLUMNS FROM `{$table}` LIKE %s", $column_name ),
+			ARRAY_A
+		);
+		$this->assertIsArray( $column, $table . '.' . $column_name . ' exists' );
+		$this->assertSame( $type, strtolower( $column['Type'] ), $table . '.' . $column_name . ' type' );
+		$this->assertSame( $nullable, $column['Null'], $table . '.' . $column_name . ' nullability' );
+		if ( null === $default ) {
+			$this->assertNull( $column['Default'], $table . '.' . $column_name . ' default' );
+		} else {
+			$this->assertSame( (string) $default, (string) $column['Default'], $table . '.' . $column_name . ' default' );
+		}
 	}
 
 	private function getTableEngine( string $table ): string {

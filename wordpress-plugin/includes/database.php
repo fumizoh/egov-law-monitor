@@ -305,9 +305,11 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				environment VARCHAR(16) NOT NULL,
 				merchant_id VARCHAR(64) NOT NULL,
 				square_location_id VARCHAR(64) NOT NULL DEFAULT '',
-				square_customer_id VARCHAR(64) NOT NULL,
-				square_subscription_id VARCHAR(64) NOT NULL,
-				square_plan_variation_id VARCHAR(64) NOT NULL DEFAULT '',
+				square_customer_id VARCHAR(191) NOT NULL,
+				square_subscription_id VARCHAR(255) NOT NULL,
+				square_plan_variation_id VARCHAR(255) NOT NULL DEFAULT '',
+				checkout_attempt_uuid CHAR(36) NULL DEFAULT NULL,
+				square_version BIGINT UNSIGNED NULL DEFAULT NULL,
 				plan_code VARCHAR(32) NOT NULL DEFAULT 'standard',
 				internal_status VARCHAR(32) NOT NULL DEFAULT 'pending',
 				square_status VARCHAR(32) NOT NULL DEFAULT 'unknown',
@@ -329,6 +331,7 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				updated_at DATETIME NOT NULL,
 				PRIMARY KEY  (id),
 				UNIQUE KEY square_subscription (environment, merchant_id, square_subscription_id),
+				UNIQUE KEY checkout_attempt_uuid (checkout_attempt_uuid),
 				UNIQUE KEY current_user_subscription (user_id, environment, merchant_id, current_slot),
 				KEY user_status (user_id, internal_status, current_slot),
 				KEY customer_lookup (environment, merchant_id, square_customer_id),
@@ -338,6 +341,7 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 			'columns' => array(
 				'id', 'user_id', 'environment', 'merchant_id', 'square_location_id',
 				'square_customer_id', 'square_subscription_id', 'square_plan_variation_id',
+				'checkout_attempt_uuid', 'square_version',
 				'plan_code', 'internal_status', 'square_status', 'initial_payment_status',
 				'current_slot', 'started_at', 'current_period_start', 'current_period_end',
 				'cancel_at_period_end', 'cancel_scheduled_at', 'canceled_at',
@@ -347,6 +351,7 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 			'indexes' => array(
 				'PRIMARY'                   => array( true, array( 'id' ) ),
 				'square_subscription'       => array( true, array( 'environment', 'merchant_id', 'square_subscription_id' ) ),
+				'checkout_attempt_uuid'     => array( true, array( 'checkout_attempt_uuid' ) ),
 				'current_user_subscription' => array( true, array( 'user_id', 'environment', 'merchant_id', 'current_slot' ) ),
 				'user_status'               => array( false, array( 'user_id', 'internal_status', 'current_slot' ) ),
 				'customer_lookup'           => array( false, array( 'environment', 'merchant_id', 'square_customer_id' ) ),
@@ -361,12 +366,14 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				user_id BIGINT UNSIGNED NOT NULL,
 				environment VARCHAR(16) NOT NULL,
 				merchant_id VARCHAR(64) NOT NULL,
-				square_invoice_id VARCHAR(64) NOT NULL,
-				square_payment_id VARCHAR(64) NULL DEFAULT NULL,
+				square_invoice_id VARCHAR(255) NOT NULL,
+				square_payment_id VARCHAR(192) NULL DEFAULT NULL,
+				square_version BIGINT UNSIGNED NULL DEFAULT NULL,
 				invoice_status VARCHAR(32) NOT NULL DEFAULT 'unknown',
 				square_status VARCHAR(32) NOT NULL DEFAULT 'unknown',
 				payment_status VARCHAR(32) NOT NULL DEFAULT 'unknown',
 				amount BIGINT NOT NULL DEFAULT 0,
+				completed_amount BIGINT NULL DEFAULT NULL,
 				currency CHAR(3) NOT NULL DEFAULT 'JPY',
 				billing_period_start DATETIME NULL DEFAULT NULL,
 				billing_period_end DATETIME NULL DEFAULT NULL,
@@ -384,8 +391,8 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 			) ENGINE=InnoDB {$charset_collate};",
 			'columns' => array(
 				'id', 'subscription_id', 'user_id', 'environment', 'merchant_id',
-				'square_invoice_id', 'square_payment_id', 'invoice_status', 'square_status',
-				'payment_status', 'amount', 'currency', 'billing_period_start',
+				'square_invoice_id', 'square_payment_id', 'square_version', 'invoice_status', 'square_status',
+				'payment_status', 'amount', 'completed_amount', 'currency', 'billing_period_start',
 				'billing_period_end', 'due_at', 'paid_at', 'failed_at', 'created_at', 'updated_at',
 			),
 			'indexes' => array(
@@ -689,7 +696,7 @@ function egov_law_monitor_maybe_upgrade_subscription_schema() {
 	global $wpdb;
 
 	$schema_version_option = 'egov_law_monitor_square_schema_version';
-	$current_version       = 4;
+	$current_version       = 5;
 	$stored_version        = (int) get_option( $schema_version_option, 0 );
 
 	if ( $stored_version > $current_version ) {
