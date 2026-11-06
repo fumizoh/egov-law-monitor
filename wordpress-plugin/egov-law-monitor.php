@@ -473,6 +473,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/ai-summary-usage-api.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-checkout.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-subscription-sync.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-recurring-payment-read-service.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/square-initial-payment-read-service.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-webhook.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/subscription-plan-page.php';
 
