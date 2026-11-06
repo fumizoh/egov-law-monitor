@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 final class DatabaseSchemaTest extends TestCase {
 	private $tables = array();
 	private const SCHEMA_VERSION_OPTION = 'egov_law_monitor_square_schema_version';
-	private const CURRENT_SCHEMA_VERSION = 5;
+	private const CURRENT_SCHEMA_VERSION = 6;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -21,6 +21,7 @@ final class DatabaseSchemaTest extends TestCase {
 			$wpdb->prefix . 'egov_law_square_events',
 			$wpdb->prefix . 'egov_law_ai_summary_usage',
 			$wpdb->prefix . 'egov_law_checkout_attempts',
+			$wpdb->prefix . 'egov_law_square_admin_reviews',
 		);
 	}
 
@@ -108,6 +109,31 @@ final class DatabaseSchemaTest extends TestCase {
 				)
 			)
 		);
+	}
+
+	public function test_version_five_migration_adds_admin_review_history_and_preserves_contract_data(): void {
+		global $wpdb;
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$subscriptions = $wpdb->prefix . 'egov_law_subscriptions';
+		$reviews = $wpdb->prefix . 'egov_law_square_admin_reviews';
+		$subscription_id = 'preserve-v5-before-admin-review';
+		$this->assertSame( 1, $wpdb->insert( $subscriptions, array(
+			'user_id' => 1, 'environment' => 'sandbox', 'merchant_id' => 'schema-v5-merchant',
+			'square_customer_id' => 'schema-v5-customer', 'square_subscription_id' => $subscription_id,
+			'plan_code' => 'standard', 'internal_status' => 'pending', 'current_slot' => null,
+			'created_at' => '2026-11-01 00:00:00', 'updated_at' => '2026-11-01 00:00:00',
+		) ) );
+		$wpdb->query( "DROP TABLE `{$reviews}`" );
+		update_option( self::SCHEMA_VERSION_OPTION, 5, false );
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->assertSame( 6, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+		$this->assertTableExists( $reviews );
+		$this->assertSame( $subscription_id, $wpdb->get_var( $wpdb->prepare( "SELECT square_subscription_id FROM {$subscriptions} WHERE merchant_id = %s", 'schema-v5-merchant' ) ) );
+		$this->assertColumn( $reviews, 'square_invoice_id', 'varchar(255)', 'YES', '' );
+		$this->assertColumn( $reviews, 'approved_period_start', 'datetime', 'YES', '' );
+		$this->assertIndex( $reviews, 'approval_payment_guard', array( 'approval_payment_guard' ), true );
+		$this->assertIndex( $reviews, 'approval_invoice_guard', array( 'approval_invoice_guard' ), true );
 	}
 
 	public function test_version_one_migration_adds_checkout_attempts_and_preserves_existing_data(): void {
@@ -352,7 +378,7 @@ final class DatabaseSchemaTest extends TestCase {
 		$this->assertNull( $wpdb->get_var( $wpdb->prepare( "SHOW COLUMNS FROM `{$subscriptions}` LIKE %s", 'square_version' ) ) );
 	}
 
-	public function test_schema_v5_accepts_square_id_lengths_and_keeps_unique_constraints(): void {
+	public function test_current_schema_accepts_square_id_lengths_and_keeps_unique_constraints(): void {
 		global $wpdb;
 		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
 

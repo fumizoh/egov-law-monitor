@@ -1,0 +1,256 @@
+<?php
+
+use PHPUnit\Framework\TestCase;
+
+final class SquareAdminReviewRepositoryTest extends TestCase {
+	private $wpdb;
+	private $attempt_id;
+	private $attempt_uuid;
+	private $contract_id;
+	private $invoice_row_id;
+	private $review_ids = array();
+	private $repository;
+
+	protected function setUp(): void {
+		parent::setUp();
+		global $wpdb;
+		$this->wpdb = $wpdb;
+		$this->assertSame( 'egov_law_monitor_test', $wpdb->get_var( 'SELECT DATABASE()' ) );
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		wp_set_current_user( 1 );
+		$this->repository = new Egov_Law_Monitor_Square_Admin_Review_Repository( $wpdb );
+		$this->attempt_uuid = wp_generate_uuid4();
+		$this->assertSame( 1, $wpdb->insert( $wpdb->prefix . 'egov_law_checkout_attempts', array(
+			'attempt_uuid' => $this->attempt_uuid, 'user_id' => 1, 'environment' => 'sandbox', 'merchant_id' => 'review-test-merchant',
+			'square_location_id' => 'review-test-location', 'plan_code' => 'standard', 'catalog_item_variation_id' => 'review-item',
+			'subscription_plan_variation_id' => 'review-plan', 'status' => 'pending', 'idempotency_key' => wp_generate_uuid4(),
+			'square_order_id' => 'review-order-' . wp_generate_uuid4(), 'created_at' => current_time( 'mysql', true ), 'updated_at' => current_time( 'mysql', true ),
+		) ) );
+		$this->attempt_id = (int) $wpdb->insert_id;
+		$this->assertSame( 1, $wpdb->insert( $wpdb->prefix . 'egov_law_subscriptions', array(
+			'user_id' => 1, 'environment' => 'sandbox', 'merchant_id' => 'review-test-merchant', 'square_location_id' => 'review-test-location',
+			'square_customer_id' => 'review-customer', 'square_subscription_id' => 'review-subscription-' . wp_generate_uuid4(),
+			'square_plan_variation_id' => 'review-plan', 'checkout_attempt_uuid' => $this->attempt_uuid, 'plan_code' => 'standard',
+			'internal_status' => 'pending', 'current_slot' => null, 'created_at' => current_time( 'mysql', true ), 'updated_at' => current_time( 'mysql', true ),
+		) ) );
+		$this->contract_id = (int) $wpdb->insert_id;
+		$this->assertSame( 1, $wpdb->insert( $wpdb->prefix . 'egov_law_subscription_invoices', array(
+			'subscription_id' => $this->contract_id, 'user_id' => 1, 'environment' => 'sandbox', 'merchant_id' => 'review-test-merchant',
+			'square_invoice_id' => 'review-invoice-' . wp_generate_uuid4(), 'square_payment_id' => 'review-payment-' . wp_generate_uuid4(),
+			'created_at' => current_time( 'mysql', true ), 'updated_at' => current_time( 'mysql', true ),
+		) ) );
+		$this->invoice_row_id = (int) $wpdb->insert_id;
+	}
+
+	protected function tearDown(): void {
+		if ( DB_NAME === 'egov_law_monitor_test' && DB_HOST === 'wp-test-db' && DB_USER === 'egov_test' ) {
+			$reviews = $this->wpdb->prefix . 'egov_law_square_admin_reviews';
+			foreach ( $this->review_ids as $review_id ) {
+				$this->wpdb->delete( $reviews, array( 'id' => $review_id ), array( '%d' ) );
+			}
+			if ( $this->invoice_row_id ) {
+				$this->wpdb->delete( $this->wpdb->prefix . 'egov_law_subscription_invoices', array( 'id' => $this->invoice_row_id ), array( '%d' ) );
+			}
+			if ( $this->contract_id ) {
+				$this->wpdb->delete( $this->wpdb->prefix . 'egov_law_subscriptions', array( 'id' => $this->contract_id ), array( '%d' ) );
+			}
+			if ( $this->attempt_uuid ) {
+				$this->wpdb->delete( $this->wpdb->prefix . 'egov_law_checkout_attempts', array( 'attempt_uuid' => $this->attempt_uuid ), array( '%s' ) );
+			}
+		}
+		parent::tearDown();
+	}
+
+	public function test_initial_approval_record_can_link_attempt_without_invoice_and_is_readable(): void {
+		$result = $this->repository->append_review( $this->entry( array(
+			'checkout_attempt_id' => $this->attempt_id,
+			'checkout_attempt_uuid' => $this->attempt_uuid,
+			'square_payment_id' => 'review-payment-initial-' . wp_generate_uuid4(),
+			'action_type' => 'approve',
+			'candidate_period_start' => '2026-11-01 00:00:00',
+			'candidate_period_end' => '2026-12-01 00:00:00',
+			'approved_period_start' => '2026-11-01 00:00:00',
+			'approved_period_end' => '2026-12-01 00:00:00',
+		) ) );
+
+		$this->assertSame( 'saved', $result['status'] );
+		$this->review_ids[] = $result['review_id'];
+		$row = $this->repository->get_review( $result['review_id'] );
+		$this->assertSame( $this->attempt_uuid, $row['checkout_attempt_uuid'] );
+		$this->assertSame( (string) $this->attempt_id, $row['checkout_attempt_id'] );
+		$this->assertNull( $row['contract_id'] );
+		$this->assertNull( $row['square_invoice_id'] );
+		$this->assertSame( 'approve', $row['action_type'] );
+		$this->assertSame( 'payment_and_period_checked', $row['evidence_code'] );
+		$this->assertSame( '2026-11-01 00:00:00', $row['approved_period_start'] );
+		$this->assertSame( '1', (string) $row['reviewer_user_id'] );
+		$this->assertSame( 1, count( $this->repository->get_reviews_for_attempt( $this->attempt_uuid ) ) );
+		$contract = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT internal_status, current_slot FROM {$this->wpdb->prefix}egov_law_subscriptions WHERE id = %d", $this->contract_id ), ARRAY_A );
+		$attempt = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT status FROM {$this->wpdb->prefix}egov_law_checkout_attempts WHERE id = %d", $this->attempt_id ), ARRAY_A );
+		$this->assertSame( 'pending', $contract['internal_status'] );
+		$this->assertNull( $contract['current_slot'] );
+		$this->assertSame( 'pending', $attempt['status'] );
+	}
+
+	public function test_duplicate_approval_for_payment_is_rejected_but_hold_and_correction_append(): void {
+		$payment_id = 'review-payment-dedup-' . wp_generate_uuid4();
+		$approval = $this->repository->append_review( $this->entry( array(
+			'contract_id' => $this->contract_id,
+			'square_payment_id' => $payment_id,
+			'action_type' => 'approve',
+			'approved_period_start' => '2026-11-01 00:00:00',
+			'approved_period_end' => '2026-12-01 00:00:00',
+		) ) );
+		$this->assertSame( 'saved', $approval['status'] );
+		$this->review_ids[] = $approval['review_id'];
+
+		$duplicate = $this->repository->append_review( $this->entry( array(
+			'contract_id' => $this->contract_id,
+			'square_payment_id' => $payment_id,
+			'action_type' => 'approve',
+			'approved_period_start' => '2026-11-01 00:00:00',
+			'approved_period_end' => '2026-12-01 00:00:00',
+		) ) );
+		$this->assertInstanceOf( WP_Error::class, $duplicate );
+		$this->assertSame( 'square_admin_review_duplicate_approval', $duplicate->get_error_code() );
+
+		$hold = $this->repository->append_review( $this->entry( array(
+			'contract_id' => $this->contract_id,
+			'square_payment_id' => $payment_id,
+			'action_type' => 'hold',
+		) ) );
+		$this->assertSame( 'saved', $hold['status'] );
+		$this->review_ids[] = $hold['review_id'];
+
+		$correction = $this->repository->append_review( $this->entry( array(
+			'contract_id' => $this->contract_id,
+			'square_payment_id' => $payment_id,
+			'action_type' => 'correct',
+			'supersedes_review_id' => $approval['review_id'],
+			'approved_period_start' => '2026-11-02 00:00:00',
+			'approved_period_end' => '2026-12-02 00:00:00',
+		) ) );
+		$this->assertSame( 'saved', $correction['status'] );
+		$this->review_ids[] = $correction['review_id'];
+		$this->assertCount( 3, $this->repository->get_reviews_for_contract( $this->contract_id ) );
+
+		$mismatched_correction = $this->repository->append_review( $this->entry( array(
+			'contract_id' => $this->contract_id,
+			'square_payment_id' => 'another-payment',
+			'action_type' => 'correct',
+			'supersedes_review_id' => $approval['review_id'],
+			'approved_period_start' => '2026-11-02 00:00:00',
+			'approved_period_end' => '2026-12-02 00:00:00',
+		) ) );
+		$this->assertInstanceOf( WP_Error::class, $mismatched_correction );
+		$this->assertSame( 'square_admin_review_reference_mismatch', $mismatched_correction->get_error_code() );
+	}
+
+	public function test_invoice_approval_is_guarded_and_local_invoice_identity_is_checked(): void {
+		$invoice = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT square_invoice_id, square_payment_id FROM {$this->wpdb->prefix}egov_law_subscription_invoices WHERE id = %d", $this->invoice_row_id ), ARRAY_A );
+		$entry = $this->entry( array(
+			'contract_id' => $this->contract_id,
+			'invoice_row_id' => $this->invoice_row_id,
+			'square_invoice_id' => $invoice['square_invoice_id'],
+			'square_payment_id' => $invoice['square_payment_id'],
+			'action_type' => 'approve',
+			'approved_period_start' => '2026-11-01 00:00:00',
+			'approved_period_end' => '2026-12-01 00:00:00',
+		) );
+		$saved = $this->repository->append_review( $entry );
+		$this->assertSame( 'saved', $saved['status'] );
+		$this->review_ids[] = $saved['review_id'];
+
+		$again = $this->repository->append_review( $entry );
+		$this->assertInstanceOf( WP_Error::class, $again );
+		$this->assertSame( 'square_admin_review_duplicate_approval', $again->get_error_code() );
+
+		$mismatch = $entry;
+		$mismatch['square_payment_id'] = 'different-payment';
+		$mismatch_result = $this->repository->append_review( $mismatch );
+		$this->assertInstanceOf( WP_Error::class, $mismatch_result );
+		$this->assertSame( 'square_admin_review_reference_mismatch', $mismatch_result->get_error_code() );
+	}
+
+	public function test_invoice_guard_prevents_second_approval_with_a_different_payment_id(): void {
+		$this->assertSame( 1, $this->wpdb->update(
+			$this->wpdb->prefix . 'egov_law_subscription_invoices',
+			array( 'square_payment_id' => null ),
+			array( 'id' => $this->invoice_row_id ),
+			array( '%s' ),
+			array( '%d' )
+		) );
+		$invoice_id = $this->wpdb->get_var( $this->wpdb->prepare( "SELECT square_invoice_id FROM {$this->wpdb->prefix}egov_law_subscription_invoices WHERE id = %d", $this->invoice_row_id ) );
+		$base = array(
+			'contract_id' => $this->contract_id,
+			'invoice_row_id' => $this->invoice_row_id,
+			'square_invoice_id' => $invoice_id,
+			'action_type' => 'approve',
+			'approved_period_start' => '2026-11-01 00:00:00',
+			'approved_period_end' => '2026-12-01 00:00:00',
+		);
+		$first = $this->repository->append_review( $this->entry( array_merge( $base, array( 'square_payment_id' => 'review-invoice-payment-one' ) ) ) );
+		$this->assertSame( 'saved', $first['status'] );
+		$this->review_ids[] = $first['review_id'];
+
+		$second = $this->repository->append_review( $this->entry( array_merge( $base, array( 'square_payment_id' => 'review-invoice-payment-two' ) ) ) );
+		$this->assertInstanceOf( WP_Error::class, $second );
+		$this->assertSame( 'square_admin_review_duplicate_approval', $second->get_error_code() );
+	}
+
+	public function test_scope_mismatch_invalid_period_non_admin_and_unapproved_payload_are_rejected(): void {
+		$wrong_user = $this->repository->append_review( $this->entry( array( 'user_id' => 2, 'checkout_attempt_id' => $this->attempt_id, 'checkout_attempt_uuid' => $this->attempt_uuid, 'action_type' => 'hold' ) ) );
+		$this->assertInstanceOf( WP_Error::class, $wrong_user );
+		$this->assertSame( 'square_admin_review_reference_mismatch', $wrong_user->get_error_code() );
+
+		$invalid_period = $this->repository->append_review( $this->entry( array( 'checkout_attempt_id' => $this->attempt_id, 'action_type' => 'approve', 'square_payment_id' => 'review-payment-invalid-period', 'approved_period_start' => '2026-12-01 00:00:00', 'approved_period_end' => '2026-11-01 00:00:00' ) ) );
+		$this->assertInstanceOf( WP_Error::class, $invalid_period );
+		$this->assertSame( 'square_admin_review_arguments_invalid', $invalid_period->get_error_code() );
+
+		wp_set_current_user( 2 );
+		$not_admin = $this->repository->append_review( $this->entry( array( 'checkout_attempt_id' => $this->attempt_id, 'reviewer_user_id' => 2, 'action_type' => 'hold' ) ) );
+		$spoofed_admin = $this->repository->append_review( $this->entry( array( 'checkout_attempt_id' => $this->attempt_id, 'reviewer_user_id' => 1, 'action_type' => 'hold' ) ) );
+		wp_set_current_user( 1 );
+		$this->assertInstanceOf( WP_Error::class, $not_admin );
+		$this->assertSame( 'square_admin_review_forbidden', $not_admin->get_error_code() );
+		$this->assertInstanceOf( WP_Error::class, $spoofed_admin );
+		$this->assertSame( 'square_admin_review_forbidden', $spoofed_admin->get_error_code() );
+
+		$unapproved_payload = $this->entry( array( 'checkout_attempt_id' => $this->attempt_id, 'action_type' => 'hold', 'raw_square_response' => '{"personal":"must-not-store"}' ) );
+		$this->assertInstanceOf( WP_Error::class, $this->repository->append_review( $unapproved_payload ) );
+		$this->assertSame( 0, (int) $this->wpdb->get_var( "SELECT COUNT(*) FROM {$this->wpdb->prefix}egov_law_square_admin_reviews" ) );
+	}
+
+	public function test_read_methods_return_newest_first_and_invalid_filters_fail_closed(): void {
+		$one = $this->repository->append_review( $this->entry( array( 'checkout_attempt_id' => $this->attempt_id, 'action_type' => 'hold' ) ) );
+		$two = $this->repository->append_review( $this->entry( array( 'checkout_attempt_id' => $this->attempt_id, 'action_type' => 'hold', 'evidence_code' => 'second_review' ) ) );
+		$this->review_ids = array( $one['review_id'], $two['review_id'] );
+		$rows = $this->repository->get_reviews_for_attempt( $this->attempt_uuid );
+		$this->assertSame( (string) $two['review_id'], $rows[0]['id'] );
+		$this->assertSame( (string) $one['review_id'], $rows[1]['id'] );
+		$this->assertInstanceOf( WP_Error::class, $this->repository->get_reviews_for_contract( 0 ) );
+		$this->assertInstanceOf( WP_Error::class, $this->repository->get_reviews_for_attempt( 'not-a-uuid' ) );
+	}
+
+	private function entry( array $overrides = array() ): array {
+		return array_merge( array(
+			'user_id' => 1,
+			'environment' => 'sandbox',
+			'merchant_id' => 'review-test-merchant',
+			'contract_id' => null,
+			'invoice_row_id' => null,
+			'checkout_attempt_id' => null,
+			'checkout_attempt_uuid' => null,
+			'square_invoice_id' => null,
+			'square_payment_id' => null,
+			'action_type' => 'hold',
+			'candidate_period_start' => null,
+			'candidate_period_end' => null,
+			'approved_period_start' => null,
+			'approved_period_end' => null,
+			'evidence_code' => 'payment_and_period_checked',
+			'reviewer_user_id' => 1,
+			'supersedes_review_id' => null,
+		), $overrides );
+	}
+}

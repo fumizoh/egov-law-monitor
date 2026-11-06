@@ -286,6 +286,7 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 	$square_events = $wpdb->prefix . 'egov_law_square_events';
 	$usage         = $wpdb->prefix . 'egov_law_ai_summary_usage';
 	$checkout_attempts = $wpdb->prefix . 'egov_law_checkout_attempts';
+	$admin_reviews = $wpdb->prefix . 'egov_law_square_admin_reviews';
 
 	/*
 	 * The webhook receiver stores the signature-verified original JSON in
@@ -402,6 +403,58 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				'subscription_state' => array( false, array( 'subscription_id', 'invoice_status', 'due_at' ) ),
 				'user_period'        => array( false, array( 'user_id', 'billing_period_start' ) ),
 				'unresolved_due'     => array( false, array( 'payment_status', 'due_at' ) ),
+			),
+		),
+		$admin_reviews => array(
+			'sql'     => "CREATE TABLE {$admin_reviews} (
+				id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+				user_id BIGINT UNSIGNED NOT NULL,
+				environment VARCHAR(16) NOT NULL,
+				merchant_id VARCHAR(64) NOT NULL,
+				contract_id BIGINT UNSIGNED NULL DEFAULT NULL,
+				invoice_row_id BIGINT UNSIGNED NULL DEFAULT NULL,
+				checkout_attempt_id BIGINT UNSIGNED NULL DEFAULT NULL,
+				checkout_attempt_uuid CHAR(36) NULL DEFAULT NULL,
+				square_invoice_id VARCHAR(255) NULL DEFAULT NULL,
+				square_payment_id VARCHAR(192) NULL DEFAULT NULL,
+				action_type VARCHAR(24) NOT NULL,
+				candidate_period_start DATETIME NULL DEFAULT NULL,
+				candidate_period_end DATETIME NULL DEFAULT NULL,
+				approved_period_start DATETIME NULL DEFAULT NULL,
+				approved_period_end DATETIME NULL DEFAULT NULL,
+				evidence_code VARCHAR(100) NOT NULL,
+				reviewer_user_id BIGINT UNSIGNED NOT NULL,
+				supersedes_review_id BIGINT UNSIGNED NULL DEFAULT NULL,
+				approval_payment_guard CHAR(64) NULL DEFAULT NULL,
+				approval_invoice_guard CHAR(64) NULL DEFAULT NULL,
+				recorded_at DATETIME NOT NULL,
+				PRIMARY KEY  (id),
+				UNIQUE KEY approval_payment_guard (approval_payment_guard),
+				UNIQUE KEY approval_invoice_guard (approval_invoice_guard),
+				KEY contract_history (contract_id, id),
+				KEY invoice_history (invoice_row_id, id),
+				KEY attempt_history (checkout_attempt_uuid, id),
+				KEY user_history (user_id, recorded_at),
+				KEY square_invoice_lookup (environment, merchant_id, square_invoice_id),
+				KEY square_payment_lookup (environment, merchant_id, square_payment_id)
+			) ENGINE=InnoDB {$charset_collate};",
+			'columns' => array(
+				'id', 'user_id', 'environment', 'merchant_id', 'contract_id', 'invoice_row_id',
+				'checkout_attempt_id', 'checkout_attempt_uuid', 'square_invoice_id', 'square_payment_id',
+				'action_type', 'candidate_period_start', 'candidate_period_end', 'approved_period_start',
+				'approved_period_end', 'evidence_code', 'reviewer_user_id', 'supersedes_review_id',
+				'approval_payment_guard', 'approval_invoice_guard', 'recorded_at',
+			),
+			'indexes' => array(
+				'PRIMARY'                  => array( true, array( 'id' ) ),
+				'approval_payment_guard'  => array( true, array( 'approval_payment_guard' ) ),
+				'approval_invoice_guard'  => array( true, array( 'approval_invoice_guard' ) ),
+				'contract_history'         => array( false, array( 'contract_id', 'id' ) ),
+				'invoice_history'          => array( false, array( 'invoice_row_id', 'id' ) ),
+				'attempt_history'          => array( false, array( 'checkout_attempt_uuid', 'id' ) ),
+				'user_history'             => array( false, array( 'user_id', 'recorded_at' ) ),
+				'square_invoice_lookup'    => array( false, array( 'environment', 'merchant_id', 'square_invoice_id' ) ),
+				'square_payment_lookup'    => array( false, array( 'environment', 'merchant_id', 'square_payment_id' ) ),
 			),
 		),
 		$square_events => array(
@@ -696,7 +749,7 @@ function egov_law_monitor_maybe_upgrade_subscription_schema() {
 	global $wpdb;
 
 	$schema_version_option = 'egov_law_monitor_square_schema_version';
-	$current_version       = 5;
+	$current_version       = 6;
 	$stored_version        = (int) get_option( $schema_version_option, 0 );
 
 	if ( $stored_version > $current_version ) {

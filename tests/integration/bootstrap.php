@@ -60,6 +60,7 @@ require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/entitlement-ser
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/user-settings.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/ai-summary-usage-api.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-checkout.php';
+require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-admin-review.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-subscription-sync.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-recurring-payment-read-service.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-initial-payment-read-service.php';
