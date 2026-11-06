@@ -165,6 +165,201 @@ final class SquareApiClientTest extends TestCase {
 		$this->assertArrayNotHasKey( 'primary_recipient', $result );
 		$this->assertSame( 'https://connect.squareupsandbox.com/v2/invoices/invoice-123', $this->request['url'] );
 		$this->assertSame( 'GET', $this->request['args']['method'] );
+		$this->assertSame( 2, $result['version'] );
+	}
+
+	public function test_subscription_preserves_raw_unknown_status_and_nullable_version(): void {
+		$this->response_body = array(
+			'subscription' => array(
+				'id'                => 'subscription-123',
+				'location_id'       => 'location-123',
+				'plan_variation_id' => 'variation-123',
+				'customer_id'       => 'customer-123',
+				'status'            => 'FUTURE_STATUS',
+				'start_date'        => '2026-11-05',
+			),
+		);
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->retrieve_subscription( 'subscription-123' );
+
+		$this->assertFalse( is_wp_error( $result ) );
+		$this->assertSame( 'FUTURE_STATUS', $result['status'] );
+		$this->assertFalse( $result['status_known'] );
+		$this->assertNull( $result['version'] );
+		$this->assertSame( '2026-11-05', $result['start_date'] );
+		$this->assertArrayNotHasKey( 'charged_through_date', $result );
+	}
+
+	public function test_subscription_rejects_invalid_version_and_anchor_types(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$base = array( 'id' => 'subscription-123', 'location_id' => 'location', 'plan_variation_id' => 'variation', 'customer_id' => 'customer', 'status' => 'ACTIVE' );
+		$this->response_body = array( 'subscription' => $base + array( 'version' => '2' ) );
+		$bad_version = $client->retrieve_subscription( 'subscription-123' );
+		$this->assertTrue( is_wp_error( $bad_version ) );
+		$this->assertSame( 'square_subscription_response_invalid', $bad_version->get_error_code() );
+
+		$this->response_body = array( 'subscription' => $base + array( 'monthly_billing_anchor_date' => 32 ) );
+		$bad_anchor = $client->retrieve_subscription( 'subscription-123' );
+		$this->assertTrue( is_wp_error( $bad_anchor ) );
+		$this->assertSame( 'square_subscription_response_invalid', $bad_anchor->get_error_code() );
+	}
+
+	public function test_subscription_and_invoice_reject_identity_and_version_mismatches(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$this->response_body = array(
+			'subscription' => array( 'id' => 'other-id', 'location_id' => 'location', 'plan_variation_id' => 'variation', 'customer_id' => 'customer', 'status' => 'ACTIVE' ),
+		);
+		$subscription_mismatch = $client->retrieve_subscription( 'subscription-123' );
+		$this->assertTrue( is_wp_error( $subscription_mismatch ) );
+		$this->assertSame( 'square_subscription_response_invalid', $subscription_mismatch->get_error_code() );
+
+		$this->response_body = array(
+			'invoice' => array( 'id' => 'invoice-123', 'location_id' => 'location', 'order_id' => 'order', 'status' => 'UNPAID', 'version' => '4' ),
+		);
+		$invoice_version = $client->get_invoice( 'invoice-123' );
+		$this->assertTrue( is_wp_error( $invoice_version ) );
+		$this->assertSame( 'square_invoice_response_invalid', $invoice_version->get_error_code() );
+	}
+
+	public function test_invoice_normalizes_request_money_and_only_marks_fully_paid_with_complete_evidence(): void {
+		$this->response_body = array(
+			'invoice' => array(
+				'id'              => 'invoice-123',
+				'location_id'     => 'location-123',
+				'order_id'        => 'order-123',
+				'subscription_id' => 'subscription-123',
+				'status'          => 'PAID',
+				'version'         => 4,
+				'updated_at'      => '2026-11-06T01:00:00Z',
+				'payment_requests' => array(
+					array(
+						'uid'                           => 'request-1',
+						'request_type'                  => 'BALANCE',
+						'due_date'                      => '2026-11-06',
+						'computed_amount_money'          => array( 'amount' => 500, 'currency' => 'JPY' ),
+						'total_completed_amount_money'   => array( 'amount' => 500, 'currency' => 'JPY' ),
+						'card_id'                       => 'private-card-id',
+					),
+				),
+				'primary_recipient' => array( 'email_address' => 'private@example.test' ),
+			),
+		);
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->get_invoice( 'invoice-123' );
+
+		$this->assertFalse( is_wp_error( $result ) );
+		$this->assertSame( 4, $result['version'] );
+		$this->assertSame( 'subscription-123', $result['subscription_id'] );
+		$this->assertSame( array( 'amount' => 500, 'currency' => 'JPY' ), $result['requested_amount_money'] );
+		$this->assertSame( array( 'amount' => 500, 'currency' => 'JPY' ), $result['completed_amount_money'] );
+		$this->assertSame( 'paid', $result['payment_state'] );
+		$this->assertTrue( $result['status_known'] );
+		$this->assertNull( $result['completed_at'] );
+		$this->assertArrayNotHasKey( 'card_id', $result['payment_requests'][0] );
+		$this->assertArrayNotHasKey( 'primary_recipient', $result );
+	}
+
+	public function test_invoice_multiple_requests_sum_schedule_once_and_keep_partial_payment_distinct(): void {
+		$this->response_body = array(
+			'invoice' => array(
+				'id' => 'invoice-123', 'location_id' => 'location', 'order_id' => 'order', 'status' => 'PARTIALLY_PAID',
+				'payment_requests' => array(
+					array( 'request_type' => 'DEPOSIT', 'due_date' => '2026-11-06', 'computed_amount_money' => array( 'amount' => 200, 'currency' => 'JPY' ), 'total_completed_amount_money' => array( 'amount' => 200, 'currency' => 'JPY' ) ),
+					array( 'request_type' => 'BALANCE', 'due_date' => '2026-12-06', 'computed_amount_money' => array( 'amount' => 300, 'currency' => 'JPY' ), 'total_completed_amount_money' => array( 'amount' => 0, 'currency' => 'JPY' ) ),
+				),
+			),
+		);
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->get_invoice( 'invoice-123' );
+
+		$this->assertSame( array( 'amount' => 500, 'currency' => 'JPY' ), $result['requested_amount_money'] );
+		$this->assertSame( array( 'amount' => 200, 'currency' => 'JPY' ), $result['completed_amount_money'] );
+		$this->assertSame( 'partially_paid', $result['payment_state'] );
+		$this->assertCount( 2, $result['payment_requests'] );
+	}
+
+	public function test_invoice_statuses_are_distinguished_without_confusing_webhook_event_types(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$cases = array(
+			'DRAFT' => 'planned', 'SCHEDULED' => 'scheduled', 'UNPAID' => 'unpaid',
+			'PAYMENT_PENDING' => 'processing', 'PARTIALLY_PAID' => 'partially_paid',
+			'PARTIALLY_REFUNDED' => 'partially_refunded', 'REFUNDED' => 'refunded',
+			'CANCELED' => 'canceled', 'FAILED' => 'invoice_failed', 'NEW_STATUS' => 'unknown',
+		);
+		foreach ( $cases as $raw_status => $expected_state ) {
+			$invoice = array( 'id' => 'invoice-123', 'location_id' => 'location', 'order_id' => 'order', 'status' => $raw_status );
+			if ( 'PARTIALLY_PAID' === $raw_status ) {
+				$invoice['payment_requests'] = array(
+					array(
+						'computed_amount_money'        => array( 'amount' => 500, 'currency' => 'JPY' ),
+						'total_completed_amount_money' => array( 'amount' => 200, 'currency' => 'JPY' ),
+					),
+				);
+			}
+			$this->response_body = array( 'invoice' => $invoice );
+			$result = $client->get_invoice( 'invoice-123' );
+			$this->assertFalse( is_wp_error( $result ), $raw_status );
+			$this->assertSame( $raw_status, $result['status'] );
+			$this->assertSame( $expected_state, $result['payment_state'], $raw_status );
+			$this->assertSame( 'NEW_STATUS' !== $raw_status, $result['status_known'] );
+		}
+	}
+
+	public function test_invoice_missing_or_inconsistent_money_is_not_defaulted_or_marked_paid(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$this->response_body = array(
+			'invoice' => array(
+				'id' => 'invoice-123', 'location_id' => 'location', 'order_id' => 'order', 'status' => 'PAID',
+				'payment_requests' => array( array( 'computed_amount_money' => array( 'currency' => 'JPY' ), 'total_completed_amount_money' => array( 'amount' => 0, 'currency' => 'JPY' ) ) ),
+			),
+		);
+		$missing = $client->get_invoice( 'invoice-123' );
+		$this->assertNull( $missing['requested_amount_money'] );
+		$this->assertSame( 'unknown', $missing['payment_state'] );
+
+		$this->response_body = array(
+			'invoice' => array(
+				'id' => 'invoice-123', 'location_id' => 'location', 'order_id' => 'order', 'status' => 'PAID',
+				'payment_requests' => array(
+					array( 'computed_amount_money' => array( 'amount' => 200, 'currency' => 'JPY' ), 'total_completed_amount_money' => array( 'amount' => 200, 'currency' => 'JPY' ) ),
+					array( 'computed_amount_money' => array( 'amount' => 300, 'currency' => 'USD' ), 'total_completed_amount_money' => array( 'amount' => 300, 'currency' => 'USD' ) ),
+				),
+			),
+		);
+		$mixed = $client->get_invoice( 'invoice-123' );
+		$this->assertNull( $mixed['requested_amount_money'] );
+		$this->assertSame( 'unknown', $mixed['payment_state'] );
+	}
+
+	public function test_invoice_rejects_malformed_money_and_request_shapes(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$invalid_payloads = array(
+			array( 'payment_requests' => 'invalid' ),
+			array( 'payment_requests' => array( 'invalid' ) ),
+			array( 'payment_requests' => array( array( 'computed_amount_money' => array( 'amount' => '500', 'currency' => 'JPY' ) ) ) ),
+			array( 'payment_requests' => array( array( 'computed_amount_money' => array( 'amount' => -1, 'currency' => 'JPY' ) ) ) ),
+			array( 'payment_requests' => array( array( 'computed_amount_money' => array( 'amount' => 500, 'currency' => 'jpy' ) ) ) ),
+		);
+		foreach ( $invalid_payloads as $extra ) {
+			$this->response_body = array( 'invoice' => array_merge( array( 'id' => 'invoice-123', 'location_id' => 'location', 'order_id' => 'order', 'status' => 'UNPAID' ), $extra ) );
+			$result = $client->get_invoice( 'invoice-123' );
+			$this->assertTrue( is_wp_error( $result ) );
+			$this->assertSame( 'square_invoice_response_invalid', $result->get_error_code() );
+		}
+	}
+
+	public function test_invoice_preserves_absent_values_as_unknown_and_missing_version_as_null(): void {
+		$this->response_body = array( 'invoice' => array( 'id' => 'invoice-123', 'location_id' => 'location', 'order_id' => 'order', 'status' => 'UNPAID' ) );
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->get_invoice( 'invoice-123' );
+
+		$this->assertNull( $result['version'] );
+		$this->assertSame( array(), $result['payment_requests'] );
+		$this->assertNull( $result['requested_amount_money'] );
+		$this->assertNull( $result['completed_amount_money'] );
+		$this->assertNull( $result['next_payment_amount_money'] );
+		$this->assertNull( $result['completed_at'] );
+		$this->assertSame( 'unpaid', $result['payment_state'] );
 	}
 
 	public function test_retrieve_subscription_reports_http_errors_without_exposing_square_body(): void {
@@ -188,6 +383,22 @@ final class SquareApiClientTest extends TestCase {
 		$this->assertSame( 'square_resource_request_failed', $result->get_error_code() );
 		$this->assertStringNotContainsString( 'private transport details', $result->get_error_message() );
 		$this->assertSame( 1, $this->request_count );
+	}
+
+	public function test_get_invoice_reports_square_api_and_http_errors(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$this->response_status = 400;
+		$this->response_body = array( 'errors' => array( array( 'detail' => 'private invoice detail' ) ) );
+		$api_error = $client->get_invoice( 'invoice-123' );
+		$this->assertTrue( is_wp_error( $api_error ) );
+		$this->assertSame( 'square_resource_api_error', $api_error->get_error_code() );
+		$this->assertStringNotContainsString( 'private invoice detail', $api_error->get_error_message() );
+
+		$this->response_status = 503;
+		$this->response_body = array( 'unexpected' => true );
+		$http_error = $client->get_invoice( 'invoice-123' );
+		$this->assertTrue( is_wp_error( $http_error ) );
+		$this->assertSame( 'square_resource_http_error', $http_error->get_error_code() );
 	}
 
 	public function test_retrieve_subscription_rejects_invalid_json(): void {

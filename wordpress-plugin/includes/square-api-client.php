@@ -293,20 +293,36 @@ class Egov_Law_Monitor_Square_Api_Client {
 				array(
 					'id', 'location_id', 'plan_variation_id', 'customer_id', 'status',
 					'start_date', 'canceled_date', 'charged_through_date', 'paid_until_date',
-					'created_at', 'invoice_ids', 'version', 'timezone',
+					'created_at', 'completed_date', 'monthly_billing_anchor_date', 'invoice_ids', 'version', 'timezone',
 				)
 			)
 		);
+		$known_statuses = array( 'PENDING', 'ACTIVE', 'CANCELED', 'PAUSED', 'DEACTIVATED', 'COMPLETED' );
+		$normalized['status_known'] = in_array( $normalized['status'], $known_statuses, true );
 		foreach ( array( 'start_date', 'canceled_date', 'charged_through_date', 'paid_until_date', 'created_at', 'timezone' ) as $key ) {
 			if ( array_key_exists( $key, $normalized ) && ! is_string( $normalized[ $key ] ) ) {
 				return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
 			}
 		}
-		if ( array_key_exists( 'version', $normalized ) && ! is_int( $normalized['version'] ) ) {
+		foreach ( array( 'start_date', 'canceled_date', 'charged_through_date', 'paid_until_date', 'completed_date' ) as $key ) {
+			if ( array_key_exists( $key, $normalized ) && ! $this->is_square_date( $normalized[ $key ] ) ) {
+				return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+			}
+		}
+		if ( array_key_exists( 'version', $normalized ) && ( ! is_int( $normalized['version'] ) || $normalized['version'] < 0 ) ) {
 			return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
 		}
+		if ( array_key_exists( 'monthly_billing_anchor_date', $normalized ) && ( ! is_int( $normalized['monthly_billing_anchor_date'] ) || $normalized['monthly_billing_anchor_date'] < 1 || $normalized['monthly_billing_anchor_date'] > 31 ) ) {
+			return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+		}
+		if ( array_key_exists( 'completed_date', $normalized ) && ! is_string( $normalized['completed_date'] ) ) {
+			return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+		}
+		if ( ! array_key_exists( 'version', $normalized ) ) {
+			$normalized['version'] = null;
+		}
 		if ( array_key_exists( 'invoice_ids', $normalized ) ) {
-			if ( ! is_array( $normalized['invoice_ids'] ) ) {
+			if ( ! is_array( $normalized['invoice_ids'] ) || ( ! empty( $normalized['invoice_ids'] ) && array_keys( $normalized['invoice_ids'] ) !== range( 0, count( $normalized['invoice_ids'] ) - 1 ) ) ) {
 				return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
 			}
 			foreach ( $normalized['invoice_ids'] as $invoice_id ) {
@@ -353,11 +369,143 @@ class Egov_Law_Monitor_Square_Api_Client {
 				return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
 			}
 		}
-		if ( array_key_exists( 'version', $normalized ) && ! is_int( $normalized['version'] ) ) {
+		if ( array_key_exists( 'version', $normalized ) && ( ! is_int( $normalized['version'] ) || $normalized['version'] < 0 || $normalized['version'] > 2147483647 ) ) {
 			return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
 		}
+		if ( ! array_key_exists( 'version', $normalized ) ) {
+			$normalized['version'] = null;
+		}
+
+		$normalized['payment_requests'] = array();
+		if ( array_key_exists( 'payment_requests', $resource ) ) {
+			if ( ! is_array( $resource['payment_requests'] ) || count( $resource['payment_requests'] ) > 13 || ( ! empty( $resource['payment_requests'] ) && array_keys( $resource['payment_requests'] ) !== range( 0, count( $resource['payment_requests'] ) - 1 ) ) ) {
+				return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
+			}
+			foreach ( $resource['payment_requests'] as $request ) {
+				$payment_request = $this->normalize_invoice_payment_request( $request );
+				if ( is_wp_error( $payment_request ) ) {
+					return $payment_request;
+				}
+				$normalized['payment_requests'][] = $payment_request;
+			}
+		}
+
+		$normalized['requested_amount_money'] = $this->sum_invoice_request_money( $normalized['payment_requests'], 'computed_amount_money' );
+		$normalized['completed_amount_money'] = $this->sum_invoice_request_money( $normalized['payment_requests'], 'total_completed_amount_money' );
+		$normalized['status_known'] = in_array(
+			$normalized['status'],
+			array( 'DRAFT', 'SCHEDULED', 'UNPAID', 'PAYMENT_PENDING', 'PARTIALLY_PAID', 'PAID', 'PARTIALLY_REFUNDED', 'REFUNDED', 'CANCELED', 'FAILED' ),
+			true
+		);
+		if ( array_key_exists( 'next_payment_amount_money', $resource ) ) {
+			$next_amount = $this->normalize_optional_money( $resource['next_payment_amount_money'], 'square_invoice_response_invalid' );
+			if ( is_wp_error( $next_amount ) ) {
+				return $next_amount;
+			}
+			if ( isset( $next_amount['amount'] ) && $next_amount['amount'] < 0 ) {
+				return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
+			}
+			$normalized['next_payment_amount_money'] = $next_amount;
+		} else {
+			$normalized['next_payment_amount_money'] = null;
+		}
+		$normalized['payment_state'] = $this->classify_invoice_payment_state( $normalized['status'], $normalized['requested_amount_money'], $normalized['completed_amount_money'] );
+		// Invoice does not expose a payment-completion timestamp or Payment ID. Do not infer either from updated_at.
+		$normalized['completed_at'] = null;
 
 		return $normalized;
+	}
+
+	/** Normalize payment-request fields while excluding card and recipient information. */
+	private function normalize_invoice_payment_request( $request ) {
+		if ( ! is_array( $request ) ) {
+			return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
+		}
+		$normalized = array();
+		foreach ( array( 'uid', 'request_type', 'due_date', 'automatic_payment_source' ) as $key ) {
+			if ( array_key_exists( $key, $request ) ) {
+				if ( ! is_string( $request[ $key ] ) || '' === $request[ $key ] ) {
+					return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
+				}
+				$normalized[ $key ] = $request[ $key ];
+			}
+		}
+		if ( isset( $normalized['due_date'] ) && ! $this->is_square_date( $normalized['due_date'] ) ) {
+			return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
+		}
+		foreach ( array( 'computed_amount_money', 'total_completed_amount_money' ) as $key ) {
+			if ( array_key_exists( $key, $request ) ) {
+				$money = $this->normalize_optional_money( $request[ $key ], 'square_invoice_response_invalid' );
+				if ( is_wp_error( $money ) ) {
+					return $money;
+				}
+				if ( isset( $money['amount'] ) && $money['amount'] < 0 ) {
+					return new WP_Error( 'square_invoice_response_invalid', 'Squareの請求情報を確認できませんでした。' );
+				}
+				$normalized[ $key ] = $money;
+			}
+		}
+		return $normalized;
+	}
+
+	/** Validate Square YYYY-MM-DD calendar dates without timezone conversion. */
+	private function is_square_date( $value ) {
+		if ( ! is_string( $value ) || ! preg_match( '/\A(\d{4})-(\d{2})-(\d{2})\z/', $value, $matches ) ) {
+			return false;
+		}
+		return checkdate( (int) $matches[2], (int) $matches[3], (int) $matches[1] );
+	}
+
+	/** Sum request-level money only when every request has a valid amount and matching currency. */
+	private function sum_invoice_request_money( $requests, $field ) {
+		if ( empty( $requests ) ) {
+			return null;
+		}
+		$total    = 0;
+		$currency = null;
+		foreach ( $requests as $request ) {
+			if ( ! isset( $request[ $field ]['amount'], $request[ $field ]['currency'] ) ) {
+				return null;
+			}
+			if ( null !== $currency && $currency !== $request[ $field ]['currency'] ) {
+				return null;
+			}
+			$currency = $request[ $field ]['currency'];
+			if ( $request[ $field ]['amount'] > PHP_INT_MAX - $total ) {
+				return null;
+			}
+			$total += $request[ $field ]['amount'];
+		}
+		return array( 'amount' => $total, 'currency' => $currency );
+	}
+
+	/** Classify the raw Invoice status without treating incomplete money data as payment success. */
+	private function classify_invoice_payment_state( $status, $requested, $completed ) {
+		$states = array(
+			'DRAFT'              => 'planned',
+			'SCHEDULED'          => 'scheduled',
+			'UNPAID'             => 'unpaid',
+			'PAYMENT_PENDING'    => 'processing',
+			'PARTIALLY_PAID'     => 'partially_paid',
+			'PARTIALLY_REFUNDED' => 'partially_refunded',
+			'CANCELED'           => 'canceled',
+			'FAILED'             => 'invoice_failed',
+		);
+		if ( 'REFUNDED' === $status ) {
+			return 'refunded';
+		}
+		if ( 'PAID' === $status ) {
+			if ( null === $requested || null === $completed || $requested['currency'] !== $completed['currency'] || $requested['amount'] !== $completed['amount'] ) {
+				return 'unknown';
+			}
+			return 'paid';
+		}
+		if ( 'PARTIALLY_PAID' === $status ) {
+			if ( null === $requested || null === $completed || $requested['currency'] !== $completed['currency'] || 0 >= $completed['amount'] || $completed['amount'] >= $requested['amount'] ) {
+				return 'unknown';
+			}
+		}
+		return isset( $states[ $status ] ) ? $states[ $status ] : 'unknown';
 	}
 
 	/**
