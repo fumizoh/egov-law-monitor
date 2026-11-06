@@ -532,7 +532,7 @@ class Egov_Law_Monitor_Square_Api_Client {
 
 		$normalized = array_intersect_key(
 			$resource,
-			array_flip( array( 'id', 'order_id', 'customer_id', 'location_id', 'status', 'created_at', 'updated_at' ) )
+			array_flip( array( 'id', 'order_id', 'customer_id', 'location_id', 'status', 'created_at', 'updated_at', 'refund_ids' ) )
 		);
 		foreach ( array( 'customer_id', 'updated_at' ) as $key ) {
 			if ( array_key_exists( $key, $normalized ) && ( ! is_string( $normalized[ $key ] ) || '' === $normalized[ $key ] ) ) {
@@ -547,6 +547,24 @@ class Egov_Law_Monitor_Square_Api_Client {
 				}
 				$normalized[ $key ] = $money;
 			}
+		}
+		if ( array_key_exists( 'refund_ids', $resource ) ) {
+			if ( ! is_array( $resource['refund_ids'] ) || ( ! empty( $resource['refund_ids'] ) && array_keys( $resource['refund_ids'] ) !== range( 0, count( $resource['refund_ids'] ) - 1 ) ) ) {
+				return new WP_Error( 'square_payment_response_invalid', 'Squareの決済情報を確認できませんでした。' );
+			}
+			foreach ( $resource['refund_ids'] as $refund_id ) {
+				if ( ! is_string( $refund_id ) || '' === $refund_id ) {
+					return new WP_Error( 'square_payment_response_invalid', 'Squareの決済情報を確認できませんでした。' );
+				}
+			}
+			$normalized['refund_ids'] = $resource['refund_ids'];
+		}
+		if ( array_key_exists( 'refunded_money', $resource ) ) {
+			$refunded_money = $this->normalize_optional_money( $resource['refunded_money'], 'square_payment_response_invalid' );
+			if ( is_wp_error( $refunded_money ) || ( isset( $refunded_money['amount'] ) && $refunded_money['amount'] < 0 ) ) {
+				return new WP_Error( 'square_payment_response_invalid', 'Squareの決済情報を確認できませんでした。' );
+			}
+			$normalized['refunded_money'] = $refunded_money;
 		}
 
 		return $normalized;
@@ -595,7 +613,10 @@ class Egov_Law_Monitor_Square_Api_Client {
 				if ( ! is_array( $tender ) ) {
 					return new WP_Error( 'square_order_response_invalid', 'Squareの注文情報を確認できませんでした。' );
 				}
-				$payment_id = array_key_exists( 'payment_id', $tender ) ? $tender['payment_id'] : null;
+				$payment_id = array_key_exists( 'payment_id', $tender ) ? $tender['payment_id'] : ( array_key_exists( 'id', $tender ) ? $tender['id'] : null );
+				if ( array_key_exists( 'payment_id', $tender ) && array_key_exists( 'id', $tender ) && is_string( $tender['payment_id'] ) && is_string( $tender['id'] ) && ! hash_equals( $tender['payment_id'], $tender['id'] ) ) {
+					return new WP_Error( 'square_order_response_invalid', 'Squareの注文情報を確認できませんでした。' );
+				}
 				if ( null !== $payment_id && ( ! is_string( $payment_id ) || '' === $payment_id ) ) {
 					return new WP_Error( 'square_order_response_invalid', 'Squareの注文情報を確認できませんでした。' );
 				}

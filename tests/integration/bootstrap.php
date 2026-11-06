@@ -61,6 +61,7 @@ require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/user-settings.p
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/ai-summary-usage-api.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-checkout.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-subscription-sync.php';
+require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-recurring-payment-read-service.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-webhook.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/subscription-plan-page.php';
 

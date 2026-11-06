@@ -564,6 +564,36 @@ final class SquareApiClientTest extends TestCase {
 		$this->assertSame( array( 'currency' => 'JPY' ), $result['total_money'] );
 	}
 
+	public function test_order_accepts_square_tender_id_as_payment_id_and_rejects_conflicting_ids(): void {
+		$this->response_body = array( 'order' => array(
+			'id' => 'order-123', 'location_id' => 'location-123', 'state' => 'COMPLETED',
+			'tenders' => array( array( 'id' => 'payment-from-tender' ) ),
+		) );
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->retrieve_order( 'order-123' );
+		$this->assertSame( array( array( 'payment_id' => 'payment-from-tender' ) ), $result['tenders'] );
+
+		$this->response_body['order']['tenders'] = array( array( 'id' => 'payment-one', 'payment_id' => 'payment-two' ) );
+		$conflict = $client->retrieve_order( 'order-123' );
+		$this->assertInstanceOf( WP_Error::class, $conflict );
+		$this->assertSame( 'square_order_response_invalid', $conflict->get_error_code() );
+	}
+
+	public function test_payment_returns_refund_metadata_without_card_or_buyer_fields(): void {
+		$this->response_body = array( 'payment' => array(
+			'id' => 'payment-123', 'order_id' => 'order-123', 'location_id' => 'location-123',
+			'status' => 'COMPLETED', 'created_at' => '2026-11-05T01:02:03Z',
+			'refund_ids' => array( 'refund-123' ), 'refunded_money' => array( 'amount' => 100, 'currency' => 'JPY' ),
+			'card_details' => array( 'card' => array( 'last_4' => '1111' ) ), 'buyer_email_address' => 'private@example.test',
+		) );
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->get_payment( 'payment-123' );
+		$this->assertSame( array( 'refund-123' ), $result['refund_ids'] );
+		$this->assertSame( array( 'amount' => 100, 'currency' => 'JPY' ), $result['refunded_money'] );
+		$this->assertArrayNotHasKey( 'card_details', $result );
+		$this->assertArrayNotHasKey( 'buyer_email_address', $result );
+	}
+
 	public function test_order_without_tenders_returns_empty_array(): void {
 		$this->response_body = array( 'order' => array( 'id' => 'order-123', 'location_id' => 'location-123', 'state' => 'OPEN' ) );
 		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
