@@ -10,6 +10,7 @@ final class SquareApiClientTest extends TestCase {
 	private $response_status = 200;
 	private $response_headers = array();
 	private $transport_error = null;
+	private $response_resolver = null;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -28,11 +29,23 @@ final class SquareApiClientTest extends TestCase {
 			if ( is_wp_error( $this->transport_error ) ) {
 				return $this->transport_error;
 			}
+			$body = $this->response_body;
+			$status = $this->response_status;
+			if ( is_callable( $this->response_resolver ) ) {
+				$resolved = call_user_func( $this->response_resolver, $url, $args );
+				if ( is_wp_error( $resolved ) ) {
+					return $resolved;
+				}
+			if ( is_array( $resolved ) && array_key_exists( 'body', $resolved ) ) {
+					$body = $resolved['body'];
+					$status = $resolved['status'] ?? 200;
+				}
+			}
 
 			return array(
 				'headers'  => $this->response_headers,
-				'body'     => wp_json_encode( $this->response_body ),
-				'response' => array( 'code' => $this->response_status, 'message' => 'mocked' ),
+				'body'     => is_string( $body ) ? $body : wp_json_encode( $body ),
+				'response' => array( 'code' => $status, 'message' => 'mocked' ),
 				'cookies'  => array(),
 				'filename' => null,
 			);
@@ -850,6 +863,205 @@ final class SquareApiClientTest extends TestCase {
 		$error = $client_without_token->get_checkout_scope();
 		$this->assertTrue( is_wp_error( $error ) );
 		$this->assertSame( 'square_configuration_invalid', $error->get_error_code() );
+	}
+
+	public function test_retrieve_subscription_plan_variation_normalizes_one_monthly_phase_and_omits_sensitive_fields(): void {
+		$this->response_body = array( 'catalog_object' => array(
+			'id' => 'variation-123', 'type' => 'SUBSCRIPTION_PLAN_VARIATION', 'version' => 4,
+			'subscription_plan_variation' => array(
+				'name' => 'private plan name', 'monthly_billing_anchor_date' => 31,
+				'phases' => array( array(
+					'uid' => 'phase-1', 'ordinal' => 0, 'cadence' => 'MONTHLY', 'periods' => 1,
+					'recurring_price_money' => array( 'amount' => 500, 'currency' => 'JPY' ),
+					'private_field' => 'must-not-return',
+				) ),
+			),
+		) );
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->retrieve_subscription_plan_variation( 'variation-123' );
+
+		$this->assertSame( 'variation-123', $result['id'] );
+		$this->assertSame( 'SUBSCRIPTION_PLAN_VARIATION', $result['type'] );
+		$this->assertSame( 4, $result['version'] );
+		$this->assertSame( 31, $result['monthly_billing_anchor_date'] );
+		$this->assertTrue( $result['phases_available'] );
+		$this->assertTrue( $result['single_monthly_phase'] );
+		$this->assertSame( 'MONTHLY', $result['phases'][0]['cadence'] );
+		$this->assertSame( array( 'amount' => 500, 'currency' => 'JPY' ), $result['phases'][0]['recurring_price_money'] );
+		$this->assertArrayNotHasKey( 'name', $result );
+		$this->assertArrayNotHasKey( 'private_field', $result['phases'][0] );
+		$this->assertSame( 'https://connect.squareupsandbox.com/v2/catalog/object/variation-123', $this->request['url'] );
+		$this->assertSame( 'GET', $this->request['args']['method'] );
+	}
+
+	public function test_catalog_variation_rejects_wrong_type_id_and_malformed_phase_but_preserves_unknown_cadence(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$this->response_body = array( 'catalog_object' => array( 'id' => 'variation-123', 'type' => 'ITEM_VARIATION', 'subscription_plan_variation' => array( 'phases' => array() ) ) );
+		$wrong_type = $client->retrieve_subscription_plan_variation( 'variation-123' );
+		$this->assertInstanceOf( WP_Error::class, $wrong_type );		$this->assertSame( 'square_catalog_variation_response_invalid', $wrong_type->get_error_code() );
+
+		$this->response_body = array( 'catalog_object' => array( 'id' => 'different', 'type' => 'SUBSCRIPTION_PLAN_VARIATION', 'subscription_plan_variation' => array( 'phases' => array() ) ) );
+		$id_mismatch = $client->retrieve_subscription_plan_variation( 'variation-123' );
+		$this->assertInstanceOf( WP_Error::class, $id_mismatch );
+
+		$this->response_body = array( 'catalog_object' => array( 'id' => 'variation-123', 'type' => 'SUBSCRIPTION_PLAN_VARIATION', 'subscription_plan_variation' => array( 'phases' => array( array( 'cadence' => 'FUTURE_CADENCE' ) ) ) ) );
+		$unknown = $client->retrieve_subscription_plan_variation( 'variation-123' );
+		$this->assertFalse( is_wp_error( $unknown ) );
+		$this->assertSame( 'FUTURE_CADENCE', $unknown['phases'][0]['cadence'] );
+		$this->assertFalse( $unknown['phases'][0]['cadence_known'] );
+		$this->assertFalse( $unknown['single_monthly_phase'] );
+
+		$this->response_body['catalog_object']['subscription_plan_variation']['phases'][] = array( 'cadence' => 'MONTHLY' );
+		$multiple = $client->retrieve_subscription_plan_variation( 'variation-123' );
+		$this->assertCount( 2, $multiple['phases'] );
+		$this->assertFalse( $multiple['single_monthly_phase'] );
+
+		$this->response_body['catalog_object']['subscription_plan_variation']['phases'] = 'invalid';
+		$malformed = $client->retrieve_subscription_plan_variation( 'variation-123' );
+		$this->assertInstanceOf( WP_Error::class, $malformed );
+	}
+
+	public function test_subscription_actions_distinguish_not_requested_from_retrieved_empty_list(): void {
+		$this->response_body = array( 'subscription' => array(
+			'id' => 'subscription-123', 'location_id' => 'location', 'plan_variation_id' => 'variation', 'customer_id' => 'customer', 'status' => 'ACTIVE',
+		) );
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$without_actions = $client->retrieve_subscription( 'subscription-123' );
+		$this->assertFalse( $without_actions['actions_retrieved'] );
+		$this->assertArrayNotHasKey( 'actions', $without_actions );
+		$this->assertSame( 'https://connect.squareupsandbox.com/v2/subscriptions/subscription-123', $this->request['url'] );
+
+		$this->response_body['subscription']['actions'] = array();
+		$with_empty_actions = $client->retrieve_subscription( 'subscription-123', true );
+		$this->assertTrue( $with_empty_actions['actions_retrieved'] );
+		$this->assertSame( array(), $with_empty_actions['actions'] );
+		$this->assertSame( 'https://connect.squareupsandbox.com/v2/subscriptions/subscription-123?include=actions', $this->request['url'] );
+
+		$this->response_body['subscription']['actions'] = array( array( 'id' => 'action-1', 'type' => 'CHANGE_BILLING_ANCHOR_DATE', 'effective_date' => '2026-12-01', 'monthly_billing_anchor_date' => 1 ) );
+		$with_action = $client->retrieve_subscription( 'subscription-123', true );
+		$this->assertSame( 'CHANGE_BILLING_ANCHOR_DATE', $with_action['actions'][0]['type'] );
+		$this->assertSame( 1, $with_action['actions'][0]['monthly_billing_anchor_date'] );
+
+		unset( $this->response_body['subscription']['actions'] );
+		$missing_actions = $client->retrieve_subscription( 'subscription-123', true );
+		$this->assertInstanceOf( WP_Error::class, $missing_actions );
+		$this->assertSame( 'square_subscription_response_invalid', $missing_actions->get_error_code() );
+	}
+
+	public function test_subscription_events_retrieve_multiple_pages_and_report_complete_scope(): void {
+		$this->response_resolver = function ( $url ) {
+			if ( false === strpos( $url, '/subscriptions/subscription-123/events' ) ) {
+				return array( 'body' => array() );
+			}
+			if ( false === strpos( $url, 'cursor=cursor-page-2' ) ) {
+				return array( 'body' => array( 'subscription_events' => array( array( 'id' => 'event-1', 'subscription_event_type' => 'START_SUBSCRIPTION', 'effective_date' => '2026-10-01' ) ), 'cursor' => 'cursor-page-2' ) );
+			}
+			return array( 'body' => array( 'subscription_events' => array( array( 'id' => 'event-2', 'subscription_event_type' => 'BILLING_ANCHOR_DATE_CHANGED', 'effective_date' => '2026-11-01', 'monthly_billing_anchor_date' => 1, 'info' => array( 'detail' => 'private detail', 'code' => 'ANCHOR_CHANGED' ) ) ) ) );
+		};
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->list_subscription_events( 'subscription-123' );
+
+		$this->assertTrue( $result['complete'] );
+		$this->assertSame( 'all_event_pages_retrieved', $result['reason_code'] );
+		$this->assertSame( 2, $result['page_count'] );
+		$this->assertSame( 2, $result['retrieved_event_count'] );
+		$this->assertSame( '2026-10-01', $result['coverage_start_date'] );
+		$this->assertSame( '2026-11-01', $result['coverage_end_date'] );
+		$this->assertSame( 2, $this->request_count );
+		$this->assertStringContainsString( 'limit=100', $this->request['url'] );
+		$this->assertStringContainsString( 'cursor=cursor-page-2', $this->request['url'] );
+		$this->assertArrayNotHasKey( 'info_detail', $result['events'][1] );
+		$this->assertSame( 'ANCHOR_CHANGED', $result['events'][1]['info_code'] );
+	}
+
+	public function test_subscription_events_report_limit_and_do_not_claim_complete(): void {
+		$this->response_body = array( 'subscription_events' => array( array( 'id' => 'event-1', 'subscription_event_type' => 'START_SUBSCRIPTION', 'effective_date' => '2026-10-01' ) ), 'cursor' => 'next-page' );
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$result = $client->list_subscription_events( 'subscription-123', 1 );
+		$this->assertFalse( $result['complete'] );
+		$this->assertSame( 'event_limit_reached', $result['reason_code'] );
+		$this->assertSame( 1, $result['retrieved_event_count'] );
+		$this->assertSame( 1, $this->request_count );
+	}
+
+	public function test_subscription_events_reject_api_errors_invalid_cursor_and_invalid_event_data(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$this->response_status = 503;
+		$this->response_body = array( 'errors' => array( array( 'detail' => 'secret square detail' ) ) );
+		$api_error = $client->list_subscription_events( 'subscription-123' );
+		$this->assertInstanceOf( WP_Error::class, $api_error );
+		$this->assertSame( 'square_resource_api_error', $api_error->get_error_code() );
+		$this->assertStringNotContainsString( 'secret square detail', $api_error->get_error_message() );
+
+		$this->response_status = 200;
+		$this->response_body = array( 'subscription_events' => array(), 'cursor' => array( 'invalid' ) );
+		$cursor_error = $client->list_subscription_events( 'subscription-123' );
+		$this->assertInstanceOf( WP_Error::class, $cursor_error );
+		$this->assertSame( 'square_subscription_events_cursor_invalid', $cursor_error->get_error_code() );
+
+		$this->response_resolver = function ( $url ) {
+			return array( 'body' => array( 'subscription_events' => array(), 'cursor' => 'stuck-cursor' ) );
+		};
+		$repeated_cursor = $client->list_subscription_events( 'subscription-123' );
+		$this->assertInstanceOf( WP_Error::class, $repeated_cursor );
+		$this->assertSame( 'square_subscription_events_cursor_invalid', $repeated_cursor->get_error_code() );
+		$this->assertSame( 4, $this->request_count );
+		$this->response_resolver = null;
+
+		$this->response_body = array( 'subscription_events' => array( array( 'id' => 'event-1', 'subscription_event_type' => 'PLAN_CHANGE', 'effective_date' => 'bad-date' ) ) );
+		$event_error = $client->list_subscription_events( 'subscription-123' );
+		$this->assertInstanceOf( WP_Error::class, $event_error );
+		$this->assertSame( 'square_subscription_events_response_invalid', $event_error->get_error_code() );
+		$this->assertInstanceOf( WP_Error::class, $client->list_subscription_events( array( 'invalid' ) ) );
+		$this->assertInstanceOf( WP_Error::class, $client->list_subscription_events( 'subscription-123', 501 ) );
+	}
+
+	public function test_get_payment_refund_normalizes_each_known_status_without_personal_fields(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		foreach ( array( 'PENDING', 'COMPLETED', 'REJECTED', 'FAILED' ) as $status ) {
+			$this->response_body = array( 'refund' => array(
+				'id' => 'refund-123', 'payment_id' => 'payment-123', 'status' => $status,
+				'amount_money' => array( 'amount' => 125, 'currency' => 'JPY' ),
+				'reason' => 'private reason', 'destination_details' => array( 'private' => true ),
+			) );
+			$result = $client->get_payment_refund( 'refund-123' );
+			$this->assertSame( $status, $result['status'] );
+			$this->assertTrue( $result['status_known'] );
+			$this->assertSame( 'payment-123', $result['payment_id'] );
+			$this->assertSame( array( 'amount' => 125, 'currency' => 'JPY' ), $result['amount_money'] );
+			$this->assertArrayNotHasKey( 'reason', $result );
+			$this->assertArrayNotHasKey( 'destination_details', $result );
+		}
+		$this->assertSame( 'https://connect.squareupsandbox.com/v2/refunds/refund-123', $this->request['url'] );
+	}
+
+	public function test_get_payment_refund_rejects_invalid_ids_missing_fields_types_and_mismatched_ids(): void {
+		$client = new Egov_Law_Monitor_Square_Api_Client( $this->config( 'sandbox' ) );
+		$this->assertInstanceOf( WP_Error::class, $client->get_payment_refund( '' ) );
+		$this->assertInstanceOf( WP_Error::class, $client->get_payment_refund( array( 'invalid' ) ) );
+		$this->assertSame( 0, $this->request_count );
+
+		$this->response_body = array( 'refund' => array( 'id' => 'other-refund', 'payment_id' => 'payment-123', 'status' => 'COMPLETED', 'amount_money' => array( 'amount' => 100, 'currency' => 'JPY' ) ) );
+		$id_error = $client->get_payment_refund( 'refund-123' );
+		$this->assertInstanceOf( WP_Error::class, $id_error );
+		$this->assertSame( 'square_refund_response_invalid', $id_error->get_error_code() );
+
+		$this->response_body = array( 'refund' => array( 'id' => 'refund-123', 'status' => 'COMPLETED', 'amount_money' => array( 'amount' => 100, 'currency' => 'JPY' ) ) );
+		$missing_payment = $client->get_payment_refund( 'refund-123' );
+		$this->assertInstanceOf( WP_Error::class, $missing_payment );
+		$this->assertSame( 'square_refund_response_invalid', $missing_payment->get_error_code() );
+
+		$this->response_body = array( 'refund' => array( 'id' => 'refund-123', 'payment_id' => 'payment-123', 'status' => 'COMPLETED', 'amount_money' => array( 'amount' => '100', 'currency' => 'JPY' ) ) );
+		$bad_money = $client->get_payment_refund( 'refund-123' );
+		$this->assertInstanceOf( WP_Error::class, $bad_money );
+		$this->assertSame( 'square_refund_response_invalid', $bad_money->get_error_code() );
+
+		$this->response_status = 503;
+		$this->response_body = array( 'errors' => array( array( 'detail' => 'private refund detail' ) ) );
+		$api_error = $client->get_payment_refund( 'refund-123' );
+		$this->assertInstanceOf( WP_Error::class, $api_error );
+		$this->assertSame( 'square_resource_api_error', $api_error->get_error_code() );
+		$this->assertStringNotContainsString( 'private refund detail', $api_error->get_error_message() );
 	}
 
 	private function config( $environment ): array {

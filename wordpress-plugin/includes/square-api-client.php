@@ -271,8 +271,11 @@ class Egov_Law_Monitor_Square_Api_Client {
 	 * @param string $subscription_id Square Subscription ID.
 	 * @return array|WP_Error A validated, limited Subscription snapshot.
 	 */
-	public function retrieve_subscription( $subscription_id ) {
-		$resource = $this->get_square_resource( 'subscriptions', $subscription_id, 'subscription' );
+	public function retrieve_subscription( $subscription_id, $include_actions = false ) {
+		if ( ! is_bool( $include_actions ) ) {
+			return new WP_Error( 'square_subscription_request_invalid', 'Squareの契約情報を確認できませんでした。' );
+		}
+		$resource = $this->get_square_resource( 'subscriptions', $subscription_id, 'subscription', $include_actions ? array( 'include' => 'actions' ) : array() );
 		if ( is_wp_error( $resource ) ) {
 			return $resource;
 		}
@@ -297,6 +300,22 @@ class Egov_Law_Monitor_Square_Api_Client {
 				)
 			)
 		);
+		if ( $include_actions ) {
+			if ( ! array_key_exists( 'actions', $resource ) || ! is_array( $resource['actions'] ) || ( ! empty( $resource['actions'] ) && array_keys( $resource['actions'] ) !== range( 0, count( $resource['actions'] ) - 1 ) ) ) {
+				return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+			}
+			$normalized['actions_retrieved'] = true;
+			$normalized['actions'] = array();
+			foreach ( $resource['actions'] as $action ) {
+				$normalized_action = $this->normalize_subscription_action( $action );
+				if ( is_wp_error( $normalized_action ) ) {
+					return $normalized_action;
+				}
+				$normalized['actions'][] = $normalized_action;
+			}
+		} else {
+			$normalized['actions_retrieved'] = false;
+		}
 		$known_statuses = array( 'PENDING', 'ACTIVE', 'CANCELED', 'PAUSED', 'DEACTIVATED', 'COMPLETED' );
 		$normalized['status_known'] = in_array( $normalized['status'], $known_statuses, true );
 		foreach ( array( 'start_date', 'canceled_date', 'charged_through_date', 'paid_until_date', 'created_at', 'timezone' ) as $key ) {
@@ -333,6 +352,277 @@ class Egov_Law_Monitor_Square_Api_Client {
 		}
 
 		return $normalized;
+	}
+
+	/**
+	 * Retrieve the configured Subscription Plan Variation and normalize its phases.
+	 *
+	 * @param string $variation_id Square Catalog Object ID.
+	 * @return array|WP_Error A limited variation snapshot; unknown cadence is preserved.
+	 */
+	public function retrieve_subscription_plan_variation( $variation_id ) {
+		$resource = $this->get_square_resource( 'catalog/object', $variation_id, 'catalog_object' );
+		if ( is_wp_error( $resource ) ) {
+			return $resource;
+		}
+		if ( ! isset( $resource['id'], $resource['type'] ) || ! is_string( $resource['id'] ) || ! is_string( $resource['type'] ) || ! hash_equals( $variation_id, $resource['id'] ) || 'SUBSCRIPTION_PLAN_VARIATION' !== $resource['type'] || ! isset( $resource['subscription_plan_variation'] ) || ! is_array( $resource['subscription_plan_variation'] ) ) {
+			return new WP_Error( 'square_catalog_variation_response_invalid', 'Squareのプラン情報を確認できませんでした。' );
+		}
+
+		$variation = $resource['subscription_plan_variation'];
+		$normalized = array(
+			'id' => $resource['id'],
+			'type' => $resource['type'],
+			'version' => null,
+			'phases_available' => false,
+			'phases' => array(),
+			'single_monthly_phase' => false,
+		);
+		if ( array_key_exists( 'version', $resource ) ) {
+			if ( ! is_int( $resource['version'] ) || $resource['version'] < 0 ) {
+				return new WP_Error( 'square_catalog_variation_response_invalid', 'Squareのプラン情報を確認できませんでした。' );
+			}
+			$normalized['version'] = $resource['version'];
+		}
+		if ( array_key_exists( 'monthly_billing_anchor_date', $variation ) ) {
+			if ( ! is_int( $variation['monthly_billing_anchor_date'] ) || $variation['monthly_billing_anchor_date'] < 1 || $variation['monthly_billing_anchor_date'] > 31 ) {
+				return new WP_Error( 'square_catalog_variation_response_invalid', 'Squareのプラン情報を確認できませんでした。' );
+			}
+			$normalized['monthly_billing_anchor_date'] = $variation['monthly_billing_anchor_date'];
+		}
+		if ( array_key_exists( 'phases', $variation ) ) {
+			if ( ! is_array( $variation['phases'] ) || ( ! empty( $variation['phases'] ) && array_keys( $variation['phases'] ) !== range( 0, count( $variation['phases'] ) - 1 ) ) ) {
+				return new WP_Error( 'square_catalog_variation_response_invalid', 'Squareのプラン情報を確認できませんでした。' );
+			}
+			$normalized['phases_available'] = true;
+			foreach ( $variation['phases'] as $phase ) {
+				$normalized_phase = $this->normalize_subscription_plan_phase( $phase );
+				if ( is_wp_error( $normalized_phase ) ) {
+					return $normalized_phase;
+				}
+				$normalized['phases'][] = $normalized_phase;
+			}
+		}
+		$normalized['single_monthly_phase'] = 1 === count( $normalized['phases'] ) && 'MONTHLY' === $normalized['phases'][0]['cadence'] && $normalized['phases'][0]['cadence_known'];
+		return $normalized;
+	}
+
+	/** Retrieve every available Subscription Event up to a bounded event count. */
+	public function list_subscription_events( $subscription_id, $max_events = 500 ) {
+		if ( ! is_int( $max_events ) || $max_events < 1 || $max_events > 500 ) {
+			return new WP_Error( 'square_subscription_events_limit_invalid', 'Squareの変更履歴を確認できませんでした。' );
+		}
+		if ( ! is_string( $subscription_id ) || ! preg_match( '/\A[A-Za-z0-9._:-]{1,255}\z/', $subscription_id ) ) {
+			return new WP_Error( 'square_resource_id_invalid', 'Squareの情報を確認できませんでした。' );
+		}
+
+		$events = array();
+		$cursor = null;
+		$seen_cursors = array();
+		$page_count = 0;
+		$page_size = 100;
+		while ( true ) {
+			$remaining = $max_events - count( $events );
+			if ( $remaining < 1 ) {
+				return array(
+					'subscription_id' => $subscription_id,
+					'events' => $events,
+					'complete' => false,
+					'reason_code' => 'event_limit_reached',
+					'page_count' => $page_count,
+					'retrieved_event_count' => count( $events ),
+					'max_events' => $max_events,
+					'coverage_start_date' => $this->event_date_bound( $events, false ),
+					'coverage_end_date' => $this->event_date_bound( $events, true ),
+				);
+			}
+			$query = array( 'limit' => min( $page_size, $remaining ) );
+			if ( null !== $cursor ) {
+				$query['cursor'] = $cursor;
+			}
+			$response = $this->get_square_api_response( 'subscriptions/' . rawurlencode( $subscription_id ) . '/events', $query );
+			if ( is_wp_error( $response ) ) {
+				return $response;
+			}
+			if ( ! isset( $response['subscription_events'] ) || ! is_array( $response['subscription_events'] ) || ( ! empty( $response['subscription_events'] ) && array_keys( $response['subscription_events'] ) !== range( 0, count( $response['subscription_events'] ) - 1 ) ) || count( $response['subscription_events'] ) > $query['limit'] ) {
+				return new WP_Error( 'square_subscription_events_response_invalid', 'Squareの変更履歴を確認できませんでした。' );
+			}
+			++$page_count;
+			foreach ( $response['subscription_events'] as $event ) {
+				$normalized_event = $this->normalize_subscription_event( $event );
+				if ( is_wp_error( $normalized_event ) ) {
+					return $normalized_event;
+				}
+				$events[] = $normalized_event;
+			}
+
+			if ( ! array_key_exists( 'cursor', $response ) || '' === $response['cursor'] ) {
+				return array(
+					'subscription_id' => $subscription_id,
+					'events' => $events,
+					'complete' => true,
+					'reason_code' => 'all_event_pages_retrieved',
+					'page_count' => $page_count,
+					'retrieved_event_count' => count( $events ),
+					'max_events' => $max_events,
+					'coverage_start_date' => $this->event_date_bound( $events, false ),
+					'coverage_end_date' => $this->event_date_bound( $events, true ),
+				);
+			}
+			if ( ! is_string( $response['cursor'] ) || '' === trim( $response['cursor'] ) || strlen( $response['cursor'] ) > 2048 || preg_match( '/[\x00-\x20\x7F]/', $response['cursor'] ) || isset( $seen_cursors[ $response['cursor'] ] ) ) {
+				return new WP_Error( 'square_subscription_events_cursor_invalid', 'Squareの変更履歴を確認できませんでした。' );
+			}
+			$seen_cursors[ $response['cursor'] ] = true;
+			$cursor = $response['cursor'];
+		}
+	}
+
+	/** Retrieve one Refund and return only identifiers, status, amount, and currency. */
+	public function get_payment_refund( $refund_id ) {
+		$resource = $this->get_square_resource( 'refunds', $refund_id, 'refund' );
+		if ( is_wp_error( $resource ) ) {
+			return $resource;
+		}
+		if ( ! isset( $resource['id'], $resource['payment_id'], $resource['status'], $resource['amount_money'] ) || ! is_string( $resource['id'] ) || ! is_string( $resource['payment_id'] ) || '' === $resource['payment_id'] || ! is_string( $resource['status'] ) || '' === $resource['status'] || ! hash_equals( $refund_id, $resource['id'] ) ) {
+			return new WP_Error( 'square_refund_response_invalid', 'Squareの返金情報を確認できませんでした。' );
+		}
+		$money = $this->normalize_optional_money( $resource['amount_money'], 'square_refund_response_invalid' );
+		if ( is_wp_error( $money ) || ! isset( $money['amount'], $money['currency'] ) || $money['amount'] < 0 ) {
+			return new WP_Error( 'square_refund_response_invalid', 'Squareの返金情報を確認できませんでした。' );
+		}
+		$known_statuses = array( 'PENDING', 'COMPLETED', 'REJECTED', 'FAILED' );
+		return array(
+			'id' => $resource['id'],
+			'payment_id' => $resource['payment_id'],
+			'status' => $resource['status'],
+			'status_known' => in_array( $resource['status'], $known_statuses, true ),
+			'amount_money' => $money,
+		);
+	}
+
+	/** Normalize an action without returning Square's free-form error details. */
+	private function normalize_subscription_action( $action ) {
+		if ( ! is_array( $action ) || ! isset( $action['id'], $action['type'], $action['effective_date'] ) || ! is_string( $action['id'] ) || '' === $action['id'] || ! is_string( $action['type'] ) || '' === $action['type'] || ! is_string( $action['effective_date'] ) || ! $this->is_square_date( $action['effective_date'] ) ) {
+			return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+		}
+		$known_types = array( 'CANCEL', 'PAUSE', 'RESUME', 'SWAP_PLAN', 'CHANGE_BILLING_ANCHOR_DATE', 'COMPLETE' );
+		$normalized = array(
+			'id' => $action['id'],
+			'type' => $action['type'],
+			'type_known' => in_array( $action['type'], $known_types, true ),
+			'effective_date' => $action['effective_date'],
+		);
+		if ( array_key_exists( 'monthly_billing_anchor_date', $action ) ) {
+			if ( ! is_int( $action['monthly_billing_anchor_date'] ) || $action['monthly_billing_anchor_date'] < 1 || $action['monthly_billing_anchor_date'] > 31 ) {
+				return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+			}
+			$normalized['monthly_billing_anchor_date'] = $action['monthly_billing_anchor_date'];
+		}
+		if ( array_key_exists( 'new_plan_variation_id', $action ) ) {
+			if ( ! is_string( $action['new_plan_variation_id'] ) || '' === $action['new_plan_variation_id'] ) {
+				return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+			}
+			$normalized['new_plan_variation_id'] = $action['new_plan_variation_id'];
+		}
+		if ( array_key_exists( 'phases', $action ) ) {
+			if ( ! is_array( $action['phases'] ) || ( ! empty( $action['phases'] ) && array_keys( $action['phases'] ) !== range( 0, count( $action['phases'] ) - 1 ) ) ) {
+				return new WP_Error( 'square_subscription_response_invalid', 'Squareの契約情報を確認できませんでした。' );
+			}
+			$normalized['phases_available'] = true;
+			$normalized['phase_count'] = count( $action['phases'] );
+		}
+		return $normalized;
+	}
+
+	/** Normalize one Catalog Subscription Plan Variation phase. */
+	private function normalize_subscription_plan_phase( $phase ) {
+		if ( ! is_array( $phase ) ) {
+			return new WP_Error( 'square_catalog_variation_response_invalid', 'Squareのプラン情報を確認できませんでした。' );
+		}
+		$cadence = null;
+		if ( array_key_exists( 'cadence', $phase ) ) {
+			if ( ! is_string( $phase['cadence'] ) || '' === $phase['cadence'] ) {
+				return new WP_Error( 'square_catalog_variation_response_invalid', 'Squareのプラン情報を確認できませんでした。' );
+			}
+			$cadence = $phase['cadence'];
+		}
+		$known_cadences = array( 'DAILY', 'WEEKLY', 'EVERY_TWO_WEEKS', 'THIRTY_DAYS', 'SIXTY_DAYS', 'NINETY_DAYS', 'MONTHLY', 'EVERY_TWO_MONTHS', 'QUARTERLY', 'EVERY_FOUR_MONTHS', 'EVERY_SIX_MONTHS', 'ANNUAL', 'EVERY_TWO_YEARS' );
+		$normalized = array(
+			'cadence' => $cadence,
+			'cadence_known' => null !== $cadence && in_array( $cadence, $known_cadences, true ),
+			'periods' => null,
+			'recurring_price_money' => null,
+		);
+		foreach ( array( 'uid' => 'uid', 'ordinal' => 'ordinal' ) as $field => $target ) {
+			if ( array_key_exists( $field, $phase ) ) {
+				if ( 'uid' === $field && ( ! is_string( $phase[ $field ] ) || '' === $phase[ $field ] ) ) {
+					return new WP_Error( 'square_catalog_variation_response_invalid', 'Squareのプラン情報を確認できませんでした。' );
+				}
+				if ( 'ordinal' === $field && ( ! is_int( $phase[ $field ] ) || $phase[ $field ] < 0 ) ) {
+					return new WP_Error( 'square_catalog_variation_response_invalid', 'Squareのプラン情報を確認できませんでした。' );
+				}
+				$normalized[ $target ] = $phase[ $field ];
+			}
+		}
+		if ( array_key_exists( 'periods', $phase ) ) {
+			if ( ! is_int( $phase['periods'] ) || $phase['periods'] < 1 ) {
+				return new WP_Error( 'square_catalog_variation_response_invalid', 'Squareのプラン情報を確認できませんでした。' );
+			}
+			$normalized['periods'] = $phase['periods'];
+		}
+		if ( array_key_exists( 'recurring_price_money', $phase ) ) {
+			$money = $this->normalize_optional_money( $phase['recurring_price_money'], 'square_catalog_variation_response_invalid' );
+			if ( is_wp_error( $money ) || ! isset( $money['amount'], $money['currency'] ) || $money['amount'] < 0 ) {
+				return new WP_Error( 'square_catalog_variation_response_invalid', 'Squareのプラン情報を確認できませんでした。' );
+			}
+			$normalized['recurring_price_money'] = $money;
+		}
+		return $normalized;
+	}
+
+	/** Normalize the public, non-PII fields of a Subscription Event. */
+	private function normalize_subscription_event( $event ) {
+		if ( ! is_array( $event ) || ! isset( $event['id'], $event['subscription_event_type'], $event['effective_date'] ) || ! is_string( $event['id'] ) || '' === $event['id'] || ! is_string( $event['subscription_event_type'] ) || '' === $event['subscription_event_type'] || ! is_string( $event['effective_date'] ) || ! $this->is_square_date( $event['effective_date'] ) ) {
+			return new WP_Error( 'square_subscription_events_response_invalid', 'Squareの変更履歴を確認できませんでした。' );
+		}
+		$known_types = array( 'START_SUBSCRIPTION', 'STOP_SUBSCRIPTION', 'DEACTIVATE_SUBSCRIPTION', 'RESUME_SUBSCRIPTION', 'PAUSE_SUBSCRIPTION', 'PLAN_CHANGE', 'BILLING_ANCHOR_DATE_CHANGED' );
+		$normalized = array(
+			'id' => $event['id'],
+			'subscription_event_type' => $event['subscription_event_type'],
+			'event_type_known' => in_array( $event['subscription_event_type'], $known_types, true ),
+			'effective_date' => $event['effective_date'],
+		);
+		if ( array_key_exists( 'plan_variation_id', $event ) ) {
+			if ( ! is_string( $event['plan_variation_id'] ) || '' === $event['plan_variation_id'] ) {
+				return new WP_Error( 'square_subscription_events_response_invalid', 'Squareの変更履歴を確認できませんでした。' );
+			}
+			$normalized['plan_variation_id'] = $event['plan_variation_id'];
+		}
+		if ( array_key_exists( 'monthly_billing_anchor_date', $event ) ) {
+			if ( ! is_int( $event['monthly_billing_anchor_date'] ) || $event['monthly_billing_anchor_date'] < 1 || $event['monthly_billing_anchor_date'] > 31 ) {
+				return new WP_Error( 'square_subscription_events_response_invalid', 'Squareの変更履歴を確認できませんでした。' );
+			}
+			$normalized['monthly_billing_anchor_date'] = $event['monthly_billing_anchor_date'];
+		}
+		if ( isset( $event['info'] ) && is_array( $event['info'] ) && isset( $event['info']['code'] ) && is_string( $event['info']['code'] ) && '' !== $event['info']['code'] ) {
+			$normalized['info_code'] = $event['info']['code'];
+		}
+		return $normalized;
+	}
+
+	/** Return the inclusive min/max effective dates in the retrieved event subset. */
+	private function event_date_bound( $events, $maximum ) {
+		$dates = array();
+		foreach ( $events as $event ) {
+			if ( isset( $event['effective_date'] ) ) {
+				$dates[] = $event['effective_date'];
+			}
+		}
+		if ( empty( $dates ) ) {
+			return null;
+		}
+		sort( $dates, SORT_STRING );
+		return $maximum ? end( $dates ) : reset( $dates );
 	}
 
 	/**
@@ -658,7 +948,22 @@ class Egov_Law_Monitor_Square_Api_Client {
 	}
 
 	/** Perform a sandbox-or-production GET and return the named Square object. */
-	private function get_square_resource( $resource_path, $resource_id, $response_key ) {
+	private function get_square_resource( $resource_path, $resource_id, $response_key, $query = array() ) {
+		if ( ! is_string( $resource_id ) || ! preg_match( '/\A[A-Za-z0-9._:-]{1,255}\z/', $resource_id ) ) {
+			return new WP_Error( 'square_resource_id_invalid', 'Squareの情報を確認できませんでした。' );
+		}
+		$response = $this->get_square_api_response( $resource_path . '/' . rawurlencode( $resource_id ), $query );
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		}
+		if ( ! isset( $response[ $response_key ] ) || ! is_array( $response[ $response_key ] ) ) {
+			return new WP_Error( 'square_resource_response_invalid', 'Squareから有効な情報を取得できませんでした。' );
+		}
+		return $response[ $response_key ];
+	}
+
+	/** Perform an authenticated, read-only Square GET and return its decoded envelope. */
+	private function get_square_api_response( $path, $query = array() ) {
 		if (
 			! isset( $this->config['environment'], $this->config['access_token'] )
 			|| ! in_array( $this->config['environment'], array( 'sandbox', 'production' ), true )
@@ -667,8 +972,16 @@ class Egov_Law_Monitor_Square_Api_Client {
 		) {
 			return new WP_Error( 'square_configuration_invalid', 'Squareのサーバー設定が不足しています。' );
 		}
-		if ( ! is_string( $resource_id ) || ! preg_match( '/\A[A-Za-z0-9._:-]{1,255}\z/', $resource_id ) ) {
-			return new WP_Error( 'square_resource_id_invalid', 'Squareの情報を確認できませんでした。' );
+		if ( ! is_string( $path ) || ! preg_match( '/\A[a-z][a-z0-9-]*(?:\/[A-Za-z0-9._:%-]+)*\z/', $path ) || false !== strpos( $path, '..' ) ) {
+			return new WP_Error( 'square_resource_path_invalid', 'Squareの情報を確認できませんでした。' );
+		}
+		if ( ! is_array( $query ) ) {
+			return new WP_Error( 'square_resource_query_invalid', 'Squareの情報を確認できませんでした。' );
+		}
+		foreach ( $query as $key => $value ) {
+			if ( ! in_array( $key, array( 'include', 'limit', 'cursor' ), true ) || ! is_scalar( $value ) || is_bool( $value ) || '' === (string) $value ) {
+				return new WP_Error( 'square_resource_query_invalid', 'Squareの情報を確認できませんでした。' );
+			}
 		}
 		if ( ! function_exists( 'wp_remote_get' ) ) {
 			return new WP_Error( 'square_http_api_unavailable', 'Square情報を取得できません。' );
@@ -677,8 +990,12 @@ class Egov_Law_Monitor_Square_Api_Client {
 		$host = 'sandbox' === $this->config['environment']
 			? 'https://connect.squareupsandbox.com'
 			: 'https://connect.squareup.com';
+		$url = $host . '/v2/' . $path;
+		if ( ! empty( $query ) ) {
+			$url = add_query_arg( $query, $url );
+		}
 		$response = wp_remote_get(
-			$host . '/v2/' . $resource_path . '/' . rawurlencode( $resource_id ),
+			$url,
 			array(
 				'timeout'     => 20,
 				'redirection' => 0,
@@ -705,11 +1022,10 @@ class Egov_Law_Monitor_Square_Api_Client {
 		if ( $status < 200 || $status >= 300 ) {
 			return new WP_Error( 'square_resource_http_error', 'Square情報を取得できませんでした。', array( 'http_status' => $status ) );
 		}
-		if ( ! is_array( $decoded ) || ! isset( $decoded[ $response_key ] ) || ! is_array( $decoded[ $response_key ] ) ) {
+		if ( ! is_array( $decoded ) ) {
 			return new WP_Error( 'square_resource_response_invalid', 'Squareから有効な情報を取得できませんでした。' );
 		}
-
-		return $decoded[ $response_key ];
+		return $decoded;
 	}
 
 	private function validate_request( $attempt_uuid, $idempotency_key ) {
