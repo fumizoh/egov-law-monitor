@@ -37,6 +37,28 @@ function egov_law_monitor_admin_square_recurring_read_service() {
 	return new Egov_Law_Monitor_Square_Recurring_Billing_Inspection_Service( $wpdb, $client );
 }
 
+/** Build the read-only approval preflight only for an explicit administrator action. */
+function egov_law_monitor_admin_square_approval_validation_service() {
+	$injected = apply_filters( 'egov_law_monitor_admin_square_approval_validation_service', null );
+	if ( null !== $injected ) { return $injected; }
+	$initial = egov_law_monitor_admin_square_initial_read_service();
+	if ( is_wp_error( $initial ) ) { return $initial; }
+	$recurring = egov_law_monitor_admin_square_recurring_read_service();
+	if ( is_wp_error( $recurring ) ) { return $recurring; }
+	global $wpdb;
+	return new Egov_Law_Monitor_Square_Admin_Approval_Validation_Service( $wpdb, $initial, $recurring, new Egov_Law_Monitor_Square_Admin_Review_Repository( $wpdb ) );
+}
+
+/** Build the atomic approval service only for the final explicit POST. */
+function egov_law_monitor_admin_square_approval_service() {
+	$injected = apply_filters( 'egov_law_monitor_admin_square_approval_service', null );
+	if ( null !== $injected ) { return $injected; }
+	$validation = egov_law_monitor_admin_square_approval_validation_service();
+	if ( is_wp_error( $validation ) ) { return $validation; }
+	global $wpdb;
+	return new Egov_Law_Monitor_Square_Admin_Approval_Service( $wpdb, $validation, new Egov_Law_Monitor_Square_Admin_Review_Repository( $wpdb ) );
+}
+
 /** Render the Square payment review screen; Square is queried only for a valid POST. */
 function egov_law_monitor_render_admin_square_payments() {
 	if ( ! current_user_can( 'manage_options' ) ) {
@@ -46,6 +68,94 @@ function egov_law_monitor_render_admin_square_payments() {
 
 	$inspection = null;
 	$notice = '';
+	$approval_validation = null;
+	$approval_outcome = null;
+	$workflow_type = null;
+	$workflow_id = 0;
+	$workflow_note = '';
+	if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === strtoupper( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) && isset( $_POST['square_admin_action'] ) ) {
+		$action = isset( $_POST['square_admin_action'] ) && is_string( $_POST['square_admin_action'] ) ? sanitize_key( wp_unslash( $_POST['square_admin_action'] ) ) : '';
+		$workflow_type = isset( $_POST['record_type'] ) && is_string( $_POST['record_type'] ) ? sanitize_key( wp_unslash( $_POST['record_type'] ) ) : '';
+		$raw_id = isset( $_POST['local_id'] ) ? wp_unslash( $_POST['local_id'] ) : null;
+		$workflow_id = is_string( $raw_id ) && preg_match( '/\A[1-9][0-9]*\z/', $raw_id ) && false !== filter_var( $raw_id, FILTER_VALIDATE_INT ) ? (int) $raw_id : 0;
+		$allowed_actions = array( 'validate', 'approve', 'reconcile' );
+		$nonce = isset( $_POST['square_admin_approval_nonce'] ) && is_string( $_POST['square_admin_approval_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['square_admin_approval_nonce'] ) ) : '';
+		$nonce_action = $workflow_id > 0 && in_array( $workflow_type, array( 'initial', 'recurring' ), true ) && in_array( $action, $allowed_actions, true )
+			? 'egov_square_approval_' . $action . '_' . $workflow_type . '_' . $workflow_id
+			: '';
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'この操作を実行する権限がありません。' );
+		} elseif ( '' === $nonce_action || ! wp_verify_nonce( $nonce, $nonce_action ) ) {
+			$notice = 'リクエストを確認できませんでした。画面を再読み込みして再度お試しください。';
+		} else {
+			global $wpdb;
+			$local = egov_law_monitor_admin_square_payment_local_target( $workflow_type, $workflow_id, $wpdb );
+			if ( is_wp_error( $local ) ) {
+				$notice = '対象の申込・契約を確認できません。';
+			} elseif ( 'validate' === $action ) {
+				$validation_service = egov_law_monitor_admin_square_approval_validation_service();
+				if ( is_wp_error( $validation_service ) ) {
+					$notice = 'Square設定または決済情報を確認できません。';
+				} else {
+					try {
+						$approval_validation = 'initial' === $workflow_type
+							? $validation_service->validate_initial_approval( $workflow_id )
+							: $validation_service->validate_recurring_approval( $workflow_id );
+					} catch ( Throwable $error ) {
+						$notice = '承認条件を確認できませんでした。';
+					}
+					if ( is_wp_error( $approval_validation ) ) {
+						$notice = '承認条件を確認できませんでした。';
+						$approval_validation = null;
+					}
+				}
+			} elseif ( 'approve' === $action ) {
+				$raw_note = isset( $_POST['admin_note'] ) && is_string( $_POST['admin_note'] ) ? wp_unslash( $_POST['admin_note'] ) : '';
+				$workflow_note = sanitize_textarea_field( $raw_note );
+				$note_length = function_exists( 'mb_strlen' ) ? mb_strlen( $workflow_note, 'UTF-8' ) : preg_match_all( '/./us', $workflow_note );
+				if ( false === $note_length || $note_length > 2000 ) {
+					$notice = '管理者メモは2,000文字以内で入力してください。';
+				} else {
+					$approval_service = egov_law_monitor_admin_square_approval_service();
+					if ( is_wp_error( $approval_service ) ) {
+						$approval_outcome = array( 'status' => 'square_error' );
+					} else {
+						try {
+							$approval_outcome = 'initial' === $workflow_type
+								? $approval_service->approve_initial( $workflow_id, get_current_user_id(), $workflow_note )
+								: $approval_service->approve_recurring( $workflow_id, get_current_user_id(), $workflow_note );
+						} catch ( Throwable $error ) {
+							$approval_outcome = new WP_Error( 'square_admin_approval_database_error', '承認処理を完了できませんでした。' );
+						}
+						if ( is_wp_error( $approval_outcome ) && 'square_admin_approval_commit_outcome_unknown' === $approval_outcome->get_error_code() ) {
+							$error_data = $approval_outcome->get_error_data();
+							$target = is_array( $error_data ) && is_array( $error_data['reconciliation_target'] ?? null ) ? $error_data['reconciliation_target'] : null;
+							if ( is_array( $target ) && (int) ( $target['local_id'] ?? 0 ) === $workflow_id && ( $target['type'] ?? null ) === $workflow_type ) {
+								set_transient( egov_law_monitor_admin_square_reconciliation_transient_key( $workflow_type, $workflow_id, get_current_user_id() ), $target, 12 * HOUR_IN_SECONDS );
+							}
+						}
+					}
+				}
+			} elseif ( 'reconcile' === $action ) {
+				$transient_key = egov_law_monitor_admin_square_reconciliation_transient_key( $workflow_type, $workflow_id, get_current_user_id() );
+				$target = get_transient( $transient_key );
+				if ( ! is_array( $target ) ) {
+					$approval_outcome = array( 'status' => 'unavailable', 'reason_code' => 'reconciliation_target_expired' );
+				} else {
+					$approval_service = egov_law_monitor_admin_square_approval_service();
+					if ( is_wp_error( $approval_service ) ) {
+						$approval_outcome = array( 'status' => 'unavailable', 'reason_code' => 'approval_service_unavailable' );
+					} else {
+						try { $approval_outcome = $approval_service->reconcile_commit_outcome( $target, get_current_user_id() ); }
+						catch ( Throwable $error ) { $approval_outcome = array( 'status' => 'unavailable', 'reason_code' => 'reconciliation_failed' ); }
+						if ( is_wp_error( $approval_outcome ) ) { $approval_outcome = array( 'status' => 'unavailable', 'reason_code' => $approval_outcome->get_error_code() ); }
+						if ( is_array( $approval_outcome ) && 'approved' === ( $approval_outcome['status'] ?? null ) ) { delete_transient( $transient_key ); }
+						if ( is_array( $approval_outcome ) && 'not_approved' === ( $approval_outcome['status'] ?? null ) ) { delete_transient( $transient_key ); }
+					}
+				}
+			}
+		}
+	}
 	if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === strtoupper( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) && isset( $_POST['egov_square_payment_inspect'] ) ) {
 		$record_type = isset( $_POST['record_type'] ) && is_string( $_POST['record_type'] ) ? sanitize_key( wp_unslash( $_POST['record_type'] ) ) : '';
 		$raw_id = isset( $_POST['local_id'] ) ? wp_unslash( $_POST['local_id'] ) : null;
@@ -155,6 +265,15 @@ function egov_law_monitor_render_admin_square_payments() {
 	}
 	if ( is_array( $inspection ) ) {
 		egov_law_monitor_render_square_payment_inspection( $inspection, $record_type ?? null );
+		if ( isset( $record_type, $local_id ) && in_array( $record_type, array( 'initial', 'recurring' ), true ) && is_int( $local_id ) && $local_id > 0 ) {
+			egov_law_monitor_render_square_admin_action_form( 'validate', $record_type, $local_id, '承認候補を確認', '承認条件を再検証します。' );
+		}
+	}
+	if ( is_array( $approval_validation ) ) {
+		egov_law_monitor_render_square_approval_validation( $approval_validation, $workflow_type, $workflow_id, $workflow_note );
+	}
+	if ( is_wp_error( $approval_outcome ) || is_array( $approval_outcome ) ) {
+		egov_law_monitor_render_square_approval_outcome( $approval_outcome, $workflow_type, $workflow_id );
 	}
 	echo '<table class="widefat striped"><thead><tr><th>区分</th><th>WordPressユーザーID</th><th>ローカルID</th><th>関連する申込・契約</th><th>Square環境</th><th>Merchant ID</th><th>Square Subscription ID</th><th>ローカル契約状態</th><th>保存済み同期日時</th><th>操作</th></tr></thead><tbody>';
 	if ( $list_unavailable ) {
@@ -204,6 +323,176 @@ function egov_law_monitor_render_admin_square_payments() {
 		) ) ) . '</div></div>';
 	}
 	echo '</div>';
+}
+
+/** Confirm that the posted identifier refers to a local Standard target. */
+function egov_law_monitor_admin_square_payment_local_target( $type, $id, $wpdb ) {
+	if ( ! is_int( $id ) || $id < 1 || ! in_array( $type, array( 'initial', 'recurring' ), true ) ) { return new WP_Error( 'square_admin_target_invalid' ); }
+	$table = 'initial' === $type ? $wpdb->prefix . 'egov_law_checkout_attempts' : $wpdb->prefix . 'egov_law_subscriptions';
+	$where = 'initial' === $type ? "id = %d AND plan_code = 'standard'" : "id = %d AND plan_code = 'standard' AND square_subscription_id IS NOT NULL AND square_subscription_id <> ''";
+	$wpdb->last_error = '';
+	$row = $wpdb->get_row( $wpdb->prepare( "SELECT id, user_id FROM {$table} WHERE {$where}", $id ), ARRAY_A );
+	if ( '' !== (string) $wpdb->last_error ) { return new WP_Error( 'square_admin_target_database_error' ); }
+	return is_array( $row ) ? $row : new WP_Error( 'square_admin_target_not_found' );
+}
+
+function egov_law_monitor_admin_square_reconciliation_transient_key( $type, $id, $user_id ) {
+	return 'egov_sq_reconcile_' . substr( hash_hmac( 'sha256', $type . '|' . (int) $id . '|' . (int) $user_id, wp_salt( 'auth' ) ), 0, 48 );
+}
+
+function egov_law_monitor_render_square_admin_action_form( $action, $type, $id, $label, $description = '' ) {
+	$nonce_action = 'egov_square_approval_' . $action . '_' . $type . '_' . (int) $id;
+	echo '<form method="post" action="' . esc_url( admin_url( 'admin.php?page=egov-law-monitor-square-payments' ) ) . '" class="egov-square-approval-action">';
+	echo '<input type="hidden" name="square_admin_action" value="' . esc_attr( $action ) . '"><input type="hidden" name="record_type" value="' . esc_attr( $type ) . '"><input type="hidden" name="local_id" value="' . esc_attr( (string) (int) $id ) . '">';
+	echo '<input type="hidden" name="square_admin_approval_nonce" value="' . esc_attr( wp_create_nonce( $nonce_action ) ) . '">';
+	if ( '' !== $description ) { echo '<p>' . esc_html( $description ) . '</p>'; }
+	echo '<button type="submit" class="button">' . esc_html( $label ) . '</button></form>';
+}
+
+/** Render verified preflight data; only an eligible result gets an approval POST. */
+function egov_law_monitor_render_square_approval_validation( array $validation, $type, $id, $admin_note = '' ) {
+	global $wpdb;
+	$local = egov_law_monitor_admin_square_payment_local_target( $type, (int) $id, $wpdb );
+	$user_id = is_array( $local ) ? (int) $local['user_id'] : 0;
+	$evidence = is_array( $validation['payment_evidence'] ?? null ) ? $validation['payment_evidence'] : array();
+	$invoice = is_array( $validation['verified_invoice'] ?? null ) ? $validation['verified_invoice'] : array();
+	$payment = is_array( $validation['verified_payment'] ?? null ) ? $validation['verified_payment'] : array();
+	$subscription = is_array( $validation['verified_subscription'] ?? null ) ? $validation['verified_subscription'] : array();
+	$subscription_summary = is_array( $validation['subscription_verification'] ?? null ) ? $validation['subscription_verification'] : array();
+	$candidate = is_array( $validation['period_candidate'] ?? null ) ? $validation['period_candidate'] : array();
+	$eligible = true === ( $validation['approval_eligible'] ?? false ) && 'validation_passed' === ( $validation['verification_status'] ?? null ) && empty( $validation['approved'] );
+	$reason_codes = is_array( $validation['reason_codes'] ?? null ) ? $validation['reason_codes'] : array();
+	$reason_code = $eligible ? 'approval_eligible' : ( isset( $reason_codes[0] ) && is_string( $reason_codes[0] ) ? $reason_codes[0] : 'reason_unavailable' );
+	$payment_id = $evidence['payment_id'] ?? ( $payment['id'] ?? null );
+	$invoice_id = $invoice['id'] ?? ( $evidence['invoice_id'] ?? null );
+	$subscription_id = $subscription['id'] ?? ( $subscription_summary['subscription_id'] ?? ( $validation['subscription_link']['subscription_id'] ?? null ) );
+	$period_available = 'candidate' === ( $candidate['status'] ?? null ) && is_string( $candidate['start_date'] ?? null ) && is_string( $candidate['end_exclusive_date'] ?? null );
+	$inclusive_end = $candidate['end_date_inclusive'] ?? null;
+	if ( $period_available && ( ! is_string( $inclusive_end ) || '' === $inclusive_end ) ) {
+		$end = DateTimeImmutable::createFromFormat( '!Y-m-d', $candidate['end_exclusive_date'], new DateTimeZone( $candidate['timezone'] ?? 'UTC' ) );
+		$inclusive_end = false !== $end ? $end->modify( '-1 day' )->format( 'Y-m-d' ) : null;
+	}
+	echo '<section class="notice ' . ( $eligible ? 'notice-warning' : 'notice-error' ) . ' egov-square-approval-candidate"><h2>管理者承認の事前確認</h2><p><strong>' . esc_html( $eligible ? '承認内容を確認してください。まだ権限は変更されていません。' : '通常承認できません。' ) . '</strong></p><dl>';
+	egov_law_monitor_square_payment_result_item( '対象ユーザー', $user_id > 0 ? 'WordPressユーザー #' . $user_id : '確認できず' );
+	egov_law_monitor_square_payment_result_item( '区分', 'initial' === $type ? '初回決済' : '継続決済' );
+	egov_law_monitor_square_payment_result_item( 'ローカル対象ID', (string) (int) $id );
+	egov_law_monitor_square_payment_result_item( 'Payment ID', $payment_id );
+	egov_law_monitor_square_payment_result_item( 'Invoice ID', $invoice_id );
+	egov_law_monitor_square_payment_result_item( 'Subscription ID', $subscription_id );
+	egov_law_monitor_square_payment_result_item( '決済確認', ! empty( $evidence['confirmed'] ) ? '決済完了を確認' : '確認できず' );
+	egov_law_monitor_square_payment_result_item( '決済額・通貨', isset( $evidence['amount'], $evidence['currency'] ) ? number_format_i18n( (int) $evidence['amount'] ) . ' ' . $evidence['currency'] : '確認できず' );
+	egov_law_monitor_square_payment_result_item( 'Subscription照合', 'confirmed' === ( $validation['subscription_link']['status'] ?? '' ) || 'identified_from_local_contract' === ( $validation['subscription_link']['status'] ?? '' ) ? '確認済み' : '要確認' );
+	egov_law_monitor_square_payment_result_item( '利用開始日', $period_available ? $candidate['start_date'] : '要確認' );
+	egov_law_monitor_square_payment_result_item( '利用終了日', $period_available && is_string( $inclusive_end ) ? $inclusive_end . '（最終利用日）' : '要確認' );
+	egov_law_monitor_square_payment_result_item( '終了境界（exclusive）', $period_available ? $candidate['end_exclusive_date'] : '要確認' );
+	egov_law_monitor_square_payment_result_item( 'Timezone', $candidate['timezone'] ?? ( $validation['timezone'] ?? null ) );
+	egov_law_monitor_square_payment_result_item( '月次課金アンカー', $candidate['monthly_billing_anchor_date'] ?? ( $validation['monthly_billing_anchor_date'] ?? null ) );
+	egov_law_monitor_square_payment_result_item( '承認可否', $eligible ? '通常承認可能（管理者の最終確認が必要）' : '承認不可・要確認' );
+	egov_law_monitor_square_payment_result_item( '理由', $eligible ? '検証条件を満たしました。' : egov_law_monitor_square_reason_label( $reason_code ) );
+	egov_law_monitor_square_payment_result_item( '理由コード', $reason_code );
+	echo '</dl>';
+	if ( $eligible ) {
+		echo '<p>Square ID・金額・期間はこのフォームから送信されません。最終操作時にSquare情報とDBを再検証します。</p>';
+		echo '<form method="post" action="' . esc_url( admin_url( 'admin.php?page=egov-law-monitor-square-payments' ) ) . '" class="egov-square-approval-final" onsubmit="const b=this.querySelector(\'button[type=submit]\');if(b){b.disabled=true;}">';
+		echo '<input type="hidden" name="square_admin_action" value="approve"><input type="hidden" name="record_type" value="' . esc_attr( $type ) . '"><input type="hidden" name="local_id" value="' . esc_attr( (string) (int) $id ) . '">';
+		echo '<input type="hidden" name="square_admin_approval_nonce" value="' . esc_attr( wp_create_nonce( 'egov_square_approval_approve_' . $type . '_' . (int) $id ) ) . '">';
+		echo '<label for="egov-square-admin-note"><strong>管理者メモ（任意、2,000文字以内）</strong></label><textarea id="egov-square-admin-note" name="admin_note" rows="4" maxlength="2000" class="large-text"></textarea><p>パスワード、APIキー、カード情報などの機密情報は入力しないでください。</p>';
+		echo '<p><button type="submit" class="button button-primary" data-confirm="1">この内容で承認する</button></p></form>';
+	}
+	echo '</section>';
+}
+
+function egov_law_monitor_render_square_approval_outcome( $outcome, $type, $id ) {
+	if ( is_array( $outcome ) && 'square_error' === ( $outcome['status'] ?? null ) ) {
+		echo '<div class="notice notice-error"><p>Square情報または承認サービスを利用できないため、承認していません。</p></div>';
+		return;
+	}
+	if ( is_wp_error( $outcome ) ) {
+		$code = $outcome->get_error_code();
+		if ( 'square_admin_approval_commit_outcome_unknown' === $code ) {
+			echo '<div class="notice notice-warning"><p><strong>承認結果を確認できません。再確認してください。</strong> 成功・失敗はまだ確定していません。</p></div>';
+			egov_law_monitor_render_square_admin_action_form( 'reconcile', $type, $id, '承認結果を再確認', '同じ承認対象の履歴・契約・Invoiceを読み取り専用で照合します。別決済による自動再試行は行いません。' );
+			return;
+		}
+		$messages = array(
+			'square_admin_approval_duplicate' => '既に承認済み、または重複承認です。',
+			'square_admin_approval_database_error' => 'DB更新に失敗し、承認は確定していません。',
+			'square_admin_approval_transaction_unavailable' => 'DBトランザクションを開始できず、承認していません。',
+			'square_admin_approval_forbidden' => '承認権限がありません。',
+			'square_admin_approval_validation_failed' => 'Square情報を取得できませんでした。決済失敗を意味しません。',
+			'square_admin_approval_not_eligible' => '承認条件を満たしていません。',
+			'square_admin_approval_payment_unconfirmed' => '決済完了の証拠を確認できません。',
+			'square_admin_approval_invoice_unverified' => 'Invoiceとの対応を確認できません。',
+			'square_admin_approval_period_invalid' => '利用期間を安全に確定できません。',
+			'square_admin_approval_local_state_changed' => '確認後にローカル契約情報が変わったため、承認していません。再取得してください。',
+			'square_admin_approval_current_contract_conflict' => '現行契約が競合するため承認できません。',
+			'square_admin_approval_contract_conflict' => '申込に関連する契約が競合しています。',
+			'square_admin_approval_payment_conflict' => '対象Paymentが別の承認記録と競合しています。',
+			'square_admin_approval_invoice_conflict' => '対象Invoiceが別の承認記録と競合しています。',
+			'square_admin_approval_admin_suspended' => '管理者停止中の契約は通常承認できません。',
+		);
+		$message = $messages[ $code ] ?? '承認条件不一致またはDB処理エラーです。(' . $code . ')';
+		echo '<div class="notice notice-error"><p>' . esc_html( $message ) . '</p></div>';
+		$error_data = $outcome->get_error_data();
+		$reason_code = is_array( $error_data ) && is_string( $error_data['reason_code'] ?? null ) ? $error_data['reason_code'] : null;
+		if ( null !== $reason_code ) {
+			echo '<p>' . esc_html( egov_law_monitor_square_reason_label( $reason_code ) ) . '</p>';
+		}
+		return;
+	}
+	if ( is_array( $outcome ) && in_array( $outcome['status'] ?? null, array( 'approved', 'not_approved', 'inconsistent', 'unavailable' ), true ) && isset( $outcome['reason_code'] ) ) {
+		$labels = array( 'approved' => '承認済み', 'not_approved' => '未承認', 'inconsistent' => '不整合があります。管理者による個別確認が必要です。', 'unavailable' => '確認不能です。自動承認は行っていません。' );
+		echo '<div class="notice ' . ( 'approved' === $outcome['status'] ? 'notice-success' : ( 'not_approved' === $outcome['status'] ? 'notice-warning' : 'notice-error' ) ) . '"><p><strong>再照合結果：' . esc_html( $labels[ $outcome['status'] ] ) . '</strong></p>';
+		if ( isset( $outcome['reason_code'] ) ) { echo '<p>' . esc_html( (string) $outcome['reason_code'] ) . '</p>'; }
+		if ( 'approved' === $outcome['status'] && isset( $outcome['contract_id'] ) ) {
+			$contract_id = (int) $outcome['contract_id'];
+			egov_law_monitor_render_square_approved_period( $contract_id );
+			$user_id = (int) egov_law_monitor_square_contract_user_id( $contract_id );
+			egov_law_monitor_render_square_entitlement_after_approval( $user_id );
+		}
+		echo '</div>';
+		if ( 'inconsistent' === $outcome['status'] || 'unavailable' === $outcome['status'] ) {
+			egov_law_monitor_render_square_admin_action_form( 'reconcile', $type, $id, '同じ承認結果を再確認', '不整合・確認不能の場合は承認を再実行しません。' );
+		}
+		return;
+	}
+	if ( is_array( $outcome ) && 'approved' === ( $outcome['status'] ?? null ) ) {
+		echo '<div class="notice notice-success"><p><strong>管理者承認が完了しました。</strong> 利用期間は ' . esc_html( (string) $outcome['period_start_utc'] ) . ' 〜 ' . esc_html( (string) $outcome['period_end_utc_exclusive'] ) . ' UTC（終了境界を含まない）です。</p>';
+		egov_law_monitor_render_square_entitlement_after_approval( (int) egov_law_monitor_square_contract_user_id( (int) $outcome['contract_id'] ) );
+		echo '</div>';
+	}
+}
+
+function egov_law_monitor_square_contract_user_id( $contract_id ) {
+	global $wpdb;
+	$wpdb->last_error = '';
+	$user_id = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM {$wpdb->prefix}egov_law_subscriptions WHERE id = %d", $contract_id ) );
+	return '' === (string) $wpdb->last_error && null !== $user_id ? (int) $user_id : 0;
+}
+
+function egov_law_monitor_render_square_approved_period( $contract_id ) {
+	global $wpdb;
+	$wpdb->last_error = '';
+	$row = $wpdb->get_row( $wpdb->prepare( "SELECT current_period_start, current_period_end FROM {$wpdb->prefix}egov_law_subscriptions WHERE id = %d", (int) $contract_id ), ARRAY_A );
+	echo '<dl>';
+	if ( '' !== (string) $wpdb->last_error || ! is_array( $row ) || empty( $row['current_period_start'] ) || empty( $row['current_period_end'] ) ) {
+		egov_law_monitor_square_payment_result_item( '承認済み利用期間', '確認できません' );
+		echo '</dl>';
+		return;
+	}
+	egov_law_monitor_square_payment_result_item( '承認済み利用期間（UTC、終了境界exclusive）', $row['current_period_start'] . ' 〜 ' . $row['current_period_end'] );
+	echo '</dl>';
+}
+
+function egov_law_monitor_render_square_entitlement_after_approval( $user_id ) {
+	if ( $user_id < 1 ) { egov_law_monitor_square_payment_result_item( '現在の権限', '確認できません' ); return; }
+	$entitlement = egov_law_monitor_get_effective_entitlement( $user_id );
+	if ( is_wp_error( $entitlement ) || ! is_array( $entitlement ) ) { egov_law_monitor_square_payment_result_item( '現在の権限', '取得失敗（再確認が必要）' ); return; }
+	$plan = $entitlement['effective_plan'] ?? ( $entitlement['plan'] ?? 'unknown' );
+	$reason = $entitlement['reason_code'] ?? 'reason_unavailable';
+	echo '<dl>';
+	egov_law_monitor_square_payment_result_item( '現在の権限', ( 'standard' === $plan ? 'Standard' : ( 'free' === $plan ? 'Free' : '不明' ) ) . '（' . $reason . '）' );
+	echo '</dl>';
 }
 
 /** Render normalized read-only payment evidence without exposing raw errors or PII. */

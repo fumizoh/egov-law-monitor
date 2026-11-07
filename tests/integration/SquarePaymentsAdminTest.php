@@ -18,6 +18,25 @@ final class Egov_Law_Monitor_Admin_Square_Read_Service_Stub {
 	}
 }
 
+final class Egov_Law_Monitor_Admin_Square_Approval_Validation_Stub {
+	public $initial_calls = array();
+	public $recurring_calls = array();
+	public $result;
+	public function validate_initial_approval( $id ) { $this->initial_calls[] = $id; return $this->result; }
+	public function validate_recurring_approval( $id ) { $this->recurring_calls[] = $id; return $this->result; }
+}
+
+final class Egov_Law_Monitor_Admin_Square_Approval_Service_Stub {
+	public $initial_calls = array();
+	public $recurring_calls = array();
+	public $reconcile_calls = array();
+	public $approve_result;
+	public $reconcile_result;
+	public function approve_initial( $id, $admin_id, $note ) { $this->initial_calls[] = array( $id, $admin_id, $note ); return $this->approve_result; }
+	public function approve_recurring( $id, $admin_id, $note ) { $this->recurring_calls[] = array( $id, $admin_id, $note ); return $this->approve_result; }
+	public function reconcile_commit_outcome( $target, $admin_id ) { $this->reconcile_calls[] = array( $target, $admin_id ); return $this->reconcile_result; }
+}
+
 final class SquarePaymentsAdminTest extends TestCase {
 	private $wpdb;
 	private $attempt_ids = array();
@@ -28,6 +47,10 @@ final class SquarePaymentsAdminTest extends TestCase {
 	private $initial_service_filter;
 	private $recurring_service_filter;
 	private $die_handler_filter;
+	private $approval_validation_stub;
+	private $approval_service_stub;
+	private $approval_validation_filter;
+	private $approval_service_filter;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -55,16 +78,25 @@ final class SquarePaymentsAdminTest extends TestCase {
 		);
 		$this->initial_service_filter = function ( $service ) { return $this->stub; };
 		$this->recurring_service_filter = function ( $service ) { return $this->stub; };
+		$this->approval_validation_stub = new Egov_Law_Monitor_Admin_Square_Approval_Validation_Stub();
+		$this->approval_service_stub = new Egov_Law_Monitor_Admin_Square_Approval_Service_Stub();
+		$this->approval_validation_filter = function ( $service ) { return $this->approval_validation_stub; };
+		$this->approval_service_filter = function ( $service ) { return $this->approval_service_stub; };
 		add_filter( 'egov_law_monitor_admin_square_initial_read_service', $this->initial_service_filter );
 		add_filter( 'egov_law_monitor_admin_square_recurring_read_service', $this->recurring_service_filter );
+		add_filter( 'egov_law_monitor_admin_square_approval_validation_service', $this->approval_validation_filter );
+		add_filter( 'egov_law_monitor_admin_square_approval_service', $this->approval_service_filter );
 		$this->insert_attempt();
 		$this->insert_contract();
+		$this->approval_validation_stub->result = $this->eligible_initial_validation();
 		do_action( 'admin_menu' );
 	}
 
 	protected function tearDown(): void {
 		remove_filter( 'egov_law_monitor_admin_square_initial_read_service', $this->initial_service_filter );
 		remove_filter( 'egov_law_monitor_admin_square_recurring_read_service', $this->recurring_service_filter );
+		remove_filter( 'egov_law_monitor_admin_square_approval_validation_service', $this->approval_validation_filter );
+		remove_filter( 'egov_law_monitor_admin_square_approval_service', $this->approval_service_filter );
 		if ( null !== $this->die_handler_filter ) {
 			remove_filter( 'wp_die_handler', $this->die_handler_filter );
 		}
@@ -296,6 +328,14 @@ final class SquarePaymentsAdminTest extends TestCase {
 		$this->assertCount( 2, $denied_messages );
 		$this->assertCount( 0, $this->stub->attempt_calls );
 		$this->assertCount( 0, $this->stub->contract_calls );
+
+		$this->post_admin_action( 'approve', 'initial', $this->attempt_ids[0] );
+		$this->render_page();
+		$this->assertCount( 3, $denied_messages );
+		$this->assertCount( 0, $this->approval_validation_stub->initial_calls );
+		$this->assertCount( 0, $this->approval_service_stub->initial_calls );
+		$this->assertCount( 0, $this->stub->attempt_calls );
+		$this->assertCount( 0, $this->stub->contract_calls );
 	}
 
 	public function test_pagination_limits_rows_and_reports_multiple_pages(): void {
@@ -327,6 +367,114 @@ final class SquarePaymentsAdminTest extends TestCase {
 		$this->assertSame( $contract_before, $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->wpdb->prefix}egov_law_subscriptions WHERE id = %d", $this->contract_ids[0] ), ARRAY_A ) );
 		$this->assertSame( $invoice_count_before, (int) $this->wpdb->get_var( "SELECT COUNT(*) FROM {$this->wpdb->prefix}egov_law_subscription_invoices" ) );
 		$this->assertSame( $entitlement_before, egov_law_monitor_get_effective_entitlement( 1 ) );
+	}
+
+	public function test_approval_validation_requires_explicit_post_and_only_eligible_results_show_final_action(): void {
+		$_POST = array( 'square_admin_action' => 'validate', 'record_type' => 'initial', 'local_id' => (string) $this->attempt_ids[0] );
+		$html = $this->render_page();
+		$this->assertSame( array(), $this->approval_validation_stub->initial_calls );
+		$this->assertStringNotContainsString( 'この内容で承認する', $html );
+
+		$this->post_admin_action( 'validate', 'initial', $this->attempt_ids[0] );
+		$html = $this->render_page();
+		$this->assertSame( array( $this->attempt_ids[0] ), $this->approval_validation_stub->initial_calls );
+		$this->assertStringContainsString( '対象ユーザー', $html );
+		$this->assertStringContainsString( 'candidate-payment', $html );
+		$this->assertStringContainsString( '2026-12-30（最終利用日）', $html );
+		$this->assertStringContainsString( 'Asia/Tokyo', $html );
+		$this->assertStringContainsString( '月次課金アンカー', $html );
+		$this->assertStringContainsString( 'この内容で承認する', $html );
+		$this->assertSame( array(), $this->approval_service_stub->initial_calls );
+	}
+
+	public function test_ineligible_validation_has_no_approval_form_and_does_not_write(): void {
+		$this->approval_validation_stub->result = array_merge( $this->eligible_initial_validation(), array( 'approval_eligible' => false, 'verification_status' => 'review_required', 'reason_codes' => array( 'initial_invoice_payment_link_unproven' ) ) );
+		$before = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->wpdb->prefix}egov_law_subscriptions WHERE id = %d", $this->contract_ids[0] ), ARRAY_A );
+		$this->post_admin_action( 'validate', 'initial', $this->attempt_ids[0] );
+		$html = $this->render_page();
+		$this->assertStringContainsString( '通常承認できません', $html );
+		$this->assertStringContainsString( '初回決済とSubscription Invoiceの関連付けを確認できません。', $html );
+		$this->assertStringNotContainsString( 'この内容で承認する', $html );
+		$this->assertSame( $before, $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->wpdb->prefix}egov_law_subscriptions WHERE id = %d", $this->contract_ids[0] ), ARRAY_A ) );
+	}
+
+	public function test_final_approval_post_sends_only_local_target_and_sanitized_optional_note(): void {
+		$this->approval_service_stub->approve_result = array( 'status' => 'approved', 'contract_id' => $this->contract_ids[0], 'period_start_utc' => '2026-11-07 00:00:00', 'period_end_utc_exclusive' => '2026-12-07 00:00:00' );
+		$this->post_admin_action( 'approve', 'initial', $this->attempt_ids[0], array( 'admin_note' => "確認済み <script>alert(1)</script>\n根拠" ) );
+		$html = $this->render_page();
+		$this->assertSame( array( array( $this->attempt_ids[0], 1, "確認済み \n根拠" ) ), $this->approval_service_stub->initial_calls );
+		$this->assertStringContainsString( '管理者承認が完了しました', $html );
+		$this->assertStringContainsString( '現在の権限', $html );
+		$this->assertStringNotContainsString( '<script>', $html );
+		$this->assertStringContainsString( 'Free', $html );
+	}
+
+	public function test_recurring_validation_and_approval_use_only_local_contract_id(): void {
+		$this->approval_validation_stub->result = array(
+			'target_type' => 'recurring', 'local_attempt_id' => null, 'local_contract_id' => $this->contract_ids[0],
+			'verification_status' => 'validation_passed', 'approval_eligible' => true, 'approved' => false,
+			'payment_evidence' => array( 'confirmed' => true, 'payment_id' => 'recurring-payment', 'invoice_id' => 'recurring-invoice', 'amount' => 500, 'currency' => 'JPY' ),
+			'subscription_link' => array( 'status' => 'identified_from_local_contract', 'subscription_id' => 'local-subscription' ),
+			'invoice_verification' => array( 'verified' => true, 'invoice_id' => 'recurring-invoice' ),
+			'period_candidate' => array( 'status' => 'candidate', 'period_type' => 'renewal', 'start_date' => '2026-12-01', 'end_date_inclusive' => '2026-12-30', 'end_exclusive_date' => '2026-12-31', 'timezone' => 'Asia/Tokyo', 'monthly_billing_anchor_date' => 1 ),
+			'timezone' => 'Asia/Tokyo', 'monthly_billing_anchor_date' => 1,
+		);
+		$this->post_admin_action( 'validate', 'recurring', $this->contract_ids[0] );
+		$html = $this->render_page();
+		$this->assertSame( array( $this->contract_ids[0] ), $this->approval_validation_stub->recurring_calls );
+		$this->assertStringContainsString( '継続決済', $html );
+		$this->assertStringContainsString( 'この内容で承認する', $html );
+		$this->assertSame( array(), $this->approval_service_stub->recurring_calls );
+
+		$this->approval_service_stub->approve_result = array( 'status' => 'approved', 'contract_id' => $this->contract_ids[0], 'period_start_utc' => '2026-12-01 00:00:00', 'period_end_utc_exclusive' => '2027-01-01 00:00:00' );
+		$this->post_admin_action( 'approve', 'recurring', $this->contract_ids[0] );
+		$html = $this->render_page();
+		$this->assertSame( array( array( $this->contract_ids[0], 1, '' ) ), $this->approval_service_stub->recurring_calls );
+		$this->assertStringContainsString( '管理者承認が完了しました', $html );
+	}
+
+	public function test_invalid_nonce_and_get_request_cannot_approve(): void {
+		$_SERVER['REQUEST_METHOD'] = 'POST';
+		$_POST = array( 'square_admin_action' => 'approve', 'record_type' => 'initial', 'local_id' => (string) $this->attempt_ids[0], 'square_admin_approval_nonce' => 'invalid' );
+		$html = $this->render_page();
+		$this->assertStringContainsString( 'リクエストを確認できませんでした', $html );
+		$this->assertSame( array(), $this->approval_service_stub->initial_calls );
+		$this->post_admin_action( 'approve', 'initial', $this->attempt_ids[0] );
+		$_SERVER['REQUEST_METHOD'] = 'GET';
+		$this->render_page();
+		$this->assertSame( array(), $this->approval_service_stub->initial_calls );
+	}
+
+	public function test_commit_unknown_reconciliation_never_automatically_reapproves(): void {
+		$target = array( 'type' => 'initial', 'local_id' => $this->attempt_ids[0], 'contract_id' => $this->contract_ids[0], 'invoice_row_id' => 81, 'review_id' => 82 );
+		$this->approval_service_stub->approve_result = new WP_Error( 'square_admin_approval_commit_outcome_unknown', 'unknown', array( 'reconciliation_target' => $target ) );
+		$this->post_admin_action( 'approve', 'initial', $this->attempt_ids[0] );
+		$html = $this->render_page();
+		$this->assertStringContainsString( '承認結果を確認できません。再確認してください。', $html );
+		$this->assertStringContainsString( '承認結果を再確認', $html );
+		$this->assertSame( 1, count( $this->approval_service_stub->initial_calls ) );
+
+		$this->approval_service_stub->reconcile_result = array( 'status' => 'inconsistent', 'reason_code' => 'approval_records_do_not_match' );
+		$this->post_admin_action( 'reconcile', 'initial', $this->attempt_ids[0] );
+		$html = $this->render_page();
+		$this->assertStringContainsString( '再照合結果：不整合があります', $html );
+		$this->assertStringContainsString( '同じ承認結果を再確認', $html );
+		$this->assertSame( 1, count( $this->approval_service_stub->initial_calls ) );
+		$this->assertSame( 1, count( $this->approval_service_stub->reconcile_calls ) );
+	}
+
+	public function test_reconciliation_statuses_are_displayed_without_approval_retry(): void {
+		$target = array( 'type' => 'recurring', 'local_id' => $this->contract_ids[0], 'contract_id' => $this->contract_ids[0], 'invoice_row_id' => 81, 'review_id' => 82 );
+		set_transient( egov_law_monitor_admin_square_reconciliation_transient_key( 'recurring', $this->contract_ids[0], 1 ), $target, HOUR_IN_SECONDS );
+		foreach ( array( 'approved' => '再照合結果：承認済み', 'not_approved' => '再照合結果：未承認', 'unavailable' => '再照合結果：確認不能' ) as $status => $label ) {
+			set_transient( egov_law_monitor_admin_square_reconciliation_transient_key( 'recurring', $this->contract_ids[0], 1 ), $target, HOUR_IN_SECONDS );
+			$this->approval_service_stub->reconcile_result = array( 'status' => $status, 'reason_code' => 'test_reason' );
+			$this->post_admin_action( 'reconcile', 'recurring', $this->contract_ids[0] );
+			$html = $this->render_page();
+			$this->assertStringContainsString( $label, $html );
+		}
+		$this->assertCount( 3, $this->approval_service_stub->reconcile_calls );
+		$this->assertCount( 0, $this->approval_service_stub->recurring_calls );
 	}
 
 	private function insert_attempt( $status = 'pending', $include_order = true ): int {
@@ -364,6 +512,30 @@ final class SquarePaymentsAdminTest extends TestCase {
 			'record_type' => $type,
 			'local_id' => (string) $id,
 			'egov_square_payment_nonce' => wp_create_nonce( 'egov_square_payment_inspect_' . $type . '_' . $id ),
+		);
+	}
+
+	private function post_admin_action( $action, $type, $id, $extra = array() ): void {
+		$_SERVER['REQUEST_METHOD'] = 'POST';
+		$_POST = array_merge( array(
+			'square_admin_action' => $action,
+			'record_type' => $type,
+			'local_id' => (string) $id,
+			'square_admin_approval_nonce' => wp_create_nonce( 'egov_square_approval_' . $action . '_' . $type . '_' . $id ),
+		), $extra );
+	}
+
+	private function eligible_initial_validation(): array {
+		return array(
+			'target_type' => 'initial', 'local_attempt_id' => $this->attempt_ids[0], 'local_contract_id' => $this->contract_ids[0],
+			'verification_status' => 'validation_passed', 'approval_eligible' => true, 'approved' => false,
+			'payment_evidence' => array( 'confirmed' => true, 'payment_id' => 'candidate-payment', 'invoice_id' => 'candidate-invoice', 'amount' => 500, 'currency' => 'JPY' ),
+			'subscription_link' => array( 'status' => 'confirmed', 'subscription_id' => 'candidate-subscription' ),
+			'invoice_verification' => array( 'verified' => true, 'invoice_id' => 'candidate-invoice' ),
+			'period_candidate' => array( 'status' => 'candidate', 'start_date' => '2026-12-01', 'end_date_inclusive' => '2026-12-30', 'end_exclusive_date' => '2026-12-31', 'timezone' => 'Asia/Tokyo', 'monthly_billing_anchor_date' => 1 ),
+			'timezone' => 'Asia/Tokyo', 'monthly_billing_anchor_date' => 1,
+			'verified_subscription' => array( 'id' => 'candidate-subscription', 'status' => 'ACTIVE' ),
+			'verified_invoice' => array( 'id' => 'candidate-invoice' ),
 		);
 	}
 
