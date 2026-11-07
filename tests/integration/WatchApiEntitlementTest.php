@@ -41,6 +41,7 @@ final class WatchApiEntitlementTest extends TestCase {
 			$watch_table = $wpdb->prefix . 'law_watch_settings';
 			$wpdb->delete( $watch_table, array( 'user_id' => $this->user_id ), array( '%d' ) );
 			foreach ( $this->subscription_ids as $subscription_id ) {
+				$wpdb->delete( $wpdb->prefix . 'egov_law_square_admin_reviews', array( 'contract_id' => $subscription_id ), array( '%d' ) );
 				$wpdb->delete( $wpdb->prefix . 'egov_law_subscription_invoices', array( 'subscription_id' => $subscription_id ), array( '%d' ) );
 				$wpdb->delete( $wpdb->prefix . 'egov_law_subscriptions', array( 'id' => $subscription_id ), array( '%d' ) );
 			}
@@ -494,6 +495,7 @@ final class WatchApiEntitlementTest extends TestCase {
 				'square_status'           => 'ACTIVE',
 				'initial_payment_status' => 'succeeded',
 				'current_slot'           => 1,
+				'current_period_start'   => '2026-01-01 00:00:00',
 				'current_period_end'     => '2030-01-01 00:00:00',
 				'sync_state'             => 'ok',
 				'created_at'             => '2026-01-01 00:00:00',
@@ -502,6 +504,14 @@ final class WatchApiEntitlementTest extends TestCase {
 			array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s', '%s' )
 		);
 		$this->assertSame( 1, $result );
-		$this->subscription_ids[] = (int) $wpdb->insert_id;
+		$subscription_id = (int) $wpdb->insert_id;
+		$this->subscription_ids[] = $subscription_id;
+		$this->assertSame( 1, $wpdb->insert( $wpdb->prefix . 'egov_law_square_admin_reviews', array(
+			'user_id' => $this->user_id, 'environment' => 'production', 'merchant_id' => 'watch-test-merchant', 'contract_id' => $subscription_id,
+			'square_payment_id' => 'watch-test-payment-' . $this->user_id, 'action_type' => 'approve',
+			'approved_period_start' => '2026-01-01 00:00:00', 'approved_period_end' => '2030-01-01 00:00:00',
+			'subscription_timezone' => 'UTC', 'monthly_billing_anchor_date' => 1, 'evidence_code' => 'watch_entitlement_test',
+			'reviewer_user_id' => 1, 'recorded_at' => current_time( 'mysql', true ),
+		) ) );
 	}
 }

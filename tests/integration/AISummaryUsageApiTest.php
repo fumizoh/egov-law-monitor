@@ -44,6 +44,7 @@ final class AISummaryUsageApiTest extends TestCase {
 		if ( DB_NAME === 'egov_law_monitor_test' && DB_HOST === 'wp-test-db' && DB_USER === 'egov_test' ) {
 			$wpdb->delete( $wpdb->prefix . 'egov_law_ai_summary_usage', array( 'user_id' => $this->user_id ), array( '%d' ) );
 			foreach ( $this->subscription_ids as $subscription_id ) {
+				$wpdb->delete( $wpdb->prefix . 'egov_law_square_admin_reviews', array( 'contract_id' => $subscription_id ), array( '%d' ) );
 				$wpdb->delete( $wpdb->prefix . 'egov_law_subscription_invoices', array( 'subscription_id' => $subscription_id ), array( '%d' ) );
 				$wpdb->delete( $wpdb->prefix . 'egov_law_subscriptions', array( 'id' => $subscription_id ), array( '%d' ) );
 			}
@@ -162,6 +163,7 @@ final class AISummaryUsageApiTest extends TestCase {
 				'square_status'          => 'ACTIVE',
 				'initial_payment_status' => 'succeeded',
 				'current_slot'           => 1,
+				'current_period_start'   => '2026-01-01 00:00:00',
 				'current_period_end'     => '2030-01-01 00:00:00',
 				'sync_state'             => 'ok',
 				'created_at'             => '2026-01-01 00:00:00',
@@ -170,7 +172,15 @@ final class AISummaryUsageApiTest extends TestCase {
 			array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s', '%s' )
 		);
 		$this->assertSame( 1, $result );
-		$this->subscription_ids[] = (int) $wpdb->insert_id;
+		$subscription_id = (int) $wpdb->insert_id;
+		$this->subscription_ids[] = $subscription_id;
+		$this->assertSame( 1, $wpdb->insert( $wpdb->prefix . 'egov_law_square_admin_reviews', array(
+			'user_id' => $this->user_id, 'environment' => 'production', 'merchant_id' => 'usage-api-merchant', 'contract_id' => $subscription_id,
+			'square_payment_id' => 'usage-api-payment-' . $this->user_id, 'action_type' => 'approve',
+			'approved_period_start' => '2026-01-01 00:00:00', 'approved_period_end' => '2030-01-01 00:00:00',
+			'subscription_timezone' => 'UTC', 'monthly_billing_anchor_date' => 1, 'evidence_code' => 'usage_api_test',
+			'reviewer_user_id' => 1, 'recorded_at' => current_time( 'mysql', true ),
+		) ) );
 	}
 
 	private function assertUsageLedgerErrorResponse(): void {

@@ -360,6 +360,7 @@ final class DatabaseSchemaTest extends TestCase {
 					'square_subscription_id' => $subscription_id,
 					'square_plan_variation_id' => 'migration-plan',
 					'internal_status'       => 'active',
+					'square_status'          => 'ACTIVE',
 					'initial_payment_status' => 'succeeded',
 					'current_slot'            => 1,
 					'current_period_end'      => '2027-06-01 00:00:00',
@@ -374,7 +375,8 @@ final class DatabaseSchemaTest extends TestCase {
 		$snapshot_before = $repository->get_entitlement_snapshot( 865, 'sandbox' );
 		$this->assertIsArray( $snapshot_before );
 		$entitlement_before = egov_law_monitor_resolve_entitlement( $snapshot_before, new DateTimeImmutable( '2026-06-15 00:00:00', new DateTimeZone( 'UTC' ) ) );
-		$this->assertSame( 'standard', $entitlement_before['effective_plan'] );
+		$this->assertSame( 'free', $entitlement_before['effective_plan'], 'A legacy contract without a manual approval record must not grant Standard.' );
+		$this->assertSame( 'administrator_approval_required', $entitlement_before['reason_code'] );
 		$this->assertSame(
 			1,
 			$wpdb->insert(

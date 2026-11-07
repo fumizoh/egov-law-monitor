@@ -38,6 +38,7 @@ final class EntitlementServiceTest extends TestCase {
 				}
 			}
 			foreach ( $this->subscription_ids as $subscription_id ) {
+				$wpdb->delete( $wpdb->prefix . 'egov_law_square_admin_reviews', array( 'contract_id' => $subscription_id ), array( '%d' ) );
 				$wpdb->delete( $wpdb->prefix . 'egov_law_subscription_invoices', array( 'subscription_id' => $subscription_id ), array( '%d' ) );
 				$wpdb->delete( $table, array( 'id' => $subscription_id ), array( '%d' ) );
 			}
@@ -72,13 +73,160 @@ final class EntitlementServiceTest extends TestCase {
 		$this->assertSame( 'cancel_scheduled_paid_period', $cancel_scheduled['reason_code'] );
 	}
 
+	public function test_contract_without_administrator_approval_is_free_even_with_successful_payment_fields(): void {
+		$this->add_subscription( 'production', array( 'with_approval' => false, 'current_period_end' => '2026-11-01 00:00:00' ) );
+		$result = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
+		$this->assertSame( 'free', $result['effective_plan'] );
+		$this->assertSame( 'administrator_approval_required', $result['reason_code'] );
+	}
+
+	public function test_approval_period_must_match_contract_utc_boundaries(): void {
+		$id = $this->add_subscription( 'production', array( 'current_period_end' => '2026-11-01 00:00:00' ) );
+		global $wpdb;
+		$wpdb->update( $wpdb->prefix . 'egov_law_subscriptions', array( 'current_period_end' => '2026-12-01 00:00:00' ), array( 'id' => $id ), array( '%s' ), array( '%d' ) );
+		$result = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
+		$this->assertSame( 'free', $result['effective_plan'] );
+		$this->assertSame( 'administrator_approval_period_mismatch', $result['reason_code'] );
+	}
+
+	public function test_latest_valid_correction_replaces_approved_period_and_identity_mismatch_fails_closed(): void {
+		$id = $this->add_subscription( 'production', array( 'current_period_end' => '2026-11-01 00:00:00' ) );
+		global $wpdb;
+		$prior_id = (int) $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}egov_law_square_admin_reviews WHERE contract_id = %d AND action_type = %s ORDER BY id DESC LIMIT 1", $id, 'approve' ) );
+		$wpdb->update( $wpdb->prefix . 'egov_law_subscriptions', array( 'current_period_start' => '2026-10-15 00:00:00', 'current_period_end' => '2026-12-01 00:00:00' ), array( 'id' => $id ), array( '%s', '%s' ), array( '%d' ) );
+		$this->append_admin_review( $id, 'correct', '2026-10-16 00:00:00', array(
+			'square_payment_id' => 'entitlement-corrected-payment-' . $id,
+			'approved_period_start' => '2026-10-15 00:00:00',
+			'approved_period_end' => '2026-12-01 00:00:00',
+			'subscription_timezone' => 'UTC',
+			'monthly_billing_anchor_date' => 1,
+			'supersedes_review_id' => $prior_id,
+		) );
+		$corrected = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-11-15T00:00:00Z' ) );
+		$this->assertSame( 'standard', $corrected['effective_plan'] );
+
+		$wpdb->update( $wpdb->prefix . 'egov_law_square_admin_reviews', array( 'merchant_id' => 'other-merchant' ), array( 'contract_id' => $id, 'action_type' => 'correct' ), array( '%s' ), array( '%d', '%s' ) );
+		$mismatched = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-11-15T00:00:00Z' ) );
+		$this->assertSame( 'free', $mismatched['effective_plan'] );
+		$this->assertSame( 'administrator_approval_inconsistent', $mismatched['reason_code'] );
+	}
+
+	public function test_timezone_aware_review_period_matches_contract_utc_period(): void {
+		$this->add_subscription( 'production', array(
+			'current_period_start' => '2026-10-31 15:00:00',
+			'current_period_end' => '2026-11-30 15:00:00',
+			'approval_period_start' => '2026-11-01 00:00:00',
+			'approval_period_end' => '2026-12-01 00:00:00',
+			'approval_timezone' => 'Asia/Tokyo',
+		) );
+		$before_boundary = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-11-30T14:59:59Z' ) );
+		$at_boundary = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-11-30T15:00:00Z' ) );
+		$this->assertSame( 'standard', $before_boundary['effective_plan'] );
+		$this->assertSame( 'free', $at_boundary['effective_plan'] );
+	}
+
+	public function test_canceled_contract_keeps_approved_period_without_current_slot_and_never_gets_review_grace(): void {
+		$id = $this->add_subscription( 'production', array(
+			'internal_status' => 'canceled', 'square_status' => 'CANCELED', 'current_slot' => null,
+			'current_period_end' => '2026-11-01 00:00:00',
+		) );
+		$this->assertSame( 'standard', $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) )['effective_plan'] );
+		global $wpdb;
+		$wpdb->update( $wpdb->prefix . 'egov_law_subscriptions', array( 'current_period_start' => '2026-09-01 00:00:00', 'current_period_end' => '2026-10-01 00:00:00', 'review_grace_ends_at' => '2026-10-08 00:00:00' ), array( 'id' => $id ), array( '%s', '%s', '%s' ), array( '%d' ) );
+		$wpdb->update( $wpdb->prefix . 'egov_law_square_admin_reviews', array( 'approved_period_start' => '2026-09-01 00:00:00', 'approved_period_end' => '2026-10-01 00:00:00' ), array( 'contract_id' => $id, 'action_type' => 'approve' ), array( '%s', '%s' ), array( '%d', '%s' ) );
+		$expired = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
+		$this->assertSame( 'free', $expired['effective_plan'] );
+		$this->assertSame( 'no_current_contract', $expired['reason_code'] );
+	}
+
+	public function test_admin_suspend_is_immediate_and_resume_requires_an_existing_approved_period(): void {
+		$id = $this->add_subscription( 'production', array( 'current_period_end' => '2026-11-01 00:00:00' ) );
+		$this->append_admin_review( $id, 'suspend', '2026-10-10 00:00:00' );
+		$suspended = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
+		$this->assertSame( 'free', $suspended['effective_plan'] );
+		$this->assertSame( 'administrator_suspended', $suspended['reason_code'] );
+		$this->append_admin_review( $id, 'resume', '2026-10-11 00:00:00' );
+		$resumed = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
+		$this->assertSame( 'standard', $resumed['effective_plan'] );
+	}
+
+	public function test_review_delay_grace_requires_a_due_unpaid_invoice_and_expires_at_boundary(): void {
+		$id = $this->add_subscription( 'production', array(
+			'current_period_start' => '2026-09-22 00:00:00',
+			'current_period_end' => '2026-10-22 00:00:00',
+			'review_grace_ends_at' => '2026-10-29 00:00:00',
+		) );
+		$this->add_invoice( $id, 'production', array( 'payment_status' => 'unpaid', 'due_at' => '2026-10-22 00:00:00' ) );
+		$inside = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-28T23:59:59Z' ) );
+		$at_boundary = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T00:00:00Z' ) );
+		$this->assertSame( 'standard', $inside['effective_plan'] );
+		$this->assertSame( 'review_confirmation_grace', $inside['reason_code'] );
+		$this->assertSame( 'free', $at_boundary['effective_plan'] );
+		$this->assertSame( 'review_confirmation_grace_expired', $at_boundary['reason_code'] );
+	}
+
+	public function test_review_delay_grace_does_not_apply_to_unknown_or_failed_invoice_data(): void {
+		$unknown_id = $this->add_subscription( 'production', array(
+			'current_period_start' => '2026-09-22 00:00:00', 'current_period_end' => '2026-10-22 00:00:00', 'review_grace_ends_at' => '2026-10-29 00:00:00',
+		) );
+		$this->add_invoice( $unknown_id, 'production', array( 'payment_status' => 'unknown', 'due_at' => '2026-10-22 00:00:00' ) );
+		$unknown = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-25T00:00:00Z' ) );
+		global $wpdb;
+		$this->assertSame( 'free', $unknown['effective_plan'] );
+		$this->assertSame( 'review_grace_without_eligible_invoice', $unknown['reason_code'] );
+
+		$wpdb->update( $wpdb->prefix . 'egov_law_subscriptions', array( 'current_slot' => null ), array( 'id' => $unknown_id ), array( '%d' ), array( '%d' ) );
+		$failed_id = $this->add_subscription( 'production', array(
+			'current_period_start' => '2026-09-22 00:00:00', 'current_period_end' => '2026-10-22 00:00:00',
+			'first_payment_failed_at' => '2026-10-20 00:00:00', 'grace_ends_at' => '2026-10-27 00:00:00', 'review_grace_ends_at' => '2026-10-29 00:00:00',
+		) );
+		$this->add_invoice( $failed_id, 'production', array( 'payment_status' => 'failed', 'due_at' => '2026-10-22 00:00:00' ) );
+		$after_failure_grace = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-28T00:00:00Z' ) );
+		$this->assertSame( 'free', $after_failure_grace['effective_plan'] );
+		$this->assertSame( 'payment_grace_expired', $after_failure_grace['reason_code'] );
+	}
+
+	public function test_failed_invoice_without_verified_failure_timestamp_never_gets_either_grace(): void {
+		$id = $this->add_subscription( 'production', array(
+			'current_period_start' => '2026-09-22 00:00:00', 'current_period_end' => '2026-10-22 00:00:00', 'review_grace_ends_at' => '2026-10-29 00:00:00',
+		) );
+		$this->add_invoice( $id, 'production', array( 'payment_status' => 'failed', 'due_at' => '2026-10-22 00:00:00' ) );
+		$result = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-25T00:00:00Z' ) );
+		$this->assertSame( 'free', $result['effective_plan'] );
+		$this->assertSame( 'payment_failure_time_unavailable', $result['reason_code'] );
+	}
+
+	public function test_square_paused_is_not_treated_as_administrator_stop_during_approved_period(): void {
+		$id = $this->add_subscription( 'production', array( 'square_status' => 'PAUSED', 'current_period_end' => '2026-11-01 00:00:00' ) );
+		$within_period = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
+		$this->assertSame( 'standard', $within_period['effective_plan'] );
+		global $wpdb;
+		$wpdb->update( $wpdb->prefix . 'egov_law_subscriptions', array( 'current_period_start' => '2026-09-01 00:00:00', 'current_period_end' => '2026-10-01 00:00:00' ), array( 'id' => $id ), array( '%s', '%s' ), array( '%d' ) );
+		$wpdb->update( $wpdb->prefix . 'egov_law_square_admin_reviews', array( 'approved_period_start' => '2026-09-01 00:00:00', 'approved_period_end' => '2026-10-01 00:00:00' ), array( 'contract_id' => $id, 'action_type' => 'approve' ), array( '%s', '%s' ), array( '%d', '%s' ) );
+		$after_period = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
+		$this->assertSame( 'free', $after_period['effective_plan'] );
+		$this->assertSame( 'square_subscription_paused', $after_period['reason_code'] );
+	}
+
+	public function test_failure_grace_does_not_truncate_an_unexpired_approved_period(): void {
+		$id = $this->add_subscription( 'production', array(
+			'current_period_end' => '2026-11-01 00:00:00',
+			'first_payment_failed_at' => '2026-10-20 00:00:00',
+			'grace_ends_at' => '2026-10-27 00:00:00',
+		) );
+		$this->add_invoice( $id, 'production', array( 'payment_status' => 'failed' ) );
+		$result = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
+		$this->assertSame( 'standard', $result['effective_plan'] );
+		$this->assertSame( 'payment_recovered', $result['reason_code'] );
+	}
+
 	public function test_current_contract_sync_state_is_reflected_in_entitlement_result(): void {
 		global $wpdb;
 		$id    = $this->add_subscription( 'production', array( 'current_period_end' => '2026-11-01 00:00:00' ) );
 		$table = $wpdb->prefix . 'egov_law_subscriptions';
 		$cases = array(
 			'ok'      => array( 'standard', 'active_paid_period', false ),
-			'error'   => array( 'standard', 'sync_error_within_verified_period', true ),
+			'error'   => array( 'free', 'sync_unavailable', true ),
 			'unknown' => array( 'free', 'invalid_input', true ),
 			''        => array( 'free', 'invalid_input', true ),
 			'invalid' => array( 'free', 'invalid_input', true ),
@@ -106,8 +254,8 @@ final class EntitlementServiceTest extends TestCase {
 		);
 		$this->add_invoice( $id, 'production', array( 'payment_status' => 'failed' ) );
 		$grace_result = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
-		$this->assertSame( 'standard', $grace_result['effective_plan'] );
-		$this->assertSame( 'sync_error_within_payment_grace', $grace_result['reason_code'] );
+		$this->assertSame( 'free', $grace_result['effective_plan'] );
+		$this->assertSame( 'sync_unavailable', $grace_result['reason_code'] );
 		$this->assertTrue( $grace_result['recheck_required'] );
 	}
 
@@ -115,12 +263,13 @@ final class EntitlementServiceTest extends TestCase {
 		$this->add_subscription(
 			'production',
 			array(
-				'first_payment_failed_at' => '2026-10-22 12:00:00',
-				'grace_ends_at'           => '2026-10-29 12:00:00',
+				'current_period_end' => '2026-10-22 00:00:00',
+				'first_payment_failed_at' => '2026-10-22 00:00:00',
+				'grace_ends_at'           => '2026-10-29 00:00:00',
 			)
 		);
 		$this->add_invoice( $this->subscription_ids[0], 'production', array( 'payment_status' => 'failed' ) );
-		$result = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
+		$result = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T00:00:00Z' ) );
 		$this->assertSame( 'free', $result['effective_plan'] );
 		$this->assertSame( 'payment_grace_expired', $result['reason_code'] );
 	}
@@ -174,6 +323,22 @@ final class EntitlementServiceTest extends TestCase {
 		try {
 			$result = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
 			$this->assertTrue( is_wp_error( $result ) );
+			$this->assertSame( 'entitlement_database_error', $result->get_error_code() );
+		} finally {
+			$wpdb->suppress_errors( $previous_suppress_errors );
+			$this->assertTrue( egov_law_monitor_create_subscription_tables() );
+		}
+	}
+
+	public function test_missing_admin_review_table_never_grants_standard(): void {
+		global $wpdb;
+		$this->add_subscription( 'production', array( 'current_period_end' => '2026-11-01 00:00:00' ) );
+		$review_table = $wpdb->prefix . 'egov_law_square_admin_reviews';
+		$wpdb->query( "DROP TABLE `{$review_table}`" );
+		$previous_suppress_errors = $wpdb->suppress_errors( true );
+		try {
+			$result = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-10-29T12:00:00Z' ) );
+			$this->assertInstanceOf( WP_Error::class, $result );
 			$this->assertSame( 'entitlement_database_error', $result->get_error_code() );
 		} finally {
 			$wpdb->suppress_errors( $previous_suppress_errors );
@@ -407,6 +572,11 @@ final class EntitlementServiceTest extends TestCase {
 	private function add_subscription( $environment, array $overrides = array() ) {
 		global $wpdb;
 		$table = $wpdb->prefix . 'egov_law_subscriptions';
+		$with_approval = array_key_exists( 'with_approval', $overrides ) ? (bool) $overrides['with_approval'] : true;
+		$approval_timezone = $overrides['approval_timezone'] ?? 'UTC';
+		$approval_period_start = $overrides['approval_period_start'] ?? null;
+		$approval_period_end = $overrides['approval_period_end'] ?? null;
+		unset( $overrides['with_approval'], $overrides['approval_timezone'], $overrides['approval_period_start'], $overrides['approval_period_end'] );
 		$data = array_merge(
 			array(
 				'user_id'                  => $this->user_id,
@@ -416,9 +586,11 @@ final class EntitlementServiceTest extends TestCase {
 				'square_subscription_id'   => 'subscription-' . count( $this->subscription_ids ),
 				'plan_code'                => 'standard',
 				'internal_status'          => 'active',
+				'square_status'            => 'ACTIVE',
 				'initial_payment_status'   => 'succeeded',
 				'sync_state'               => 'ok',
 				'current_slot'             => 1,
+				'current_period_start'     => '2026-10-01 00:00:00',
 				'current_period_end'       => '2026-11-01 00:00:00',
 				'created_at'               => '2026-01-01 00:00:00',
 				'updated_at'               => '2026-01-01 00:00:00',
@@ -428,7 +600,47 @@ final class EntitlementServiceTest extends TestCase {
 		$this->assertSame( 1, $wpdb->insert( $table, $data ) );
 		$id = (int) $wpdb->insert_id;
 		$this->subscription_ids[] = $id;
+		if ( $with_approval && is_string( $data['current_period_start'] ) && is_string( $data['current_period_end'] ) ) {
+			$this->append_admin_review(
+				$id,
+				'approve',
+				current_time( 'mysql', true ),
+				array(
+					'subscription_timezone' => $approval_timezone,
+					'approved_period_start' => $approval_period_start ?: $data['current_period_start'],
+					'approved_period_end' => $approval_period_end ?: $data['current_period_end'],
+				)
+			);
+		}
 		return $id;
+	}
+
+	private function append_admin_review( $contract_id, $action, $recorded_at, array $overrides = array() ) {
+		global $wpdb;
+		$contract = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}egov_law_subscriptions WHERE id = %d", $contract_id ), ARRAY_A );
+		$defaults = array(
+			'user_id' => $this->user_id,
+			'environment' => $contract['environment'],
+			'merchant_id' => $contract['merchant_id'],
+			'contract_id' => $contract_id,
+			'action_type' => $action,
+			'approved_period_start' => null,
+			'approved_period_end' => null,
+			'subscription_timezone' => null,
+			'monthly_billing_anchor_date' => null,
+			'square_payment_id' => null,
+			'evidence_code' => 'entitlement_policy_test',
+			'reviewer_user_id' => 1,
+			'recorded_at' => $recorded_at,
+		);
+		if ( 'approve' === $action ) {
+			$defaults['approved_period_start'] = $contract['current_period_start'];
+			$defaults['approved_period_end'] = $contract['current_period_end'];
+			$defaults['subscription_timezone'] = 'UTC';
+			$defaults['monthly_billing_anchor_date'] = 1;
+			$defaults['square_payment_id'] = 'entitlement-payment-' . $contract_id;
+		}
+		$this->assertSame( 1, $wpdb->insert( $wpdb->prefix . 'egov_law_square_admin_reviews', array_merge( $defaults, $overrides ) ) );
 	}
 
 	private function add_invoice( $subscription_id, $environment, array $overrides = array() ): void {

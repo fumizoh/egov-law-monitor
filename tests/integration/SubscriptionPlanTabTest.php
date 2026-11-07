@@ -41,6 +41,10 @@ final class SubscriptionPlanTabTest extends TestCase {
 		remove_filter( 'egov_law_monitor_square_checkout_service_override', $this->checkout_service_filter, 10 );
 		if ( DB_NAME === 'egov_law_monitor_test' && DB_HOST === 'wp-test-db' && DB_USER === 'egov_test' && $this->user_id ) {
 			$wpdb->delete( $wpdb->prefix . 'egov_law_checkout_attempts', array( 'user_id' => $this->user_id ), array( '%d' ) );
+			$subscription_ids = $wpdb->get_col( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}egov_law_subscriptions WHERE user_id = %d", $this->user_id ) );
+			foreach ( $subscription_ids as $subscription_id ) {
+				$wpdb->delete( $wpdb->prefix . 'egov_law_square_admin_reviews', array( 'contract_id' => (int) $subscription_id ), array( '%d' ) );
+			}
 			$wpdb->delete( $wpdb->prefix . 'egov_law_subscriptions', array( 'user_id' => $this->user_id ), array( '%d' ) );
 			delete_user_meta( $this->user_id, 'egov_law_monitor_plan' );
 			if ( $this->unallowed_user_id ) {
@@ -77,6 +81,8 @@ final class SubscriptionPlanTabTest extends TestCase {
 	public function test_effective_standard_contract_is_shown_without_checkout_button(): void {
 		global $wpdb;
 		$now = current_time( 'mysql', true );
+		$period_start = gmdate( 'Y-m-d 00:00:00' );
+		$period_end = gmdate( 'Y-m-d 00:00:00', time() + DAY_IN_SECONDS * 30 );
 		$inserted = $wpdb->insert(
 			$wpdb->prefix . 'egov_law_subscriptions',
 			array(
@@ -91,14 +97,22 @@ final class SubscriptionPlanTabTest extends TestCase {
 				'square_status'               => 'ACTIVE',
 				'initial_payment_status'       => 'succeeded',
 				'current_slot'                => 1,
-				'current_period_start'         => $now,
-				'current_period_end'           => gmdate( 'Y-m-d H:i:s', time() + DAY_IN_SECONDS * 30 ),
+				'current_period_start'         => $period_start,
+				'current_period_end'           => $period_end,
 				'sync_state'                  => 'ok',
 				'created_at'                  => $now,
 				'updated_at'                  => $now,
 			)
 		);
 		$this->assertSame( 1, $inserted );
+		$contract_id = (int) $wpdb->insert_id;
+		$this->assertSame( 1, $wpdb->insert( $wpdb->prefix . 'egov_law_square_admin_reviews', array(
+			'user_id' => $this->user_id, 'environment' => 'production', 'merchant_id' => 'test-merchant', 'contract_id' => $contract_id,
+			'square_payment_id' => 'plan-tab-payment-' . $this->user_id, 'action_type' => 'approve',
+			'approved_period_start' => $period_start, 'approved_period_end' => $period_end, 'subscription_timezone' => 'UTC',
+			'monthly_billing_anchor_date' => 1, 'evidence_code' => 'subscription_plan_tab_test', 'reviewer_user_id' => 1,
+			'recorded_at' => current_time( 'mysql', true ),
+		) ) );
 
 		$html = do_shortcode( '[egov_law_subscription_plan]' );
 		$this->assertStringContainsString( '>Standard</p>', $html );

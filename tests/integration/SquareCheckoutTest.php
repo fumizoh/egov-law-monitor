@@ -98,6 +98,7 @@ final class SquareCheckoutTest extends TestCase {
 			$wpdb->delete( $attempts, array( 'user_id' => $this->user_id ), array( '%d' ) );
 			$subscription_ids = $wpdb->get_col( $wpdb->prepare( "SELECT id FROM {$subscriptions} WHERE user_id = %d", $this->user_id ) );
 			foreach ( $subscription_ids as $subscription_id ) {
+				$wpdb->delete( $wpdb->prefix . 'egov_law_square_admin_reviews', array( 'contract_id' => (int) $subscription_id ), array( '%d' ) );
 				$wpdb->delete( $invoices, array( 'subscription_id' => (int) $subscription_id ), array( '%d' ) );
 			}
 			$wpdb->delete( $subscriptions, array( 'user_id' => $this->user_id ), array( '%d' ) );
@@ -367,6 +368,8 @@ final class SquareCheckoutTest extends TestCase {
 	private function add_active_contract(): void {
 		global $wpdb;
 		$now = current_time( 'mysql', true );
+		$period_start = gmdate( 'Y-m-d 00:00:00' );
+		$period_end = gmdate( 'Y-m-d 00:00:00', time() + DAY_IN_SECONDS * 30 );
 		$inserted = $wpdb->insert(
 			$wpdb->prefix . 'egov_law_subscriptions',
 			array(
@@ -381,13 +384,21 @@ final class SquareCheckoutTest extends TestCase {
 				'square_status' => 'ACTIVE',
 				'initial_payment_status' => 'succeeded',
 				'current_slot' => 1,
-				'current_period_start' => $now,
-				'current_period_end' => gmdate( 'Y-m-d H:i:s', time() + DAY_IN_SECONDS * 30 ),
+				'current_period_start' => $period_start,
+				'current_period_end' => $period_end,
 				'sync_state' => 'ok',
 				'created_at' => $now,
 				'updated_at' => $now,
 			)
 		);
 		$this->assertSame( 1, $inserted );
+		$contract_id = (int) $wpdb->insert_id;
+		$this->assertSame( 1, $wpdb->insert( $wpdb->prefix . 'egov_law_square_admin_reviews', array(
+			'user_id' => $this->user_id, 'environment' => 'production', 'merchant_id' => 'test-merchant', 'contract_id' => $contract_id,
+			'square_payment_id' => 'test-payment-' . $this->user_id, 'action_type' => 'approve',
+			'approved_period_start' => $period_start, 'approved_period_end' => $period_end, 'subscription_timezone' => 'UTC',
+			'monthly_billing_anchor_date' => 1, 'evidence_code' => 'square_checkout_test', 'reviewer_user_id' => 1,
+			'recorded_at' => current_time( 'mysql', true ),
+		) ) );
 	}
 }

@@ -35,21 +35,27 @@ final class EntitlementPolicyTest extends TestCase {
 		);
 		$failure_under_7_days = self::contract(
 			array(
+				'paid_through_at'           => '2026-10-22T12:00:00+09:00',
 				'unresolved_invoice_count' => 1,
+				'confirmed_failure_invoice_count' => 1,
 				'first_failure_at'         => '2026-10-23T12:00:00+09:00',
 				'grace_ends_at'            => '2026-10-30T12:00:00+09:00',
 			)
 		);
 		$failure_at_7_days = self::contract(
 			array(
+				'paid_through_at'           => '2026-10-22T12:00:00+09:00',
 				'unresolved_invoice_count' => 1,
+				'confirmed_failure_invoice_count' => 1,
 				'first_failure_at'         => '2026-10-22T12:00:00+09:00',
 				'grace_ends_at'            => '2026-10-29T12:00:00+09:00',
 			)
 		);
 		$failure_after_7_days = self::contract(
 			array(
+				'paid_through_at'           => '2026-10-22T12:00:00+09:00',
 				'unresolved_invoice_count' => 2,
+				'confirmed_failure_invoice_count' => 1,
 				'first_failure_at'         => '2026-10-22T11:59:59+09:00',
 				'grace_ends_at'            => '2026-10-29T11:59:59+09:00',
 			)
@@ -72,8 +78,13 @@ final class EntitlementPolicyTest extends TestCase {
 			'paid active contract' => array( self::snapshot( array( $active ) ), 'standard', 'active_paid_period', false ),
 			'cancel scheduled during paid period' => array( self::snapshot( array( $cancel_scheduled ) ), 'standard', 'cancel_scheduled_paid_period', false ),
 			'paid period ends exactly now' => array( self::snapshot( array( self::contract( array( 'paid_through_at' => self::AS_OF ) ) ) ), 'free', 'paid_period_ended', false ),
-			'canceled after paid period' => array( self::snapshot( array( self::contract( array( 'status' => 'canceled', 'paid_through_at' => '2026-10-29T11:59:59+09:00' ) ) ) ), 'free', 'contract_not_active', false ),
-			'canceled before paid period ends is inconsistent' => array( self::snapshot( array( self::contract( array( 'status' => 'canceled' ) ) ) ), 'free', 'inconsistent_contract_data', true ),
+			'canceled after paid period' => array( self::snapshot( array( self::contract( array( 'status' => 'canceled', 'paid_through_at' => '2026-10-29T11:59:59+09:00' ) ) ) ), 'free', 'canceled_approved_period_ended', false ),
+			'canceled remains entitled through its approved paid period' => array( self::snapshot( array( self::contract( array( 'status' => 'canceled', 'square_status' => 'CANCELED' ) ) ) ), 'standard', 'canceled_approved_period', false ),
+			'canceled paid period ended' => array( self::snapshot( array( self::contract( array( 'status' => 'canceled', 'square_status' => 'CANCELED', 'paid_through_at' => self::AS_OF ) ) ) ), 'free', 'canceled_approved_period_ended', false ),
+			'initial approval is required' => array( self::snapshot( array( self::contract( array( 'approval_status' => 'missing' ) ) ) ), 'free', 'administrator_approval_required', true ),
+			'invalid or mismatched approval fails closed' => array( self::snapshot( array( self::contract( array( 'approval_status' => 'invalid' ) ) ) ), 'free', 'administrator_approval_inconsistent', true ),
+			'approved period must match contract period' => array( self::snapshot( array( self::contract( array( 'approved_period_end_at' => '2026-10-31T23:59:59Z' ) ) ) ), 'free', 'administrator_approval_period_mismatch', true ),
+			'manager suspension immediately disables access' => array( self::snapshot( array( self::contract( array( 'admin_suspended' => true ) ) ) ), 'free', 'administrator_suspended', false ),
 			'payment failure before seven day deadline' => array( self::snapshot( array( $failure_under_7_days ) ), 'standard', 'payment_grace_period', false ),
 			'payment failure exactly at seven day deadline' => array( self::snapshot( array( $failure_at_7_days ) ), 'free', 'payment_grace_expired', false ),
 			'multiple unresolved invoices past deadline' => array( self::snapshot( array( $failure_after_7_days ) ), 'free', 'payment_grace_expired', false ),
@@ -85,11 +96,18 @@ final class EntitlementPolicyTest extends TestCase {
 			'missing required contract field' => array( self::snapshot( array( self::without_key( $active, 'paid_through_at' ) ) ), 'free', 'incomplete_contract_data', true ),
 			'unknown sync status' => array( self::snapshot( array( $active ), array( 'sync_status' => 'timeout' ) ), 'free', 'invalid_input', true ),
 			'multiple current contracts' => array( self::snapshot( array( $active, $cancel_scheduled ) ), 'free', 'multiple_current_contracts', true ),
-			'sync failure retains verified paid period' => array( self::snapshot( array( $active ), array( 'sync_status' => 'error' ) ), 'standard', 'sync_error_within_verified_period', true ),
+			'sync failure does not grant standard' => array( self::snapshot( array( $active ), array( 'sync_status' => 'error' ) ), 'free', 'sync_unavailable', true ),
 			'sync failure does not extend expired paid period' => array( self::snapshot( array( self::contract( array( 'paid_through_at' => '2026-10-29T11:59:59+09:00' ) ) ), array( 'sync_status' => 'error' ) ), 'free', 'sync_unavailable', true ),
 			'missing contract collection' => array( array( 'sync_status' => 'ok' ), 'free', 'invalid_input', true ),
 			'bad paid period timestamp' => array( self::snapshot( array( self::contract( array( 'paid_through_at' => 'not-a-date' ) ) ) ), 'free', 'incomplete_contract_data', true ),
-			'failure timestamp in future' => array( self::snapshot( array( self::contract( array( 'unresolved_invoice_count' => 1, 'first_failure_at' => '2026-10-30T12:00:00+09:00', 'grace_ends_at' => '2026-11-06T12:00:00+09:00' ) ) ) ), 'free', 'inconsistent_payment_data', true ),
+			'failure timestamp in future' => array( self::snapshot( array( self::contract( array( 'unresolved_invoice_count' => 1, 'confirmed_failure_invoice_count' => 1, 'first_failure_at' => '2026-10-30T12:00:00+09:00', 'grace_ends_at' => '2026-11-06T12:00:00+09:00' ) ) ) ), 'free', 'inconsistent_payment_data', true ),
+			'confirmed failure without failure time does not get grace' => array( self::snapshot( array( self::contract( array( 'paid_through_at' => '2026-10-22T12:00:00+09:00', 'unresolved_invoice_count' => 1, 'confirmed_failure_invoice_count' => 1, 'review_pending_invoice_count' => 1, 'review_grace_ends_at' => '2026-10-29T12:00:00+09:00' ) ) ) ), 'free', 'payment_failure_time_unavailable', true ),
+			'review delay grace uses its bounded period' => array( self::snapshot( array( self::contract( array( 'paid_through_at' => '2026-10-23T12:00:00+09:00', 'approved_period_end_at' => '2026-10-23T12:00:00+09:00', 'current_period_end_at' => '2026-10-23T03:00:00Z', 'review_grace_ends_at' => '2026-10-30T12:00:00+09:00', 'unresolved_invoice_count' => 1, 'review_pending_invoice_count' => 1 ) ) ) ), 'standard', 'review_confirmation_grace', false ),
+			'review delay grace expires at its exclusive end' => array( self::snapshot( array( self::contract( array( 'paid_through_at' => '2026-10-22T12:00:00+09:00', 'approved_period_end_at' => '2026-10-22T12:00:00+09:00', 'current_period_end_at' => '2026-10-22T03:00:00Z', 'review_grace_ends_at' => '2026-10-29T12:00:00+09:00', 'unresolved_invoice_count' => 1, 'review_pending_invoice_count' => 1 ) ) ) ), 'free', 'review_confirmation_grace_expired', false ),
+			'review delay grace cannot exceed seven days' => array( self::snapshot( array( self::contract( array( 'paid_through_at' => '2026-10-22T12:00:00+09:00', 'approved_period_end_at' => '2026-10-22T12:00:00+09:00', 'current_period_end_at' => '2026-10-22T03:00:00Z', 'review_grace_ends_at' => '2026-10-30T12:00:00+09:00', 'unresolved_invoice_count' => 1, 'review_pending_invoice_count' => 1 ) ) ) ), 'free', 'review_confirmation_grace_invalid', true ),
+			'review grace requires a due unpaid invoice' => array( self::snapshot( array( self::contract( array( 'paid_through_at' => '2026-10-22T12:00:00+09:00', 'approved_period_end_at' => '2026-10-22T12:00:00+09:00', 'current_period_end_at' => '2026-10-22T03:00:00Z', 'review_grace_ends_at' => '2026-10-29T12:00:00+09:00', 'unresolved_invoice_count' => 1 ) ) ) ), 'free', 'review_grace_without_eligible_invoice', true ),
+			'canceled contract never gets review delay grace' => array( self::snapshot( array( self::contract( array( 'status' => 'canceled', 'square_status' => 'CANCELED', 'paid_through_at' => '2026-10-22T12:00:00+09:00', 'approved_period_end_at' => '2026-10-22T12:00:00+09:00', 'current_period_end_at' => '2026-10-22T03:00:00Z', 'review_grace_ends_at' => '2026-10-29T12:00:00+09:00', 'unresolved_invoice_count' => 1, 'review_pending_invoice_count' => 1 ) ) ) ), 'free', 'canceled_approved_period_ended', false ),
+			'failure grace is not extended by a later review grace' => array( self::snapshot( array( self::contract( array( 'paid_through_at' => '2026-10-22T12:00:00+09:00', 'approved_period_end_at' => '2026-10-22T12:00:00+09:00', 'current_period_end_at' => '2026-10-22T03:00:00Z', 'unresolved_invoice_count' => 1, 'review_pending_invoice_count' => 1, 'confirmed_failure_invoice_count' => 1, 'first_failure_at' => '2026-10-20T12:00:00+09:00', 'grace_ends_at' => '2026-10-27T12:00:00+09:00', 'review_grace_ends_at' => '2026-10-29T12:00:00+09:00' ) ) ) ), 'free', 'payment_grace_expired', false ),
 			'limits for standard and free are defined' => array( self::snapshot( array( $active ) ), 'standard', 'active_paid_period', false ),
 		);
 	}
@@ -105,19 +123,36 @@ final class EntitlementPolicyTest extends TestCase {
 	}
 
 	private static function contract( array $overrides = array() ): array {
-		return array_merge(
+		$contract = array_merge(
 			array(
 				'is_current'               => true,
 				'plan_code'                => 'standard',
 				'status'                   => 'active',
+				'square_status'            => 'ACTIVE',
 				'initial_payment_status'   => 'succeeded',
+				'approval_status'          => 'valid',
+				'approved_period_start_at' => '2026-10-01T00:00:00Z',
+				'approved_period_end_at'   => '2026-10-31T15:00:00Z',
+				'current_period_start_at'  => '2026-10-01T00:00:00Z',
 				'paid_through_at'          => '2026-11-01T00:00:00+09:00',
 				'unresolved_invoice_count' => 0,
+				'review_pending_invoice_count' => 0,
+				'confirmed_failure_invoice_count' => 0,
 				'first_failure_at'         => null,
 				'grace_ends_at'            => null,
+				'review_grace_ends_at'     => null,
+				'admin_control_status'     => 'ok',
+				'admin_suspended'          => false,
 			),
 			$overrides
 		);
+		if ( array_key_exists( 'paid_through_at', $overrides ) && ! array_key_exists( 'approved_period_end_at', $overrides ) ) {
+			$contract['approved_period_end_at'] = $contract['paid_through_at'];
+		}
+		if ( array_key_exists( 'paid_through_at', $overrides ) && ! array_key_exists( 'current_period_end_at', $overrides ) ) {
+			$contract['current_period_end_at'] = $contract['paid_through_at'];
+		}
+		return $contract;
 	}
 
 	private static function without_key( array $value, $key ): array {
