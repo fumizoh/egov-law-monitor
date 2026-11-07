@@ -286,6 +286,121 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 		}
 	}
 
+	public function test_caller_owned_transaction_controls_review_commit_and_rollback(): void {
+		$table = $this->wpdb->prefix . 'egov_law_square_admin_reviews';
+		$before = (int) $this->wpdb->get_var( "SELECT COUNT(*) FROM {$table}" );
+
+		$this->assertNotFalse( $this->wpdb->query( 'START TRANSACTION' ) );
+		$saved = $this->repository->append_review_in_transaction( $this->entry( array(
+			'checkout_attempt_id' => $this->attempt_id,
+			'action_type' => 'hold',
+			'evidence_code' => 'caller_transaction_rollback',
+		) ) );
+		$this->assertSame( 'saved', $saved['status'] );
+		$this->assertSame( $before + 1, (int) $this->wpdb->get_var( "SELECT COUNT(*) FROM {$table}" ) );
+		$this->assertNotFalse( $this->wpdb->query( 'ROLLBACK' ) );
+		$this->assertSame( $before, (int) $this->wpdb->get_var( "SELECT COUNT(*) FROM {$table}" ) );
+
+		$this->assertNotFalse( $this->wpdb->query( 'START TRANSACTION' ) );
+		$committed = $this->repository->append_review_in_transaction( $this->entry( array(
+			'checkout_attempt_id' => $this->attempt_id,
+			'action_type' => 'hold',
+			'evidence_code' => 'caller_transaction_commit',
+		) ) );
+		$this->assertSame( 'saved', $committed['status'] );
+		$this->assertNotFalse( $this->wpdb->query( 'COMMIT' ) );
+		$this->review_ids[] = $committed['review_id'];
+		$this->assertSame( 'caller_transaction_commit', $this->repository->get_review( $committed['review_id'] )['evidence_code'] );
+
+		$before_invalid = (int) $this->wpdb->get_var( "SELECT COUNT(*) FROM {$table}" );
+		$this->assertNotFalse( $this->wpdb->query( 'START TRANSACTION' ) );
+		$invalid = $this->repository->append_review_in_transaction( $this->entry( array(
+			'user_id' => 2,
+			'checkout_attempt_id' => $this->attempt_id,
+			'action_type' => 'hold',
+		) ) );
+		$this->assertInstanceOf( WP_Error::class, $invalid );
+		$this->assertSame( 'square_admin_review_reference_mismatch', $invalid->get_error_code() );
+		$after_invalid = $this->repository->append_review_in_transaction( $this->entry( array(
+			'checkout_attempt_id' => $this->attempt_id,
+			'action_type' => 'hold',
+			'evidence_code' => 'caller_transaction_after_error',
+		) ) );
+		$this->assertSame( 'saved', $after_invalid['status'], 'A validation error must leave transaction ownership with the caller.' );
+		$this->assertNotFalse( $this->wpdb->query( 'ROLLBACK' ) );
+		$this->assertSame( $before_invalid, (int) $this->wpdb->get_var( "SELECT COUNT(*) FROM {$table}" ) );
+	}
+
+	public function test_caller_owned_transaction_keeps_duplicate_approval_protection(): void {
+		$entry = $this->entry( array(
+			'contract_id' => $this->contract_id,
+			'square_payment_id' => 'caller-transaction-duplicate-' . wp_generate_uuid4(),
+			'action_type' => 'approve',
+			'approved_period_start' => '2026-11-01 00:00:00',
+			'approved_period_end' => '2026-12-01 00:00:00',
+			'subscription_timezone' => 'Asia/Tokyo',
+			'monthly_billing_anchor_date' => 1,
+		) );
+		$first = $this->repository->append_review( $entry );
+		$this->assertSame( 'saved', $first['status'] );
+		$this->review_ids[] = $first['review_id'];
+
+		$table = $this->wpdb->prefix . 'egov_law_square_admin_reviews';
+		$before_duplicate = (int) $this->wpdb->get_var( "SELECT COUNT(*) FROM {$table}" );
+		$this->assertNotFalse( $this->wpdb->query( 'START TRANSACTION' ) );
+		$duplicate = $this->repository->append_review_in_transaction( $entry );
+		$this->assertInstanceOf( WP_Error::class, $duplicate );
+		$this->assertSame( 'square_admin_review_duplicate_approval', $duplicate->get_error_code() );
+		$after_duplicate = $this->repository->append_review_in_transaction( $this->entry( array(
+			'checkout_attempt_id' => $this->attempt_id,
+			'action_type' => 'hold',
+			'evidence_code' => 'caller_transaction_after_duplicate',
+		) ) );
+		$this->assertSame( 'saved', $after_duplicate['status'], 'A duplicate approval must not roll back the caller transaction.' );
+		$this->assertNotFalse( $this->wpdb->query( 'ROLLBACK' ) );
+		$this->assertSame( $before_duplicate, (int) $this->wpdb->get_var( "SELECT COUNT(*) FROM {$table}" ) );
+	}
+
+	public function test_admin_note_is_nullable_normalized_and_length_limited(): void {
+		$without_note = $this->repository->append_review( $this->entry( array(
+			'checkout_attempt_id' => $this->attempt_id,
+			'action_type' => 'hold',
+		) ) );
+		$this->assertSame( 'saved', $without_note['status'] );
+		$this->review_ids[] = $without_note['review_id'];
+		$this->assertNull( $this->repository->get_review( $without_note['review_id'] )['admin_note'] );
+
+		$with_note = $this->repository->append_review( $this->entry( array(
+			'checkout_attempt_id' => $this->attempt_id,
+			'action_type' => 'hold',
+			'evidence_code' => 'note_normalized',
+			'admin_note' => "  <b>管理者確認</b>\n内容  ",
+		) ) );
+		$this->assertSame( 'saved', $with_note['status'] );
+		$this->review_ids[] = $with_note['review_id'];
+		$this->assertSame( "管理者確認\n内容", $this->repository->get_review( $with_note['review_id'] )['admin_note'] );
+
+		$maximum = $this->repository->append_review( $this->entry( array(
+			'checkout_attempt_id' => $this->attempt_id,
+			'action_type' => 'hold',
+			'evidence_code' => 'note_max_length',
+			'admin_note' => str_repeat( 'あ', 2000 ),
+		) ) );
+		$this->assertSame( 'saved', $maximum['status'] );
+		$this->review_ids[] = $maximum['review_id'];
+		$this->assertSame( 2000, preg_match_all( '/./us', $this->repository->get_review( $maximum['review_id'] )['admin_note'] ) );
+
+		foreach ( array( str_repeat( 'あ', 2001 ), array( 'not' => 'text' ) ) as $invalid_note ) {
+			$invalid = $this->repository->append_review( $this->entry( array(
+				'checkout_attempt_id' => $this->attempt_id,
+				'action_type' => 'hold',
+				'admin_note' => $invalid_note,
+			) ) );
+			$this->assertInstanceOf( WP_Error::class, $invalid );
+			$this->assertSame( 'square_admin_review_arguments_invalid', $invalid->get_error_code() );
+		}
+	}
+
 	private function entry( array $overrides = array() ): array {
 		return array_merge( array(
 			'user_id' => 1,
@@ -305,6 +420,7 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 			'subscription_timezone' => null,
 			'monthly_billing_anchor_date' => null,
 			'evidence_code' => 'payment_and_period_checked',
+			'admin_note' => null,
 			'reviewer_user_id' => 1,
 			'supersedes_review_id' => null,
 		), $overrides );

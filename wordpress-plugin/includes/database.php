@@ -324,6 +324,7 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				canceled_at DATETIME NULL DEFAULT NULL,
 				first_payment_failed_at DATETIME NULL DEFAULT NULL,
 				grace_ends_at DATETIME NULL DEFAULT NULL,
+				review_grace_ends_at DATETIME NULL DEFAULT NULL,
 				sync_state VARCHAR(20) NOT NULL DEFAULT 'unknown',
 				last_synced_at DATETIME NULL DEFAULT NULL,
 				sync_error_code VARCHAR(100) NOT NULL DEFAULT '',
@@ -346,7 +347,7 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				'plan_code', 'internal_status', 'square_status', 'initial_payment_status',
 				'current_slot', 'started_at', 'current_period_start', 'current_period_end',
 				'cancel_at_period_end', 'cancel_scheduled_at', 'canceled_at',
-				'first_payment_failed_at', 'grace_ends_at', 'sync_state', 'last_synced_at',
+				'first_payment_failed_at', 'grace_ends_at', 'review_grace_ends_at', 'sync_state', 'last_synced_at',
 				'sync_error_code', 'last_square_event_at', 'created_at', 'updated_at',
 			),
 			'indexes' => array(
@@ -425,6 +426,7 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				subscription_timezone VARCHAR(64) NULL DEFAULT NULL,
 				monthly_billing_anchor_date TINYINT UNSIGNED NULL DEFAULT NULL,
 				evidence_code VARCHAR(100) NOT NULL,
+				admin_note TEXT NULL DEFAULT NULL,
 				reviewer_user_id BIGINT UNSIGNED NOT NULL,
 				supersedes_review_id BIGINT UNSIGNED NULL DEFAULT NULL,
 				approval_payment_guard CHAR(64) NULL DEFAULT NULL,
@@ -445,6 +447,7 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				'checkout_attempt_id', 'checkout_attempt_uuid', 'square_invoice_id', 'square_payment_id',
 				'action_type', 'candidate_period_start', 'candidate_period_end', 'approved_period_start',
 				'approved_period_end', 'subscription_timezone', 'monthly_billing_anchor_date', 'evidence_code', 'reviewer_user_id', 'supersedes_review_id',
+				'admin_note',
 				'approval_payment_guard', 'approval_invoice_guard', 'recorded_at',
 			),
 			'indexes' => array(
@@ -751,7 +754,7 @@ function egov_law_monitor_maybe_upgrade_subscription_schema() {
 	global $wpdb;
 
 	$schema_version_option = 'egov_law_monitor_square_schema_version';
-	$current_version       = 7;
+	$current_version       = 8;
 	$stored_version        = (int) get_option( $schema_version_option, 0 );
 
 	if ( $stored_version > $current_version ) {

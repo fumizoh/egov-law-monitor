@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 final class DatabaseSchemaTest extends TestCase {
 	private $tables = array();
 	private const SCHEMA_VERSION_OPTION = 'egov_law_monitor_square_schema_version';
-	private const CURRENT_SCHEMA_VERSION = 7;
+	private const CURRENT_SCHEMA_VERSION = 8;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -53,6 +53,8 @@ final class DatabaseSchemaTest extends TestCase {
 				$wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) ) )
 			);
 		}
+		$this->assertColumn( $wpdb->prefix . 'egov_law_subscriptions', 'review_grace_ends_at', 'datetime', 'YES', '' );
+		$this->assertColumn( $wpdb->prefix . 'egov_law_square_admin_reviews', 'admin_note', 'text', 'YES', null );
 
 		$watch_table = $wpdb->prefix . 'law_watch_settings';
 		$inserted     = $wpdb->insert(
@@ -163,6 +165,62 @@ final class DatabaseSchemaTest extends TestCase {
 		$this->assertNull( $row['monthly_billing_anchor_date'] );
 		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
 		$this->assertNull( $wpdb->get_var( $wpdb->prepare( "SELECT subscription_timezone FROM {$reviews} WHERE id = %d", $review_id ) ) );
+	}
+
+	public function test_version_seven_migration_adds_nullable_manual_review_fields_and_preserves_rows(): void {
+		global $wpdb;
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$subscriptions = $wpdb->prefix . 'egov_law_subscriptions';
+		$reviews        = $wpdb->prefix . 'egov_law_square_admin_reviews';
+		$subscription_id = 'preserve-v8-subscription';
+		$this->assertSame( 1, $wpdb->insert( $subscriptions, array(
+			'user_id' => 1, 'environment' => 'sandbox', 'merchant_id' => 'v8-merchant',
+			'square_customer_id' => 'v8-customer', 'square_subscription_id' => $subscription_id,
+			'plan_code' => 'standard', 'internal_status' => 'pending', 'current_slot' => null,
+			'created_at' => '2026-11-01 00:00:00', 'updated_at' => '2026-11-01 00:00:00',
+		) ) );
+		$subscription_row_id = (int) $wpdb->insert_id;
+		$this->assertSame( 1, $wpdb->insert( $reviews, array(
+			'user_id' => 1, 'environment' => 'sandbox', 'merchant_id' => 'v8-merchant',
+			'action_type' => 'hold', 'evidence_code' => 'v7_existing_review', 'reviewer_user_id' => 1,
+			'recorded_at' => '2026-11-01 00:00:00',
+		) ) );
+		$review_id = (int) $wpdb->insert_id;
+		$wpdb->query( "ALTER TABLE `{$subscriptions}` DROP COLUMN review_grace_ends_at" );
+		$wpdb->query( "ALTER TABLE `{$reviews}` DROP COLUMN admin_note" );
+		update_option( self::SCHEMA_VERSION_OPTION, 7, false );
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+		$this->assertColumn( $subscriptions, 'review_grace_ends_at', 'datetime', 'YES', '' );
+		$this->assertColumn( $reviews, 'admin_note', 'text', 'YES', null );
+		$this->assertSame( $subscription_id, $wpdb->get_var( $wpdb->prepare( "SELECT square_subscription_id FROM {$subscriptions} WHERE id = %d", $subscription_row_id ) ) );
+		$this->assertNull( $wpdb->get_var( $wpdb->prepare( "SELECT review_grace_ends_at FROM {$subscriptions} WHERE id = %d", $subscription_row_id ) ) );
+		$this->assertSame( 'v7_existing_review', $wpdb->get_var( $wpdb->prepare( "SELECT evidence_code FROM {$reviews} WHERE id = %d", $review_id ) ) );
+		$this->assertNull( $wpdb->get_var( $wpdb->prepare( "SELECT admin_note FROM {$reviews} WHERE id = %d", $review_id ) ) );
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+	}
+
+	public function test_failed_version_seven_migration_does_not_advance_schema_version(): void {
+		global $wpdb;
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$reviews = $wpdb->prefix . 'egov_law_square_admin_reviews';
+		$wpdb->query( "ALTER TABLE `{$reviews}` DROP COLUMN admin_note" );
+		update_option( self::SCHEMA_VERSION_OPTION, 7, false );
+		$skip_review_table = static function ( $queries ) use ( $reviews ) {
+			unset( $queries[ $reviews ] );
+			return $queries;
+		};
+		add_filter( 'dbdelta_create_queries', $skip_review_table );
+		try {
+			$this->assertFalse( egov_law_monitor_maybe_upgrade_subscription_schema() );
+			$this->assertSame( 7, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+		} finally {
+			remove_filter( 'dbdelta_create_queries', $skip_review_table );
+		}
 	}
 
 	public function test_version_one_migration_adds_checkout_attempts_and_preserves_existing_data(): void {

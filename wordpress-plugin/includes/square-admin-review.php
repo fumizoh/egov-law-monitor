@@ -12,58 +12,98 @@ class Egov_Law_Monitor_Square_Admin_Review_Repository {
 	/**
 	 * Append one review/audit event without updating contract, invoice, attempt, or user rows.
 	 *
-	 * @param array $entry Whitelisted review fields. Free-form payloads are rejected.
+	 * @param array $entry Whitelisted review fields; raw Square payloads are rejected.
 	 * @return array|WP_Error Saved review ID or a safe error.
 	 */
 	public function append_review( array $entry ) {
-		$validated = $this->validate_entry( $entry );
+		$validated = $this->prepare_entry( $entry );
 		if ( is_wp_error( $validated ) ) {
 			return $validated;
 		}
-
-		if ( get_current_user_id() !== $validated['reviewer_user_id'] || ! current_user_can( 'manage_options' ) ) {
-			return new WP_Error( 'square_admin_review_forbidden', '管理者の操作として記録できません。' );
-		}
-
 		if ( false === $this->wpdb->query( 'START TRANSACTION' ) ) {
 			return new WP_Error( 'square_admin_review_database_unavailable', 'レビュー履歴を保存できません。' );
 		}
 
+		$result = $this->insert_review_in_transaction( $validated );
+		if ( is_wp_error( $result ) ) {
+			$this->wpdb->query( 'ROLLBACK' );
+			return $result;
+		}
+		$this->wpdb->last_error = '';
+		if ( false === $this->wpdb->query( 'COMMIT' ) || '' !== (string) $this->wpdb->last_error ) {
+			$this->wpdb->query( 'ROLLBACK' );
+			return new WP_Error( 'square_admin_review_database_unavailable', 'レビュー履歴の保存結果を確認できません。' );
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Append a review inside a transaction owned by the caller.
+	 *
+	 * The caller must start, commit, and roll back the transaction on this same
+	 * wpdb connection. This method never issues transaction-control statements.
+	 *
+	 * @param array $entry Whitelisted review fields.
+	 * @return array|WP_Error Saved review ID or a safe error.
+	 */
+	public function append_review_in_transaction( array $entry ) {
+		$validated = $this->prepare_entry( $entry );
+		if ( is_wp_error( $validated ) ) {
+			return $validated;
+		}
+
+		return $this->insert_review_in_transaction( $validated );
+	}
+
+	/** Validate common fields and reviewer authority before any database write. */
+	private function prepare_entry( array $entry ) {
+		$validated = $this->validate_entry( $entry );
+		if ( is_wp_error( $validated ) ) {
+			return $validated;
+		}
+		if ( get_current_user_id() !== $validated['reviewer_user_id'] || ! current_user_can( 'manage_options' ) ) {
+			return new WP_Error( 'square_admin_review_forbidden', '管理者の操作として記録できません。' );
+		}
+		return $validated;
+	}
+
+	/** Insert one validated review; the caller owns any surrounding transaction. */
+	private function insert_review_in_transaction( array $validated ) {
 		$references = $this->validate_references_in_transaction( $validated );
 		if ( is_wp_error( $references ) ) {
-			$this->wpdb->query( 'ROLLBACK' );
 			return $references;
 		}
 
 		$guards = $this->approval_guards( $validated );
 		if ( is_wp_error( $guards ) ) {
-			$this->wpdb->query( 'ROLLBACK' );
 			return $guards;
 		}
 
 		$data = array(
-			'user_id'                  => $validated['user_id'],
-			'environment'              => $validated['environment'],
-			'merchant_id'              => $validated['merchant_id'],
-			'contract_id'              => $validated['contract_id'],
-			'invoice_row_id'           => $validated['invoice_row_id'],
-			'checkout_attempt_id'      => $validated['checkout_attempt_id'],
-			'checkout_attempt_uuid'    => $validated['checkout_attempt_uuid'],
-			'square_invoice_id'        => $validated['square_invoice_id'],
-			'square_payment_id'        => $validated['square_payment_id'],
-			'action_type'              => $validated['action_type'],
-			'candidate_period_start'   => $validated['candidate_period_start'],
-			'candidate_period_end'     => $validated['candidate_period_end'],
-			'approved_period_start'    => $validated['approved_period_start'],
-			'approved_period_end'      => $validated['approved_period_end'],
-			'subscription_timezone'    => $validated['subscription_timezone'],
+			'user_id'                     => $validated['user_id'],
+			'environment'                 => $validated['environment'],
+			'merchant_id'                 => $validated['merchant_id'],
+			'contract_id'                 => $validated['contract_id'],
+			'invoice_row_id'              => $validated['invoice_row_id'],
+			'checkout_attempt_id'         => $validated['checkout_attempt_id'],
+			'checkout_attempt_uuid'       => $validated['checkout_attempt_uuid'],
+			'square_invoice_id'           => $validated['square_invoice_id'],
+			'square_payment_id'           => $validated['square_payment_id'],
+			'action_type'                 => $validated['action_type'],
+			'candidate_period_start'      => $validated['candidate_period_start'],
+			'candidate_period_end'        => $validated['candidate_period_end'],
+			'approved_period_start'       => $validated['approved_period_start'],
+			'approved_period_end'         => $validated['approved_period_end'],
+			'subscription_timezone'       => $validated['subscription_timezone'],
 			'monthly_billing_anchor_date' => $validated['monthly_billing_anchor_date'],
-			'evidence_code'            => $validated['evidence_code'],
-			'reviewer_user_id'         => $validated['reviewer_user_id'],
-			'supersedes_review_id'     => $validated['supersedes_review_id'],
-			'approval_payment_guard'   => $guards['payment'],
-			'approval_invoice_guard'   => $guards['invoice'],
-			'recorded_at'              => current_time( 'mysql', true ),
+			'evidence_code'               => $validated['evidence_code'],
+			'admin_note'                  => $validated['admin_note'],
+			'reviewer_user_id'            => $validated['reviewer_user_id'],
+			'supersedes_review_id'        => $validated['supersedes_review_id'],
+			'approval_payment_guard'      => $guards['payment'],
+			'approval_invoice_guard'      => $guards['invoice'],
+			'recorded_at'                 => current_time( 'mysql', true ),
 		);
 
 		$table = $this->wpdb->prefix . 'egov_law_square_admin_reviews';
@@ -71,21 +111,13 @@ class Egov_Law_Monitor_Square_Admin_Review_Repository {
 		$inserted = $this->wpdb->insert( $table, $data );
 		if ( 1 !== $inserted || '' !== (string) $this->wpdb->last_error ) {
 			$error = (string) $this->wpdb->last_error;
-			$this->wpdb->query( 'ROLLBACK' );
 			if ( false !== stripos( $error, 'approval_payment_guard' ) || false !== stripos( $error, 'approval_invoice_guard' ) ) {
 				return new WP_Error( 'square_admin_review_duplicate_approval', '同じ決済または請求期間の承認履歴が既にあります。' );
 			}
 			return new WP_Error( 'square_admin_review_database_unavailable', 'レビュー履歴を保存できません。' );
 		}
 
-		$review_id = (int) $this->wpdb->insert_id;
-		$this->wpdb->last_error = '';
-		if ( false === $this->wpdb->query( 'COMMIT' ) || '' !== (string) $this->wpdb->last_error ) {
-			$this->wpdb->query( 'ROLLBACK' );
-			return new WP_Error( 'square_admin_review_database_unavailable', 'レビュー履歴の保存結果を確認できません。' );
-		}
-
-		return array( 'status' => 'saved', 'review_id' => $review_id );
+		return array( 'status' => 'saved', 'review_id' => (int) $this->wpdb->insert_id );
 	}
 
 	/** Retrieve one audit row by its local ID. */
@@ -136,7 +168,7 @@ class Egov_Law_Monitor_Square_Admin_Review_Repository {
 			'user_id', 'environment', 'merchant_id', 'contract_id', 'invoice_row_id',
 			'checkout_attempt_id', 'checkout_attempt_uuid', 'square_invoice_id', 'square_payment_id',
 			'action_type', 'candidate_period_start', 'candidate_period_end', 'approved_period_start',
-			'approved_period_end', 'subscription_timezone', 'monthly_billing_anchor_date', 'evidence_code', 'reviewer_user_id', 'supersedes_review_id',
+			'approved_period_end', 'subscription_timezone', 'monthly_billing_anchor_date', 'evidence_code', 'admin_note', 'reviewer_user_id', 'supersedes_review_id',
 		);
 		if ( array_diff( array_keys( $entry ), $allowed ) ) {
 			return new WP_Error( 'square_admin_review_arguments_invalid', 'レビュー情報の形式が不正です。' );
@@ -155,6 +187,18 @@ class Egov_Law_Monitor_Square_Admin_Review_Repository {
 		if ( ! is_string( $entry['evidence_code'] ?? null ) || ! preg_match( '/\A[a-z0-9_]{1,100}\z/', $entry['evidence_code'] ) ) {
 			return new WP_Error( 'square_admin_review_arguments_invalid', '確認根拠コードが不正です。' );
 		}
+		$admin_note = $entry['admin_note'] ?? null;
+		if ( null !== $admin_note ) {
+			if ( ! is_string( $admin_note ) ) {
+				return new WP_Error( 'square_admin_review_arguments_invalid', '管理者メモの形式が不正です。' );
+			}
+			$admin_note = trim( sanitize_textarea_field( $admin_note ) );
+			if ( '' === $admin_note ) {
+				$admin_note = null;
+			} elseif ( false === preg_match_all( '/./us', $admin_note, $note_characters ) || 2000 < count( $note_characters[0] ) ) {
+				return new WP_Error( 'square_admin_review_arguments_invalid', '管理者メモは2000文字以内で入力してください。' );
+			}
+		}
 
 		$validated = array(
 			'user_id' => $entry['user_id'],
@@ -162,6 +206,7 @@ class Egov_Law_Monitor_Square_Admin_Review_Repository {
 			'merchant_id' => $entry['merchant_id'],
 			'action_type' => $entry['action_type'],
 			'evidence_code' => $entry['evidence_code'],
+			'admin_note' => $admin_note,
 			'reviewer_user_id' => $entry['reviewer_user_id'],
 		);
 		$nullable_ids = array( 'contract_id', 'invoice_row_id', 'checkout_attempt_id', 'supersedes_review_id' );
