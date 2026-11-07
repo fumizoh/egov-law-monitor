@@ -354,6 +354,82 @@ class Egov_Law_Monitor_Square_Api_Client {
 		return $normalized;
 	}
 
+	/** Search candidate subscriptions by server-verified customer and location scope.
+	 *
+	 * A match from this search is only a candidate. Callers must verify an exact
+	 * Checkout Attempt identifier chain before associating it with a WordPress user.
+	 *
+	 * @return array|WP_Error Candidate identifiers and whether the result page is complete.
+	 */
+	public function search_subscriptions_by_customer_location( $customer_id, $location_id, $max_results = 100 ) {
+		if ( ! is_string( $customer_id ) || ! preg_match( '/\\A[A-Za-z0-9._:-]{1,255}\\z/', $customer_id ) || ! is_string( $location_id ) || ! preg_match( '/\\A[A-Za-z0-9._:-]{1,255}\\z/', $location_id ) || ! is_int( $max_results ) || $max_results < 1 || $max_results > 100 ) {
+			return new WP_Error( 'square_subscription_search_request_invalid', 'Squareの契約候補を確認できませんでした。' );
+		}
+		if ( ! isset( $this->config['environment'], $this->config['access_token'] ) || ! in_array( $this->config['environment'], array( 'sandbox', 'production' ), true ) || ! is_string( $this->config['access_token'] ) || '' === trim( $this->config['access_token'] ) ) {
+			return new WP_Error( 'square_configuration_invalid', 'Squareのサーバー設定が不足しています。' );
+		}
+		if ( ! function_exists( 'wp_remote_post' ) || ! function_exists( 'wp_json_encode' ) ) {
+			return new WP_Error( 'square_http_api_unavailable', 'Square情報を取得できません。' );
+		}
+		$host = 'sandbox' === $this->config['environment'] ? 'https://connect.squareupsandbox.com' : 'https://connect.squareup.com';
+		$response = wp_remote_post(
+			$host . '/v2/subscriptions/search',
+			array(
+				'timeout' => 20,
+				'redirection' => 0,
+				'sslverify' => true,
+				'headers' => array(
+					'Authorization' => 'Bearer ' . $this->config['access_token'],
+					'Square-Version' => self::API_VERSION,
+					'Accept' => 'application/json',
+					'Content-Type' => 'application/json',
+				),
+				'body' => wp_json_encode( array(
+					'limit' => $max_results,
+					'query' => array( 'filter' => array( 'customer_ids' => array( $customer_id ), 'location_ids' => array( $location_id ) ) ),
+				) ),
+			)
+		);
+		if ( is_wp_error( $response ) ) {
+			return new WP_Error( 'square_resource_request_failed', 'Squareの契約候補を取得できませんでした。' );
+		}
+		$status = (int) wp_remote_retrieve_response_code( $response );
+		$decoded = json_decode( (string) wp_remote_retrieve_body( $response ), true );
+		if ( is_array( $decoded ) && ! empty( $decoded['errors'] ) ) {
+			return new WP_Error( 'square_resource_api_error', 'Squareの契約候補を取得できませんでした。', array( 'http_status' => $status ) );
+		}
+		if ( $status < 200 || $status >= 300 ) {
+			return new WP_Error( 'square_resource_http_error', 'Squareの契約候補を取得できませんでした。', array( 'http_status' => $status ) );
+		}
+		if ( ! is_array( $decoded ) || ! isset( $decoded['subscriptions'] ) || ! is_array( $decoded['subscriptions'] ) || count( $decoded['subscriptions'] ) > $max_results || ( ! empty( $decoded['subscriptions'] ) && array_keys( $decoded['subscriptions'] ) !== range( 0, count( $decoded['subscriptions'] ) - 1 ) ) ) {
+			return new WP_Error( 'square_subscription_search_response_invalid', 'Squareの契約候補を確認できませんでした。' );
+		}
+		$candidates = array();
+		$seen = array();
+		foreach ( $decoded['subscriptions'] as $subscription ) {
+			if ( ! is_array( $subscription ) || ! isset( $subscription['id'], $subscription['location_id'], $subscription['customer_id'] ) || ! is_string( $subscription['id'] ) || '' === $subscription['id'] || ! is_string( $subscription['location_id'] ) || ! is_string( $subscription['customer_id'] ) || ! hash_equals( $location_id, $subscription['location_id'] ) || ! hash_equals( $customer_id, $subscription['customer_id'] ) || isset( $seen[ $subscription['id'] ] ) ) {
+				return new WP_Error( 'square_subscription_search_response_invalid', 'Squareの契約候補を確認できませんでした。' );
+			}
+			$seen[ $subscription['id'] ] = true;
+			$candidates[] = array(
+				'id' => $subscription['id'],
+				'location_id' => $subscription['location_id'],
+				'customer_id' => $subscription['customer_id'],
+				'plan_variation_id' => isset( $subscription['plan_variation_id'] ) && is_string( $subscription['plan_variation_id'] ) ? $subscription['plan_variation_id'] : null,
+			);
+		}
+		$cursor = $decoded['cursor'] ?? null;
+		if ( null !== $cursor && ( ! is_string( $cursor ) || '' === trim( $cursor ) || strlen( $cursor ) > 2048 || preg_match( '/[\\x00-\\x20\\x7F]/', $cursor ) ) ) {
+			return new WP_Error( 'square_subscription_search_response_invalid', 'Squareの契約候補を確認できませんでした。' );
+		}
+		return array(
+			'candidates' => $candidates,
+			'candidate_count' => count( $candidates ),
+			'complete' => null === $cursor,
+			'cursor_present' => null !== $cursor,
+		);
+	}
+
 	/**
 	 * Retrieve the configured Subscription Plan Variation and normalize its phases.
 	 *
