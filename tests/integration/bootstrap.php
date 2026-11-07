@@ -67,6 +67,7 @@ require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-recurrin
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-recurring-billing-inspection.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-initial-payment-read-service.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-initial-billing-period-inspection.php';
+require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-admin-approval-validation.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/square-webhook.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/subscription-plan-page.php';
 require_once dirname( __DIR__, 2 ) . '/wordpress-plugin/includes/admin/admin-square-payments.php';
