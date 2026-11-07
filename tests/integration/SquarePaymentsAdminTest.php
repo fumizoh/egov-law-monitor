@@ -156,8 +156,87 @@ final class SquarePaymentsAdminTest extends TestCase {
 		$this->assertSame( array(), $this->stub->contract_calls );
 		$this->assertStringContainsString( '決済完了を確認', $html );
 		$this->assertStringContainsString( '決済完了の確認とStandard利用期間・権限の承認は別の判断です。', $html );
-		$this->assertStringContainsString( '未確認（期間の根拠なし）', $html );
+		$this->assertStringContainsString( '利用期間候補', $html );
+		$this->assertStringContainsString( '要確認', $html );
 		$this->assertStringContainsString( '未確認: 1', $html );
+	}
+
+	public function test_initial_billing_inspection_displays_payment_link_period_candidate_and_change_evidence_separately(): void {
+		$this->stub->result = array(
+			'status' => 'review_required', 'reason_code' => 'initial_invoice_payment_link_unproven', 'review_status' => 'required',
+			'initial_payment' => array( 'confirmed' => true, 'status' => 'confirmed', 'payment_id' => 'first-payment-id', 'order_id' => 'first-order-id', 'amount' => 500, 'currency' => 'JPY', 'payment_status' => 'COMPLETED', 'refund_status' => 'none_reported_at_lookup' ),
+			'subscription_link' => array( 'status' => 'confirmed', 'subscription_id' => 'first-subscription-id', 'method' => 'local_contract_and_attempt_reference_chain' ),
+			'initial_invoice' => array( 'id' => 'first-invoice-id', 'order_id' => 'first-order-id', 'status' => 'PAID' ),
+			'billing_conditions' => array(
+				'status' => 'confirmed',
+				'subscription' => array( 'id' => 'first-subscription-id', 'timezone' => 'Asia/Tokyo', 'monthly_billing_anchor_date' => 31 ),
+				'variation' => array( 'id' => 'standard-monthly-variation', 'phases' => array( array( 'cadence' => 'MONTHLY', 'recurring_price_money' => array( 'amount' => 500, 'currency' => 'JPY' ) ) ) ),
+				'events' => array( 'complete' => true ),
+			),
+			'period_candidate' => array( 'status' => 'candidate', 'basis' => array( 'monthly_anchor', 'schedule_changes_confirmed_absent' ), 'billing_period' => array( 'start_date' => '2026-01-31', 'end_date_inclusive' => '2026-02-27', 'end_exclusive_date' => '2026-02-28', 'next_start_date' => '2026-02-28', 'timezone' => 'Asia/Tokyo' ) ),
+			'automatic_approval_candidate' => false,
+		);
+		$this->post_inspection( 'initial', $this->attempt_ids[0] );
+		$html = $this->render_page();
+		$this->assertStringContainsString( '初回決済', $html );
+		$this->assertStringContainsString( 'first-payment-id', $html );
+		$this->assertStringContainsString( 'first-invoice-id', $html );
+		$this->assertStringContainsString( '照合済み', $html );
+		$this->assertStringContainsString( 'MONTHLY / 500 JPY', $html );
+		$this->assertStringContainsString( '変更なしを確認', $html );
+		$this->assertStringContainsString( '2026-02-27（最終利用日）', $html );
+		$this->assertStringContainsString( '2026-02-28', $html );
+		$this->assertStringContainsString( 'Asia/Tokyo', $html );
+		$this->assertStringContainsString( '31', $html );
+		$this->assertStringContainsString( '候補を算出（未承認）', $html );
+		$this->assertStringContainsString( '初回決済とSubscription Invoiceの関連付けを確認できません。', $html );
+		$this->assertStringNotContainsString( '承認済み利用期間', $html );
+	}
+
+	public function test_recurring_inspection_displays_invoice_scope_candidates_and_not_found_period_as_review(): void {
+		$this->stub->result = array(
+			'status' => 'review_required', 'reason_code' => 'subscription_events_incomplete', 'review_status' => 'required',
+			'payment_evidence' => array( 'status' => 'not_confirmed', 'confirmed' => false, 'invoice_results' => array(
+				array( 'status' => 'payment_confirmed', 'reason_code' => 'invoice_order_payment_verified', 'payment_evidence' => 'confirmed', 'invoice' => array( 'id' => 'renewal-invoice-id', 'order_id' => 'renewal-order-id', 'amount' => 500, 'completed_amount' => 500, 'currency' => 'JPY' ), 'payment' => array( 'id' => 'renewal-payment-id', 'status' => 'COMPLETED' ) ),
+			) ),
+			'invoice_scope' => array( 'selection' => 'all_invoice_ids_newer_than_last_approved_invoice', 'baseline_invoice_id' => 'previous-approved-invoice', 'invoice_list_completeness' => 'square_subscription_invoice_ids_field_newest_first', 'invoice_total_count' => 3, 'requested_invoice_count' => 2, 'checked_invoice_count' => 1, 'unchecked_invoice_count' => 1 ),
+			'contract' => array( 'id' => 7, 'subscription_id' => 'renewal-subscription-id' ),
+			'subscription' => array( 'id' => 'renewal-subscription-id', 'timezone' => 'Asia/Tokyo', 'monthly_billing_anchor_date' => 15 ),
+			'variation' => array( 'id' => 'monthly-plan', 'single_monthly_phase' => true, 'phases' => array( array( 'cadence' => 'MONTHLY', 'recurring_price_money' => array( 'amount' => 500, 'currency' => 'JPY' ) ) ) ),
+			'schedule_review' => array( 'state' => 'unknown', 'reason' => 'subscription_events_incomplete' ),
+			'event_scope' => array( 'complete' => false ),
+			'period_candidate' => array( 'status' => 'review_required', 'reason_code' => 'subscription_schedule_provenance_incomplete', 'billing_period' => array( 'start_date' => null, 'end_date_inclusive' => null ) ),
+		);
+		$this->post_inspection( 'recurring', $this->contract_ids[0] );
+		$html = $this->render_page();
+		$this->assertStringContainsString( '継続決済', $html );
+		$this->assertStringContainsString( 'previous-approved-invoice', $html );
+		$this->assertStringContainsString( 'renewal-invoice-id', $html );
+		$this->assertStringContainsString( 'renewal-payment-id', $html );
+		$this->assertStringContainsString( '全体／確認／未確認', $html );
+		$this->assertStringContainsString( 'Invoice範囲の完全性', $html );
+		$this->assertStringContainsString( '未確認Invoiceあり（不完全）', $html );
+		$this->assertStringContainsString( '不完全・要確認', $html );
+		$this->assertStringContainsString( 'Subscriptionの変更履歴が不完全です。', $html );
+		$this->assertStringContainsString( '利用期間候補', $html );
+		$this->assertGreaterThanOrEqual( 1, substr_count( $html, '要確認' ) );
+		$this->assertStringNotContainsString( '候補を算出（未承認）', $html );
+	}
+
+	public function test_unknown_reason_code_is_shown_as_review_required_and_all_result_values_are_escaped(): void {
+		$this->stub->result = array(
+			'status' => 'review_required', 'reason_code' => '<script>unknown_reason</script>', 'review_status' => 'required',
+			'initial_payment' => array( 'confirmed' => false, 'payment_id' => '<img src=x onerror=alert(1)>', 'order_id' => 'local-order' ),
+			'subscription_link' => array( 'status' => 'unconfirmed' ),
+			'period_candidate' => array( 'status' => 'review_required', 'reason_code' => 'candidate_not_calculated', 'billing_period' => array() ),
+		);
+		$this->post_inspection( 'initial', $this->attempt_ids[0] );
+		$html = $this->render_page();
+		$this->assertStringContainsString( '要確認（理由コード:', $html );
+		$this->assertStringContainsString( '&lt;script&gt;unknown_reason&lt;/script&gt;', $html );
+		$this->assertStringContainsString( '&lt;img src=x onerror=alert(1)&gt;', $html );
+		$this->assertStringNotContainsString( '<script>unknown_reason</script>', $html );
+		$this->assertStringNotContainsString( '<img src=x onerror=alert(1)>', $html );
 	}
 
 	public function test_recurring_post_uses_contract_id_and_api_error_or_pending_is_not_success(): void {
@@ -169,6 +248,7 @@ final class SquarePaymentsAdminTest extends TestCase {
 		$this->assertSame( array( $this->contract_ids[0] ), $this->stub->contract_calls );
 		$this->assertStringContainsString( '確認できず', $html );
 		$this->assertStringContainsString( 'invoice_retrieval_failed', $html );
+		$this->assertStringContainsString( '決済失敗を意味しません', $html );
 		$this->assertStringNotContainsString( '決済完了を確認', $html );
 
 		$this->stub->result['status'] = 'payment_pending';
@@ -236,6 +316,12 @@ final class SquarePaymentsAdminTest extends TestCase {
 		$invoice_count_before = (int) $this->wpdb->get_var( "SELECT COUNT(*) FROM {$this->wpdb->prefix}egov_law_subscription_invoices" );
 		$entitlement_before = egov_law_monitor_get_effective_entitlement( 1 );
 		$this->post_inspection( 'recurring', $this->contract_ids[0] );
+		$this->render_page();
+		$this->assertSame( $attempt_before, $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->wpdb->prefix}egov_law_checkout_attempts WHERE id = %d", $this->attempt_ids[0] ), ARRAY_A ) );
+		$this->assertSame( $contract_before, $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->wpdb->prefix}egov_law_subscriptions WHERE id = %d", $this->contract_ids[0] ), ARRAY_A ) );
+		$this->assertSame( $invoice_count_before, (int) $this->wpdb->get_var( "SELECT COUNT(*) FROM {$this->wpdb->prefix}egov_law_subscription_invoices" ) );
+		$this->assertSame( $entitlement_before, egov_law_monitor_get_effective_entitlement( 1 ) );
+		$this->post_inspection( 'initial', $this->attempt_ids[0] );
 		$this->render_page();
 		$this->assertSame( $attempt_before, $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->wpdb->prefix}egov_law_checkout_attempts WHERE id = %d", $this->attempt_ids[0] ), ARRAY_A ) );
 		$this->assertSame( $contract_before, $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->wpdb->prefix}egov_law_subscriptions WHERE id = %d", $this->contract_ids[0] ), ARRAY_A ) );

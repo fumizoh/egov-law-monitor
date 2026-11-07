@@ -19,7 +19,8 @@ function egov_law_monitor_admin_square_initial_read_service() {
 	$payment_matcher = new Egov_Law_Monitor_Square_Payment_Attempt_Matcher( $repository, $client );
 	$payment_confirmation = new Egov_Law_Monitor_Square_Initial_Payment_Confirmation_Service( $repository, $client, $payment_matcher );
 	$subscription_matcher = new Egov_Law_Monitor_Square_Subscription_Attempt_Matcher( $repository, $client, $payment_confirmation );
-	return new Egov_Law_Monitor_Square_Initial_Payment_Read_Service( $wpdb, $repository, $client, $payment_confirmation, $subscription_matcher );
+	$initial_payment_reader = new Egov_Law_Monitor_Square_Initial_Payment_Read_Service( $wpdb, $repository, $client, $payment_confirmation, $subscription_matcher );
+	return new Egov_Law_Monitor_Square_Initial_Billing_Period_Inspection_Service( $wpdb, $repository, $client, $initial_payment_reader );
 }
 
 /** Build the read-only recurring-payment service only after an explicit POST. */
@@ -33,7 +34,7 @@ function egov_law_monitor_admin_square_recurring_read_service() {
 		return $client;
 	}
 	global $wpdb;
-	return new Egov_Law_Monitor_Square_Recurring_Payment_Read_Service( $wpdb, $client );
+	return new Egov_Law_Monitor_Square_Recurring_Billing_Inspection_Service( $wpdb, $client );
 }
 
 /** Render the Square payment review screen; Square is queried only for a valid POST. */
@@ -153,7 +154,7 @@ function egov_law_monitor_render_admin_square_payments() {
 		echo '<div class="notice notice-error"><p>' . esc_html( $notice ) . '</p></div>';
 	}
 	if ( is_array( $inspection ) ) {
-		egov_law_monitor_render_square_payment_inspection( $inspection );
+		egov_law_monitor_render_square_payment_inspection( $inspection, $record_type ?? null );
 	}
 	echo '<table class="widefat striped"><thead><tr><th>区分</th><th>WordPressユーザーID</th><th>ローカルID</th><th>関連する申込・契約</th><th>Square環境</th><th>Merchant ID</th><th>Square Subscription ID</th><th>ローカル契約状態</th><th>保存済み同期日時</th><th>操作</th></tr></thead><tbody>';
 	if ( $list_unavailable ) {
@@ -206,15 +207,20 @@ function egov_law_monitor_render_admin_square_payments() {
 }
 
 /** Render normalized read-only payment evidence without exposing raw errors or PII. */
-function egov_law_monitor_render_square_payment_inspection( array $result ) {
-	$evidence = isset( $result['payment_evidence'] ) && is_array( $result['payment_evidence'] ) ? $result['payment_evidence'] : array();
+function egov_law_monitor_render_square_payment_inspection( array $result, $record_type = null ) {
+	$is_initial = 'initial' === $record_type || isset( $result['initial_payment'] ) || isset( $result['billing_conditions'] );
+	$evidence = $is_initial
+		? ( is_array( $result['initial_payment'] ?? null ) ? $result['initial_payment'] : ( is_array( $result['payment_evidence'] ?? null ) ? $result['payment_evidence'] : array() ) )
+		: ( is_array( $result['payment_evidence'] ?? null ) ? $result['payment_evidence'] : array() );
 	$invoice_scope = isset( $result['invoice_scope'] ) && is_array( $result['invoice_scope'] ) ? $result['invoice_scope'] : array();
-	$period = isset( $result['billing_period'] ) && is_array( $result['billing_period'] ) ? $result['billing_period'] : array();
-	$invoice = isset( $result['invoice'] ) && is_array( $result['invoice'] ) ? $result['invoice'] : array();
+	$period_candidate = isset( $result['period_candidate'] ) && is_array( $result['period_candidate'] ) ? $result['period_candidate'] : array();
+	$period = isset( $period_candidate['billing_period'] ) && is_array( $period_candidate['billing_period'] ) ? $period_candidate['billing_period'] : ( isset( $result['billing_period'] ) && is_array( $result['billing_period'] ) ? $result['billing_period'] : array() );
+	$invoice = isset( $result['invoice'] ) && is_array( $result['invoice'] ) ? $result['invoice'] : ( isset( $result['initial_invoice'] ) && is_array( $result['initial_invoice'] ) ? $result['initial_invoice'] : array() );
 	$payment = isset( $result['payment'] ) && is_array( $result['payment'] ) ? $result['payment'] : array();
+	$contract = isset( $result['contract'] ) && is_array( $result['contract'] ) ? $result['contract'] : array();
 	$subscription = isset( $result['subscription_link'] ) && is_array( $result['subscription_link'] ) ? $result['subscription_link'] : array();
 	if ( empty( $subscription ) && isset( $result['subscription'] ) && is_array( $result['subscription'] ) ) {
-		$stored_id = $result['contract']['subscription_id'] ?? null;
+		$stored_id = $contract['subscription_id'] ?? null;
 		$remote_id = $result['subscription']['id'] ?? null;
 		$subscription = array(
 			'status' => is_string( $stored_id ) && is_string( $remote_id ) && '' !== $stored_id && hash_equals( $stored_id, $remote_id ) ? 'confirmed' : 'unconfirmed',
@@ -227,34 +233,176 @@ function egov_law_monitor_render_square_payment_inspection( array $result ) {
 	$amount = $evidence['amount'] ?? ( $payment['amount'] ?? ( $invoice['completed_amount'] ?? null ) );
 	$currency = $evidence['currency'] ?? ( $payment['currency'] ?? ( $invoice['currency'] ?? null ) );
 	$payment_confirmed = ! empty( $evidence['confirmed'] );
-	$period_verified = ! empty( $period['verified'] );
+	$period_available = 'candidate' === ( $period_candidate['status'] ?? null ) && is_string( $period['start_date'] ?? null ) && is_string( $period['end_date_inclusive'] ?? null );
 	$review_labels = array( 'required' => '追加確認が必要', 'awaiting_payment' => '決済確認待ち', 'retrieval_failed' => '情報取得失敗' );
-	$scope_labels = array( 'latest_invoice_only' => '最新Invoiceのみ', 'initial_checkout_order_only' => '初回CheckoutのOrderのみ' );
+	$scope_labels = array( 'latest_invoice_only' => '最新Invoiceのみ', 'initial_checkout_order_only' => '初回Checkout Order', 'all_invoice_ids_newer_than_last_approved_invoice' => '前回承認Invoice以降のInvoice ID' );
 	$link_status = ( $subscription['status'] ?? '' ) === 'confirmed' ? '照合済み' : '未照合・要確認';
 	$status_labels = array(
-		'payment_confirmed' => '決済情報を確認（利用期間は別途確認）',
+		'payment_confirmed' => '決済完了を確認（利用期間候補は別途確認）',
 		'payment_pending' => '決済未完了または処理中',
-		'payment_failed' => '決済失敗の情報あり',
-		'square_api_error' => 'Square情報の取得に失敗',
+		'payment_failed' => 'Squareで決済失敗を確認',
+		'square_api_error' => 'Square情報の取得失敗（決済失敗を意味しません）',
 		'reconciliation_required' => '照合・追加確認が必要',
+		'review_required' => '照合・追加確認が必要',
 	);
+	$variation = isset( $result['billing_conditions']['variation'] ) && is_array( $result['billing_conditions']['variation'] ) ? $result['billing_conditions']['variation'] : ( isset( $result['variation'] ) && is_array( $result['variation'] ) ? $result['variation'] : array() );
+	$subscription_snapshot = isset( $result['billing_conditions']['subscription'] ) && is_array( $result['billing_conditions']['subscription'] ) ? $result['billing_conditions']['subscription'] : ( isset( $result['subscription'] ) && is_array( $result['subscription'] ) ? $result['subscription'] : array() );
+	$event_complete = null;
+	$schedule_state = 'unknown';
+	if ( isset( $result['billing_conditions'] ) && is_array( $result['billing_conditions'] ) ) {
+		$event_data = $result['billing_conditions']['events'] ?? null;
+		$event_complete = is_array( $event_data ) && array_key_exists( 'complete', $event_data ) ? (bool) $event_data['complete'] : null;
+		$schedule_state = 'confirmed' === ( $result['billing_conditions']['status'] ?? '' ) && true === $event_complete ? 'none' : 'unknown';
+	} elseif ( isset( $result['event_scope'] ) && is_array( $result['event_scope'] ) ) {
+		$event_complete = ! empty( $result['event_scope']['complete'] );
+		$schedule_state = $result['schedule_review']['state'] ?? 'unknown';
+	}
+	$reason_code = is_string( $result['reason_code'] ?? null ) ? $result['reason_code'] : 'reason_unavailable';
 
 	echo '<section class="notice notice-info"><h2>決済情報の取得結果</h2><dl>';
+	egov_law_monitor_square_payment_result_item( '区分', $is_initial ? '初回決済' : '継続決済' );
 	egov_law_monitor_square_payment_result_item( '取得結果', $status_labels[ $result['status'] ?? '' ] ?? '状態不明・要確認' );
+	egov_law_monitor_square_payment_result_item( '決済状態', $payment['status'] ?? ( $evidence['payment_status'] ?? ( $evidence['status'] ?? '確認できず' ) ) );
 	egov_law_monitor_square_payment_result_item( '決済証拠', $payment_confirmed ? '決済完了を確認' : ( ( $evidence['status'] ?? '' ) === 'pending' ? '決済処理中または未完了' : '確認できず' ) );
 	egov_law_monitor_square_payment_result_item( '金額・通貨', null !== $amount && null !== $currency ? number_format_i18n( (int) $amount ) . ' ' . $currency : '確認できず' );
 	egov_law_monitor_square_payment_result_item( 'Payment ID', $payment_id );
 	egov_law_monitor_square_payment_result_item( 'Order ID', $order_id );
 	egov_law_monitor_square_payment_result_item( 'Invoice ID', $invoice_id );
-	egov_law_monitor_square_payment_result_item( 'Subscription ID', $subscription['subscription_id'] ?? ( $result['contract']['subscription_id'] ?? null ) );
+	egov_law_monitor_square_payment_result_item( 'Subscription ID', $subscription['subscription_id'] ?? ( $contract['subscription_id'] ?? ( $subscription_snapshot['id'] ?? null ) ) );
 	egov_law_monitor_square_payment_result_item( 'Subscriptionとの紐付け', $link_status );
+	egov_law_monitor_square_payment_result_item( 'Subscription照合根拠', $subscription['method'] ?? ( $subscription['source'] ?? null ) );
+	egov_law_monitor_square_payment_result_item( 'Square Subscription状態', $subscription_snapshot['status'] ?? null );
+	egov_law_monitor_square_payment_result_item( 'Plan Variation', egov_law_monitor_square_plan_description( $variation ) );
+	egov_law_monitor_square_payment_result_item( '課金条件', ( 'confirmed' === ( $result['billing_conditions']['status'] ?? '' ) || ! empty( $variation['single_monthly_phase'] ) ) ? '単一月次Phaseを確認' : '要確認' );
+	egov_law_monitor_square_payment_result_item( '予定・過去変更', 'none' === $schedule_state ? '変更なしを確認' : '変更履歴または予定を要確認' );
+	egov_law_monitor_square_payment_result_item( 'イベント履歴', true === $event_complete ? '完全取得' : ( false === $event_complete ? '不完全・要確認' : '完全性不明・要確認' ) );
 	egov_law_monitor_square_payment_result_item( '確認したInvoice範囲', $scope_labels[ $invoice_scope['selection'] ?? '' ] ?? '範囲不明' );
-	egov_law_monitor_square_payment_result_item( 'Invoice件数', sprintf( '全体: %s / 確認: %s / 未確認: %s', isset( $invoice_scope['invoice_total_count'] ) ? (string) $invoice_scope['invoice_total_count'] : '不明', isset( $invoice_scope['checked_invoice_count'] ) ? (string) $invoice_scope['checked_invoice_count'] : '不明', isset( $invoice_scope['unchecked_invoice_count'] ) ? (string) $invoice_scope['unchecked_invoice_count'] : '不明' ) );
+	egov_law_monitor_square_payment_result_item( '前回承認済みInvoice ID', $invoice_scope['baseline_invoice_id'] ?? null );
+	$checked_count = $invoice_scope['checked_invoice_count'] ?? ( $invoice_scope['requested_invoice_count'] ?? null );
+	$unchecked_count = $invoice_scope['unchecked_invoice_count'] ?? ( isset( $invoice_scope['requested_invoice_count'], $invoice_scope['checked_invoice_count'] ) ? max( 0, (int) $invoice_scope['requested_invoice_count'] - (int) $invoice_scope['checked_invoice_count'] ) : null );
+	egov_law_monitor_square_payment_result_item( 'Invoice件数（全体／確認／未確認）', sprintf( '全体: %s / 確認: %s / 未確認: %s', isset( $invoice_scope['invoice_total_count'] ) ? (string) $invoice_scope['invoice_total_count'] : '不明', null !== $checked_count ? (string) $checked_count : '不明', null !== $unchecked_count ? (string) $unchecked_count : '不明' ) );
+	egov_law_monitor_square_payment_result_item( 'Invoice範囲の完全性', egov_law_monitor_square_invoice_scope_completeness( $invoice_scope ) );
 	egov_law_monitor_square_payment_result_item( 'レビュー状態', $review_labels[ $result['review_status'] ?? '' ] ?? '不明（要確認）' );
-	egov_law_monitor_square_payment_result_item( '利用期間', $period_verified ? ( ( $period['start'] ?? '' ) . ' 〜 ' . ( $period['end'] ?? '' ) ) : '未確認（期間の根拠なし）' );
-	egov_law_monitor_square_payment_result_item( '期間確認根拠', $period['evidence_code'] ?? '根拠不明' );
-	egov_law_monitor_square_payment_result_item( '保留理由', $result['reason_code'] ?? '理由不明' );
-	echo '</dl><p><strong>決済完了の確認とStandard利用期間・権限の承認は別の判断です。この画面では権限を変更しません。</strong></p></section>';
+	egov_law_monitor_square_payment_result_item( '利用期間候補', $period_available ? ( $period['start_date'] . ' 〜 ' . $period['end_date_inclusive'] . '（最終利用日）' ) : '要確認' );
+	egov_law_monitor_square_payment_result_item( '次回期間開始日', $period_available ? ( $period['next_start_date'] ?? null ) : '要確認' );
+	egov_law_monitor_square_payment_result_item( 'Timezone', $period['timezone'] ?? ( $subscription_snapshot['timezone'] ?? null ) );
+	egov_law_monitor_square_payment_result_item( '月次課金アンカー', $subscription_snapshot['monthly_billing_anchor_date'] ?? null );
+	egov_law_monitor_square_payment_result_item( '候補計算状態', $period_available ? '候補を算出（未承認）' : '要確認' );
+	egov_law_monitor_square_payment_result_item( '候補計算根拠', is_array( $period_candidate['basis'] ?? null ) ? implode( ', ', $period_candidate['basis'] ) : ( $period_candidate['reason_code'] ?? '根拠不明' ) );
+	egov_law_monitor_square_payment_result_item( '要確認理由', egov_law_monitor_square_reason_label( $reason_code ) );
+	egov_law_monitor_square_payment_result_item( '理由コード', $reason_code );
+	echo '</dl>';
+	$invoice_results = is_array( $evidence['invoice_results'] ?? null ) ? $evidence['invoice_results'] : array();
+	if ( ! empty( $invoice_results ) ) {
+		echo '<h3>確認した継続Invoice</h3><table class="widefat striped"><thead><tr><th>Invoice ID</th><th>Payment ID</th><th>状態</th><th>金額・通貨</th><th>決済証拠</th><th>理由</th></tr></thead><tbody>';
+		foreach ( $invoice_results as $invoice_result ) {
+			if ( ! is_array( $invoice_result ) ) {
+				continue;
+			}
+			$invoice_row = is_array( $invoice_result['invoice'] ?? null ) ? $invoice_result['invoice'] : array();
+			$payment_row = is_array( $invoice_result['payment'] ?? null ) ? $invoice_result['payment'] : array();
+			$row_amount = $invoice_row['completed_amount'] ?? ( $invoice_row['amount'] ?? null );
+			$row_currency = $invoice_row['currency'] ?? null;
+			echo '<tr><td>' . esc_html( (string) ( $invoice_row['id'] ?? '—' ) ) . '</td><td>' . esc_html( (string) ( $payment_row['id'] ?? '—' ) ) . '</td><td>' . esc_html( (string) ( $invoice_result['status'] ?? '不明' ) ) . '</td><td>' . esc_html( null !== $row_amount && null !== $row_currency ? number_format_i18n( (int) $row_amount ) . ' ' . $row_currency : '確認できず' ) . '</td><td>' . esc_html( 'confirmed' === ( $invoice_result['payment_evidence'] ?? '' ) ? '決済完了を確認' : '確認できず' ) . '</td><td>' . esc_html( egov_law_monitor_square_reason_label( $invoice_result['reason_code'] ?? 'reason_unavailable' ) ) . '</td></tr>';
+		}
+		echo '</tbody></table>';
+	}
+	echo '<p><strong>決済完了の確認とStandard利用期間・権限の承認は別の判断です。この画面では権限を変更しません。</strong></p></section>';
+}
+
+function egov_law_monitor_square_invoice_scope_completeness( array $scope ) {
+	if ( isset( $scope['unchecked_invoice_count'] ) && (int) $scope['unchecked_invoice_count'] > 0 ) {
+		return '未確認Invoiceあり（不完全）';
+	}
+	if ( 'latest_invoice_only' === ( $scope['selection'] ?? '' ) ) {
+		return '最新Invoiceのみ。過去を含む全体確認ではありません';
+	}
+	if ( isset( $scope['invoice_list_completeness'] ) ) {
+		return '取得根拠: ' . (string) $scope['invoice_list_completeness'] . '。全履歴の完全性は未保証';
+	}
+	if ( isset( $scope['invoice_total_count'], $scope['checked_invoice_count'] ) && (int) $scope['invoice_total_count'] === (int) $scope['checked_invoice_count'] ) {
+		return '表示対象のInvoiceをすべて確認';
+	}
+	return '完全性不明・要確認';
+}
+
+function egov_law_monitor_square_plan_description( array $variation ) {
+	$parts = array();
+	$phases = is_array( $variation['phases'] ?? null ) ? $variation['phases'] : array();
+	foreach ( $phases as $phase ) {
+		if ( ! is_array( $phase ) ) {
+			continue;
+		}
+		$money = is_array( $phase['recurring_price_money'] ?? null ) ? $phase['recurring_price_money'] : array();
+		$amount = isset( $money['amount'] ) && is_numeric( $money['amount'] ) ? number_format_i18n( (int) $money['amount'] ) : '金額不明';
+		$parts[] = ( is_string( $phase['cadence'] ?? null ) ? $phase['cadence'] : 'cadence不明' ) . ' / ' . $amount . ' ' . ( is_string( $money['currency'] ?? null ) ? $money['currency'] : '通貨不明' );
+	}
+	$id = is_string( $variation['id'] ?? null ) ? $variation['id'] : null;
+	return ( null !== $id ? $id . ': ' : '' ) . ( empty( $parts ) ? '課金条件を確認できず' : implode( '; ', $parts ) );
+}
+
+function egov_law_monitor_square_reason_label( $reason_code ) {
+	$labels = array(
+		'payment_and_period_candidate_require_administrator_approval' => '決済と期間候補を取得しました。管理者の確認が必要です。',
+		'invoice_order_payment_verified' => 'InvoiceとOrder・Paymentを照合しました。',
+		'checkout_attempt_subscription_identifier_chain_unproven' => 'Checkout AttemptとSubscriptionを結ぶ識別子を確認できません。',
+		'multiple_subscription_candidates_match_attempt' => '申込に一致するSubscription候補が複数あります。',
+		'multiple_initial_subscription_invoices_or_candidates' => '申込に一致するInvoiceまたはSubscription候補が複数あります。',
+		'attempt_contract_not_unique' => '申込に関連するローカル契約を一意に特定できません。',
+		'attempt_contract_identity_mismatch' => '申込とローカル契約のユーザーまたはSquare情報が一致しません。',
+		'attempt_contract_plan_mismatch' => '申込とローカル契約のプランが一致しません。',
+		'attempt_contract_subscription_id_missing' => 'ローカル契約にSubscription IDがありません。',
+		'subscription_invoice_relationship_unavailable' => 'Subscriptionと初回Invoiceの関係を確認できません。',
+		'subscription_customer_id_mismatch' => 'SubscriptionのCustomer IDが決済または契約情報と一致しません。',
+		'subscription_location_id_mismatch' => 'SubscriptionのLocation IDが設定と一致しません。',
+		'subscription_plan_variation_id_mismatch' => 'SubscriptionのPlan Variation IDが申込と一致しません。',
+		'local_contract_subscription_mismatch' => 'ローカル契約と初回InvoiceのSubscription IDが一致しません。',
+		'initial_invoice_identity_mismatch' => 'Invoice ID、Subscription ID、Locationのいずれかが一致しません。',
+		'initial_invoice_order_identity_mismatch' => 'Invoiceに紐づくOrder IDまたはLocationが一致しません。',
+		'initial_invoice_payment_link_unproven' => '初回決済とSubscription Invoiceの関連付けを確認できません。',
+		'initial_invoice_payment_not_unique' => 'Invoiceに対応するPaymentを一意に特定できません。',
+		'initial_invoice_not_fully_paid' => 'Invoiceの全額支払を確認できません。',
+		'multiple_subscription_invoices_require_review' => 'Subscriptionに複数Invoiceがあり、初回Invoiceを確定できません。',
+		'initial_payment_refund_requires_review' => '返金の存在または状態を確認してください。',
+		'initial_order_payment_identity_or_amount_mismatch' => 'Order・Payment・申込ID、金額、通貨のいずれかが一致しません。',
+		'subscription_plan_phase_or_price_unconfirmed' => '月次Phaseまたは500円・JPYの課金条件を確認できません。',
+		'subscription_status_requires_review' => 'Subscription状態または解約状態の確認が必要です。',
+		'subscription_actions_unavailable' => '予定変更情報を取得できません。',
+		'subscription_actions_pending' => 'Subscriptionに予定変更があります。',
+		'subscription_events_incomplete' => 'Subscriptionの変更履歴が不完全です。',
+		'subscription_event_type_unknown' => '未知の変更履歴があり、影響を確認できません。',
+		'subscription_history_contains_change' => '過去の契約・課金予定変更があります。',
+		'subscription_start_event_unconfirmed' => '開始イベントを確認できません。',
+		'subscription_start_event_mismatch' => 'Subscription開始日と開始イベントが一致しません。',
+		'subscription_timezone_or_anchor_missing' => 'Timezoneまたは月次課金アンカーが不足しています。',
+		'subscription_search_incomplete' => 'Subscription候補検索がページング途中です。',
+		'subscription_search_failed' => 'Subscription候補のSquare API取得に失敗しました。',
+		'subscription_retrieval_failed' => 'SubscriptionのSquare API取得に失敗しました。',
+		'subscription_invoice_retrieval_failed' => 'InvoiceのSquare API取得に失敗しました。',
+		'initial_invoice_order_retrieval_failed' => 'Invoice OrderのSquare API取得に失敗しました。',
+		'initial_order_retrieval_failed' => '初回OrderのSquare API取得に失敗しました。',
+		'initial_payment_retrieval_failed' => '初回PaymentのSquare API取得に失敗しました。',
+		'subscription_invoice_inspection_limit_reached' => 'Invoice確認上限に達しました。残りの確認が必要です。',
+		'billing_period_candidate_unavailable' => '利用期間候補を算出できません。',
+		'billing_period_provenance_unavailable' => '利用期間の根拠を確認できません。',
+		'approved_invoice_baseline_missing' => '前回承認済みInvoiceを確認できません。',
+		'approved_invoice_not_in_subscription_list' => '前回承認済みInvoiceがSubscription一覧にありません。',
+		'subscription_schedule_changed' => 'Subscriptionの課金予定に変更があります。',
+		'subscription_schedule_provenance_incomplete' => '課金予定の変更履歴が不完全です。',
+		'invoice_amount_state_or_payment_request_unconfirmed' => 'Invoiceの状態・請求額・支払要求を確認できません。',
+		'order_not_single_completed_payment' => 'Orderに単一の完了Paymentを確認できません。',
+		'payment_amount_or_currency_mismatch' => 'Paymentの金額または通貨が一致しません。',
+		'refund_detected' => '返金が確認されました。',
+		'refund_identity_or_status_unknown' => '返金IDまたは返金状態を確認できません。',
+		'refund_state_unavailable' => '返金情報を取得できません。',
+		'latest_invoice_cross_check_failed' => '最新Invoiceの独立照合に失敗しました。',
+		'latest_invoice_cross_check_not_confirmed' => '最新Invoiceの決済を照合できません。',
+		'no_unapproved_invoice' => '前回承認以降に未承認Invoiceがありません。',
+	);
+	if ( ! is_string( $reason_code ) || '' === $reason_code ) {
+		$reason_code = 'reason_unavailable';
+	}
+	return $labels[ $reason_code ] ?? '要確認（理由コード: ' . $reason_code . '）';
 }
 
 function egov_law_monitor_square_payment_result_item( $label, $value ) {
