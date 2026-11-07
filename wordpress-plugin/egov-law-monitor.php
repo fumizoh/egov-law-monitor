@@ -475,6 +475,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/square-billing-period-candi
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-admin-review.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-subscription-sync.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-recurring-payment-read-service.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/square-recurring-billing-inspection.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-initial-payment-read-service.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-webhook.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/subscription-plan-page.php';
