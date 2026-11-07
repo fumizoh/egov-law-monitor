@@ -479,6 +479,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/square-recurring-billing-in
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-initial-payment-read-service.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-initial-billing-period-inspection.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-admin-approval-validation.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/square-admin-approval.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-webhook.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/subscription-plan-page.php';
 

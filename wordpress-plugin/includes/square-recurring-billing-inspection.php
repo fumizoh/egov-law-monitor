@@ -310,7 +310,7 @@ class Egov_Law_Monitor_Square_Recurring_Billing_Inspection_Service {
 	}
 
 	private function invoice_summary( array $invoice ) {
-		return array( 'id' => $invoice['id'] ?? null, 'order_id' => $invoice['order_id'] ?? null, 'status' => $invoice['status'] ?? null, 'payment_state' => $invoice['payment_state'] ?? null, 'amount' => $invoice['requested_amount_money']['amount'] ?? null, 'completed_amount' => $invoice['completed_amount_money']['amount'] ?? null, 'currency' => $invoice['requested_amount_money']['currency'] ?? null );
+		return array( 'id' => $invoice['id'] ?? null, 'order_id' => $invoice['order_id'] ?? null, 'status' => $invoice['status'] ?? null, 'payment_state' => $invoice['payment_state'] ?? null, 'amount' => $invoice['requested_amount_money']['amount'] ?? null, 'completed_amount' => $invoice['completed_amount_money']['amount'] ?? null, 'currency' => $invoice['requested_amount_money']['currency'] ?? null, 'version' => $invoice['version'] ?? null );
 	}
 
 	private function payment_summary( array $payment ) {
@@ -354,7 +354,7 @@ class Egov_Law_Monitor_Square_Recurring_Billing_Inspection_Service {
 				'contract_wide_payment_status_confirmed' => false,
 			),
 			'contract' => array( 'id' => (int) ( $contract['id'] ?? 0 ), 'user_id' => (int) ( $contract['user_id'] ?? 0 ), 'environment' => $contract['environment'] ?? null, 'merchant_id' => $contract['merchant_id'] ?? null, 'location_id' => $contract['square_location_id'] ?? null, 'customer_id' => $contract['square_customer_id'] ?? null, 'subscription_id' => $contract['square_subscription_id'] ?? null, 'plan_variation_id' => $contract['square_plan_variation_id'] ?? null ),
-			'subscription' => is_array( $subscription ) ? array( 'id' => $subscription['id'] ?? null, 'status' => $subscription['status'] ?? null, 'start_date' => $subscription['start_date'] ?? null, 'timezone' => $subscription['timezone'] ?? null, 'monthly_billing_anchor_date' => $subscription['monthly_billing_anchor_date'] ?? null ) : null,
+			'subscription' => is_array( $subscription ) ? array( 'id' => $subscription['id'] ?? null, 'status' => $subscription['status'] ?? null, 'version' => $subscription['version'] ?? null, 'start_date' => $subscription['start_date'] ?? null, 'timezone' => $subscription['timezone'] ?? null, 'monthly_billing_anchor_date' => $subscription['monthly_billing_anchor_date'] ?? null ) : null,
 			'variation' => is_array( $variation ) ? array( 'id' => $variation['id'] ?? null, 'phases' => $variation['phases'] ?? array(), 'single_monthly_phase' => $variation['single_monthly_phase'] ?? false ) : null,
 			'schedule_review' => is_array( $schedule ) ? $schedule : null,
 			'event_scope' => is_array( $events ) ? array( 'complete' => $events['complete'] ?? false, 'reason_code' => $events['reason_code'] ?? null, 'page_count' => $events['page_count'] ?? null, 'retrieved_event_count' => $events['retrieved_event_count'] ?? null, 'coverage_start_date' => $events['coverage_start_date'] ?? null, 'coverage_end_date' => $events['coverage_end_date'] ?? null ) : null,

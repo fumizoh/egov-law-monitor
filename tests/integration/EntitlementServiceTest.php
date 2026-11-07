@@ -80,6 +80,20 @@ final class EntitlementServiceTest extends TestCase {
 		$this->assertSame( 'administrator_approval_required', $result['reason_code'] );
 	}
 
+	public function test_future_approved_period_does_not_grant_standard_before_its_start_boundary(): void {
+		$this->add_subscription( 'production', array(
+			'current_period_start' => '2026-12-01 00:00:00',
+			'current_period_end' => '2027-01-01 00:00:00',
+			'approval_period_start' => '2026-12-01 00:00:00',
+			'approval_period_end' => '2027-01-01 00:00:00',
+		) );
+		$before = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-11-30T23:59:59Z' ) );
+		$at_boundary = $this->service( 'production' )->resolve_for_user( $this->user_id, $this->fixed_time( '2026-12-01T00:00:00Z' ) );
+		$this->assertSame( 'free', $before['effective_plan'] );
+		$this->assertSame( 'approved_period_not_started', $before['reason_code'] );
+		$this->assertSame( 'standard', $at_boundary['effective_plan'] );
+	}
+
 	public function test_approval_period_must_match_contract_utc_boundaries(): void {
 		$id = $this->add_subscription( 'production', array( 'current_period_end' => '2026-11-01 00:00:00' ) );
 		global $wpdb;

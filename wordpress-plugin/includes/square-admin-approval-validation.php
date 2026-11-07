@@ -150,6 +150,8 @@ class Egov_Law_Monitor_Square_Admin_Approval_Validation_Service {
 			'period_candidate' => $candidate,
 			'timezone' => $conditions['subscription']['timezone'],
 			'monthly_billing_anchor_date' => $conditions['subscription']['monthly_billing_anchor_date'],
+			'verified_subscription' => $conditions['subscription'],
+			'verified_invoice' => $inspection['initial_invoice'],
 		) );
 	}
 
@@ -276,6 +278,9 @@ class Egov_Law_Monitor_Square_Admin_Approval_Validation_Service {
 			'period_candidate' => $candidate,
 			'timezone' => $candidate['timezone'],
 			'monthly_billing_anchor_date' => $candidate['monthly_billing_anchor_date'],
+			'verified_subscription' => $inspection['subscription'],
+			'verified_invoice' => $invoice,
+			'verified_payment' => $payment,
 		) );
 	}
 
@@ -305,6 +310,9 @@ class Egov_Law_Monitor_Square_Admin_Approval_Validation_Service {
 			'invoice_verification' => $verified['invoice_verification'] ?? $summary['invoice_verification'],
 			'period_candidate' => $verified['period_candidate'] ?? $summary['period_candidate'],
 			'subscription_verification' => $verified['subscription_verification'] ?? $summary['subscription_verification'],
+			'verified_subscription' => $verified['verified_subscription'] ?? null,
+			'verified_invoice' => $verified['verified_invoice'] ?? null,
+			'verified_payment' => $verified['verified_payment'] ?? null,
 			'evidence_gaps' => $summary['evidence_gaps'],
 			'timezone' => $verified['timezone'] ?? $summary['timezone'],
 			'monthly_billing_anchor_date' => $verified['monthly_billing_anchor_date'] ?? $summary['monthly_billing_anchor_date'],
@@ -371,6 +379,11 @@ class Egov_Law_Monitor_Square_Admin_Approval_Validation_Service {
 			'subscription_verification' => array(
 				'status' => $conditions['status'] ?? ( $inspection['status'] ?? null ),
 				'subscription_id' => $subscription['id'] ?? null,
+				'square_status' => $subscription['status'] ?? null,
+				'location_id' => $subscription['location_id'] ?? null,
+				'customer_id' => $subscription['customer_id'] ?? null,
+				'version' => $subscription['version'] ?? null,
+				'start_date' => $subscription['start_date'] ?? null,
 				'plan_variation_id' => $variation['id'] ?? ( $subscription['plan_variation_id'] ?? null ),
 				'variation_confirmed' => ! empty( $conditions['confirmed'] ) || ! empty( $variation['single_monthly_phase'] ),
 				'schedule_review' => $inspection['schedule_review'] ?? null,

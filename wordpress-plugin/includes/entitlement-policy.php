@@ -271,6 +271,9 @@ function egov_law_monitor_resolve_entitlement( $snapshot, $as_of ) {
 	if ( $approved_start >= $approved_end || $approved_start != $current_start || $approved_end != $paid_through ) {
 		return egov_law_monitor_entitlement_result( $free, 'administrator_approval_period_mismatch', true );
 	}
+	if ( $approved_start > $as_of ) {
+		return egov_law_monitor_entitlement_result( $free, 'approved_period_not_started', false );
+	}
 	if ( null !== $contract['first_failure_at'] || null !== $contract['grace_ends_at'] ) {
 		$stored_failure = egov_law_monitor_parse_entitlement_time( $contract['first_failure_at'] );
 		$stored_grace_end = egov_law_monitor_parse_entitlement_time( $contract['grace_ends_at'] );
