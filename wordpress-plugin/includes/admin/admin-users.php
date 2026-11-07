@@ -388,6 +388,7 @@ function egov_law_monitor_render_admin_users() {
                                             保存
                                         </button>
                                     </form>
+                                    <a class="button" href="<?php echo esc_url( add_query_arg( array( 'page' => 'egov-square-subscriptions', 'user_id' => $user->ID ), admin_url( 'admin.php' ) ) ); ?>">Square契約管理</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

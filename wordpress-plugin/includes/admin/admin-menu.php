@@ -8,6 +8,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * 法令ウォッチ管理メニュー
  */
 function egov_law_monitor_admin_menu() {
+    add_submenu_page(
+        null,
+        'Square契約管理',
+        'Square契約管理',
+        'manage_options',
+        'egov-square-subscriptions',
+        'egov_law_monitor_render_square_subscriptions'
+    );
     add_menu_page(
         '法令ウォッチ',
         '法令ウォッチ',
