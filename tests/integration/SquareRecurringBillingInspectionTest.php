@@ -113,9 +113,10 @@ final class SquareRecurringBillingInspectionTest extends TestCase {
 		$this->assertSame( 1, $result['invoice_scope']['checked_invoice_count'] );
 		$this->assertSame( 0, $result['invoice_scope']['unchecked_invoice_count'] );
 		$this->assertSame( 'square_subscription_invoice_ids_field_newest_first', $result['invoice_scope']['invoice_list_completeness'] );
-		$this->assertSame( 'review_required', $result['period_candidate']['status'] );
-		$this->assertSame( 'approved_period_schedule_provenance_missing', $result['period_candidate']['reason_code'] );
-		$this->assertNull( $result['period_candidate']['billing_period'] );
+		$this->assertSame( 'candidate', $result['period_candidate']['status'] );
+		$this->assertSame( 'monthly_anchor_candidate', $result['period_candidate']['reason_code'] );
+		$this->assertSame( '2026-12-01', $result['period_candidate']['billing_period']['start_date'] );
+		$this->assertSame( '2026-12-31', $result['period_candidate']['billing_period']['end_date_inclusive'] );
 		$this->assertSame( $before_contract, $this->contract_row() );
 		$this->assertSame( $before_invoice, $this->invoice_rows() );
 		$this->assertSame( $before_entitlement, egov_law_monitor_entitlement_service()->resolve_for_user( 1 ) );
@@ -262,6 +263,7 @@ final class SquareRecurringBillingInspectionTest extends TestCase {
 			'square_invoice_id' => $invoice_id, 'square_payment_id' => 'approved-payment-' . wp_generate_uuid4(),
 			'action_type' => 'approve', 'candidate_period_start' => '2026-11-01 00:00:00', 'candidate_period_end' => '2026-12-01 00:00:00',
 			'approved_period_start' => '2026-11-01 00:00:00', 'approved_period_end' => '2026-12-01 00:00:00',
+			'subscription_timezone' => 'Asia/Tokyo', 'monthly_billing_anchor_date' => 1,
 			'evidence_code' => 'payment_and_period_checked', 'reviewer_user_id' => 1, 'supersedes_review_id' => null,
 		) );
 		$this->assertSame( 'saved', $result['status'] );

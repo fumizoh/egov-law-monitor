@@ -275,6 +275,9 @@ class Egov_Law_Monitor_Square_Recurring_Billing_Inspection_Service {
 		$end = $this->approved_midnight_date( $baseline['approved_period_end'] ?? null );
 		$approved_timezone = $baseline['subscription_timezone'] ?? $baseline['timezone'] ?? null;
 		$approved_anchor = $baseline['monthly_billing_anchor_date'] ?? null;
+		if ( is_string( $approved_anchor ) && preg_match( '/\A(?:[1-9]|[12][0-9]|3[01])\z/', $approved_anchor ) ) {
+			$approved_anchor = (int) $approved_anchor;
+		}
 		if ( null === $start || null === $end || ! is_string( $approved_timezone ) || '' === $approved_timezone || ! is_int( $approved_anchor ) ) {
 			return array( 'status' => 'review_required', 'reason_code' => 'approved_period_schedule_provenance_missing', 'billing_period' => null, 'automatic_approval_candidate' => false );
 		}

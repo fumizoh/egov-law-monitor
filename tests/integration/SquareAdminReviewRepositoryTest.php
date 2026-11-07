@@ -71,6 +71,8 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 			'candidate_period_end' => '2026-12-01 00:00:00',
 			'approved_period_start' => '2026-11-01 00:00:00',
 			'approved_period_end' => '2026-12-01 00:00:00',
+			'subscription_timezone' => 'Asia/Tokyo',
+			'monthly_billing_anchor_date' => 1,
 		) ) );
 
 		$this->assertSame( 'saved', $result['status'] );
@@ -83,6 +85,8 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 		$this->assertSame( 'approve', $row['action_type'] );
 		$this->assertSame( 'payment_and_period_checked', $row['evidence_code'] );
 		$this->assertSame( '2026-11-01 00:00:00', $row['approved_period_start'] );
+		$this->assertSame( 'Asia/Tokyo', $row['subscription_timezone'] );
+		$this->assertSame( '1', (string) $row['monthly_billing_anchor_date'] );
 		$this->assertSame( '1', (string) $row['reviewer_user_id'] );
 		$this->assertSame( 1, count( $this->repository->get_reviews_for_attempt( $this->attempt_uuid ) ) );
 		$contract = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT internal_status, current_slot FROM {$this->wpdb->prefix}egov_law_subscriptions WHERE id = %d", $this->contract_id ), ARRAY_A );
@@ -100,6 +104,8 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 			'action_type' => 'approve',
 			'approved_period_start' => '2026-11-01 00:00:00',
 			'approved_period_end' => '2026-12-01 00:00:00',
+			'subscription_timezone' => 'Asia/Tokyo',
+			'monthly_billing_anchor_date' => 1,
 		) ) );
 		$this->assertSame( 'saved', $approval['status'] );
 		$this->review_ids[] = $approval['review_id'];
@@ -110,6 +116,8 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 			'action_type' => 'approve',
 			'approved_period_start' => '2026-11-01 00:00:00',
 			'approved_period_end' => '2026-12-01 00:00:00',
+			'subscription_timezone' => 'Asia/Tokyo',
+			'monthly_billing_anchor_date' => 1,
 		) ) );
 		$this->assertInstanceOf( WP_Error::class, $duplicate );
 		$this->assertSame( 'square_admin_review_duplicate_approval', $duplicate->get_error_code() );
@@ -129,6 +137,8 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 			'supersedes_review_id' => $approval['review_id'],
 			'approved_period_start' => '2026-11-02 00:00:00',
 			'approved_period_end' => '2026-12-02 00:00:00',
+			'subscription_timezone' => 'Asia/Tokyo',
+			'monthly_billing_anchor_date' => 1,
 		) ) );
 		$this->assertSame( 'saved', $correction['status'] );
 		$this->review_ids[] = $correction['review_id'];
@@ -141,6 +151,8 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 			'supersedes_review_id' => $approval['review_id'],
 			'approved_period_start' => '2026-11-02 00:00:00',
 			'approved_period_end' => '2026-12-02 00:00:00',
+			'subscription_timezone' => 'Asia/Tokyo',
+			'monthly_billing_anchor_date' => 1,
 		) ) );
 		$this->assertInstanceOf( WP_Error::class, $mismatched_correction );
 		$this->assertSame( 'square_admin_review_reference_mismatch', $mismatched_correction->get_error_code() );
@@ -156,6 +168,8 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 			'action_type' => 'approve',
 			'approved_period_start' => '2026-11-01 00:00:00',
 			'approved_period_end' => '2026-12-01 00:00:00',
+			'subscription_timezone' => 'Asia/Tokyo',
+			'monthly_billing_anchor_date' => 1,
 		) );
 		$saved = $this->repository->append_review( $entry );
 		$this->assertSame( 'saved', $saved['status'] );
@@ -188,6 +202,8 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 			'action_type' => 'approve',
 			'approved_period_start' => '2026-11-01 00:00:00',
 			'approved_period_end' => '2026-12-01 00:00:00',
+			'subscription_timezone' => 'Asia/Tokyo',
+			'monthly_billing_anchor_date' => 1,
 		);
 		$first = $this->repository->append_review( $this->entry( array_merge( $base, array( 'square_payment_id' => 'review-invoice-payment-one' ) ) ) );
 		$this->assertSame( 'saved', $first['status'] );
@@ -203,7 +219,7 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 		$this->assertInstanceOf( WP_Error::class, $wrong_user );
 		$this->assertSame( 'square_admin_review_reference_mismatch', $wrong_user->get_error_code() );
 
-		$invalid_period = $this->repository->append_review( $this->entry( array( 'checkout_attempt_id' => $this->attempt_id, 'action_type' => 'approve', 'square_payment_id' => 'review-payment-invalid-period', 'approved_period_start' => '2026-12-01 00:00:00', 'approved_period_end' => '2026-11-01 00:00:00' ) ) );
+		$invalid_period = $this->repository->append_review( $this->entry( array( 'checkout_attempt_id' => $this->attempt_id, 'action_type' => 'approve', 'square_payment_id' => 'review-payment-invalid-period', 'approved_period_start' => '2026-12-01 00:00:00', 'approved_period_end' => '2026-11-01 00:00:00', 'subscription_timezone' => 'Asia/Tokyo', 'monthly_billing_anchor_date' => 1 ) ) );
 		$this->assertInstanceOf( WP_Error::class, $invalid_period );
 		$this->assertSame( 'square_admin_review_arguments_invalid', $invalid_period->get_error_code() );
 
@@ -232,6 +248,44 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 		$this->assertInstanceOf( WP_Error::class, $this->repository->get_reviews_for_attempt( 'not-a-uuid' ) );
 	}
 
+	public function test_approval_requires_timezone_and_anchor_and_stores_valid_anchor_boundaries(): void {
+		$base = array(
+			'checkout_attempt_id' => $this->attempt_id,
+			'action_type' => 'approve',
+			'approved_period_start' => '2026-11-01 00:00:00',
+			'approved_period_end' => '2026-12-01 00:00:00',
+			'square_payment_id' => 'review-payment-anchor-one',
+			'subscription_timezone' => 'Asia/Tokyo',
+			'monthly_billing_anchor_date' => 1,
+		);
+		$one = $this->repository->append_review( $this->entry( $base ) );
+		$this->assertSame( 'saved', $one['status'] );
+		$this->review_ids[] = $one['review_id'];
+		$base['square_payment_id'] = 'review-payment-anchor-thirty-one';
+		$base['monthly_billing_anchor_date'] = 31;
+		$thirty_one = $this->repository->append_review( $this->entry( $base ) );
+		$this->assertSame( 'saved', $thirty_one['status'] );
+		$this->review_ids[] = $thirty_one['review_id'];
+		$this->assertSame( '31', (string) $this->repository->get_review( $thirty_one['review_id'] )['monthly_billing_anchor_date'] );
+
+		foreach ( array(
+			array( 'subscription_timezone' => null ),
+			array( 'monthly_billing_anchor_date' => null ),
+			array( 'subscription_timezone' => 'Mars/Olympus' ),
+			array( 'subscription_timezone' => '+09:00' ),
+			array( 'monthly_billing_anchor_date' => 0 ),
+			array( 'monthly_billing_anchor_date' => 32 ),
+			array( 'monthly_billing_anchor_date' => '1' ),
+			array( 'approved_period_start' => '2026-11-01 12:00:00' ),
+			array( 'approved_period_end' => '2026-12-01 12:00:00' ),
+		) as $index => $invalid ) {
+			$payload = array_merge( $base, array( 'square_payment_id' => 'invalid-provenance-' . $index ), $invalid );
+			$result = $this->repository->append_review( $this->entry( $payload ) );
+			$this->assertInstanceOf( WP_Error::class, $result );
+			$this->assertSame( 'square_admin_review_arguments_invalid', $result->get_error_code() );
+		}
+	}
+
 	private function entry( array $overrides = array() ): array {
 		return array_merge( array(
 			'user_id' => 1,
@@ -248,6 +302,8 @@ final class SquareAdminReviewRepositoryTest extends TestCase {
 			'candidate_period_end' => null,
 			'approved_period_start' => null,
 			'approved_period_end' => null,
+			'subscription_timezone' => null,
+			'monthly_billing_anchor_date' => null,
 			'evidence_code' => 'payment_and_period_checked',
 			'reviewer_user_id' => 1,
 			'supersedes_review_id' => null,

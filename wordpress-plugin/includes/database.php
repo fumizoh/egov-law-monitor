@@ -422,6 +422,8 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				candidate_period_end DATETIME NULL DEFAULT NULL,
 				approved_period_start DATETIME NULL DEFAULT NULL,
 				approved_period_end DATETIME NULL DEFAULT NULL,
+				subscription_timezone VARCHAR(64) NULL DEFAULT NULL,
+				monthly_billing_anchor_date TINYINT UNSIGNED NULL DEFAULT NULL,
 				evidence_code VARCHAR(100) NOT NULL,
 				reviewer_user_id BIGINT UNSIGNED NOT NULL,
 				supersedes_review_id BIGINT UNSIGNED NULL DEFAULT NULL,
@@ -442,7 +444,7 @@ function egov_law_monitor_subscription_table_schemas( $charset_collate ) {
 				'id', 'user_id', 'environment', 'merchant_id', 'contract_id', 'invoice_row_id',
 				'checkout_attempt_id', 'checkout_attempt_uuid', 'square_invoice_id', 'square_payment_id',
 				'action_type', 'candidate_period_start', 'candidate_period_end', 'approved_period_start',
-				'approved_period_end', 'evidence_code', 'reviewer_user_id', 'supersedes_review_id',
+				'approved_period_end', 'subscription_timezone', 'monthly_billing_anchor_date', 'evidence_code', 'reviewer_user_id', 'supersedes_review_id',
 				'approval_payment_guard', 'approval_invoice_guard', 'recorded_at',
 			),
 			'indexes' => array(
@@ -749,7 +751,7 @@ function egov_law_monitor_maybe_upgrade_subscription_schema() {
 	global $wpdb;
 
 	$schema_version_option = 'egov_law_monitor_square_schema_version';
-	$current_version       = 6;
+	$current_version       = 7;
 	$stored_version        = (int) get_option( $schema_version_option, 0 );
 
 	if ( $stored_version > $current_version ) {

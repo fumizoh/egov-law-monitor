@@ -56,6 +56,8 @@ class Egov_Law_Monitor_Square_Admin_Review_Repository {
 			'candidate_period_end'     => $validated['candidate_period_end'],
 			'approved_period_start'    => $validated['approved_period_start'],
 			'approved_period_end'      => $validated['approved_period_end'],
+			'subscription_timezone'    => $validated['subscription_timezone'],
+			'monthly_billing_anchor_date' => $validated['monthly_billing_anchor_date'],
 			'evidence_code'            => $validated['evidence_code'],
 			'reviewer_user_id'         => $validated['reviewer_user_id'],
 			'supersedes_review_id'     => $validated['supersedes_review_id'],
@@ -134,7 +136,7 @@ class Egov_Law_Monitor_Square_Admin_Review_Repository {
 			'user_id', 'environment', 'merchant_id', 'contract_id', 'invoice_row_id',
 			'checkout_attempt_id', 'checkout_attempt_uuid', 'square_invoice_id', 'square_payment_id',
 			'action_type', 'candidate_period_start', 'candidate_period_end', 'approved_period_start',
-			'approved_period_end', 'evidence_code', 'reviewer_user_id', 'supersedes_review_id',
+			'approved_period_end', 'subscription_timezone', 'monthly_billing_anchor_date', 'evidence_code', 'reviewer_user_id', 'supersedes_review_id',
 		);
 		if ( array_diff( array_keys( $entry ), $allowed ) ) {
 			return new WP_Error( 'square_admin_review_arguments_invalid', 'レビュー情報の形式が不正です。' );
@@ -198,11 +200,21 @@ class Egov_Law_Monitor_Square_Admin_Review_Repository {
 		if ( ( null === $validated['candidate_period_start'] ) !== ( null === $validated['candidate_period_end'] ) || ( null === $validated['approved_period_start'] ) !== ( null === $validated['approved_period_end'] ) ) {
 			return new WP_Error( 'square_admin_review_arguments_invalid', '利用期間の開始日と終了日が揃っていません。' );
 		}
+		$timezone = $entry['subscription_timezone'] ?? null;
+		if ( null !== $timezone && ( ! is_string( $timezone ) || strlen( $timezone ) > 64 || ! $this->is_valid_timezone_identifier( $timezone ) ) ) {
+			return new WP_Error( 'square_admin_review_arguments_invalid', 'Timezoneの形式が不正です。' );
+		}
+		$anchor = $entry['monthly_billing_anchor_date'] ?? null;
+		if ( null !== $anchor && ( ! is_int( $anchor ) || $anchor < 1 || $anchor > 31 ) ) {
+			return new WP_Error( 'square_admin_review_arguments_invalid', '月次課金日の形式が不正です。' );
+		}
+		$validated['subscription_timezone'] = $timezone;
+		$validated['monthly_billing_anchor_date'] = $anchor;
 		if ( null !== $validated['candidate_period_start'] && $validated['candidate_period_start'] >= $validated['candidate_period_end'] ) {
 			return new WP_Error( 'square_admin_review_arguments_invalid', '候補期間が不正です。' );
 		}
 		if ( in_array( $validated['action_type'], array( 'approve', 'correct' ), true ) ) {
-			if ( null === $validated['approved_period_start'] || $validated['approved_period_start'] >= $validated['approved_period_end'] || ( null === $validated['square_invoice_id'] && null === $validated['square_payment_id'] ) ) {
+			if ( null === $validated['approved_period_start'] || $validated['approved_period_start'] >= $validated['approved_period_end'] || '00:00:00' !== substr( $validated['approved_period_start'], 11 ) || '00:00:00' !== substr( $validated['approved_period_end'], 11 ) || null === $validated['subscription_timezone'] || null === $validated['monthly_billing_anchor_date'] || ( null === $validated['square_invoice_id'] && null === $validated['square_payment_id'] ) ) {
 				return new WP_Error( 'square_admin_review_arguments_invalid', '承認期間または決済識別子が不足しています。' );
 			}
 		} elseif ( null !== $validated['approved_period_start'] || null !== $validated['approved_period_end'] ) {
@@ -345,8 +357,12 @@ class Egov_Law_Monitor_Square_Admin_Review_Repository {
 	}
 
 	private function is_datetime( $value ) {
-		$date = DateTimeImmutable::createFromFormat( '!Y-m-d H:i:s', $value, new DateTimeZone( 'UTC' ) );
+		$date = DateTimeImmutable::createFromFormat( '!Y-m-d H:i:s', $value );
 		$errors = DateTimeImmutable::getLastErrors();
 		return false !== $date && ( false === $errors || ( 0 === $errors['warning_count'] && 0 === $errors['error_count'] ) ) && $date->format( 'Y-m-d H:i:s' ) === $value;
+	}
+
+	private function is_valid_timezone_identifier( $timezone ) {
+		return 'UTC' === $timezone || in_array( $timezone, DateTimeZone::listIdentifiers( DateTimeZone::ALL_WITH_BC ), true );
 	}
 }

@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 final class DatabaseSchemaTest extends TestCase {
 	private $tables = array();
 	private const SCHEMA_VERSION_OPTION = 'egov_law_monitor_square_schema_version';
-	private const CURRENT_SCHEMA_VERSION = 6;
+	private const CURRENT_SCHEMA_VERSION = 7;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -127,13 +127,42 @@ final class DatabaseSchemaTest extends TestCase {
 		update_option( self::SCHEMA_VERSION_OPTION, 5, false );
 
 		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
-		$this->assertSame( 6, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+		$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
 		$this->assertTableExists( $reviews );
 		$this->assertSame( $subscription_id, $wpdb->get_var( $wpdb->prepare( "SELECT square_subscription_id FROM {$subscriptions} WHERE merchant_id = %s", 'schema-v5-merchant' ) ) );
 		$this->assertColumn( $reviews, 'square_invoice_id', 'varchar(255)', 'YES', '' );
 		$this->assertColumn( $reviews, 'approved_period_start', 'datetime', 'YES', '' );
+		$this->assertColumn( $reviews, 'subscription_timezone', 'varchar(64)', 'YES', '' );
+		$this->assertColumn( $reviews, 'monthly_billing_anchor_date', 'tinyint unsigned', 'YES', '' );
 		$this->assertIndex( $reviews, 'approval_payment_guard', array( 'approval_payment_guard' ), true );
 		$this->assertIndex( $reviews, 'approval_invoice_guard', array( 'approval_invoice_guard' ), true );
+	}
+
+	public function test_version_six_migration_adds_nullable_review_provenance_without_backfill(): void {
+		global $wpdb;
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$reviews = $wpdb->prefix . 'egov_law_square_admin_reviews';
+		$wpdb->query( "ALTER TABLE `{$reviews}` DROP COLUMN subscription_timezone, DROP COLUMN monthly_billing_anchor_date" );
+		$wpdb->last_error = '';
+		$this->assertSame( 1, $wpdb->insert( $reviews, array(
+			'user_id' => 1, 'environment' => 'sandbox', 'merchant_id' => 'legacy-review-merchant',
+			'action_type' => 'hold', 'evidence_code' => 'legacy_review', 'reviewer_user_id' => 1,
+			'recorded_at' => '2026-10-01 00:00:00',
+		) ) );
+		$review_id = (int) $wpdb->insert_id;
+		update_option( self::SCHEMA_VERSION_OPTION, 6, false );
+
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->assertSame( self::CURRENT_SCHEMA_VERSION, (int) get_option( self::SCHEMA_VERSION_OPTION, 0 ) );
+		$this->assertColumn( $reviews, 'subscription_timezone', 'varchar(64)', 'YES', '' );
+		$this->assertColumn( $reviews, 'monthly_billing_anchor_date', 'tinyint unsigned', 'YES', '' );
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT action_type, evidence_code, subscription_timezone, monthly_billing_anchor_date FROM {$reviews} WHERE id = %d", $review_id ), ARRAY_A );
+		$this->assertSame( 'hold', $row['action_type'] );
+		$this->assertSame( 'legacy_review', $row['evidence_code'] );
+		$this->assertNull( $row['subscription_timezone'] );
+		$this->assertNull( $row['monthly_billing_anchor_date'] );
+		$this->assertTrue( egov_law_monitor_maybe_upgrade_subscription_schema() );
+		$this->assertNull( $wpdb->get_var( $wpdb->prepare( "SELECT subscription_timezone FROM {$reviews} WHERE id = %d", $review_id ) ) );
 	}
 
 	public function test_version_one_migration_adds_checkout_attempts_and_preserves_existing_data(): void {
