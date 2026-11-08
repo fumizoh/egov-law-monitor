@@ -23,6 +23,19 @@ function egov_law_monitor_render_square_subscriptions() {
     $values = $editing ?: array( 'square_customer_id' => '', 'square_subscription_id' => '', 'admin_note' => '' );
     $form_token = $editing ? egov_law_monitor_square_record_token( $editing ) : '';
     $message = null;
+    $lookup_result = null;
+    $lookup_record_id = 0;
+    $lookup_requested_at = '';
+    if ( isset( $_POST['egov_square_lookup'], $_POST['egov_square_save'] ) ) {
+        wp_die( '契約保存とSquare照会は別々に操作してください。' );
+    }
+    if ( isset( $_POST['egov_square_lookup'] ) ) {
+        $lookup_record_id = isset( $_POST['lookup_record_id'] ) && is_scalar( $_POST['lookup_record_id'] ) ? absint( $_POST['lookup_record_id'] ) : 0;
+        $lookup_nonce = isset( $_POST['egov_square_lookup_nonce'] ) && is_string( $_POST['egov_square_lookup_nonce'] ) ? wp_unslash( $_POST['egov_square_lookup_nonce'] ) : '';
+        $lookup_token = isset( $_POST['lookup_record_token'] ) && is_string( $_POST['lookup_record_token'] ) ? wp_unslash( $_POST['lookup_record_token'] ) : '';
+        $lookup_result = egov_law_monitor_lookup_square_subscription( $user_id, $lookup_record_id, $lookup_nonce, $lookup_token );
+        $lookup_requested_at = current_time( 'mysql' );
+    }
     if ( isset( $_POST['egov_square_save'] ) ) {
         check_admin_referer( 'egov_square_save_' . $user_id . '_' . $id, 'egov_square_nonce' );
         foreach ( array( 'square_customer_id', 'square_subscription_id', 'admin_note' ) as $key ) {
@@ -59,6 +72,21 @@ function egov_law_monitor_render_square_subscriptions() {
         <?php if ( $message !== null ) : ?>
             <div class="notice <?php echo is_wp_error( $message ) ? 'notice-error' : 'notice-success'; ?>"><p><?php echo esc_html( is_wp_error( $message ) ? $message->get_error_message() : '契約情報と操作履歴を保存しました。' ); ?></p></div>
         <?php endif; ?>
+        <?php if ( $lookup_result !== null ) : ?>
+            <h2>契約レコード ID <?php echo esc_html( $lookup_record_id ); ?> のSquare照会結果</h2>
+            <p>照会操作日時（サイト時刻）：<?php echo esc_html( $lookup_requested_at ); ?></p>
+            <?php if ( is_wp_error( $lookup_result ) ) : ?>
+                <div class="notice notice-error"><p><?php echo esc_html( $lookup_result->get_error_message() ); ?></p></div>
+            <?php else : ?>
+                <div class="notice <?php echo $lookup_result['customer_matches'] === true ? 'notice-success' : 'notice-warning'; ?>"><p><?php echo esc_html( $lookup_result['customer_matches'] === true ? 'Customer IDは登録内容と一致しています。' : ( $lookup_result['customer_matches'] === false ? 'Customer IDが一致しません。ユーザーと契約の紐付けを確認してください。' : 'Customer IDが応答にないため、一致を確認できません。' ) ); ?></p></div>
+                <table class="widefat striped"><tbody>
+                <?php foreach ( array( 'environment' => 'Square環境', 'subscription_id' => 'Subscription ID', 'status' => '契約ステータス', 'registered_customer_id' => '登録済みCustomer ID', 'customer_id' => 'Square応答のCustomer ID', 'plan_variation_id' => 'Square Plan Variation ID', 'plan_id' => 'Square Plan ID（旧形式）', 'queried_at' => '照会日時（サイト時刻）' ) as $key => $label ) : ?>
+                    <tr><th><?php echo esc_html( $label ); ?></th><td><?php echo esc_html( $lookup_result[$key] !== '' ? $lookup_result[$key] : '未取得' ); ?></td></tr>
+                <?php endforeach; ?>
+                </tbody></table>
+                <p>契約ステータスは支払済みの判定ではありません。この照会では、プラン名・請求書・決済履歴を取得せず、WordPressのプランと確認済み情報も変更しません。</p>
+            <?php endif; ?>
+        <?php endif; ?>
         <?php if ( $read_error || ! egov_law_monitor_square_storage_ready() ) : ?>
             <div class="notice notice-error"><p>契約・履歴データの読み取り、またはカラム・主キー・インデックス・UNIQUE制約・InnoDBの確認に失敗しました。DBの構成・更新状況を確認してください。</p></div>
         <?php endif; ?>
@@ -75,7 +103,14 @@ function egov_law_monitor_render_square_subscriptions() {
                     <td><?php echo esc_html( $contract['verified_at'] ?: '未確認' ); ?></td>
                     <td><?php echo esc_html( $contract['verified_by'] ? ( $verifier ? $verifier->display_name : '削除済み管理者' ) . ' (ID: ' . $contract['verified_by'] . ')' : '—' ); ?></td>
                     <td style="white-space:pre-wrap"><?php echo esc_html( $contract['admin_note'] ?? '' ); ?></td>
-                    <td><a href="<?php echo esc_url( add_query_arg( 'subscription_id', $contract['id'], $url ) ); ?>">編集</a></td>
+                    <td><a href="<?php echo esc_url( add_query_arg( 'subscription_id', $contract['id'], $url ) ); ?>">編集</a>
+                        <form method="post" action="<?php echo esc_url( $url ); ?>">
+                            <?php wp_nonce_field( 'egov_square_lookup_' . $user_id . '_' . $contract['id'], 'egov_square_lookup_nonce' ); ?>
+                            <input type="hidden" name="lookup_record_id" value="<?php echo esc_attr( $contract['id'] ); ?>">
+                            <input type="hidden" name="lookup_record_token" value="<?php echo esc_attr( egov_law_monitor_square_record_token( $contract ) ); ?>">
+                            <button type="submit" name="egov_square_lookup" class="button">Square契約状況を確認</button>
+                        </form>
+                    </td>
                 </tr>
             <?php endforeach; ?>
             <?php if ( ! $contracts && ! $read_error ) : ?><tr><td colspan="7">登録済み契約はありません。</td></tr><?php endif; ?>
