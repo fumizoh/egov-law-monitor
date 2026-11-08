@@ -259,8 +259,14 @@ foreach ( array( '', 'bad id', 'id<script>', str_repeat( 'x', 256 ), array() ) a
 check_square( save_square( 10, 0, 'CUSTOMER_1', 'SUB_2' ) === 2, 'multiple contracts and shared customer supported' );
 $wpdb->contracts[1]['verified_at'] = '2026-10-01 12:00:00';
 $wpdb->contracts[1]['verified_by'] = 50;
-check_square( save_square( 10, 1, 'CUSTOMER_2', 'SUB_3' ) === 1, 'edit saved' );
+check_square( save_square( 10, 1, 'CUSTOMER_2', 'SUB_3' ) instanceof WP_Error, 'verified contract ID changes rejected' );
+check_square( save_square( 10, 1, 'CUSTOMER_2', 'SUB_1' ) instanceof WP_Error, 'verified Customer ID alone cannot change' );
+check_square( save_square( 10, 1, 'CUSTOMER_1', 'SUB_3' ) instanceof WP_Error, 'verified Subscription ID alone cannot change' );
+check_square( egov_law_monitor_save_square_subscription( 10, 1, 'CUSTOMER_1', 'SUB_1', 'updated note', egov_law_monitor_square_record_token( $wpdb->contracts[1] ), new SquareTestTransaction( $wpdb ) ) === 1 && $wpdb->contracts[1]['admin_note'] === 'updated note', 'verified contract note edit saved' );
 check_square( $wpdb->contracts[1]['verified_by'] === 50 && $wpdb->contracts[1]['verified_at'] === '2026-10-01 12:00:00', 'edit preserves verification' );
+$wpdb->contracts[1]['verified_at'] = null;
+$wpdb->contracts[1]['verified_by'] = null;
+check_square( save_square( 10, 1, 'CUSTOMER_2', 'SUB_3' ) === 1, 'unverified contract ID edit saved' );
 $audit = end( $wpdb->logs );
 check_square( $audit['action'] === 'subscription_updated' && json_decode( $audit['old_value'], true )['square_subscription_id'] === 'SUB_1' && json_decode( $audit['new_value'], true )['square_subscription_id'] === 'SUB_3', 'edit before and after JSON' );
 foreach ( array( 'log', 'contract', 'START TRANSACTION', 'COMMIT' ) as $failure ) {
