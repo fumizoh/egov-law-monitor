@@ -231,3 +231,7 @@ tools/*
 
 # Environmental variables
 .env
+
+# 
+/vendor/
+.phpunit.cache/
