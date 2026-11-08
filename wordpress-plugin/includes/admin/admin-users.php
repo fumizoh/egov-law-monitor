@@ -12,87 +12,8 @@ function egov_law_monitor_render_admin_users() {
         wp_die( 'このページにアクセスする権限がありません。' );
     }
 
-    if (
-        isset( $_POST['egov_law_monitor_save_user'] )
-        && check_admin_referer(
-            'egov_law_monitor_save_user',
-            'egov_law_monitor_nonce'
-        )
-    ) {
-        $user_id = isset( $_POST['user_id'] )
-            ? absint( $_POST['user_id'] )
-            : 0;
-
-        $plan = isset( $_POST['plan'] )
-            ? sanitize_key( $_POST['plan'] )
-            : EGOV_LAW_MONITOR_PLAN_FREE;
-
-        $allowed_plans = array(
-            EGOV_LAW_MONITOR_PLAN_FREE,
-            EGOV_LAW_MONITOR_PLAN_STANDARD,
-        );
-
-        if ( ! in_array( $plan, $allowed_plans, true ) ) {
-            $plan = EGOV_LAW_MONITOR_PLAN_FREE;
-        }
-
-        $notifications = isset( $_POST['notifications'] )
-            ? 1
-            : 0;
-
-        if ( $user_id > 0 && get_userdata( $user_id ) ) {
-            update_user_meta(
-                $user_id,
-                EGOV_LAW_MONITOR_META_PLAN,
-                $plan
-            );
-
-            update_user_meta(
-                $user_id,
-                EGOV_LAW_MONITOR_META_NOTIFICATIONS,
-                $notifications
-            );
-
-            egov_law_monitor_enforce_watch_limit( $user_id );
-
-            echo '<div class="notice notice-success is-dismissible">';
-            echo '<p>ユーザー設定を保存しました。</p>';
-            echo '</div>';
-        }
-    }
-
-    if (
-        isset( $_POST['egov_law_monitor_clear_ai_summary'] )
-        && check_admin_referer(
-            'egov_law_monitor_clear_ai_summary',
-            'egov_law_monitor_clear_ai_summary_nonce'
-        )
-    ) {
-        $user_id = isset( $_POST['ai_summary_user_id'] )
-            ? absint( $_POST['ai_summary_user_id'] )
-            : 0;
-
-        if ( $user_id > 0 && get_userdata( $user_id ) ) {
-
-            $deleted =
-                egov_law_monitor_clear_ai_summary_usage(
-                    $user_id
-                );
-
-            if ( $deleted !== false ) {
-                echo '<div class="notice notice-success is-dismissible">';
-                echo '<p>';
-                echo '今月のAI要約利用履歴を';
-                echo esc_html( $deleted );
-                echo '件クリアしました。';
-                echo '</p>';
-                echo '</div>';
-            } else {
-                echo '<div class="notice notice-error is-dismissible">';
-                echo '<p>AI要約利用履歴のクリアに失敗しました。</p>';
-                echo '</div>';
-            }
-        }
+    if ( isset( $_POST['egov_law_monitor_save_user'] ) || isset( $_POST['egov_law_monitor_clear_ai_summary'] ) ) {
+        wp_die( 'この一覧は閲覧専用です。プラン変更は対象ユーザーのSquare契約管理から操作してください。' );
     }
 
     global $wpdb;
@@ -235,23 +156,7 @@ function egov_law_monitor_render_admin_users() {
                                     $plan = egov_law_monitor_get_plan( $user->ID );
                                     ?>
 
-                                    <select
-                                        name="plan"
-                                        form="egov-law-monitor-user-<?php echo esc_attr( $user->ID ); ?>"
-                                    >
-                                        <option
-                                            value="<?php echo esc_attr( EGOV_LAW_MONITOR_PLAN_FREE ); ?>"
-                                            <?php selected( $plan, EGOV_LAW_MONITOR_PLAN_FREE ); ?>
-                                        >
-                                            無料
-                                        </option>
-                                        <option
-                                            value="<?php echo esc_attr( EGOV_LAW_MONITOR_PLAN_STANDARD ); ?>"
-                                            <?php selected( $plan, EGOV_LAW_MONITOR_PLAN_STANDARD ); ?>
-                                        >
-                                            スタンダード
-                                        </option>
-                                    </select>
+                                    <?php echo esc_html( $plan === EGOV_LAW_MONITOR_PLAN_FREE ? '無料' : ( $plan === EGOV_LAW_MONITOR_PLAN_STANDARD ? 'スタンダード' : egov_law_monitor_get_plan_label( $plan ) ) ); ?>
                                 </td>
 
                                 <td>
@@ -259,16 +164,7 @@ function egov_law_monitor_render_admin_users() {
                                     $notifications = egov_law_monitor_get_notifications( $user->ID );
                                     ?>
 
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            name="notifications"
-                                            value="1"
-                                            form="egov-law-monitor-user-<?php echo esc_attr( $user->ID ); ?>"
-                                            <?php checked( $notifications, true ); ?>
-                                        >
-                                        ON
-                                    </label>
+                                    <?php echo esc_html( $notifications ? 'ON' : 'OFF' ); ?>
                                 </td>
 
                                 <td>
@@ -314,41 +210,7 @@ function egov_law_monitor_render_admin_users() {
                                         <?php echo esc_html( $ai_summary_limit ); ?>回
                                     </strong>
 
-                                    <?php
-                                    if (
-                                        $plan === EGOV_LAW_MONITOR_PLAN_STANDARD
-                                        && $ai_summary_usage > 0
-                                    ) :
-                                    ?>
 
-                                        <form
-                                            method="post"
-                                            style="margin-top: 6px;"
-                                        >
-                                            <?php
-                                            wp_nonce_field(
-                                                'egov_law_monitor_clear_ai_summary',
-                                                'egov_law_monitor_clear_ai_summary_nonce'
-                                            );
-                                            ?>
-
-                                            <input
-                                                type="hidden"
-                                                name="ai_summary_user_id"
-                                                value="<?php echo esc_attr( $user->ID ); ?>"
-                                            >
-
-                                            <button
-                                                type="submit"
-                                                name="egov_law_monitor_clear_ai_summary"
-                                                class="button button-secondary"
-                                                onclick="return confirm('今月のAI要約利用履歴を削除して、利用回数をリセットします。よろしいですか？');"
-                                            >
-                                                今月をリセット
-                                            </button>
-                                        </form>
-
-                                    <?php endif; ?>
                                 </td>
 
                                 <td>
@@ -363,31 +225,7 @@ function egov_law_monitor_render_admin_users() {
                                 </td>
 
                                 <td>
-                                    <form
-                                        method="post"
-                                        id="egov-law-monitor-user-<?php echo esc_attr( $user->ID ); ?>"
-                                    >
-                                        <?php
-                                        wp_nonce_field(
-                                            'egov_law_monitor_save_user',
-                                            'egov_law_monitor_nonce'
-                                        );
-                                        ?>
 
-                                        <input
-                                            type="hidden"
-                                            name="user_id"
-                                            value="<?php echo esc_attr( $user->ID ); ?>"
-                                        >
-
-                                        <button
-                                            type="submit"
-                                            name="egov_law_monitor_save_user"
-                                            class="button button-primary"
-                                        >
-                                            保存
-                                        </button>
-                                    </form>
                                     <a class="button" href="<?php echo esc_url( add_query_arg( array( 'page' => 'egov-square-subscriptions', 'user_id' => $user->ID ), admin_url( 'admin.php' ) ) ); ?>">Square契約管理</a>
                                 </td>
                             </tr>

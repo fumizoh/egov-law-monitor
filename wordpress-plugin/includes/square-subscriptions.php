@@ -195,6 +195,9 @@ function egov_law_monitor_save_square_subscription( $user_id, $id, $customer_id,
             if ( ! is_string( $expected_token ) || ! hash_equals( egov_law_monitor_square_record_token( $old, $token_key ), $expected_token ) ) {
                 throw new RuntimeException( '契約情報が変更されています。画面を再読み込みし、最新の内容を確認してから保存してください。' );
             }
+            if ( ( $old['verified_at'] !== null || $old['verified_by'] !== null ) && ( $old['square_customer_id'] !== $customer_id || $old['square_subscription_id'] !== $subscription_id ) ) {
+                throw new RuntimeException( '確認済み契約のCustomer ID・Subscription IDは変更できません。別の契約として新規登録してください。' );
+            }
         }
         $duplicates = $db->rows( "SELECT id FROM {$table} WHERE square_subscription_id = ? AND id <> ? LIMIT 1", array( $subscription_id, (int) $id ) );
         if ( $db->last_error !== '' || $db->connection_lost ) {
