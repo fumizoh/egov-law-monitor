@@ -2,9 +2,13 @@
 /** Run: php tests/square-api-test.php. All HTTP calls are deterministic doubles. */
 define( 'ABSPATH', __DIR__ . '/' );
 define( 'ARRAY_A', 'ARRAY_A' );
+define( 'EGOV_LAW_MONITOR_META_PLAN', 'egov_law_monitor_plan' );
+define( 'EGOV_LAW_MONITOR_PLAN_FREE', 'free' );
+define( 'EGOV_LAW_MONITOR_PLAN_STANDARD', 'standard' );
 class WP_Error {
     public function __construct( public $code, public $message ) {}
     public function get_error_message() { return $this->message; }
+    public function get_error_code() { return $this->code; }
 }
 function is_wp_error( $value ) { return $value instanceof WP_Error; }
 function current_user_can( $capability ) { return $GLOBALS['allowed']; }
@@ -35,8 +39,16 @@ function add_query_arg( $key, $value, $url = null ) {
 }
 function wp_nonce_field( $action, $name ) { echo '<input type="hidden" name="' . esc_attr( $name ) . '" value="' . esc_attr( 'valid:' . $action ) . '">'; }
 function submit_button( $text, $type, $name ) { echo '<button name="' . esc_attr( $name ) . '">' . esc_html( $text ) . '</button>'; }
-function egov_law_monitor_get_plan( $id ) { return 'free'; }
+function egov_law_monitor_get_plan( $id ) { return $id === 20 || ! empty( $GLOBALS['display_standard'] ) ? 'standard' : 'free'; }
 function egov_law_monitor_get_plan_label( $plan ) { return ucfirst( $plan ); }
+function egov_law_monitor_get_notifications( $id ) { return $id !== 20; }
+function egov_law_monitor_get_ai_summary_trial_usage_count( $id ) { return 2; }
+function egov_law_monitor_get_ai_summary_limit( $id ) { return $id === 20 ? 100 : 3; }
+function egov_law_monitor_get_ai_summary_usage_count( $id ) { return 37; }
+function get_users( $args ) { return array_map( static fn( $id ) => (object) array( 'ID' => $id, 'display_name' => 'User' . $id, 'user_email' => 'user' . $id . '@example.test', 'user_registered' => '2026-01-01' ), array( 10, 20 ) ); }
+function selected( $a, $b ) { if ( $a === $b ) { echo 'selected'; } }
+function checked( $a, $b ) { if ( $a === $b ) { echo 'checked'; } }
+function wp_date( $format, $timestamp ) { return date( $format, $timestamp ); }
 function wp_die( $message ) { throw new RuntimeException( $message ); }
 // Any accidental persistence is a test failure.
 function update_user_meta( ...$args ) { throw new LogicException( 'unexpected plan write' ); }
@@ -45,6 +57,8 @@ function set_transient( ...$args ) { throw new LogicException( 'unexpected looku
 
 class SquareLookupDatabase {
     public $prefix = 'wp_';
+    public $users = 'wp_users';
+    public $usermeta = 'wp_usermeta';
     public $last_error = '';
     public $records = array();
     public $fail = false;
@@ -60,8 +74,10 @@ class SquareLookupDatabase {
     public function get_results( $query, $mode ) {
         $this->last_error = '';
         if ( is_array( $query ) ) {
+            if ( str_contains( $query[0], 'usermeta' ) ) { return array(); }
             return str_contains( $query[0], 'admin_log' ) ? array() : array_values( array_filter( $this->records, static fn( $row ) => (int) $row['user_id'] === $query[1][0] ) );
         }
+        if ( str_contains( $query, 'law_watch_settings' ) ) { return array( array( 'user_id' => 10, 'keyword' => '環境' ), array( 'user_id' => 10, 'keyword' => '行政' ) ); }
         $suffix = str_contains( $query, 'admin_log' ) ? 'egov_square_admin_log' : 'egov_square_subscriptions';
         if ( str_starts_with( $query, 'SHOW FULL' ) ) {
             $columns = array();
@@ -81,7 +97,9 @@ class SquareLookupDatabase {
 }
 require __DIR__ . '/../wordpress-plugin/includes/square-subscriptions.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-api.php';
+require __DIR__ . '/../wordpress-plugin/includes/square-approval.php';
 require __DIR__ . '/../wordpress-plugin/includes/admin/admin-square-subscriptions.php';
+require __DIR__ . '/../wordpress-plugin/includes/admin/admin-users.php';
 $checks = 0;
 function check_lookup( $condition, $label ) {
     if ( ! $condition ) { throw new RuntimeException( $label ); }
@@ -241,6 +259,7 @@ try {
     $count = count( $http_calls );
     $html = render_lookup_page();
     check_lookup( count( $http_calls ) === $count && str_contains( $html, 'Square契約状況を確認' ), 'normal page render shows button but never queries API' );
+    check_lookup( str_contains( $html, 'この契約でStandardを承認する' ) && str_contains( $html, 'dashboard_confirmed' ) && str_contains( $html, 'approval_reason' ) && str_contains( $html, 'approval_token' ), 'approval form requires explicit confirmation and signed state' );
     $html = render_lookup_page( array( 'egov_square_lookup' => '1', 'lookup_record_id' => '1', 'egov_square_lookup_nonce' => 'valid:egov_square_lookup_10_1', 'lookup_record_token' => egov_law_monitor_square_record_token( $stored[1] ) ) );
     check_lookup( count( $http_calls ) === $count + 1 && str_contains( $html, 'ACTIVE' ) && str_contains( $html, 'VAR_1' ), 'button renders transient status and plan result' );
     check_lookup( ! str_contains( $html, 'test-only-square-secret' ) && $wpdb->records === $stored, 'rendered lookup exposes no token and persists nothing' );
@@ -261,6 +280,39 @@ try {
     } catch ( RuntimeException $error ) {
         check_lookup( str_contains( $error->getMessage(), '別々' ), 'lookup and save cannot execute in the same request' );
     }
+    try {
+        render_lookup_page( array( 'egov_square_approve' => '1', 'egov_square_lookup' => '1' ) );
+        throw new LogicException( 'mixed approval accepted' );
+    } catch ( RuntimeException $error ) {
+        check_lookup( str_contains( $error->getMessage(), '別々' ), 'approval and lookup cannot execute together' );
+    }
+    $html = render_lookup_page( array( 'egov_square_approve' => '1', 'approval_record_id' => '1', 'egov_square_approve_nonce' => 'wrong' ) );
+    check_lookup( str_contains( $html, '操作を確認できません' ) && $wpdb->records[1]['verified_at'] === null, 'bad approval nonce renders error without changing confirmation' );
+    $_POST = array();
+    ob_start();
+    try { egov_law_monitor_render_admin_users(); $html = ob_get_contents(); }
+    finally { ob_end_clean(); }
+    check_lookup( ! str_contains( $html, '<form' ) && ! str_contains( $html, '<select' ) && ! str_contains( $html, '<input' ) && ! str_contains( $html, '<button' ), 'user management list is completely read-only' );
+    check_lookup( str_contains( $html, '無料' ) && str_contains( $html, 'スタンダード' ) && str_contains( $html, 'ON' ) && str_contains( $html, 'OFF' ), 'plan and notification current values render as text' );
+    preg_match_all( '/<th>(.*?)<\/th>/', $html, $headers );
+    check_lookup( $headers[1] === array( 'ユーザーID', 'ユーザー', 'メールアドレス', 'プラン', '通知', 'ウォッチキーワード', 'AI要約', '登録日', '操作' ), 'all nine columns and original order preserved' );
+    check_lookup( str_contains( $html, '環境、行政' ) && preg_match( '/2\s*\/\s*3回/u', $html ) && preg_match( '/37\s*\/\s*100回/u', $html ) && str_contains( $html, '2026年1月1日' ), 'watch formatting usage counters and registration date formatting preserved' );
+    check_lookup( str_contains( $html, 'user_id=10' ) && str_contains( $html, 'user_id=20' ), 'each user has own Square contract link' );
+    foreach ( array( 'egov_law_monitor_save_user', 'egov_law_monitor_clear_ai_summary' ) as $old_action ) {
+        $_POST = array( $old_action => '1', 'user_id' => '10', 'plan' => 'standard', 'notifications' => '1', 'ai_summary_user_id' => '10' );
+        ob_start();
+        try { egov_law_monitor_render_admin_users(); throw new LogicException( 'old POST accepted' ); }
+        catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '閲覧専用' ), 'old save/reset POST refused without writes' ); }
+        finally { ob_end_clean(); }
+    }
+    $display_standard = true;
+    $html = render_lookup_page();
+    check_lookup( str_contains( $html, 'egov_square_free_nonce' ) && str_contains( $html, 'free_reason' ) && str_contains( $html, 'Square側の解約・課金停止は行いません' ), 'user-level Free form requires reason and clarifies Square billing unchanged' );
+    $html = render_lookup_page( array( 'egov_square_free' => '1', 'egov_square_free_nonce' => 'wrong' ) );
+    check_lookup( str_contains( $html, '操作を確認できません' ), 'Free form rejects invalid nonce' );
+    try { render_lookup_page( array( 'egov_square_free' => '1', 'egov_square_approve' => '1' ) ); throw new LogicException( 'mixed Free accepted' ); }
+    catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '別々' ), 'Free and approval cannot execute together' ); }
+    $display_standard = false;
 } finally {
     putenv( $old_token === false ? 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN' : 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN=' . $old_token );
     putenv( $old_environment === false ? 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT' : 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT=' . $old_environment );

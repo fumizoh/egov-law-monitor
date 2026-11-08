@@ -1,5 +1,5 @@
 <?php
-/** Administrator-only manual contract registration; never changes plans. */
+/** Administrator-only contract registration, lookup and explicit manual approval. */
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -26,8 +26,24 @@ function egov_law_monitor_render_square_subscriptions() {
     $lookup_result = null;
     $lookup_record_id = 0;
     $lookup_requested_at = '';
-    if ( isset( $_POST['egov_square_lookup'], $_POST['egov_square_save'] ) ) {
-        wp_die( '契約保存とSquare照会は別々に操作してください。' );
+    $approval_message = null;
+    $free_message = null;
+    $actions = array_filter( array( isset( $_POST['egov_square_lookup'] ), isset( $_POST['egov_square_save'] ), isset( $_POST['egov_square_approve'] ), isset( $_POST['egov_square_free'] ) ) );
+    if ( count( $actions ) > 1 ) {
+        wp_die( '契約保存・Square照会・プラン変更は別々に操作してください。' );
+    }
+    if ( isset( $_POST['egov_square_free'] ) ) {
+        $free_nonce = isset( $_POST['egov_square_free_nonce'] ) && is_string( $_POST['egov_square_free_nonce'] ) ? wp_unslash( $_POST['egov_square_free_nonce'] ) : '';
+        $free_token = isset( $_POST['free_plan_token'] ) && is_string( $_POST['free_plan_token'] ) ? wp_unslash( $_POST['free_plan_token'] ) : '';
+        $free_reason = isset( $_POST['free_reason'] ) && is_string( $_POST['free_reason'] ) ? wp_unslash( $_POST['free_reason'] ) : '';
+        $free_message = egov_law_monitor_square_make_free( $user_id, $free_token, $free_nonce, $free_reason );
+    }
+    if ( isset( $_POST['egov_square_approve'] ) ) {
+        $approval_id = isset( $_POST['approval_record_id'] ) && is_string( $_POST['approval_record_id'] ) && ctype_digit( $_POST['approval_record_id'] ) ? (int) $_POST['approval_record_id'] : 0;
+        $approval_nonce = isset( $_POST['egov_square_approve_nonce'] ) && is_string( $_POST['egov_square_approve_nonce'] ) ? wp_unslash( $_POST['egov_square_approve_nonce'] ) : '';
+        $approval_token = isset( $_POST['approval_token'] ) && is_string( $_POST['approval_token'] ) ? wp_unslash( $_POST['approval_token'] ) : '';
+        $approval_reason = isset( $_POST['approval_reason'] ) && is_string( $_POST['approval_reason'] ) ? wp_unslash( $_POST['approval_reason'] ) : '';
+        $approval_message = $approval_id > 0 ? egov_law_monitor_square_change_plan( $user_id, 'standard', $approval_token, $approval_nonce, $approval_id, ( $_POST['dashboard_confirmed'] ?? null ) === '1', $approval_reason ) : new WP_Error( 'invalid_contract', '承認対象の契約を指定してください。' );
     }
     if ( isset( $_POST['egov_square_lookup'] ) ) {
         $lookup_record_id = isset( $_POST['lookup_record_id'] ) && is_scalar( $_POST['lookup_record_id'] ) ? absint( $_POST['lookup_record_id'] ) : 0;
@@ -66,9 +82,30 @@ function egov_law_monitor_render_square_subscriptions() {
     <div class="wrap">
         <h1>Square契約管理</h1>
         <p><a href="<?php echo esc_url( admin_url( 'admin.php?page=egov-law-monitor' ) ); ?>">ユーザー管理へ戻る</a></p>
-        <p>契約情報の登録はStandardの承認やSquareでの支払確認を意味しません。この画面ではプランと確認済み情報を変更しません。</p>
+        <p>契約登録・API照会だけではStandardになりません。Dashboardで契約・支払状況を確認した後、対象契約の手動承認を行ってください。確認記録は過去の記録であり、現在のプラン状態とは別です。</p>
         <p>WordPress User ID: <?php echo esc_html( $user_id ); ?> ／ ユーザー名: <?php echo esc_html( $user->user_login ); ?>（<?php echo esc_html( $user->display_name ); ?>） ／ メール: <?php echo esc_html( $user->user_email ); ?></p>
         <p>現在のプラン: <strong><?php echo esc_html( egov_law_monitor_get_plan_label( egov_law_monitor_get_plan( $user_id ) ) ); ?></strong></p>
+        <?php if ( $approval_message !== null ) : ?>
+            <div class="notice <?php echo is_wp_error( $approval_message ) ? 'notice-error' : 'notice-success'; ?>"><p><?php echo esc_html( is_wp_error( $approval_message ) ? $approval_message->get_error_message() : 'Standardを手動承認し、契約確認記録と監査履歴を保存しました。' ); ?></p></div>
+        <?php endif; ?>
+        <?php if ( $free_message !== null ) : ?>
+            <div class="notice <?php echo is_wp_error( $free_message ) ? 'notice-error' : ( $free_message['warning'] ? 'notice-warning' : 'notice-success' ); ?>"><p><?php echo esc_html( is_wp_error( $free_message ) ? $free_message->get_error_message() : $free_message['message'] ); ?></p></div>
+        <?php endif; ?>
+        <?php if ( egov_law_monitor_get_plan( $user_id ) === 'standard' ) : ?>
+            <h2>このユーザーをFreeへ変更</h2>
+            <p>ユーザーの利用権限を変更します。Square側の解約・課金停止は行いません。契約・確認情報・承認履歴・AI要約利用回数は保持します。上限を超える有効ウォッチは停止されます。</p>
+            <?php $free_token = egov_law_monitor_square_plan_form_token( $user_id ); ?>
+            <?php if ( is_wp_error( $free_token ) ) : ?>
+                <p><?php echo esc_html( $free_token->get_error_message() ); ?></p>
+            <?php else : ?>
+                <form method="post" action="<?php echo esc_url( $url ); ?>">
+                    <?php wp_nonce_field( 'egov_square_free_' . $user_id, 'egov_square_free_nonce' ); ?>
+                    <input type="hidden" name="free_plan_token" value="<?php echo esc_attr( $free_token ); ?>">
+                    <p><label>Freeへの変更理由<textarea name="free_reason" rows="2" maxlength="2000" required></textarea></label></p>
+                    <button type="submit" name="egov_square_free" class="button">このユーザーをFreeへ変更する</button>
+                </form>
+            <?php endif; ?>
+        <?php endif; ?>
         <?php if ( $message !== null ) : ?>
             <div class="notice <?php echo is_wp_error( $message ) ? 'notice-error' : 'notice-success'; ?>"><p><?php echo esc_html( is_wp_error( $message ) ? $message->get_error_message() : '契約情報と操作履歴を保存しました。' ); ?></p></div>
         <?php endif; ?>
@@ -110,6 +147,23 @@ function egov_law_monitor_render_square_subscriptions() {
                             <input type="hidden" name="lookup_record_token" value="<?php echo esc_attr( egov_law_monitor_square_record_token( $contract ) ); ?>">
                             <button type="submit" name="egov_square_lookup" class="button">Square契約状況を確認</button>
                         </form>
+                        <?php $approval_token = egov_law_monitor_square_plan_form_token( $user_id, $contract ); ?>
+                        <?php if ( is_wp_error( $approval_token ) ) : ?>
+                            <p><?php echo esc_html( $approval_token->get_error_message() ); ?></p>
+                        <?php elseif ( egov_law_monitor_get_plan( $user_id ) === 'standard' ) : ?>
+                            <p>現在Standardです。再承認はできません。</p>
+                        <?php else : ?>
+                            <details><summary>この契約でStandardを手動承認</summary>
+                            <form method="post" action="<?php echo esc_url( $url ); ?>">
+                                <?php wp_nonce_field( 'egov_square_approve_' . $user_id . '_' . $contract['id'], 'egov_square_approve_nonce' ); ?>
+                                <input type="hidden" name="approval_record_id" value="<?php echo esc_attr( $contract['id'] ); ?>">
+                                <input type="hidden" name="approval_token" value="<?php echo esc_attr( $approval_token ); ?>">
+                                <p>対象Subscription ID：<?php echo esc_html( $contract['square_subscription_id'] ); ?></p>
+                                <p><label><input type="checkbox" name="dashboard_confirmed" value="1" required>Square Dashboardで、このユーザーの契約・支払状況とCustomer／Subscription IDを確認しました。</label></p>
+                                <p><label>確認理由・メモ<textarea name="approval_reason" rows="2" maxlength="2000" required></textarea></label></p>
+                                <button type="submit" name="egov_square_approve" class="button">この契約でStandardを承認する</button>
+                            </form></details>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -126,11 +180,11 @@ function egov_law_monitor_render_square_subscriptions() {
                 <?php endforeach; ?>
                 <tr><th><label for="admin_note">管理者メモ</label></th><td><textarea class="large-text" rows="4" id="admin_note" name="admin_note"><?php echo esc_textarea( $values['admin_note'] ?? '' ); ?></textarea></td></tr>
             </table>
-            <p>IDは半角英数字・ハイフン・アンダースコアで入力してください。</p>
+            <p>IDは半角英数字・ハイフン・アンダースコアで入力してください。確認済み契約のID変更はできません。別契約として新規登録してください。</p>
             <?php submit_button( '契約情報を保存', 'primary', 'egov_square_save' ); ?>
         </form>
         <p><a href="<?php echo esc_url( $url ); ?>">別の契約を新規登録</a></p>
-        <h2>登録・更新の操作履歴（最新100件）</h2>
+        <h2>契約・承認・プラン変更の操作履歴（最新100件）</h2>
         <table class="widefat striped">
             <thead><tr><th>日時</th><th>管理者</th><th>操作</th><th>変更前（JSON）</th><th>変更後（JSON）</th><th>理由</th></tr></thead>
             <tbody>
