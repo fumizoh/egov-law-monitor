@@ -30,7 +30,7 @@ function wp_cache_delete( $id, $group ) {
     $GLOBALS['evictions'][] = array( $id, $group ); unset( $GLOBALS['cache'][$id] ); return true;
 }
 function update_user_meta( ...$args ) { throw new LogicException( 'Shared metadata writes forbidden' ); }
-function wp_safe_remote_get( ...$args ) { throw new LogicException( 'API forbidden' ); }
+function wp_safe_remote_get( ...$args ) { if ( isset( $GLOBALS['checkout_contract_transport'] ) ) { return ( $GLOBALS['checkout_contract_transport'] )( ...$args ); } throw new LogicException( 'API forbidden' ); }
 require __DIR__ . '/../wordpress-plugin/includes/square-subscriptions.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-approval.php';
 require __DIR__ . '/../wordpress-plugin/includes/user-settings.php';

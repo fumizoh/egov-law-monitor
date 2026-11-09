@@ -594,6 +594,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/square-subscriptions.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-approval.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-api.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-checkout.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/square-checkout-contracts.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-checkout-cancel.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-checkout-page.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-square-subscriptions.php';

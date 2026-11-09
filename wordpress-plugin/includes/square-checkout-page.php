@@ -208,6 +208,16 @@ function egov_law_monitor_render_checkout_attempts( $user_id ) {
         echo '<tr>';
         foreach ( array( 'application_uuid', 'environment', 'state', 'payment_link_id', 'template_order_id', 'created_at', 'updated_at' ) as $key ) { echo '<td>' . esc_html( $row[$key] ?? '未取得' ) . '</td>'; }
         echo '</tr>';
+        if ( $row['environment'] === 'sandbox' ) {
+            echo '<tr><td colspan="7"><a href="https://developer.squareup.com/apps" target="_blank" rel="noopener noreferrer">Square Developer Consoleを開く（Sandbox）</a>：対象テストアカウントのDashboardを開いてください。Sandbox DashboardはSubscriptionの閲覧に対応していません。APIで見つからない場合は手動照合・サポート確認が必要です。</td></tr>';
+        } elseif ( $row['environment'] === 'production' ) {
+            echo '<tr><td colspan="7"><a href="https://squareup.com/dashboard/" target="_blank" rel="noopener noreferrer">Square Dashboardを開く（本番）</a>：上記の申込UUID・Payment Link ID・注文テンプレートIDで照合してください。詳細画面URLの自動生成は行いません。</td></tr>';
+        }
+        if ( $row['state'] === 'ready' && egov_law_monitor_square_api_id_valid( $row['payment_link_id'] ?? null ) && egov_law_monitor_square_api_id_valid( $row['template_order_id'] ?? null ) ) {
+            echo '<tr><td colspan="7"><form method="post">';
+            wp_nonce_field( 'egov_checkout_contract_lookup_' . $user_id . '_' . $row['id'], 'attempt_nonce' );
+            echo '<input type="hidden" name="attempt_id" value="' . esc_attr( $row['id'] ) . '"><input type="hidden" name="attempt_token" value="' . esc_attr( egov_law_monitor_square_record_token( $row ) ) . '"><button class="button" type="submit" name="egov_checkout_contract_lookup">Square契約を照会</button></form></td></tr>';
+        }
         if ( in_array( $row['state'], array( 'closing', 'canceling', 'cancel_unknown' ), true ) ) {
             echo '<tr><td colspan="7">キャンセル処理中・結果未確認：新規申込は停止中です。監査履歴とSquare側の決済・契約を確認してください。自動再試行は行いません。</td></tr>';
         }

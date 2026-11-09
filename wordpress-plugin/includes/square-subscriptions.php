@@ -153,7 +153,7 @@ function egov_law_monitor_square_record_token( $record, $key = null ) {
 }
 
 /** Save a contract and its immutable audit entry together. $database is a test seam. */
-function egov_law_monitor_save_square_subscription( $user_id, $id, $customer_id, $subscription_id, $note, $expected_token = '', ?EGOV_Law_Monitor_Square_Connection $database = null ) {
+function egov_law_monitor_save_square_subscription( $user_id, $id, $customer_id, $subscription_id, $note, $expected_token = '', ?EGOV_Law_Monitor_Square_Connection $database = null, $checkout_context = null ) {
     global $wpdb;
     if ( ! current_user_can( 'manage_options' ) ) {
         return new WP_Error( 'forbidden', 'この操作を行う権限がありません。' );
@@ -181,11 +181,14 @@ function egov_law_monitor_save_square_subscription( $user_id, $id, $customer_id,
         }
         $table = '`' . str_replace( '`', '``', $db->prefix . 'egov_square_subscriptions' ) . '`';
         $log_table = '`' . str_replace( '`', '``', $db->prefix . 'egov_square_admin_log' ) . '`';
+        if ( $checkout_context !== null && ( $id !== 0 || ! function_exists( 'egov_law_monitor_checkout_contract_lock' ) ||
+            ! egov_law_monitor_square_plan_storage_ready( $db, egov_law_monitor_square_plan_tables() ) || ! egov_law_monitor_checkout_storage_ready( $db ) ) ) { throw new RuntimeException( '申込照合用の保存条件を確認できません。' ); }
         if ( $db->begin() === false ) {
             error_log( 'e-Gov Square: transaction start failed; user_id=' . (int) $user_id );
             return new WP_Error( 'transaction_failed', '保存処理を開始できませんでした。再操作前にDBの接続状態を確認してください。' );
         }
         $started = true;
+        if ( $checkout_context !== null ) { egov_law_monitor_checkout_contract_lock( $db, $user_id, $checkout_context ); }
         $old = null;
         if ( $id > 0 ) {
             $old = $db->rows( "SELECT * FROM {$table} WHERE id = ? FOR UPDATE", array( (int) $id ) )[0] ?? null;

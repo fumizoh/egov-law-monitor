@@ -123,11 +123,36 @@ SquareはPayment Link・決済・Subscription・継続課金・リンク削除�
 
 ## ローカル検証と反映手順
 
+### 申込からのSquare契約照会・登録補助
+
+ユーザー別のSquare契約管理で、`ready`の申込行の「Square契約を照会」を押します。対象ユーザーの未解決申込が1件で、所属・全行署名・ID・保存環境が確認できる場合だけ照会します。通常の画面表示ではAPIを呼びません。照会・登録確定は他の保存・承認・キャンセル操作と別々に実行してください。
+
+照会は既存の環境別アクセストークンを使用し、保存済みrequest_jsonのLocation・Plan Variation・申込UUIDを基準にします。現在の発行用Locationや戻り先設定で過去の申込内容を置き換えません。保存環境と現在の環境が異なる場合は拒否し、反対環境にフォールバックしません。必要な読み取り権限は`SUBSCRIPTIONS_READ`と、注文テンプレート再照合用の`ORDERS_READ`です。Squareの契約を作成・変更・解約するAPIは呼びません。
+
+元注文のID・reference_id・Locationを照合したうえでSearchSubscriptionsをLocation単位で検索し、全ページ・全phaseのorder_template_idを完全一致で比較します。1ページ100件、最大5ページ、全体30秒、各通信最大10秒・応答256KiBが上限です。同じSubscription内の複数phase一致は1件にまとめます。候補を見つけても後続ページまで確認します。phase欠落・カーソル異常・ページ上限・通信エラー・不整合は検索未完了として登録を停止します。古い契約などのphase不足でも止まる保守的な仕様です。
+
+全検索で一致1件、必要IDが有効、Location・Variationが一致、statusがACTIVEの場合のみ、Customer／Subscription ID・状態・Location・Variation・環境・照会UTC日時を登録候補として表示します。ACTIVEも支払済みの証明ではありません。一致0件は契約不存在を意味しません。複数一致・CANCELED／PAUSED等・検索未完了の場合は既存の手動登録を利用してください。Sandboxで生成されない契約を、氏名・メール・金額の推測で補完しません。
+
+管理者が「この契約を登録」を押すまでDBへ契約を書き込みません。候補は管理者・対象ユーザー・申込・環境・署名付きレコード状態に結び付けた署名で保護し、期限は5分です。確定時は全API検索と注文照合を再実行し、候補が変われば保存を拒否します。ブラウザのIDをそのまま保存しません。
+
+API終了後、既存の独立mysqliによる契約保存処理を使います。保存直前に同一DB・InnoDB・既存スキーマ・申込スキーマを確認し、トランザクション内でユーザー行と未解決申込をロックし、所有者・ready状態・環境・全行署名を再確認します。この登録経路は新規申込・キャンセル処理と同じユーザー行で直列化します。状態変更や他ユーザーの契約を検出した場合は保存しません。既存UNIQUE制約と契約＋監査の原子性・結果不明処理を維持します。
+
+管理者メモに申込UUID・環境・注文テンプレートID・最新照合UTC日時を記録し、既存のsubscription_created監査にも保存後レコードとして残します。生のAPI応答・トークン・署名用処理情報は保存しません。確認日時verified_at・verified_byはNULL、プランは変更せず、既存のStandard承認は別途実施します。申込状態readyも変更しません。新規テーブル・カラムはありません。
+
+Dashboard導線は本番のDashboardトップ、SandboxのDeveloper Consoleのみです。Customer／Subscriptionの詳細URLは組み立てません。申込一覧のUUID・Payment Link ID・注文テンプレートIDで手動照合します。Sandbox DashboardはSubscription閲覧に対応していないため、API照会・サポートで確認してください。
+
+**残る制約：** SearchSubscriptionsは検索全体のスナップショットや、複数API・WordPress DB間の分散トランザクションを保証するものではありません。検索後にSquare側の状態が変わる可能性は残ります。API一致は管理者確認の補助であり、支払保証や自動承認ではありません。既存の手動契約登録は従来のままで、その経路と新規リンク発行の同時実行を今回全面的に改修してはいません。既に開始したSquare通信も取り消しません。手動登録時も未解決申込を確認してください。
+
+反映時は`includes/square-checkout-contracts.php`と更新したプラグイン本体・契約保存・申込表示・管理画面を一式配置します。実DB・実API・本番Checkoutからのテンプレート一致は未検証です。別途承認後、Sandboxで照会・権限不足・検索失敗・署名期限・登録後もFree／未確認・監査・重複拒否を確認してください。Subscription生成を確認できない場合は完全なCheckout経路の検証済みとは扱わず、手動登録を維持します。
+
+仕様：[SearchSubscriptions](https://developer.squareup.com/reference/square/subscriptions/search-subscriptions)、[Sandboxの制約](https://developer.squareup.com/docs/devtools/sandbox/overview)。
+
 ```powershell
 php tests/square-api-test.php
 php tests/square-subscriptions-test.php
 php tests/square-approval-test.php
 php tests/square-checkout-test.php
+php tests/square-checkout-contracts-test.php
 php tests/square-checkout-cancel-test.php
 php tests/square-checkout-prg-test.php
 php tests/square-plan-status-test.php

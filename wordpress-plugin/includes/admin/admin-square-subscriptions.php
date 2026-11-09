@@ -28,9 +28,15 @@ function egov_law_monitor_render_square_subscriptions() {
     $lookup_requested_at = '';
     $approval_message = null;
     $free_message = null;
-    $actions = array_filter( array( isset( $_POST['egov_square_lookup'] ), isset( $_POST['egov_square_save'] ), isset( $_POST['egov_square_approve'] ), isset( $_POST['egov_square_free'] ), isset( $_POST['egov_checkout_cancel'] ) ) );
+    $checkout_contract_result = null;
+    $actions = array_filter( array( isset( $_POST['egov_square_lookup'] ), isset( $_POST['egov_square_save'] ), isset( $_POST['egov_square_approve'] ), isset( $_POST['egov_square_free'] ), isset( $_POST['egov_checkout_cancel'] ), isset( $_POST['egov_checkout_contract_lookup'] ), isset( $_POST['egov_checkout_contract_register'] ) ) );
     if ( count( $actions ) > 1 ) {
         wp_die( '契約保存・Square照会・プラン変更は別々に操作してください。' );
+    }
+    if ( isset( $_POST['egov_checkout_contract_lookup'] ) || isset( $_POST['egov_checkout_contract_register'] ) ) {
+        $fields = array();
+        foreach ( array( 'attempt_id', 'attempt_token', 'attempt_nonce', 'candidate', 'candidate_signature' ) as $field ) { $fields[$field] = isset( $_POST[$field] ) && is_string( $_POST[$field] ) ? wp_unslash( $_POST[$field] ) : ''; }
+        $checkout_contract_result = egov_law_monitor_checkout_contract_operation( $user_id, $fields, isset( $_POST['egov_checkout_contract_register'] ) );
     }
     if ( isset( $_POST['egov_checkout_cancel'] ) ) {
         $cancel_fields = array();
@@ -94,6 +100,7 @@ function egov_law_monitor_render_square_subscriptions() {
         <p>WordPress User ID: <?php echo esc_html( $user_id ); ?> ／ ユーザー名: <?php echo esc_html( $user->user_login ); ?>（<?php echo esc_html( $user->display_name ); ?>） ／ メール: <?php echo esc_html( $user->user_email ); ?></p>
         <p>現在のプラン: <strong><?php echo esc_html( egov_law_monitor_get_plan_label( egov_law_monitor_get_plan( $user_id ) ) ); ?></strong></p>
         <?php egov_law_monitor_render_checkout_attempts( $user_id ); ?>
+        <?php if ( $checkout_contract_result !== null ) { egov_law_monitor_render_checkout_contract_result( $user_id, $checkout_contract_result ); } ?>
         <?php if ( $approval_message !== null ) : ?>
             <div class="notice <?php echo is_wp_error( $approval_message ) ? 'notice-error' : 'notice-success'; ?>"><p><?php echo esc_html( is_wp_error( $approval_message ) ? $approval_message->get_error_message() : 'Standardを手動承認し、契約確認記録と監査履歴を保存しました。' ); ?></p></div>
         <?php endif; ?>

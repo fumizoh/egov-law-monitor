@@ -24,6 +24,7 @@ function get_option( $name ) { return $GLOBALS['options'][$name] ?? ''; }
 function update_option( $name, $value, $autoload ) { $GLOBALS['options'][$name] = $value; }
 function dbDelta( $sql ) { $GLOBALS['ddl'][] = $sql; }
 function wp_safe_remote_post( $url, $args ) {
+    if ( isset( $GLOBALS['checkout_contract_transport'] ) ) { return ( $GLOBALS['checkout_contract_transport'] )( $url, $args ); }
     check( $GLOBALS['checkout_active'] === 0, 'HTTP runs outside all DB transactions' );
     $GLOBALS['http'][] = array( $url, $args );
     if ( $GLOBALS['http_hook'] ) { ( $GLOBALS['http_hook'] )(); }
