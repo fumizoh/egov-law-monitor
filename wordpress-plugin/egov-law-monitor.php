@@ -33,6 +33,13 @@ add_action(
         );
 
         // JS
+        wp_enqueue_script(
+            'egov-square-checkout',
+            plugin_dir_url( __FILE__ ) . 'assets/js/square-checkout.js',
+            array(),
+            filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/square-checkout.js' ),
+            true
+        );
         $js_path = plugin_dir_path( __FILE__ )
             . 'assets/js/law-watch.js';
 
@@ -586,6 +593,9 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-users.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-subscriptions.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-approval.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/square-api.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/square-checkout.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/square-checkout-cancel.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/square-checkout-page.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-square-subscriptions.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-menu.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-ai-summary-cache.php';

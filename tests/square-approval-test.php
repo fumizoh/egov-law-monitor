@@ -10,7 +10,7 @@ class WP_Error {
 function is_wp_error( $value ) { return $value instanceof WP_Error; }
 function current_user_can( $cap ) { return $GLOBALS['allowed']; }
 function get_userdata( $id ) { return isset( $GLOBALS['wpdb']->people[$id] ) ? (object) array( 'ID' => $id ) : false; }
-function get_current_user_id() { return 99; }
+function get_current_user_id() { return $GLOBALS['checkout_user'] ?? 99; }
 function wp_verify_nonce( $nonce, $action ) { return $nonce === 'valid:' . $action; }
 function wp_salt( $scheme ) { return 'test-key'; }
 function wp_json_encode( $value ) { return json_encode( $value ); }

@@ -19,6 +19,7 @@ function wp_json_encode( $value ) { return json_encode( $value ); }
 function wp_salt( $scheme ) { return 'test-only-key'; }
 function add_action( ...$args ) {}
 function register_activation_hook( ...$args ) {}
+function add_shortcode( ...$args ) {}
 function wp_safe_remote_get( $url, $args ) {
     $GLOBALS['http_calls'][] = array( $url, $args );
     if ( $GLOBALS['during_http'] ) { ( $GLOBALS['during_http'] )(); }
@@ -74,6 +75,7 @@ class SquareLookupDatabase {
     public function get_results( $query, $mode ) {
         $this->last_error = '';
         if ( is_array( $query ) ) {
+            if ( str_contains( $query[0], 'checkout_attempts' ) ) { return array(); }
             if ( str_contains( $query[0], 'usermeta' ) ) { return array(); }
             return str_contains( $query[0], 'admin_log' ) ? array() : array_values( array_filter( $this->records, static fn( $row ) => (int) $row['user_id'] === $query[1][0] ) );
         }
@@ -98,6 +100,8 @@ class SquareLookupDatabase {
 require __DIR__ . '/../wordpress-plugin/includes/square-subscriptions.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-api.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-approval.php';
+require __DIR__ . '/../wordpress-plugin/includes/square-checkout.php';
+require __DIR__ . '/../wordpress-plugin/includes/square-checkout-page.php';
 require __DIR__ . '/../wordpress-plugin/includes/admin/admin-square-subscriptions.php';
 require __DIR__ . '/../wordpress-plugin/includes/admin/admin-users.php';
 $checks = 0;

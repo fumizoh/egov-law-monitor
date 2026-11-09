@@ -28,9 +28,17 @@ function egov_law_monitor_render_square_subscriptions() {
     $lookup_requested_at = '';
     $approval_message = null;
     $free_message = null;
-    $actions = array_filter( array( isset( $_POST['egov_square_lookup'] ), isset( $_POST['egov_square_save'] ), isset( $_POST['egov_square_approve'] ), isset( $_POST['egov_square_free'] ) ) );
+    $actions = array_filter( array( isset( $_POST['egov_square_lookup'] ), isset( $_POST['egov_square_save'] ), isset( $_POST['egov_square_approve'] ), isset( $_POST['egov_square_free'] ), isset( $_POST['egov_checkout_cancel'] ) ) );
     if ( count( $actions ) > 1 ) {
         wp_die( '契約保存・Square照会・プラン変更は別々に操作してください。' );
+    }
+    if ( isset( $_POST['egov_checkout_cancel'] ) ) {
+        $cancel_fields = array();
+        foreach ( array( 'checkout_cancel_id', 'checkout_cancel_nonce', 'checkout_cancel_token', 'checkout_cancel_reason', 'link_deleted', 'no_payment_subscription', 'no_unresolved_issue' ) as $field ) {
+            $cancel_fields[$field] = isset( $_POST[$field] ) && is_string( $_POST[$field] ) ? wp_unslash( $_POST[$field] ) : '';
+        }
+        $cancel_result = egov_law_monitor_complete_checkout_cancel( $user_id, $cancel_fields );
+        echo '<div class="notice notice-warning"><p>' . esc_html( is_wp_error( $cancel_result ) ? $cancel_result->get_error_message() : '管理者によるキャンセル完了を登録しました。Square側への通信やプラン変更は行っていません。' ) . '</p></div>';
     }
     if ( isset( $_POST['egov_square_free'] ) ) {
         $free_nonce = isset( $_POST['egov_square_free_nonce'] ) && is_string( $_POST['egov_square_free_nonce'] ) ? wp_unslash( $_POST['egov_square_free_nonce'] ) : '';
@@ -85,6 +93,7 @@ function egov_law_monitor_render_square_subscriptions() {
         <p>契約登録・API照会だけではStandardになりません。Dashboardで契約・支払状況を確認した後、対象契約の手動承認を行ってください。確認記録は過去の記録であり、現在のプラン状態とは別です。</p>
         <p>WordPress User ID: <?php echo esc_html( $user_id ); ?> ／ ユーザー名: <?php echo esc_html( $user->user_login ); ?>（<?php echo esc_html( $user->display_name ); ?>） ／ メール: <?php echo esc_html( $user->user_email ); ?></p>
         <p>現在のプラン: <strong><?php echo esc_html( egov_law_monitor_get_plan_label( egov_law_monitor_get_plan( $user_id ) ) ); ?></strong></p>
+        <?php egov_law_monitor_render_checkout_attempts( $user_id ); ?>
         <?php if ( $approval_message !== null ) : ?>
             <div class="notice <?php echo is_wp_error( $approval_message ) ? 'notice-error' : 'notice-success'; ?>"><p><?php echo esc_html( is_wp_error( $approval_message ) ? $approval_message->get_error_message() : 'Standardを手動承認し、契約確認記録と監査履歴を保存しました。' ); ?></p></div>
         <?php endif; ?>
@@ -184,15 +193,15 @@ function egov_law_monitor_render_square_subscriptions() {
             <?php submit_button( '契約情報を保存', 'primary', 'egov_square_save' ); ?>
         </form>
         <p><a href="<?php echo esc_url( $url ); ?>">別の契約を新規登録</a></p>
-        <h2>契約・承認・プラン変更の操作履歴（最新100件）</h2>
+        <h2>契約・承認・プラン変更・申込キャンセルの操作履歴（最新100件）</h2>
         <table class="widefat striped">
-            <thead><tr><th>日時</th><th>管理者</th><th>操作</th><th>変更前（JSON）</th><th>変更後（JSON）</th><th>理由</th></tr></thead>
+            <thead><tr><th>日時</th><th>操作者</th><th>操作</th><th>変更前（JSON）</th><th>変更後（JSON）</th><th>理由</th></tr></thead>
             <tbody>
             <?php foreach ( (array) $logs as $log ) : ?>
                 <?php $actor = get_userdata( $log['admin_user_id'] ); ?>
                 <tr>
                     <td><?php echo esc_html( $log['created_at'] ); ?></td>
-                    <td><?php echo esc_html( ( $actor ? $actor->display_name : '削除済み管理者' ) . ' (ID: ' . $log['admin_user_id'] . ')' ); ?></td>
+                    <td><?php echo esc_html( $log['action'] === 'checkout_cancel_requested' && (int) $log['admin_user_id'] === 0 ? '利用者による申請 (ID: ' . $log['user_id'] . ')' : ( $actor ? $actor->display_name : '削除済み管理者' ) . ' (ID: ' . $log['admin_user_id'] . ')' ); ?></td>
                     <td><?php echo esc_html( $log['action'] ); ?></td>
                     <td style="overflow-wrap:anywhere"><?php echo esc_html( $log['old_value'] ?? 'null' ); ?></td>
                     <td style="overflow-wrap:anywhere"><?php echo esc_html( $log['new_value'] ?? 'null' ); ?></td>

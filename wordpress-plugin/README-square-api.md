@@ -1,5 +1,7 @@
 # Square契約状況の手動照会（第2-A段階）
 
+第3段階の申込・Payment Link発行は[README-square-checkout.md](README-square-checkout.md)を参照してください。既存の照会・手動承認は独立したままです。
+
 ユーザー管理の「Square契約管理」で、対象契約の「Square契約状況を確認」を押すと、登録済みSubscription IDを使ってサーバーから1回だけGET照会します。通常表示・契約保存・手動承認では照会しません。
 
 ## Standardの手動承認（第2-B段階）
