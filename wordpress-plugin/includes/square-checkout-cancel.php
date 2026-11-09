@@ -45,6 +45,7 @@ function egov_law_monitor_checkout_cancel_transition( $user_id, $id, $token, $co
 function egov_law_monitor_request_checkout_cancel( $fields, $factory = null ) {
     $user_id = (int) get_current_user_id();
     if ( ! is_user_logged_in() || $user_id < 1 || ! get_userdata( $user_id ) ) { return new WP_Error( 'cancel_login_required', 'ログインしてください。' ); }
+    if ( ! egov_law_monitor_standard_application_allowed() ) { return new WP_Error( 'checkout_application_restricted', 'Standardプランのお申し込みは現在準備中です。管理者へお問い合わせください。' ); }
     $id = $fields['checkout_cancel_id'] ?? ''; $nonce = $fields['checkout_cancel_nonce'] ?? ''; $token = $fields['checkout_cancel_token'] ?? '';
     if ( ! is_string( $id ) || ! ctype_digit( $id ) || (int) $id < 1 || ! is_string( $nonce ) ||
         ! wp_verify_nonce( $nonce, 'egov_checkout_cancel_request_' . $user_id . '_' . (int) $id ) || ! is_string( $token ) ||

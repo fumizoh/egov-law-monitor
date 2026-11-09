@@ -4,6 +4,28 @@
 
 ## 事前設定
 
+### 開発中の公開制限
+
+`EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC`が未定義または真偽値`false`の場合、申込機能は`manage_options`権限を持つ管理者と、`EGOV_LAW_MONITOR_STANDARD_TEST_USER_IDS`に指定したテストユーザーに限定します。テストIDはWordPressユーザーIDの整数配列で指定し、未定義は空配列です。文字列のIDや配列以外の値は許可に使いません。`PUBLIC`が真偽値`true`の場合だけ、全ログインユーザーが申込対象になります。公開してもFree・契約なし・申込状態・nonce等の既存条件は維持します。
+
+本番で開発中の設定例（`wp-config.php`は運用者が別途設定）：
+
+```php
+define( 'EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC', false );
+define( 'EGOV_LAW_MONITOR_STANDARD_TEST_USER_IDS', array() );
+// テストユーザーを許可する場合だけ、対象環境で確認した整数IDを配列に指定する。
+```
+
+一般公開時は、上の既存定義を`true`へ変更します。同じ定数を二重定義しないでください。Squareの環境・トークン・発行有効化とは別の制御です。テストユーザーに管理者権限は不要で、この配列で契約管理権限が付与されることもありません。
+
+一般ユーザーには独立申込ページで準備中の案内だけを表示し、マイページでは現在プラン表示を残して申込リンクを隠します。発行・既存リンクの再表示・発行回復・利用者キャンセル申請のサーバー入口も同じ共通関数で拒否します。既存申込は削除・変更せず、管理者用の契約照会・登録・承認・キャンセル完了は既存の権限で利用できます。Square申込用のAJAX／RESTエンドポイントは現在ありません。
+
+法令更新・AI要約・ウォッチ・通知設定の判定には、この公開制限を適用しません。既に配布されたSquare URL自体を無効化する制御でもありません。両申込関連ページは引き続きCDN／ページキャッシュから除外し、管理者の画面を一般ユーザーへ配信しないでください。
+
+ステージング確認：未定義／falseで一般ユーザーの直接URL・旧リンク表示・直接POSTが止まり、Free表示・Free機能が維持されること、管理者と指定テストユーザーは従来の申込・キャンセルが可能なこと、非指定ユーザーは拒否されることを確認します。trueでは全ログインユーザーが既存条件に従って利用でき、未ログインは拒否されることも確認してください。実決済を伴う操作は別途承認したSandboxでのみ行います。
+
+### Square接続設定
+
 既存の環境／トークン定数を再利用します。秘密情報をコード、DB、ブラウザー、ログへ入力・保存しないでください。
 
 - `EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT`：`sandbox` または `production`。
@@ -152,6 +174,7 @@ php tests/square-api-test.php
 php tests/square-subscriptions-test.php
 php tests/square-approval-test.php
 php tests/square-checkout-test.php
+php tests/square-application-access-test.php
 php tests/square-checkout-contracts-test.php
 php tests/square-checkout-cancel-test.php
 php tests/square-checkout-prg-test.php

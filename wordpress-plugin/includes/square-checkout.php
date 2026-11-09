@@ -2,6 +2,15 @@
 /** Checkout applications, not payment or entitlement state. No automatic API calls. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/** Development gate applies only to the currently logged-in applicant. */
+function egov_law_monitor_standard_application_allowed() {
+    $user_id = (int) get_current_user_id();
+    if ( ! is_user_logged_in() || $user_id < 1 ) { return false; }
+    if ( current_user_can( 'manage_options' ) || ( defined( 'EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC' ) && EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC === true ) ) { return true; }
+    $ids = defined( 'EGOV_LAW_MONITOR_STANDARD_TEST_USER_IDS' ) ? EGOV_LAW_MONITOR_STANDARD_TEST_USER_IDS : array();
+    return is_array( $ids ) && in_array( $user_id, $ids, true );
+}
+
 function egov_law_monitor_checkout_columns() {
     return array( 'id' => array( 'bigint unsigned', false ), 'application_uuid' => array( 'char(36)', false ),
         'user_id' => array( 'bigint unsigned', false ), 'environment' => array( 'varchar(10)', false ),
@@ -186,6 +195,7 @@ function egov_law_monitor_checkout_public_result( $row ) {
 function egov_law_monitor_submit_checkout( $nonce, $retry_uuid = '', $factory = null, $transport = null ) {
     $user_id = (int) get_current_user_id();
     if ( ! is_user_logged_in() || $user_id < 1 || ! get_userdata( $user_id ) ) { return new WP_Error( 'checkout_login_required', 'ログインしてください。' ); }
+    if ( ! egov_law_monitor_standard_application_allowed() ) { return new WP_Error( 'checkout_application_restricted', 'Standardプランのお申し込みは現在準備中です。' ); }
     if ( ! is_string( $nonce ) || ! wp_verify_nonce( $nonce, 'egov_square_checkout_' . $user_id ) || ! is_string( $retry_uuid ) || ( $retry_uuid !== '' && ! egov_law_monitor_checkout_uuid_valid( $retry_uuid ) ) ) { return new WP_Error( 'checkout_invalid_request', '画面を再読み込みして操作してください。' ); }
     $settings = egov_law_monitor_checkout_settings();
     if ( is_wp_error( $settings ) ) { return $settings; }

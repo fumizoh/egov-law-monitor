@@ -2,6 +2,7 @@
 /** Offline integration doubles; also reruns the existing approval regression harness. */
 require __DIR__ . '/square-approval-test.php';
 define( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT', 'sandbox' );
+define( 'EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC', true );
 define( 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_SANDBOX', 'test-checkout-secret' );
 define( 'EGOV_LAW_MONITOR_SQUARE_CHECKOUT_ENABLED', true );
 define( 'EGOV_LAW_MONITOR_SQUARE_LOCATION_ID_SANDBOX', 'LOCATION' );
@@ -275,7 +276,7 @@ require getcwd().'/wordpress-plugin/includes/square-checkout.php';
 $s=egov_law_monitor_checkout_settings();
 echo is_wp_error($s)?'ERROR':($s['environment'].':'.($s['token']===($fixture['EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_'.strtoupper($s['environment'])]??null)?'TOKEN_OK':'BAD'));
 PHP;
-$fixture = array( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT' => 'sandbox', 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_SANDBOX' => 'dummy-sandbox', 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_PRODUCTION' => 'dummy-production',
+$fixture = array( 'EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC' => true, 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT' => 'sandbox', 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_SANDBOX' => 'dummy-sandbox', 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_PRODUCTION' => 'dummy-production',
     'EGOV_LAW_MONITOR_SQUARE_CHECKOUT_ENABLED' => true, 'EGOV_LAW_MONITOR_SQUARE_LOCATION_ID_SANDBOX' => 'LOC', 'EGOV_LAW_MONITOR_SQUARE_PLAN_VARIATION_ID_SANDBOX' => 'VAR',
     'EGOV_LAW_MONITOR_SQUARE_LOCATION_ID_PRODUCTION' => 'PRODLOC', 'EGOV_LAW_MONITOR_SQUARE_PLAN_VARIATION_ID_PRODUCTION' => 'PRODVAR', 'EGOV_LAW_MONITOR_SQUARE_CHECKOUT_RETURN_URL' => 'https://wp.example.test/mypage/' );
 $cases = array( 'sandbox' => array(), 'production' => array( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT' => 'production' ),
@@ -295,6 +296,7 @@ foreach ( $cases as $name => $replace ) {
 $display_program = 'ob_start();' . $program . <<<'PHP'
 ob_end_clean();
 function is_user_logged_in(){return true;}
+function current_user_can($cap){return false;}
 function get_current_user_id(){return 10;}
 function egov_law_monitor_get_plan($id){return 'free';}
 function nocache_headers(){}

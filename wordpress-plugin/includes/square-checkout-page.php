@@ -37,7 +37,8 @@ function egov_law_monitor_checkout_cancel_post( $factory = null, $redirect = nul
     if ( isset( $GLOBALS['egov_checkout_cancel_post'] ) ) { return $GLOBALS['egov_checkout_cancel_post']['result']; }
     $GLOBALS['egov_checkout_cancel_post'] = array( 'result' => null );
     $target = egov_law_monitor_standard_application_page_url();
-    if ( isset( $_POST['egov_square_checkout'] ) ) { $result = new WP_Error( 'checkout_mixed_action', '申込とキャンセル申請は別々に操作してください。' ); }
+    if ( ! egov_law_monitor_standard_application_allowed() ) { $result = new WP_Error( 'checkout_application_restricted', 'Standardプランのお申し込みは現在準備中です。管理者へお問い合わせください。' ); }
+    elseif ( isset( $_POST['egov_square_checkout'] ) ) { $result = new WP_Error( 'checkout_mixed_action', '申込とキャンセル申請は別々に操作してください。' ); }
     elseif ( $target === '' || ( $redirect === null && headers_sent() ) ) { $result = new WP_Error( 'cancel_redirect_unavailable', '申請画面への移動を準備できません。画面を開き直してください。' ); }
     else {
         $fields = array();
@@ -59,6 +60,7 @@ function egov_law_monitor_standard_application_shortcode() {
     if ( ! is_user_logged_in() ) { return '<p>Standardの申込にはログインが必要です。</p>'; }
     if ( ! defined( 'DONOTCACHEPAGE' ) ) { define( 'DONOTCACHEPAGE', true ); }
     if ( ! headers_sent() ) { nocache_headers(); }
+    if ( ! egov_law_monitor_standard_application_allowed() ) { return '<p>Standardプランのお申し込みは現在準備中です。管理者へお問い合わせください。</p>'; }
     $user_id = (int) get_current_user_id();
     $cancel_result = $GLOBALS['egov_checkout_cancel_post']['result'] ?? null;
     $mixed = isset( $_POST['egov_square_checkout'], $_POST['egov_checkout_cancel_request'] );
@@ -163,10 +165,15 @@ function egov_law_monitor_plan_status_shortcode() {
     if ( ! is_user_logged_in() ) { return '<p>ご利用プランの確認にはログインが必要です。</p>'; }
     if ( ! defined( 'DONOTCACHEPAGE' ) ) { define( 'DONOTCACHEPAGE', true ); }
     if ( ! headers_sent() ) { nocache_headers(); }
-    $view = egov_law_monitor_checkout_view( (int) get_current_user_id() );
+    $application_allowed = egov_law_monitor_standard_application_allowed();
+    $view = $application_allowed ? egov_law_monitor_checkout_view( (int) get_current_user_id() ) : array( 'plan' => egov_law_monitor_get_plan( (int) get_current_user_id() ), 'attempt' => null );
     $plan = $view['plan']; $attempt = $view['attempt'];
     $known_plan = in_array( $plan, array( 'free', 'standard' ), true );
     $html = '<section class="egov-plan-status"><h2>💳 ご利用プラン</h2><p class="egov-plan-status-current"><span>現在のプラン：</span><strong class="egov-plan-status-badge egov-plan-status-badge--' . ( $known_plan ? $plan : 'unknown' ) . '">' . esc_html( $known_plan ? ( $plan === 'standard' ? 'Standard' : 'Free' ) : '確認が必要です' ) . '</strong></p>';
+    if ( ! $application_allowed ) {
+        if ( $plan === 'standard' ) { $html .= '<p>Standardプランをご利用中です。</p>'; }
+        return $html . '<p>Standardプランのお申し込みは現在準備中です。</p></section>';
+    }
     $label = '';
     if ( ! $known_plan ) { $html .= '<p>プラン情報を確認できません。管理者へお問い合わせください。</p>'; }
     elseif ( $plan === 'standard' ) {
