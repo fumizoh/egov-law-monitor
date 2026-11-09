@@ -305,5 +305,10 @@ foreach ( array( 'meta', 'audit', 'audit_rollback', 'commit', 'disconnect:commit
 reset_store(); change(); seed_watches(); $wpdb->fail = 'commit'; $wpdb->commit_applied = true;
 check( make_free()->code === 'square_plan_outcome_unknown' && $wpdb->meta[1]['meta_value'] === 'free' && $wpdb->watches[8]['is_active'] === 1, 'Free COMMIT response loss stays unknown without post-commit watch writes' );
 reset_store(); change(); $wpdb->contracts = array();
+$past_logs = $wpdb->logs;
 check( ! make_free()['warning'] && $wpdb->meta[1]['meta_value'] === 'free', 'Free is user-level even without contract rows' );
+check( count( $wpdb->logs ) === 2 && $wpdb->logs[0] === $past_logs[0] && $wpdb->logs[1]['action'] === 'plan_changed' &&
+    json_decode( $wpdb->logs[1]['old_value'], true )['plan'] === 'standard' && json_decode( $wpdb->logs[1]['new_value'], true )['plan'] === 'free', 'contractless revocation appends exact plan transition without deleting past audit' );
+check( make_free() instanceof WP_Error && count( $wpdb->logs ) === 2, 'contractless revocation cannot execute twice' );
+check( $GLOBALS['trial_usage'] === 2 && $GLOBALS['monthly_usage'] === 37 && ! array_filter( $wpdb->sql_queries, static fn( $sql ) => str_contains( $sql, 'checkout_attempts' ) ), 'revocation preserves AI counts and never modifies application records' );
 echo "{$checks} checks passed. No real DB, cache or Square API used.\n";

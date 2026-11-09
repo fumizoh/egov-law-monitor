@@ -50,7 +50,13 @@ function egov_law_monitor_render_square_subscriptions() {
         $free_nonce = isset( $_POST['egov_square_free_nonce'] ) && is_string( $_POST['egov_square_free_nonce'] ) ? wp_unslash( $_POST['egov_square_free_nonce'] ) : '';
         $free_token = isset( $_POST['free_plan_token'] ) && is_string( $_POST['free_plan_token'] ) ? wp_unslash( $_POST['free_plan_token'] ) : '';
         $free_reason = isset( $_POST['free_reason'] ) && is_string( $_POST['free_reason'] ) ? wp_unslash( $_POST['free_reason'] ) : '';
-        $free_message = egov_law_monitor_square_make_free( $user_id, $free_token, $free_nonce, $free_reason );
+        if ( ! wp_verify_nonce( $free_nonce, 'egov_square_free_' . $user_id ) ) {
+            $free_message = new WP_Error( 'invalid_nonce', '操作を確認できません。画面を再読み込みしてください。' );
+        } elseif ( ( $_POST['free_confirmed'] ?? null ) !== '1' ) {
+            $free_message = new WP_Error( 'confirmation_required', 'Standard承認を解除することを確認してください。' );
+        } else {
+            $free_message = egov_law_monitor_square_make_free( $user_id, $free_token, $free_nonce, $free_reason );
+        }
     }
     if ( isset( $_POST['egov_square_approve'] ) ) {
         $approval_id = isset( $_POST['approval_record_id'] ) && is_string( $_POST['approval_record_id'] ) && ctype_digit( $_POST['approval_record_id'] ) ? (int) $_POST['approval_record_id'] : 0;
@@ -108,7 +114,8 @@ function egov_law_monitor_render_square_subscriptions() {
             <div class="notice <?php echo is_wp_error( $free_message ) ? 'notice-error' : ( $free_message['warning'] ? 'notice-warning' : 'notice-success' ); ?>"><p><?php echo esc_html( is_wp_error( $free_message ) ? $free_message->get_error_message() : $free_message['message'] ); ?></p></div>
         <?php endif; ?>
         <?php if ( egov_law_monitor_get_plan( $user_id ) === 'standard' ) : ?>
-            <h2>このユーザーをFreeへ変更</h2>
+            <h2>Standard承認を解除</h2>
+            <p>この操作はWordPressの利用権限のみを変更し、Squareのサブスクリプションは解約しません。</p>
             <p>ユーザーの利用権限を変更します。Square側の解約・課金停止は行いません。契約・確認情報・承認履歴・AI要約利用回数は保持します。上限を超える有効ウォッチは停止されます。</p>
             <?php $free_token = egov_law_monitor_square_plan_form_token( $user_id ); ?>
             <?php if ( is_wp_error( $free_token ) ) : ?>
@@ -117,8 +124,9 @@ function egov_law_monitor_render_square_subscriptions() {
                 <form method="post" action="<?php echo esc_url( $url ); ?>">
                     <?php wp_nonce_field( 'egov_square_free_' . $user_id, 'egov_square_free_nonce' ); ?>
                     <input type="hidden" name="free_plan_token" value="<?php echo esc_attr( $free_token ); ?>">
-                    <p><label>Freeへの変更理由<textarea name="free_reason" rows="2" maxlength="2000" required></textarea></label></p>
-                    <button type="submit" name="egov_square_free" class="button">このユーザーをFreeへ変更する</button>
+                    <p><label>承認解除の理由<textarea name="free_reason" rows="2" maxlength="2000" required></textarea></label></p>
+                    <p><label><input type="checkbox" name="free_confirmed" value="1" required>このユーザーのStandard承認を解除し、Freeへ戻すことを確認しました。</label></p>
+                    <button type="submit" name="egov_square_free" class="button">Standard承認を解除</button>
                 </form>
             <?php endif; ?>
         <?php endif; ?>

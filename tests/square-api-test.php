@@ -312,6 +312,9 @@ try {
     $display_standard = true;
     $html = render_lookup_page();
     check_lookup( str_contains( $html, 'egov_square_free_nonce' ) && str_contains( $html, 'free_reason' ) && str_contains( $html, 'Square側の解約・課金停止は行いません' ), 'user-level Free form requires reason and clarifies Square billing unchanged' );
+    check_lookup( str_contains( $html, 'Standard承認を解除' ) && str_contains( $html, 'この操作はWordPressの利用権限のみを変更し、Squareのサブスクリプションは解約しません' ) && str_contains( $html, 'name="free_confirmed" value="1" required' ), 'revoke approval form explicitly requires confirmation and warns Square is unchanged' );
+    $html = render_lookup_page( array( 'egov_square_free' => '1', 'egov_square_free_nonce' => 'valid:egov_square_free_10' ) );
+    check_lookup( str_contains( $html, '解除することを確認してください' ), 'valid nonce alone cannot execute revocation without confirmation' );
     $html = render_lookup_page( array( 'egov_square_free' => '1', 'egov_square_free_nonce' => 'wrong' ) );
     check_lookup( str_contains( $html, '操作を確認できません' ), 'Free form rejects invalid nonce' );
     try { render_lookup_page( array( 'egov_square_free' => '1', 'egov_square_approve' => '1' ) ); throw new LogicException( 'mixed Free accepted' ); }
