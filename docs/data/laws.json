@@ -1,44 +1,66 @@
 [
   {
-    "law_id": "508CO0000000332",
-    "law_no": "令和八年政令第三百三十二号",
-    "law_name": "医療的ケア児等及び重症心身障害者並びにそれらの家族に対する支援に関する法律第十四条第一項の政令で定める市を定める政令",
+    "law_id": "508CO0000000224",
+    "law_no": "令和八年政令第二百二十四号",
+    "law_name": "ニッケル系ステンレス冷延鋼帯及び冷延鋼板に対して課する不当廉売関税に関する政令",
     "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/508CO0000000332",
+    "url": "https://laws.e-gov.go.jp/law/508CO0000000224",
     "updates": [
       {
-        "law_data_id": 650874,
+        "law_data_id": 651077,
         "sub_revision": "1",
-        "published_date": "2026-10-23",
-        "effective_date": "2027-04-01",
+        "published_date": "2026-07-08",
+        "effective_date": "2026-10-31",
         "effective_comment": "",
-        "amend_name": "新規制定",
-        "amend_no": "",
-        "amendment_id": null,
-        "amend_published_date": "2026-10-23",
-        "compare_url": null,
-        "pending": true
+        "amend_name": "ニッケル系ステンレス冷延鋼帯及び冷延鋼板に対して課する暫定的な不当廉売関税に関する政令の一部を改正する政令",
+        "amend_no": "令和八年政令第三百四十号",
+        "amendment_id": "508CO0000000340",
+        "amend_published_date": "2026-10-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/508CO0000000224/20261031_508CO0000000340?occasion_date=20261031&tab=compare",
+        "pending": false
       }
     ]
   },
   {
-    "law_id": "349CO0000000179",
-    "law_no": "昭和四十九年政令第百七十九号",
-    "law_name": "在外公館に勤務する外務公務員の在勤基本手当の額、在外住居手当に係る控除額及び限度額並びに子女教育手当に係る自己負担額を定める政令",
+    "law_id": "508CO0000000335",
+    "law_no": "令和八年政令第三百三十五号",
+    "law_name": "国家社会機能継続性確保施策・副首都整備推進本部令",
     "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/349CO0000000179",
+    "url": "https://laws.e-gov.go.jp/law/508CO0000000335",
     "updates": [
       {
-        "law_data_id": 650868,
+        "law_data_id": 650869,
         "sub_revision": "1",
-        "published_date": "1974-05-27",
-        "effective_date": "2026-11-01",
+        "published_date": "2026-10-28",
+        "effective_date": "2026-10-30",
         "effective_comment": "",
-        "amend_name": "在外公館に勤務する外務公務員の在勤基本手当の額、在外住居手当に係る控除額及び限度額並びに子女教育手当に係る自己負担額を定める政令の一部を改正する政令",
-        "amend_no": "令和八年政令第三百三十三号",
-        "amendment_id": "508CO0000000333",
+        "amend_name": "新規制定",
+        "amend_no": "",
+        "amendment_id": null,
         "amend_published_date": "2026-10-28",
-        "compare_url": "https://laws.e-gov.go.jp/law/349CO0000000179/20261101_508CO0000000333?occasion_date=20261101&tab=compare",
+        "compare_url": null,
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "508CO0000000342",
+    "law_no": "令和八年政令第三百四十二号",
+    "law_name": "国家社会機能継続性確保施策及び副首都の整備に係る施策の推進に関する法律施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/508CO0000000342",
+    "updates": [
+      {
+        "law_data_id": 651079,
+        "sub_revision": "1",
+        "published_date": "2026-10-30",
+        "effective_date": "2026-10-30",
+        "effective_comment": "",
+        "amend_name": "新規制定",
+        "amend_no": "",
+        "amendment_id": null,
+        "amend_published_date": "2026-10-30",
+        "compare_url": null,
         "pending": false
       }
     ]
