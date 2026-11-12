@@ -3,6 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+require_once __DIR__ . '/admin-square-audit.php';
 
 function egov_law_monitor_render_square_subscriptions() {
     if ( ! current_user_can( 'manage_options' ) ) {
@@ -228,23 +229,7 @@ function egov_law_monitor_render_square_subscriptions() {
         </form>
         <p><a href="<?php echo esc_url( $url ); ?>">別の契約を新規登録</a></p>
         <h2>契約・承認・プラン変更・申込キャンセルの操作履歴（最新100件）</h2>
-        <table class="widefat striped">
-            <thead><tr><th>日時</th><th>操作者</th><th>操作</th><th>変更前（JSON）</th><th>変更後（JSON）</th><th>理由</th></tr></thead>
-            <tbody>
-            <?php foreach ( (array) $logs as $log ) : ?>
-                <?php $actor = get_userdata( $log['admin_user_id'] ); ?>
-                <tr>
-                    <td><?php echo esc_html( $log['created_at'] ); ?></td>
-                    <td><?php echo esc_html( $log['action'] === 'checkout_cancel_requested' && (int) $log['admin_user_id'] === 0 ? '利用者による申請 (ID: ' . $log['user_id'] . ')' : ( $actor ? $actor->display_name : '削除済み管理者' ) . ' (ID: ' . $log['admin_user_id'] . ')' ); ?></td>
-                    <td><?php echo esc_html( $log['action'] ); ?></td>
-                    <td style="overflow-wrap:anywhere"><?php echo esc_html( $log['old_value'] ?? 'null' ); ?></td>
-                    <td style="overflow-wrap:anywhere"><?php echo esc_html( $log['new_value'] ?? 'null' ); ?></td>
-                    <td><?php echo esc_html( $log['reason'] ?? '' ); ?></td>
-                </tr>
-            <?php endforeach; ?>
-            <?php if ( ! $logs && ! $read_error ) : ?><tr><td colspan="6">操作履歴はありません。</td></tr><?php endif; ?>
-            </tbody>
-        </table>
+        <?php egov_law_monitor_render_square_audit( $logs, $read_error ); ?>
     </div>
     <?php
 }
