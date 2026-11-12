@@ -83,7 +83,7 @@ function egov_law_monitor_plan_status_shortcode() {
     $html = '<section class="egov-plan-status"><h2>💳 ご利用プラン</h2><p class="egov-plan-status-current"><span>現在のプラン：</span><strong class="egov-plan-status-badge egov-plan-status-badge--' . ( $known_plan ? $plan : 'unknown' ) . '">' . esc_html( $known_plan ? ( $plan === 'standard' ? 'Standard' : 'Free' ) : '確認が必要です' ) . '</strong></p>';
     if ( $view['can_pay'] ) {
         $url = egov_law_monitor_standard_application_page_url();
-        $html .= $url !== '' ? '<p><a href="' . esc_url( $url ) . '">Standardプランに申し込む</a></p>' : '<p>申込ページを確認できません。管理者へお問い合わせください。</p>';
+        $html .= $url !== '' ? '<p><a class="egov-law-button" href="' . esc_url( $url ) . '">Standardプランに申し込む</a></p>' : '<p>申込ページを確認できません。管理者へお問い合わせください。</p>';
     } elseif ( $view['plan'] !== 'standard' || ! function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= '<p>' . esc_html( $view['message'] ) . '</p>'; }
     if ( function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= egov_law_monitor_subscription_cancellation_panel( (int) get_current_user_id() ); }
     if ( $plan === 'standard' ) { $html .= egov_law_monitor_standard_contact_guidance(); }

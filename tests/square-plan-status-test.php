@@ -10,6 +10,7 @@ check_page( str_contains( $html, $link ) && str_contains( $html, 'Squareでお�
 check_page( str_contains( $html, '再度決済せず' ) && str_contains( $html, '請求書番号' ), 'duplicate-payment warning and invoice guidance' );
 $html = egov_law_monitor_plan_status_shortcode();
 check_page( str_contains( $html, '<h2>💳 ご利用プラン</h2>' ) && str_contains( $html, 'egov-plan-status-badge--free' ) && str_contains( $html, 'https://example.test/standard-application/' ) && ! str_contains( $html, $link ), 'mypage badge and same-site application link retained' );
+check_page( str_contains( $html, '<a class="egov-law-button" href="https://example.test/standard-application/">Standardプランに申し込む</a>' ), 'Free application link reuses cancellation button style without changing destination or text' );
 check_page( defined( 'DONOTCACHEPAGE' ) && DONOTCACHEPAGE && $page_no_cache >= 2, 'personal panels request no-cache' );
 check_page( isset( $page_shortcodes['egov_plan_status'], $page_shortcodes['egov_standard_application'] ), 'existing shortcode names retained' );
 foreach ( array( 'ready', 'creating', 'unknown', 'cancel_requested', 'closing', 'cancel_unknown', 'canceling', 'unexpected', 'CLOSED' ) as $state ) {
