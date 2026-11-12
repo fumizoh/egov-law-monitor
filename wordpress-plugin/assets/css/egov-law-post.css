@@ -265,6 +265,13 @@
     padding: 1rem;
     margin-block: 1rem;
 }
+.egov-standard-cancellation .egov-standard-cancellation-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+}
+
 .egov-standard-cancellation button {
     max-width: 100%;
     white-space: normal;

@@ -61,7 +61,7 @@ function egov_law_monitor_subscription_cancellation_panel( $user_id ) {
         if ( ( $_GET['egov_standard_cancel_confirm'] ?? null ) === '1' ) {
             $html .= '<section class="egov-standard-cancellation"><h3>Standardプランの解約を申請しますか？</h3><p>管理者がSquareで解約手続きを行います。お支払い済みの期間は、引き続きStandardプランをご利用いただけます。</p><form method="post" action="' . esc_url( $url ) . '">';
             ob_start(); wp_nonce_field( 'egov_standard_cancel_' . $user_id, 'standard_cancel_nonce' ); $html .= ob_get_clean();
-            $html .= '<input type="hidden" name="standard_cancel_token" value="' . esc_attr( $context['plan_token'] ) . '"><p><button type="submit" name="egov_standard_cancel_request" value="1">確定して解約を申請する</button> <a href="' . esc_url( $url ) . '">戻る</a></p></form></section>';
+            $html .= '<input type="hidden" name="standard_cancel_token" value="' . esc_attr( $context['plan_token'] ) . '"><p class="egov-standard-cancellation-actions"><button type="submit" name="egov_standard_cancel_request" value="1">解約を申請する</button> <a href="' . esc_url( $url ) . '">戻る</a></p></form></section>';
         } else { $html .= '<p><a class="egov-law-button" href="' . esc_url( add_query_arg( 'egov_standard_cancel_confirm', '1', $url ) ) . '">Standardを解約する</a></p>'; }
         return $html;
     } catch ( Throwable $error ) { return $html . '<p>承認対象契約または解約申請を確認できません。管理者へお問い合わせください。</p>'; }
