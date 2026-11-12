@@ -102,6 +102,7 @@ require __DIR__ . '/../wordpress-plugin/includes/square-api.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-approval.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-checkout.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-checkout-page.php';
+require __DIR__ . '/../wordpress-plugin/includes/square-invoices.php';
 require __DIR__ . '/../wordpress-plugin/includes/admin/admin-square-subscriptions.php';
 require __DIR__ . '/../wordpress-plugin/includes/admin/admin-users.php';
 $checks = 0;
@@ -313,6 +314,11 @@ try {
     $html = render_lookup_page();
     check_lookup( str_contains( $html, 'egov_square_free_nonce' ) && str_contains( $html, 'free_reason' ) && str_contains( $html, 'Square側の解約・課金停止は行いません' ), 'user-level Free form requires reason and clarifies Square billing unchanged' );
     check_lookup( str_contains( $html, 'Standard承認を解除' ) && str_contains( $html, 'この操作はWordPressの利用権限のみを変更し、Squareのサブスクリプションは解約しません' ) && str_contains( $html, 'name="free_confirmed" value="1" required' ), 'revoke approval form explicitly requires confirmation and warns Square is unchanged' );
+    check_lookup( str_contains( $html, '請求書番号でSquare契約を照会' ) && str_contains( $html, 'invoice_nonce' ) && str_contains( $html, 'user@example.test' ), 'invoice read-only form sits alongside selected WordPress identity' );
+    $html = render_lookup_page( array( 'egov_square_invoice_lookup' => '1', 'invoice_number' => '000004', 'invoice_nonce' => 'bad' ) );
+    check_lookup( str_contains( $html, 'nonceを確認できません' ), 'invoice controller preserves nonce error' );
+    try { render_lookup_page( array( 'egov_square_invoice_lookup' => '1', 'egov_square_save' => '1' ) ); throw new LogicException( 'mixed invoice/save accepted' ); }
+    catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '別々' ), 'invoice lookup cannot run alongside contract write' ); }
     $html = render_lookup_page( array( 'egov_square_free' => '1', 'egov_square_free_nonce' => 'valid:egov_square_free_10' ) );
     check_lookup( str_contains( $html, '解除することを確認してください' ), 'valid nonce alone cannot execute revocation without confirmation' );
     $html = render_lookup_page( array( 'egov_square_free' => '1', 'egov_square_free_nonce' => 'wrong' ) );

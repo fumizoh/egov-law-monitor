@@ -29,9 +29,15 @@ function egov_law_monitor_render_square_subscriptions() {
     $approval_message = null;
     $free_message = null;
     $checkout_contract_result = null;
+    $invoice_result = null;
     $actions = array_filter( array( isset( $_POST['egov_square_lookup'] ), isset( $_POST['egov_square_save'] ), isset( $_POST['egov_square_approve'] ), isset( $_POST['egov_square_free'] ), isset( $_POST['egov_checkout_cancel'] ), isset( $_POST['egov_checkout_contract_lookup'] ), isset( $_POST['egov_checkout_contract_register'] ) ) );
-    if ( count( $actions ) > 1 ) {
+    if ( count( $actions ) + ( isset( $_POST['egov_square_invoice_lookup'] ) ? 1 : 0 ) > 1 ) {
         wp_die( '契約保存・Square照会・プラン変更は別々に操作してください。' );
+    }
+    if ( isset( $_POST['egov_square_invoice_lookup'] ) ) {
+        $number = isset( $_POST['invoice_number'] ) && is_string( $_POST['invoice_number'] ) ? wp_unslash( $_POST['invoice_number'] ) : '';
+        $nonce = isset( $_POST['invoice_nonce'] ) && is_string( $_POST['invoice_nonce'] ) ? wp_unslash( $_POST['invoice_nonce'] ) : '';
+        $invoice_result = egov_law_monitor_lookup_square_invoice( $user_id, $number, $nonce );
     }
     if ( isset( $_POST['egov_checkout_contract_lookup'] ) || isset( $_POST['egov_checkout_contract_register'] ) ) {
         $fields = array();
@@ -105,6 +111,7 @@ function egov_law_monitor_render_square_subscriptions() {
         <p>契約登録・API照会だけではStandardになりません。Dashboardで契約・支払状況を確認した後、対象契約の手動承認を行ってください。確認記録は過去の記録であり、現在のプラン状態とは別です。</p>
         <p>WordPress User ID: <?php echo esc_html( $user_id ); ?> ／ ユーザー名: <?php echo esc_html( $user->user_login ); ?>（<?php echo esc_html( $user->display_name ); ?>） ／ メール: <?php echo esc_html( $user->user_email ); ?></p>
         <p>現在のプラン: <strong><?php echo esc_html( egov_law_monitor_get_plan_label( egov_law_monitor_get_plan( $user_id ) ) ); ?></strong></p>
+        <?php egov_law_monitor_render_invoice_lookup( $user_id, $url, $invoice_result ); ?>
         <?php egov_law_monitor_render_checkout_attempts( $user_id ); ?>
         <?php if ( $checkout_contract_result !== null ) { egov_law_monitor_render_checkout_contract_result( $user_id, $checkout_contract_result ); } ?>
         <?php if ( $approval_message !== null ) : ?>

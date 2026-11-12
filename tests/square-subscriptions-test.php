@@ -283,6 +283,7 @@ $wpdb->engine = 'MyISAM';
 check_square( save_square() instanceof WP_Error, 'nontransactional storage rejected' );
 $wpdb->engine = 'InnoDB';
 check_square( save_square( 10, 999 ) instanceof WP_Error, 'missing contract rejected' );
+require __DIR__ . '/../wordpress-plugin/includes/square-invoices.php';
 require __DIR__ . '/../wordpress-plugin/includes/admin/admin-square-subscriptions.php';
 $_GET = array( 'user_id' => 10 );
 $_POST = array( 'egov_square_save' => '1' );

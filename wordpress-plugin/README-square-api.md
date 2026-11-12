@@ -4,6 +4,18 @@
 
 ユーザー管理の「Square契約管理」で、対象契約の「Square契約状況を確認」を押すと、登録済みSubscription IDを使ってサーバーから1回だけGET照会します。通常表示・契約保存・手動承認では照会しません。
 
+## 請求書番号の読み取り専用照会
+
+ユーザー管理から対象ユーザーのSquare契約管理を開き、「請求書番号でSquare契約を照会」にDashboardの番号（例：`000004`）を入力します。先頭ゼロを保持して完全一致検索します。この操作では契約登録・Standard承認・確認記録・監査・申込状態を一切更新しません。
+
+既存の`EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT`、選択環境の`EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_PRODUCTION`または`EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN_SANDBOX`、`EGOV_LAW_MONITOR_SQUARE_LOCATION_ID_PRODUCTION`／`_SANDBOX`、`EGOV_LAW_MONITOR_SQUARE_PLAN_VARIATION_ID_PRODUCTION`／`_SANDBOX`を使用します。受付有効化・戻り先URLの設定には依存しません。照会に必要な権限は`INVOICES_READ`と`SUBSCRIPTIONS_READ`です。wp-config.php自体は変更しません。
+
+ListInvoicesは最大200件×5ページ、照会全体30秒・各通信最大10秒で検索します。上限到達・ページ送り不整合・通信失敗は検索未完了として扱い、途中の1件を確定しません。0件・複数候補・認証／権限／404／429・応答不正を区別します。取得したInvoice IDをURLエンコードしてGetInvoice、続いてRetrieveSubscriptionで再取得します。
+
+PAID、請求額と支払済み額の各合計500 JPY、ACTIVE、設定済みLocation／Variation、InvoiceとSubscriptionのCustomer ID一致をそれぞれ表示します。返金済み状態では支払済み金額が残る場合があるため金額だけで判断しません。照会時点の単一請求書の確認であり、過去・将来の全請求の支払い保証ではありません。本人確認も自動化しません。ページ上部のWordPressユーザー名・メールと請求先氏名・メールを並べて確認し、Dashboardや本人との連絡で確認してください。不一致・項目欠落は要確認です。
+
+本番での確認：管理者で対象ユーザーを選び、設定環境・Locationを確認した上で、既知の500円PAID請求書を照会しDashboardと各項目を比較します。存在しない番号、不正nonce、権限不足も確認してください。照会の前後でプラン・契約・確認記録・監査履歴が変わらないことを確認します。SandboxではSubscription付きInvoiceを本番同様に再現できない場合があります。APIトークンやカード情報を画面・ログへ出さず、API応答全文も保存しません。
+
 ## Standardの手動承認（第2-B段階）
 
 StandardからFreeへ戻す場合は、対象ユーザーのSquare契約管理にある「Standard承認を解除」を使用します。理由を入力し、WordPressの利用権限だけを変更することを確認して実行してください。管理者権限・専用nonce・確認チェック・署名付きプラン状態を検証します。契約レコードのないStandardテストユーザーも同じ操作で戻せます。
