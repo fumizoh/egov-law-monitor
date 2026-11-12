@@ -101,6 +101,7 @@ require __DIR__ . '/../wordpress-plugin/includes/square-subscriptions.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-api.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-approval.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-invoices.php';
+require __DIR__ . '/../wordpress-plugin/includes/square-cancellations.php';
 require __DIR__ . '/../wordpress-plugin/includes/admin/admin-square-subscriptions.php';
 require __DIR__ . '/../wordpress-plugin/includes/admin/admin-users.php';
 $checks = 0;

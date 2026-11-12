@@ -50,4 +50,7 @@ ob_start(); egov_law_monitor_render_square_audit( array(), false ); $empty = ob_
 check_audit( str_contains( $empty, 'colspan="5">操作履歴はありません' ), 'empty history row' );
 ob_start(); egov_law_monitor_render_square_audit( array(), true ); $failed = ob_get_clean();
 check_audit( ! str_contains( $failed, '操作履歴はありません' ), 'read failure not misrepresented as empty history' );
+check_audit( egov_law_monitor_square_audit_label( 'subscription_cancellation_requested' ) === 'Standard解約申請' && egov_law_monitor_square_audit_label( 'subscription_cancellation_completed' ) === 'Standard利用終了・Free変更', 'service cancellation actions have dedicated Japanese labels' );
+check_audit( audit_summary( 'subscription_end_date_set', '{"end_date":null}', '{"end_date":"2026-11-15"}' ) === '終了日未登録 → 2026-11-15', 'end date registration summary' );
+check_audit( audit_summary( 'subscription_cancellation_completed', '{"plan":"standard"}', '{"plan":"free"}' ) === 'Standard → Free', 'cancellation completion summarizes actual entitlement change' );
 echo "{$checks} audit display checks passed; no DB or API used.\n";

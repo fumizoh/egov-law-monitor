@@ -126,6 +126,7 @@ function egov_law_monitor_square_change_plan( $user_id, $plan, $expected_token, 
         if ( $before['plan'] !== 'standard' ) { throw new RuntimeException( '現在Standardではありません。二重操作はできません。' ); }
         $invalidate = true;
         egov_law_monitor_square_apply_plan( $db, $tables, $user_id, $before, $old, $plan, $now, $admin_id, $reason );
+        if ( function_exists( 'egov_law_monitor_complete_cancellations_for_free' ) ) { egov_law_monitor_complete_cancellations_for_free( $db, $tables, $user_id, $reason ); }
         $committing = true;
         if ( ! $db->commit() ) { throw new RuntimeException( '確定応答を確認できません。' ); }
         $committed = true;

@@ -2,6 +2,8 @@
 
 固定の決済リンクと利用者向け表示は[README-square-checkout.md](README-square-checkout.md)を参照してください。管理者の契約登録・再承認は請求書番号から行います。
 
+Standardの解約申請、終了日登録、期限通知、承認解除との連携は[README-square-cancellation.md](README-square-cancellation.md)を参照してください。Squareの解約とWordPressの利用権限解除は、引き続き管理者が手動で行います。
+
 ## 請求書番号の照会と一括登録・承認
 
 ユーザー管理から対象ユーザーのSquare契約管理を開き、「請求書番号でSquare契約を照会」にDashboardの番号（例：`000004`）を入力します。先頭ゼロを保持して完全一致検索します。この操作では契約登録・Standard承認・確認記録・監査・申込状態を一切更新しません。

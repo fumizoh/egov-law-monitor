@@ -14,9 +14,15 @@ function egov_law_monitor_render_square_subscriptions() {
         if ( isset( $_POST[$action] ) ) { wp_die( '旧Square操作は廃止しました。請求書番号による照会・承認を利用してください。' ); }
     }
     $table = $wpdb->prefix . 'egov_square_subscriptions';
-    $free_message = null; $invoice_result = null; $invoice_approval = null;
-    $actions = array_filter( array( isset( $_POST['egov_square_free'] ), isset( $_POST['egov_square_invoice_lookup'] ), isset( $_POST['egov_square_invoice_approve'] ) ) );
+    $free_message = null; $invoice_result = null; $invoice_approval = null; $cancellation_message = null;
+    $actions = array_filter( array( isset( $_POST['egov_square_free'] ), isset( $_POST['egov_square_invoice_lookup'] ), isset( $_POST['egov_square_invoice_approve'] ), isset( $_POST['egov_subscription_cancel_date'] ) ) );
     if ( count( $actions ) > 1 ) { wp_die( 'Square照会・承認・承認解除は別々に操作してください。' ); }
+    if ( isset( $_POST['egov_subscription_cancel_date'] ) ) {
+        $fields = array();
+        foreach ( array( 'subscription_cancel_id', 'subscription_end_date', 'subscription_cancel_date_nonce', 'subscription_cancel_token', 'subscription_dashboard_confirmed', 'subscription_cancel_reason' ) as $field ) { $fields[$field] = isset( $_POST[$field] ) && is_string( $_POST[$field] ) ? wp_unslash( $_POST[$field] ) : ''; }
+        $cancellation_message = egov_law_monitor_save_cancellation_date( $user_id, ctype_digit( $fields['subscription_cancel_id'] ) ? (int) $fields['subscription_cancel_id'] : 0, $fields['subscription_end_date'], $fields['subscription_cancel_date_nonce'], $fields['subscription_cancel_token'], $fields['subscription_dashboard_confirmed'] === '1', $fields['subscription_cancel_reason'] );
+        if ( ! is_wp_error( $cancellation_message ) ) { egov_law_monitor_process_cancellation_mail( $cancellation_message['id'] ); }
+    }
     if ( isset( $_POST['egov_square_invoice_lookup'] ) ) {
         $number = isset( $_POST['invoice_number'] ) && is_string( $_POST['invoice_number'] ) ? wp_unslash( $_POST['invoice_number'] ) : '';
         $nonce = isset( $_POST['invoice_nonce'] ) && is_string( $_POST['invoice_nonce'] ) ? wp_unslash( $_POST['invoice_nonce'] ) : '';
@@ -81,6 +87,8 @@ function egov_law_monitor_render_square_subscriptions() {
             <?php endif; ?>
         <?php endif; ?>
         <?php if ( $read_error || ! egov_law_monitor_square_storage_ready() ) : ?><div class="notice notice-error"><p>契約情報・操作履歴または保存先を確認できません。管理者がDBの状態を確認してください。</p></div><?php endif; ?>
+        <?php if ( $cancellation_message !== null ) : ?><p role="status"><?php echo esc_html( is_wp_error( $cancellation_message ) ? $cancellation_message->get_error_message() : '利用終了日を保存しました。WordPressのプラン・Squareの契約は変更していません。' ); ?></p><?php endif; ?>
+        <?php if ( function_exists( 'egov_law_monitor_render_subscription_cancellations' ) ) { egov_law_monitor_render_subscription_cancellations( $user_id, $url ); } ?>
         <h2>登録済みSquare契約</h2>
         <table class="widefat striped"><thead><tr><th>ID</th><th>Customer ID</th><th>Subscription ID</th><th>最終確認日時</th><th>確認管理者</th><th>管理者メモ</th></tr></thead><tbody>
         <?php foreach ( (array) $contracts as $contract ) : ?>

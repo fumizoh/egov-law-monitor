@@ -64,6 +64,7 @@ function egov_law_monitor_standard_application_shortcode() {
     if ( $view['can_pay'] ) {
         $html .= '<p>Standardプランのお支払いは、Squareの決済ページで行います。</p><p>お支払いの確認後、管理者がStandardプランへの切り替えを行います。切り替えが完了するまで、しばらくお待ちください。</p><p><a class="egov-law-button egov-standard-payment-button" href="https://square.link/u/30s16R3f" rel="noreferrer">Squareでお支払いへ進む</a></p><p>すでにお支払い済みの場合は、再度決済せず、プランの切り替えをお待ちください。お問い合わせの際はSquareの請求書番号をお知らせください。</p>';
     } else { $html .= '<p>' . esc_html( $view['message'] ) . '</p>'; }
+    if ( function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= egov_law_monitor_subscription_cancellation_panel( (int) get_current_user_id() ); }
     return $html . '<p>お支払い・契約・キャンセルについては管理者へお問い合わせください。この画面からSquareの契約変更・解約は行いません。</p></section>';
 }
 add_shortcode( 'egov_standard_application', 'egov_law_monitor_standard_application_shortcode' );
@@ -79,6 +80,7 @@ function egov_law_monitor_plan_status_shortcode() {
         $url = egov_law_monitor_standard_application_page_url();
         $html .= $url !== '' ? '<p><a href="' . esc_url( $url ) . '">Standardプランに申し込む</a></p>' : '<p>申込ページを確認できません。管理者へお問い合わせください。</p>';
     } else { $html .= '<p>' . esc_html( $view['message'] ) . '</p>'; }
+    if ( function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= egov_law_monitor_subscription_cancellation_panel( (int) get_current_user_id() ); }
     return $html . '</section>';
 }
 add_shortcode( 'egov_plan_status', 'egov_law_monitor_plan_status_shortcode' );

@@ -259,6 +259,16 @@
 }
 
 /* Fixed Standard payment link: reuse the site button. */
+.egov-standard-cancellation {
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-block: 1rem;
+}
+.egov-standard-cancellation button {
+    max-width: 100%;
+    white-space: normal;
+}
 .egov-standard-application .egov-standard-payment-button {
     box-sizing: border-box;
     max-width: 100%;

@@ -9,13 +9,13 @@ class WP_Error {
 }
 function is_wp_error( $value ) { return $value instanceof WP_Error; }
 function current_user_can( $cap ) { return $GLOBALS['allowed']; }
-function get_userdata( $id ) { return isset( $GLOBALS['wpdb']->people[$id] ) ? (object) array( 'ID' => $id ) : false; }
+function get_userdata( $id ) { return isset( $GLOBALS['wpdb']->people[$id] ) ? (object) array( 'ID' => $id, 'user_login' => 'user' . $id, 'display_name' => 'User ' . $id, 'user_email' => 'user' . $id . '@example.test' ) : false; }
 function get_current_user_id() { return $GLOBALS['checkout_user'] ?? 99; }
 function wp_verify_nonce( $nonce, $action ) { return $nonce === 'valid:' . $action; }
 function wp_salt( $scheme ) { return 'test-key'; }
 function wp_json_encode( $value ) { return json_encode( $value ); }
 function current_time( $format ) { return $format === 'timestamp' ? strtotime( $GLOBALS['now'] . ' UTC' ) : $GLOBALS['now']; }
-function wp_date( $format, $timestamp ) { return gmdate( $format, $timestamp ); }
+function wp_date( $format, $timestamp, $timezone = null ) { return ( new DateTimeImmutable( '@' . $timestamp ) )->setTimezone( $timezone ?? new DateTimeZone( 'UTC' ) )->format( $format ); }
 function get_user_meta( $id, $key, $single ) {
     if ( $key === 'egov_law_monitor_ai_summary_trial_usage' ) { return $GLOBALS['trial_usage']; }
     if ( array_key_exists( $id, $GLOBALS['cache'] ) ) { return $GLOBALS['cache'][$id]; }

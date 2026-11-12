@@ -11,6 +11,10 @@ function egov_law_monitor_square_audit_label( $action ) {
         'subscription_updated' => '契約更新',
         'checkout_cancel_requested' => '申込キャンセル申請',
         'checkout_cancel_completed' => '申込キャンセル完了',
+        'subscription_cancellation_requested' => 'Standard解約申請',
+        'subscription_end_date_set' => '利用終了日登録',
+        'subscription_end_date_changed' => '利用終了日変更',
+        'subscription_cancellation_completed' => 'Standard利用終了・Free変更',
     );
     return $labels[$action] ?? $action;
 }
@@ -28,9 +32,10 @@ function egov_law_monitor_square_audit_json( $raw ) {
 function egov_law_monitor_square_audit_summary( $action, $old, $new ) {
     $before = $old['data']; $after = $new['data'];
     $plans = array( 'free' => 'Free', 'standard' => 'Standard' );
-    if ( in_array( $action, array( 'standard_approved', 'plan_changed' ), true ) && is_array( $before ) && is_array( $after ) && is_string( $before['plan'] ?? null ) && is_string( $after['plan'] ?? null ) && isset( $plans[$before['plan']], $plans[$after['plan']] ) ) {
+    if ( in_array( $action, array( 'standard_approved', 'plan_changed', 'subscription_cancellation_completed' ), true ) && is_array( $before ) && is_array( $after ) && is_string( $before['plan'] ?? null ) && is_string( $after['plan'] ?? null ) && isset( $plans[$before['plan']], $plans[$after['plan']] ) ) {
         return $plans[$before['plan']] . ' → ' . $plans[$after['plan']];
     }
+    if ( in_array( $action, array( 'subscription_end_date_set', 'subscription_end_date_changed' ), true ) && is_array( $before ) && is_array( $after ) && array_key_exists( 'end_date', $before ) && is_string( $after['end_date'] ?? null ) && preg_match( '/\A[0-9]{4}-[0-9]{2}-[0-9]{2}\z/', $after['end_date'] ) && ( $before['end_date'] === null || ( is_string( $before['end_date'] ) && preg_match( '/\A[0-9]{4}-[0-9]{2}-[0-9]{2}\z/', $before['end_date'] ) ) ) ) { return ( $before['end_date'] ?? '終了日未登録' ) . ' → ' . $after['end_date']; }
     if ( $action === 'contract_environment_confirmed' && is_array( $before ) && is_array( $after ) && array_key_exists( 'environment', $before ) && in_array( $before['environment'], array( null, 'sandbox', 'production' ), true ) && in_array( $after['environment'] ?? null, array( 'sandbox', 'production' ), true ) ) {
         return ( $before['environment'] ?? '環境未登録' ) . ' → ' . $after['environment'];
     }
@@ -73,9 +78,10 @@ function egov_law_monitor_render_square_audit( $logs, $read_error ) {
             $action = (string) ( $log['action'] ?? '' );
             $actor_id = (int) ( $log['admin_user_id'] ?? 0 );
             $actor = $actor_id > 0 ? get_userdata( $actor_id ) : false;
-            $actor_label = $action === 'checkout_cancel_requested' && $actor_id === 0
+            $actor_label = in_array( $action, array( 'checkout_cancel_requested', 'subscription_cancellation_requested' ), true ) && $actor_id === 0
                 ? '利用者による申請 (ID: ' . (int) $log['user_id'] . ')'
                 : ( $actor ? $actor->display_name : '削除済み管理者' ) . ' (ID: ' . $actor_id . ')';
+            if ( $action === 'subscription_cancellation_completed' && $actor_id === 0 ) { $actor_label = 'システム（Free状態の確認）'; }
             $old = egov_law_monitor_square_audit_json( $log['old_value'] ?? null );
             $new = egov_law_monitor_square_audit_json( $log['new_value'] ?? null );
             ?>
