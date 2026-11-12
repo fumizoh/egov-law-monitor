@@ -191,7 +191,7 @@ try {
     try { egov_law_monitor_render_admin_users(); $html = ob_get_contents(); }
     finally { ob_end_clean(); }
     check_lookup( ! str_contains( $html, '<form' ) && ! str_contains( $html, '<select' ) && ! str_contains( $html, '<input' ) && ! str_contains( $html, '<button' ), 'user management list is completely read-only' );
-    check_lookup( str_contains( $html, '無料' ) && str_contains( $html, 'スタンダード' ) && str_contains( $html, 'ON' ) && str_contains( $html, 'OFF' ), 'plan and notification current values render as text' );
+    check_lookup( str_contains( $html, 'Free' ) && str_contains( $html, 'Standard' ) && ! str_contains( $html, '無料' ) && ! str_contains( $html, 'スタンダード' ) && str_contains( $html, 'ON' ) && str_contains( $html, 'OFF' ), 'plan and notification current values render as text' );
     preg_match_all( '/<th>(.*?)<\/th>/', $html, $headers );
     check_lookup( $headers[1] === array( 'ユーザーID', 'ユーザー', 'メールアドレス', 'プラン', '通知', 'ウォッチキーワード', 'AI要約', '登録日', '操作' ), 'all nine columns and original order preserved' );
     check_lookup( str_contains( $html, '環境、行政' ) && preg_match( '/2\s*\/\s*3回/u', $html ) && preg_match( '/37\s*\/\s*100回/u', $html ) && str_contains( $html, '2026年1月1日' ), 'watch formatting usage counters and registration date formatting preserved' );

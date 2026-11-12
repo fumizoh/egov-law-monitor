@@ -156,7 +156,7 @@ function egov_law_monitor_render_admin_users() {
                                     $plan = egov_law_monitor_get_plan( $user->ID );
                                     ?>
 
-                                    <?php echo esc_html( $plan === EGOV_LAW_MONITOR_PLAN_FREE ? '無料' : ( $plan === EGOV_LAW_MONITOR_PLAN_STANDARD ? 'スタンダード' : egov_law_monitor_get_plan_label( $plan ) ) ); ?>
+                                    <?php echo esc_html( $plan === EGOV_LAW_MONITOR_PLAN_FREE ? 'Free' : ( $plan === EGOV_LAW_MONITOR_PLAN_STANDARD ? 'Standard' : egov_law_monitor_get_plan_label( $plan ) ) ); ?>
                                 </td>
 
                                 <td>
