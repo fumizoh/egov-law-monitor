@@ -39,7 +39,7 @@ function egov_law_monitor_standard_legacy_pending( $user_id ) {
 function egov_law_monitor_standard_plan_view( $user_id ) {
     $plan = egov_law_monitor_get_plan( $user_id );
     $view = array( 'plan' => $plan, 'can_pay' => false, 'message' => '' );
-    if ( $plan === 'standard' ) { $view['message'] = 'Standardプランをご利用中です。Squareの支払状況はこの画面では確認できません。契約については管理者へお問い合わせください。'; return $view; }
+    if ( $plan === 'standard' ) { $view['message'] = 'Standardプランをご利用中です。'; return $view; }
     if ( $plan !== 'free' ) { $view['message'] = 'プラン情報を確認できません。管理者へお問い合わせください。'; return $view; }
     if ( ! egov_law_monitor_standard_application_allowed() ) { $view['message'] = 'Standardプランのお申し込みは現在準備中です。'; return $view; }
     global $wpdb;
@@ -63,7 +63,7 @@ function egov_law_monitor_standard_application_shortcode() {
     $html = '<section class="egov-standard-application"><h2>Standardプラン（月額500円・税込）</h2>';
     if ( $view['can_pay'] ) {
         $html .= '<p>Standardプランのお支払いは、Squareの決済ページで行います。</p><p>お支払いの確認後、管理者がStandardプランへの切り替えを行います。切り替えが完了するまで、しばらくお待ちください。</p><p><a class="egov-law-button egov-standard-payment-button" href="https://square.link/u/30s16R3f" rel="noreferrer">Squareでお支払いへ進む</a></p><p>すでにお支払い済みの場合は、再度決済せず、プランの切り替えをお待ちください。お問い合わせの際はSquareの請求書番号をお知らせください。</p>';
-    } else { $html .= '<p>' . esc_html( $view['message'] ) . '</p>'; }
+    } elseif ( $view['plan'] !== 'standard' || ! function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= '<p>' . esc_html( $view['message'] ) . '</p>'; }
     if ( function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= egov_law_monitor_subscription_cancellation_panel( (int) get_current_user_id() ); }
     return $html . '<p>お支払い・契約・キャンセルについては管理者へお問い合わせください。この画面からSquareの契約変更・解約は行いません。</p></section>';
 }
@@ -79,7 +79,7 @@ function egov_law_monitor_plan_status_shortcode() {
     if ( $view['can_pay'] ) {
         $url = egov_law_monitor_standard_application_page_url();
         $html .= $url !== '' ? '<p><a href="' . esc_url( $url ) . '">Standardプランに申し込む</a></p>' : '<p>申込ページを確認できません。管理者へお問い合わせください。</p>';
-    } else { $html .= '<p>' . esc_html( $view['message'] ) . '</p>'; }
+    } elseif ( $view['plan'] !== 'standard' || ! function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= '<p>' . esc_html( $view['message'] ) . '</p>'; }
     if ( function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= egov_law_monitor_subscription_cancellation_panel( (int) get_current_user_id() ); }
     return $html . '</section>';
 }

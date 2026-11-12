@@ -187,7 +187,26 @@ egov_law_monitor_subscription_cancel_post( 'cancel_factory', $redirect );
 check( count( $wpdb->cancellations ) === 1 && count( $cancel_mails ) === 1 && count( $redirects ) === 1, 'POST handler runs once per request' );
 $_SERVER['REQUEST_METHOD'] = 'GET'; check( egov_law_monitor_subscription_cancel_post( 'cancel_factory', $redirect ) === null && str_contains( egov_law_monitor_subscription_cancellation_panel( 10 ), '解約申請を受け付けました' ), 'GET shows accepted state and never replays POST' );
 set_cancel_date( '2026-11-15' ); $panel = egov_law_monitor_subscription_cancellation_panel( 10 );
-check( str_contains( $panel, '契約状況：解約予定' ) && str_contains( $panel, '2026年11月15日' ) && ! str_contains( $panel, 'Standardを解約する' ), 'scheduled date appears in mypage instead of button' );
+check( str_contains( $panel, 'Standardプランは解約予定です。' ) && str_contains( $panel, '2026年11月15日' ) && ! str_contains( $panel, 'Standardを解約する' ), 'scheduled date appears in mypage instead of button' );
+
+// Both shortcodes share exactly one state-specific notice; rendering never sends mail or changes plans.
+foreach ( array( 'normal', 'requested', 'scheduled', 'end_day', 'due' ) as $display_state ) {
+    reset_cancellation();
+    if ( $display_state !== 'normal' ) { request_cancellation(); }
+    if ( in_array( $display_state, array( 'scheduled', 'end_day', 'due' ), true ) ) { set_cancel_date( '2026-11-15' ); }
+    if ( $display_state === 'end_day' ) { $cancel_clock = '2026-11-15T23:59:59+09:00'; }
+    if ( $display_state === 'due' ) { $cancel_clock = '2026-11-16T00:00:00+09:00'; }
+    $expected = array( 'normal' => 'Standardプランをご利用中です。', 'requested' => '解約申請を受け付けました。手続き完了後に利用終了日をお知らせします。', 'scheduled' => 'Standardプランは解約予定です。', 'end_day' => 'Standardプランは解約予定です。', 'due' => 'Standardプランの利用終了日を過ぎています。管理者による手続き中です。' );
+    $before_display = serialize( array( $wpdb->cancellations, $wpdb->logs, $wpdb->meta, $cancel_mails ) );
+    foreach ( array( 'egov_law_monitor_plan_status_shortcode', 'egov_law_monitor_standard_application_shortcode' ) as $shortcode ) {
+        $html = $shortcode();
+        check( substr_count( $html, $expected[$display_state] ) === 1 && ! str_contains( $html, 'Squareの支払状況はこの画面では確認できません' ) && ( $display_state === 'normal' || ! str_contains( $html, 'Standardプランをご利用中です。' ) ), 'one shared notice without obsolete or duplicate guidance: ' . $display_state . '/' . $shortcode );
+        if ( in_array( $display_state, array( 'scheduled', 'end_day', 'due' ), true ) ) {
+            check( str_contains( $html, '利用終了日：<strong>2026年11月15日</strong>' ) && ( str_contains( $html, '利用終了日まではStandardプランをご利用いただけます。' ) === ( $display_state !== 'due' ) ), 'end date and usage notice match state: ' . $display_state . '/' . $shortcode );
+        }
+    }
+    check( serialize( array( $wpdb->cancellations, $wpdb->logs, $wpdb->meta, $cancel_mails ) ) === $before_display, 'display has no mutation or mail side effects: ' . $display_state );
+}
 
 foreach ( array( 'engine', 'column', 'unique', 'prefix' ) as $bad ) {
     reset_cancellation(); $wpdb->cancellation_bad = $bad;

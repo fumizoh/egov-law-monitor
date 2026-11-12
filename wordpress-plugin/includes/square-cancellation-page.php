@@ -49,11 +49,13 @@ function egov_law_monitor_subscription_cancellation_panel( $user_id ) {
         if ( $state === 'completed' ) { return $html . '<p>解約申請の利用終了処理は完了し、Freeへ変更済みです。</p>'; }
         if ( $state === 'requested' ) { return $html . '<p>解約申請を受け付けました。手続き完了後に利用終了日をお知らせします。</p>'; }
         if ( in_array( $state, array( 'scheduled', 'due' ), true ) ) {
-            $html .= '<h3>契約状況：解約予定</h3><p>Standard利用終了日：<strong>' . esc_html( egov_law_monitor_cancellation_date_label( $row['end_date'] ) ) . '</strong></p><p>利用終了日当日までStandardプランをご利用いただけます。</p>';
-            if ( $state === 'due' ) { $html .= '<p>利用終了日が到来しています。管理者による利用終了処理をお待ちください。</p>'; }
+            $html .= $state === 'due' ? '<p>Standardプランの利用終了日を過ぎています。管理者による手続き中です。</p>' : '<p>Standardプランは解約予定です。</p>';
+            $html .= '<p>利用終了日：<strong>' . esc_html( egov_law_monitor_cancellation_date_label( $row['end_date'] ) ) . '</strong></p>';
+            if ( $state === 'scheduled' ) { $html .= '<p>利用終了日まではStandardプランをご利用いただけます。</p>'; }
             return $html;
         }
         if ( $state !== 'none' || $plan !== 'standard' ) { return $html; }
+        $html .= '<p>Standardプランをご利用中です。</p>';
         $url = egov_law_monitor_standard_application_page_url();
         if ( $url === '' ) { throw new RuntimeException(); }
         if ( ( $_GET['egov_standard_cancel_confirm'] ?? null ) === '1' ) {
