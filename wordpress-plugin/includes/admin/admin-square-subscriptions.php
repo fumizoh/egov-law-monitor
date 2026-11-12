@@ -43,7 +43,7 @@ function egov_law_monitor_render_square_subscriptions() {
     }
     if ( isset( $_POST['egov_square_invoice_approve'] ) ) {
         $fields = array();
-        foreach ( array( 'nonce' => 'invoice_approve_nonce', 'candidate' => 'invoice_candidate', 'signature' => 'invoice_signature', 'confirmed' => 'invoice_confirmed', 'reason' => 'invoice_reason' ) as $key => $field ) {
+        foreach ( array( 'nonce' => 'invoice_approve_nonce', 'candidate' => 'invoice_candidate', 'signature' => 'invoice_signature', 'confirmed' => 'invoice_confirmed', 'reason' => 'invoice_reason', 'environment_confirmed' => 'invoice_environment_confirmed', 'environment_reason' => 'invoice_environment_reason' ) as $key => $field ) {
             $fields[$key] = isset( $_POST[$field] ) && is_string( $_POST[$field] ) ? wp_unslash( $_POST[$field] ) : '';
         }
         $invoice_approval = egov_law_monitor_approve_square_invoice( $user_id, $fields );

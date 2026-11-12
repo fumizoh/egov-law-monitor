@@ -119,6 +119,9 @@ function egov_law_monitor_render_invoice_lookup( $user_id, $url, $result ) {
     if ( $valid && isset( $result['candidate'], $result['signature'] ) ) {
         echo '<form method="post" action="' . esc_url( $url ) . '">';
         wp_nonce_field( 'egov_square_invoice_approve_' . $user_id, 'invoice_approve_nonce' );
+        if ( ! empty( $result['environment_confirmation_required'] ) ) {
+            echo '<fieldset><legend>既存契約のSquare環境確認（必須）</legend><p>既存契約のSquare環境情報が未登録です。今回の照会環境：<strong>' . esc_html( $result['fields']['Square環境'] ) . '</strong>。Dashboardの環境・Locationと契約ID・Customer IDを照合してください。</p><p><label><input type="checkbox" name="invoice_environment_confirmed" value="1" required>既存契約が今回照会したSquare環境の契約であることを確認した</label></p><p><label>環境確認の根拠<textarea name="invoice_environment_reason" maxlength="2000" rows="3" required></textarea></label></p><p>本人確認とは別の確認です。チェックだけでは補完せず、確定時の再照会・契約再検証と承認が成功した場合のみ環境確認履歴を保存します。</p></fieldset>';
+        }
         echo '<input type="hidden" name="invoice_candidate" value="' . esc_attr( $result['candidate'] ) . '"><input type="hidden" name="invoice_signature" value="' . esc_attr( $result['signature'] ) . '"><p><label><input type="checkbox" name="invoice_confirmed" value="1" required>対象ユーザー本人の契約であることを確認した</label></p><p><label>本人確認の根拠<textarea name="invoice_reason" maxlength="2000" rows="3" required></textarea></label></p><p>確定時にSquareを再照会します。照会候補の有効期限は5分です。</p><button class="button button-primary" name="egov_square_invoice_approve" type="submit">契約を登録してStandardを承認</button></form>';
     }
 }

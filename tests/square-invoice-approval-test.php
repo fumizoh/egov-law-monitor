@@ -15,7 +15,10 @@ require __DIR__ . '/../wordpress-plugin/includes/square-api.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-invoices.php';
 
 class InvoiceStore extends ApprovalStore {
+    /** Preexisting immutable fixture history, separate from writes under test. */
+    public $environment_history = array();
     public function select( $sql, $p ) {
+        if ( str_contains( $sql, 'SELECT action, new_value' ) && str_contains( $sql, 'admin_log' ) ) { return array_slice( array_values( array_reverse( array_filter( array_merge( $this->environment_history, $this->logs ), static fn( $r ) => $r['user_id'] === $p[0] && in_array( $r['action'], array_slice( $p, 1 ), true ) ) ) ), 0, 101 ); }
         if ( str_contains( $sql, 'WHERE square_subscription_id =' ) ) { return array_values( array_filter( $this->contracts, static fn( $r ) => $r['square_subscription_id'] === $p[0] ) ); }
         return parent::select( $sql, $p );
     }
@@ -46,6 +49,7 @@ function reset_invoice_approval( $existing = false ) {
     reset_store(); $GLOBALS['wpdb'] = new InvoiceStore();
     if ( $existing ) { $GLOBALS['wpdb']->contracts = array( 1 => $GLOBALS['wpdb']->contracts[1] ); $GLOBALS['wpdb']->contracts[1]['admin_note'] = '申込照合: {"environment":"production"}'; }
     else { $GLOBALS['wpdb']->contracts = array(); }
+    if ( $existing ) { $GLOBALS['wpdb']->environment_history[] = array( 'user_id' => 10, 'action' => 'subscription_created', 'new_value' => json_encode( $GLOBALS['wpdb']->contracts[1] ) ); }
     $GLOBALS['invoice_data'] = invoice_fixture(); $GLOBALS['subscription_data'] = subscription_fixture();
     $GLOBALS['invoice_http_calls'] = array(); $GLOBALS['invoice_session'] = null;
     $GLOBALS['checkout_contract_transport'] = static function ( $url, $args ) {
@@ -89,9 +93,8 @@ $fields = invoice_fields( invoice_candidate() ); $r = approve_invoice( $fields )
 check( ! is_wp_error( $r ) && count( $wpdb->contracts ) === 1 && count( $wpdb->logs ) === 4 && $wpdb->logs[3]['action'] === 'standard_approved', 'fresh reapproval after Free preserves contract and appends history' );
 reset_invoice_approval( true ); $fields = invoice_fields( invoice_candidate() ); $r = approve_invoice( $fields );
 check( ! is_wp_error( $r ) && count( $wpdb->contracts ) === 1 && count( $wpdb->logs ) === 1 && $wpdb->logs[0]['action'] === 'standard_approved', 'same-user environment-known contract reused' );
-foreach ( array( 'unknown', 'sandbox', 'other_user', 'other_customer' ) as $case ) {
+foreach ( array( 'sandbox', 'other_user', 'other_customer' ) as $case ) {
     reset_invoice_approval( true );
-    if ( $case === 'unknown' ) { $wpdb->contracts[1]['admin_note'] = ''; }
     if ( $case === 'sandbox' ) { $wpdb->contracts[1]['admin_note'] = '申込照合: {"environment":"sandbox"}'; }
     if ( $case === 'other_user' ) { $wpdb->contracts[1]['user_id'] = 20; }
     if ( $case === 'other_customer' ) { $wpdb->contracts[1]['square_customer_id'] = 'OTHER'; }
@@ -137,4 +140,74 @@ check( is_wp_error( approve_invoice( $fields ) ) && ! $wpdb->logs, 'other-user r
 check( $trial_usage === 2 && $monthly_usage === 37, 'AI counters unchanged' );
 reset_invoice_approval(); $fields = invoice_fields( invoice_candidate() ); $cache_failure = true; $r = approve_invoice( $fields );
 check( $r->code === 'square_invoice_cache_warning' && count( $wpdb->logs ) === 2 && $wpdb->meta[1]['meta_value'] === 'standard', 'cache exception distinguished from committed approval' );
+
+function reset_legacy_invoice() { reset_invoice_approval( true ); $GLOBALS['wpdb']->contracts[1]['admin_note'] = '旧手動登録のメモ'; $GLOBALS['wpdb']->environment_history = array( array( 'user_id' => 10, 'action' => 'subscription_created', 'new_value' => json_encode( $GLOBALS['wpdb']->contracts[1] ) ) ); }
+function confirm_environment_fields( $candidate ) { return invoice_fields( $candidate ) + array( 'environment_confirmed' => '1', 'environment_reason' => '本番DashboardでLocation・契約・顧客を照合した' ); }
+reset_legacy_invoice(); change(); change( 'free', 0 ); $past_logs = $wpdb->logs;
+$candidate = invoice_candidate();
+check( isset( $candidate['candidate'] ) && $candidate['environment_confirmation_required'] && str_contains( $candidate['approval_notice'], 'Square環境情報が未登録' ), 'legacy unknown environment offers provisional candidate with mandatory confirmation' );
+check( ! $wpdb->meta || $wpdb->meta[1]['meta_value'] === 'free', 'lookup never changes Free plan or auto-completes environment' );
+ob_start(); egov_law_monitor_render_invoice_lookup( 10, 'https://example.test/admin', $candidate ); $html = ob_get_clean();
+check( str_contains( $html, 'name="invoice_environment_confirmed" value="1" required' ) && str_contains( $html, 'name="invoice_environment_reason"' ) && str_contains( $html, 'production' ), 'legacy form displays separate environment checkbox, evidence and selected API environment' );
+$fields = confirm_environment_fields( $candidate ); $r = approve_invoice( $fields );
+check( ! is_wp_error( $r ) && count( $wpdb->contracts ) === 1 && $wpdb->meta[1]['meta_value'] === 'standard' && $wpdb->contracts[1]['admin_note'] === '旧手動登録のメモ', 'legacy contract reapproved without duplicate or note rewrite' );
+$environment_log = $wpdb->logs[2]; $environment_data = json_decode( $environment_log['new_value'], true );
+check( array_slice( $wpdb->logs, 0, 2 ) === $past_logs && $environment_log['action'] === 'contract_environment_confirmed' && $wpdb->logs[3]['action'] === 'standard_approved', 'old approval history preserved and environment plus approval audited together' );
+check( $environment_data['contract_id'] === 1 && $environment_data['environment'] === 'production' && $environment_data['invoice_number'] === '000004' && $environment_log['admin_user_id'] === 99 && $environment_log['reason'] === $fields['environment_reason'] && $environment_log['created_at'] === $now, 'environment confirmation includes contract, invoice, actor, reason and time' );
+check( egov_law_monitor_invoice_contract_environment( $wpdb->contracts[1] ) === 'production', 'immutable confirmation establishes environment without magic note text' );
+$saved_logs = $wpdb->logs; $r = approve_invoice( $fields );
+check( ! is_wp_error( $r ) && $r['already'] && $wpdb->logs === $saved_logs, 'double legacy approval never duplicates environment or approval log' );
+change( 'free', 0 ); $candidate = invoice_candidate();
+check( isset( $candidate['candidate'] ) && ! $candidate['environment_confirmation_required'], 'later reapproval reads confirmed environment from audit' );
+$r = approve_invoice( invoice_fields( $candidate ) );
+check( ! is_wp_error( $r ) && count( array_filter( $wpdb->logs, static fn( $row ) => $row['action'] === 'contract_environment_confirmed' ) ) === 1, 'known audited environment needs no repeated supplementation' );
+
+foreach ( array( 'unchecked_environment', 'empty_environment_reason', 'html_environment_reason', 'unchecked_identity', 'empty_identity_reason', 'tampered_environment_requirement' ) as $case ) {
+    reset_legacy_invoice(); $fields = confirm_environment_fields( invoice_candidate() ); $call_count = count( $invoice_http_calls );
+    if ( $case === 'unchecked_environment' ) { unset( $fields['environment_confirmed'] ); }
+    if ( $case === 'empty_environment_reason' ) { $fields['environment_reason'] = ' '; }
+    if ( $case === 'html_environment_reason' ) { $fields['environment_reason'] = '<b></b>'; }
+    if ( $case === 'unchecked_identity' ) { $fields['confirmed'] = ''; }
+    if ( $case === 'empty_identity_reason' ) { $fields['reason'] = ''; }
+    if ( $case === 'tampered_environment_requirement' ) { $data = json_decode( $fields['candidate'], true ); $data['environment_confirmation_required'] = false; $fields['candidate'] = json_encode( $data ); }
+    $r = approve_invoice( $fields );
+    check( is_wp_error( $r ) && ! $invoice_session && count( $invoice_http_calls ) === $call_count && ! $wpdb->logs && ! $wpdb->meta, 'confirmation required before HTTP/DB: ' . $case );
+}
+reset_legacy_invoice(); $wpdb->contracts[1]['admin_note'] .= '\n請求書照合: {"environment":"production"}'; $candidate = invoice_candidate();
+check( $candidate['environment_confirmation_required'] && ! $wpdb->logs, 'appending metadata text does not bypass environment confirmation' );
+reset_legacy_invoice(); $wpdb->contracts[1]['admin_note'] = '請求書照合: {"environment":"production"}'; $candidate = invoice_candidate();
+check( $candidate['environment_confirmation_required'], 'even replacing an empty or legacy note with magic metadata cannot establish provenance' );
+reset_invoice_approval( true ); $wpdb->contracts[1]['admin_note'] = '管理者がメモを編集'; $candidate = invoice_candidate();
+check( ! $candidate['environment_confirmation_required'], 'immutable creation evidence survives later note edits' );
+reset_legacy_invoice(); $fields = confirm_environment_fields( invoice_candidate() );
+$wpdb->logs[] = array( 'id' => 1, 'user_id' => 10, 'action' => 'contract_environment_confirmed', 'new_value' => json_encode( array( 'contract_id' => 1, 'subscription_id' => 'SUB1', 'customer_id' => 'CUSTOMER', 'environment' => 'production' ) ) );
+check( is_wp_error( approve_invoice( $fields ) ) && count( $wpdb->logs ) === 1 && ! $wpdb->meta, 'concurrent environment confirmation invalidates stale unknown candidate' );
+reset_legacy_invoice(); $wpdb->environment_history = array_fill( 0, 101, $wpdb->environment_history[0] ); $candidate = invoice_candidate();
+check( ! isset( $candidate['candidate'] ) && str_contains( $candidate['approval_notice'], '環境確認履歴' ), 'incomplete bounded history never treated as unknown and overridden' );
+reset_legacy_invoice(); $wpdb->read_fail = 'global_usermeta'; $candidate = invoice_candidate();
+check( ! isset( $candidate['candidate'] ) && str_contains( $candidate['approval_notice'], '現在のプラン' ), 'plan-read failure distinct from unknown environment' );
+foreach ( array( 'sandbox' => '保存環境', 'other_user' => '所属ユーザー', 'other_customer' => 'Customer ID', 'history_read_failure' => '環境確認履歴' ) as $case => $message ) {
+    reset_legacy_invoice();
+    if ( $case === 'sandbox' ) { $wpdb->contracts[1]['admin_note'] = '申込照合: {"environment":"sandbox"}'; }
+    if ( $case === 'other_user' ) { $wpdb->contracts[1]['user_id'] = 20; }
+    if ( $case === 'other_customer' ) { $wpdb->contracts[1]['square_customer_id'] = 'OTHER'; }
+    if ( $case === 'history_read_failure' ) { $wpdb->read_fail = 'SELECT action, new_value'; }
+    $r = invoice_candidate(); check( ! isset( $r['candidate'] ) && str_contains( $r['approval_notice'], $message ), 'distinct safe refusal reason: ' . $case );
+}
+foreach ( array( 'note', 'owner', 'customer' ) as $race ) {
+    reset_legacy_invoice(); $fields = confirm_environment_fields( invoice_candidate() );
+    if ( $race === 'note' ) { $wpdb->contracts[1]['admin_note'] = '申込照合: {"environment":"sandbox"}'; }
+    if ( $race === 'owner' ) { $wpdb->contracts[1]['user_id'] = 20; }
+    if ( $race === 'customer' ) { $wpdb->contracts[1]['square_customer_id'] = 'OTHER'; }
+    check( is_wp_error( approve_invoice( $fields ) ) && ! $wpdb->logs && ! $wpdb->meta, 'legacy contract race rejected under transaction: ' . $race );
+}
+foreach ( array( 'meta', 'contract', 'audit', 'approval_audit', 'audit_rollback', 'commit', 'disconnect:meta' ) as $failure ) {
+    reset_legacy_invoice(); $fields = confirm_environment_fields( invoice_candidate() ); $original_contract = $wpdb->contracts[1]; $wpdb->fail = $failure;
+    $r = approve_invoice( $fields );
+    check( is_wp_error( $r ) && ! $wpdb->logs && ! $wpdb->meta && $wpdb->contracts[1] === $original_contract && $invoice_session->closed, 'environment and approval remain atomic on failure: ' . $failure );
+    if ( in_array( $failure, array( 'audit_rollback', 'commit', 'disconnect:meta' ), true ) ) { check( $r->code === 'square_invoice_outcome_unknown', 'legacy uncertain result distinguished: ' . $failure ); }
+}
+reset_legacy_invoice(); $fields = confirm_environment_fields( invoice_candidate() ); $wpdb->fail = 'commit'; $wpdb->commit_applied = true;
+$r = approve_invoice( $fields );
+check( $r->code === 'square_invoice_outcome_unknown' && $wpdb->meta[1]['meta_value'] === 'standard' && count( $wpdb->logs ) === 2 && egov_law_monitor_invoice_contract_environment( $wpdb->contracts[1] ) === 'production', 'applied COMMIT response loss retains atomic environment and plan but remains unknown' );
 echo ( $checks - $invoice_checks_start ) . " invoice approval checks passed; no real DB or Square API used.\n";

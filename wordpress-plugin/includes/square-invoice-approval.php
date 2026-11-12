@@ -7,9 +7,11 @@ function egov_law_monitor_invoice_fingerprint( $result ) {
     return hash( 'sha256', wp_json_encode( array( $fields, $result['checks'], $result['versions'] ) ) );
 }
 
-/** Legacy rows without recorded environment cannot be silently adopted. */
-function egov_law_monitor_invoice_contract_environment( $record ) {
-    $note = $record['admin_note'] ?? '';
+/** Only these fixed messages may be shown; driver/transport errors stay private. */
+class EGOV_Law_Monitor_Invoice_Validation_Error extends RuntimeException {}
+
+/** A note claim can reveal a contradiction, but cannot establish provenance. */
+function egov_law_monitor_invoice_note_environment( $note ) {
     foreach ( array( '請求書照合: ', '申込照合: ' ) as $prefix ) {
         if ( is_string( $note ) && str_starts_with( $note, $prefix ) ) {
             $metadata = json_decode( substr( $note, strlen( $prefix ) ), true );
@@ -19,17 +21,49 @@ function egov_law_monitor_invoice_contract_environment( $record ) {
     return null;
 }
 
+/** Read immutable creation/confirmation evidence; never infer environment from edited notes. */
+function egov_law_monitor_invoice_contract_environment( $record, $db = null, $expected_environment = null ) {
+    global $wpdb;
+    $claimed = egov_law_monitor_invoice_note_environment( $record['admin_note'] ?? '' );
+    $table = $wpdb->prefix . 'egov_square_admin_log';
+    if ( ! preg_match( '/\A[A-Za-z0-9_]+\z/', $table ) ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '環境確認履歴の保存先を確認できません。' ); }
+    $sql = "SELECT action, new_value FROM `{$table}` WHERE user_id = ";
+    $rows = $db ? $db->rows( $sql . '? AND action IN (?, ?) ORDER BY id DESC LIMIT 101', array( (int) $record['user_id'], 'contract_environment_confirmed', 'subscription_created' ) )
+        : $wpdb->get_results( $wpdb->prepare( $sql . '%d AND action IN (%s, %s) ORDER BY id DESC LIMIT 101', (int) $record['user_id'], 'contract_environment_confirmed', 'subscription_created' ), ARRAY_A );
+    if ( ! is_array( $rows ) || count( $rows ) > 100 || ( $db ?: $wpdb )->last_error !== '' || ( $db && $db->connection_lost ) ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '環境確認履歴を読み取れません。承認せず管理者が確認してください。' ); }
+    $environment = null;
+    foreach ( $rows as $row ) {
+        $data = json_decode( $row['new_value'] ?? '', true );
+        $creation = ( $row['action'] ?? null ) === 'subscription_created';
+        $id = is_array( $data ) ? ( $data[$creation ? 'id' : 'contract_id'] ?? null ) : null;
+        if ( $id === null ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '環境確認履歴の形式を確認できません。' ); }
+        if ( (int) $id !== (int) $record['id'] ) { continue; }
+        $confirmed = $creation ? egov_law_monitor_invoice_note_environment( $data['admin_note'] ?? '' ) : ( $data['environment'] ?? null );
+        if ( $creation && $confirmed === null ) { continue; }
+        if ( ( $data[$creation ? 'square_subscription_id' : 'subscription_id'] ?? null ) !== $record['square_subscription_id'] || ( $data[$creation ? 'square_customer_id' : 'customer_id'] ?? null ) !== $record['square_customer_id'] ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '環境確認履歴と現在の契約IDが一致しません。' ); }
+        if ( ! in_array( $confirmed, array( 'production', 'sandbox' ), true ) || ( $environment !== null && $environment !== $confirmed ) ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '既存契約の保存環境に明確な不一致・矛盾があります。承認できません。' ); }
+        $environment = $confirmed;
+    }
+    if ( $claimed !== null && ( ( $expected_environment !== null && $claimed !== $expected_environment ) || ( $environment !== null && $claimed !== $environment ) ) ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '既存契約の保存環境が今回のSquare照会環境または確認履歴と明確に異なります。承認できません。' ); }
+    return $environment;
+}
+
 /** Same unique Subscription lookup before signing and under the final lock. */
-function egov_law_monitor_invoice_contract( $user_id, $subscription_id, $customer_id, $environment, $db = null ) {
+function egov_law_monitor_invoice_contract( $user_id, $subscription_id, $customer_id, $environment, $db = null, &$environment_state = null ) {
     global $wpdb;
     $table = $wpdb->prefix . 'egov_square_subscriptions';
     if ( ! preg_match( '/\A[A-Za-z0-9_]+\z/', $table ) ) { throw new RuntimeException(); }
     $sql = "SELECT * FROM `{$table}` WHERE square_subscription_id = ";
     $rows = $db ? $db->rows( $sql . '? FOR UPDATE', array( $subscription_id ) ) : $wpdb->get_results( $wpdb->prepare( $sql . '%s', $subscription_id ), ARRAY_A );
-    if ( ! is_array( $rows ) || count( $rows ) > 1 || ( $db ?: $wpdb )->last_error !== '' || ( $db && $db->connection_lost ) ) { throw new RuntimeException( '契約情報を確認できません。' ); }
+    if ( ! is_array( $rows ) || count( $rows ) > 1 || ( $db ?: $wpdb )->last_error !== '' || ( $db && $db->connection_lost ) ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '契約情報を読み取れません。承認せず管理者が確認してください。' ); }
     $record = $rows[0] ?? null;
-    if ( $record && ( (int) $record['user_id'] !== $user_id || $record['square_subscription_id'] !== $subscription_id || $record['square_customer_id'] !== $customer_id || egov_law_monitor_invoice_contract_environment( $record ) !== $environment ) ) {
-        throw new RuntimeException( '契約の所属・Customer ID・保存環境を確認できません。既存契約を管理者が確認してください。' );
+    $environment_state = 'not_registered';
+    if ( $record ) {
+        if ( (int) $record['user_id'] !== $user_id ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '既存契約の所属ユーザーが一致しません。承認できません。' ); }
+        if ( $record['square_subscription_id'] !== $subscription_id || $record['square_customer_id'] !== $customer_id ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '既存契約のSubscription ID・Customer IDが一致しません。承認できません。' ); }
+        $saved_environment = egov_law_monitor_invoice_contract_environment( $record, $db, $environment );
+        $environment_state = $saved_environment === null ? 'unknown' : ( $saved_environment === $environment ? 'match' : 'mismatch' );
+        if ( $environment_state === 'mismatch' ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '既存契約の保存環境が今回のSquare照会環境と明確に異なります。承認できません。' ); }
     }
     return $record;
 }
@@ -43,17 +77,21 @@ function egov_law_monitor_invoice_candidate( $user_id, $result ) {
     if ( is_wp_error( $result ) || in_array( false, $result['checks'], true ) ) { return $result; }
     try {
         $fields = $result['fields'];
-        $record = egov_law_monitor_invoice_contract( $user_id, $fields['Subscription ID'], $fields['請求先Customer ID'], $fields['Square環境'] );
-        $snapshot = egov_law_monitor_square_plan_snapshot( $user_id, egov_law_monitor_square_plan_tables() );
+        $record = egov_law_monitor_invoice_contract( $user_id, $fields['Subscription ID'], $fields['請求先Customer ID'], $fields['Square環境'], null, $environment_state );
+        try { $snapshot = egov_law_monitor_square_plan_snapshot( $user_id, egov_law_monitor_square_plan_tables() ); }
+        catch ( Throwable $error ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '現在のプラン・変更履歴を読み取れません。再照会してください。' ); }
         if ( $snapshot['plan'] === 'standard' ) {
-            if ( ! $record ) { throw new RuntimeException( '既にStandardですが、この契約は未登録です。状態を確認してください。' ); }
+            if ( ! $record ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '既にStandardですが、この契約は未登録です。状態を確認してください。' ); }
             $result['approval_notice'] = 'このユーザーは登録済み契約で既にStandardです。二重登録・二重承認は行いません。';
             return $result;
         }
         $candidate = array( 'user_id' => $user_id, 'admin_id' => (int) get_current_user_id(), 'issued_at' => time(), 'invoice_id' => $fields['Invoice ID'], 'number' => $fields['請求書番号'], 'environment' => $fields['Square環境'], 'location' => $fields['請求書Location ID'], 'variation' => $fields['Plan Variation ID'], 'subscription_id' => $fields['Subscription ID'], 'customer_id' => $fields['請求先Customer ID'], 'fingerprint' => egov_law_monitor_invoice_fingerprint( $result ), 'plan_token' => egov_law_monitor_square_plan_token( $user_id, $snapshot ), 'contract_token' => $record ? egov_law_monitor_square_record_token( $record ) : null );
+        $candidate['environment_confirmation_required'] = $environment_state === 'unknown';
+        $result['environment_confirmation_required'] = $candidate['environment_confirmation_required'];
+        if ( $candidate['environment_confirmation_required'] ) { $result['approval_notice'] = '既存契約のSquare環境情報が未登録です。Dashboardで今回の照会環境と既存契約を確認し、環境確認のチェックと根拠を入力してください。'; }
         $result['candidate'] = wp_json_encode( $candidate );
         $result['signature'] = egov_law_monitor_invoice_signature( $result['candidate'] );
-    } catch ( Throwable $error ) { $result['approval_notice'] = '契約の所属・保存環境・現在プランを確認できないため、一括承認できません。管理者が既存契約を確認してください。'; }
+    } catch ( Throwable $error ) { $result['approval_notice'] = $error instanceof EGOV_Law_Monitor_Invoice_Validation_Error ? $error->getMessage() : '契約情報の検証に失敗しました。承認せず管理者が確認してください。'; }
     return $result;
 }
 
@@ -66,6 +104,9 @@ function egov_law_monitor_approve_square_invoice( $user_id, $fields, $factory = 
     if ( ! is_string( $payload ) || strlen( $payload ) > 8192 || ! is_string( $signature ) || ! hash_equals( egov_law_monitor_invoice_signature( $payload ), $signature ) ) { return egov_law_monitor_invoice_error( 'candidate', '照会候補を確認できません。再照会してください。' ); }
     $candidate = json_decode( $payload, true, 16 );
     if ( ! is_array( $candidate ) || ( $candidate['user_id'] ?? null ) !== $user_id || ( $candidate['admin_id'] ?? null ) !== (int) get_current_user_id() || ! is_int( $candidate['issued_at'] ?? null ) || $candidate['issued_at'] > time() || time() - $candidate['issued_at'] > 300 ) { return egov_law_monitor_invoice_error( 'candidate', '照会候補が古いか対象が異なります。再照会してください。' ); }
+    if ( ! is_bool( $candidate['environment_confirmation_required'] ?? null ) ) { return egov_law_monitor_invoice_error( 'candidate', '照会候補の形式が古いため再照会してください。' ); }
+    $environment_reason = $fields['environment_reason'] ?? '';
+    if ( $candidate['environment_confirmation_required'] && ( ( $fields['environment_confirmed'] ?? null ) !== '1' || ! is_string( $environment_reason ) || strlen( $environment_reason ) > 6000 || trim( sanitize_textarea_field( $environment_reason ) ) === '' ) ) { return egov_law_monitor_invoice_error( 'environment_confirmation', '既存契約のSquare環境確認チェックと、環境確認の根拠を入力してください。' ); }
     $settings = egov_law_monitor_square_api_settings();
     if ( is_wp_error( $settings ) ) { return $settings; }
     $suffix = strtoupper( $settings['environment'] );
@@ -83,7 +124,7 @@ function egov_law_monitor_approve_square_invoice( $user_id, $fields, $factory = 
         $started = true;
         $users = $db->rows( "SELECT ID FROM `{$tables['users']}` WHERE ID = ? FOR UPDATE", array( $user_id ) );
         if ( ! $users || (int) $users[0]['ID'] !== $user_id ) { throw new RuntimeException(); }
-        $record = egov_law_monitor_invoice_contract( $user_id, $candidate['subscription_id'], $candidate['customer_id'], $candidate['environment'], $db );
+        $record = egov_law_monitor_invoice_contract( $user_id, $candidate['subscription_id'], $candidate['customer_id'], $candidate['environment'], $db, $environment_state );
         if ( $db->rows( "SELECT umeta_id FROM `{$tables['meta']}` WHERE user_id = ? AND meta_key = ? FOR UPDATE", array( $user_id, EGOV_LAW_MONITOR_META_PLAN ) ) === false ) { throw new RuntimeException(); }
         $before = egov_law_monitor_square_plan_snapshot( $user_id, $tables, $db );
         if ( $record && $before['plan'] === 'standard' ) {
@@ -91,11 +132,19 @@ function egov_law_monitor_approve_square_invoice( $user_id, $fields, $factory = 
             $started = false;
             return array( 'already' => true, 'message' => '既にStandardです。二重登録・二重承認は行いません。' );
         }
-        if ( time() - $candidate['issued_at'] > 300 || $before['plan'] !== 'free' || ! hash_equals( $candidate['plan_token'], egov_law_monitor_square_plan_token( $user_id, $before ) ) || ( $record ? egov_law_monitor_square_record_token( $record ) : null ) !== $candidate['contract_token'] ) { throw new RuntimeException(); }
+        if ( time() - $candidate['issued_at'] > 300 || $before['plan'] !== 'free' || ! hash_equals( $candidate['plan_token'], egov_law_monitor_square_plan_token( $user_id, $before ) ) || ( $record ? egov_law_monitor_square_record_token( $record ) : null ) !== $candidate['contract_token'] || ( $environment_state === 'unknown' ) !== $candidate['environment_confirmation_required'] ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( 'プラン・既存契約・環境確認状態が照会時から変わりました。再照会してください。' ); }
         $now = current_time( 'mysql' ); $admin_id = get_current_user_id();
         $evidence = array( 'environment' => $candidate['environment'], 'invoice_id' => $candidate['invoice_id'], 'invoice_number' => $candidate['number'], 'subscription_id' => $candidate['subscription_id'], 'customer_id' => $candidate['customer_id'], 'location_id' => $candidate['location'], 'variation_id' => $candidate['variation'], 'status' => 'PAID', 'amount_jpy' => 500, 'paid_jpy' => 500, 'queried_at' => $candidate['issued_at'], 'confirmed_at' => $now );
         if ( ! $record ) {
             $record = egov_law_monitor_square_store_contract( $db, '`' . $tables['contracts'] . '`', '`' . $tables['log'] . '`', $user_id, 0, null, $candidate['customer_id'], $candidate['subscription_id'], '請求書照合: ' . wp_json_encode( $evidence ), $now, $admin_id );
+        }
+        if ( $candidate['environment_confirmation_required'] ) {
+            // Preserve the legacy note; append immutable evidence, not a magic string.
+            $confirmation = $evidence + array( 'contract_id' => (int) $record['id'] );
+            $old_json = wp_json_encode( array( 'contract_id' => (int) $record['id'], 'environment' => null ) );
+            $new_json = wp_json_encode( $confirmation );
+            if ( $old_json === false || $new_json === false || ! $db->write( "INSERT INTO `{$tables['log']}` (user_id, admin_user_id, action, old_value, new_value, reason, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)", array( $user_id, $admin_id, 'contract_environment_confirmed', $old_json, $new_json, sanitize_textarea_field( $environment_reason ), $now ) ) ) { throw new EGOV_Law_Monitor_Invoice_Validation_Error( '環境確認履歴を保存できませんでした。' ); }
+            $evidence['environment_confirmation_reason'] = sanitize_textarea_field( $environment_reason );
         }
         $invalidate = true;
         egov_law_monitor_square_apply_plan( $db, $tables, $user_id, $before, $record, 'standard', $now, $admin_id, sanitize_textarea_field( $reason ), $evidence );
@@ -108,7 +157,7 @@ function egov_law_monitor_approve_square_invoice( $user_id, $fields, $factory = 
         if ( $started ) { try { $rolled_back = $db->rollback() !== false; } catch ( Throwable $rollback_error ) {} }
         $unknown = $started && ( $committing || ! $rolled_back || $rollback_failed );
         error_log( 'e-Gov Square: invoice approval ' . ( $unknown ? 'outcome unknown' : 'failed' ) . '; user_id=' . $user_id );
-        return egov_law_monitor_invoice_error( $unknown ? 'outcome_unknown' : 'save_failed', $unknown ? '確定または取り消し結果が不明です。再操作せず、現在のプラン・契約・操作履歴を確認してください。' : '契約登録・承認できませんでした。再照会し、プラン・契約の競合とDBの状態を確認してください。' );
+        return egov_law_monitor_invoice_error( $unknown ? 'outcome_unknown' : 'save_failed', $unknown ? '確定または取り消し結果が不明です。再操作せず、現在のプラン・契約・操作履歴を確認してください。' : ( $error instanceof EGOV_Law_Monitor_Invoice_Validation_Error ? $error->getMessage() : '契約登録・承認できませんでした。再照会し、プラン・契約の競合とDBの状態を確認してください。' ) );
     } finally {
         if ( $db ) { $db->close(); }
         if ( $invalidate ) {
