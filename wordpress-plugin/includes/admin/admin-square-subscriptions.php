@@ -30,14 +30,23 @@ function egov_law_monitor_render_square_subscriptions() {
     $free_message = null;
     $checkout_contract_result = null;
     $invoice_result = null;
+    $invoice_approval = null;
     $actions = array_filter( array( isset( $_POST['egov_square_lookup'] ), isset( $_POST['egov_square_save'] ), isset( $_POST['egov_square_approve'] ), isset( $_POST['egov_square_free'] ), isset( $_POST['egov_checkout_cancel'] ), isset( $_POST['egov_checkout_contract_lookup'] ), isset( $_POST['egov_checkout_contract_register'] ) ) );
-    if ( count( $actions ) + ( isset( $_POST['egov_square_invoice_lookup'] ) ? 1 : 0 ) > 1 ) {
+    if ( count( $actions ) + ( isset( $_POST['egov_square_invoice_lookup'] ) ? 1 : 0 ) + ( isset( $_POST['egov_square_invoice_approve'] ) ? 1 : 0 ) > 1 ) {
         wp_die( '契約保存・Square照会・プラン変更は別々に操作してください。' );
     }
     if ( isset( $_POST['egov_square_invoice_lookup'] ) ) {
         $number = isset( $_POST['invoice_number'] ) && is_string( $_POST['invoice_number'] ) ? wp_unslash( $_POST['invoice_number'] ) : '';
         $nonce = isset( $_POST['invoice_nonce'] ) && is_string( $_POST['invoice_nonce'] ) ? wp_unslash( $_POST['invoice_nonce'] ) : '';
         $invoice_result = egov_law_monitor_lookup_square_invoice( $user_id, $number, $nonce );
+        $invoice_result = egov_law_monitor_invoice_candidate( $user_id, $invoice_result );
+    }
+    if ( isset( $_POST['egov_square_invoice_approve'] ) ) {
+        $fields = array();
+        foreach ( array( 'nonce' => 'invoice_approve_nonce', 'candidate' => 'invoice_candidate', 'signature' => 'invoice_signature', 'confirmed' => 'invoice_confirmed', 'reason' => 'invoice_reason' ) as $key => $field ) {
+            $fields[$key] = isset( $_POST[$field] ) && is_string( $_POST[$field] ) ? wp_unslash( $_POST[$field] ) : '';
+        }
+        $invoice_approval = egov_law_monitor_approve_square_invoice( $user_id, $fields );
     }
     if ( isset( $_POST['egov_checkout_contract_lookup'] ) || isset( $_POST['egov_checkout_contract_register'] ) ) {
         $fields = array();
@@ -108,10 +117,13 @@ function egov_law_monitor_render_square_subscriptions() {
     <div class="wrap">
         <h1>Square契約管理</h1>
         <p><a href="<?php echo esc_url( admin_url( 'admin.php?page=egov-law-monitor' ) ); ?>">ユーザー管理へ戻る</a></p>
-        <p>契約登録・API照会だけではStandardになりません。Dashboardで契約・支払状況を確認した後、対象契約の手動承認を行ってください。確認記録は過去の記録であり、現在のプラン状態とは別です。</p>
+        <p>契約登録・API照会だけではStandardになりません。請求書照会後に本人確認して一括登録・承認するか、Dashboardで契約・支払状況を確認した後、対象契約の手動承認を行ってください。確認記録は過去の記録であり、現在のプラン状態とは別です。</p>
         <p>WordPress User ID: <?php echo esc_html( $user_id ); ?> ／ ユーザー名: <?php echo esc_html( $user->user_login ); ?>（<?php echo esc_html( $user->display_name ); ?>） ／ メール: <?php echo esc_html( $user->user_email ); ?></p>
         <p>現在のプラン: <strong><?php echo esc_html( egov_law_monitor_get_plan_label( egov_law_monitor_get_plan( $user_id ) ) ); ?></strong></p>
         <?php egov_law_monitor_render_invoice_lookup( $user_id, $url, $invoice_result ); ?>
+        <?php if ( $invoice_approval !== null ) : ?>
+            <div class="notice <?php echo is_wp_error( $invoice_approval ) ? 'notice-error' : 'notice-success'; ?>"><p><?php echo esc_html( is_wp_error( $invoice_approval ) ? $invoice_approval->get_error_message() : $invoice_approval['message'] ); ?></p></div>
+        <?php endif; ?>
         <?php egov_law_monitor_render_checkout_attempts( $user_id ); ?>
         <?php if ( $checkout_contract_result !== null ) { egov_law_monitor_render_checkout_contract_result( $user_id, $checkout_contract_result ); } ?>
         <?php if ( $approval_message !== null ) : ?>

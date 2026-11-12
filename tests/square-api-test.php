@@ -319,6 +319,10 @@ try {
     check_lookup( str_contains( $html, 'nonceを確認できません' ), 'invoice controller preserves nonce error' );
     try { render_lookup_page( array( 'egov_square_invoice_lookup' => '1', 'egov_square_save' => '1' ) ); throw new LogicException( 'mixed invoice/save accepted' ); }
     catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '別々' ), 'invoice lookup cannot run alongside contract write' ); }
+    $html = render_lookup_page( array( 'egov_square_invoice_approve' => '1', 'invoice_approve_nonce' => 'bad' ) );
+    check_lookup( str_contains( $html, 'nonceを確認できません' ), 'invoice approval controller validates nonce' );
+    try { render_lookup_page( array( 'egov_square_invoice_approve' => '1', 'egov_square_invoice_lookup' => '1' ) ); throw new LogicException( 'mixed invoice lookup/approval accepted' ); }
+    catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '別々' ), 'invoice lookup and approval remain separate operations' ); }
     $html = render_lookup_page( array( 'egov_square_free' => '1', 'egov_square_free_nonce' => 'valid:egov_square_free_10' ) );
     check_lookup( str_contains( $html, '解除することを確認してください' ), 'valid nonce alone cannot execute revocation without confirmation' );
     $html = render_lookup_page( array( 'egov_square_free' => '1', 'egov_square_free_nonce' => 'wrong' ) );

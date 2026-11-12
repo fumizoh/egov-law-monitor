@@ -152,6 +152,32 @@ function egov_law_monitor_square_record_token( $record, $key = null ) {
     return hash_hmac( 'sha256', wp_json_encode( $record ), $key === null ? wp_salt( 'auth' ) : $key );
 }
 
+/** Persist validated contract and audit inside caller-owned transaction. */
+function egov_law_monitor_square_store_contract( $db, $table, $log_table, $user_id, $id, $old, $customer_id, $subscription_id, $note, $now, $admin_id ) {
+    if ( $old ) {
+        $saved = $db->write( "UPDATE {$table} SET square_customer_id = ?, square_subscription_id = ?, admin_note = ?, updated_at = ? WHERE id = ? AND user_id = ?", array( $customer_id, $subscription_id, $note, $now, (int) $id, (int) $user_id ) );
+    } else {
+        $saved = $db->write( "INSERT INTO {$table} (square_customer_id, square_subscription_id, admin_note, updated_at, user_id, created_at, verified_at, verified_by) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL)", array( $customer_id, $subscription_id, $note, $now, (int) $user_id, $now ) );
+        $id = (int) $db->insert_id;
+    }
+    if ( $saved === false ) {
+        throw new RuntimeException( '契約を保存できませんでした。Subscription IDの重複またはDBエラーを確認してください。' );
+    }
+    $new = $db->rows( "SELECT * FROM {$table} WHERE id = ?", array( $id ) )[0] ?? null;
+    if ( ! $new ) {
+        throw new RuntimeException( '保存結果を取得できませんでした。' );
+    }
+    $old_json = $old === null ? null : wp_json_encode( $old );
+    $new_json = wp_json_encode( $new );
+    if ( $old_json === false || $new_json === false || $db->write(
+        "INSERT INTO {$log_table} (user_id, admin_user_id, action, old_value, new_value, reason, created_at) VALUES (?, ?, ?, ?, ?, NULL, ?)",
+        array( (int) $user_id, (int) $admin_id, $old ? 'subscription_updated' : 'subscription_created', $old_json, $new_json, $now )
+    ) === false ) {
+        throw new RuntimeException( '操作履歴を保存できませんでした。' );
+    }
+    return $new;
+}
+
 /** Save a contract and its immutable audit entry together. $database is a test seam. */
 function egov_law_monitor_save_square_subscription( $user_id, $id, $customer_id, $subscription_id, $note, $expected_token = '', ?EGOV_Law_Monitor_Square_Connection $database = null, $checkout_context = null ) {
     global $wpdb;
@@ -212,27 +238,8 @@ function egov_law_monitor_save_square_subscription( $user_id, $id, $customer_id,
         if ( $duplicates ) {
             throw new RuntimeException( 'このSubscription IDは既に登録されています。別ユーザーへの移動はできません。' );
         }
-        if ( $old ) {
-            $saved = $db->write( "UPDATE {$table} SET square_customer_id = ?, square_subscription_id = ?, admin_note = ?, updated_at = ? WHERE id = ? AND user_id = ?", array( $customer_id, $subscription_id, $note, $now, (int) $id, (int) $user_id ) );
-        } else {
-            $saved = $db->write( "INSERT INTO {$table} (square_customer_id, square_subscription_id, admin_note, updated_at, user_id, created_at, verified_at, verified_by) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL)", array( $customer_id, $subscription_id, $note, $now, (int) $user_id, $now ) );
-            $id = (int) $db->insert_id;
-        }
-        if ( $saved === false ) {
-            throw new RuntimeException( '契約を保存できませんでした。Subscription IDの重複またはDBエラーを確認してください。' );
-        }
-        $new = $db->rows( "SELECT * FROM {$table} WHERE id = ?", array( $id ) )[0] ?? null;
-        if ( ! $new ) {
-            throw new RuntimeException( '保存結果を取得できませんでした。' );
-        }
-        $old_json = $old === null ? null : wp_json_encode( $old );
-        $new_json = wp_json_encode( $new );
-        if ( $old_json === false || $new_json === false || $db->write(
-            "INSERT INTO {$log_table} (user_id, admin_user_id, action, old_value, new_value, reason, created_at) VALUES (?, ?, ?, ?, ?, NULL, ?)",
-            array( (int) $user_id, (int) $admin_id, $old ? 'subscription_updated' : 'subscription_created', $old_json, $new_json, $now )
-        ) === false ) {
-            throw new RuntimeException( '操作履歴を保存できませんでした。' );
-        }
+        $new = egov_law_monitor_square_store_contract( $db, $table, $log_table, $user_id, $id, $old, $customer_id, $subscription_id, $note, $now, $admin_id );
+        $id = (int) $new['id'];
         $committing = true;
         if ( $db->commit() === false ) {
             throw new RuntimeException( '保存の確定に失敗しました。' );

@@ -1,6 +1,7 @@
 <?php
-/** Administrator-only invoice lookup. No database writes or Square mutations. */
+/** Administrator-only invoice lookup. Square API calls are read-only. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
+require_once __DIR__ . '/square-invoice-approval.php';
 
 function egov_law_monitor_invoice_error( $code, $message ) {
     return new WP_Error( 'square_invoice_' . $code, $message );
@@ -61,10 +62,15 @@ function egov_law_monitor_lookup_square_invoice( $user_id, $number, $nonce ) {
     }
     if ( $cursor !== '' ) { return egov_law_monitor_invoice_error( 'incomplete', '検索上限（1000件）に達しました。検索は未完了です。' ); }
     if ( ! $matches ) { return egov_law_monitor_invoice_error( 'not_found', '一致する請求書番号が見つかりません。' ); }
-    $data = egov_law_monitor_invoice_get( $settings, '/v2/invoices/' . rawurlencode( $matches[0] ), $deadline );
+    return egov_law_monitor_invoice_details( $settings, $location, $variation, $number, $matches[0], $deadline );
+}
+
+/** Direct refresh by signed Invoice ID; no list scan at approval. */
+function egov_law_monitor_invoice_details( $settings, $location, $variation, $number, $invoice_id, $deadline ) {
+    $data = egov_law_monitor_invoice_get( $settings, '/v2/invoices/' . rawurlencode( $invoice_id ), $deadline );
     if ( is_wp_error( $data ) ) { return $data; }
     $invoice = $data['invoice'] ?? null;
-    if ( ! is_array( $invoice ) || ( $invoice['id'] ?? null ) !== $matches[0] || ( $invoice['invoice_number'] ?? null ) !== $number || ! egov_law_monitor_square_api_id_valid( $invoice['subscription_id'] ?? null ) ) { return egov_law_monitor_invoice_error( 'changed', '請求書が変更されたか、Subscription IDを取得できません。再照会してください。' ); }
+    if ( ! is_array( $invoice ) || ( $invoice['id'] ?? null ) !== $invoice_id || ( $invoice['invoice_number'] ?? null ) !== $number || ! egov_law_monitor_square_api_id_valid( $invoice['subscription_id'] ?? null ) ) { return egov_law_monitor_invoice_error( 'changed', '請求書が変更されたか、Subscription IDを取得できません。再照会してください。' ); }
     $data = egov_law_monitor_invoice_get( $settings, '/v2/subscriptions/' . rawurlencode( $invoice['subscription_id'] ), $deadline );
     if ( is_wp_error( $data ) ) { return $data; }
     $subscription = $data['subscription'] ?? null;
@@ -91,18 +97,28 @@ function egov_law_monitor_lookup_square_invoice( $user_id, $number, $nonce ) {
     // Explicit display allowlist: never return raw objects, card IDs or payment sources.
     $fields = array( 'Square環境' => $settings['environment'], '請求書番号' => $number, 'Invoice ID' => $invoice['id'], '請求書状態' => $invoice['status'] ?? '', '請求額（JPY）' => $money_valid ? (string) $amount : '確認不能', '支払済み額（JPY）' => $money_valid ? (string) $paid : '確認不能', 'Subscription ID' => $subscription['id'], '契約状態' => $subscription['status'] ?? '', '請求書Location ID' => $invoice['location_id'] ?? '', '契約Location ID' => $subscription['location_id'] ?? '', 'Plan Variation ID' => $subscription['plan_variation_id'] ?? '', '請求先Customer ID' => $customer['customer_id'] ?? '', '契約Customer ID' => $subscription['customer_id'] ?? '', '請求先氏名' => trim( ( is_string( $customer['given_name'] ?? null ) ? $customer['given_name'] : '' ) . ' ' . ( is_string( $customer['family_name'] ?? null ) ? $customer['family_name'] : '' ) ), '請求先メール' => $customer['email_address'] ?? '', '照会日時（サイト時刻）' => current_time( 'mysql' ) );
     foreach ( $fields as &$value ) { $value = is_string( $value ) && strlen( $value ) <= 512 ? $value : '応答形式不正'; } unset( $value );
-    return array( 'fields' => $fields, 'checks' => $checks );
+    return array( 'fields' => $fields, 'checks' => $checks, 'versions' => array( $invoice['version'] ?? null, $invoice['updated_at'] ?? null, $subscription['version'] ?? null, $subscription['updated_at'] ?? null ) );
 }
 
 function egov_law_monitor_render_invoice_lookup( $user_id, $url, $result ) {
-    echo '<h2>請求書番号でSquare契約を照会（読み取り専用）</h2><form method="post" action="' . esc_url( $url ) . '">';
+    echo '<h2>請求書番号でSquare契約を照会</h2><form method="post" action="' . esc_url( $url ) . '">';
     wp_nonce_field( 'egov_square_invoice_' . $user_id, 'invoice_nonce' );
     echo '<label>請求書番号 <input type="text" name="invoice_number" maxlength="191" required></label> <button class="button" name="egov_square_invoice_lookup" type="submit">請求書を照会</button></form>';
     echo '<p>上記のWordPressユーザーと請求先の氏名・メールを比較し、Dashboardでも本人を確認してください。番号やメールの一致だけでは本人と確定できません。照会だけでは契約登録・Standard承認は行いません。</p>';
     if ( $result === null ) { return; }
     if ( is_wp_error( $result ) ) { echo '<div class="notice notice-error"><p>' . esc_html( $result->get_error_message() ) . '</p></div>'; return; }
-    echo '<table class="widefat"><tbody>';
+    $valid = ! in_array( false, $result['checks'], true );
+    echo '<p><strong>' . ( $valid ? '請求書PAID・500 JPY・契約ACTIVEと各IDの整合性を確認しました。' : '検証結果に不一致があります。承認できません。' ) . '</strong></p>';
+    $user = get_userdata( $user_id );
+    echo '<table class="widefat"><thead><tr><th>本人確認</th><th>WordPressユーザー</th><th>Square請求先</th></tr></thead><tbody><tr><th>氏名・表示名</th><td>' . esc_html( $user->display_name ?? '' ) . '</td><td>' . esc_html( $result['fields']['請求先氏名'] ) . '</td></tr><tr><th>メール</th><td>' . esc_html( $user->user_email ?? '' ) . '</td><td>' . esc_html( $result['fields']['請求先メール'] ) . '</td></tr></tbody></table>';
+    echo '<details><summary>請求書・契約・検証結果の詳細</summary><table class="widefat"><tbody>';
     foreach ( $result['fields'] as $label => $value ) { echo '<tr><th>' . esc_html( $label ) . '</th><td>' . esc_html( $value ) . '</td></tr>'; }
     foreach ( $result['checks'] as $label => $ok ) { echo '<tr><th>' . esc_html( $label ) . '</th><td>' . ( $ok ? '一致・確認済み' : '不一致・要確認' ) . '</td></tr>'; }
-    echo '</tbody></table><p>これは照会時点の結果です。この請求書以外の未払い、今後の課金や継続的な契約有効性は保証しません。確認不一致時は承認せずDashboardで確認してください。</p>';
+    echo '</tbody></table></details><p>これは照会時点の結果です。この請求書以外の未払い、今後の課金や継続的な契約有効性は保証しません。確認不一致時は承認せずDashboardで確認してください。</p>';
+    if ( isset( $result['approval_notice'] ) ) { echo '<p>' . esc_html( $result['approval_notice'] ) . '</p>'; }
+    if ( $valid && isset( $result['candidate'], $result['signature'] ) ) {
+        echo '<form method="post" action="' . esc_url( $url ) . '">';
+        wp_nonce_field( 'egov_square_invoice_approve_' . $user_id, 'invoice_approve_nonce' );
+        echo '<input type="hidden" name="invoice_candidate" value="' . esc_attr( $result['candidate'] ) . '"><input type="hidden" name="invoice_signature" value="' . esc_attr( $result['signature'] ) . '"><p><label><input type="checkbox" name="invoice_confirmed" value="1" required>対象ユーザー本人の契約であることを確認した</label></p><p><label>本人確認の根拠<textarea name="invoice_reason" maxlength="2000" rows="3" required></textarea></label></p><p>確定時にSquareを再照会します。照会候補の有効期限は5分です。</p><button class="button button-primary" name="egov_square_invoice_approve" type="submit">契約を登録してStandardを承認</button></form>';
+    }
 }

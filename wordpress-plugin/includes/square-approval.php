@@ -71,6 +71,28 @@ function egov_law_monitor_square_plan_storage_ready( $db, $tables ) {
     return ! $db->connection_lost && $db->last_error === '';
 }
 
+/** Apply validated change inside caller-owned transaction; no begin/commit/API. */
+function egov_law_monitor_square_apply_plan( $db, $tables, $user_id, $before, $old, $plan, $now, $admin_id, $reason, $evidence = array() ) {
+    $approving = $old !== null;
+    $contract_id = $approving ? (int) $old['id'] : 0;
+    $saved = $before['meta_id'] === null
+        ? $db->write( "INSERT INTO `{$tables['meta']}` (user_id, meta_key, meta_value) VALUES (?, ?, ?)", array( $user_id, EGOV_LAW_MONITOR_META_PLAN, $plan ) )
+        : $db->write( "UPDATE `{$tables['meta']}` SET meta_value = ? WHERE umeta_id = ? AND user_id = ? AND meta_key = ?", array( $plan, (int) $before['meta_id'], $user_id, EGOV_LAW_MONITOR_META_PLAN ) );
+    if ( ! $saved ) { throw new RuntimeException( 'プランを保存できませんでした。' ); }
+    $after = egov_law_monitor_square_plan_snapshot( $user_id, $tables, $db );
+    if ( $after['plan'] !== $plan || $after['meta_id'] === null ) { throw new RuntimeException( 'プラン保存結果を確認できません。' ); }
+    $new = null;
+    if ( $approving ) {
+        if ( ! $db->write( "UPDATE `{$tables['contracts']}` SET verified_at = ?, verified_by = ?, updated_at = ? WHERE id = ? AND user_id = ?", array( $now, $admin_id, $now, $contract_id, $user_id ) ) ) { throw new RuntimeException( '契約確認記録を保存できませんでした。' ); }
+        $records = $db->rows( "SELECT * FROM `{$tables['contracts']}` WHERE id = ?", array( $contract_id ) );
+        $new = $records[0] ?? null;
+        if ( ! $new || $new['verified_at'] !== $now || (int) $new['verified_by'] !== $admin_id ) { throw new RuntimeException( '契約確認記録を再取得できません。' ); }
+    }
+    $old_json = wp_json_encode( array( 'plan' => $before['plan'], 'plan_meta' => $before, 'contract' => $old ) );
+    $new_json = wp_json_encode( array( 'plan' => $plan, 'contract' => $new ) + ( $evidence ? array( 'invoice_evidence' => $evidence ) : array() ) );
+    if ( $old_json === false || $new_json === false || ! $db->write( "INSERT INTO `{$tables['log']}` (user_id, admin_user_id, action, old_value, new_value, reason, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)", array( $user_id, $admin_id, $approving ? 'standard_approved' : 'plan_changed', $old_json, $new_json, $reason, $now ) ) ) { throw new RuntimeException( '監査履歴を保存できませんでした。' ); }
+}
+
 /** One transaction for plan + selected contract + audit. Never calls Square API. */
 function egov_law_monitor_square_change_plan( $user_id, $plan, $expected_token, $nonce, $contract_id = 0, $confirmed = false, $reason = '', ?EGOV_Law_Monitor_Square_Connection $database = null ) {
     global $wpdb;
@@ -113,22 +135,7 @@ function egov_law_monitor_square_change_plan( $user_id, $plan, $expected_token, 
         if ( $approving && $before['plan'] === 'standard' ) { throw new RuntimeException( '既にStandardです。二重承認はできません。' ); }
         if ( ! $approving && $before['plan'] !== 'standard' ) { throw new RuntimeException( '現在Standardではありません。二重操作はできません。' ); }
         $invalidate = true;
-        $saved = $before['meta_id'] === null
-            ? $db->write( "INSERT INTO `{$tables['meta']}` (user_id, meta_key, meta_value) VALUES (?, ?, ?)", array( $user_id, EGOV_LAW_MONITOR_META_PLAN, $plan ) )
-            : $db->write( "UPDATE `{$tables['meta']}` SET meta_value = ? WHERE umeta_id = ? AND user_id = ? AND meta_key = ?", array( $plan, (int) $before['meta_id'], $user_id, EGOV_LAW_MONITOR_META_PLAN ) );
-        if ( ! $saved ) { throw new RuntimeException( 'プランを保存できませんでした。' ); }
-        $after = egov_law_monitor_square_plan_snapshot( $user_id, $tables, $db );
-        if ( $after['plan'] !== $plan || $after['meta_id'] === null ) { throw new RuntimeException( 'プラン保存結果を確認できません。' ); }
-        $new = null;
-        if ( $approving ) {
-            if ( ! $db->write( "UPDATE `{$tables['contracts']}` SET verified_at = ?, verified_by = ?, updated_at = ? WHERE id = ? AND user_id = ?", array( $now, $admin_id, $now, $contract_id, $user_id ) ) ) { throw new RuntimeException( '契約確認記録を保存できませんでした。' ); }
-            $records = $db->rows( "SELECT * FROM `{$tables['contracts']}` WHERE id = ?", array( $contract_id ) );
-            $new = $records[0] ?? null;
-            if ( ! $new || $new['verified_at'] !== $now || (int) $new['verified_by'] !== $admin_id ) { throw new RuntimeException( '契約確認記録を再取得できません。' ); }
-        }
-        $old_json = wp_json_encode( array( 'plan' => $before['plan'], 'plan_meta' => $before, 'contract' => $old ) );
-        $new_json = wp_json_encode( array( 'plan' => $plan, 'contract' => $new ) );
-        if ( $old_json === false || $new_json === false || ! $db->write( "INSERT INTO `{$tables['log']}` (user_id, admin_user_id, action, old_value, new_value, reason, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)", array( $user_id, $admin_id, $approving ? 'standard_approved' : 'plan_changed', $old_json, $new_json, $reason, $now ) ) ) { throw new RuntimeException( '監査履歴を保存できませんでした。' ); }
+        egov_law_monitor_square_apply_plan( $db, $tables, $user_id, $before, $old, $plan, $now, $admin_id, $reason );
         $committing = true;
         if ( ! $db->commit() ) { throw new RuntimeException( '確定応答を確認できません。' ); }
         $committed = true;
