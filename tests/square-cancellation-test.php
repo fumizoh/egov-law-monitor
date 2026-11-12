@@ -180,6 +180,9 @@ check( str_contains( egov_law_monitor_plan_status_shortcode(), 'Standardを解�
 $_GET['egov_standard_cancel_confirm'] = '1'; $panel = egov_law_monitor_subscription_cancellation_panel( 10 );
 check( str_contains( $panel, '確定して解約を申請する' ) && str_contains( $panel, 'standard_cancel_nonce' ) && ! $wpdb->cancellations, 'confirmation GET has nonce and makes no changes' );
 check( str_contains( egov_law_monitor_standard_application_shortcode(), '確定して解約を申請する' ) && ! str_contains( egov_law_monitor_standard_application_shortcode(), 'https://square.link/u/30s16R3f' ), 'independent confirmation page never offers another payment to Standard user' );
+check( str_contains( $panel, '管理者がSquareで解約手続きを行います。お支払い済みの期間は、引き続きStandardプランをご利用いただけます。' ) && ! str_contains( $panel, '申請だけではSquareの解約' ), 'confirmation uses customer-facing cancellation guidance' );
+$application_html = egov_law_monitor_standard_application_shortcode();
+check( str_contains( $application_html, 'お支払い・契約・解約については管理者へお問い合わせください。' ) && ! str_contains( $application_html, 'この画面からSquareの契約変更・解約は行いません。' ), 'application uses concise contact guidance' );
 $_SERVER['REQUEST_METHOD'] = 'POST'; $_POST = array( 'egov_standard_cancel_request' => '1', 'standard_cancel_nonce' => 'valid:egov_standard_cancel_10', 'standard_cancel_token' => egov_law_monitor_cancellation_context( 10 )['plan_token'], 'user_id' => '20' );
 $redirects = array(); $redirect = static function ( $url, $status ) use ( &$redirects ) { $redirects[] = array( $url, $status ); return 'redirect'; };
 check( egov_law_monitor_subscription_cancel_post( 'cancel_factory', $redirect ) === 'redirect' && $redirects === array( array( 'https://example.test/standard-application/', 303 ) ), 'successful request PRG uses fixed same-site 303 target and ignores forged user ID' );
