@@ -100,8 +100,6 @@ class SquareLookupDatabase {
 require __DIR__ . '/../wordpress-plugin/includes/square-subscriptions.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-api.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-approval.php';
-require __DIR__ . '/../wordpress-plugin/includes/square-checkout.php';
-require __DIR__ . '/../wordpress-plugin/includes/square-checkout-page.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-invoices.php';
 require __DIR__ . '/../wordpress-plugin/includes/admin/admin-square-subscriptions.php';
 require __DIR__ . '/../wordpress-plugin/includes/admin/admin-users.php';
@@ -111,15 +109,8 @@ function check_lookup( $condition, $label ) {
     ++$GLOBALS['checks'];
     echo "PASS: {$label}\n";
 }
-function api_response( $subscription, $status = 200 ) { return array( 'response' => array( 'code' => $status ), 'body' => json_encode( array( 'subscription' => $subscription ) ) ); }
-function lookup( $user = 10, $id = 1, $nonce = null, $token = null ) {
-    $record = $GLOBALS['wpdb']->records[$id] ?? array();
-    return egov_law_monitor_lookup_square_subscription( $user, $id, $nonce ?? 'valid:egov_square_lookup_' . $user . '_' . $id, $token ?? egov_law_monitor_square_record_token( $record ) );
-}
 function render_lookup_page( $post = array() ) {
-    $_GET = array( 'user_id' => 10 );
-    $_POST = $post;
-    ob_start();
+    $_GET = array( 'user_id' => 10 ); $_POST = $post; ob_start();
     try { egov_law_monitor_render_square_subscriptions(); return ob_get_contents(); }
     finally { ob_end_clean(); }
 }
@@ -155,40 +146,22 @@ try {
     define( 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN', 'ignored-legacy-token' );
     putenv( 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN=test-only-square-secret' );
     putenv( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT=sandbox' );
-    $allowed = true;
-    $wpdb = new SquareLookupDatabase();
-    $wpdb->records[1] = array( 'id' => 1, 'user_id' => 10, 'square_customer_id' => 'CUSTOMER_1', 'square_subscription_id' => 'SUB_1', 'verified_at' => null, 'verified_by' => null, 'admin_note' => '', 'created_at' => '2026-11-01 00:00:00', 'updated_at' => '2026-11-01 00:00:00' );
-    $stored = $wpdb->records;
-    $subscription = array( 'id' => 'SUB_1', 'customer_id' => 'CUSTOMER_1', 'status' => 'ACTIVE', 'plan_variation_id' => 'VAR_1', 'invoice_ids' => array( 'NOT_DISPLAYED' ), 'card_id' => 'NOT_DISPLAYED' );
-    $http_result = api_response( $subscription );
-    $http_calls = array();
-    $during_http = null;
+    $http_calls = array(); $during_http = null;
     if ( $settings_case !== 'default' ) {
-        $result = lookup();
+        $result = egov_law_monitor_square_api_settings();
         if ( in_array( $settings_case, array( 'production', 'sandbox_only', 'production_only' ), true ) ) {
-            $environment = $fixture['environment'];
-            $origin = $environment === 'production' ? 'https://connect.squareup.com' : 'https://connect.squareupsandbox.com';
-            check_lookup( is_array( $result ) && count( $http_calls ) === 1 && $http_calls[0][0] === $origin . '/v2/subscriptions/SUB_1', 'environment selects correct API origin' );
-            check_lookup( $http_calls[0][1]['headers']['Authorization'] === 'Bearer ' . $fixture[$environment], 'selected environment constant supplies token' );
-            check_lookup( ! str_contains( json_encode( $result ), $fixture[$environment] ) && $wpdb->records === $stored, 'selected token stays private and contract unchanged' );
+            check_lookup( is_array( $result ) && $result['environment'] === $fixture['environment'], 'configured environment selected' );
+            check_lookup( $result['token'] === $fixture[$fixture['environment']], 'matching environment token selected' );
+            check_lookup( ! $http_calls, 'configuration never calls Square' );
         } else {
             check_lookup( $result instanceof WP_Error && $result->code === 'square_api_not_configured', 'invalid selected configuration refused' );
             check_lookup( ! $http_calls, 'no fallback and no HTTP request' );
-            check_lookup( ! str_contains( $result->message, 'test-only-square-secret' ) && ! str_contains( $result->message, 'test-only-production-secret' ) && ! str_contains( $result->message, 'ignored-legacy-token' ), 'configuration error never exposes token values' );
+            check_lookup( ! str_contains( $result->message, 'test-only-square-secret' ) && ! str_contains( $result->message, 'test-only-production-secret' ), 'error hides credentials' );
         }
-        echo "{$checks} settings checks passed.\n";
-        return;
+        echo "{$checks} settings checks passed.\n"; return;
     }
-    check_lookup( ! $http_calls, 'loading API helpers makes no request' );
-    $result = lookup();
-    check_lookup( is_array( $result ) && $result['customer_matches'] === true && $result['status'] === 'ACTIVE', 'subscription and exact customer match returned' );
-    check_lookup( $result['plan_variation_id'] === 'VAR_1' && $result['queried_at'] === '2026-11-08 12:00:00', 'plan ID and query time returned' );
-    check_lookup( count( $http_calls ) === 1 && $http_calls[0][0] === 'https://connect.squareupsandbox.com/v2/subscriptions/SUB_1', 'one GET request to fixed sandbox endpoint' );
-    $args = $http_calls[0][1];
-    check_lookup( $args['timeout'] === 10 && $args['redirection'] === 0 && $args['sslverify'] === true && $args['limit_response_size'] === 65536, 'timeout TLS redirect and size limits set' );
-    check_lookup( $args['headers']['Authorization'] === 'Bearer test-only-square-secret' && $args['headers']['Square-Version'] === '2026-09-16', 'server-side authentication and pinned API version' );
-    check_lookup( ! str_contains( json_encode( $result ), 'test-only-square-secret' ) && ! isset( $result['invoice_ids'], $result['card_id'] ), 'secret and unrelated API fields not exposed' );
-    check_lookup( $wpdb->records === $stored, 'lookup never changes contract or verification fields' );
+    $allowed = true; $wpdb = new SquareLookupDatabase();
+    $wpdb->records[1] = array( 'id' => 1, 'user_id' => 10, 'square_customer_id' => 'CUSTOMER_1', 'square_subscription_id' => 'SUB_1', 'verified_at' => null, 'verified_by' => null, 'admin_note' => '<script>note</script>', 'created_at' => '2026-11-01 00:00:00', 'updated_at' => '2026-11-01 00:00:00' );
     foreach ( array( 'production', 'sandbox_only', 'production_only', 'missing_sandbox', 'missing_production', 'empty_sandbox', 'empty_production', 'newline_token', 'space_token', 'nonstring_token', 'long_token', 'invalid_environment', 'nonstring_environment', 'missing_environment', 'legacy_only', 'environment_variables_only' ) as $case ) {
         $process = proc_open( array( PHP_BINARY, __FILE__, $case ), array( 1 => array( 'pipe', 'w' ), 2 => array( 'pipe', 'w' ) ), $pipes );
         if ( ! is_resource( $process ) ) { throw new RuntimeException( 'cannot start settings test process' ); }
@@ -200,99 +173,18 @@ try {
         check_lookup( $exit_code === 0 && str_contains( $output, '3 settings checks passed.' ) && $errors === '', 'isolated constant configuration: ' . $case );
     }
 
-    $count = count( $http_calls );
+    $html = render_lookup_page();
+    check_lookup( ! $http_calls && str_contains( $html, '請求書番号でSquare契約を照会' ), 'normal render is read-only and invoice-focused' );
+    foreach ( array( 'egov_square_save', 'egov_square_lookup', 'egov_square_approve', 'egov_checkout_cancel', 'egov_checkout_contract_lookup', 'egov_checkout_contract_register', 'egov_square_checkout', 'egov_checkout_cancel_request' ) as $retired ) {
+        check_lookup( ! str_contains( $html, 'name="' . $retired . '"' ), 'retired control absent: ' . $retired );
+        try { render_lookup_page( array( $retired => '1' ) ); throw new LogicException( 'retired POST accepted' ); }
+        catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '廃止' ) && ! $http_calls, 'retired POST blocked without API or writes: ' . $retired ); }
+    }
+    check_lookup( str_contains( $html, 'SUB_1' ) && str_contains( $html, '&lt;script&gt;note&lt;/script&gt;' ), 'saved contracts and escaped notes remain visible' );
     $allowed = false;
-    check_lookup( lookup()->code === 'square_lookup_forbidden', 'unauthorized caller refused' );
+    try { render_lookup_page(); throw new LogicException( 'unauthorized page accepted' ); }
+    catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '権限' ), 'administrator required' ); }
     $allowed = true;
-    check_lookup( lookup( 10, 1, 'wrong' )->code === 'square_lookup_invalid_request', 'invalid nonce refused' );
-    check_lookup( lookup( 10, 1, 'valid:egov_square_lookup_20_1' )->code === 'square_lookup_invalid_request', 'nonce cannot be moved to another user' );
-    check_lookup( lookup( 999 )->code === 'square_lookup_invalid_user', 'missing user refused' );
-    check_lookup( lookup( 20 )->code === 'square_lookup_record_not_found', 'other user contract refused' );
-    check_lookup( lookup( 10, 999 )->code === 'square_lookup_record_not_found', 'missing contract refused' );
-    check_lookup( lookup( 10, 1, null, 'stale' )->code === 'square_lookup_stale_record', 'stale or forged contract snapshot refused' );
-    $wpdb->fail = true;
-    check_lookup( lookup()->code === 'square_lookup_storage_error', 'DB read failure handled separately' );
-    $wpdb->fail = false;
-    $wpdb->records[1]['square_subscription_id'] = '../../other';
-    check_lookup( lookup()->code === 'square_lookup_invalid_ids', 'invalid stored ID cannot change API path' );
-    $wpdb->records = $stored;
-    check_lookup( count( $http_calls ) === $count, 'rejected requests make no HTTP call' );
-
-    foreach ( array( 401 => '認証', 403 => 'SUBSCRIPTIONS_READ', 404 => '見つかりません', 429 => '呼び出し制限', 500 => 'エラー', 302 => 'エラー' ) as $status => $message ) {
-        $http_result = array( 'response' => array( 'code' => $status ), 'body' => 'test-only-square-secret <script>error</script>' );
-        $result = lookup();
-        check_lookup( $result instanceof WP_Error && str_contains( $result->message, $message ) && ! str_contains( $result->message, 'test-only-square-secret' ), "HTTP {$status} mapped without raw response" );
-    }
-    $http_result = new WP_Error( 'http_request_failed', 'timeout test-only-square-secret' );
-    check_lookup( lookup()->code === 'square_lookup_transport_error' && ! str_contains( lookup()->message, 'test-only-square-secret' ), 'transport errors never expose underlying messages' );
-    $during_http = function () { throw new RuntimeException( 'HTTP extension error test-only-square-secret' ); };
-    $result = lookup();
-    check_lookup( $result->code === 'square_lookup_transport_error' && ! str_contains( $result->message, 'test-only-square-secret' ), 'HTTP exceptions are contained without credential leakage' );
-    $during_http = null;
-    $http_result = array( 'response' => array( 'code' => 200 ), 'body' => json_encode( array( 'subscription' => $subscription, 'errors' => array( array( 'detail' => 'test-only-square-secret' ) ) ) ) );
-    check_lookup( lookup()->code === 'square_lookup_invalid_response', 'error-bearing success response is refused' );
-    foreach ( array( 'not JSON', 'null', '[]', '{"subscription":[]}', str_repeat( 'x', 65537 ) ) as $body ) {
-        $http_result = array( 'response' => array( 'code' => 200 ), 'body' => $body );
-        check_lookup( lookup()->code === 'square_lookup_invalid_response', 'malformed or oversized body rejected' );
-    }
-    foreach ( array( array( 'id', 'WRONG_ID' ), array( 'status', '<script>alert(1)</script>' ), array( 'status', array() ), array( 'customer_id', null ), array( 'plan_variation_id', array() ), array( 'plan_variation_id', 'test-only-square-secret' ) ) as $bad ) {
-        $payload = $subscription;
-        $payload[$bad[0]] = $bad[1];
-        $http_result = api_response( $payload );
-        check_lookup( lookup()->code === 'square_lookup_invalid_response', 'invalid or secret-reflecting response fields rejected' );
-    }
-    $payload = $subscription;
-    $payload['customer_id'] = 'OTHER_CUSTOMER';
-    $http_result = api_response( $payload );
-    check_lookup( lookup()['customer_matches'] === false && $wpdb->records === $stored, 'customer mismatch is displayed, never relinked' );
-    unset( $payload['customer_id'] );
-    $http_result = api_response( $payload );
-    check_lookup( lookup()['customer_matches'] === null, 'missing customer is indeterminate rather than a match' );
-    unset( $payload['plan_variation_id'] );
-    $payload['plan_id'] = 'LEGACY_PLAN';
-    $http_result = api_response( $payload );
-    check_lookup( lookup()['plan_id'] === 'LEGACY_PLAN' && lookup()['plan_variation_id'] === '', 'legacy plan ID supported without Catalog API calls' );
-    unset( $payload['plan_id'] );
-    $http_result = api_response( $payload );
-    check_lookup( lookup()['plan_id'] === '', 'missing plan remains unacquired' );
-    $http_result = api_response( $subscription );
-    $during_http = function () { $GLOBALS['wpdb']->records[1]['square_customer_id'] = 'CHANGED'; };
-    check_lookup( lookup()->code === 'square_lookup_stale_record', 'contract changes during request cannot produce a trusted result' );
-    $wpdb->records = $stored;
-    $during_http = null;
-
-    $count = count( $http_calls );
-    $html = render_lookup_page();
-    check_lookup( count( $http_calls ) === $count && str_contains( $html, 'Square契約状況を確認' ), 'normal page render shows button but never queries API' );
-    check_lookup( str_contains( $html, 'この契約でStandardを承認する' ) && str_contains( $html, 'dashboard_confirmed' ) && str_contains( $html, 'approval_reason' ) && str_contains( $html, 'approval_token' ), 'approval form requires explicit confirmation and signed state' );
-    $html = render_lookup_page( array( 'egov_square_lookup' => '1', 'lookup_record_id' => '1', 'egov_square_lookup_nonce' => 'valid:egov_square_lookup_10_1', 'lookup_record_token' => egov_law_monitor_square_record_token( $stored[1] ) ) );
-    check_lookup( count( $http_calls ) === $count + 1 && str_contains( $html, 'ACTIVE' ) && str_contains( $html, 'VAR_1' ), 'button renders transient status and plan result' );
-    check_lookup( ! str_contains( $html, 'test-only-square-secret' ) && $wpdb->records === $stored, 'rendered lookup exposes no token and persists nothing' );
-    $payload = $subscription;
-    $payload['customer_id'] = 'OTHER_CUSTOMER';
-    $http_result = api_response( $payload );
-    $html = render_lookup_page( array( 'egov_square_lookup' => '1', 'lookup_record_id' => '1', 'egov_square_lookup_nonce' => 'valid:egov_square_lookup_10_1', 'lookup_record_token' => egov_law_monitor_square_record_token( $stored[1] ) ) );
-    check_lookup( str_contains( $html, 'Customer IDが一致しません' ) && str_contains( $html, 'OTHER_CUSTOMER' ) && $wpdb->records === $stored, 'customer mismatch renders a warning without saving' );
-    $http_result = array( 'response' => array( 'code' => 401 ), 'body' => 'test-only-square-secret <script>raw</script>' );
-    $html = render_lookup_page( array( 'egov_square_lookup' => '1', 'lookup_record_id' => '1', 'egov_square_lookup_nonce' => 'valid:egov_square_lookup_10_1', 'lookup_record_token' => egov_law_monitor_square_record_token( $stored[1] ) ) );
-    check_lookup( str_contains( $html, '認証に失敗' ) && str_contains( $html, '照会操作日時' ) && ! str_contains( $html, 'test-only-square-secret' ) && ! str_contains( $html, '<script>raw</script>' ), 'API error and attempt time render without raw body' );
-    $wpdb->records[1]['admin_note'] = '<script>note</script>';
-    $html = render_lookup_page();
-    check_lookup( str_contains( $html, '&lt;script&gt;note&lt;/script&gt;' ) && ! str_contains( $html, '<script>note</script>' ), 'existing contract display remains escaped' );
-    try {
-        render_lookup_page( array( 'egov_square_lookup' => '1', 'egov_square_save' => '1' ) );
-        throw new LogicException( 'mixed action accepted' );
-    } catch ( RuntimeException $error ) {
-        check_lookup( str_contains( $error->getMessage(), '別々' ), 'lookup and save cannot execute in the same request' );
-    }
-    try {
-        render_lookup_page( array( 'egov_square_approve' => '1', 'egov_square_lookup' => '1' ) );
-        throw new LogicException( 'mixed approval accepted' );
-    } catch ( RuntimeException $error ) {
-        check_lookup( str_contains( $error->getMessage(), '別々' ), 'approval and lookup cannot execute together' );
-    }
-    $html = render_lookup_page( array( 'egov_square_approve' => '1', 'approval_record_id' => '1', 'egov_square_approve_nonce' => 'wrong' ) );
-    check_lookup( str_contains( $html, '操作を確認できません' ) && $wpdb->records[1]['verified_at'] === null, 'bad approval nonce renders error without changing confirmation' );
     $_POST = array();
     ob_start();
     try { egov_law_monitor_render_admin_users(); $html = ob_get_contents(); }
@@ -318,7 +210,7 @@ try {
     $html = render_lookup_page( array( 'egov_square_invoice_lookup' => '1', 'invoice_number' => '000004', 'invoice_nonce' => 'bad' ) );
     check_lookup( str_contains( $html, 'nonceを確認できません' ), 'invoice controller preserves nonce error' );
     try { render_lookup_page( array( 'egov_square_invoice_lookup' => '1', 'egov_square_save' => '1' ) ); throw new LogicException( 'mixed invoice/save accepted' ); }
-    catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '別々' ), 'invoice lookup cannot run alongside contract write' ); }
+    catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '廃止' ), 'retired save POST refused even alongside invoice lookup' ); }
     $html = render_lookup_page( array( 'egov_square_invoice_approve' => '1', 'invoice_approve_nonce' => 'bad' ) );
     check_lookup( str_contains( $html, 'nonceを確認できません' ), 'invoice approval controller validates nonce' );
     try { render_lookup_page( array( 'egov_square_invoice_approve' => '1', 'egov_square_invoice_lookup' => '1' ) ); throw new LogicException( 'mixed invoice lookup/approval accepted' ); }
@@ -328,7 +220,7 @@ try {
     $html = render_lookup_page( array( 'egov_square_free' => '1', 'egov_square_free_nonce' => 'wrong' ) );
     check_lookup( str_contains( $html, '操作を確認できません' ), 'Free form rejects invalid nonce' );
     try { render_lookup_page( array( 'egov_square_free' => '1', 'egov_square_approve' => '1' ) ); throw new LogicException( 'mixed Free accepted' ); }
-    catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '別々' ), 'Free and approval cannot execute together' ); }
+    catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '廃止' ), 'retired approval POST refused even alongside Free operation' ); }
     $display_standard = false;
 } finally {
     putenv( $old_token === false ? 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN' : 'EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN=' . $old_token );

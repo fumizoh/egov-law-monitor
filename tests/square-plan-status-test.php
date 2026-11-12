@@ -1,61 +1,45 @@
 <?php
-/** Read-only plan panel, using offline WordPress/DB/HTTP doubles. */
-require __DIR__ . '/square-checkout-test.php';
-$status_baseline = $checks;
-checkout_reset();
+/** Read-only fixed-link page regressions. */
+define( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT', 'production' );
+require __DIR__ . '/standard-plan-test-bootstrap.php';
+$checks = 0;
+function check_page( $ok, $label ) { if ( ! $ok ) { throw new RuntimeException( $label ); } ++$GLOBALS['checks']; }
+$link = 'https://square.link/u/30s16R3f';
+$html = egov_law_monitor_standard_application_shortcode();
+check_page( str_contains( $html, $link ) && str_contains( $html, 'Squareでお支払いへ進む' ) && ! str_contains( $html, '<form' ), 'fixed production link, no application form' );
+check_page( str_contains( $html, '再度決済せず' ) && str_contains( $html, '請求書番号' ), 'duplicate-payment warning and invoice guidance' );
 $html = egov_law_monitor_plan_status_shortcode();
-check( str_contains( strip_tags( $html ), '現在のプラン：Free' ) && str_contains( $html, 'Standardプランに申し込む' ) && str_contains( $html, 'https://wp.example.test/standard-application/' ), 'Free without unresolved history links to independent same-site application page' );
-check( str_contains( $html, '<h2>💳 ご利用プラン</h2>' ) && str_contains( $html, '<p class="egov-plan-status-current"><span>現在のプラン：</span><strong class="egov-plan-status-badge egov-plan-status-badge--free">Free</strong></p>' ), 'Free label and styled badge remain separate elements under the card heading' );
-check( ! str_contains( $html, '<form' ) && ! str_contains( $html, 'square.link' ) && ! $http && DONOTCACHEPAGE, 'plan panel is private read-only content without checkout URL or HTTP' );
-check( egov_law_monitor_standard_application_page_url() !== EGOV_LAW_MONITOR_SQUARE_CHECKOUT_RETURN_URL, 'independent page navigation does not rewrite or depend on the configured legacy return destination' );
-$checkout_logged_in = false;
-check( str_contains( egov_law_monitor_plan_status_shortcode(), 'ログインが必要' ), 'anonymous user cannot see plan panel' );
-foreach ( array( 'ready', 'creating', 'unknown', 'cancel_requested', 'closed', 'closing', 'canceling', 'cancel_unknown' ) as $state ) {
-    checkout_reset(); submit(); $wpdb->attempts[1]['state'] = $state; $http = array();
-    $before = array( $wpdb->attempts, $wpdb->logs, $wpdb->meta, $wpdb->watches );
-    $_POST = array( 'egov_square_checkout' => '1', 'egov_checkout_cancel_request' => '1', 'egov_checkout_cancel' => '1' );
-    $html = egov_law_monitor_plan_status_shortcode();
-    $expected = array( 'ready' => 'お申し込みを受け付けました。お支払いの確認後、管理者がStandardプランへの切り替えを行います。', 'creating' => '申込処理中', 'unknown' => '申込結果の確認が必要', 'cancel_requested' => 'キャンセル手続き中', 'closed' => 'Standardプランに申し込む' );
-    check( str_contains( strip_tags( $html ), $expected[$state] ?? '未解決の申込' ), 'plan panel state: ' . $state );
-    if ( $state === 'ready' ) {
-        check( str_contains( $html, '<p>お申し込みを受け付けました。</p><p>お支払いの確認後、管理者がStandardプランへの切り替えを行います。</p>' ), 'ready message uses separate paragraphs with unchanged wording' );
-    }
-    check( ( str_contains( $html, '/standard-application/' ) ) === isset( $expected[$state] ), 'only supported states offer independent page navigation: ' . $state );
-    check( ! $http && $before === array( $wpdb->attempts, $wpdb->logs, $wpdb->meta, $wpdb->watches ) && ! str_contains( $html, '<form' ) && ! str_contains( $html, 'sandbox.square.link' ), 'POST cannot mutate or expose checkout from plan panel: ' . $state );
+check_page( str_contains( $html, '<h2>💳 ご利用プラン</h2>' ) && str_contains( $html, 'egov-plan-status-badge--free' ) && str_contains( $html, 'https://example.test/standard-application/' ) && ! str_contains( $html, $link ), 'mypage badge and same-site application link retained' );
+check_page( defined( 'DONOTCACHEPAGE' ) && DONOTCACHEPAGE && $page_no_cache >= 2, 'personal panels request no-cache' );
+check_page( isset( $page_shortcodes['egov_plan_status'], $page_shortcodes['egov_standard_application'] ), 'existing shortcode names retained' );
+foreach ( array( 'ready', 'creating', 'unknown', 'cancel_requested', 'closing', 'cancel_unknown', 'canceling', 'unexpected', 'CLOSED' ) as $state ) {
+    reset_standard_page(); $wpdb->legacy = array( array( 'id' => 1, 'user_id' => 10, 'state' => $state ) );
+    check_page( ! str_contains( egov_law_monitor_standard_application_shortcode(), $link ) && ! str_contains( egov_law_monitor_plan_status_shortcode(), '/standard-application/' ), 'legacy unresolved history blocks repeat payment: ' . $state );
 }
-checkout_reset(); submit(); $wpdb->attempts[1]['state'] = 'closed';
-$wpdb->attempts[2] = array_replace( $wpdb->attempts[1], array( 'id' => 2, 'application_uuid' => wp_generate_uuid4() ) );
-check( str_contains( egov_law_monitor_plan_status_shortcode(), 'Standardプランに申し込む' ), 'multiple closed histories still show new application navigation' );
-checkout_reset(); $cache[10] = 'standard';
-$html = egov_law_monitor_plan_status_shortcode();
-check( str_contains( strip_tags( $html ), '現在のプラン：Standard' ) && str_contains( $html, 'Standardプランをご利用中' ) && ! str_contains( $html, '/standard-application/' ) && ! str_contains( $html, '契約有効' ), 'Standard displays entitlement without claiming Square payment or contract validity' );
-check( str_contains( $html, 'class="egov-plan-status-badge egov-plan-status-badge--standard">Standard</strong>' ) && str_contains( $html, '<h2>💳 ご利用プラン</h2>' ), 'Standard has its own badge class without changing the card heading' );
-checkout_reset(); $wpdb->contracts[1] = array( 'id' => 1, 'user_id' => 10 );
-check( ! str_contains( egov_law_monitor_plan_status_shortcode(), '/standard-application/' ), 'Free with registered contract cannot navigate as a new applicant' );
-$wpdb->contracts = array(); $wpdb->read_fail = 'egov_square_subscriptions';
-check( str_contains( egov_law_monitor_plan_status_shortcode(), '確認が必要' ) && ! str_contains( egov_law_monitor_plan_status_shortcode(), '/standard-application/' ), 'read failure fails closed' );
-checkout_reset(); submit(); $http = array(); $wpdb->attempts[1]['checkout_url'] = 'https://evil.example/pay';
-check( ! str_contains( egov_law_monitor_plan_status_shortcode(), '/standard-application/' ), 'invalid stored URL is treated as inconsistent application data' );
-$wpdb->attempts[1]['environment'] = 'production';
-check( ! str_contains( egov_law_monitor_plan_status_shortcode(), '/standard-application/' ), 'mixed environment blocks plan-panel navigation' );
-checkout_reset(); submit(); $http = array(); $checkout_user = 20;
-$html = egov_law_monitor_plan_status_shortcode();
-check( ! str_contains( $html, $wpdb->attempts[1]['application_uuid'] ) && ! str_contains( $html, 'square.link' ), 'other user application data is not disclosed' );
-// Constant variations are isolated; no database or HTTP implementation is available.
-$panel_program = 'ob_start();' . $display_program . <<<'PHP'
-ob_end_clean();
-$panel=egov_law_monitor_plan_status_shortcode();
-echo json_encode(array('details'=>str_contains($panel,'https://wp.example.test/standard-application/'),'purchase'=>str_contains($panel,'sandbox.square.link'),'diagnostic'=>str_contains($panel,'egov-checkout-diagnostic')));
-PHP;
-$fresh_panel_program = str_replace( '$panel=egov_law_monitor_plan_status_shortcode();', '$wpdb=new class extends DisplayStore {public function get_results($sql,$mode){return array();}}; $panel=egov_law_monitor_plan_status_shortcode();', $panel_program );
-foreach ( array( 'ready' => $panel_program, 'fresh' => $fresh_panel_program ) as $mode => $program_variant ) {
-foreach ( array( 'sandbox', 'disabled', 'missing_token', 'location', 'variation', 'external_return' ) as $name ) {
-    $process = proc_open( array( PHP_BINARY, '-r', $program_variant, base64_encode( json_encode( array_replace( $fixture, $cases[$name] ) ) ) ), array( 1 => array( 'pipe', 'w' ), 2 => array( 'pipe', 'w' ) ), $pipes, dirname( __DIR__ ) );
-    if ( ! is_resource( $process ) ) { throw new RuntimeException( 'Cannot run plan panel case' ); }
-    $out = stream_get_contents( $pipes[1] ); $errors = stream_get_contents( $pipes[2] );
-    fclose( $pipes[1] ); fclose( $pipes[2] ); $exit = proc_close( $process );
-    check( $exit === 0 && $errors === '' && json_decode( $out, true ) === array( 'details' => true, 'purchase' => false, 'diagnostic' => false ), 'panel navigation independent of issuance configuration: ' . $mode . ' ' . $name );
+reset_standard_page(); $wpdb->legacy = array_fill( 0, 3, array( 'user_id' => 10, 'state' => 'closed' ) );
+check_page( str_contains( egov_law_monitor_standard_application_shortcode(), $link ), 'closed historical rows do not block' );
+reset_standard_page(); $wpdb->legacy = array( array( 'user_id' => 20, 'state' => 'ready' ) ); $wpdb->contracts = array( 20 );
+check_page( str_contains( egov_law_monitor_standard_application_shortcode(), $link ), 'other users do not affect current user' );
+reset_standard_page(); $wpdb->legacy_table = false;
+check_page( str_contains( egov_law_monitor_standard_application_shortcode(), $link ) && ! array_filter( $wpdb->queries, static fn( $q ) => str_contains( $q, 'FROM `wp_egov_square_checkout_attempts`' ) ), 'fresh sites need no legacy table' );
+foreach ( array( 'information_schema', 'egov_square_subscriptions', 'egov_square_checkout_attempts' ) as $failure ) {
+    reset_standard_page(); $wpdb->fail = $failure;
+    $html = egov_law_monitor_standard_application_shortcode();
+    check_page( ! str_contains( $html, $link ) && str_contains( $html, '確認できません' ) && ! str_contains( $html, 'private error' ), 'read failure blocks payments: ' . $failure );
 }
+reset_standard_page(); $wpdb->contracts = array( 10 );
+check_page( ! str_contains( egov_law_monitor_standard_application_shortcode(), $link ) && str_contains( egov_law_monitor_plan_status_shortcode(), '登録済み' ), 'Free with registered contract never offered another payment' );
+reset_standard_page(); $page_plan = 'standard';
+check_page( ! str_contains( egov_law_monitor_standard_application_shortcode(), $link ) && str_contains( egov_law_monitor_plan_status_shortcode(), 'egov-plan-status-badge--standard' ) && ! $wpdb->queries, 'Standard entitlement display retained without legacy reads' );
+reset_standard_page(); $page_plan = 'other';
+check_page( ! str_contains( egov_law_monitor_standard_application_shortcode(), $link ) && str_contains( egov_law_monitor_plan_status_shortcode(), '確認が必要' ), 'unknown plan fails closed' );
+reset_standard_page(); $page_logged_in = false;
+check_page( str_contains( egov_law_monitor_standard_application_shortcode(), 'ログイン' ) && ! str_contains( egov_law_monitor_plan_status_shortcode(), '/standard-application/' ) && ! $wpdb->queries, 'anonymous panels do not read private data' );
+reset_standard_page();
+foreach ( array( 'egov_square_checkout', 'egov_checkout_cancel_request' ) as $retired ) {
+    $_POST = array( $retired => '1', 'checkout_url' => 'https://evil.test', 'plan' => 'standard' );
+    check_page( str_contains( egov_law_monitor_standard_application_shortcode(), $link ) && $page_plan === 'free' && ! $wpdb->contracts && ! $wpdb->legacy, 'retired front-end POST cannot execute mutations: ' . $retired );
 }
-check( ! str_contains( file_get_contents( __DIR__ . '/../wordpress-plugin/includes/square-checkout-page.php' ), 'checkout_diagnostic' ), 'temporary diagnostics removed from application page' );
-echo ( $checks - $status_baseline ) . " plan-status checks passed; no real DB or Square API used.\n";
+reset_standard_page(); $page_home = 'http://example.test';
+check_page( egov_law_monitor_standard_application_page_url() === '', 'unsafe local destination rejected' );
+echo "{$checks} fixed-link display checks passed; no DB writes or API used.\n";

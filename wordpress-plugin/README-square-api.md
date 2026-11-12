@@ -1,8 +1,6 @@
-# Square契約状況の手動照会（第2-A段階）
+# Square契約管理：請求書番号による登録・承認
 
-第3段階の申込・Payment Link発行は[README-square-checkout.md](README-square-checkout.md)を参照してください。既存の照会・手動承認は独立したままです。
-
-ユーザー管理の「Square契約管理」で、対象契約の「Square契約状況を確認」を押すと、登録済みSubscription IDを使ってサーバーから1回だけGET照会します。通常表示・契約保存・手動承認では照会しません。
+固定の決済リンクと利用者向け表示は[README-square-checkout.md](README-square-checkout.md)を参照してください。管理者の契約登録・再承認は請求書番号から行います。
 
 ## 請求書番号の照会と一括登録・承認
 
@@ -27,7 +25,7 @@ PAID、請求額と支払済み額の各合計500 JPY、ACTIVE、設定済みLoc
 
 旧手動登録契約などで環境が不明でも、所属ユーザー・Subscription ID・Customer IDが今回の正常なAPI照会結果とすべて一致する場合は、追加確認付きフォームを表示します。「既存契約のSquare環境情報が未登録です」の案内に従い、表示された照会環境のDashboardでLocation・契約・顧客を確認し、本人確認とは別に「環境確認」チェックと「環境確認の根拠」を入力してください。未確認・根拠未入力では承認できず、productionの自動補完も行いません。
 
-確定時の再照会・契約再検証後、`contract_environment_confirmed`監査に契約ID・環境・Invoice／Subscription／Customer ID・確認日時・管理者・確認根拠を保存し、Standard承認と同一トランザクションで確定します。元の管理者メモ、過去の承認・解除履歴は保持し、新規契約レコードは作りません。以後の環境判定はこの監査を利用するため、Freeへの解除後も確認済み環境を再利用できます。監査・承認の一部失敗はまとめて取り消し、確定・取り消し結果不明時は再操作前に契約・プラン・環境確認監査を確認してください。既存の単独登録・承認・解除機能は維持します。
+確定時の再照会・契約再検証後、`contract_environment_confirmed`監査に契約ID・環境・Invoice／Subscription／Customer ID・確認日時・管理者・確認根拠を保存し、Standard承認と同一トランザクションで確定します。元の管理者メモ、過去の承認・解除履歴は保持し、新規契約レコードは作りません。以後の環境判定はこの監査を利用するため、Freeへの解除後も確認済み環境を再利用できます。監査・承認の一部失敗はまとめて取り消し、確定・取り消し結果不明時は再操作前に契約・プラン・環境確認監査を確認してください。承認解除は維持します。旧手入力登録・個別承認の画面と入口は廃止しました。
 
 新規登録時は`subscription_created`と`standard_approved`、既存契約の再利用時は`standard_approved`を記録します。監査には先頭ゼロを保持した請求書番号、Invoice ID、環境、契約・顧客・Location・Variation、500円PAIDの根拠、確認日時、管理者、本人確認理由を含めます。API応答全文やカード情報は保存しません。同じ契約で既にStandardなら二重保存せず案内します。Free変更後の再承認には新しい照会と確認が必要です。
 
@@ -35,22 +33,18 @@ COMMIT応答喪失・ROLLBACK失敗は結果不明です。再実行前にプラ
 
 反映後の検証は、テストユーザーで新規承認、同一ユーザー既存契約の再利用、二重送信、他ユーザー契約の拒否、旧手動登録契約の追加環境確認、確認不足・環境不一致の拒否、照会後5分超過、承認解除後の再承認を確認します。環境確認・承認監査が同時に記録され、元のメモが保持されることも確認してください。失敗試験は本番データで行わず、ステージング・モックで実施してください。AI回数・ウォッチ設定・申込履歴が変わらないことも確認します。
 
-## Standardの手動承認（第2-B段階）
+## Standard承認解除と既存権限の維持
 
 StandardからFreeへ戻す場合は、対象ユーザーのSquare契約管理にある「Standard承認を解除」を使用します。理由を入力し、WordPressの利用権限だけを変更することを確認して実行してください。管理者権限・専用nonce・確認チェック・署名付きプラン状態を検証します。契約レコードのないStandardテストユーザーも同じ操作で戻せます。
 
 既存のFree変更トランザクションを再利用し、プランと`plan_changed`監査を一体で保存します。契約・申込・過去の監査・AI利用回数は削除しません。Freeのウォッチ上限処理は維持し、その失敗は確定済みのプラン変更と区別して表示します。SquareへのAPI通信・解約・課金停止は行いません。COMMIT結果不明時やキャッシュ警告時は再実行せず、現在プランと履歴を確認してください。
 
-1. ユーザー管理から対象ユーザーのSquare契約管理を開きます。
-2. Square Dashboardで、そのユーザーのCustomer／Subscription ID、契約・支払状況を確認します。API照会成功やACTIVE表示だけで支払済みとは判断しません。
-3. 対象契約の「この契約でStandardを手動承認」を開き、確認チェックと確認理由を入力して承認します。複数契約がある場合も、対象契約を明示的に選びます。
-
 プランの正本は既存のユーザーメタ`egov_law_monitor_plan`です。既存の独立した非永続mysqli接続で、プラン、対象契約の`verified_at`／`verified_by`、`standard_approved`監査履歴を同一トランザクションに保存します。確認日時はサイト時刻です。履歴の変更前後JSONにはプランと対象契約のスナップショットが残ります。確認記録は現在のプランの判定には使いません。新しいテーブル・プラン状態カラムは追加しません。
 
 - `manage_options`、操作別nonce、ユーザー／契約所属、明示的確認、入力内容を検証します。ユーザー行・対象契約・プランメタをロックし、署名付きの契約／プラン状態とプラン変更履歴IDを比較します。二重承認、古い画面、Free→Standard→Freeを経由した古い画面は拒否します。
 - 「法令ウォッチ ユーザー管理」は9列・従来の表示順を維持した閲覧専用一覧です。プランと通知は既存メタの現在値をテキスト表示します。プラン選択・通知チェック・保存・AI要約の「今月をリセット」はありません。旧保存／リセットPOSTも拒否します。ほかの呼び出し元がないAI要約リセット用DB関数も削除しました。利用者マイページ・通知設定・ウォッチAPIの処理は変更しません。
-- プラン変更はユーザー別のSquare契約管理に集約します。既にStandardの場合は再承認できません。Free→Standardは登録済み契約の明示的承認のみで、契約IDなしのStandard化と旧ユーザー管理nonceは内部でも拒否します。
-- Standard→Freeは、契約単位ではなく「このユーザーをFreeへ変更」から行います。変更理由は必須です。専用のユーザー別nonce、署名、現在Standardであることをロック後にも検証し、プランと`plan_changed`監査履歴を同一トランザクションに保存します。既にFreeなら拒否し、二重操作で履歴は増やしません。Square契約がないStandardユーザーも対象にできます。
+- プラン変更はユーザー別のSquare契約管理に集約します。既にStandardの場合は再承認できません。Free→Standardは請求書の再照会と本人確認後の一括承認だけです。旧個別承認・手入力登録POSTと旧ユーザー管理nonceは拒否します。
+- Standard→Freeは、契約単位ではなく「Standard承認を解除」から行います。変更理由は必須です。専用のユーザー別nonce、署名、現在Standardであることをロック後にも検証し、プランと`plan_changed`監査履歴を同一トランザクションに保存します。既にFreeなら拒否し、二重操作で履歴は増やしません。Square契約がないStandardユーザーも対象にできます。
 - Free変更はSquare側の解約・課金停止ではありません。Square契約・確認情報・過去の承認履歴・AI要約回数は保持します。通知メタも更新しません。
 - Freeの確定後、既存ウォッチ上限処理を実行し、有効件数が上限内であることとプラン状態を再確認します。失敗・再確認不能は「Free変更と監査履歴は確定済み、ウォッチ適用は未確認」と区別して表示します。一部だけ停止している可能性があります。キャッシュ更新失敗の場合は不正な上限適用を避けてウォッチ処理を行いません。COMMIT結果不明時もウォッチ処理を開始しません。
 - ウォッチ適用警告ではFree変更を再送信せず、DBの現在プラン・履歴・キャッシュ・有効ウォッチを管理者が確認してください。ページ再読み込みだけでFree操作を再試行することはありません。障害解消後の既存ウォッチ一覧取得時にも通常の上限処理がありますが、復旧結果は別途確認が必要です。プラン確定とウォッチ処理は別トランザクションで、ウォッチ処理の完全な排他・一括取り消しは保証しません。
@@ -73,42 +67,36 @@ Webhook、自動課金確認、自動プラン変更、Payment Link発行は追�
 
 環境に対応するトークンだけを使用します。不正・未設定の環境や、選択した環境のトークンが未設定・不正な場合はAPIへ問い合わせません。反対側の環境のトークン、旧共通定数`EGOV_LAW_MONITOR_SQUARE_ACCESS_TOKEN`、環境変数へのフォールバックは行いません。
 
-設定値はDB・監査ログ・画面へ保存／表示しません。既存のGoogle Cloud認証とは別の設定です。
+アクセストークンはDB・監査ログ・画面へ保存／表示しません。環境・Location・Variationは照合情報として表示・記録します。既存のGoogle Cloud認証とは別の設定です。
 
 ## Square側の権限
 
-必要なOAuth権限は **`SUBSCRIPTIONS_READ`のみ**です。この権限に限定したOAuthアクセストークンを用意してください。OAuth認可・トークン取得／更新フロー自体は今回実装していません。
+必要なOAuth権限は **`INVOICES_READ`と`SUBSCRIPTIONS_READ`**です。この権限に限定したOAuthアクセストークンを用意してください。OAuth認可・トークン取得／更新フロー自体は今回実装していません。
 
 Personal access tokenは権限を限定できないため、最小権限の構成にはなりません。コード側から、設定されたトークンの全権限を検証することはしていません。
 
 - [Retrieve subscription（権限・レスポンス）](https://developer.squareup.com/reference/square/subscriptions-api/retrieve-subscription)
 - [Squareアクセストークンの種類と環境](https://developer.squareup.com/docs/build-basics/access-tokens)
 
-## 表示と制限
+## 現行の表示・通信と制限
 
-- API：`GET /v2/subscriptions/{subscription_id}`、固定バージョン`2026-09-16`。
-- Sandbox：`https://connect.squareupsandbox.com`、本番：`https://connect.squareup.com`。
-- プラン情報はレスポンス内のPlan Variation ID、存在する場合は旧Plan IDを表示します。プラン名を取得するCatalog APIは呼びません。
-- Customer IDは大文字小文字も含めて比較します。不一致でも自動修正しません。
-- API応答と照会日時は、そのリクエストの画面表示だけに使用します。DB・キャッシュ・監査履歴には保存しません。
-- `ACTIVE`等の契約ステータスは支払済みの証明ではありません。請求書・決済履歴は取得しません。
-- `verified_at`・`verified_by`、WordPressプラン、契約の登録・編集履歴は変更しません。
-- タイムアウト10秒、リダイレクト禁止、TLS検証有効、応答サイズ上限64 KiB。自動再試行・定期実行はありません。
-- 通信・APIエラーでは、トークンを含み得る生のエラー詳細やレスポンス本文を表示・記録しません。
+- Square通信は管理者の請求書照会・承認確定時だけです。ListInvoices、GetInvoice、RetrieveSubscriptionのGETだけを使用します。契約作成・変更・解約・リンク発行・SearchSubscriptionsは呼びません。
+- WordPressユーザーと請求先の本人確認は管理者の責任で行います。API上の一致だけで本人確定・自動承認はしません。
+- API認証・Location・Plan Variation設定、独立mysqli接続、既存契約／監査スキーマは維持します。既存DB・履歴は削除せず、旧キャンセルや契約編集の監査も引き続き日本語ラベルと詳細JSONで確認できます。
+- 生の通信エラー、API応答全文、カード情報、アクセストークンは表示・保存しません。
 
 ## テスト
 
-### Sandboxでの実測と検証範囲
-
-- 別の検証用CLIによるユーザーの実測では、SandboxでPayment Link作成とテスト決済には成功しましたが、そのCheckoutによるSubscription生成は確認できませんでした。
-- これは今回の検証条件での結果であり、Sandbox全体の仕様や、本番でのSubscription生成・紐付けを保証するものではありません。Square Developer Forumsへの質問は回答待ちです。
-- 第2-A段階は、既に登録されたSubscription IDをGET照会する機能です。Payment Linkからの契約生成・ID自動取得は対象外であり、Sandboxでの決済成功を照会成功の検証とは扱いません。
-- 実在するSubscriptionの取得とCustomer ID照合の成功経路は、実APIでは未検証です。以下のテストはHTTP応答の代替実装による検証です。
-
 ```powershell
 php tests/square-api-test.php
-php tests/square-subscriptions-test.php
+php tests/square-invoices-test.php
+php tests/square-invoice-approval-test.php
 php tests/square-approval-test.php
+php tests/square-subscriptions-test.php
+php tests/square-audit-display-test.php
+php tests/square-plan-status-test.php
+php tests/square-application-access-test.php
+php tests/square-cleanup-test.php
 ```
 
-HTTP・DBの代替実装を使用し、実通信は行いません。実WordPress・Square Sandboxでは、認証、権限、環境、実契約の一致／不一致、管理画面表示を別途確認してください。
+すべてHTTP／DBの代替実装によるローカル検証です。今回の整理では実API・実DBへ接続しません。請求書承認の本番正常動作は管理者が確認済みですが、この整理後の読み込み・表示・承認・解除・キャッシュはステージングで改めて確認してください。

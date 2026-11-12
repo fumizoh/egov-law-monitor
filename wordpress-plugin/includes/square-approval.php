@@ -93,17 +93,16 @@ function egov_law_monitor_square_apply_plan( $db, $tables, $user_id, $before, $o
     if ( $old_json === false || $new_json === false || ! $db->write( "INSERT INTO `{$tables['log']}` (user_id, admin_user_id, action, old_value, new_value, reason, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)", array( $user_id, $admin_id, $approving ? 'standard_approved' : 'plan_changed', $old_json, $new_json, $reason, $now ) ) ) { throw new RuntimeException( '監査履歴を保存できませんでした。' ); }
 }
 
-/** One transaction for plan + selected contract + audit. Never calls Square API. */
+/** User-level Free transaction. Standard approval is exclusively invoice-based. */
 function egov_law_monitor_square_change_plan( $user_id, $plan, $expected_token, $nonce, $contract_id = 0, $confirmed = false, $reason = '', ?EGOV_Law_Monitor_Square_Connection $database = null ) {
     global $wpdb;
     if ( ! current_user_can( 'manage_options' ) ) { return new WP_Error( 'forbidden', 'この操作を行う権限がありません。' ); }
     if ( ! is_int( $user_id ) || $user_id < 1 || ! is_int( $contract_id ) || $contract_id < 0 || ! in_array( $plan, array( 'free', 'standard' ), true ) ) { return new WP_Error( 'invalid_plan_request', 'プラン変更リクエストが不正です。' ); }
-    $approving = $contract_id > 0;
-    if ( ! $approving && $plan !== 'free' ) { return new WP_Error( 'invalid_plan_request', 'Standardへの変更には登録済み契約の手動承認が必要です。' ); }
-    $action = $approving ? 'egov_square_approve_' . $user_id . '_' . $contract_id : 'egov_square_free_' . $user_id;
+    if ( $plan !== 'free' || $contract_id !== 0 ) { return new WP_Error( 'invalid_plan_request', 'Standard承認は請求書番号による確認を利用してください。' ); }
+    $action = 'egov_square_free_' . $user_id;
     if ( ! is_string( $nonce ) || ! wp_verify_nonce( $nonce, $action ) ) { return new WP_Error( 'invalid_nonce', '操作を確認できません。画面を再読み込みしてください。' ); }
     if ( ! get_userdata( $user_id ) ) { return new WP_Error( 'invalid_user', '対象ユーザーが存在しません。' ); }
-    if ( ! is_string( $reason ) || strlen( $reason ) > 6000 || trim( $reason ) === '' || ( $approving && ( $plan !== 'standard' || $confirmed !== true ) ) ) { return new WP_Error( 'confirmation_required', '変更理由を入力し、Standard承認時はDashboardでの確認チェックも行ってください。' ); }
+    if ( ! is_string( $reason ) || strlen( $reason ) > 6000 || trim( $reason ) === '' ) { return new WP_Error( 'confirmation_required', '変更理由を入力し、Standard承認時はDashboardでの確認チェックも行ってください。' ); }
     $reason = sanitize_textarea_field( $reason );
     if ( trim( $reason ) === '' ) { return new WP_Error( 'confirmation_required', '変更理由を入力してください。' ); }
     $now = current_time( 'mysql' );
@@ -120,20 +119,11 @@ function egov_law_monitor_square_change_plan( $user_id, $plan, $expected_token, 
         $users = $db->rows( "SELECT ID FROM `{$tables['users']}` WHERE ID = ? FOR UPDATE", array( $user_id ) );
         if ( ! $users || (int) $users[0]['ID'] !== $user_id ) { throw new RuntimeException( '対象ユーザーを確認できません。' ); }
         $old = null;
-        if ( $approving ) {
-            $records = $db->rows( "SELECT * FROM `{$tables['contracts']}` WHERE id = ? FOR UPDATE", array( $contract_id ) );
-            $old = $records[0] ?? null;
-            if ( ! $old || (int) $old['user_id'] !== $user_id ) { throw new RuntimeException( '対象ユーザーの契約が見つかりません。' ); }
-            foreach ( array( 'square_customer_id', 'square_subscription_id' ) as $field ) {
-                if ( ! is_string( $old[$field] ) || ! preg_match( '/\A[A-Za-z0-9_-]{1,255}\z/', $old[$field] ) ) { throw new RuntimeException( '登録済み契約IDが不正です。' ); }
-            }
-        }
         // Current locking read, not a cached WP value; holds existing meta rows too.
         if ( $db->rows( "SELECT umeta_id FROM `{$tables['meta']}` WHERE user_id = ? AND meta_key = ? FOR UPDATE", array( $user_id, EGOV_LAW_MONITOR_META_PLAN ) ) === false ) { throw new RuntimeException( 'プラン情報をロックできません。' ); }
         $before = egov_law_monitor_square_plan_snapshot( $user_id, $tables, $db );
         if ( ! is_string( $expected_token ) || ! hash_equals( egov_law_monitor_square_plan_token( $user_id, $before, $old, $key ), $expected_token ) ) { throw new RuntimeException( 'プランまたは契約が変更されています。画面を再読み込みしてください。' ); }
-        if ( $approving && $before['plan'] === 'standard' ) { throw new RuntimeException( '既にStandardです。二重承認はできません。' ); }
-        if ( ! $approving && $before['plan'] !== 'standard' ) { throw new RuntimeException( '現在Standardではありません。二重操作はできません。' ); }
+        if ( $before['plan'] !== 'standard' ) { throw new RuntimeException( '現在Standardではありません。二重操作はできません。' ); }
         $invalidate = true;
         egov_law_monitor_square_apply_plan( $db, $tables, $user_id, $before, $old, $plan, $now, $admin_id, $reason );
         $committing = true;

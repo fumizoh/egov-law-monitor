@@ -169,93 +169,22 @@ function reset_store() {
     $GLOBALS['trial_usage'] = 2; $GLOBALS['monthly_usage'] = 37;
 }
 function token( $id = 1, $user = 10 ) { return egov_law_monitor_square_plan_form_token( $user, $id ? ( $GLOBALS['wpdb']->contracts[$id] ?? null ) : null ); }
+/** Seed a historical Standard state for downgrade/race tests; not a production approval route. */
 function change( $plan = 'standard', $id = 1, $snapshot = null, $user = 10, $confirmed = true, $nonce = null, $reason = 'Dashboardで確認' ) {
+    if ( $plan === 'standard' && $id > 0 ) {
+        $store = $GLOBALS['wpdb'];
+        $before = egov_law_monitor_square_plan_snapshot( $user, egov_law_monitor_square_plan_tables() );
+        $old = $store->contracts[$id];
+        $meta_id = $before['meta_id'] === null ? count( $store->meta ) + 1 : (int) $before['meta_id'];
+        $store->meta[$meta_id] = array( 'umeta_id' => $meta_id, 'user_id' => $user, 'meta_key' => EGOV_LAW_MONITOR_META_PLAN, 'meta_value' => 'standard' );
+        $store->contracts[$id]['verified_at'] = $GLOBALS['now']; $store->contracts[$id]['verified_by'] = 99;
+        $store->logs[] = array( 'id' => count( $store->logs ) + 1, 'user_id' => $user, 'admin_user_id' => 99, 'action' => 'standard_approved', 'old_value' => json_encode( array( 'plan' => $before['plan'], 'contract' => $old ) ), 'new_value' => json_encode( array( 'plan' => 'standard', 'contract' => $store->contracts[$id] ) ), 'reason' => $reason, 'created_at' => $GLOBALS['now'] );
+        unset( $GLOBALS['cache'][$user] );
+        return true;
+    }
     $GLOBALS['session'] = new ApprovalSession( $GLOBALS['wpdb'] );
-    return egov_law_monitor_square_change_plan( $user, $plan, $snapshot ?? token( $id, $user ), $nonce ?? 'valid:' . ( $id ? 'egov_square_approve_' . $user . '_' . $id : 'egov_square_free_' . $user ), $id, $confirmed, $reason, $GLOBALS['session'] );
+    return egov_law_monitor_square_change_plan( $user, $plan, $snapshot ?? token( $id, $user ), $nonce ?? 'valid:egov_square_free_' . $user, $id, $confirmed, $reason, $GLOBALS['session'] );
 }
-reset_store();
-check( egov_law_monitor_get_plan( 10 ) === 'free' && egov_law_monitor_get_ai_summary_limit( 10 ) === 3 && egov_law_monitor_get_watch_limit( 10 ) === 5, 'existing Free policy before approval' );
-$old = token();
-check( change() === true, 'approval successful with absent meta' );
-check( $wpdb->meta[1]['meta_value'] === 'standard' && $wpdb->contracts[1]['verified_by'] === 99 && $wpdb->contracts[1]['verified_at'] === $now, 'plan and confirmation committed together' );
-check( $wpdb->contracts[2]['verified_at'] === null, 'only selected contract verified' );
-$audit = $wpdb->logs[0];
-check( $audit['action'] === 'standard_approved' && $audit['admin_user_id'] === 99 && $audit['reason'] === 'Dashboardで確認', 'approval audit actor/action/reason' );
-check( json_decode( $audit['old_value'], true )['plan'] === 'free' && json_decode( $audit['new_value'], true )['contract']['square_subscription_id'] === 'SUB1', 'audit exact old/new plan and contract IDs' );
-check( $session->closed && $evictions === array( array( 10, 'user_meta' ) ) && ! isset( $cache[10] ), 'owned connection closed and stale cache evicted' );
-check( egov_law_monitor_get_plan( 10 ) === 'standard' && egov_law_monitor_get_ai_summary_limit( 10 ) === 100 && egov_law_monitor_get_watch_limit( 10 ) === 10, 'existing Standard policy reads committed meta after cache invalidation' );
-check( egov_law_monitor_get_ai_summary_trial_usage_count( 10 ) === 2 && egov_law_monitor_get_ai_summary_usage_count( 10 ) === 37, 'approval preserves Free lifetime and monthly history counters' );
-check( count( array_filter( $wpdb->sql_queries, static fn( $sql ) => str_contains( $sql, 'FOR UPDATE' ) ) ) === 3, 'user contract and meta locked on dedicated session' );
-check( change( 'standard', 1, $old ) instanceof WP_Error && count( $wpdb->logs ) === 1, 'replayed approval cannot add history' );
-check( change()->code === 'square_plan_failed' && count( $wpdb->logs ) === 1, 'fresh duplicate approval refused' );
-check( change( 'free', 0 ) === true && $wpdb->meta[1]['meta_value'] === 'free', 'Free change shares transaction path' );
-check( $wpdb->contracts[1]['verified_by'] === 99 && count( $wpdb->logs ) === 2 && $wpdb->logs[1]['action'] === 'plan_changed', 'downgrade retains historical confirmation and audit' );
-check( egov_law_monitor_get_plan( 10 ) === 'free' && egov_law_monitor_get_ai_summary_limit( 10 ) === 3 && egov_law_monitor_get_ai_summary_trial_usage_count( 10 ) === 2, 'downgrade restores Free policy without resetting trial usage' );
-check( change() === true && count( $wpdb->logs ) === 3, 'reapproval after downgrade adds fresh audit' );
-reset_store();
-$contractToken = token(); $legacyToken = token( 0 ); $otherContractToken = token( 2 );
-check( change() === true, 'first administrator wins' );
-check( change( 'free', 0, $legacyToken ) instanceof WP_Error && $wpdb->meta[1]['meta_value'] === 'standard', 'old Free form cannot reverse approval' );
-check( change( 'standard', 2, $otherContractToken ) instanceof WP_Error, 'other contract cannot double approve same user' );
-check( change( 'free', 0 ) === true, 'fresh downgrade accepted' );
-check( change( 'standard', 1, $contractToken ) instanceof WP_Error, 'old approval rejected after free-standard-free cycle' );
-reset_store(); $old = token(); $wpdb->contracts[1]['admin_note'] = 'edited';
-check( change( 'standard', 1, $old ) instanceof WP_Error, 'contract edit invalidates approval snapshot' );
-reset_store();
-check( change( 'standard', 1, null, 20 ) instanceof WP_Error, 'other user contract refused' );
-check( change( 'standard', 999 ) instanceof WP_Error, 'missing contract refused' );
-check( change( 'standard', 1, '', 999 ) instanceof WP_Error, 'missing user refused' );
-$allowed = false;
-check( change() instanceof WP_Error && ! $session->began, 'permission failure before transaction' );
-$allowed = true;
-check( change( 'standard', 1, null, 10, true, 'wrong' ) instanceof WP_Error && ! $session->began, 'bad nonce before transaction' );
-check( change( 'standard', 1, null, 10, true, 'valid:egov_square_approve_20_1' ) instanceof WP_Error, 'nonce bound to user and contract' );
-check( change( 'standard', 1, null, 10, false ) instanceof WP_Error, 'explicit Dashboard confirmation required' );
-check( change( 'standard', 1, null, 10, true, null, '' ) instanceof WP_Error, 'confirmation reason required' );
-check( change( 'free', 1 ) instanceof WP_Error, 'approval cannot downgrade' );
-check( change( 'invalid', 0 ) instanceof WP_Error, 'unknown target plan refused' );
-reset_store();
-foreach ( array( '', 'free' ) as $raw ) {
-    $wpdb->meta = array( 1 => array( 'umeta_id' => 1, 'user_id' => 10, 'meta_key' => EGOV_LAW_MONITOR_META_PLAN, 'meta_value' => $raw ) );
-    check( change() === true && count( $wpdb->meta ) === 1, 'existing Free/empty meta updated without insertion' );
-    reset_store();
-}
-$wpdb->meta = array( 1 => array( 'umeta_id' => 1, 'user_id' => 10, 'meta_key' => EGOV_LAW_MONITOR_META_PLAN, 'meta_value' => 'unknown' ) );
-check( is_wp_error( token() ), 'unknown stored plan blocks form token' );
-check( change( 'standard', 1, 'forged' ) instanceof WP_Error && ! $wpdb->logs, 'unknown stored plan blocks save' );
-$wpdb->meta[1]['meta_value'] = 'free'; $wpdb->meta[2] = array_replace( $wpdb->meta[1], array( 'umeta_id' => 2 ) );
-check( is_wp_error( token() ) && change( 'standard', 1, 'forged' ) instanceof WP_Error, 'duplicate plan rows rejected, never repaired' );
-foreach ( array( 'MyISAM', 'missing' ) as $engine ) {
-    reset_store(); $wpdb->engine = $engine;
-    check( change() instanceof WP_Error && ! $session->began, 'nontransactional/missing tables refused' );
-}
-foreach ( array( 'column', 'primary' ) as $schema ) {
-    reset_store(); $wpdb->bad_schema = $schema;
-    check( change() instanceof WP_Error && ! $session->began, 'core table schema failure refused' );
-}
-reset_store(); $wpdb->usermeta = 'other_db.users';
-check( is_wp_error( token() ), 'cross-database table name rejected' );
-foreach ( array( 'begin', 'meta', 'contract', 'audit', 'audit_rollback', 'commit', 'disconnect:meta', 'disconnect:contract', 'disconnect:audit', 'disconnect:commit' ) as $failure ) {
-    reset_store(); $wpdb->fail = $failure;
-    $before = array( $wpdb->meta, $wpdb->contracts, $wpdb->logs );
-    $result = change();
-    check( $result instanceof WP_Error && array( $wpdb->meta, $wpdb->contracts, $wpdb->logs ) === $before, 'atomic failure: ' . $failure );
-    $unknown = $failure === 'audit_rollback' || $failure === 'commit' || str_starts_with( $failure, 'disconnect:' );
-    check( $result->code === ( $unknown ? 'square_plan_outcome_unknown' : 'square_plan_failed' ) && $session->closed, 'failure classified and connection closed: ' . $failure );
-    if ( $unknown ) { check( ! str_contains( $result->message, '取り消しました' ), 'uncertain outcome never claims rollback' ); }
-}
-reset_store(); $wpdb->fail = 'commit'; $wpdb->commit_applied = true;
-check( change()->code === 'square_plan_outcome_unknown' && $wpdb->meta[1]['meta_value'] === 'standard' && count( $wpdb->logs ) === 1, 'commit applied but response lost remains unknown' );
-check( ! isset( $cache[10] ), 'unknown outcome also clears cache' );
-check( change( 'standard', 1, $old ) instanceof WP_Error && count( $wpdb->logs ) === 1, 'retry unknown committed operation cannot duplicate approval' );
-reset_store();
-check( change( 'free', 0 ) instanceof WP_Error && ! $wpdb->logs && ! $wpdb->meta, 'already Free is rejected without creating meta or audit' );
-check( ! array_filter( $wpdb->queries, static fn( $query ) => in_array( $query, array( 'meta', 'contract', 'audit' ), true ) ), 'already-Free request performs no writes' );
-reset_store(); $cache_failure = true;
-$result = change();
-check( $result->code === 'square_plan_cache_warning' && $wpdb->meta[1]['meta_value'] === 'standard' && count( $wpdb->logs ) === 1, 'post-commit cache exception reports saved data and no reapproval' );
-check( ! str_contains( $result->message, 'private cache error' ), 'cache details suppressed' );
-
 function seed_watches() {
     for ( $i = 1; $i <= 8; ++$i ) { $GLOBALS['wpdb']->watches[$i] = array( 'id' => $i, 'user_id' => 10, 'is_active' => 1 ); }
 }
@@ -275,7 +204,7 @@ check( count( array_filter( $wpdb->watches, static fn( $row ) => $row['is_active
 check( egov_law_monitor_get_ai_summary_trial_usage_count( 10 ) === 2 && egov_law_monitor_get_ai_summary_usage_count( 10 ) === 37, 'Free operation preserves AI usage counters' );
 check( make_free( $free_form ) instanceof WP_Error && count( $wpdb->logs ) === 2, 'replayed Free form cannot duplicate history' );
 check( make_free() instanceof WP_Error && count( $wpdb->logs ) === 2, 'fresh already-Free operation refused' );
-check( change() === true && count( $wpdb->logs ) === 3 && $wpdb->watches[8]['is_active'] === 0, 'Standard reapproval adds history without reactivating stopped watches' );
+check( change() === true && count( $wpdb->logs ) === 3 && $wpdb->watches[8]['is_active'] === 0, 'historical Standard fixture does not reactivate stopped watches' );
 check( make_free( $free_form ) instanceof WP_Error, 'old Free form refused after downgrade and reapproval' );
 foreach ( array( '', '  ', '<script></script>' ) as $reason ) {
     reset_store(); change();
@@ -311,4 +240,14 @@ check( count( $wpdb->logs ) === 2 && $wpdb->logs[0] === $past_logs[0] && $wpdb->
     json_decode( $wpdb->logs[1]['old_value'], true )['plan'] === 'standard' && json_decode( $wpdb->logs[1]['new_value'], true )['plan'] === 'free', 'contractless revocation appends exact plan transition without deleting past audit' );
 check( make_free() instanceof WP_Error && count( $wpdb->logs ) === 2, 'contractless revocation cannot execute twice' );
 check( $GLOBALS['trial_usage'] === 2 && $GLOBALS['monthly_usage'] === 37 && ! array_filter( $wpdb->sql_queries, static fn( $sql ) => str_contains( $sql, 'checkout_attempts' ) ), 'revocation preserves AI counts and never modifies application records' );
+reset_store();
+check( egov_law_monitor_square_change_plan( 10, 'standard', token( 1 ), 'valid:egov_square_approve_10_1', 1, true, '旧画面', new ApprovalSession( $wpdb ) )->code === 'invalid_plan_request' && ! $wpdb->logs && ! $wpdb->meta, 'old individual approval is disabled even with contract, confirmation and nonce' );
+foreach ( array( 'MyISAM', 'missing' ) as $engine ) {
+    reset_store(); change(); $wpdb->engine = $engine;
+    check( make_free() instanceof WP_Error && $wpdb->meta[1]['meta_value'] === 'standard', 'Free transaction still rejects nontransactional storage' );
+}
+reset_store(); change(); $allowed = false;
+check( make_free()->code === 'forbidden', 'Free checks administrator permission' );
+reset_store(); change(); $wpdb->meta[2] = array_replace( $wpdb->meta[1], array( 'umeta_id' => 2 ) );
+check( is_wp_error( token( 0 ) ), 'duplicate plan rows still block Free form' );
 echo "{$checks} checks passed. No real DB, cache or Square API used.\n";
