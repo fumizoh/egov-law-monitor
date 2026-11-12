@@ -55,6 +55,11 @@ function egov_law_monitor_standard_plan_view( $user_id ) {
     return $view;
 }
 
+/** Shared customer-facing contact guidance. */
+function egov_law_monitor_standard_contact_guidance() {
+    return '<p>お支払い・契約に関するお問い合わせは、<a href="' . esc_url( 'https://egovlm.oogushioffice.com/contact/' ) . '">お問い合わせフォーム</a>からご連絡ください。</p>';
+}
+
 function egov_law_monitor_standard_application_shortcode() {
     if ( ! is_user_logged_in() ) { return '<p>Standardの申込にはログインが必要です。</p>'; }
     if ( ! defined( 'DONOTCACHEPAGE' ) ) { define( 'DONOTCACHEPAGE', true ); }
@@ -65,7 +70,7 @@ function egov_law_monitor_standard_application_shortcode() {
         $html .= '<p>Standardプランのお支払いは、Squareの決済ページで行います。</p><p>お支払いの確認後、管理者がStandardプランへの切り替えを行います。切り替えが完了するまで、しばらくお待ちください。</p><p><a class="egov-law-button egov-standard-payment-button" href="https://square.link/u/30s16R3f" rel="noreferrer">Squareでお支払いへ進む</a></p><p>すでにお支払い済みの場合は、再度決済せず、プランの切り替えをお待ちください。お問い合わせの際はSquareの請求書番号をお知らせください。</p>';
     } elseif ( $view['plan'] !== 'standard' || ! function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= '<p>' . esc_html( $view['message'] ) . '</p>'; }
     if ( function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= egov_law_monitor_subscription_cancellation_panel( (int) get_current_user_id() ); }
-    return $html . '<p>お支払い・契約・解約については管理者へお問い合わせください。</p></section>';
+    return $html . egov_law_monitor_standard_contact_guidance() . '</section>';
 }
 add_shortcode( 'egov_standard_application', 'egov_law_monitor_standard_application_shortcode' );
 
@@ -81,6 +86,7 @@ function egov_law_monitor_plan_status_shortcode() {
         $html .= $url !== '' ? '<p><a href="' . esc_url( $url ) . '">Standardプランに申し込む</a></p>' : '<p>申込ページを確認できません。管理者へお問い合わせください。</p>';
     } elseif ( $view['plan'] !== 'standard' || ! function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= '<p>' . esc_html( $view['message'] ) . '</p>'; }
     if ( function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= egov_law_monitor_subscription_cancellation_panel( (int) get_current_user_id() ); }
+    if ( $plan === 'standard' ) { $html .= egov_law_monitor_standard_contact_guidance(); }
     return $html . '</section>';
 }
 add_shortcode( 'egov_plan_status', 'egov_law_monitor_plan_status_shortcode' );

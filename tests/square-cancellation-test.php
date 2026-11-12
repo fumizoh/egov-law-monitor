@@ -182,7 +182,7 @@ check( str_contains( $panel, '確定して解約を申請する' ) && str_contai
 check( str_contains( egov_law_monitor_standard_application_shortcode(), '確定して解約を申請する' ) && ! str_contains( egov_law_monitor_standard_application_shortcode(), 'https://square.link/u/30s16R3f' ), 'independent confirmation page never offers another payment to Standard user' );
 check( str_contains( $panel, '管理者がSquareで解約手続きを行います。お支払い済みの期間は、引き続きStandardプランをご利用いただけます。' ) && ! str_contains( $panel, '申請だけではSquareの解約' ), 'confirmation uses customer-facing cancellation guidance' );
 $application_html = egov_law_monitor_standard_application_shortcode();
-check( str_contains( $application_html, 'お支払い・契約・解約については管理者へお問い合わせください。' ) && ! str_contains( $application_html, 'この画面からSquareの契約変更・解約は行いません。' ), 'application uses concise contact guidance' );
+check( str_contains( $application_html, egov_law_monitor_standard_contact_guidance() ) && ! str_contains( $application_html, 'お支払い・契約・解約については管理者へお問い合わせください。' ), 'application uses shared contact form guidance' );
 $_SERVER['REQUEST_METHOD'] = 'POST'; $_POST = array( 'egov_standard_cancel_request' => '1', 'standard_cancel_nonce' => 'valid:egov_standard_cancel_10', 'standard_cancel_token' => egov_law_monitor_cancellation_context( 10 )['plan_token'], 'user_id' => '20' );
 $redirects = array(); $redirect = static function ( $url, $status ) use ( &$redirects ) { $redirects[] = array( $url, $status ); return 'redirect'; };
 check( egov_law_monitor_subscription_cancel_post( 'cancel_factory', $redirect ) === 'redirect' && $redirects === array( array( 'https://example.test/standard-application/', 303 ) ), 'successful request PRG uses fixed same-site 303 target and ignores forged user ID' );
@@ -203,6 +203,7 @@ foreach ( array( 'normal', 'requested', 'scheduled', 'end_day', 'due' ) as $disp
     $before_display = serialize( array( $wpdb->cancellations, $wpdb->logs, $wpdb->meta, $cancel_mails ) );
     foreach ( array( 'egov_law_monitor_plan_status_shortcode', 'egov_law_monitor_standard_application_shortcode' ) as $shortcode ) {
         $html = $shortcode();
+        check( substr_count( $html, 'href="https://egovlm.oogushioffice.com/contact/"' ) === 1 && substr_count( $html, 'お支払い・契約に関するお問い合わせは、<a' ) === 1 && str_contains( $html, '>お問い合わせフォーム</a>からご連絡ください。' ), 'one ordinary contact link in each Standard state: ' . $display_state . '/' . $shortcode );
         check( substr_count( $html, $expected[$display_state] ) === 1 && ! str_contains( $html, 'Squareの支払状況はこの画面では確認できません' ) && ( $display_state === 'normal' || ! str_contains( $html, 'Standardプランをご利用中です。' ) ), 'one shared notice without obsolete or duplicate guidance: ' . $display_state . '/' . $shortcode );
         if ( in_array( $display_state, array( 'scheduled', 'end_day', 'due' ), true ) ) {
             check( str_contains( $html, '利用終了日：<strong>2026年11月15日</strong>' ) && ( str_contains( $html, '利用終了日まではStandardプランをご利用いただけます。' ) === ( $display_state !== 'due' ) ), 'end date and usage notice match state: ' . $display_state . '/' . $shortcode );
