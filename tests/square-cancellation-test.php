@@ -2,8 +2,8 @@
 /** Service cancellation transactions, mail and date tests; no real DB/API/mail. */
 require __DIR__ . '/square-approval-test.php';
 function is_user_logged_in() { return ! empty( $GLOBALS['cancel_logged_in'] ); }
-function wp_timezone() { return new DateTimeZone( $GLOBALS['cancel_timezone'] ); }
-function current_datetime() { return ( new DateTimeImmutable( $GLOBALS['cancel_clock'] ) )->setTimezone( wp_timezone() ); }
+function wp_timezone() { return new DateTimeZone( $GLOBALS['cancel_timezone'] ?? 'UTC' ); }
+function current_datetime() { return ( new DateTimeImmutable( $GLOBALS['cancel_clock'] ?? $GLOBALS['now'], wp_timezone() ) )->setTimezone( wp_timezone() ); }
 function get_option( $key, $default = false ) { return $GLOBALS['cancel_options'][$key] ?? $default; }
 function update_option( $key, $value, $autoload = false ) { $GLOBALS['cancel_options'][$key] = $value; }
 function dbDelta( $sql ) { $GLOBALS['cancel_ddl'][] = $sql; }

@@ -503,15 +503,9 @@ function egov_law_monitor_get_ai_summary_usage_count(
     $table_name =
         $wpdb->prefix . 'egov_law_ai_summary_history';
 
-    $now = current_time( 'timestamp' );
-    $month_start = wp_date(
-        'Y-m-01 00:00:00',
-        $now
-    );
-    $next_month_start = wp_date(
-        'Y-m-01 00:00:00',
-        strtotime( '+1 month', $now )
-    );
+    $month = current_datetime()->modify( 'first day of this month' )->setTime( 0, 0, 0 );
+    $month_start = $month->format( 'Y-m-d H:i:s' );
+    $next_month_start = $month->modify( '+1 month' )->format( 'Y-m-d H:i:s' );
 
     $count = $wpdb->get_var(
         $wpdb->prepare(
