@@ -81,6 +81,7 @@ function egov_law_monitor_render_subscription_cancellations( $user_id, $url ) {
             if ( $state !== 'completed' && (int) $snapshot['revision'] !== (int) $row['approval_id'] ) { $state = 'approval_changed'; }
             $labels = array( 'requested' => '未処理：利用終了日未登録', 'scheduled' => '解約予定日登録済み', 'due' => '終了日到来・Free変更待ち', 'completed' => 'Free変更済み', 'invalid' => '日付を確認してください', 'approval_changed' => '現在の承認履歴と一致しません。管理者確認が必要です' );
             echo '<details open><summary>申請 #' . esc_html( $row['id'] ) . '：' . esc_html( $labels[$state] ?? '確認が必要' ) . '</summary><p>対象契約レコード ID: ' . esc_html( $row['contract_id'] ) . ' ／ 承認履歴 ID: ' . esc_html( $row['approval_id'] ) . '</p><p>申請日時：' . esc_html( wp_date( 'Y年m月d日 H:i', strtotime( $row['requested_at'] . ' UTC' ), wp_timezone() ) ) . ' ／ Standard利用終了日：' . esc_html( egov_law_monitor_cancellation_date_label( $row['end_date'] ) ) . '</p><p>管理者通知：' . esc_html( $row['admin_notified_at'] === null ? '送信待ち・失敗時は再試行' : '送信処理受付済み' ) . ' ／ 期限通知の最終試行日：' . esc_html( $row['last_due_attempt_date'] ?? 'なし' ) . ' ／ 期限通知の最終受付日：' . esc_html( $row['last_due_sent_date'] ?? 'なし' ) . '</p>';
+            echo '<p>利用者向け終了日通知：' . esc_html( egov_law_monitor_cancellation_user_mail_status( $row ) ) . '（送信処理の受付は受信完了を保証しません）</p>';
             if ( ! in_array( $state, array( 'completed', 'approval_changed' ), true ) ) {
                 echo '<form method="post" action="' . esc_url( $url ) . '">';
                 wp_nonce_field( 'egov_cancel_date_' . $user_id . '_' . $row['id'], 'subscription_cancel_date_nonce' );

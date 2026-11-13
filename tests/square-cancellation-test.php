@@ -45,7 +45,7 @@ class CancellationStore extends ApprovalStore {
                 return $rows;
             }
             $rows = array();
-            foreach ( egov_law_monitor_cancellation_columns() as $name => $spec ) { $rows[] = array( 'Field' => $name, 'Type' => $this->cancellation_bad === 'column' && $name === 'end_date' ? 'text' : $spec[0], 'Null' => $spec[1] ? 'YES' : 'NO', 'Extra' => $name === 'id' ? 'auto_increment' : '' ); }
+            foreach ( egov_law_monitor_cancellation_columns() as $name => $spec ) { if ( $this->cancellation_bad === 'missing_user_attempt' && $name === 'user_mail_attempt_at' ) { continue; } $rows[] = array( 'Field' => $name, 'Type' => $this->cancellation_bad === 'column' && $name === 'end_date' ? 'text' : $spec[0], 'Null' => $spec[1] ? 'YES' : 'NO', 'Extra' => $name === 'id' ? 'auto_increment' : '' ); }
             return $rows;
         }
         if ( $is_table ) {
@@ -76,12 +76,12 @@ class CancellationSession extends ApprovalSession {
         if ( str_starts_with( $sql, 'INSERT' ) ) {
             foreach ( $this->local->cancellations as $row ) { if ( (int) $row['approval_id'] === (int) $p[2] ) { return false; } }
             $id = count( $this->local->cancellations ) + 1; $this->insert_id = $id;
-            $this->local->cancellations[$id] = array( 'id' => $id, 'user_id' => $p[0], 'contract_id' => $p[1], 'approval_id' => $p[2], 'requested_at' => $p[3], 'updated_at' => $p[4], 'revision' => 1, 'end_date' => null, 'completed_at' => null, 'admin_notified_at' => null, 'user_notified_revision' => 0, 'last_mail_attempt_at' => null, 'last_due_attempt_date' => null, 'last_due_sent_date' => null, 'mail_claim_token' => null, 'mail_claimed_at' => null );
+            $this->local->cancellations[$id] = array( 'id' => $id, 'user_id' => $p[0], 'contract_id' => $p[1], 'approval_id' => $p[2], 'requested_at' => $p[3], 'updated_at' => $p[4], 'revision' => 1, 'end_date' => null, 'completed_at' => null, 'admin_notified_at' => null, 'user_notified_revision' => 0, 'last_mail_attempt_at' => null, 'request_mail_attempt_at' => null, 'user_mail_attempt_at' => null, 'last_due_attempt_date' => null, 'last_due_sent_date' => null, 'mail_claim_token' => null, 'mail_claimed_at' => null );
         } else {
             $id = $p[count( $p ) - 2]; $row = &$this->local->cancellations[$id];
             if ( str_contains( $sql, 'SET end_date' ) ) { $row['end_date'] = $p[0]; $row['updated_at'] = $p[1]; ++$row['revision']; }
             elseif ( str_contains( $sql, 'SET completed_at' ) ) { $row['completed_at'] = $p[0]; $row['updated_at'] = $p[1]; ++$row['revision']; $row['mail_claim_token'] = null; $row['mail_claimed_at'] = null; }
-            elseif ( str_contains( $sql, 'SET mail_claim_token' ) ) { $row['mail_claim_token'] = $p[0]; $row['mail_claimed_at'] = $p[1]; $row['last_mail_attempt_at'] = $p[2]; $row['last_due_attempt_date'] = $p[3]; }
+            elseif ( str_contains( $sql, 'SET mail_claim_token' ) ) { $row['mail_claim_token'] = $p[0]; $row['mail_claimed_at'] = $p[1]; $row['last_mail_attempt_at'] = $p[2]; $row['last_due_attempt_date'] = $p[3]; $row['request_mail_attempt_at'] = $p[4]; $row['user_mail_attempt_at'] = $p[5]; }
             elseif ( str_contains( $sql, 'SET admin_notified_at' ) ) { $row['admin_notified_at'] = $p[0]; $row['user_notified_revision'] = $p[1]; $row['last_due_sent_date'] = $p[2]; $row['mail_claim_token'] = null; $row['mail_claimed_at'] = null; }
             else { throw new LogicException( 'unknown cancellation write' ); }
         }
@@ -136,6 +136,8 @@ $allowed = false; check( is_wp_error( set_cancel_date( '2026-11-17' ) ), 'date u
 
 reset_cancellation(); request_cancellation(); set_cancel_date( '2026-11-14' );
 $row = $wpdb->cancellations[1];
+$wpdb->cancellations[1]['admin_notified_at'] = egov_law_monitor_cancellation_now();
+$wpdb->cancellations[1]['user_notified_revision'] = $row['revision'];
 check( egov_law_monitor_cancellation_state( null, 'standard' ) === 'none' && egov_law_monitor_cancellation_state( array_replace( $row, array( 'end_date' => null ) ), 'standard' ) === 'requested', 'no request and no end date states' );
 check( egov_law_monitor_cancellation_state( $row, 'standard' ) === 'scheduled', 'before end date remains scheduled' );
 $cancel_clock = '2026-11-13T15:00:00Z';
@@ -215,13 +217,17 @@ foreach ( array( 'normal', 'requested', 'scheduled', 'end_day', 'due' ) as $disp
     check( serialize( array( $wpdb->cancellations, $wpdb->logs, $wpdb->meta, $cancel_mails ) ) === $before_display, 'display has no mutation or mail side effects: ' . $display_state );
 }
 
-foreach ( array( 'engine', 'column', 'unique', 'prefix' ) as $bad ) {
+foreach ( array( 'engine', 'column', 'unique', 'prefix', 'missing_user_attempt' ) as $bad ) {
     reset_cancellation(); $wpdb->cancellation_bad = $bad;
     check( ! egov_law_monitor_cancellation_storage_ready() && is_wp_error( request_cancellation() ), 'incomplete storage rejects request: ' . $bad );
     egov_law_monitor_install_cancellation_table(); check( ! isset( $cancel_options['egov_law_monitor_cancellation_schema_version'] ), 'incomplete schema never advances version' );
 }
 reset_cancellation(); egov_law_monitor_install_cancellation_table();
-check( $cancel_options['egov_law_monitor_cancellation_schema_version'] === '1' && str_contains( end( $cancel_ddl ), 'ENGINE=InnoDB' ), 'activation/update schema version only after metadata verification' );
+check( $cancel_options['egov_law_monitor_cancellation_schema_version'] === '2' && str_contains( end( $cancel_ddl ), 'ENGINE=InnoDB' ), 'activation/update schema version only after metadata verification' );
+$cancel_options['egov_law_monitor_cancellation_schema_version'] = '1';
+$schema_rows = serialize( array( $wpdb->cancellations, $wpdb->contracts, $wpdb->logs, $wpdb->meta ) );
+egov_law_monitor_install_cancellation_table();
+check( $cancel_options['egov_law_monitor_cancellation_schema_version'] === '2' && str_contains( end( $cancel_ddl ), 'request_mail_attempt_at DATETIME NULL' ) && str_contains( end( $cancel_ddl ), 'user_mail_attempt_at DATETIME NULL' ) && $schema_rows === serialize( array( $wpdb->cancellations, $wpdb->contracts, $wpdb->logs, $wpdb->meta ) ), 'schema version one upgrades additively without resetting stored data' );
 egov_law_monitor_schedule_cancellation_cron(); $schedule = $cancel_schedule; egov_law_monitor_schedule_cancellation_cron();
 check( $cancel_schedule === $schedule && $cancel_schedule['egov_standard_cancellation_cron'][1] === 'hourly', 'hourly scheduling avoids duplicate events' );
 reset_cancellation(); request_cancellation();
@@ -229,7 +235,7 @@ $cancel_during_mail = static function () { egov_law_monitor_process_cancellation
 egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
 check( count( $cancel_mails ) === 1 && $wpdb->cancellations[1]['admin_notified_at'] !== null, 'overlapping notification workers honor committed lease and cooldown' );
 unset( $cancel_during_mail );
-set_cancel_date( '2026-11-15' ); $cancel_clock = '2026-11-13T01:01:00+09:00'; egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
+set_cancel_date( '2026-11-15' ); egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
 check( count( $cancel_mails ) === 2 && $cancel_mails[1][0] === 'user10@example.test' && str_contains( $cancel_mails[1][2], '2026年11月15日' ) && (int) $wpdb->cancellations[1]['user_notified_revision'] === (int) $wpdb->cancellations[1]['revision'], 'end date mail reaches user through wp_mail and acknowledges revision' );
 $mail_token = egov_law_monitor_cancellation_token( $wpdb->cancellations[1] );
 check( ! is_wp_error( set_cancel_date( '2026-11-16', $mail_token ) ), 'mail acknowledgements do not invalidate administrator date token' );
@@ -254,4 +260,38 @@ reset_cancellation(); request_cancellation(); $wpdb->fail = 'commit'; $wpdb->com
 check( $r->code === 'cancellation_outcome_unknown' && $wpdb->cancellations[1]['end_date'] === '2026-11-15' && end( $wpdb->logs )['action'] === 'subscription_end_date_set' && ! $cancel_mails, 'date COMMIT ambiguity preserves queued notification and audit but sends no premature email' );
 reset_cancellation(); $wpdb->fail = 'commit'; $wpdb->commit_applied = true; $r = request_cancellation();
 check( $r->code === 'cancellation_outcome_unknown' && count( $wpdb->cancellations ) === 1 && count( $wpdb->logs ) === 2, 'request COMMIT ambiguity distinguishes stored request from success response' );
+reset_cancellation(); request_cancellation();
+egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
+set_cancel_date( '2026-12-12' );
+check( egov_law_monitor_cancellation_user_mail_status( $wpdb->cancellations[1] ) === '待機中', 'request mail does not mark user notification attempted' );
+$cancel_during_mail = static function () { egov_law_monitor_cancellation_cron( 'cancel_factory' ); };
+egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' ); unset( $cancel_during_mail );
+check( count( $cancel_mails ) === 2 && $cancel_mails[1][0] === 'user10@example.test' && $wpdb->cancellations[1]['user_notified_revision'] === $wpdb->cancellations[1]['revision'], 'date mail sends immediately after administrator mail, overlapping Cron cannot duplicate' );
+check( egov_law_monitor_cancellation_user_mail_status( $wpdb->cancellations[1] ) === '送信処理受付済み', 'user notice reports acceptance only' );
+egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
+check( count( $cancel_mails ) === 2, 'same accepted revision is not resent' );
+
+reset_cancellation(); request_cancellation(); egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' ); set_cancel_date( '2026-12-12' );
+$cancel_mail_fail = true; egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
+check( count( $cancel_mails ) === 2 && $wpdb->cancellations[1]['user_notified_revision'] === 0 && str_starts_with( egov_law_monitor_cancellation_user_mail_status( $wpdb->cancellations[1] ), '再試行待ち' ), 'failed end-date notice remains pending with own attempt record' );
+egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
+$cancel_clock = '2026-11-13T00:59:59+09:00'; egov_law_monitor_cancellation_cron( 'cancel_factory' );
+check( count( $cancel_mails ) === 2, 'failed user notice cannot retry before one hour' );
+$cancel_clock = '2026-11-13T01:00:00+09:00'; $cancel_mail_fail = false; egov_law_monitor_cancellation_cron( 'cancel_factory' );
+check( count( $cancel_mails ) === 3 && egov_law_monitor_cancellation_user_mail_status( $wpdb->cancellations[1] ) === '送信処理受付済み', 'Cron retries user notice at one-hour boundary and acknowledges revision' );
+ob_start(); egov_law_monitor_render_subscription_cancellations( 10, admin_url( 'admin.php' ) ); $notification_html = ob_get_clean();
+check( str_contains( $notification_html, '利用者向け終了日通知：送信処理受付済み' ) && str_contains( $notification_html, '受信完了を保証しません' ), 'administrator sees delivery disclaimer and user acceptance state' );
+
+reset_cancellation(); request_cancellation(); $cancel_mail_fail = true; egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' ); set_cancel_date( '2026-12-12' );
+$cancel_mail_fail = false; egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' ); egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
+check( count( $cancel_mails ) === 2 && $wpdb->cancellations[1]['admin_notified_at'] === null, 'user mail bypasses failed request cooldown without resetting request retry limit' );
+$cancel_clock = '2026-11-13T01:00:00+09:00'; egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
+check( count( $cancel_mails ) === 3 && $wpdb->cancellations[1]['admin_notified_at'] !== null, 'failed administrator request retries independently' );
+
+reset_cancellation(); request_cancellation(); egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' ); set_cancel_date( '2026-11-13' ); egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
+$cancel_clock = '2026-11-13T23:59:59+09:00';
+check( egov_law_monitor_cancellation_mail_job( $wpdb->cancellations[1] ) === null, 'separated cooldown does not send due notification on end date' );
+$cancel_clock = '2026-11-14T00:00:00+09:00'; egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' ); egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
+check( count( $cancel_mails ) === 3 && $wpdb->cancellations[1]['last_due_attempt_date'] === '2026-11-14', 'next-day due notification retains daily limit' );
+
 echo ( $checks - $start ) . " service cancellation checks passed; no real DB, API or mail used.\n";

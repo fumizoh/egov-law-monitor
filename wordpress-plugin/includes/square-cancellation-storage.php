@@ -17,6 +17,7 @@ function egov_law_monitor_cancellation_columns() {
     return array( 'id' => array( 'bigint unsigned', false ), 'user_id' => array( 'bigint unsigned', false ), 'contract_id' => array( 'bigint unsigned', false ), 'approval_id' => array( 'bigint unsigned', false ),
         'requested_at' => array( 'datetime', false ), 'end_date' => array( 'date', true ), 'updated_at' => array( 'datetime', false ), 'completed_at' => array( 'datetime', true ), 'revision' => array( 'bigint unsigned', false ),
         'admin_notified_at' => array( 'datetime', true ), 'user_notified_revision' => array( 'bigint unsigned', false ), 'last_mail_attempt_at' => array( 'datetime', true ),
+        'request_mail_attempt_at' => array( 'datetime', true ), 'user_mail_attempt_at' => array( 'datetime', true ),
         'last_due_attempt_date' => array( 'date', true ), 'last_due_sent_date' => array( 'date', true ), 'mail_claim_token' => array( 'char(32)', true ), 'mail_claimed_at' => array( 'datetime', true ) );
 }
 
@@ -61,7 +62,7 @@ function egov_law_monitor_cancellation_storage_ready( $db = null ) {
 
 function egov_law_monitor_install_cancellation_table() {
     global $wpdb;
-    if ( get_option( 'egov_law_monitor_cancellation_schema_version' ) === '1' && egov_law_monitor_cancellation_storage_ready() ) { return; }
+    if ( get_option( 'egov_law_monitor_cancellation_schema_version' ) === '2' && egov_law_monitor_cancellation_storage_ready() ) { return; }
     if ( ! function_exists( 'dbDelta' ) ) { require_once ABSPATH . 'wp-admin/includes/upgrade.php'; }
     $name = egov_law_monitor_cancellation_table(); $charset = $wpdb->get_charset_collate();
     dbDelta( "CREATE TABLE {$name} (
@@ -77,6 +78,8 @@ function egov_law_monitor_install_cancellation_table() {
         admin_notified_at DATETIME NULL,
         user_notified_revision BIGINT UNSIGNED NOT NULL DEFAULT 0,
         last_mail_attempt_at DATETIME NULL,
+        request_mail_attempt_at DATETIME NULL,
+        user_mail_attempt_at DATETIME NULL,
         last_due_attempt_date DATE NULL,
         last_due_sent_date DATE NULL,
         mail_claim_token CHAR(32) NULL,
@@ -85,7 +88,7 @@ function egov_law_monitor_install_cancellation_table() {
         UNIQUE KEY approval_id (approval_id),
         KEY user_id (user_id)
     ) ENGINE=InnoDB {$charset};" );
-    if ( egov_law_monitor_cancellation_storage_ready() ) { update_option( 'egov_law_monitor_cancellation_schema_version', '1', false ); }
+    if ( egov_law_monitor_cancellation_storage_ready() ) { update_option( 'egov_law_monitor_cancellation_schema_version', '2', false ); }
 }
 add_action( 'admin_init', 'egov_law_monitor_install_cancellation_table' );
 register_activation_hook( dirname( __DIR__ ) . '/egov-law-monitor.php', 'egov_law_monitor_install_cancellation_table' );

@@ -2,16 +2,23 @@
 /** Durable mail reservations. SMTP is always outside a DB transaction. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/** Acceptance is not proof of delivery. A reservation can outlive an uncertain send. */
+function egov_law_monitor_cancellation_user_mail_status( $row ) {
+    if ( $row['end_date'] === null ) { return '待機中（利用終了日未登録）'; }
+    if ( (int) $row['user_notified_revision'] >= (int) $row['revision'] ) { return '送信処理受付済み'; }
+    if ( $row['completed_at'] !== null ) { return '未通知（利用終了処理済み）'; }
+    return $row['user_mail_attempt_at'] !== null && $row['user_mail_attempt_at'] >= $row['updated_at'] ? '再試行待ち（送信結果未確認を含む）' : '待機中';
+}
+
 function egov_law_monitor_cancellation_mail_job( $row, $now = null ) {
     $now = $now ?? current_datetime(); $utc = $now->setTimezone( new DateTimeZone( 'UTC' ) );
     if ( $row['completed_at'] !== null ) { return null; }
     if ( $row['end_date'] !== null && ! egov_law_monitor_cancellation_date_valid( $row['end_date'] ) ) { return null; }
     if ( $row['mail_claim_token'] !== null && $row['mail_claimed_at'] !== null && strtotime( $row['mail_claimed_at'] . ' UTC' ) > $utc->getTimestamp() - 900 ) { return null; }
-    if ( $row['last_mail_attempt_at'] !== null && strtotime( $row['last_mail_attempt_at'] . ' UTC' ) > $utc->getTimestamp() - 3600 ) { return null; }
     $today = $now->format( 'Y-m-d' );
     if ( $row['end_date'] !== null && egov_law_monitor_cancellation_date_valid( $row['end_date'] ) && $row['end_date'] < $today && $row['last_due_attempt_date'] !== $today ) { return 'due'; }
-    if ( $row['end_date'] !== null && (int) $row['user_notified_revision'] < (int) $row['revision'] ) { return 'end_date'; }
-    if ( $row['admin_notified_at'] === null ) { return 'request'; }
+    if ( $row['end_date'] !== null && (int) $row['user_notified_revision'] < (int) $row['revision'] && ( $row['user_mail_attempt_at'] === null || strtotime( $row['user_mail_attempt_at'] . ' UTC' ) <= $utc->getTimestamp() - 3600 ) ) { return 'end_date'; }
+    if ( $row['admin_notified_at'] === null && ( $row['request_mail_attempt_at'] === null || strtotime( $row['request_mail_attempt_at'] . ' UTC' ) <= $utc->getTimestamp() - 3600 ) ) { return 'request'; }
     return null;
 }
 
@@ -33,7 +40,9 @@ function egov_law_monitor_process_cancellation_mail( $id, $factory = null ) {
             $token = bin2hex( random_bytes( 16 ) ); $now = egov_law_monitor_cancellation_now(); $today = current_datetime()->format( 'Y-m-d' );
             // Reserve the due-day before sending, even if delivery fails or COMMIT is ambiguous.
             $due = $kind === 'due' ? $today : $row['last_due_attempt_date'];
-            if ( ! $db->write( "UPDATE `{$table}` SET mail_claim_token = ?, mail_claimed_at = ?, last_mail_attempt_at = ?, last_due_attempt_date = ? WHERE id = ? AND user_id = ?", array( $token, $now, $now, $due, $id, $user_id ) ) ) { throw new RuntimeException(); }
+            $request_at = $kind === 'request' ? $now : $row['request_mail_attempt_at'];
+            $user_at = $kind === 'end_date' ? $now : $row['user_mail_attempt_at'];
+            if ( ! $db->write( "UPDATE `{$table}` SET mail_claim_token = ?, mail_claimed_at = ?, last_mail_attempt_at = ?, last_due_attempt_date = ?, request_mail_attempt_at = ?, user_mail_attempt_at = ? WHERE id = ? AND user_id = ?", array( $token, $now, $now, $due, $request_at, $user_at, $id, $user_id ) ) ) { throw new RuntimeException(); }
             return array( 'kind' => $kind, 'token' => $token, 'row' => $row, 'contract' => $context['contract'], 'today' => $today );
         }, $factory );
         if ( is_wp_error( $job ) || ! $job ) { return; }
