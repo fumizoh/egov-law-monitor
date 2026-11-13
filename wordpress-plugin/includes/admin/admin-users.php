@@ -3,6 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+require_once __DIR__ . '/admin-user-cancellations.php';
 
 /**
  * ユーザー管理画面
@@ -26,6 +27,10 @@ function egov_law_monitor_render_admin_users() {
     );
 
     $table_name = $wpdb->prefix . 'law_watch_settings';
+    $cancellation_markers = egov_law_monitor_user_cancellation_markers( $users );
+    $pending_only = isset( $_GET['cancellation_status'] ) && $_GET['cancellation_status'] === 'due';
+    $pending_count = count( array_filter( $cancellation_markers, static fn( $marker ) => $marker['state'] === 'due' ) );
+    if ( $pending_only ) { $users = array_filter( $users, static fn( $user ) => ( $cancellation_markers[(int) $user->ID]['state'] ?? '' ) === 'due' ); }
 
     $watch_settings = $wpdb->get_results(
         "SELECT user_id, keyword
@@ -48,6 +53,8 @@ function egov_law_monitor_render_admin_users() {
     ?>
     <div class="wrap">
         <style>
+        .egov-law-monitor-users-table-wrap .egov-user-free-pending {color:#b32d2e;border-left:3px solid #b32d2e;padding-left:6px;margin-top:4px}
+        .egov-law-monitor-users-table-wrap .egov-user-cancellation {margin-top:4px}
         .egov-law-monitor-users-table-wrap {
             overflow-x: auto;
             width: 100%;
@@ -114,6 +121,8 @@ function egov_law_monitor_render_admin_users() {
         </style>
 
         <h1>法令ウォッチ ユーザー管理</h1>
+        <p><a href="<?php echo esc_url( admin_url( 'admin.php?page=egov-law-monitor' ) ); ?>">すべて</a> |
+            <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'egov-law-monitor', 'cancellation_status' => 'due' ), admin_url( 'admin.php' ) ) ); ?>">Free変更待ち（<?php echo esc_html( $pending_count ); ?>）</a></p>
 
         <div class="egov-law-monitor-users-table-wrap">
             <table class="widefat fixed striped egov-law-monitor-users-table">
@@ -157,6 +166,7 @@ function egov_law_monitor_render_admin_users() {
                                     ?>
 
                                     <?php echo esc_html( $plan === EGOV_LAW_MONITOR_PLAN_FREE ? 'Free' : ( $plan === EGOV_LAW_MONITOR_PLAN_STANDARD ? 'Standard' : egov_law_monitor_get_plan_label( $plan ) ) ); ?>
+                                    <?php echo egov_law_monitor_user_cancellation_label( $cancellation_markers[(int) $user->ID] ?? null ); ?>
                                 </td>
 
                                 <td>
