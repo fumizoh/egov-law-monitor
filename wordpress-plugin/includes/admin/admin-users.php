@@ -61,7 +61,7 @@ function egov_law_monitor_render_admin_users() {
         }
 
         .egov-law-monitor-users-table {
-            min-width: 1250px;
+            min-width: 1400px;
             table-layout: auto;
         }
 
@@ -74,49 +74,65 @@ function egov_law_monitor_render_admin_users() {
         .egov-law-monitor-users-table th:nth-child(1),
         .egov-law-monitor-users-table td:nth-child(1) {
             width: 80px;
+            min-width: 80px;
         }
 
         .egov-law-monitor-users-table th:nth-child(2),
         .egov-law-monitor-users-table td:nth-child(2) {
             width: 120px;
+            min-width: 120px;
         }
 
         .egov-law-monitor-users-table th:nth-child(3),
         .egov-law-monitor-users-table td:nth-child(3) {
             width: 210px;
+            min-width: 210px;
             white-space: normal;
             overflow-wrap: anywhere;
         }
 
         .egov-law-monitor-users-table th:nth-child(4),
         .egov-law-monitor-users-table td:nth-child(4) {
-            width: 120px;
+            width: 210px;
+            min-width: 210px;
+            white-space: normal;
+            overflow-wrap: anywhere;
         }
 
         .egov-law-monitor-users-table th:nth-child(5),
         .egov-law-monitor-users-table td:nth-child(5) {
             width: 100px;
+            min-width: 100px;
         }
 
         .egov-law-monitor-users-table th:nth-child(6),
         .egov-law-monitor-users-table td:nth-child(6) {
             width: 160px;
+            min-width: 160px;
             white-space: normal;
+            overflow-wrap: anywhere;
         }
 
         .egov-law-monitor-users-table th:nth-child(7),
         .egov-law-monitor-users-table td:nth-child(7) {
             width: 150px;
+            min-width: 150px;
         }
 
         .egov-law-monitor-users-table th:nth-child(8),
         .egov-law-monitor-users-table td:nth-child(8) {
             width: 120px;
+            min-width: 120px;
         }
 
         .egov-law-monitor-users-table th:nth-child(9),
         .egov-law-monitor-users-table td:nth-child(9) {
-            width: 100px;
+            width: 180px;
+            min-width: 180px;
+        }
+
+        .egov-law-monitor-users-table td:nth-child(9) .button {
+            white-space: nowrap;
         }
         </style>
 

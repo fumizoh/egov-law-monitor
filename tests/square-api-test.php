@@ -198,6 +198,12 @@ try {
     check_lookup( $headers[1] === array( 'ユーザーID', 'ユーザー', 'メールアドレス', 'プラン', '通知', 'ウォッチキーワード', 'AI要約', '登録日', '操作' ), 'all nine columns and original order preserved' );
     check_lookup( str_contains( $html, '環境、行政' ) && preg_match( '/2\s*\/\s*3回/u', $html ) && preg_match( '/37\s*\/\s*100回/u', $html ) && str_contains( $html, '2026年1月1日' ), 'watch formatting usage counters and registration date formatting preserved' );
     check_lookup( str_contains( $html, 'user_id=10' ) && str_contains( $html, 'user_id=20' ), 'each user has own Square contract link' );
+    check_lookup( preg_match( '/\.egov-law-monitor-users-table-wrap\s*\{[^}]*overflow-x:\s*auto;/s', $html ) && str_contains( $html, 'min-width: 1400px;' ), 'narrow user list scrolls horizontally instead of compressing columns' );
+    foreach ( array( 1 => 80, 2 => 120, 3 => 210, 4 => 210, 5 => 100, 6 => 160, 7 => 150, 8 => 120, 9 => 180 ) as $column => $width ) {
+        check_lookup( preg_match( '/td:nth-child\(' . $column . '\)\s*\{[^}]*min-width:\s*' . $width . 'px;/s', $html ), 'minimum width protects user list column ' . $column );
+    }
+    check_lookup( preg_match( '/td:nth-child\(6\)\s*\{[^}]*white-space:\s*normal;[^}]*overflow-wrap:\s*anywhere;/s', $html ) && preg_match( '/td:nth-child\(4\)\s*\{[^}]*white-space:\s*normal;/s', $html ), 'keywords and multiline plan content wrap inside their cells' );
+    check_lookup( preg_match( '/td:nth-child\(9\) \.button\s*\{\s*white-space:\s*nowrap;/s', $html ), 'operation buttons do not wrap midway' );
     foreach ( array( 'egov_law_monitor_save_user', 'egov_law_monitor_clear_ai_summary' ) as $old_action ) {
         $_POST = array( $old_action => '1', 'user_id' => '10', 'plan' => 'standard', 'notifications' => '1', 'ai_summary_user_id' => '10' );
         ob_start();
