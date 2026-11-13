@@ -1,313 +1,124 @@
 [
   {
-    "law_id": "406CO0000000371",
-    "law_no": "平成六年政令第三百七十一号",
-    "law_name": "政党助成法施行令",
-    "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/406CO0000000371",
-    "updates": [
-      {
-        "law_data_id": 651073,
-        "sub_revision": "1",
-        "published_date": "1994-11-25",
-        "effective_date": "2027-01-01",
-        "effective_comment": "",
-        "amend_name": "政治資金規正法施行令及び政党助成法施行令の一部を改正する政令",
-        "amend_no": "令和八年政令第三百三十八号",
-        "amendment_id": "508CO0000000338",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/406CO0000000371/20270101_508CO0000000338?occasion_date=20270101&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "350CO0000000277",
-    "law_no": "昭和五十年政令第二百七十七号",
-    "law_name": "政治資金規正法施行令",
-    "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/350CO0000000277",
-    "updates": [
-      {
-        "law_data_id": 651074,
-        "sub_revision": "1",
-        "published_date": "1975-09-26",
-        "effective_date": "2027-01-01",
-        "effective_comment": "",
-        "amend_name": "政治資金規正法施行令及び政党助成法施行令の一部を改正する政令",
-        "amend_no": "令和八年政令第三百三十八号",
-        "amendment_id": "508CO0000000338",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/350CO0000000277/20270101_508CO0000000338?occasion_date=20270101&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "426CO0000000336",
-    "law_no": "平成二十六年政令第三百三十六号",
-    "law_name": "特定秘密の保護に関する法律施行令",
-    "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/426CO0000000336",
-    "updates": [
-      {
-        "law_data_id": 650332,
-        "sub_revision": "2",
-        "published_date": "2014-10-17",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律の施行に伴う関係政令の整備に関する政令",
-        "amend_no": "令和八年政令第三百五号",
-        "amendment_id": "508CO0000000305",
-        "amend_published_date": "2026-09-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/426CO0000000336/20261102_508CO0000000305?occasion_date=20261102&tab=compare",
-        "pending": false
-      },
-      {
-        "law_data_id": 650871,
-        "sub_revision": "1",
-        "published_date": "2014-10-17",
-        "effective_date": "2026-10-30",
-        "effective_comment": "",
-        "amend_name": "国家社会機能継続性確保施策・副首都整備推進本部令",
-        "amend_no": "令和八年政令第三百三十五号",
-        "amendment_id": "508CO0000000335",
-        "amend_published_date": "2026-10-28",
-        "compare_url": "https://laws.e-gov.go.jp/law/426CO0000000336/20261030_508CO0000000335?occasion_date=20261030&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "504CO0000000394",
-    "law_no": "令和四年政令第三百九十四号",
-    "law_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律施行令",
-    "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/504CO0000000394",
-    "updates": [
-      {
-        "law_data_id": 650873,
-        "sub_revision": "1",
-        "published_date": "2022-12-23",
-        "effective_date": "2026-10-28",
-        "effective_comment": "",
-        "amend_name": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律施行令の一部を改正する政令",
-        "amend_no": "令和八年政令第三百三十六号",
-        "amendment_id": "508CO0000000336",
-        "amend_published_date": "2026-10-28",
-        "compare_url": "https://laws.e-gov.go.jp/law/504CO0000000394/20261028_508CO0000000336?occasion_date=20261028&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "508M60000040049",
-    "law_no": "令和八年財務省令第四十九号",
-    "law_name": "ニッケル系ステンレス冷延鋼帯及び冷延鋼板に対して課する不当廉売関税に関する政令第一条第三項に規定する特定国等において熱延鋼帯について冷間圧延をする工程を経て製造されていない旨の証明書の提出に関する省令",
+    "law_id": "508M60000400060",
+    "law_no": "令和八年経済産業省令第六十号",
+    "law_name": "ニッケル系ステンレス冷延鋼帯及び冷延鋼板に対して課する不当廉売関税に関する政令第一条第三項に規定する特定国等において熱延鋼帯について冷間圧延をする工程を経て製造されていない旨の証明書の発給に関する省令",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/508M60000040049",
+    "url": "https://laws.e-gov.go.jp/law/508M60000400060",
     "updates": [
       {
-        "law_data_id": 651086,
+        "law_data_id": 651084,
         "sub_revision": "1",
         "published_date": "2026-07-08",
         "effective_date": "2026-10-31",
         "effective_comment": "",
-        "amend_name": "ニッケル系ステンレス冷延鋼帯及び冷延鋼板に対して課する暫定的な不当廉売関税に関する政令第一条第二項に規定する特定国等において熱延鋼帯について冷間圧延をする工程を経て製造されていない旨の証明書の提出に関する省令の一部を改正する省令",
-        "amend_no": "令和八年財務省令第六十四号",
-        "amendment_id": "508M60000040064",
+        "amend_name": "ニッケル系ステンレス冷延鋼帯及び冷延鋼板に対して課する暫定的な不当廉売関税に関する政令第一条第二項に規定する特定国等において熱延鋼帯について冷間圧延をする工程を経て製造されていない旨の証明書の発給に関する省令の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第七十八号",
+        "amendment_id": "508M60000400078",
         "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/508M60000040049/20261031_508M60000040064?occasion_date=20261031&tab=compare",
+        "compare_url": "https://laws.e-gov.go.jp/law/508M60000400060/20261031_508M60000400078?occasion_date=20261031&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "215M10000008036",
-    "law_no": "大正十五年内務省令第三十六号",
-    "law_name": "健康保険法施行規則",
+    "law_id": "426M60000800041",
+    "law_no": "平成二十六年国土交通省令第四十一号",
+    "law_name": "小笠原諸島振興開発特別措置法施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/215M10000008036",
+    "url": "https://laws.e-gov.go.jp/law/426M60000800041",
     "updates": [
       {
-        "law_data_id": 650881,
+        "law_data_id": 651140,
         "sub_revision": "1",
-        "published_date": "1926-07-01",
-        "effective_date": "2027-08-01",
+        "published_date": "2014-03-31",
+        "effective_date": "2026-11-02",
         "effective_comment": "",
-        "amend_name": "健康保険法施行規則等の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第百五十一号",
-        "amendment_id": "508M60000100151",
-        "amend_published_date": "2026-10-28",
-        "compare_url": "https://laws.e-gov.go.jp/law/215M10000008036/20270801_508M60000100151?occasion_date=20270801&tab=compare",
+        "amend_name": "小笠原諸島振興開発特別措置法施行規則の一部を改正する省令",
+        "amend_no": "令和八年国土交通省令第八十六号",
+        "amendment_id": "508M60000800086",
+        "amend_published_date": "2026-11-02",
+        "compare_url": "https://laws.e-gov.go.jp/law/426M60000800041/20261102_508M60000800086?occasion_date=20261102&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "419M60000008037",
+    "law_no": "平成十九年総務省令第三十七号",
+    "law_name": "日本郵便株式会社法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/419M60000008037",
+    "updates": [
+      {
+        "law_data_id": 651092,
+        "sub_revision": "1",
+        "published_date": "2007-03-26",
+        "effective_date": "2026-12-01",
+        "effective_comment": "",
+        "amend_name": "日本郵政株式会社法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年総務省令第百二十三号",
+        "amendment_id": "508M60000008123",
+        "amend_published_date": "2026-10-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/419M60000008037/20261201_508M60000008123?occasion_date=20261201&tab=compare",
         "pending": true
       },
       {
-        "law_data_id": 650878,
+        "law_data_id": 651091,
         "sub_revision": "1",
-        "published_date": "1926-07-01",
-        "effective_date": "2026-10-28",
-        "effective_comment": "",
-        "amend_name": "健康保険法施行規則等の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第百五十一号",
-        "amendment_id": "508M60000100151",
-        "amend_published_date": "2026-10-28",
-        "compare_url": "https://laws.e-gov.go.jp/law/215M10000008036/20261028_508M60000100151?occasion_date=20261028&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "419M60000100014",
-    "law_no": "平成十九年厚生労働省令第十四号",
-    "law_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律第二条第十五項に規定する指定薬物及び同法第七十六条の四に規定する医療等の用途を定める省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/419M60000100014",
-    "updates": [
-      {
-        "law_data_id": 650876,
-        "sub_revision": "1",
-        "published_date": "2007-02-28",
-        "effective_date": "2026-11-06",
-        "effective_comment": "",
-        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律第二条第十五項に規定する指定薬物及び同法第七十六条の四に規定する医療等の用途を定める省令の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第百五十号",
-        "amendment_id": "508M60000100150",
-        "amend_published_date": "2026-10-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/419M60000100014/20261106_508M60000100150?occasion_date=20261106&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "333M50000100053",
-    "law_no": "昭和三十三年厚生省令第五十三号",
-    "law_name": "国民健康保険法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/333M50000100053",
-    "updates": [
-      {
-        "law_data_id": 650879,
-        "sub_revision": "1",
-        "published_date": "1958-12-27",
-        "effective_date": "2027-08-01",
-        "effective_comment": "",
-        "amend_name": "健康保険法施行規則等の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第百五十一号",
-        "amendment_id": "508M60000100151",
-        "amend_published_date": "2026-10-28",
-        "compare_url": "https://laws.e-gov.go.jp/law/333M50000100053/20270801_508M60000100151?occasion_date=20270801&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "406M50000008045",
-    "law_no": "平成六年自治省令第四十五号",
-    "law_name": "政党助成法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/406M50000008045",
-    "updates": [
-      {
-        "law_data_id": 651096,
-        "sub_revision": "1",
-        "published_date": "1994-11-28",
-        "effective_date": "2027-01-01",
-        "effective_comment": "",
-        "amend_name": "政治資金規正法施行規則及び政党助成法施行規則の一部を改正する省令",
-        "amend_no": "令和八年総務省令第百二十五号",
-        "amendment_id": "508M60000008125",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/406M50000008045/20270101_508M60000008125?occasion_date=20270101&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "350M50000008017",
-    "law_no": "昭和五十年自治省令第十七号",
-    "law_name": "政治資金規正法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/350M50000008017",
-    "updates": [
-      {
-        "law_data_id": 651097,
-        "sub_revision": "1",
-        "published_date": "1975-09-26",
-        "effective_date": "2027-01-01",
-        "effective_comment": "",
-        "amend_name": "政治資金規正法施行規則及び政党助成法施行規則の一部を改正する省令",
-        "amend_no": "令和八年総務省令第百二十五号",
-        "amendment_id": "508M60000008125",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/350M50000008017/20270101_508M60000008125?occasion_date=20270101&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "417M60000200107",
-    "law_no": "平成十七年農林水産省令第百七号",
-    "law_name": "物資の流通の効率化に関する法律第四条第六号ロの法人を定める省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/417M60000200107",
-    "updates": [
-      {
-        "law_data_id": 650875,
-        "sub_revision": "1",
-        "published_date": "2005-09-30",
+        "published_date": "2007-03-26",
         "effective_date": "2026-11-01",
         "effective_comment": "",
-        "amend_name": "物資の流通の効率化に関する法律第四条第十八号ロの法人を定める省令の一部を改正する省令",
-        "amend_no": "令和八年農林水産省令第七十三号",
-        "amendment_id": "508M60000200073",
-        "amend_published_date": "2026-10-23",
-        "compare_url": "https://laws.e-gov.go.jp/law/417M60000200107/20261101_508M60000200073?occasion_date=20261101&tab=compare",
+        "amend_name": "日本郵政株式会社法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年総務省令第百二十三号",
+        "amendment_id": "508M60000008123",
+        "amend_published_date": "2026-10-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/419M60000008037/20261101_508M60000008123?occasion_date=20261101&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "315M10000100005",
-    "law_no": "昭和十五年厚生省令第五号",
-    "law_name": "船員保険法施行規則",
+    "law_id": "418M60000008003",
+    "law_no": "平成十八年総務省令第三号",
+    "law_name": "日本郵政株式会社法施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/315M10000100005",
+    "url": "https://laws.e-gov.go.jp/law/418M60000008003",
     "updates": [
       {
-        "law_data_id": 650880,
+        "law_data_id": 651090,
         "sub_revision": "1",
-        "published_date": "1940-02-27",
-        "effective_date": "2027-08-01",
+        "published_date": "2006-01-20",
+        "effective_date": "2026-12-01",
         "effective_comment": "",
-        "amend_name": "健康保険法施行規則等の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第百五十一号",
-        "amendment_id": "508M60000100151",
-        "amend_published_date": "2026-10-28",
-        "compare_url": "https://laws.e-gov.go.jp/law/315M10000100005/20270801_508M60000100151?occasion_date=20270801&tab=compare",
+        "amend_name": "日本郵政株式会社法施行規則等の一部を改正する省令",
+        "amend_no": "令和八年総務省令第百二十三号",
+        "amendment_id": "508M60000008123",
+        "amend_published_date": "2026-10-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/418M60000008003/20261201_508M60000008123?occasion_date=20261201&tab=compare",
         "pending": true
       }
     ]
   },
   {
-    "law_id": "419M60000100129",
-    "law_no": "平成十九年厚生労働省令第百二十九号",
-    "law_name": "高齢者の医療の確保に関する法律施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/419M60000100129",
+    "law_id": "504RJNJ09147000",
+    "law_no": "令和四年人事院規則九―一四七",
+    "law_name": "人事院規則九―一四七（給与法附則第八項の規定による俸給月額）",
+    "law_type": "規則",
+    "url": "https://laws.e-gov.go.jp/law/504RJNJ09147000",
     "updates": [
       {
-        "law_data_id": 650877,
+        "law_data_id": 651219,
         "sub_revision": "1",
-        "published_date": "2007-10-22",
-        "effective_date": "2027-08-01",
+        "published_date": "2022-02-18",
+        "effective_date": "2026-11-02",
         "effective_comment": "",
-        "amend_name": "健康保険法施行規則等の一部を改正する省令",
-        "amend_no": "令和八年厚生労働省令第百五十一号",
-        "amendment_id": "508M60000100151",
-        "amend_published_date": "2026-10-28",
-        "compare_url": "https://laws.e-gov.go.jp/law/419M60000100129/20270801_508M60000100151?occasion_date=20270801&tab=compare",
-        "pending": true
+        "amend_name": "人事院規則一―八三（防災庁設置法等の施行に伴う関係人事院規則の整備に関する人事院規則）",
+        "amend_no": "令和八年人事院規則一―八三",
+        "amendment_id": "508RJNJ01083000",
+        "amend_published_date": "2026-11-02",
+        "compare_url": "https://laws.e-gov.go.jp/law/504RJNJ09147000/20261102_508RJNJ01083000?occasion_date=20261102&tab=compare",
+        "pending": false
       }
     ]
   }
