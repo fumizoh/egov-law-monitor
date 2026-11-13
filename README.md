@@ -41,6 +41,16 @@ AI要約は、利用者が対象の法令・改正を選択して実行する仕
 
 ## 利用方法
 
+### 法令更新の最終確認日時
+
+通常実行でe-Gov更新一覧の取得・解析が正常終了した日時を、既存の内部API用Application Password（`WP_API_USERNAME`・`WP_API_APP_PASSWORD`）でWordPressの`POST /wp-json/egov-law-monitor/v1/internal/watch-status`へ送ります。`law_watch_internal_api`権限が必要です。新規Secrets・テーブルは不要で、`egov_law_monitor_last_checked` optionへUTC・autoload無効で保存します。5分を超える未来日時・不正日時は拒否し、同値・古い日時の再送では現在値を巻き戻しません。競合は条件付き更新と再読込で処理します。
+
+更新なしの日も送信し、取得失敗・日付指定の再処理では本番日時を更新しません。送信は一時障害のみ最大3回（15秒タイムアウト、待機2秒・5秒）試行し、最終失敗は警告ログに残して投稿・通知処理を継続します。翌日の正常取得時に最新日時で回復し、過去分の送信キューは作りません。この値は投稿・メール配送の成功日時ではありません。既存のCSV検証条件は変更していません。
+
+法令ウォッチ画面はPHPでoptionを読み、WordPress設定のタイムゾーンで表示します（未登録は「未確認」、不正値は「確認できません」）。ブラウザからPagesのJSONは取得しません。反映はプラグイン側を先に行い、APIルート・権限・HTTPS・ページキャッシュを確認してからPython側を更新してください。`docs/data/`の保存、Pages設定、処理結果メール内のPagesリンクはこの移行では変更していません。
+
+ローカル検証：`php tests/watch-status-test.php`、`php tests/law-watch-page-test.php`、`python -B tests/watch_status_test.py`。実DB・HTTP通信はモック化します。
+
 サービスの利用方法や各機能の操作手順については、本番サイトの「使い方」ページをご覧ください。
 
 [本番サイト](https://egovlm.oogushioffice.com/)

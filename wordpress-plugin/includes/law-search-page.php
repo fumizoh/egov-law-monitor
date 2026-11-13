@@ -35,7 +35,7 @@ function egov_law_monitor_render_search_page() {
         </p>
 
         <p class="egov-law-watch-last-checked">
-            法令更新の最終確認：<span id="egov-law-watch-last-checked">確認中…</span>
+            法令更新の最終確認：<span id="egov-law-watch-last-checked"><?php echo esc_html( egov_law_monitor_last_checked_label() ); ?></span>
         </p>
 
         <?php if ( ! empty( $watches ) ) : ?>

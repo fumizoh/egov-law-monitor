@@ -15,6 +15,7 @@ import pipeline
 import storage
 from notification import service
 from wordpress import service as wordpress_service
+from wordpress import client as wordpress_client
 import watch.service as watch_service
 import watch.email as watch_email
 import watch.mailer as watch_mailer
@@ -121,15 +122,23 @@ def main(date: str | None = None):
         storage_paths = storage.REPROCESS_STORAGE
 
     events, date = egov.fetch(date=specified_date)
+    last_checked = datetime.now(JST).isoformat()
 
     logger.info("=== record last checked ===")
 
     storage.save_watch_status(
         {
-            "last_checked": datetime.now(JST).isoformat(),
+            "last_checked": last_checked,
         },
         paths=storage_paths,
     )
+
+    if specified_date is None:
+        try:
+            wordpress_client.send_watch_status(last_checked)
+        except Exception:
+            # Do not log credentials, response bodies or request URLs.
+            logger.warning("WordPress最終確認日時の送信に失敗しました。法令更新処理を継続します。")
 
     statistics = storage.load_statistics()
     last_update = statistics.get("egov", {}).get("last_update")
