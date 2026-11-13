@@ -237,6 +237,7 @@ check( count( $cancel_mails ) === 1 && $wpdb->cancellations[1]['admin_notified_a
 unset( $cancel_during_mail );
 set_cancel_date( '2026-11-15' ); egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
 check( count( $cancel_mails ) === 2 && $cancel_mails[1][0] === 'user10@example.test' && str_contains( $cancel_mails[1][2], '2026年11月15日' ) && (int) $wpdb->cancellations[1]['user_notified_revision'] === (int) $wpdb->cancellations[1]['revision'], 'end date mail reaches user through wp_mail and acknowledges revision' );
+check( $cancel_mails[1][2] === "Standard利用終了日: 2026年11月15日\n利用終了日当日までStandardプランをご利用いただけます。\n", 'user end-date mail uses concise body without administrator processing explanation' );
 $mail_token = egov_law_monitor_cancellation_token( $wpdb->cancellations[1] );
 check( ! is_wp_error( set_cancel_date( '2026-11-16', $mail_token ) ), 'mail acknowledgements do not invalidate administrator date token' );
 reset_cancellation(); request_cancellation(); $wpdb->fail = 'date_audit'; $r = set_cancel_date( '2026-11-15' );

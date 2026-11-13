@@ -76,7 +76,7 @@ function egov_law_monitor_send_cancellation_mail( $job, $user_id ) {
             $body = $identity . '解約申請日時: ' . wp_date( 'Y年m月d日 H:i', strtotime( $row['requested_at'] . ' UTC' ), wp_timezone() ) . "\nSquare Dashboardで手動処理し、確認した利用終了日を登録してください。WordPressプランはまだStandardです。\n管理画面: {$url}";
         } elseif ( $job['kind'] === 'end_date' ) {
             $subject = 'Standard利用終了日のお知らせ';
-            $body = 'Standard利用終了日: ' . egov_law_monitor_cancellation_date_label( $row['end_date'] ) . "\n利用終了日当日までStandardプランをご利用いただけます。利用権限の終了処理は管理者が行います。\n";
+            $body = 'Standard利用終了日: ' . egov_law_monitor_cancellation_date_label( $row['end_date'] ) . "\n利用終了日当日までStandardプランをご利用いただけます。\n";
         } else {
             $subject = 'Standard利用終了日到来・承認解除の確認';
             $body = $identity . "解約予定日: {$row['end_date']}\n現在のWordPressプラン: Standard\n利用終了日はWordPressのタイムゾーン（" . wp_timezone()->getName() . "）で当日23:59までで、既に終了日を過ぎています。既存のStandard承認解除を手動で行ってください。\n管理画面: {$url}\nSquareの解約状況も確認してください。この通知はSquareの解約を証明しません。";
