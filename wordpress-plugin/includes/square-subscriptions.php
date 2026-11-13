@@ -152,105 +152,28 @@ function egov_law_monitor_square_record_token( $record, $key = null ) {
     return hash_hmac( 'sha256', wp_json_encode( $record ), $key === null ? wp_salt( 'auth' ) : $key );
 }
 
-/** Save a contract and its immutable audit entry together. $database is a test seam. */
-function egov_law_monitor_save_square_subscription( $user_id, $id, $customer_id, $subscription_id, $note, $expected_token = '', ?EGOV_Law_Monitor_Square_Connection $database = null ) {
-    global $wpdb;
-    if ( ! current_user_can( 'manage_options' ) ) {
-        return new WP_Error( 'forbidden', 'この操作を行う権限がありません。' );
+/** Persist validated contract and audit inside caller-owned transaction. */
+function egov_law_monitor_square_store_contract( $db, $table, $log_table, $user_id, $id, $old, $customer_id, $subscription_id, $note, $now, $admin_id ) {
+    if ( $old ) {
+        $saved = $db->write( "UPDATE {$table} SET square_customer_id = ?, square_subscription_id = ?, admin_note = ?, updated_at = ? WHERE id = ? AND user_id = ?", array( $customer_id, $subscription_id, $note, $now, (int) $id, (int) $user_id ) );
+    } else {
+        $saved = $db->write( "INSERT INTO {$table} (square_customer_id, square_subscription_id, admin_note, updated_at, user_id, created_at, verified_at, verified_by) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL)", array( $customer_id, $subscription_id, $note, $now, (int) $user_id, $now ) );
+        $id = (int) $db->insert_id;
     }
-    if ( ! get_userdata( $user_id ) ) {
-        return new WP_Error( 'invalid_user', '対象ユーザーが存在しません。' );
+    if ( $saved === false ) {
+        throw new RuntimeException( '契約を保存できませんでした。Subscription IDの重複またはDBエラーを確認してください。' );
     }
-    foreach ( array( $customer_id, $subscription_id ) as $value ) {
-        if ( ! is_string( $value ) || strlen( $value ) > 255 || ! preg_match( '/\A[A-Za-z0-9_-]+\z/', $value ) ) {
-            return new WP_Error( 'invalid_id', 'IDは255文字以内の半角英数字・ハイフン・アンダースコアで入力してください。' );
-        }
+    $new = $db->rows( "SELECT * FROM {$table} WHERE id = ?", array( $id ) )[0] ?? null;
+    if ( ! $new ) {
+        throw new RuntimeException( '保存結果を取得できませんでした。' );
     }
-    // Resolve WordPress options/user data before starting the transaction.
-    $now = current_time( 'mysql' );
-    $admin_id = get_current_user_id();
-    $token_key = wp_salt( 'auth' );
-    $started = false;
-    $committing = false;
-    $db = null;
-    try {
-        $db = $database ?: EGOV_Law_Monitor_Square_Connection::open( $wpdb );
-        if ( ! egov_law_monitor_square_storage_ready( $db ) ) {
-            error_log( 'e-Gov Square: schema validation failed; user_id=' . (int) $user_id );
-            return new WP_Error( 'storage_unavailable', '契約・履歴テーブルのカラム・制約・InnoDB構成を確認できないため保存できません。' );
-        }
-        $table = '`' . str_replace( '`', '``', $db->prefix . 'egov_square_subscriptions' ) . '`';
-        $log_table = '`' . str_replace( '`', '``', $db->prefix . 'egov_square_admin_log' ) . '`';
-        if ( $db->begin() === false ) {
-            error_log( 'e-Gov Square: transaction start failed; user_id=' . (int) $user_id );
-            return new WP_Error( 'transaction_failed', '保存処理を開始できませんでした。再操作前にDBの接続状態を確認してください。' );
-        }
-        $started = true;
-        $old = null;
-        if ( $id > 0 ) {
-            $old = $db->rows( "SELECT * FROM {$table} WHERE id = ? FOR UPDATE", array( (int) $id ) )[0] ?? null;
-            if ( ! $old || (int) $old['user_id'] !== (int) $user_id ) {
-                throw new RuntimeException( '対象ユーザーの契約が見つかりません。' );
-            }
-            if ( ! is_string( $expected_token ) || ! hash_equals( egov_law_monitor_square_record_token( $old, $token_key ), $expected_token ) ) {
-                throw new RuntimeException( '契約情報が変更されています。画面を再読み込みし、最新の内容を確認してから保存してください。' );
-            }
-            if ( ( $old['verified_at'] !== null || $old['verified_by'] !== null ) && ( $old['square_customer_id'] !== $customer_id || $old['square_subscription_id'] !== $subscription_id ) ) {
-                throw new RuntimeException( '確認済み契約のCustomer ID・Subscription IDは変更できません。別の契約として新規登録してください。' );
-            }
-        }
-        $duplicates = $db->rows( "SELECT id FROM {$table} WHERE square_subscription_id = ? AND id <> ? LIMIT 1", array( $subscription_id, (int) $id ) );
-        if ( $db->last_error !== '' || $db->connection_lost ) {
-            throw new RuntimeException( '重複確認に失敗しました。' );
-        }
-        if ( $duplicates === false ) {
-            throw new RuntimeException( '重複確認に失敗しました。' );
-        }
-        if ( $duplicates ) {
-            throw new RuntimeException( 'このSubscription IDは既に登録されています。別ユーザーへの移動はできません。' );
-        }
-        if ( $old ) {
-            $saved = $db->write( "UPDATE {$table} SET square_customer_id = ?, square_subscription_id = ?, admin_note = ?, updated_at = ? WHERE id = ? AND user_id = ?", array( $customer_id, $subscription_id, $note, $now, (int) $id, (int) $user_id ) );
-        } else {
-            $saved = $db->write( "INSERT INTO {$table} (square_customer_id, square_subscription_id, admin_note, updated_at, user_id, created_at, verified_at, verified_by) VALUES (?, ?, ?, ?, ?, ?, NULL, NULL)", array( $customer_id, $subscription_id, $note, $now, (int) $user_id, $now ) );
-            $id = (int) $db->insert_id;
-        }
-        if ( $saved === false ) {
-            throw new RuntimeException( '契約を保存できませんでした。Subscription IDの重複またはDBエラーを確認してください。' );
-        }
-        $new = $db->rows( "SELECT * FROM {$table} WHERE id = ?", array( $id ) )[0] ?? null;
-        if ( ! $new ) {
-            throw new RuntimeException( '保存結果を取得できませんでした。' );
-        }
-        $old_json = $old === null ? null : wp_json_encode( $old );
-        $new_json = wp_json_encode( $new );
-        if ( $old_json === false || $new_json === false || $db->write(
-            "INSERT INTO {$log_table} (user_id, admin_user_id, action, old_value, new_value, reason, created_at) VALUES (?, ?, ?, ?, ?, NULL, ?)",
-            array( (int) $user_id, (int) $admin_id, $old ? 'subscription_updated' : 'subscription_created', $old_json, $new_json, $now )
-        ) === false ) {
-            throw new RuntimeException( '操作履歴を保存できませんでした。' );
-        }
-        $committing = true;
-        if ( $db->commit() === false ) {
-            throw new RuntimeException( '保存の確定に失敗しました。' );
-        }
-        return $id;
-    } catch ( Throwable $error ) {
-        $rolled_back = false;
-        if ( $started ) {
-            try {
-                $rolled_back = $db->rollback() !== false;
-            } catch ( Throwable $rollback_error ) {
-                $rolled_back = false;
-            }
-        }
-        if ( $started && ( $committing || ! $rolled_back ) ) {
-            error_log( 'e-Gov Square: transaction outcome unknown; user_id=' . (int) $user_id . '; contract_id=' . (int) $id . '; commit_attempted=' . (int) $committing );
-            return new WP_Error( 'square_save_outcome_unknown', '保存結果または取り消しを確認できません。再操作前に契約情報と操作履歴を確認してください。' );
-        }
-        error_log( 'e-Gov Square: save failed; user_id=' . (int) $user_id . '; contract_id=' . (int) $id . '; transaction_started=' . (int) $started . '; rolled_back=' . (int) $rolled_back );
-        return new WP_Error( 'square_save_failed', $error->getMessage() . ( $rolled_back ? ' 変更を取り消しました。' : '' ) );
-    } finally {
-        if ( $db ) { $db->close(); }
+    $old_json = $old === null ? null : wp_json_encode( $old );
+    $new_json = wp_json_encode( $new );
+    if ( $old_json === false || $new_json === false || $db->write(
+        "INSERT INTO {$log_table} (user_id, admin_user_id, action, old_value, new_value, reason, created_at) VALUES (?, ?, ?, ?, ?, NULL, ?)",
+        array( (int) $user_id, (int) $admin_id, $old ? 'subscription_updated' : 'subscription_created', $old_json, $new_json, $now )
+    ) === false ) {
+        throw new RuntimeException( '操作履歴を保存できませんでした。' );
     }
+    return $new;
 }

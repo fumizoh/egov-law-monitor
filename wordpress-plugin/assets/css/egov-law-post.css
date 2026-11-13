@@ -226,6 +226,67 @@
     background: #0060c0;
 }
 
+.egov-plan-status p.egov-plan-status-current {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+}
+
+.egov-plan-status .egov-plan-status-current > strong.egov-plan-status-badge {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: 100%;
+    padding: .25em .75em;
+    border-radius: .375rem;
+    background: #e5e7eb;
+    color: #374151;
+    font-size: 1.125em;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.egov-plan-status .egov-plan-status-current > strong.egov-plan-status-badge--free {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.egov-plan-status .egov-plan-status-current > strong.egov-plan-status-badge--standard {
+    background: #004080;
+    color: #fff;
+}
+
+/* Fixed Standard payment link: reuse the site button. */
+.egov-standard-cancellation {
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-block: 1rem;
+}
+.egov-standard-cancellation .egov-standard-cancellation-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+}
+
+.egov-standard-cancellation button {
+    max-width: 100%;
+    white-space: normal;
+}
+.egov-standard-application .egov-standard-payment-button {
+    box-sizing: border-box;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+}
+.egov-standard-application .egov-standard-payment-button:focus-visible {
+    outline: 2px solid var(--theme-palette-color-1, #004080);
+    outline-offset: 3px;
+}
+
 @media (max-width: 767px) {
     .content-container.site-container {
         padding-left: 12px;

@@ -34,17 +34,8 @@ function egov_law_monitor_render_search_page() {
             停止中のキーワードは通知対象外です。
         </p>
 
-        <p class="egov-law-watch-plan">
-            ご利用プラン：<strong>
-                <?php
-                $plan = egov_law_monitor_get_plan( get_current_user_id() );
-                echo esc_html( egov_law_monitor_get_plan_label( $plan ) );
-                ?>
-            </strong>
-        </p>
-
         <p class="egov-law-watch-last-checked">
-            最終確認：<span id="egov-law-watch-last-checked">確認中…</span>
+            法令更新の最終確認：<span id="egov-law-watch-last-checked">確認中…</span>
         </p>
 
         <?php if ( ! empty( $watches ) ) : ?>

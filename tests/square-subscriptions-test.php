@@ -144,90 +144,6 @@ class wpdb extends SquareTestDatabase {
 }
 require __DIR__ . '/../wordpress-plugin/includes/square-subscriptions.php';
 /** Separate session double: only committed database storage is shared with WordPress. */
-class SquareTestTransaction extends EGOV_Law_Monitor_Square_Connection {
-    private $session;
-    private $source;
-    private $active = false;
-    public $is_closed = false;
-    public function __construct( $source ) {
-        $this->source = $source;
-        $this->session = new SquareTestDatabase();
-        foreach ( array( 'contracts', 'logs', 'fail', 'engine', 'metadata', 'disconnect_on', 'disconnected', 'reconnects', 'switched', 'commit_applied' ) as $key ) {
-            $this->session->$key =& $source->$key;
-        }
-        $this->prefix = $source->prefix;
-        $this->last_error =& $this->session->last_error;
-        $this->insert_id =& $this->session->insert_id;
-        $source->dedicated[] = $this;
-    }
-    private function available() {
-        if ( $this->is_closed || $this->connection_lost || $this->session->switched ) {
-            $this->connection_lost = true;
-            $this->last_error = 'unavailable';
-            return false;
-        }
-        return true;
-    }
-    private function checked( $result ) {
-        if ( $this->session->disconnected ) { $this->connection_lost = true; }
-        return $result;
-    }
-    public function rows( $sql, $params = array() ) {
-        if ( ! $this->available() ) { return false; }
-        if ( str_starts_with( $sql, 'SHOW TABLE' ) ) {
-            $row = $this->session->get_row( array( $sql, $params ), ARRAY_A );
-            return $this->checked( $row ? array( $row ) : false );
-        }
-        if ( str_starts_with( $sql, 'SHOW' ) ) { return $this->checked( $this->session->get_results( $sql, ARRAY_A ) ); }
-        if ( str_starts_with( $sql, 'SELECT id' ) ) {
-            $value = $this->session->get_var( array( $sql, $params ) );
-            return $this->checked( $this->last_error !== '' ? false : ( $value ? array( array( 'id' => $value ) ) : array() ) );
-        }
-        $row = $this->session->get_row( array( $sql, $params ), ARRAY_A );
-        return $this->checked( $this->last_error !== '' ? false : ( $row ? array( $row ) : array() ) );
-    }
-    public function write( $sql, $params = array() ) {
-        if ( ! $this->available() ) { return false; }
-        if ( str_starts_with( $sql, 'UPDATE' ) ) {
-            $data = array_combine( array( 'square_customer_id', 'square_subscription_id', 'admin_note', 'updated_at' ), array_slice( $params, 0, 4 ) );
-            return $this->checked( $this->session->update( '', $data, array( 'id' => $params[4], 'user_id' => $params[5] ), array(), array() ) !== false );
-        }
-        if ( str_contains( $sql, 'admin_log' ) ) {
-            $data = array_combine( array( 'user_id', 'admin_user_id', 'action', 'old_value', 'new_value', 'created_at' ), $params );
-            $data['reason'] = null;
-            return $this->checked( $this->session->insert( 'wp_egov_square_admin_log', $data, array() ) !== false );
-        }
-        $data = array_combine( array( 'square_customer_id', 'square_subscription_id', 'admin_note', 'updated_at', 'user_id', 'created_at' ), $params );
-        $data['verified_at'] = null;
-        $data['verified_by'] = null;
-        return $this->checked( $this->session->insert( 'wp_egov_square_subscriptions', $data, array() ) !== false );
-    }
-    public function begin() {
-        if ( ! $this->available() ) { return false; }
-        $result = $this->checked( $this->session->query( 'START TRANSACTION' ) !== false );
-        $this->active = $result;
-        return $result;
-    }
-    public function commit() {
-        if ( ! $this->available() ) { return false; }
-        $result = $this->checked( $this->session->query( 'COMMIT' ) !== false );
-        if ( $result ) { $this->active = false; }
-        return $result;
-    }
-    public function rollback() {
-        if ( ! $this->available() ) { return false; }
-        $result = $this->checked( $this->session->query( 'ROLLBACK' ) !== false );
-        if ( $result ) { $this->active = false; }
-        return $result;
-    }
-    public function close() {
-        if ( $this->is_closed ) { return; }
-        $this->is_closed = true;
-        if ( $this->active ) {
-            list( $this->session->contracts, $this->session->logs ) = $this->session->snapshot;
-        }
-    }
-}
 $checks = 0;
 function check_square( $condition, $label ) {
     global $checks;
@@ -235,73 +151,6 @@ function check_square( $condition, $label ) {
     ++$checks;
     echo "PASS: {$label}\n";
 }
-function save_square( $user = 10, $id = 0, $customer = 'CUSTOMER_1', $subscription = 'SUB_1' ) {
-    $source = $GLOBALS['wpdb'];
-    $token = isset( $source->contracts[$id] ) ? egov_law_monitor_square_record_token( $source->contracts[$id] ) : '';
-    return egov_law_monitor_save_square_subscription( $user, $id, $customer, $subscription, 'note', $token, new SquareTestTransaction( $source ) );
-}
-$allowed = true;
-$wpdb = new SquareTestDatabase();
-check_square( save_square() === 1, 'new contract saved' );
-check_square( $wpdb->contracts[1]['verified_at'] === null && $wpdb->contracts[1]['verified_by'] === null, 'creation is unverified' );
-check_square( $wpdb->logs[0]['action'] === 'subscription_created' && $wpdb->logs[0]['admin_user_id'] === 99 && $wpdb->logs[0]['old_value'] === null && json_decode( $wpdb->logs[0]['new_value'], true )['id'] === 1, 'creation audit JSON and actor' );
-check_square( save_square() instanceof WP_Error, 'same user duplicate rejected' );
-check_square( save_square( 20 ) instanceof WP_Error, 'other user duplicate rejected' );
-check_square( save_square( 20, 1 ) instanceof WP_Error, 'contract ownership cannot change' );
-check_square( save_square( 999 ) instanceof WP_Error, 'unknown user rejected' );
-$allowed = false;
-check_square( save_square() instanceof WP_Error, 'permission required' );
-$allowed = true;
-foreach ( array( '', 'bad id', 'id<script>', str_repeat( 'x', 256 ), array() ) as $invalid ) {
-    check_square( save_square( 10, 0, $invalid, 'SUB_2' ) instanceof WP_Error, 'invalid customer ID rejected' );
-    check_square( save_square( 10, 0, 'CUSTOMER_1', $invalid ) instanceof WP_Error, 'invalid subscription ID rejected' );
-}
-check_square( save_square( 10, 0, 'CUSTOMER_1', 'SUB_2' ) === 2, 'multiple contracts and shared customer supported' );
-$wpdb->contracts[1]['verified_at'] = '2026-10-01 12:00:00';
-$wpdb->contracts[1]['verified_by'] = 50;
-check_square( save_square( 10, 1, 'CUSTOMER_2', 'SUB_3' ) instanceof WP_Error, 'verified contract ID changes rejected' );
-check_square( save_square( 10, 1, 'CUSTOMER_2', 'SUB_1' ) instanceof WP_Error, 'verified Customer ID alone cannot change' );
-check_square( save_square( 10, 1, 'CUSTOMER_1', 'SUB_3' ) instanceof WP_Error, 'verified Subscription ID alone cannot change' );
-check_square( egov_law_monitor_save_square_subscription( 10, 1, 'CUSTOMER_1', 'SUB_1', 'updated note', egov_law_monitor_square_record_token( $wpdb->contracts[1] ), new SquareTestTransaction( $wpdb ) ) === 1 && $wpdb->contracts[1]['admin_note'] === 'updated note', 'verified contract note edit saved' );
-check_square( $wpdb->contracts[1]['verified_by'] === 50 && $wpdb->contracts[1]['verified_at'] === '2026-10-01 12:00:00', 'edit preserves verification' );
-$wpdb->contracts[1]['verified_at'] = null;
-$wpdb->contracts[1]['verified_by'] = null;
-check_square( save_square( 10, 1, 'CUSTOMER_2', 'SUB_3' ) === 1, 'unverified contract ID edit saved' );
-$audit = end( $wpdb->logs );
-check_square( $audit['action'] === 'subscription_updated' && json_decode( $audit['old_value'], true )['square_subscription_id'] === 'SUB_1' && json_decode( $audit['new_value'], true )['square_subscription_id'] === 'SUB_3', 'edit before and after JSON' );
-foreach ( array( 'log', 'contract', 'START TRANSACTION', 'COMMIT' ) as $failure ) {
-    $before = array( $wpdb->contracts, $wpdb->logs );
-    $wpdb->fail = $failure;
-    check_square( save_square( 10, 1, 'CHANGED', 'SUB_4' ) instanceof WP_Error, "{$failure} failure reported" );
-    check_square( array( $wpdb->contracts, $wpdb->logs ) === $before, "{$failure} preserves contract and audit" );
-}
-$wpdb->fail = 'log';
-$before = $wpdb->contracts;
-check_square( save_square( 10, 0, 'CUSTOMER_1', 'SUB_5' ) instanceof WP_Error && $wpdb->contracts === $before, 'new contract rolled back on audit failure' );
-$wpdb->fail = '';
-$wpdb->engine = 'MyISAM';
-check_square( save_square() instanceof WP_Error, 'nontransactional storage rejected' );
-$wpdb->engine = 'InnoDB';
-check_square( save_square( 10, 999 ) instanceof WP_Error, 'missing contract rejected' );
-require __DIR__ . '/../wordpress-plugin/includes/admin/admin-square-subscriptions.php';
-$_GET = array( 'user_id' => 10 );
-$_POST = array( 'egov_square_save' => '1' );
-$before = array( $wpdb->contracts, $wpdb->logs );
-try {
-    egov_law_monitor_render_square_subscriptions();
-    throw new LogicException( 'nonce check was bypassed' );
-} catch ( RuntimeException $error ) {
-    check_square( $error->getMessage() === 'invalid nonce' && $nonce_action === 'egov_square_save_10_0', 'UI checks user-bound nonce before write' );
-}
-check_square( array( $wpdb->contracts, $wpdb->logs ) === $before, 'invalid nonce leaves data unchanged' );
-$allowed = false;
-try {
-    egov_law_monitor_render_square_subscriptions();
-    throw new LogicException( 'permission check was bypassed' );
-} catch ( RuntimeException $error ) {
-    check_square( $error->getMessage() === 'このページにアクセスする権限がありません。', 'UI refuses unauthorized access' );
-}
-
 $allowed = true;
 $wpdb = new SquareTestDatabase();
 check_square( egov_law_monitor_square_storage_ready(), 'complete physical schema accepted' );
@@ -331,7 +180,7 @@ foreach ( array( 'subscriptions', 'log' ) as $table_name ) {
 }
 $wpdb->metadata = $good_metadata;
 unset( $wpdb->metadata['subscriptions']['indexes'][2] );
-check_square( save_square() instanceof WP_Error && ! $wpdb->contracts, 'missing subscription UNIQUE refuses save before write' );
+check_square( ! egov_law_monitor_square_storage_ready() && ! $wpdb->contracts, 'missing subscription UNIQUE fails shared storage validation' );
 $schema_version = '1';
 $ddl_calls = 0;
 egov_law_monitor_install_square_tables();
@@ -355,79 +204,6 @@ foreach ( array( 'prefix', 'composite', 'nonunique' ) as $bad_index ) {
     }
     check_square( ! egov_law_monitor_square_storage_ready(), "{$bad_index} subscription index rejected" );
 }
-
-// Model a connection loss at each write and at COMMIT. No retry may occur.
-foreach ( array( 'INSERT contract', 'INSERT audit', 'COMMIT' ) as $lost_at ) {
-    $wpdb = new SquareTestDatabase();
-    $wpdb->disconnect_on = $lost_at;
-    $result = save_square();
-    check_square( $result instanceof WP_Error && $result->code === 'square_save_outcome_unknown', "connection loss at {$lost_at} reports uncertain outcome" );
-    check_square( $wpdb->reconnects === 0, "connection loss at {$lost_at} never reconnects" );
-    check_square( ! $wpdb->contracts && ! $wpdb->logs, "connection loss at {$lost_at} never continues audit on another session" );
-}
-$wpdb = new SquareTestDatabase();
-save_square();
-$wpdb->disconnect_on = 'UPDATE contract';
-$before = array( $wpdb->contracts, $wpdb->logs );
-$result = save_square( 10, 1, 'CHANGED', 'SUB_CHANGED' );
-check_square( $result->code === 'square_save_outcome_unknown' && $wpdb->reconnects === 0 && array( $wpdb->contracts, $wpdb->logs ) === $before, 'edit connection loss preserves modeled committed state without retry' );
-$wpdb = new SquareTestDatabase();
-$wpdb->switched = true;
-check_square( save_square() instanceof WP_Error && ! $wpdb->contracts && ! $wpdb->logs, 'replaced connection rejected before writes' );
-$wpdb = new SquareTestDatabase();
-$guard = new SquareTestTransaction( $wpdb );
-$guard->close();
-check_square( $guard->begin() === false && $guard->is_closed, 'closed dedicated session cannot reopen' );
-
-$wpdb = new SquareTestDatabase();
-$wpdb->fail = 'log_and_rollback';
-$result = save_square();
-check_square( $result instanceof WP_Error && $result->code === 'square_save_outcome_unknown', 'rollback failure is distinguished from ordinary save failure' );
-check_square( ! str_contains( $result->message, '取り消しました' ) && str_contains( $result->message, '再操作前' ), 'rollback failure does not claim successful cancellation' );
-foreach ( array( false, true ) as $committed ) {
-    $wpdb = new SquareTestDatabase();
-    $wpdb->fail = 'COMMIT';
-    $wpdb->commit_applied = $committed;
-    $result = save_square();
-    check_square( $result instanceof WP_Error && $result->code === 'square_save_outcome_unknown', 'COMMIT response failure is unknown even if rollback responds' );
-    check_square( count( $wpdb->contracts ) === ( $committed ? 1 : 0 ) && count( $wpdb->logs ) === ( $committed ? 1 : 0 ), 'COMMIT ambiguity can represent both committed and uncommitted state' );
-}
-
-$wpdb = new SquareTestDatabase();
-save_square();
-$old_token = egov_law_monitor_square_record_token( $wpdb->contracts[1] );
-check_square( save_square( 10, 1, 'NEW_CUSTOMER', 'NEW_SUB' ) === 1, 'first administrator edits normally' );
-$before = array( $wpdb->contracts, $wpdb->logs );
-$result = egov_law_monitor_save_square_subscription( 10, 1, 'CUSTOMER_1', 'SUB_1', 'stale note', $old_token, new SquareTestTransaction( $wpdb ) );
-check_square( $result instanceof WP_Error && str_contains( $result->message, '再読み込み' ), 'stale second administrator form rejected' );
-check_square( array( $wpdb->contracts, $wpdb->logs ) === $before, 'stale form changes neither contract nor audit' );
-$current_token = egov_law_monitor_square_record_token( $wpdb->contracts[1] );
-foreach ( array( '', str_repeat( '0', 64 ) ) as $bad_token ) {
-    $result = egov_law_monitor_save_square_subscription( 10, 1, 'CHANGED', 'CHANGED', 'note', $bad_token, new SquareTestTransaction( $wpdb ) );
-    check_square( $result instanceof WP_Error && array( $wpdb->contracts, $wpdb->logs ) === $before, 'missing or tampered snapshot rejected' );
-}
-$result = egov_law_monitor_save_square_subscription( 10, 1, 'NEW_CUSTOMER', 'NEW_SUB', 'fresh note', $current_token, new SquareTestTransaction( $wpdb ) );
-check_square( $result === 1 && end( $wpdb->logs )['action'] === 'subscription_updated', 'fresh snapshot permits audited edit' );
-$old_token = egov_law_monitor_square_record_token( $wpdb->contracts[1] );
-$wpdb->contracts[1]['admin_note'] = 'other administrator note';
-$result = egov_law_monitor_save_square_subscription( 10, 1, 'NEW_CUSTOMER', 'NEW_SUB', 'overwrite', $old_token, new SquareTestTransaction( $wpdb ) );
-check_square( $result instanceof WP_Error, 'same-second note-only changes also invalidate snapshot' );
-
-// Dedicated session ownership, including early returns and failure paths.
-foreach ( array( '', 'log', 'contract', 'START TRANSACTION', 'COMMIT', 'log_and_rollback' ) as $failure ) {
-    $wpdb = new SquareTestDatabase();
-    $wpdb->query( 'START TRANSACTION' );
-    $wordpress_snapshot = $wpdb->snapshot;
-    $wordpress_queries = $wpdb->queries;
-    $wpdb->fail = $failure;
-    save_square();
-    check_square( end( $wpdb->dedicated )->is_closed, "dedicated session closed: {$failure}" );
-    check_square( $wpdb->snapshot === $wordpress_snapshot && $wpdb->queries === $wordpress_queries, "WordPress transaction untouched: {$failure}" );
-}
-$wpdb = new SquareTestDatabase();
-$wpdb->engine = 'MyISAM';
-save_square();
-check_square( end( $wpdb->dedicated )->is_closed, 'dedicated session closed on incomplete schema' );
 
 class SquareHostParserStub {
     public $seen;
