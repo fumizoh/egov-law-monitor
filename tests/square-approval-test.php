@@ -15,6 +15,9 @@ function wp_verify_nonce( $nonce, $action ) { return $nonce === 'valid:' . $acti
 function wp_salt( $scheme ) { return 'test-key'; }
 function wp_json_encode( $value ) { return json_encode( $value ); }
 function current_time( $format ) { return $format === 'timestamp' ? strtotime( $GLOBALS['now'] . ' UTC' ) : $GLOBALS['now']; }
+if ( ! function_exists( 'current_datetime' ) ) {
+    function current_datetime() { return new DateTimeImmutable( $GLOBALS['now'], new DateTimeZone( 'UTC' ) ); }
+}
 function wp_date( $format, $timestamp, $timezone = null ) { return ( new DateTimeImmutable( '@' . $timestamp ) )->setTimezone( $timezone ?? new DateTimeZone( 'UTC' ) )->format( $format ); }
 function get_user_meta( $id, $key, $single ) {
     if ( $key === 'egov_law_monitor_ai_summary_trial_usage' ) { return $GLOBALS['trial_usage']; }
