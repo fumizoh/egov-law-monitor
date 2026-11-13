@@ -67,26 +67,70 @@ function egov_law_monitor_subscription_cancellation_panel( $user_id ) {
     } catch ( Throwable $error ) { return $html . '<p>承認対象契約または解約申請を確認できません。管理者へお問い合わせください。</p>'; }
 }
 
-function egov_law_monitor_render_subscription_cancellations( $user_id, $url ) {
-    if ( ! current_user_can( 'manage_options' ) ) { return; }
-    echo '<h2>Standard解約申請</h2><p>SquareのキャンセルはDashboardで手動操作してください。日付登録だけではSquareの解約を確認したことにはなりません。WordPressのプランは自動変更しません。</p>';
+/** Read-only presentation context; never infers Square's live status. */
+function egov_law_monitor_admin_cancellation_view( $user_id ) {
+    $view = array( 'state' => 'unknown', 'row' => null, 'rows' => array(), 'snapshot' => null, 'error' => false );
     try {
         if ( ! egov_law_monitor_cancellation_storage_ready() ) { throw new RuntimeException(); }
         $table = egov_law_monitor_cancellation_table();
-        $rows = egov_law_monitor_cancellation_rows( "SELECT * FROM `{$table}` WHERE user_id = ? ORDER BY id DESC LIMIT 50", array( $user_id ) );
-        $snapshot = egov_law_monitor_square_plan_snapshot( $user_id, egov_law_monitor_square_plan_tables() ); $plan = $snapshot['plan'];
+        $view['rows'] = egov_law_monitor_cancellation_rows( "SELECT * FROM `{$table}` WHERE user_id = ? ORDER BY id DESC LIMIT 50", array( $user_id ) );
+        $view['snapshot'] = egov_law_monitor_square_plan_snapshot( $user_id, egov_law_monitor_square_plan_tables() );
+        $plan = $view['snapshot']['plan'];
+        if ( $plan === 'standard' ) {
+            $context = egov_law_monitor_cancellation_context( $user_id );
+            $view['row'] = egov_law_monitor_cancellation_rows( "SELECT * FROM `{$table}` WHERE user_id = ? AND approval_id = ?", array( $user_id, $context['approval_id'] ) )[0] ?? null;
+            if ( $view['row'] && ( (int) $view['row']['contract_id'] !== (int) $context['contract']['id'] || $view['row']['completed_at'] !== null ) ) { throw new RuntimeException(); }
+            foreach ( $view['rows'] as $history ) {
+                if ( $history['completed_at'] === null && (int) $history['approval_id'] !== $context['approval_id'] ) { throw new RuntimeException(); }
+            }
+            if ( $view['row'] && ! in_array( (int) $view['row']['id'], array_map( 'intval', array_column( $view['rows'], 'id' ) ), true ) ) { array_unshift( $view['rows'], $view['row'] ); }
+            $view['state'] = egov_law_monitor_cancellation_state( $view['row'], $plan );
+        } elseif ( $plan === 'free' ) {
+            $view['row'] = $view['rows'][0] ?? null;
+            $view['state'] = $view['row'] ? ( $view['row']['completed_at'] === null ? 'free_pending_record' : 'completed' ) : 'free';
+        } else { throw new RuntimeException(); }
+        if ( $view['state'] === 'invalid' ) { throw new RuntimeException(); }
+    } catch ( Throwable $error ) { $view['state'] = 'unknown'; $view['error'] = true; }
+    return $view;
+}
+
+function egov_law_monitor_render_admin_cancellation_summary( $view ) {
+    $labels = array( 'free' => 'Free・解約履歴なし', 'none' => 'Standard通常利用中（解約申請なし）', 'requested' => '解約申請受付済み・利用終了日未登録', 'scheduled' => '解約予定', 'due' => '利用終了日経過・Free変更待ち', 'completed' => 'Free変更済み・解約申請完了記録あり', 'free_pending_record' => '現在Free・申請完了記録は未確認', 'unknown' => '確認が必要' );
+    echo '<div class="notice notice-info inline"><p><strong>契約・解約の状態：' . esc_html( $labels[$view['state']] ?? '確認が必要' ) . '</strong></p>';
+    if ( ! $view['error'] && $view['row'] ) {
+        if ( $view['row']['end_date'] !== null ) { echo '<p>利用終了日：' . esc_html( egov_law_monitor_cancellation_date_label( $view['row']['end_date'] ) ) . '</p>'; }
+        echo '<p>利用者向け終了日通知：' . esc_html( egov_law_monitor_cancellation_user_mail_status( $view['row'] ) ) . '（受信完了を保証しません）</p>';
+    }
+    if ( $view['error'] ) { echo '<p>承認履歴・契約情報・解約申請の対応、日付または保存先を確認してください。</p>'; }
+    echo '<p>WordPressの保存情報です。Square側の現在の契約・解約状況を証明するものではありません。</p></div>';
+}
+
+function egov_law_monitor_render_subscription_cancellations( $user_id, $url, $view = null ) {
+    if ( ! current_user_can( 'manage_options' ) ) { return; }
+    echo '<h2>Standard解約申請</h2><p>SquareのキャンセルはDashboardで手動操作してください。日付登録だけではSquareの解約を確認したことにはなりません。WordPressのプランは自動変更しません。</p>';
+    try {
+        $view = $view ?? egov_law_monitor_admin_cancellation_view( $user_id );
+        $rows = $view['rows'];
+        $snapshot = $view['snapshot'];
+        if ( ! $snapshot ) { throw new RuntimeException(); }
+        $plan = $snapshot['plan'];
+        if ( $view['error'] ) { echo '<p>確認が必要：承認履歴・契約情報・日付・保存先を確認してください。</p>'; }
         if ( ! $rows ) { echo '<p>解約申請はありません。</p>'; }
         foreach ( $rows as $row ) {
             $state = egov_law_monitor_cancellation_state( $row, $plan );
             if ( $state !== 'completed' && (int) $snapshot['revision'] !== (int) $row['approval_id'] ) { $state = 'approval_changed'; }
             $labels = array( 'requested' => '未処理：利用終了日未登録', 'scheduled' => '解約予定日登録済み', 'due' => '終了日到来・Free変更待ち', 'completed' => 'Free変更済み', 'invalid' => '日付を確認してください', 'approval_changed' => '現在の承認履歴と一致しません。管理者確認が必要です' );
-            echo '<details open><summary>申請 #' . esc_html( $row['id'] ) . '：' . esc_html( $labels[$state] ?? '確認が必要' ) . '</summary><p>対象契約レコード ID: ' . esc_html( $row['contract_id'] ) . ' ／ 承認履歴 ID: ' . esc_html( $row['approval_id'] ) . '</p><p>申請日時：' . esc_html( wp_date( 'Y年m月d日 H:i', strtotime( $row['requested_at'] . ' UTC' ), wp_timezone() ) ) . ' ／ Standard利用終了日：' . esc_html( egov_law_monitor_cancellation_date_label( $row['end_date'] ) ) . '</p><p>管理者通知：' . esc_html( $row['admin_notified_at'] === null ? '送信待ち・失敗時は再試行' : '送信処理受付済み' ) . ' ／ 期限通知の最終試行日：' . esc_html( $row['last_due_attempt_date'] ?? 'なし' ) . ' ／ 期限通知の最終受付日：' . esc_html( $row['last_due_sent_date'] ?? 'なし' ) . '</p>';
+            $current = $plan === 'standard' && $view['row'] && (int) $row['id'] === (int) $view['row']['id'];
+            echo '<details' . ( $current ? ' open' : '' ) . '><summary>' . ( $current ? '現在の申請' : '過去の解約申請' ) . ' #' . esc_html( $row['id'] ) . '：' . esc_html( $labels[$state] ?? '確認が必要' ) . '</summary><p>対象契約レコード ID: ' . esc_html( $row['contract_id'] ) . ' ／ 承認履歴 ID: ' . esc_html( $row['approval_id'] ) . '</p><p>申請日時：' . esc_html( wp_date( 'Y年m月d日 H:i', strtotime( $row['requested_at'] . ' UTC' ), wp_timezone() ) ) . ' ／ Standard利用終了日：' . esc_html( egov_law_monitor_cancellation_date_label( $row['end_date'] ) ) . '</p><p>管理者通知：' . esc_html( $row['admin_notified_at'] === null ? '送信待ち・失敗時は再試行' : '送信処理受付済み' ) . ' ／ 期限通知の最終試行日：' . esc_html( $row['last_due_attempt_date'] ?? 'なし' ) . ' ／ 期限通知の最終受付日：' . esc_html( $row['last_due_sent_date'] ?? 'なし' ) . '</p>';
             echo '<p>利用者向け終了日通知：' . esc_html( egov_law_monitor_cancellation_user_mail_status( $row ) ) . '（送信処理の受付は受信完了を保証しません）</p>';
             if ( ! in_array( $state, array( 'completed', 'approval_changed' ), true ) ) {
+                $correction = $row['end_date'] !== null;
+                if ( $correction ) { echo '<details><summary>利用終了日を訂正する</summary>'; }
                 echo '<form method="post" action="' . esc_url( $url ) . '">';
                 wp_nonce_field( 'egov_cancel_date_' . $user_id . '_' . $row['id'], 'subscription_cancel_date_nonce' );
                 echo '<input type="hidden" name="subscription_cancel_id" value="' . esc_attr( $row['id'] ) . '"><input type="hidden" name="subscription_cancel_token" value="' . esc_attr( egov_law_monitor_cancellation_token( $row ) ) . '"><p><label>Squareで確認したStandard利用終了日 <input type="date" name="subscription_end_date" value="' . esc_attr( $row['end_date'] ?? '' ) . '" required></label></p><p><label><input type="checkbox" name="subscription_dashboard_confirmed" value="1" required>Square Dashboardでキャンセル操作と契約終了日を確認しました</label></p><p><label>確認理由・変更理由<textarea name="subscription_cancel_reason" maxlength="2000" rows="2" required></textarea></label></p><button class="button" name="egov_subscription_cancel_date" type="submit">利用終了日を保存</button></form>';
                 echo '<p>利用終了日はサイトのタイムゾーンで当日23:59までです。終了後に上記の「Standard承認を解除」を実行してください。</p>';
+                if ( $correction ) { echo '</details>'; }
             }
             echo '</details>';
         }

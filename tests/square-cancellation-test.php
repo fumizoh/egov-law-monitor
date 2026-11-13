@@ -295,4 +295,34 @@ check( egov_law_monitor_cancellation_mail_job( $wpdb->cancellations[1] ) === nul
 $cancel_clock = '2026-11-14T00:00:00+09:00'; egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' ); egov_law_monitor_process_cancellation_mail( 1, 'cancel_factory' );
 check( count( $cancel_mails ) === 3 && $wpdb->cancellations[1]['last_due_attempt_date'] === '2026-11-14', 'next-day due notification retains daily limit' );
 
+foreach ( array( 'free', 'none', 'requested', 'scheduled', 'due', 'completed', 'free_pending_record', 'invalid', 'missing_contract', 'approval_mismatch', 'read_error' ) as $admin_state ) {
+    reset_cancellation();
+    if ( ! in_array( $admin_state, array( 'none', 'missing_contract' ), true ) ) { request_cancellation(); }
+    if ( in_array( $admin_state, array( 'scheduled', 'due', 'invalid' ), true ) ) { set_cancel_date( '2026-12-12' ); }
+    if ( $admin_state === 'due' ) { $cancel_clock = '2026-12-13T00:00:00+09:00'; }
+    if ( $admin_state === 'invalid' ) { $wpdb->cancellations[1]['end_date'] = '2026-02-30'; }
+    if ( $admin_state === 'completed' ) { free_cancellation(); }
+    if ( $admin_state === 'free' ) { free_cancellation(); $wpdb->cancellations = array(); }
+    if ( $admin_state === 'free_pending_record' ) { $wpdb->meta[1]['meta_value'] = 'free'; }
+    if ( $admin_state === 'missing_contract' ) { $wpdb->contracts = array(); }
+    if ( $admin_state === 'approval_mismatch' ) { $wpdb->cancellations[1]['approval_id'] = 999; }
+    if ( $admin_state === 'read_error' ) { $wpdb->cancellation_bad = 'engine'; }
+    $before_admin = serialize( array( $wpdb->cancellations, $wpdb->logs, $wpdb->meta, $cancel_mails ) );
+    $view = egov_law_monitor_admin_cancellation_view( 10 );
+    $expected_state = in_array( $admin_state, array( 'invalid', 'missing_contract', 'approval_mismatch', 'read_error' ), true ) ? 'unknown' : $admin_state;
+    check( $view['state'] === $expected_state, 'administrator overview derives stored state safely: ' . $admin_state );
+    ob_start(); egov_law_monitor_render_admin_cancellation_summary( $view ); $summary_html = ob_get_clean();
+    check( str_contains( $summary_html, 'WordPressの保存情報です。' ) && ( $expected_state !== 'unknown' || str_contains( $summary_html, '確認が必要' ) ), 'overview never claims live Square status: ' . $admin_state );
+    if ( in_array( $admin_state, array( 'requested', 'scheduled', 'due' ), true ) ) {
+        ob_start(); egov_law_monitor_render_subscription_cancellations( 10, admin_url( 'admin.php' ), $view ); $state_html = ob_get_clean();
+        check( str_contains( $state_html, '<details open><summary>現在の申請 #1' ) && str_contains( $state_html, 'subscription_cancel_date_nonce' ) && str_contains( $state_html, 'subscription_dashboard_confirmed' ) && ( str_contains( $state_html, '<details><summary>利用終了日を訂正する</summary>' ) === ( $admin_state !== 'requested' ) ), 'current date form keeps safety fields and folds corrections: ' . $admin_state );
+    }
+    check( $before_admin === serialize( array( $wpdb->cancellations, $wpdb->logs, $wpdb->meta, $cancel_mails ) ), 'admin rendering never writes or sends mail: ' . $admin_state );
+}
+reset_cancellation(); request_cancellation(); free_cancellation(); change();
+$view = egov_law_monitor_admin_cancellation_view( 10 );
+check( $view['state'] === 'none' && $view['row'] === null && count( $view['rows'] ) === 1, 'reapproval does not use old completed request as current state' );
+ob_start(); egov_law_monitor_render_subscription_cancellations( 10, admin_url( 'admin.php' ), $view ); $past_html = ob_get_clean();
+check( str_contains( $past_html, '<details><summary>過去の解約申請 #1' ) && ! str_contains( $past_html, '<details open>' ), 'completed previous approval history is initially folded' );
+
 echo ( $checks - $start ) . " service cancellation checks passed; no real DB, API or mail used.\n";

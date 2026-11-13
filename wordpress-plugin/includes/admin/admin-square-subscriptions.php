@@ -55,14 +55,23 @@ function egov_law_monitor_render_square_subscriptions() {
     ), ARRAY_A );
     $read_error = $read_error || $wpdb->last_error !== '';
     $url = add_query_arg( array( 'page' => 'egov-square-subscriptions', 'user_id' => $user_id ), admin_url( 'admin.php' ) );
+    $cancellation_view = egov_law_monitor_admin_cancellation_view( $user_id );
+    if ( $read_error || ! egov_law_monitor_square_storage_ready() ) { $cancellation_view['state'] = 'unknown'; $cancellation_view['error'] = true; }
+    $plan = egov_law_monitor_get_plan( $user_id );
+    $invoice_primary = $plan === 'free' && ! $cancellation_view['row'];
     ?>
     <div class="wrap">
         <h1>Square契約管理</h1>
         <p><a href="<?php echo esc_url( admin_url( 'admin.php?page=egov-law-monitor' ) ); ?>">ユーザー管理へ戻る</a></p>
-        <p>請求書番号で契約・支払いを照会し、本人確認後に契約登録とStandard承認を行ってください。照会だけでは利用権限は変わりません。</p>
+        <?php if ( $plan === 'free' ) : ?>
+            <p>請求書番号で契約・支払いを照会し、本人確認後に契約登録とStandard承認を行ってください。照会だけでは利用権限は変わりません。</p>
+        <?php endif; ?>
         <p>WordPress User ID: <?php echo esc_html( $user_id ); ?> ／ ユーザー名: <?php echo esc_html( $user->user_login ); ?>（<?php echo esc_html( $user->display_name ); ?>） ／ メール: <?php echo esc_html( $user->user_email ); ?></p>
         <p>現在のプラン: <strong><?php echo esc_html( egov_law_monitor_get_plan_label( egov_law_monitor_get_plan( $user_id ) ) ); ?></strong></p>
+        <?php egov_law_monitor_render_admin_cancellation_summary( $cancellation_view ); ?>
+        <?php if ( ! $invoice_primary && $invoice_result === null ) : ?><details><summary>請求書照会・Standard承認</summary><?php endif; ?>
         <?php egov_law_monitor_render_invoice_lookup( $user_id, $url, $invoice_result ); ?>
+        <?php if ( ! $invoice_primary && $invoice_result === null ) : ?></details><?php endif; ?>
         <?php if ( $invoice_approval !== null ) : ?>
             <div class="notice <?php echo is_wp_error( $invoice_approval ) ? 'notice-error' : 'notice-success'; ?>"><p><?php echo esc_html( is_wp_error( $invoice_approval ) ? $invoice_approval->get_error_message() : $invoice_approval['message'] ); ?></p></div>
         <?php endif; ?>
@@ -70,6 +79,7 @@ function egov_law_monitor_render_square_subscriptions() {
             <div class="notice <?php echo is_wp_error( $free_message ) ? 'notice-error' : ( $free_message['warning'] ? 'notice-warning' : 'notice-success' ); ?>"><p><?php echo esc_html( is_wp_error( $free_message ) ? $free_message->get_error_message() : $free_message['message'] ); ?></p></div>
         <?php endif; ?>
         <?php if ( egov_law_monitor_get_plan( $user_id ) === 'standard' ) : ?>
+            <?php if ( $cancellation_view['state'] !== 'due' ) : ?><details><summary>例外的な管理操作：Standard承認を解除</summary><?php endif; ?>
             <h2>Standard承認を解除</h2>
             <p>この操作はWordPressの利用権限のみを変更し、Squareのサブスクリプションは解約しません。</p>
             <p>ユーザーの利用権限を変更します。Square側の解約・課金停止は行いません。契約・確認情報・承認履歴・AI要約利用回数は保持します。上限を超える有効ウォッチは停止されます。</p>
@@ -85,10 +95,11 @@ function egov_law_monitor_render_square_subscriptions() {
                     <button type="submit" name="egov_square_free" class="button">Standard承認を解除</button>
                 </form>
             <?php endif; ?>
+            <?php if ( $cancellation_view['state'] !== 'due' ) : ?></details><?php endif; ?>
         <?php endif; ?>
         <?php if ( $read_error || ! egov_law_monitor_square_storage_ready() ) : ?><div class="notice notice-error"><p>契約情報・操作履歴または保存先を確認できません。管理者がDBの状態を確認してください。</p></div><?php endif; ?>
         <?php if ( $cancellation_message !== null ) : ?><p role="status"><?php echo esc_html( is_wp_error( $cancellation_message ) ? $cancellation_message->get_error_message() : '利用終了日を保存しました。WordPressのプラン・Squareの契約は変更していません。' ); ?></p><?php endif; ?>
-        <?php if ( function_exists( 'egov_law_monitor_render_subscription_cancellations' ) ) { egov_law_monitor_render_subscription_cancellations( $user_id, $url ); } ?>
+        <?php if ( function_exists( 'egov_law_monitor_render_subscription_cancellations' ) ) { egov_law_monitor_render_subscription_cancellations( $user_id, $url, $cancellation_view ); } ?>
         <h2>登録済みSquare契約</h2>
         <table class="widefat striped"><thead><tr><th>ID</th><th>Customer ID</th><th>Subscription ID</th><th>最終確認日時</th><th>確認管理者</th><th>管理者メモ</th></tr></thead><tbody>
         <?php foreach ( (array) $contracts as $contract ) : ?>
@@ -104,8 +115,9 @@ function egov_law_monitor_render_square_subscriptions() {
         <?php endforeach; ?>
         <?php if ( ! $contracts && ! $read_error ) : ?><tr><td colspan="6">登録済み契約はありません。</td></tr><?php endif; ?>
         </tbody></table>
-        <h2>Square操作履歴（最新100件・旧操作の履歴を含む）</h2>
+        <details><summary>Square操作履歴（最新100件・旧操作の履歴を含む）</summary>
         <?php egov_law_monitor_render_square_audit( $logs, $read_error ); ?>
+        </details>
     </div>
     <?php
 }

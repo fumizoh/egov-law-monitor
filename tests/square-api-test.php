@@ -176,6 +176,8 @@ try {
 
     $html = render_lookup_page();
     check_lookup( ! $http_calls && str_contains( $html, '請求書番号でSquare契約を照会' ), 'normal render is read-only and invoice-focused' );
+    $invoice_guidance = '請求書番号で契約・支払いを照会し、本人確認後に契約登録とStandard承認を行ってください。照会だけでは利用権限は変わりません。';
+    check_lookup( str_contains( $html, $invoice_guidance ), 'Free user sees introductory invoice approval guidance' );
     foreach ( array( 'egov_square_save', 'egov_square_lookup', 'egov_square_approve', 'egov_checkout_cancel', 'egov_checkout_contract_lookup', 'egov_checkout_contract_register', 'egov_square_checkout', 'egov_checkout_cancel_request' ) as $retired ) {
         check_lookup( ! str_contains( $html, 'name="' . $retired . '"' ), 'retired control absent: ' . $retired );
         try { render_lookup_page( array( $retired => '1' ) ); throw new LogicException( 'retired POST accepted' ); }
@@ -205,11 +207,15 @@ try {
     }
     $display_standard = true;
     $html = render_lookup_page();
+    check_lookup( ! str_contains( $html, $invoice_guidance ) && str_contains( $html, '<details><summary>請求書照会・Standard承認</summary>' ), 'Standard user omits introductory guidance but retains folded invoice form' );
     check_lookup( str_contains( $html, 'egov_square_free_nonce' ) && str_contains( $html, 'free_reason' ) && str_contains( $html, 'Square側の解約・課金停止は行いません' ), 'user-level Free form requires reason and clarifies Square billing unchanged' );
     check_lookup( str_contains( $html, 'Standard承認を解除' ) && str_contains( $html, 'この操作はWordPressの利用権限のみを変更し、Squareのサブスクリプションは解約しません' ) && str_contains( $html, 'name="free_confirmed" value="1" required' ), 'revoke approval form explicitly requires confirmation and warns Square is unchanged' );
     check_lookup( str_contains( $html, '請求書番号でSquare契約を照会' ) && str_contains( $html, 'invoice_nonce' ) && str_contains( $html, 'user@example.test' ), 'invoice read-only form sits alongside selected WordPress identity' );
+    check_lookup( str_contains( $html, '契約・解約の状態：確認が必要' ) && str_contains( $html, '<details><summary>例外的な管理操作：Standard承認を解除</summary>' ) && str_contains( $html, '<details><summary>請求書照会・Standard承認</summary>' ), 'unverifiable contract overview exposes warning and folds optional operations without removing forms' );
+    check_lookup( str_contains( $html, '<details><summary>Square操作履歴（最新100件・旧操作の履歴を含む）</summary>' ) && str_contains( $html, '<h2>登録済みSquare契約</h2>' ), 'audit initially folded while registered contract table remains available' );
     $html = render_lookup_page( array( 'egov_square_invoice_lookup' => '1', 'invoice_number' => '000004', 'invoice_nonce' => 'bad' ) );
     check_lookup( str_contains( $html, 'nonceを確認できません' ), 'invoice controller preserves nonce error' );
+    check_lookup( ! str_contains( $html, '<details><summary>請求書照会・Standard承認</summary>' ), 'invoice POST result and error are never hidden in optional lookup fold' );
     try { render_lookup_page( array( 'egov_square_invoice_lookup' => '1', 'egov_square_save' => '1' ) ); throw new LogicException( 'mixed invoice/save accepted' ); }
     catch ( RuntimeException $error ) { check_lookup( str_contains( $error->getMessage(), '廃止' ), 'retired save POST refused even alongside invoice lookup' ); }
     $html = render_lookup_page( array( 'egov_square_invoice_approve' => '1', 'invoice_approve_nonce' => 'bad' ) );
