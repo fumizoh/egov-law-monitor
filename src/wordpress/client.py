@@ -2,6 +2,7 @@
 
 import os
 import time
+from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
 import requests
@@ -168,3 +169,36 @@ def get_watch_settings() -> list[dict]:
     response.raise_for_status()
 
     return response.json()["users"]
+
+
+def send_watch_status(last_checked: str) -> None:
+    """Send one fixed observation time; retries are safe and bounded."""
+    wp_url, username, app_password = _get_api_config()
+    parsed = urlsplit(wp_url)
+    if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
+        raise ValueError("Watch status requires a safe HTTPS WordPress URL")
+    for attempt in range(3):
+        try:
+            response = requests.post(
+                f"{wp_url}/wp-json/egov-law-monitor/v1/internal/watch-status",
+                json={"last_checked": last_checked},
+                auth=(username, app_password),
+                timeout=15,
+                allow_redirects=False,
+            )
+            if response.status_code in {429, 500, 502, 503, 504} and attempt < 2:
+                time.sleep((2, 5)[attempt])
+                continue
+            response.raise_for_status()
+            if not 200 <= response.status_code < 300:
+                raise ValueError("Unexpected watch status response")
+            payload = response.json()
+            if not isinstance(payload, dict) or not isinstance(payload.get("last_checked"), str):
+                raise ValueError("Invalid watch status acknowledgement")
+            return
+        except requests.exceptions.SSLError:
+            raise
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):
+            if attempt == 2:
+                raise
+            time.sleep((2, 5)[attempt])

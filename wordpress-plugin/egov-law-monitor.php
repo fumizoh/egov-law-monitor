@@ -9,11 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define(
-    'EGOV_LAW_MONITOR_DATA_URL',
-    'https://fumizoh.github.io/egov-law-monitor/'
-);
-
 add_action(
     'wp_enqueue_scripts',
     function () {
@@ -102,7 +97,6 @@ add_action(
             'egov-law-watch',
             'egovLawMonitor',
             array(
-                'dataUrl'   => EGOV_LAW_MONITOR_DATA_URL,
                 'restNonce' => wp_create_nonce( 'wp_rest' ),
                 'restUrl'   => rest_url( 'egov-law-monitor/v1/watches' ),
                 'lawSearchUrl' => rest_url( 'egov-law-monitor/v1/law-search' ),
