@@ -1,4 +1,26 @@
 from models import ProcessingResult
+from urllib.parse import urlsplit
+
+
+def processing_details_url(result: ProcessingResult) -> str:
+    """Use the confirmed public permalink, otherwise the production updates list."""
+    fallback = "https://egovlm.oogushioffice.com/"
+    wp = result.wp
+    if wp is None or wp.status != "success" or wp.post_status != "publish" or not isinstance(wp.link, str):
+        return fallback
+    link = wp.link
+    if any(ord(char) <= 32 or ord(char) == 127 for char in link):
+        return fallback
+    try:
+        parts = urlsplit(link)
+        if (parts.scheme == "https" and parts.hostname == "egovlm.oogushioffice.com"
+                and parts.port in (None, 443) and not parts.username and not parts.password
+                and not parts.fragment and not parts.query and not parts.path.startswith("//")
+                and "\\" not in link):
+            return link
+    except ValueError:
+        pass
+    return fallback
 
 
 def format_date(date: str) -> str:
@@ -145,7 +167,7 @@ def create_email_body(
             "-" * 40,
             "",
             "詳細はこちら",
-            "https://fumizoh.github.io/egov-law-monitor/",
+            processing_details_url(result),
         ]
     )
 
