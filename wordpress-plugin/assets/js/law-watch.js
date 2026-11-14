@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (button.disabled) return;
             const panel = button.closest('.egov-watch-mail-setting');
             const result = panel.querySelector('.egov-watch-mail-result');
-            const enabled = button.getAttribute('aria-pressed') !== 'true';
+            const enabled = button.getAttribute('aria-checked') !== 'true';
             button.disabled = true;
             result.textContent = '保存中…';
             try {
@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (!response.ok || typeof data.notifications !== 'boolean') {
                     throw new Error(data.message || 'メール通知設定を保存できませんでした。');
                 }
-                button.setAttribute('aria-pressed', String(data.notifications));
-                button.querySelector('span').textContent = data.notifications ? 'ON' : 'OFF';
+                button.setAttribute('aria-checked', String(data.notifications));
+                button.querySelector('.egov-watch-mail-value').textContent = data.notifications ? 'ON' : 'OFF';
                 panel.querySelector('.egov-watch-mail-off').hidden = data.notifications;
                 result.textContent = '保存しました。次回の通知対象取得時から反映されます。';
             } catch (error) {
