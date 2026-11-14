@@ -601,14 +601,81 @@
 
 /* Law Watch */
 
-.egov-watch-mail-setting .egov-watch-mail-toggle {
-    min-height: 44px;
-    max-width: 100%;
-    white-space: normal;
+.egov-watch-mail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
-.egov-watch-mail-setting .egov-watch-mail-toggle span {
+.egov-law-search .egov-watch-mail-setting button.egov-watch-mail-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 6px;
+    margin: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #334155;
+    box-shadow: none;
+    cursor: pointer;
+    font: inherit;
+    flex-shrink: 0;
+}
+
+.egov-watch-mail-toggle .egov-watch-mail-track {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 28px;
+    border-radius: 14px;
+    background: #64748b;
+    transition: background-color 0.15s;
+}
+
+.egov-watch-mail-toggle .egov-watch-mail-track::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.15s;
+}
+
+.egov-watch-mail-toggle[aria-checked="true"] .egov-watch-mail-track {
+    background: #15803d;
+}
+
+.egov-watch-mail-toggle[aria-checked="true"] .egov-watch-mail-track::after {
+    transform: translateX(20px);
+}
+
+.egov-watch-mail-toggle .egov-watch-mail-value {
+    min-width: 3ch;
     font-weight: bold;
+}
+
+.egov-law-search .egov-watch-mail-toggle:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 3px;
+}
+
+.egov-law-search .egov-watch-mail-toggle:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .egov-watch-mail-toggle .egov-watch-mail-track,
+    .egov-watch-mail-toggle .egov-watch-mail-track::after {
+        transition: none;
+    }
 }
 
 .egov-watch-mail-setting .egov-watch-mail-result:empty {

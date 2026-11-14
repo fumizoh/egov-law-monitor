@@ -32,9 +32,11 @@ foreach ( array( array(), array( array( 'keyword' => '民法', 'is_active' => 1 
 foreach ( array( true, false ) as $enabled ) {
     $GLOBALS['test_notifications'] = $enabled; $GLOBALS['test_watches'] = array();
     $html = egov_law_monitor_render_search_page();
-    check_watch_display( str_contains( $html, 'aria-pressed="' . ( $enabled ? 'true' : 'false' ) . '"' ) && str_contains( $html, '<span>' . ( $enabled ? 'ON' : 'OFF' ) . '</span>' ), 'saved notification value rendered without keywords' );
+    check_watch_display( str_contains( $html, 'aria-checked="' . ( $enabled ? 'true' : 'false' ) . '"' ) && str_contains( $html, 'class="egov-watch-mail-value" aria-hidden="true">' . ( $enabled ? 'ON' : 'OFF' ) . '</span>' ), 'saved notification value rendered without keywords' );
     check_watch_display( str_contains( $html, '/watch-notifications' ) && str_contains( $html, 'data-rest-nonce="test-nonce"' ), 'notification endpoint and nonce supplied' );
     check_watch_display( str_contains( $html, 'class="egov-watch-mail-off" ' . ( $enabled ? 'hidden' : '' ) . '>' ), 'OFF guidance visibility follows preference' );
+    check_watch_display( str_contains( $html, 'type="button" class="egov-watch-mail-toggle" role="switch" aria-label="メール通知"' ) && str_contains( $html, 'class="egov-watch-mail-track" aria-hidden="true"' ), 'native keyboard button exposes named switch with decorative track' );
+    check_watch_display( str_contains( $html, 'class="egov-watch-mail-result" role="status" aria-live="polite"></p>' ) && ! str_contains( $html, '保存しました' ), 'initial status empty; no premature success message' );
 }
 check_watch_display( defined( 'DONOTCACHEPAGE' ) && DONOTCACHEPAGE, 'personal preferences request cache exclusion' );
 echo "{$checks} display checks passed; no DB or API used.\n";
