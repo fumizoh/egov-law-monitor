@@ -4,9 +4,9 @@ define( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT', 'production' );
 require __DIR__ . '/standard-plan-test-bootstrap.php';
 $checks = 0;
 function check_page( $ok, $label ) { if ( ! $ok ) { throw new RuntimeException( $label ); } ++$GLOBALS['checks']; }
-$link = 'https://square.link/u/30s16R3f';
+$link = 'name="egov_standard_consent"';
 $html = egov_law_monitor_standard_application_shortcode();
-check_page( str_contains( $html, $link ) && str_contains( $html, 'Squareでお支払いへ進む' ) && ! str_contains( $html, '<form' ), 'fixed production link, no application form' );
+check_page( str_contains( $html, $link ) && str_contains( $html, '同意してSquareでお支払いへ進む' ) && str_contains( $html, '<form' ), 'eligible user offered consent form before fixed checkout' );
 check_page( str_contains( $html, '再度決済せず' ) && str_contains( $html, '請求書番号' ), 'duplicate-payment warning and invoice guidance' );
 $html = egov_law_monitor_plan_status_shortcode();
 check_page( str_contains( $html, '<h2>💳 ご利用プラン</h2>' ) && str_contains( $html, 'egov-plan-status-badge--free' ) && str_contains( $html, 'https://example.test/standard-application/' ) && ! str_contains( $html, $link ), 'mypage badge and same-site application link retained' );

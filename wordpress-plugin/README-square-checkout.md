@@ -7,11 +7,21 @@ Square Dashboardで作成した既存のサブスクリプション決済リン�
 ## 利用者の表示
 
 - 独立した固定ページには既存の`[egov_standard_application]`を維持します。マイページには`[egov_plan_status]`を維持します。WordPressページ本文の再編集は不要です。
-- ログイン済みFreeユーザーで、登録済み契約・未解決の旧申込がなく、公開条件を満たす場合に固定リンクを表示します。リンクをクリックしてもWordPressプランや申込DBを更新しません。
+- ログイン済みFreeユーザーで、登録済み契約・未解決の旧申込がなく、公開条件を満たす場合に契約条件と同意フォームを表示します。WordPressプランや申込DBは更新しません。
 - 正式リンクは本番用です。`EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT`が`production`の場合だけ案内し、Sandbox設定から本番決済へ誘導しません。APIトークン・Location・戻り先の発行設定の検証には依存しません。
 - `EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC`未定義／falseでは管理者と`EGOV_LAW_MONITOR_STANDARD_TEST_USER_IDS`の整数ID配列の利用者だけに案内します。trueでは全ログインユーザーが対象です。wp-config.phpは自動変更しません。これはWordPressの案内制御であり、外部で共有された固定リンク自体のアクセス制限ではありません。
 - Standardユーザーには利用中の表示だけを行います。Freeでも登録済みSquare契約があれば、新規決済ではなく管理者確認を案内します。APIで支払状況を自動確認しません。
 - 支払済みの利用者は再度決済せず、切り替えを待つよう案内します。問い合わせ時には請求書番号を伝えてもらいます。個人向けページはCDN・ページキャッシュの共有対象から除外してください。
+
+## 契約条件への同意
+
+料金・利用上限・毎月自動更新・機能有効化・解約期限・返金条件と、利用規約／特定商取引法に基づく表記／プライバシーポリシーへのリンクを決済前に表示します。未チェックの同意欄はHTMLのrequiredとサーバー側で検証します。JavaScriptは不要です。
+
+`template_redirect`でログイン・バージョンを含むnonce・同意値・既存の申込資格を再確認し、保存成功時のみサーバー固定のSquare URLへ303リダイレクトします。外部リダイレクトには固定URL限定の`wp_redirect`を使用し、許可ホスト設定は変更しません。POSTされた遷移先は使用しません。
+
+user_meta `egov_law_monitor_standard_consent`に`agreed_at`（UTC ISO 8601）、`terms_version`、`conditions_version`の配列を保存します。再同意では最新値で更新し、同値保存も保存済み値を確認して成功扱いにします。履歴テーブル・IP情報は追加しません。規約と条件のバージョンは`standard-plan-page.php`の`EGOV_LAW_MONITOR_STANDARD_TERMS_VERSION`と`EGOV_LAW_MONITOR_STANDARD_CONDITIONS_VERSION`で明示します。公開文書の改定時に対応して更新し、旧版本文は別途保管してください。
+
+同一リクエスト内の重複処理を防止します。戻る・再送信で再同意しても、新規リンク・契約・決済は作成しません。ただしSquareでの二重決済を防ぐものではありません。同意記録はWordPress上の確認記録であり、Squareの決済成立やSubscriptionとの対応を証明しません。固定リンクへの直接アクセスにはWordPressの同意制御は適用されません。
 
 ## 旧申込データの保持
 
