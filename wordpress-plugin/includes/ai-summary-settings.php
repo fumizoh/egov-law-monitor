@@ -2,6 +2,7 @@
 /**
  * e-Gov Law Monitor - AI Summary Settings
  */
+require_once __DIR__ . '/terms-settings.php';
 
 /**
  * Add AI Summary settings page.
@@ -648,6 +649,7 @@ function egov_law_monitor_ai_settings_page() {
             <?php submit_button( 'AIサマリー生成テスト', 'secondary' ); ?>
         </form>
 
+        <?php egov_law_monitor_render_terms_settings(); ?>
     </div>
     <?php
 }

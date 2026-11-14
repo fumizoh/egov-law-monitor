@@ -13,7 +13,8 @@ function nocache_headers() { ++$GLOBALS['page_no_cache']; }
 function add_shortcode( $name, $callback ) { $GLOBALS['page_shortcodes'][$name] = $callback; }
 function add_action( ...$args ) { $GLOBALS['page_hooks'][] = $args; }
 function wp_nonce_field( $action, $name ) { echo '<input type="hidden" name="' . $name . '" value="valid">'; }
-function wp_verify_nonce( $nonce, $action ) { $GLOBALS['page_nonce_action'] = $action; return $nonce === 'valid'; }
+function wp_verify_nonce( $nonce, $action ) { $GLOBALS['page_nonce_action'] = $action; return $nonce === 'valid' || $nonce === 'valid:' . $action; }
+function get_option( $key, $default = false ) { return array_key_exists( $key, $GLOBALS['page_options'] ?? array() ) ? $GLOBALS['page_options'][$key] : $default; }
 function wp_unslash( $v ) { return $v; }
 class WP_Error { public function __construct( public $code, public $message ) {} public function get_error_message() { return $this->message; } }
 function is_wp_error( $v ) { return $v instanceof WP_Error; }
@@ -35,7 +36,7 @@ class StandardPageStore {
     public function __call( $name, $args ) { throw new LogicException( 'Unexpected DB operation: ' . $name ); }
 }
 function reset_standard_page() {
-    unset( $GLOBALS['egov_standard_consent_result'] ); $GLOBALS['page_meta'] = array(); $GLOBALS['page_save_fail'] = false; $GLOBALS['page_writes'] = 0; $_SERVER['REQUEST_METHOD'] = 'GET'; $GLOBALS['wpdb'] = new StandardPageStore(); $GLOBALS['page_user'] = 10; $GLOBALS['page_logged_in'] = true; $GLOBALS['page_admin'] = true; $GLOBALS['page_plan'] = 'free'; $GLOBALS['page_home'] = 'https://example.test'; $GLOBALS['page_no_cache'] = 0; $_POST = array(); $_GET = array();
+    unset( $GLOBALS['egov_standard_consent_result'] ); $GLOBALS['page_options'] = array(); $GLOBALS['page_meta'] = array(); $GLOBALS['page_save_fail'] = false; $GLOBALS['page_writes'] = 0; $_SERVER['REQUEST_METHOD'] = 'GET'; $GLOBALS['wpdb'] = new StandardPageStore(); $GLOBALS['page_user'] = 10; $GLOBALS['page_logged_in'] = true; $GLOBALS['page_admin'] = true; $GLOBALS['page_plan'] = 'free'; $GLOBALS['page_home'] = 'https://example.test'; $GLOBALS['page_no_cache'] = 0; $_POST = array(); $_GET = array();
 }
 reset_standard_page();
 require __DIR__ . '/../wordpress-plugin/includes/standard-plan-page.php';

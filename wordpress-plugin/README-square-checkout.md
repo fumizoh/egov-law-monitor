@@ -19,7 +19,18 @@ Square Dashboardで作成した既存のサブスクリプション決済リン�
 
 `template_redirect`でログイン・バージョンを含むnonce・同意値・既存の申込資格を再確認し、保存成功時のみサーバー固定のSquare URLへ303リダイレクトします。外部リダイレクトには固定URL限定の`wp_redirect`を使用し、許可ホスト設定は変更しません。POSTされた遷移先は使用しません。
 
-user_meta `egov_law_monitor_standard_consent`に`agreed_at`（UTC ISO 8601）、`terms_version`、`conditions_version`の配列を保存します。再同意では最新値で更新し、同値保存も保存済み値を確認して成功扱いにします。履歴テーブル・IP情報は追加しません。規約と条件のバージョンは`standard-plan-page.php`の`EGOV_LAW_MONITOR_STANDARD_TERMS_VERSION`と`EGOV_LAW_MONITOR_STANDARD_CONDITIONS_VERSION`で明示します。公開文書の改定時に対応して更新し、旧版本文は別途保管してください。
+user_meta `egov_law_monitor_standard_consent`に`agreed_at`（UTC ISO 8601）と`terms_version`の2項目を保存します。既存の`conditions_version`を含む記録は自動移行・削除せず、明示的な再同意時だけ最新の2項目で上書きします。同値保存も保存済み値を確認して成功扱いにします。履歴テーブル・IP情報は追加しません。
+
+規約バージョンは「設定 → e-Gov Law Monitor AI」の下部にある独立フォームで設定します。option名は`egov_law_monitor_terms_version`、形式は実在する日付の`YYYY-MM-DD`です。未登録時は`2026-11-14`を使用し、自動登録しません。不正な保存値がある場合は管理画面で警告し、同意保存とSquareへの遷移を停止します。規約変更前に開いたフォームは再読み込み・再同意が必要です。
+
+規約改定時は次の順序で作業します。
+
+1. 利用規約ページの本文・改定日を更新する。
+2. 管理画面の利用規約バージョンを更新する。
+3. 申込画面で動作を確認する。
+4. 改定前の利用規約を別途保管する。
+
+規約本文と設定バージョンは自動同期されません。更新中に古い説明と新しい本文が混在しないよう、作業中の申込受付・キャッシュにも注意してください。
 
 同一リクエスト内の重複処理を防止します。戻る・再送信で再同意しても、新規リンク・契約・決済は作成しません。ただしSquareでの二重決済を防ぐものではありません。同意記録はWordPress上の確認記録であり、Squareの決済成立やSubscriptionとの対応を証明しません。固定リンクへの直接アクセスにはWordPressの同意制御は適用されません。
 
