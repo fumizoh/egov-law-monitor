@@ -2,9 +2,7 @@
 /** Fixed Dashboard checkout, consent and plan guidance. No Square API. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-// Update these versions together with the published documents/conditions.
-const EGOV_LAW_MONITOR_STANDARD_TERMS_VERSION = '2026-11-14';
-const EGOV_LAW_MONITOR_STANDARD_CONDITIONS_VERSION = '2026-11-14';
+require_once __DIR__ . '/terms-settings.php';
 
 function egov_law_monitor_standard_payment_url() {
     return 'https://square.link/u/30s16R3f';
@@ -18,14 +16,16 @@ function egov_law_monitor_standard_consent_post( $redirect = null ) {
     $fail = static function ( $code, $message ) { return $GLOBALS['egov_standard_consent_result'] = new WP_Error( $code, $message ); };
     $user_id = (int) get_current_user_id();
     if ( ! is_user_logged_in() || $user_id < 1 ) { return $fail( 'consent_login', 'ログインしてからお申し込みください。' ); }
+    $version = egov_law_monitor_terms_version();
+    if ( is_wp_error( $version ) ) { return $GLOBALS['egov_standard_consent_result'] = $version; }
     $nonce = $_POST['standard_consent_nonce'] ?? null;
-    if ( ! is_string( $nonce ) || ! wp_verify_nonce( wp_unslash( $nonce ), 'egov_standard_consent_' . $user_id . '_' . EGOV_LAW_MONITOR_STANDARD_TERMS_VERSION . '_' . EGOV_LAW_MONITOR_STANDARD_CONDITIONS_VERSION ) ) { return $fail( 'consent_nonce', '画面の有効期限が切れたか確認できません。画面を開き直してください。' ); }
+    if ( ! is_string( $nonce ) || ! wp_verify_nonce( wp_unslash( $nonce ), 'egov_standard_consent_' . $user_id . '_' . $version ) ) { return $fail( 'consent_nonce', '利用規約が更新されたか画面の有効期限が切れています。画面を再読み込みして改めて同意してください。' ); }
     if ( ( $_POST['standard_agreed'] ?? null ) !== '1' ) { return $fail( 'consent_required', '利用規約、プライバシーポリシーおよび契約条件への同意が必要です。' ); }
     $view = egov_law_monitor_standard_plan_view( $user_id );
     if ( ! $view['can_pay'] ) { return $fail( 'consent_unavailable', $view['message'] ); }
     $url = egov_law_monitor_standard_payment_url();
     if ( $url !== 'https://square.link/u/30s16R3f' || ( $redirect === null && headers_sent() ) ) { return $fail( 'consent_destination', '決済画面へ移動できません。管理者へお問い合わせください。' ); }
-    $record = array( 'agreed_at' => gmdate( 'Y-m-d\TH:i:s\Z' ), 'terms_version' => EGOV_LAW_MONITOR_STANDARD_TERMS_VERSION, 'conditions_version' => EGOV_LAW_MONITOR_STANDARD_CONDITIONS_VERSION );
+    $record = array( 'agreed_at' => gmdate( 'Y-m-d\TH:i:s\Z' ), 'terms_version' => $version );
     $key = 'egov_law_monitor_standard_consent';
     // update_user_meta returns false for identical data as well as write errors.
     $saved = update_user_meta( $user_id, $key, $record );
@@ -102,6 +102,8 @@ function egov_law_monitor_standard_application_shortcode() {
     if ( ! defined( 'DONOTCACHEPAGE' ) ) { define( 'DONOTCACHEPAGE', true ); }
     if ( ! headers_sent() ) { nocache_headers(); }
     $view = egov_law_monitor_standard_plan_view( (int) get_current_user_id() );
+    $version = egov_law_monitor_terms_version();
+    if ( $view['can_pay'] && is_wp_error( $version ) ) { $view['can_pay'] = false; $view['message'] = $version->get_error_message(); }
     $html = '<section class="egov-standard-application"><h2>Standardプラン（月額500円・税込）</h2>';
     $error = $GLOBALS['egov_standard_consent_result'] ?? null;
     if ( is_wp_error( $error ) ) { $html .= '<p role="alert">' . esc_html( $error->get_error_message() ) . '</p>'; }
@@ -110,7 +112,7 @@ function egov_law_monitor_standard_application_shortcode() {
         $target = egov_law_monitor_standard_application_page_url();
         if ( $target !== '' ) {
             $html .= '<form method="post" action="' . esc_url( $target ) . '">';
-            ob_start(); wp_nonce_field( 'egov_standard_consent_' . get_current_user_id() . '_' . EGOV_LAW_MONITOR_STANDARD_TERMS_VERSION . '_' . EGOV_LAW_MONITOR_STANDARD_CONDITIONS_VERSION, 'standard_consent_nonce' ); $html .= ob_get_clean();
+            ob_start(); wp_nonce_field( 'egov_standard_consent_' . get_current_user_id() . '_' . $version, 'standard_consent_nonce' ); $html .= ob_get_clean();
             $html .= '<p><label><input type="checkbox" name="standard_agreed" value="1" required> 利用規約、プライバシーポリシーおよび上記の契約条件を確認し、同意します。</label></p><p><button class="egov-law-button egov-standard-payment-button" type="submit" name="egov_standard_consent" value="1">同意してSquareでお支払いへ進む</button></p></form>';
         } else { $html .= '<p>申込ページを確認できません。管理者へお問い合わせください。</p>'; }
         $html .= '<p>すでにお支払い済みの場合は、再度決済せず、プランの切り替えをお待ちください。お問い合わせの際はSquareの請求書番号をお知らせください。</p>';
