@@ -13,7 +13,7 @@ if ( $case !== null ) {
     if ( egov_law_monitor_standard_application_allowed() !== $allowed ) { throw new RuntimeException( 'gate mismatch' ); }
     $_POST = array( 'egov_square_checkout' => '1', 'egov_checkout_cancel_request' => '1' );
     $application = egov_law_monitor_standard_application_shortcode(); $panel = egov_law_monitor_plan_status_shortcode();
-    if ( str_contains( $application, 'https://square.link/u/30s16R3f' ) !== ( $allowed && $case !== 'sandbox' ) ) { throw new RuntimeException( 'payment link gate mismatch' ); }
+    if ( str_contains( $application, 'name="egov_standard_consent"' ) !== ( $allowed && $case !== 'sandbox' ) ) { throw new RuntimeException( 'payment link gate mismatch' ); }
     if ( ! $allowed && ( str_contains( $panel, '/standard-application/' ) || $wpdb->queries ) ) { throw new RuntimeException( 'restricted display read/leak' ); }
     if ( $page_plan !== 'free' || $wpdb->contracts || $wpdb->legacy ) { throw new RuntimeException( 'unexpected write' ); }
     echo "access case passed\n"; return;
