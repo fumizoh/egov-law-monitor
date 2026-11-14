@@ -10,7 +10,11 @@
  */
 function egov_law_monitor_render_search_page() {
 
+    if ( ! defined( 'DONOTCACHEPAGE' ) ) { define( 'DONOTCACHEPAGE', true ); }
+    if ( ! headers_sent() ) { nocache_headers(); }
+
     $rest_nonce = wp_create_nonce( 'wp_rest' );
+    $notifications = egov_law_monitor_get_notifications( get_current_user_id() );
 
     $watches = egov_law_monitor_get_watches();
     $active_watch_count = count( array_filter(
@@ -28,6 +32,21 @@ function egov_law_monitor_render_search_page() {
     <div class="egov-law-search">
 
         <h2>🔭 法令ウォッチ</h2>
+
+        <?php if ( get_current_user_id() > 0 ) : ?>
+        <div class="egov-watch-mail-setting">
+            <button type="button" class="egov-watch-mail-toggle"
+                aria-pressed="<?php echo $notifications ? 'true' : 'false'; ?>"
+                data-rest-url="<?php echo esc_url( rest_url( 'egov-law-monitor/v1/watch-notifications' ) ); ?>"
+                data-rest-nonce="<?php echo esc_attr( $rest_nonce ); ?>">
+                法令ウォッチのメール通知　<span><?php echo $notifications ? 'ON' : 'OFF'; ?></span>
+            </button>
+            <p>登録したキーワードに関連する法令の更新をメールでお知らせします。</p>
+            <p class="egov-watch-mail-off" <?php echo $notifications ? 'hidden' : ''; ?>>メール通知は停止中です。登録済みキーワードは保持されます。</p>
+            <p class="egov-watch-mail-result" role="status" aria-live="polite"></p>
+            <noscript><p>メール通知の切替にはJavaScriptを有効にしてください。</p></noscript>
+        </div>
+        <?php endif; ?>
 
         <p class="egov-law-watch-notice">
             メール通知が有効な場合、有効なキーワードに一致する法令の更新をメールでお知らせします。<br>
