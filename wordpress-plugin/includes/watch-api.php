@@ -121,6 +121,27 @@ function egov_law_monitor_watch_permission() {
     return is_user_logged_in();
 }
 
+/** Browser-only preference writes require both login and the existing REST nonce. */
+function egov_law_monitor_watch_notifications_permission( $request ) {
+    if ( ! is_user_logged_in() || get_current_user_id() < 1 ) {
+        return new WP_Error( 'not_logged_in', 'ログインが必要です。', array( 'status' => 401 ) );
+    }
+    if ( ! wp_verify_nonce( $request->get_header( 'X-WP-Nonce' ), 'wp_rest' ) ) {
+        return new WP_Error( 'rest_cookie_invalid_nonce', '画面を再読み込みしてから操作してください。', array( 'status' => 403 ) );
+    }
+    return true;
+}
+
+function egov_law_monitor_save_watch_notifications( $request ) {
+    $permission = egov_law_monitor_watch_notifications_permission( $request );
+    if ( is_wp_error( $permission ) ) { return $permission; }
+    $enabled = $request->get_param( 'notifications' );
+    if ( ! is_bool( $enabled ) || $request->has_param( 'user_id' ) ) {
+        return new WP_Error( 'invalid_watch_notifications', '通知設定はONまたはOFFで指定してください。', array( 'status' => 400 ) );
+    }
+    return egov_law_monitor_set_notifications( (int) get_current_user_id(), $enabled );
+}
+
 
 /**
  * Register watch REST API.
@@ -128,6 +149,12 @@ function egov_law_monitor_watch_permission() {
 add_action(
     'rest_api_init',
     function () {
+
+        register_rest_route( 'egov-law-monitor/v1', '/watch-notifications', array(
+            'methods' => WP_REST_Server::CREATABLE,
+            'callback' => 'egov_law_monitor_save_watch_notifications',
+            'permission_callback' => 'egov_law_monitor_watch_notifications_permission',
+        ) );
 
         register_rest_route(
             'egov-law-monitor/v1',

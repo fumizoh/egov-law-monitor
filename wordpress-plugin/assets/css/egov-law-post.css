@@ -601,6 +601,20 @@
 
 /* Law Watch */
 
+.egov-watch-mail-setting .egov-watch-mail-toggle {
+    min-height: 44px;
+    max-width: 100%;
+    white-space: normal;
+}
+
+.egov-watch-mail-setting .egov-watch-mail-toggle span {
+    font-weight: bold;
+}
+
+.egov-watch-mail-setting .egov-watch-mail-result:empty {
+    display: none;
+}
+
 .egov-law-search h2 {
     margin-top: 32px;
     margin-bottom: 16px;

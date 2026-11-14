@@ -87,3 +87,13 @@ function egov_law_monitor_get_notifications( $user_id ) {
 
     return (bool) $value;
 }
+
+/** Save only the user's global watch-mail preference, never individual watches. */
+function egov_law_monitor_set_notifications( $user_id, $enabled ) {
+    $value = $enabled ? '1' : '0';
+    $saved = update_user_meta( $user_id, EGOV_LAW_MONITOR_META_NOTIFICATIONS, $value );
+    if ( $saved === false && get_user_meta( $user_id, EGOV_LAW_MONITOR_META_NOTIFICATIONS, true ) !== $value ) {
+        return new WP_Error( 'watch_notifications_save_failed', 'メール通知設定を保存できませんでした。再度お試しください。', array( 'status' => 500 ) );
+    }
+    return array( 'notifications' => egov_law_monitor_get_notifications( $user_id ) );
+}

@@ -1,4 +1,34 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    document.querySelectorAll('.egov-watch-mail-toggle').forEach((button) => {
+        button.addEventListener('click', async () => {
+            if (button.disabled) return;
+            const panel = button.closest('.egov-watch-mail-setting');
+            const result = panel.querySelector('.egov-watch-mail-result');
+            const enabled = button.getAttribute('aria-pressed') !== 'true';
+            button.disabled = true;
+            result.textContent = '保存中…';
+            try {
+                const response = await fetch(button.dataset.restUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': button.dataset.restNonce },
+                    body: JSON.stringify({ notifications: enabled }),
+                });
+                const data = await response.json();
+                if (!response.ok || typeof data.notifications !== 'boolean') {
+                    throw new Error(data.message || 'メール通知設定を保存できませんでした。');
+                }
+                button.setAttribute('aria-pressed', String(data.notifications));
+                button.querySelector('span').textContent = data.notifications ? 'ON' : 'OFF';
+                panel.querySelector('.egov-watch-mail-off').hidden = data.notifications;
+                result.textContent = '保存しました。次回の通知対象取得時から反映されます。';
+            } catch (error) {
+                result.textContent = error.message || '保存に失敗しました。画面を再読み込みして設定をご確認ください。';
+            } finally {
+                button.disabled = false;
+            }
+        });
+    });
+
     /*
      * Watch keyword
      */
