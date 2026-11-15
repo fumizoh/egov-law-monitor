@@ -2,13 +2,24 @@
 /** Invoice-based approval, user-level revocation and read-only contract history. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 require_once __DIR__ . '/admin-square-audit.php';
+require_once __DIR__ . '/admin-withdrawal-history.php';
 
 function egov_law_monitor_render_square_subscriptions() {
     if ( ! current_user_can( 'manage_options' ) ) { wp_die( 'このページにアクセスする権限がありません。' ); }
     global $wpdb;
-    $user_id = isset( $_GET['user_id'] ) && is_scalar( $_GET['user_id'] ) ? absint( $_GET['user_id'] ) : 0;
+    $raw_id = $_GET['user_id'] ?? '';
+    if ( $raw_id === '' && empty( $_POST ) && ( $_SERVER['REQUEST_METHOD'] ?? 'GET' ) === 'GET' ) {
+        echo '<div class="wrap"><h1>Square契約管理</h1>';
+        egov_law_monitor_render_history_search();
+        echo '</div>'; return;
+    }
+    if ( ! is_scalar( $raw_id ) || ! preg_match( '/\A[1-9][0-9]*\z/', (string) $raw_id ) || (string) (int) $raw_id !== (string) $raw_id ) { wp_die( '有効なユーザーIDを指定してください。' ); }
+    $user_id = (int) $raw_id;
     $user = get_userdata( $user_id );
-    if ( ! $user ) { wp_die( '対象ユーザーが存在しません。' ); }
+    if ( ! $user ) {
+        if ( ! empty( $_POST ) || ( $_SERVER['REQUEST_METHOD'] ?? 'GET' ) !== 'GET' ) { wp_die( '削除済み・存在しないユーザーへの操作はできません。履歴は閲覧専用です。' ); }
+        egov_law_monitor_render_withdrawal_history( $user_id ); return;
+    }
     // Retired endpoints must never fall through to an active write operation.
     foreach ( array( 'egov_square_save', 'egov_square_lookup', 'egov_square_approve', 'egov_checkout_cancel', 'egov_checkout_contract_lookup', 'egov_checkout_contract_register', 'egov_square_checkout', 'egov_checkout_cancel_request' ) as $action ) {
         if ( isset( $_POST[$action] ) ) { wp_die( '旧Square操作は廃止しました。請求書番号による照会・承認を利用してください。' ); }
@@ -62,6 +73,7 @@ function egov_law_monitor_render_square_subscriptions() {
     ?>
     <div class="wrap">
         <h1>Square契約管理</h1>
+        <?php egov_law_monitor_render_history_search(); ?>
         <p><a href="<?php echo esc_url( admin_url( 'admin.php?page=egov-law-monitor' ) ); ?>">ユーザー管理へ戻る</a></p>
         <?php if ( $plan === 'free' ) : ?>
             <p>請求書番号で契約・支払いを照会し、本人確認後に契約登録とStandard承認を行ってください。照会だけでは利用権限は変わりません。</p>
