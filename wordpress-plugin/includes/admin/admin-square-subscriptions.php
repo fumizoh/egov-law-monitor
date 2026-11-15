@@ -10,7 +10,7 @@ function egov_law_monitor_render_square_subscriptions() {
     $raw_id = $_GET['user_id'] ?? '';
     if ( $raw_id === '' && empty( $_POST ) && ( $_SERVER['REQUEST_METHOD'] ?? 'GET' ) === 'GET' ) {
         echo '<div class="wrap"><h1>Square契約管理</h1>';
-        egov_law_monitor_render_history_search();
+        echo '<p>ユーザー管理一覧の「削除済みユーザーの契約履歴」から記録を選択してください。</p><p><a href="' . esc_url( admin_url( 'admin.php?page=egov-law-monitor' ) ) . '">ユーザー管理へ戻る</a></p>';
         echo '</div>'; return;
     }
     if ( ! is_scalar( $raw_id ) || ! preg_match( '/\A[1-9][0-9]*\z/', (string) $raw_id ) || (string) (int) $raw_id !== (string) $raw_id ) { wp_die( '有効なユーザーIDを指定してください。' ); }
@@ -73,7 +73,6 @@ function egov_law_monitor_render_square_subscriptions() {
     ?>
     <div class="wrap">
         <h1>Square契約管理</h1>
-        <?php egov_law_monitor_render_history_search(); ?>
         <p><a href="<?php echo esc_url( admin_url( 'admin.php?page=egov-law-monitor' ) ); ?>">ユーザー管理へ戻る</a></p>
         <?php if ( $plan === 'free' ) : ?>
             <p>請求書番号で契約・支払いを照会し、本人確認後に契約登録とStandard承認を行ってください。照会だけでは利用権限は変わりません。</p>
