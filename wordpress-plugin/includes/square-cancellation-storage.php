@@ -94,7 +94,7 @@ add_action( 'admin_init', 'egov_law_monitor_install_cancellation_table' );
 register_activation_hook( dirname( __DIR__ ) . '/egov-law-monitor.php', 'egov_law_monitor_install_cancellation_table' );
 
 /** One owned connection and one transaction for each local mutation. */
-function egov_law_monitor_cancellation_transaction( $user_id, $callback, $factory = null ) {
+function egov_law_monitor_cancellation_transaction( $user_id, $callback, $factory = null, $withdrawal_operation = 'save' ) {
     global $wpdb;
     $db = null; $started = false; $committing = false;
     try {
@@ -104,6 +104,7 @@ function egov_law_monitor_cancellation_transaction( $user_id, $callback, $factor
         $started = true;
         $users = egov_law_monitor_cancellation_rows( "SELECT ID FROM `{$tables['users']}` WHERE ID = ? FOR UPDATE", array( $user_id ), $db );
         if ( ! $users || (int) $users[0]['ID'] !== $user_id ) { throw new RuntimeException( '対象ユーザーが存在しません。' ); }
+        egov_law_monitor_withdrawal_assert_writable( $db, $user_id, $withdrawal_operation );
         $result = $callback( $db, $tables, $table );
         $committing = true;
         if ( ! $db->commit() ) { throw new RuntimeException(); }
@@ -112,6 +113,7 @@ function egov_law_monitor_cancellation_transaction( $user_id, $callback, $factor
         $rolled_back = false;
         if ( $started ) { try { $rolled_back = $db->rollback() !== false; } catch ( Throwable $rollback_error ) {} }
         $unknown = $started && ( $committing || ! $rolled_back );
+        if ( ! $unknown && $error instanceof EGOV_Law_Monitor_Withdrawal_Error ) { return new WP_Error( 'withdrawal_write_refused', $error->getMessage() ); }
         error_log( 'e-Gov Square: cancellation ' . ( $unknown ? 'outcome unknown' : 'operation failed' ) . '; user_id=' . $user_id );
         return new WP_Error( $unknown ? 'cancellation_outcome_unknown' : 'cancellation_failed', $unknown ? '確定または取り消し結果が不明です。再送信せず、申請・プラン・操作履歴を確認してください。' : '解約申請の状態または保存先を確認できません。再読み込みし、管理者へお問い合わせください。' );
     } finally { if ( $db ) { $db->close(); } }

@@ -455,38 +455,42 @@ function egov_law_monitor_save_ai_summary_history(
     $summary_title,
     $summary_body
 ) {
-    global $wpdb;
+    return egov_law_monitor_withdrawal_checked_save( $user_id, static function () use ( $user_id, $law_id, $law_name, $effective_date, $law_data_id, $sub_revision, $revision_hash, $summary_title, $summary_body ) {
+        global $wpdb;
 
-    $table_name =
-        $wpdb->prefix . 'egov_law_ai_summary_history';
+        $table_name =
+            $wpdb->prefix . 'egov_law_ai_summary_history';
 
-    return $wpdb->replace(
-        $table_name,
-        array(
-            'user_id'        => $user_id,
-            'law_id'         => $law_id,
-            'law_name'       => $law_name,
-            'effective_date' => $effective_date,
-            'law_data_id'   => $law_data_id,
-            'sub_revision'  => $sub_revision,
-            'revision_hash'  => $revision_hash,
-            'summary_title'  => $summary_title,
-            'summary_body'   => $summary_body,
-            'used_at'        => current_time( 'mysql' ),
-        ),
-        array(
-            '%d',
-            '%s',
-            '%s',
-            '%s',
-            '%s',
-            '%s',
-            '%s',
-            '%s',
-            '%s',
-            '%s',
-        )
-    );
+        $allowed = egov_law_monitor_withdrawal_check_save( $user_id );
+        if ( is_wp_error( $allowed ) ) { return $allowed; }
+        return $wpdb->replace(
+            $table_name,
+            array(
+                'user_id'        => $user_id,
+                'law_id'         => $law_id,
+                'law_name'       => $law_name,
+                'effective_date' => $effective_date,
+                'law_data_id'   => $law_data_id,
+                'sub_revision'  => $sub_revision,
+                'revision_hash'  => $revision_hash,
+                'summary_title'  => $summary_title,
+                'summary_body'   => $summary_body,
+                'used_at'        => current_time( 'mysql' ),
+            ),
+            array(
+                '%d',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+            )
+        );
+    } );
 }
 
 /**
@@ -544,16 +548,37 @@ function egov_law_monitor_get_ai_summary_trial_usage_count( $user_id ) {
  * Increment the lifetime AI summary trial usage count for a user.
  *
  * @param int $user_id User ID.
- * @return bool
+ * @return bool|WP_Error
  */
 function egov_law_monitor_increment_ai_summary_trial_usage_count( $user_id ) {
-    $current_count = egov_law_monitor_get_ai_summary_trial_usage_count( $user_id );
+    return egov_law_monitor_withdrawal_checked_save( $user_id, static function () use ( $user_id ) {
+        $count = egov_law_monitor_get_ai_summary_trial_usage_count( $user_id );
+        $allowed = egov_law_monitor_withdrawal_check_save( $user_id );
+        if ( is_wp_error( $allowed ) ) { return $allowed; }
+        $saved = update_user_meta( $user_id, 'egov_law_monitor_ai_summary_trial_usage', $count + 1 );
+        return $saved !== false;
+    } );
+}
 
-    return update_user_meta(
-        $user_id,
-        'egov_law_monitor_ai_summary_trial_usage',
-        $current_count + 1
-    ) !== false;
+/** Recheck eligibility after external AI work; quota writes remain non-atomic. */
+function egov_law_monitor_record_ai_summary_usage( $user_id, $args ) {
+    return egov_law_monitor_withdrawal_checked_save( $user_id, static function () use ( $user_id, $args ) {
+        global $wpdb;
+        // A different request could have saved this revision while AI was running.
+        $used = egov_law_monitor_has_ai_summary_history( $user_id, $args[0], $args[2], $args[3], $args[4] );
+        if ( $wpdb->last_error !== '' ) { return false; }
+        if ( $used ) { return true; }
+        $free = egov_law_monitor_get_plan( $user_id ) === 'free';
+        $count = $free ? egov_law_monitor_get_ai_summary_trial_usage_count( $user_id ) : egov_law_monitor_get_ai_summary_usage_count( $user_id );
+        if ( $wpdb->last_error !== '' ) { return false; }
+        if ( $count >= egov_law_monitor_get_ai_summary_limit( $user_id ) ) {
+            return new WP_Error( 'egov_law_monitor_ai_limit_reached', 'AI要約の利用上限に達しています。' );
+        }
+        $saved = egov_law_monitor_save_ai_summary_history( $user_id, ...$args );
+        if ( $saved === false || is_wp_error( $saved ) ) { return false; }
+        // Existing partial-success risk remains: history may persist if this fails.
+        return $free ? egov_law_monitor_increment_ai_summary_trial_usage_count( $user_id ) : true;
+    } );
 }
 
 /**

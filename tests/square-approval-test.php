@@ -1,4 +1,6 @@
 <?php
+function add_filter( ...$args ) {}
+function is_multisite() { return false; }
 /** php tests/square-approval-test.php: isolated DB/cache doubles, no real I/O. */
 define( 'ABSPATH', __DIR__ . '/' );
 define( 'ARRAY_A', 'ARRAY_A' );
@@ -34,6 +36,7 @@ function wp_cache_delete( $id, $group ) {
 }
 function update_user_meta( ...$args ) { throw new LogicException( 'Shared metadata writes forbidden' ); }
 function wp_safe_remote_get( ...$args ) { if ( isset( $GLOBALS['checkout_contract_transport'] ) ) { return ( $GLOBALS['checkout_contract_transport'] )( ...$args ); } throw new LogicException( 'API forbidden' ); }
+require_once __DIR__ . '/withdrawal-test-bootstrap.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-subscriptions.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-approval.php';
 require __DIR__ . '/../wordpress-plugin/includes/user-settings.php';
@@ -66,6 +69,7 @@ class ApprovalStore {
     }
     public function prepare( $sql, ...$params ) { return array( $sql, $params ); }
     public function get_results( $query, $mode ) {
+        if ( withdrawal_test_query( $query ) ) { $this->last_error = ''; list( $sql, $p ) = is_array( $query ) ? $query : array( $query, array() ); return ( new WithdrawalReadStore() )->rows( $sql, $p ); }
         $this->last_error = '';
         if ( $this->read_fail !== '' && str_contains( $query[0], $this->read_fail ) ) { $this->last_error = 'private read error'; return null; }
         if ( str_contains( $query[0], 'law_watch_settings' ) ) { return array_values( array_filter( $this->watches, static fn( $row ) => $row['user_id'] === $query[1][0] && $row['is_active'] === 1 ) ); }
@@ -83,6 +87,7 @@ class ApprovalStore {
         return $GLOBALS['monthly_usage'];
     }
     public function select( $sql, $p ) {
+        if ( str_contains( $sql, 'egov_user_withdrawals' ) || ( str_contains( $sql, 'information_schema' ) && str_contains( $p[0] ?? '', 'egov_user_withdrawals' ) ) ) { return ( new WithdrawalReadStore() )->rows( $sql, $p ); }
         if ( str_contains( $sql, 'information_schema.TABLES' ) ) { return array( array( 'TABLE_NAME' => $p[0], 'ENGINE' => $this->engine ) ); }
         if ( str_starts_with( $sql, 'SHOW TABLE' ) ) { return array( array( 'Engine' => $this->engine ) ); }
         if ( str_starts_with( $sql, 'SHOW' ) ) {
@@ -166,6 +171,7 @@ class ApprovalSession extends EGOV_Law_Monitor_Square_Connection {
 $checks = 0;
 function check( $ok, $label ) { if ( ! $ok ) { throw new RuntimeException( $label ); } ++$GLOBALS['checks']; echo "PASS: {$label}\n"; }
 function reset_store() {
+    reset_withdrawal_reads();
     $GLOBALS['wpdb'] = new ApprovalStore(); $GLOBALS['allowed'] = true;
     $GLOBALS['now'] = '2026-11-08 12:00:00'; $GLOBALS['evictions'] = array(); $GLOBALS['cache'] = array( 10 => 'free' );
     $GLOBALS['cache_failure'] = false;
@@ -253,4 +259,7 @@ reset_store(); change(); $allowed = false;
 check( make_free()->code === 'forbidden', 'Free checks administrator permission' );
 reset_store(); change(); $wpdb->meta[2] = array_replace( $wpdb->meta[1], array( 'umeta_id' => 2 ) );
 check( is_wp_error( token( 0 ) ), 'duplicate plan rows still block Free form' );
+reset_store(); change(); $withdrawal_blocked = true; $old_meta = $wpdb->meta; $old_logs = $wpdb->logs;
+check( ! is_wp_error( make_free() ) && $wpdb->meta[1]['meta_value'] === 'free' && count( $wpdb->logs ) === count( $old_logs ) + 1, 'administrator can finish manual Free transition during withdrawal with normal audit' );
+$withdrawal_blocked = false;
 echo "{$checks} checks passed. No real DB, cache or Square API used.\n";

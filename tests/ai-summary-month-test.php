@@ -9,15 +9,17 @@ function add_action( ...$args ) {} function register_activation_hook( ...$args )
 function is_user_logged_in() { return true; } function get_current_user_id() { return 10; }
 function get_pages( $args ) { return array(); } function esc_html( $text ) { return htmlspecialchars( (string) $text, ENT_QUOTES, 'UTF-8' ); }
 class MonthStore {
-    public $prefix = 'test_', $rows = array(), $query, $saved;
+    public $users = 'test_users', $last_error = '', $prefix = 'test_', $rows = array(), $query, $saved;
     public function prepare( $sql, ...$args ) { return array( $sql, $args ); }
     public function get_var( $query ) {
         $this->query = $query;
         return count( array_filter( $this->rows, static fn( $r ) => $r['user_id'] === $query[1][0] && ( count( $query[1] ) === 1 || ( $r['used_at'] >= $query[1][1] && $r['used_at'] < $query[1][2] ) ) ) );
     }
-    public function get_results( $query, $format ) { return array(); }
+    public function get_results( $query, $format ) {
+        if ( withdrawal_test_query( $query ) ) { $this->last_error = ''; list( $q, $p ) = is_array( $query ) ? $query : array( $query, array() ); return ( new WithdrawalReadStore() )->rows( $q, $p ); } return array(); }
     public function replace( $table, $data, $formats ) { $this->saved = $data; return 1; }
 }
+require_once __DIR__ . '/withdrawal-test-bootstrap.php';
 require __DIR__ . '/../wordpress-plugin/includes/database.php';
 require __DIR__ . '/../wordpress-plugin/includes/user-settings.php';
 require __DIR__ . '/../wordpress-plugin/includes/ai-summary-management.php';

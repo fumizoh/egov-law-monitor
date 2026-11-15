@@ -27,8 +27,20 @@ function egov_law_monitor_standard_consent_post( $redirect = null ) {
     if ( $url !== 'https://square.link/u/30s16R3f' || ( $redirect === null && headers_sent() ) ) { return $fail( 'consent_destination', '決済画面へ移動できません。管理者へお問い合わせください。' ); }
     $record = array( 'agreed_at' => gmdate( 'Y-m-d\TH:i:s\Z' ), 'terms_version' => $version );
     $key = 'egov_law_monitor_standard_consent';
-    // update_user_meta returns false for identical data as well as write errors.
-    $saved = update_user_meta( $user_id, $key, $record );
+    // Check withdrawal immediately before normal WordPress consent storage.
+    $saved = egov_law_monitor_withdrawal_checked_save( $user_id, static function () use ( $user_id, $key, $record, $version ) {
+        $current_version = egov_law_monitor_terms_version();
+        $current = egov_law_monitor_standard_plan_view( $user_id );
+        if ( is_wp_error( $current_version ) || $current_version !== $version ) {
+            return new WP_Error( 'consent_nonce', '利用規約が更新されました。再読み込みして改めて同意してください。' );
+        }
+        if ( ! $current['can_pay'] ) { return new WP_Error( 'consent_unavailable', $current['message'] ); }
+        $allowed = egov_law_monitor_withdrawal_check_save( $user_id );
+        if ( is_wp_error( $allowed ) ) { return $allowed; }
+        $result = update_user_meta( $user_id, $key, $record );
+        return $result !== false || get_user_meta( $user_id, $key, true ) === $record;
+    } );
+    if ( is_wp_error( $saved ) ) { return $GLOBALS['egov_standard_consent_result'] = $saved; }
     if ( $saved === false && get_user_meta( $user_id, $key, true ) !== $record ) { return $fail( 'consent_save', '同意情報を保存できませんでした。時間を置いて再操作してください。' ); }
     nocache_headers();
     if ( $redirect ) { return $GLOBALS['egov_standard_consent_result'] = $redirect( $url, 303 ); }

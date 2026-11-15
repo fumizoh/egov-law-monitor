@@ -24,14 +24,17 @@ function update_user_meta( $id, $key, $value ) {
 function add_action( $name, $callback ) { $GLOBALS['hooks'][$name][] = $callback; }
 function register_rest_route( $namespace, $route, $args ) { $GLOBALS['routes'][$route] = $args; }
 class Store {
-    public $prefix = 'wp_'; public $users = 'wp_users';
+    public function prepare( $sql, ...$args ) { return array( $sql, $args ); }
+    public $last_error = ''; public $prefix = 'wp_'; public $users = 'wp_users';
     public $watches = array( array( 'user_id' => 10, 'user_email' => 'user@example.test', 'keyword' => '民法', 'is_active' => 1 ), array( 'user_id' => 10, 'user_email' => 'user@example.test', 'keyword' => '商法', 'is_active' => 0 ) );
     public function get_results( $sql, $mode ) {
+        if ( withdrawal_test_query( $sql ) ) { $this->last_error = ''; list( $q, $p ) = is_array( $sql ) ? $sql : array( $sql, array() ); return ( new WithdrawalReadStore() )->rows( $q, $p ); }
         if ( ! str_contains( $sql, 'WHERE w.is_active = 1' ) ) { throw new LogicException( 'unexpected query' ); }
         return array_values( array_filter( $this->watches, static fn( $row ) => $row['is_active'] === 1 ) );
     }
     public function __call( $name, $args ) { throw new LogicException( 'watch mutation forbidden' ); }
 }
+require_once __DIR__ . '/withdrawal-test-bootstrap.php';
 require __DIR__ . '/../wordpress-plugin/includes/user-settings.php';
 require __DIR__ . '/../wordpress-plugin/includes/watch-api.php';
 require __DIR__ . '/../wordpress-plugin/includes/internal-api.php';
@@ -68,4 +71,7 @@ $save_fail = true;
 $result = egov_law_monitor_save_watch_notifications( new Request( array( 'notifications' => false ) ) );
 check_notify( is_wp_error( $result ) && $result->data['status'] === 500 && egov_law_monitor_get_notifications( 10 ) === true, 'DB failure returns error and retains state' );
 check_notify( $wpdb->watches === $original, 'no individual status changed including stopped watch' );
+$withdrawal_blocked = true; $before = $writes;
+check_notify( is_wp_error( egov_law_monitor_save_watch_notifications( new Request( array( 'notifications' => false ) ) ) ) && $before === $writes && $wpdb->watches === $original, 'withdrawal blocks settings without changing keyword states' );
+$withdrawal_blocked = false;
 echo "{$checks} notification preference checks passed; no real DB or HTTP.\n";

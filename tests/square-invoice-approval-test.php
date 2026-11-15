@@ -210,4 +210,8 @@ foreach ( array( 'meta', 'contract', 'audit', 'approval_audit', 'audit_rollback'
 reset_legacy_invoice(); $fields = confirm_environment_fields( invoice_candidate() ); $wpdb->fail = 'commit'; $wpdb->commit_applied = true;
 $r = approve_invoice( $fields );
 check( $r->code === 'square_invoice_outcome_unknown' && $wpdb->meta[1]['meta_value'] === 'standard' && count( $wpdb->logs ) === 2 && egov_law_monitor_invoice_contract_environment( $wpdb->contracts[1] ) === 'production', 'applied COMMIT response loss retains atomic environment and plan but remains unknown' );
+reset_legacy_invoice(); $fields = confirm_environment_fields( invoice_candidate() ); $withdrawal_blocked = true;
+$r = approve_invoice( $fields );
+check( is_wp_error( $r ) && ! $wpdb->logs && ! $wpdb->meta, 'withdrawal blocks invoice registration and approval after API and before transaction writes' );
+$withdrawal_blocked = false;
 echo ( $checks - $invoice_checks_start ) . " invoice approval checks passed; no real DB or Square API used.\n";

@@ -1,4 +1,7 @@
 <?php
+function is_multisite() { return false; }
+function get_option( $key, $default = false ) { return $default; }
+function add_filter( ...$args ) {}
 /** Run: php tests/square-api-test.php. All HTTP calls are deterministic doubles. */
 define( 'ABSPATH', __DIR__ . '/' );
 define( 'ARRAY_A', 'ARRAY_A' );
@@ -100,6 +103,7 @@ class SquareLookupDatabase {
     }
     public function __call( $name, $args ) { throw new LogicException( 'unexpected DB operation: ' . $name ); }
 }
+require_once __DIR__ . '/withdrawal-test-bootstrap.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-subscriptions.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-api.php';
 require __DIR__ . '/../wordpress-plugin/includes/square-approval.php';

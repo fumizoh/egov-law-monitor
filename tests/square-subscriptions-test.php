@@ -272,6 +272,7 @@ class SquareNativeMetadata {
     public function free() {}
 }
 class SquareNativeStatement {
+    public $affected_rows = 1;
     public $insert_id = 123;
     public $closed = false;
     private $bindings = array();

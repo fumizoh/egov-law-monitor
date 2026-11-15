@@ -35,6 +35,7 @@ class EGOV_Law_Monitor_Square_Connection {
     public $last_error = '';
     public $connection_lost = false;
     public $insert_id = 0;
+    public $affected_rows = 0;
 
     /** Only open() supplies a real handle; constructor also permits driver doubles. */
     public function __construct( $handle, $prefix ) {
@@ -154,7 +155,7 @@ class EGOV_Law_Monitor_Square_Connection {
                     if ( ! @$stmt->bind_param( $types, ...$params ) ) { return false; }
                 }
                 if ( ! @$stmt->execute() ) { return false; }
-                if ( ! $read ) { $this->insert_id = (int) $stmt->insert_id; return true; }
+                if ( ! $read ) { $this->insert_id = (int) $stmt->insert_id; $this->affected_rows = (int) $stmt->affected_rows; return true; }
                 if ( ! @$stmt->store_result() ) { return false; }
                 $metadata = $stmt->result_metadata();
                 if ( ! $metadata ) { return false; }

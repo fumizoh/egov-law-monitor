@@ -325,4 +325,11 @@ check( $view['state'] === 'none' && $view['row'] === null && count( $view['rows'
 ob_start(); egov_law_monitor_render_subscription_cancellations( 10, admin_url( 'admin.php' ), $view ); $past_html = ob_get_clean();
 check( str_contains( $past_html, '<details><summary>過去の解約申請 #1' ) && ! str_contains( $past_html, '<details open>' ), 'completed previous approval history is initially folded' );
 
+reset_cancellation(); $withdrawal_blocked = true;
+check( is_wp_error( request_cancellation() ) && ! $wpdb->cancellations, 'withdrawal refuses new cancellation transaction before writes' );
+$withdrawal_blocked = false;
+reset_cancellation(); request_cancellation(); $withdrawal_blocked = true;
+$result = set_cancel_date( '2026-12-12' );
+check( ! is_wp_error( $result ) && $wpdb->cancellations[1]['end_date'] === '2026-12-12', 'manual administrator end-date registration remains possible during withdrawal' );
+$withdrawal_blocked = false;
 echo ( $checks - $start ) . " service cancellation checks passed; no real DB, API or mail used.\n";

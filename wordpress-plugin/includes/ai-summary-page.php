@@ -284,43 +284,14 @@ function egov_law_monitor_ai_summary_shortcode() {
                      */
                     if ( ! $already_used ) {
 
-                        $saved =
-                            egov_law_monitor_save_ai_summary_history(
-                                $user_id,
-                                $law_id,
-                                $summary_result['law_name'] ?? '',
-                                $effective_date,
-                                $law_data_id,
-                                $sub_revision,
-                                $revision_hash,
-                                $summary_result['summary']['title'] ?? '',
-                                $summary_result['summary']['body'] ?? ''
-                            );
-
-                        if ( $saved === false ) {
-
-                            $summary_error =
-                                new WP_Error(
-                                    'egov_law_monitor_ai_history_error',
-                                    'AI要約の利用履歴を保存できませんでした。'
-                                );
-
+                        $saved = egov_law_monitor_record_ai_summary_usage( $user_id, array(
+                            $law_id, $summary_result['law_name'] ?? '', $effective_date,
+                            $law_data_id, $sub_revision, $revision_hash,
+                            $summary_result['summary']['title'] ?? '', $summary_result['summary']['body'] ?? ''
+                        ) );
+                        if ( $saved === false || is_wp_error( $saved ) ) {
+                            $summary_error = is_wp_error( $saved ) ? $saved : new WP_Error( 'egov_law_monitor_ai_history_error', 'AI要約の利用履歴を保存できませんでした。' );
                             $summary_result = null;
-
-                        } elseif ( $is_free_plan ) {
-
-                            $incremented =
-                                egov_law_monitor_increment_ai_summary_trial_usage_count(
-                                    $user_id
-                                );
-
-                            if ( ! $incremented ) {
-
-                                error_log(
-                                    'e-Gov Law Monitor: Failed to increment AI summary trial usage count. User ID: '
-                                    . $user_id
-                                );
-                            }
                         }
                     }
                 }

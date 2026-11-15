@@ -1,6 +1,11 @@
 <?php
 /** Offline preflight: only SELECT and user reads permitted. */
 define( 'ABSPATH', __DIR__ ); define( 'ARRAY_A', 'ARRAY_A' );
+function is_multisite() { return false; }
+function get_option( $key, $default = false ) { return $default; }
+function add_action( ...$args ) {}
+function add_filter( ...$args ) {}
+require __DIR__ . '/../wordpress-plugin/includes/user-withdrawal-policy.php';
 $allowed = true; $actor = 99; $caps = array();
 $person = (object) array( 'ID' => 10, 'roles' => array( 'subscriber' ), 'user_login' => 'member', 'user_email' => 'member@example.test', 'user_registered' => '2026-11-01 00:00:00' );
 function current_user_can( $cap ) { return $GLOBALS['allowed']; }
@@ -60,7 +65,7 @@ foreach ( array( 'wp_usermeta', 'information_schema', 'law_watch_settings', 'ego
 $wpdb->fail = ''; $wpdb->ai = null;
 preflight_check( str_contains( render_preflight(), '読み取りエラー' ), 'invalid aggregate is not zero' ); $wpdb->ai = '4';
 $wpdb->meta[] = array( 'meta_key' => '_application_passwords', 'meta_value' => 'privatehash' );
-try { render_preflight(); throw new LogicException( 'API account accepted' ); } catch ( RuntimeException $e ) { preflight_check( str_contains( $e->getMessage(), '対象外' ) && ! str_contains( $e->getMessage(), 'privatehash' ), 'application password account protected without secret output' ); }
+$app_html = render_preflight(); preflight_check( str_contains( $app_html, '用途' ) && ! str_contains( $app_html, 'privatehash' ), 'application password requires review without excluding subscriber or exposing secrets' );
 array_pop( $wpdb->meta );
 foreach ( array( 'manage_options', 'edit_users', 'edit_posts', 'law_watch_internal_api' ) as $cap ) {
     $caps = array( $cap ); preflight_check( ! egov_law_monitor_withdrawal_check_target( $person ), 'protected capability: ' . $cap );
