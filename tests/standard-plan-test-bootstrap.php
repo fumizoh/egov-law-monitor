@@ -23,9 +23,10 @@ function wp_safe_remote_get( ...$args ) { throw new LogicException( 'Square API 
 function wp_safe_remote_post( ...$args ) { throw new LogicException( 'Square API not permitted' ); }
 function update_user_meta( $id, $key, $value ) { if ( $key !== 'egov_law_monitor_standard_consent' ) { throw new LogicException( 'Plan write not permitted' ); } ++$GLOBALS['page_writes']; if ( $GLOBALS['page_save_fail'] ) { return false; } if ( ( $GLOBALS['page_meta'][$key] ?? null ) === $value ) { return false; } $GLOBALS['page_meta'][$key] = $value; return 1; }
 class StandardPageStore {
-    public $prefix = 'wp_'; public $last_error = ''; public $contracts = array(); public $legacy = array(); public $legacy_table = true; public $fail = ''; public $queries = array();
+    public $prefix = 'wp_'; public $users = 'wp_users'; public $last_error = ''; public $contracts = array(); public $legacy = array(); public $legacy_table = true; public $fail = ''; public $queries = array();
     public function prepare( $sql, ...$p ) { return array( $sql, $p ); }
     public function get_results( $query, $mode ) {
+        if ( withdrawal_test_query( $query ) ) { $this->last_error = ''; list( $sql, $p ) = is_array( $query ) ? $query : array( $query, array() ); return ( new WithdrawalReadStore() )->rows( $sql, $p ); }
         list( $sql, $p ) = $query; $this->queries[] = $sql; $this->last_error = '';
         if ( $this->fail && str_contains( $sql, $this->fail ) ) { $this->last_error = 'private error'; return null; }
         if ( str_contains( $sql, 'information_schema' ) ) { return $this->legacy_table ? array( array( 'TABLE_NAME' => $this->prefix . 'egov_square_checkout_attempts' ) ) : array(); }
@@ -36,7 +37,9 @@ class StandardPageStore {
     public function __call( $name, $args ) { throw new LogicException( 'Unexpected DB operation: ' . $name ); }
 }
 function reset_standard_page() {
+    if ( function_exists( 'reset_withdrawal_reads' ) ) { reset_withdrawal_reads(); }
     unset( $GLOBALS['egov_standard_consent_result'] ); $GLOBALS['page_options'] = array(); $GLOBALS['page_meta'] = array(); $GLOBALS['page_save_fail'] = false; $GLOBALS['page_writes'] = 0; $_SERVER['REQUEST_METHOD'] = 'GET'; $GLOBALS['wpdb'] = new StandardPageStore(); $GLOBALS['page_user'] = 10; $GLOBALS['page_logged_in'] = true; $GLOBALS['page_admin'] = true; $GLOBALS['page_plan'] = 'free'; $GLOBALS['page_home'] = 'https://example.test'; $GLOBALS['page_no_cache'] = 0; $_POST = array(); $_GET = array();
 }
 reset_standard_page();
+require_once __DIR__ . '/withdrawal-test-bootstrap.php';
 require __DIR__ . '/../wordpress-plugin/includes/standard-plan-page.php';

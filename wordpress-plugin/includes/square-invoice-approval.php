@@ -124,6 +124,7 @@ function egov_law_monitor_approve_square_invoice( $user_id, $fields, $factory = 
         $started = true;
         $users = $db->rows( "SELECT ID FROM `{$tables['users']}` WHERE ID = ? FOR UPDATE", array( $user_id ) );
         if ( ! $users || (int) $users[0]['ID'] !== $user_id ) { throw new RuntimeException(); }
+        egov_law_monitor_withdrawal_assert_writable( $db, $user_id );
         $record = egov_law_monitor_invoice_contract( $user_id, $candidate['subscription_id'], $candidate['customer_id'], $candidate['environment'], $db, $environment_state );
         if ( $db->rows( "SELECT umeta_id FROM `{$tables['meta']}` WHERE user_id = ? AND meta_key = ? FOR UPDATE", array( $user_id, EGOV_LAW_MONITOR_META_PLAN ) ) === false ) { throw new RuntimeException(); }
         $before = egov_law_monitor_square_plan_snapshot( $user_id, $tables, $db );
@@ -156,6 +157,7 @@ function egov_law_monitor_approve_square_invoice( $user_id, $fields, $factory = 
         $rolled_back = false;
         if ( $started ) { try { $rolled_back = $db->rollback() !== false; } catch ( Throwable $rollback_error ) {} }
         $unknown = $started && ( $committing || ! $rolled_back || $rollback_failed );
+        if ( ! $unknown && $error instanceof EGOV_Law_Monitor_Withdrawal_Error ) { return new WP_Error( 'withdrawal_write_refused', $error->getMessage() ); }
         error_log( 'e-Gov Square: invoice approval ' . ( $unknown ? 'outcome unknown' : 'failed' ) . '; user_id=' . $user_id );
         return egov_law_monitor_invoice_error( $unknown ? 'outcome_unknown' : 'save_failed', $unknown ? '確定または取り消し結果が不明です。再操作せず、現在のプラン・契約・操作履歴を確認してください。' : ( $error instanceof EGOV_Law_Monitor_Invoice_Validation_Error ? $error->getMessage() : '契約登録・承認できませんでした。再照会し、プラン・契約の競合とDBの状態を確認してください。' ) );
     } finally {

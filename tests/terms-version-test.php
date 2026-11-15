@@ -10,7 +10,7 @@ function settings_fields( $group ) { echo '<input name="option_page" value="' . 
 function submit_button( $label ) { echo '<button>' . esc_html( $label ) . '</button>'; }
 $checks = 0;
 function check_terms( $ok, $label ) { if ( ! $ok ) { throw new RuntimeException( $label ); } ++$GLOBALS['checks']; }
-foreach ( $page_hooks as $hook ) { if ( $hook[0] === 'admin_init' ) { $hook[1](); } }
+foreach ( $page_hooks as $hook ) { if ( $hook[0] === 'admin_init' && $hook[1] !== 'egov_law_monitor_install_withdrawal_table' ) { $hook[1](); } }
 check_terms( $terms_registered[0] === 'egov_law_monitor_terms_settings' && $terms_registered[1] === 'egov_law_monitor_terms_version' && $terms_registered[2]['sanitize_callback'] === 'egov_law_monitor_sanitize_terms_version', 'independent Settings API group and sanitizer registered' );
 check_terms( egov_law_monitor_terms_version() === '2026-11-14' && $page_options === array(), 'missing option uses default without writing' );
 foreach ( array( '2026-11-15', '2028-02-29' ) as $valid ) {

@@ -90,10 +90,15 @@ function egov_law_monitor_get_notifications( $user_id ) {
 
 /** Save only the user's global watch-mail preference, never individual watches. */
 function egov_law_monitor_set_notifications( $user_id, $enabled ) {
-    $value = $enabled ? '1' : '0';
-    $saved = update_user_meta( $user_id, EGOV_LAW_MONITOR_META_NOTIFICATIONS, $value );
-    if ( $saved === false && get_user_meta( $user_id, EGOV_LAW_MONITOR_META_NOTIFICATIONS, true ) !== $value ) {
-        return new WP_Error( 'watch_notifications_save_failed', 'メール通知設定を保存できませんでした。再度お試しください。', array( 'status' => 500 ) );
-    }
-    return array( 'notifications' => egov_law_monitor_get_notifications( $user_id ) );
+    return egov_law_monitor_withdrawal_checked_save( $user_id, static function () use ( $user_id, $enabled ) {
+        $value = $enabled ? '1' : '0';
+        $allowed = egov_law_monitor_withdrawal_check_save( $user_id );
+        if ( is_wp_error( $allowed ) ) { return $allowed; }
+        $saved = update_user_meta( $user_id, EGOV_LAW_MONITOR_META_NOTIFICATIONS, $value );
+        if ( is_wp_error( $saved ) ) { return $saved; }
+        if ( $saved === false && get_user_meta( $user_id, EGOV_LAW_MONITOR_META_NOTIFICATIONS, true ) !== $value ) {
+            return new WP_Error( 'watch_notifications_save_failed', 'メール通知設定を保存できませんでした。再度お試しください。', array( 'status' => 500 ) );
+        }
+        return array( 'notifications' => egov_law_monitor_get_notifications( $user_id ) );
+    } );
 }

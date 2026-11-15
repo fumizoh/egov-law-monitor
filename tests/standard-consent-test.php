@@ -46,4 +46,8 @@ consent_check( $page_meta['egov_law_monitor_standard_consent']['terms_version'] 
 $_SERVER['REQUEST_METHOD'] = 'GET'; unset( $GLOBALS['egov_standard_consent_result'] );
 $before = $page_writes; egov_law_monitor_standard_consent_post( $redirect );
 consent_check( $before === $page_writes, 'GET never saves' );
+$_SERVER['REQUEST_METHOD'] = 'POST'; unset( $GLOBALS['egov_standard_consent_result'] );
+$withdrawal_blocked = true; $old_redirects = count( $redirects ); $old_meta = $page_meta;
+consent_check( is_wp_error( egov_law_monitor_standard_consent_post( $redirect ) ) && count( $redirects ) === $old_redirects && $old_meta === $page_meta, 'withdrawal blocks consent save and checkout redirect' );
+$withdrawal_blocked = false;
 echo "{$checks} consent checks passed; no live DB, mail or HTTP.\n";

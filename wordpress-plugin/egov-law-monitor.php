@@ -444,6 +444,7 @@ JS
     }
 );
 
+require_once __DIR__ . '/includes/user-withdrawal-foundation.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/database.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/permissions.php';

@@ -118,6 +118,7 @@ function egov_law_monitor_square_change_plan( $user_id, $plan, $expected_token, 
         // Approval and Free changes serialize on this existing user row.
         $users = $db->rows( "SELECT ID FROM `{$tables['users']}` WHERE ID = ? FOR UPDATE", array( $user_id ) );
         if ( ! $users || (int) $users[0]['ID'] !== $user_id ) { throw new RuntimeException( '対象ユーザーを確認できません。' ); }
+        egov_law_monitor_withdrawal_assert_writable( $db, $user_id, 'make_free' );
         $old = null;
         // Current locking read, not a cached WP value; holds existing meta rows too.
         if ( $db->rows( "SELECT umeta_id FROM `{$tables['meta']}` WHERE user_id = ? AND meta_key = ? FOR UPDATE", array( $user_id, EGOV_LAW_MONITOR_META_PLAN ) ) === false ) { throw new RuntimeException( 'プラン情報をロックできません。' ); }
@@ -135,6 +136,7 @@ function egov_law_monitor_square_change_plan( $user_id, $plan, $expected_token, 
         $rolled_back = false;
         if ( $started ) { try { $rolled_back = $db->rollback() !== false; } catch ( Throwable $rollback_error ) { /* unknown */ } }
         $unknown = $started && ( $committing || ! $rolled_back );
+        if ( ! $unknown && $error instanceof EGOV_Law_Monitor_Withdrawal_Error ) { return new WP_Error( 'withdrawal_write_refused', $error->getMessage() ); }
         error_log( 'e-Gov Square: plan operation ' . ( $unknown ? 'outcome unknown' : 'failed' ) . '; user_id=' . $user_id . '; contract_id=' . $contract_id );
         return new WP_Error( $unknown ? 'square_plan_outcome_unknown' : 'square_plan_failed', $unknown
             ? '変更結果または取り消しを確認できません。再操作前に現在のプラン・契約確認記録・操作履歴を確認してください。'

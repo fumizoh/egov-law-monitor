@@ -2,14 +2,10 @@
 /** Administrator-only preflight. SELECTs only; no entitlement/schema/cleanup helpers. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 require_once __DIR__ . '/admin-withdrawal-history.php';
+require_once dirname( __DIR__ ) . '/user-withdrawal-policy.php';
 
 function egov_law_monitor_withdrawal_check_target( $user ) {
-    return $user && in_array( 'subscriber', (array) ( $user->roles ?? array() ), true )
-        && count( (array) $user->roles ) === 1
-        && (int) $user->ID !== (int) get_current_user_id()
-        && ! user_can( $user, 'manage_options' ) && ! user_can( $user, 'edit_users' )
-        && ! user_can( $user, 'edit_posts' ) && ! user_can( $user, 'law_watch_internal_api' )
-        && ( $user->user_login ?? '' ) !== 'law_watch_api';
+    return egov_law_monitor_withdrawal_target( $user );
 }
 
 /** Unlike several legacy getters, a failed read is never returned as an empty list. */
@@ -77,7 +73,7 @@ function egov_law_monitor_render_withdrawal_check() {
         }
     }
     // Do not display application password hashes or accidentally treat API users as members.
-    if ( $data['meta'] !== null && isset( $meta['_application_passwords'] ) ) { wp_die( 'Application Passwordの登録があるため、サービス用アカウントか管理者が確認してください。退会前チェックの対象外です。' ); }
+    if ( $data['meta'] !== null && isset( $meta['_application_passwords'] ) ) { echo '<div class="notice notice-warning"><p>Application Passwordが登録されています。サービス用途の有無を管理者が確認してください。</p></div>'; }
     $errors = in_array( null, $data, true );
     $plan = $data['meta'] === null ? '読み取りエラー' : ( $meta['egov_law_monitor_plan'] ?? 'free' );
     if ( $plan === '' ) { $plan = 'free'; }

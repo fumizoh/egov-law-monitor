@@ -650,6 +650,7 @@ function egov_law_monitor_ai_settings_page() {
         </form>
 
         <?php egov_law_monitor_render_terms_settings(); ?>
+        <?php egov_law_monitor_render_withdrawal_settings(); ?>
     </div>
     <?php
 }

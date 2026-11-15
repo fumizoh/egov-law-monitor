@@ -71,7 +71,7 @@ function egov_law_monitor_save_cancellation_date( $user_id, $id, $date, $nonce, 
         if ( ! $new || $new['end_date'] !== $date || (int) $new['revision'] !== (int) $old['revision'] + 1 ) { throw new RuntimeException(); }
         egov_law_monitor_cancellation_audit( $db, $tables, $old['end_date'] === null ? 'subscription_end_date_set' : 'subscription_end_date_changed', egov_law_monitor_cancellation_domain( $old ), egov_law_monitor_cancellation_domain( $new ) + array( 'dashboard_confirmed' => true ), sanitize_textarea_field( $reason ), (int) get_current_user_id() );
         return array( 'id' => $id, 'unchanged' => false );
-    }, $factory );
+    }, $factory, 'cancellation_admin' );
 }
 
 /** Runs inside the existing Free transaction; never begins a nested transaction. */
