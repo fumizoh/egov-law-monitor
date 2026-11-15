@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * 法令ウォッチ管理メニュー
  */
 function egov_law_monitor_admin_menu() {
+    add_submenu_page( null, '退会前チェック', '退会前チェック', 'manage_options', 'egov-user-withdrawal-check', 'egov_law_monitor_render_withdrawal_check' );
     add_submenu_page(
         null,
         'Square契約管理',

@@ -12,7 +12,9 @@ class WP_Error {
 }
 function is_wp_error( $value ) { return $value instanceof WP_Error; }
 function current_user_can( $capability ) { return $GLOBALS['allowed']; }
-function get_userdata( $id ) { return in_array( (int) $id, array( 10, 20 ), true ) ? (object) array( 'ID' => $id, 'user_login' => 'user', 'display_name' => 'User', 'user_email' => 'user@example.test' ) : false; }
+function get_userdata( $id ) { return in_array( (int) $id, array( 10, 20 ), true ) ? (object) array( 'ID' => $id, 'roles' => array( 'subscriber' ), 'user_login' => 'user', 'display_name' => 'User', 'user_email' => 'user@example.test' ) : false; }
+function get_current_user_id() { return 99; }
+function user_can( $user, $cap ) { return false; }
 function wp_verify_nonce( $nonce, $action ) { return $nonce === 'valid:' . $action; }
 function current_time( $format ) { return '2026-11-08 12:00:00'; }
 function wp_json_encode( $value ) { return json_encode( $value ); }
@@ -200,6 +202,7 @@ try {
     check_lookup( str_contains( $html, '<h2>削除済みユーザーの契約履歴</h2>' ), 'deleted history section integrated in existing user list' );
     check_lookup( str_contains( $html, '環境、行政' ) && preg_match( '/2\s*\/\s*3回/u', $html ) && preg_match( '/37\s*\/\s*100回/u', $html ) && str_contains( $html, '2026年1月1日' ), 'watch formatting usage counters and registration date formatting preserved' );
     check_lookup( str_contains( $html, 'user_id=10' ) && str_contains( $html, 'user_id=20' ), 'each user has own Square contract link' );
+    check_lookup( str_contains( $html, 'page=egov-user-withdrawal-check' ) && substr_count( $html, '退会前チェック</a>' ) === 2, 'ordinary users have preflight links in existing list' );
     check_lookup( preg_match( '/\.egov-law-monitor-users-table-wrap\s*\{[^}]*overflow-x:\s*auto;/s', $html ) && str_contains( $html, 'min-width: 1400px;' ), 'narrow user list scrolls horizontally instead of compressing columns' );
     foreach ( array( 1 => 80, 2 => 120, 3 => 210, 4 => 210, 5 => 100, 6 => 160, 7 => 150, 8 => 120, 9 => 180 ) as $column => $width ) {
         check_lookup( preg_match( '/td:nth-child\(' . $column . '\)\s*\{[^}]*min-width:\s*' . $width . 'px;/s', $html ), 'minimum width protects user list column ' . $column );
