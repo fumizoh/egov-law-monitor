@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 require_once __DIR__ . '/admin-user-cancellations.php';
+require_once __DIR__ . '/admin-withdrawal-history.php';
 
 /**
  * ユーザー管理画面
@@ -260,6 +261,7 @@ function egov_law_monitor_render_admin_users() {
                 </tbody>
             </table>
         </div>
+        <?php egov_law_monitor_render_deleted_user_list(); ?>
     </div>
     <?php
 }
