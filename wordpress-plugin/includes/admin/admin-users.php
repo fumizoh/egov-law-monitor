@@ -256,7 +256,7 @@ function egov_law_monitor_render_admin_users() {
 
                                     <a class="button" href="<?php echo esc_url( add_query_arg( array( 'page' => 'egov-square-subscriptions', 'user_id' => $user->ID ), admin_url( 'admin.php' ) ) ); ?>">Square契約管理</a>
                                     <?php if ( egov_law_monitor_withdrawal_check_target( get_userdata( $user->ID ) ) ) : ?>
-                                        <a class="button" href="<?php echo esc_url( add_query_arg( array( 'page' => 'egov-user-withdrawal-check', 'user_id' => $user->ID ), admin_url( 'admin.php' ) ) ); ?>">退会前チェック</a>
+                                        <a class="button" href="<?php echo esc_url( add_query_arg( array( 'page' => 'egov-user-withdrawal-check', 'user_id' => $user->ID ), admin_url( 'admin.php' ) ) ); ?>">退会管理</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>

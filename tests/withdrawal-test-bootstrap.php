@@ -1,6 +1,6 @@
 <?php
 /** DB read boundary only. Actual save functions and standard API calls are exercised. */
-if ( ! class_exists( 'WP_Error' ) ) { class WP_Error { public function __construct( public $code, public $message, public $data = array() ) {} public function get_error_message() { return $this->message; } } }
+if ( ! class_exists( 'WP_Error' ) ) { class WP_Error { public function __construct( public $code, public $message, public $data = array() ) {} public function get_error_message() { return $this->message; } public function get_error_code() { return $this->code; } } }
 if ( ! function_exists( 'is_wp_error' ) ) { function is_wp_error( $value ) { return $value instanceof WP_Error; } }
 if ( ! function_exists( 'add_filter' ) ) { function add_filter( ...$args ) {} }
 if ( ! function_exists( 'register_activation_hook' ) ) { function register_activation_hook( ...$args ) {} }
