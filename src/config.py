@@ -46,7 +46,7 @@ CHANGE_SAME = "same"
 # Gemini
 PROJECT_ID = "project-9dc19b38-12b0-40dd-871"
 
-MODEL_NAME = "gemini-3.5-flash"
+MODEL_NAME = "gemini-3.8-flash"
 LOCATION = "global"
 
 GEMINI_INPUT_PRICE_USD_PER_MILLION = 0.30
