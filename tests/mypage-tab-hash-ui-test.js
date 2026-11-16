@@ -3,9 +3,9 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const source = fs.readFileSync('wordpress-plugin/assets/js/law-watch.js', 'utf8');
-async function fixture(hash = '', splitPanels = false) {
+async function fixture(hash = '', splitPanels = false, query = '?keep=a%26b') {
     let init, observeSelection, hashchange;
-    const frames = [], replacements = [], listeners = {};
+    const frames = [], replacements = [], navigations = [], listeners = {};
     const ids = ['law-watch', 'ai-summary', 'plan-status'];
     const block = { addEventListener(type, handler) { listeners[type] = handler; }, querySelectorAll: () => tabs };
     const tabs = ids.map(id => ({
@@ -14,8 +14,8 @@ async function fixture(hash = '', splitPanels = false) {
         getAttribute(name) { return name === 'aria-controls' ? id : String(this.selected); },
     }));
     const panels = Object.fromEntries(ids.map(id => [id, { closest: () => splitPanels && id === 'ai-summary' ? {} : block }]));
-    const location = { href: 'https://example.test/mypage/?keep=a%26b&egov_withdrawal_confirm=1' + hash,
-        assign() { throw Error('Tab selection must not navigate'); } };
+    const location = { href: 'https://example.test/mypage/' + query + hash,
+        assign(url) { navigations.push(url); } };
     const state = { keep: 'history state' };
     const window = { location, history: { state, replaceState(nextState, title, url) {
         assert.equal(nextState, state); assert.equal(title, '');
@@ -30,7 +30,7 @@ async function fixture(hash = '', splitPanels = false) {
         getElementById: id => panels[id] || null, querySelectorAll: () => [] };
     vm.runInNewContext(source, { document, window, URL, MutationObserver });
     await init();
-    return { tabs, location, replacements, listeners,
+    return { tabs, location, replacements, navigations, listeners,
         mutate(id) { tabs.forEach(tab => { tab.selected = tab.getAttribute('aria-controls') === id; }); observeSelection?.(); },
         activate(id, type = 'click', extras = {}) {
             const tab = tabs.find(item => item.getAttribute('aria-controls') === id);
@@ -51,7 +51,8 @@ async function fixture(hash = '', splitPanels = false) {
             f.activate(id); f.mutate(id); f.flush();
             const url = new URL(f.location.href);
             assert.equal(url.hash, '#' + id);
-            assert.equal(url.search, '?keep=a%26b&egov_withdrawal_confirm=1');
+            assert.equal(url.search, '?keep=a%26b');
+            assert.equal(f.navigations.length, 0, 'ordinary tabs never reload');
             const before = f.replacements.length;
             f.activate(id); f.flush();
             assert.equal(f.replacements.length, before, 'same selection does not repeat replaceState');
@@ -71,5 +72,28 @@ async function fixture(hash = '', splitPanels = false) {
     }
     const missing = await fixture('', true);
     assert.deepEqual(Object.keys(missing.listeners), [], 'panels in different blocks do not enable synchronization');
+    for (const id of ['law-watch', 'ai-summary']) {
+        const f = await fixture('#plan-status', false, '?keep=a%26b&egov_withdrawal_confirm=1&other=two');
+        f.mutate('plan-status');
+        assert.equal(f.navigations.length, 0, 'initial confirmation remains visible');
+        f.activate('plan-status'); f.flush();
+        assert.equal(f.navigations.length, 0, 'staying on plan preserves confirmation');
+        assert.equal(new URL(f.location.href).searchParams.get('egov_withdrawal_confirm'), '1');
+        f.activate(id); f.mutate(id); f.flush(); f.mutate(id);
+        assert.equal(f.navigations.length, 1, 'confirmation exit fetches fresh HTML exactly once');
+        assert.equal(f.replacements.length, 0, 'confirmation exit must not only rewrite history');
+        const url = new URL(f.navigations[0]);
+        assert.equal(url.searchParams.has('egov_withdrawal_confirm'), false);
+        assert.equal(url.searchParams.get('keep'), 'a&b');
+        assert.equal(url.searchParams.get('other'), 'two');
+        assert.equal(url.hash, '#' + id);
+        const reloaded = await fixture(url.hash, false, url.search);
+        reloaded.mutate(id);
+        assert.equal(reloaded.location.href, url.href);
+        assert.equal(reloaded.navigations.length, 0, 'normal GET stays on destination tab');
+        reloaded.activate('plan-status'); reloaded.mutate('plan-status'); reloaded.flush();
+        assert.equal(new URL(reloaded.location.href).searchParams.has('egov_withdrawal_confirm'), false);
+        assert.equal(reloaded.navigations.length, 0, 'returning to normal plan is reload-free');
+    }
     console.log('Mypage tab hash tests passed: initial hash/default, three tabs, query/history state, keyboard, reload model, unrelated blocks.');
 })().catch(error => { console.error(error); process.exitCode = 1; });

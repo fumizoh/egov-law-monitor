@@ -10,12 +10,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                 panelIds.includes(tab.getAttribute('aria-controls')));
         if (tabs.length === 3 && new Set(tabs.map((tab) => tab.getAttribute('aria-controls'))).size === 3) {
             let userSelection = false;
+            let leavingConfirmation = false;
             const syncHash = () => {
-                if (!userSelection) return;
+                if (!userSelection || leavingConfirmation) return;
                 const selected = tabs.filter((tab) => tab.getAttribute('aria-selected') === 'true');
                 if (selected.length !== 1) return;
                 const url = new URL(window.location.href);
                 const hash = '#' + selected[0].getAttribute('aria-controls');
+                if (url.searchParams.get('egov_withdrawal_confirm') === '1' && hash !== '#plan-status') {
+                    // Fetch normal HTML too: changing history alone leaves the server-rendered confirmation form.
+                    url.searchParams.delete('egov_withdrawal_confirm');
+                    url.hash = hash;
+                    leavingConfirmation = true;
+                    window.location.assign(url.href);
+                    return;
+                }
                 if (url.hash === hash) return;
                 url.hash = hash;
                 window.history.replaceState(window.history.state, '', url.href);
