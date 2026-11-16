@@ -101,8 +101,11 @@ function egov_law_monitor_withdrawal_request_panel( $user_id ) {
     $url = egov_law_monitor_withdrawal_request_url();
     if ( $url === '' ) { return $html . '<p>退会申請画面を確認できません。</p></section>'; }
     $confirm = ( $_GET['egov_withdrawal_confirm'] ?? null ) === '1' || isset( $_POST['egov_withdrawal_request'] );
-    if ( ! $confirm ) { return $html . $warning . '<p><a class="egov-law-button" href="' . esc_url( add_query_arg( 'egov_withdrawal_confirm', '1', $url ) ) . '">' . ( $record !== null ? '受付内容を再照合する' : '退会を申請する' ) . '</a></p></section>'; }
-    $html .= '<h4>退会申請の確認</h4><p>管理者にアカウントの退会を申請します。申請だけでは削除・プラン変更・ウォッチやAI要約履歴の削除は行われません。</p>' . $warning . '<form method="post" action="' . esc_url( $url ) . '">';
+    $guidance = $standard ? '退会を申請すると、Standardプランの解約も同時に申し込まれます。Standardプランは利用終了日までご利用いただけます。利用期間終了後、管理者が退会手続きを行います。' : '退会を希望される方は、以下のボタンからお申し込みください。お申し込み後、管理者が退会手続きを行います。';
+    if ( ! $confirm ) { return $html . '<p>' . $guidance . '</p><p><a class="egov-law-button" href="' . esc_url( add_query_arg( 'egov_withdrawal_confirm', '1', $url ) ) . '">' . ( $record !== null ? '受付内容を再照合する' : '退会を申請する' ) . '</a></p></section>'; }
+    $html .= '<h4>退会申請の確認</h4><ul><li>申請後、管理者が退会手続きを行います。</li><li>退会完了後はアカウントが削除され、法令ウォッチやAI要約の個人履歴が利用できなくなります。</li>';
+    if ( $standard ) { $html .= '<li>退会申請にはStandardプランの解約申請も含まれます。</li><li>Squareでの実際の解約・課金停止は管理者が行うため、申請時点では完了しません。</li><li>利用終了日まではStandardプランをご利用いただけます。</li>'; }
+    $html .= '</ul><form method="post" action="' . esc_url( $url ) . '">';
     ob_start(); wp_nonce_field( 'egov_withdrawal_request_' . $user_id, 'withdrawal_request_nonce' ); $html .= ob_get_clean();
     if ( $context !== null ) {
         ob_start(); wp_nonce_field( 'egov_standard_cancel_' . $user_id, 'withdrawal_cancel_nonce' ); $html .= ob_get_clean();

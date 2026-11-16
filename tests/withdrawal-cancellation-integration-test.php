@@ -41,9 +41,11 @@ foreach ( array( 'new', 'existing', 'scheduled' ) as $case ) {
     if ( $case !== 'new' ) { request_cancellation(); }
     if ( $case === 'scheduled' ) { $allowed = true; set_cancel_date( '2026-12-12' ); $allowed = false; }
     $before = $wpdb->cancellations; $plan_before = $wpdb->meta;
-    $_GET = array( 'egov_withdrawal_confirm' => '1' ); $_SERVER['REQUEST_URI'] = '/account/?tab=plan';
+    $_GET = array(); $_SERVER['REQUEST_URI'] = '/account/?tab=plan';
+    check( str_contains( egov_law_monitor_withdrawal_request_panel( 10 ), '退会を申請すると、Standardプランの解約も同時に申し込まれます。Standardプランは利用終了日までご利用いただけます。利用期間終了後、管理者が退会手続きを行います。' ), 'Standard guidance matches requested text' );
+    $_GET = array( 'egov_withdrawal_confirm' => '1' );
     $html = egov_law_monitor_withdrawal_request_panel( 10 );
-    check( str_contains( $html, 'Standard解約申請も含まれます' ) && str_contains( $html, 'withdrawal_cancel_nonce' ) && str_contains( $html, 'withdrawal_cancel_token' ), 'combined confirmation contains existing nonce/token: ' . $case );
+    check( str_contains( $html, 'Standardプランの解約申請も含まれます' ) && str_contains( $html, '申請後、管理者が退会手続きを行います。' ) && str_contains( $html, '法令ウォッチやAI要約の個人履歴が利用できなくなります。' ) && str_contains( $html, 'Squareでの実際の解約・課金停止は管理者が行うため、申請時点では完了しません。' ) && str_contains( $html, '利用終了日まではStandardプランをご利用いただけます。' ) && str_contains( $html, 'withdrawal_cancel_nonce' ) && str_contains( $html, 'withdrawal_cancel_token' ), 'combined confirmation guidance and existing nonce/token: ' . $case );
     $result = integration_submit( $fields );
     check( ! is_wp_error( $result ) && $result['status'] === 'received' && $result['approval_id'] === (int) $wpdb->cancellations[1]['approval_id'] && $result['contract_id'] === 1 && $result['cancellation_id'] === 1 && count( $wpdb->cancellations ) === 1, 'combined receipt and exact existing/new cancellation: ' . $case );
     check( $wpdb->meta === $plan_before && ! $withdrawal_records, 'no plan change or withdrawal start' );
