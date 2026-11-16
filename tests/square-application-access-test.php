@@ -1,12 +1,13 @@
 <?php
-/** Run isolated constant configurations against the fixed-link pages. */
+/** Run isolated legacy constant and option configurations against the fixed-link pages. */
 $case = $argv[1] ?? null;
 if ( $case !== null ) {
-    if ( $case !== 'undefined' ) { define( 'EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC', $case === 'public' ); }
+    if ( $case !== 'undefined' ) { define( 'EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC', in_array( $case, array( 'legacy_true_off' ), true ) ); }
     if ( $case === 'allowlist' ) { define( 'EGOV_LAW_MONITOR_STANDARD_TEST_USER_IDS', array( 10 ) ); }
     if ( $case === 'string_id' ) { define( 'EGOV_LAW_MONITOR_STANDARD_TEST_USER_IDS', array( '10' ) ); }
     define( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT', $case === 'sandbox' ? 'sandbox' : 'production' );
     require __DIR__ . '/standard-plan-test-bootstrap.php';
+    $page_options['egov_law_monitor_standard_application_public'] = $case === 'public' ? '1' : '0';
     $page_admin = $case === 'admin'; if ( $case === 'anonymous' ) { $page_logged_in = false; }
     if ( $case === 'sandbox' ) { $page_admin = true; }
     $allowed = in_array( $case, array( 'admin', 'public', 'allowlist', 'sandbox' ), true );
@@ -19,7 +20,7 @@ if ( $case !== null ) {
     echo "access case passed\n"; return;
 }
 $count = 0;
-foreach ( array( 'undefined', 'private', 'admin', 'public', 'allowlist', 'string_id', 'anonymous', 'sandbox' ) as $case ) {
+foreach ( array( 'undefined', 'private', 'legacy_true_off', 'admin', 'public', 'allowlist', 'string_id', 'anonymous', 'sandbox' ) as $case ) {
     $process = proc_open( array( PHP_BINARY, __FILE__, $case ), array( 1 => array( 'pipe', 'w' ), 2 => array( 'pipe', 'w' ) ), $pipes );
     if ( ! is_resource( $process ) ) { throw new RuntimeException( 'subprocess failed' ); }
     $out = stream_get_contents( $pipes[1] ); $err = stream_get_contents( $pipes[2] ); fclose( $pipes[1] ); fclose( $pipes[2] );

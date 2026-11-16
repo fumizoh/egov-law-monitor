@@ -9,7 +9,7 @@ Square Dashboardで作成した既存のサブスクリプション決済リン�
 - 独立した固定ページには既存の`[egov_standard_application]`を維持します。マイページには`[egov_plan_status]`を維持します。WordPressページ本文の再編集は不要です。
 - ログイン済みFreeユーザーで、登録済み契約・未解決の旧申込がなく、公開条件を満たす場合に契約条件と同意フォームを表示します。WordPressプランや申込DBは更新しません。
 - 正式リンクは本番用です。`EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT`が`production`の場合だけ案内し、Sandbox設定から本番決済へ誘導しません。APIトークン・Location・戻り先の発行設定の検証には依存しません。
-- `EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC`未定義／falseでは管理者と`EGOV_LAW_MONITOR_STANDARD_TEST_USER_IDS`の整数ID配列の利用者だけに案内します。trueでは全ログインユーザーが対象です。wp-config.phpは自動変更しません。これはWordPressの案内制御であり、外部で共有された固定リンク自体のアクセス制限ではありません。
+- 「設定 → e-Gov Law Monitor AI」の「Standardプランの申込み受付」で一般受付をON/OFFします。option `egov_law_monitor_standard_application_public`に文字列`1`／`0`を保存し、未登録・不正値はOFFです。OFFでも管理者と`EGOV_LAW_MONITOR_STANDARD_TEST_USER_IDS`の整数ID配列の利用者は従来どおり対象です。旧定数`EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC`は受付判定に使用しません。wp-config.phpに残っていても影響しません。これはWordPressの案内制御であり、外部で共有された固定リンク自体のアクセス制限ではありません。
 - Standardユーザーには利用中の表示だけを行います。Freeでも登録済みSquare契約があれば、新規決済ではなく管理者確認を案内します。APIで支払状況を自動確認しません。
 - 支払済みの利用者は再度決済せず、切り替えを待つよう案内します。問い合わせ時には請求書番号を伝えてもらいます。個人向けページはCDN・ページキャッシュの共有対象から除外してください。
 

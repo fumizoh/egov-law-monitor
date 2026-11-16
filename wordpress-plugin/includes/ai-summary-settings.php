@@ -3,6 +3,7 @@
  * e-Gov Law Monitor - AI Summary Settings
  */
 require_once __DIR__ . '/terms-settings.php';
+require_once __DIR__ . '/standard-application-settings.php';
 
 /**
  * Add AI Summary settings page.
@@ -650,6 +651,7 @@ function egov_law_monitor_ai_settings_page() {
         </form>
 
         <?php egov_law_monitor_render_terms_settings(); ?>
+        <?php egov_law_monitor_render_standard_application_settings(); ?>
         <?php egov_law_monitor_render_withdrawal_settings(); ?>
     </div>
     <?php
