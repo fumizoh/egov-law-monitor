@@ -147,6 +147,7 @@ function egov_law_monitor_plan_status_shortcode() {
     } elseif ( $view['plan'] !== 'standard' || ! function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= '<p>' . esc_html( $view['message'] ) . '</p>'; }
     if ( function_exists( 'egov_law_monitor_subscription_cancellation_panel' ) ) { $html .= egov_law_monitor_subscription_cancellation_panel( (int) get_current_user_id() ); }
     if ( $plan === 'standard' ) { $html .= egov_law_monitor_standard_contact_guidance(); }
+    if ( $known_plan && function_exists( 'egov_law_monitor_withdrawal_request_panel' ) ) { $html .= egov_law_monitor_withdrawal_request_panel( (int) get_current_user_id() ); }
     return $html . '</section>';
 }
 add_shortcode( 'egov_plan_status', 'egov_law_monitor_plan_status_shortcode' );

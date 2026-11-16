@@ -113,6 +113,7 @@ function egov_law_monitor_render_withdrawal_check() {
     try { egov_law_monitor_withdrawal_start_evidence( $data ); } catch ( Throwable $error ) { $can_start = false; echo '<p>開始条件：' . esc_html( $error->getMessage() ) . '</p>'; }
     if ( $can_start ) { echo '<form method="post">'; wp_nonce_field( 'egov_withdrawal_start_' . $raw, 'withdrawal_nonce' ); echo '<input type="hidden" name="withdrawal_action" value="start">'; }
     echo '<section><h2>1. 退会申請・本人確認</h2><p>問い合わせ窓口の退会申請と本人の意思を確認してください。サービス用アカウントでないことも確認してください。</p></section>';
+    if ( function_exists( 'egov_law_monitor_render_withdrawal_request_receipt' ) ) { egov_law_monitor_render_withdrawal_request_receipt( (int) $raw ); }
     if ( $can_start ) { egov_law_monitor_render_start_checks( array( 'request', 'identity' ) ); }
     echo '<section><h2>2. Square契約終了・課金停止・利用終了日の確認</h2><p>Free・Standardの両方でSquare Dashboardの契約・課金停止と支払済み期間の終了を確認してください。必要なFree変更は既存のSquare契約管理で手動実施してください。保存情報だけではSquare側の終了を証明できません。</p><p><a href="' . esc_url( admin_url( 'admin.php?page=egov-square-subscriptions&user_id=' . $raw ) ) . '">Square契約管理を確認</a></p></section>';
     if ( $can_start ) {
@@ -215,7 +216,9 @@ function egov_law_monitor_render_withdrawal_after_delete( $user_id, $state, $res
     echo '<div class="wrap"><h1>退会管理</h1><p>対象ユーザーID：' . esc_html( $user_id ) . '</p><p>退会状態：' . esc_html( $labels[$state['phase']] ) . '</p>';
     if ( is_wp_error( $result ) ) { echo '<div class="notice notice-error"><p>' . esc_html( $result->get_error_message() ) . '</p></div>'; }
     elseif ( $result !== null ) { echo '<p>WordPressユーザーの削除を確認し、削除結果を監査へ記録しました。退会完了ではありません。</p>'; }
-    echo '<h2>1. 退会申請・本人確認</h2><p>開始時の確認は保持された監査記録を参照してください。</p><h2>2. Square契約終了・課金停止・利用終了日の確認</h2><p>Square側の状態は自動照会しません。契約・解約履歴を保持します。</p><h2>3. 退会前チェック</h2>';
+    echo '<h2>1. 退会申請・本人確認</h2><p>開始時の確認は保持された監査記録を参照してください。</p>';
+    if ( function_exists( 'egov_law_monitor_render_withdrawal_request_receipt' ) ) { egov_law_monitor_render_withdrawal_request_receipt( $user_id ); }
+    echo '<h2>2. Square契約終了・課金停止・利用終了日の確認</h2><p>Square側の状態は自動照会しません。契約・解約履歴を保持します。</p><h2>3. 退会前チェック</h2>';
     try {
         $exists = egov_law_monitor_withdrawal_user_exists( $user_id );
         echo '<p>' . ( $exists ? 'WordPressユーザーが存在します。削除失敗・中断・実行中の可能性があります。再削除はできません。監査と元の処理を確認してください。' : 'WordPressユーザー不存在を読み取りで確認しました。削除済みユーザーとして同じ処理を表示しています。' ) . '</p>';
