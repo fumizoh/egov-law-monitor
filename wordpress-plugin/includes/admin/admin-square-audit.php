@@ -4,6 +4,15 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function egov_law_monitor_square_audit_label( $action ) {
     $labels = array(
+        'withdrawal_started' => '退会処理開始',
+        'withdrawal_watches_deleted' => '退会・法令ウォッチ削除',
+        'withdrawal_ai_history_deleted' => '退会・AI個人履歴削除',
+        'withdrawal_user_deleting' => '退会・ユーザー削除開始',
+        'withdrawal_user_deleted' => '退会・ユーザー不存在確認',
+        'withdrawal_user_delete_failed' => '退会・ユーザー削除要確認',
+        'withdrawal_user_delete_rearmed' => '退会・削除失敗の確認と再準備',
+        'withdrawal_completed' => '退会完了',
+        'withdrawal_residuals_cleaned' => '退会・削除後残存データ再清掃',
         'standard_approved' => 'Standard承認',
         'contract_environment_confirmed' => '契約環境確認',
         'plan_changed' => 'プラン変更',
