@@ -36,6 +36,14 @@ function integration_fixture( $plan = 'standard' ) {
 }
 function integration_submit( $fields ) { return egov_law_monitor_submit_withdrawal_request( $fields, 'cancel_factory' ); }
 $integration_start = $checks;
+function check_integration_plan_urls( $html, $label ) {
+    preg_match_all( '/(?:href|action)="([^"]+)"/', $html, $matches );
+    check( count( $matches[1] ) > 0, 'navigation present: ' . $label );
+    foreach ( $matches[1] as $encoded ) {
+        $url = html_entity_decode( $encoded, ENT_QUOTES, 'UTF-8' );
+        check( ( parse_url( $url, PHP_URL_FRAGMENT ) ) === 'plan-status' && substr_count( $url, '#' ) === 1, 'Standard plan fragment maintained: ' . $label );
+    }
+}
 foreach ( array( 'new', 'existing', 'scheduled' ) as $case ) {
     $fields = integration_fixture();
     if ( $case !== 'new' ) { request_cancellation(); }
@@ -43,8 +51,10 @@ foreach ( array( 'new', 'existing', 'scheduled' ) as $case ) {
     $before = $wpdb->cancellations; $plan_before = $wpdb->meta;
     $_GET = array(); $_SERVER['REQUEST_URI'] = '/account/?tab=plan';
     check( str_contains( egov_law_monitor_withdrawal_request_panel( 10 ), '退会を申請すると、Standardプランの解約も同時に申し込まれます。Standardプランは利用終了日までご利用いただけます。利用期間終了後、管理者が退会手続きを行います。' ), 'Standard guidance matches requested text' );
+    check_integration_plan_urls( egov_law_monitor_withdrawal_request_panel( 10 ), 'confirmation link: ' . $case );
     $_GET = array( 'egov_withdrawal_confirm' => '1' );
     $html = egov_law_monitor_withdrawal_request_panel( 10 );
+    check_integration_plan_urls( $html, 'confirmation form and back link: ' . $case );
     check( str_contains( $html, 'Standardプランの解約申請も含まれます' ) && str_contains( $html, '申請後、管理者が退会手続きを行います。' ) && str_contains( $html, '法令ウォッチやAI要約の個人履歴が利用できなくなります。' ) && str_contains( $html, 'Squareでの実際の解約・課金停止は管理者が行うため、申請時点では完了しません。' ) && str_contains( $html, '利用終了日まではStandardプランをご利用いただけます。' ) && str_contains( $html, 'withdrawal_cancel_nonce' ) && str_contains( $html, 'withdrawal_cancel_token' ), 'combined confirmation guidance and existing nonce/token: ' . $case );
     $result = integration_submit( $fields );
     check( ! is_wp_error( $result ) && $result['status'] === 'received' && $result['approval_id'] === (int) $wpdb->cancellations[1]['approval_id'] && $result['contract_id'] === 1 && $result['cancellation_id'] === 1 && count( $wpdb->cancellations ) === 1, 'combined receipt and exact existing/new cancellation: ' . $case );
@@ -112,6 +122,9 @@ check( ! is_wp_error( integration_submit( $fields ) ) && $wpdb->cancellations[1]
 $fields = integration_fixture(); $wpdb->fail = 'cancel_write'; integration_submit( $fields ); $wpdb->fail = '';
 $_GET = array(); $_SERVER['REQUEST_URI'] = '/account/';
 check( str_contains( egov_law_monitor_withdrawal_request_panel( 10 ), '連携は未完了' ) && str_contains( egov_law_monitor_withdrawal_request_panel( 10 ), '再照合' ), 'pending displayed with explicit reconciliation' );
+check_integration_plan_urls( egov_law_monitor_withdrawal_request_panel( 10 ), 'pending reconciliation link' );
+$_GET = array( 'egov_withdrawal_confirm' => '1' );
+check_integration_plan_urls( egov_law_monitor_withdrawal_request_panel( 10 ), 'pending reconciliation form and back link' );
 $allowed = true; ob_start(); egov_law_monitor_render_withdrawal_request_receipt( 10 ); $html = ob_get_clean();
 check( str_contains( $html, '連携未完了' ), 'administrator sees partial receipt' );
 free_cancellation();

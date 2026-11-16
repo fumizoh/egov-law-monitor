@@ -36,7 +36,7 @@ function nocache_headers() {}
 function wp_timezone() { return new DateTimeZone( 'Asia/Tokyo' ); }
 function request_url_query( $url, $set = array(), $remove = array() ) {
     $p = parse_url( $url ); parse_str( $p['query'] ?? '', $q ); foreach ( $remove as $key ) { unset( $q[$key] ); }
-    $q = array_merge( $q, $set ); return $p['scheme'] . '://' . $p['host'] . ( isset( $p['port'] ) ? ':' . $p['port'] : '' ) . ( $p['path'] ?? '/' ) . ( $q ? '?' . http_build_query( $q ) : '' );
+    $q = array_merge( $q, $set ); return $p['scheme'] . '://' . $p['host'] . ( isset( $p['port'] ) ? ':' . $p['port'] : '' ) . ( $p['path'] ?? '/' ) . ( $q ? '?' . http_build_query( $q ) : '' ) . ( isset( $p['fragment'] ) ? '#' . $p['fragment'] : '' );
 }
 function remove_query_arg( $keys, $url ) { return request_url_query( $url, array(), $keys ); }
 function add_query_arg( $key, $value, $url ) { return request_url_query( $url, array( $key => $value ) ); }
@@ -58,14 +58,24 @@ function request_fixture() {
     $_GET = array(); $_POST = array(); $_SERVER['REQUEST_METHOD'] = 'GET'; $_SERVER['REQUEST_URI'] = '/account/?tab=plan';
     return array( 'withdrawal_request_nonce' => 'valid:egov_withdrawal_request_10', 'withdrawal_request_user_id' => '10', 'confirm_withdrawal_request' => '1' );
 }
+function check_withdrawal_plan_urls( $html, $label ) {
+    preg_match_all( '/(?:href|action)="([^"]+)"/', $html, $matches );
+    check_request( count( $matches[1] ) > 0, 'navigation is present: ' . $label );
+    foreach ( $matches[1] as $encoded ) {
+        $url = html_entity_decode( $encoded, ENT_QUOTES, 'UTF-8' ); $parts = parse_url( $url );
+        check_request( ( $parts['fragment'] ?? '' ) === 'plan-status' && substr_count( $url, '#' ) === 1, 'plan tab fragment is last and unique: ' . $label );
+    }
+}
 // Standard uses the real cancellation path in withdrawal-cancellation-integration-test.php.
 foreach ( array( 'free' ) as $test_plan ) {
     $fields = request_fixture(); $plan = $test_plan;
     $html = egov_law_monitor_plan_status_shortcode();
     check_request( str_contains( $html, '退会を希望される方は、以下のボタンからお申し込みください。お申し込み後、管理者が退会手続きを行います。' ), 'Free guidance matches requested text' );
     check_request( str_contains( $html, '退会を申請する' ) && ! str_contains( $html, '確定して退会' ) && $add_calls === 0, 'plan tab button for ' . $plan );
+    check_withdrawal_plan_urls( egov_law_monitor_withdrawal_request_panel( 10 ), 'Free confirmation link' );
     $_GET['egov_withdrawal_confirm'] = '1'; $html = egov_law_monitor_plan_status_shortcode();
     check_request( str_contains( $html, '退会申請の確認' ) && str_contains( $html, '申請後、管理者が退会手続きを行います。' ) && str_contains( $html, '退会完了後はアカウントが削除され、法令ウォッチやAI要約の個人履歴が利用できなくなります。' ) && ! str_contains( $html, 'Square' ) && str_contains( $html, 'withdrawal_request_nonce' ) && str_contains( $html, '確定して退会を申請する' ) && ! str_contains( $html, ' checked' ) && $add_calls === 0, 'Free confirmation explains consequences without Standard-only conditions or saves' );
+    check_withdrawal_plan_urls( egov_law_monitor_withdrawal_request_panel( 10 ), 'Free form and back link' );
     $before = $withdrawal_records; $saved = egov_law_monitor_submit_withdrawal_request( $fields );
     check_request( ! is_wp_error( $saved ) && $saved['status'] === 'received' && $saved['user_id'] === 10 && preg_match( '/Z\z/', $saved['requested_at'] ) && $withdrawal_records === $before, 'only receipt option persisted, not withdrawal phase' );
     check_request( egov_law_monitor_withdrawal_check_save( 10 ) === true && egov_law_monitor_withdrawal_checked_save( 10, fn() => update_user_meta( 10, 'normal-setting', 'kept' ) ) === 1, 'receipt does not stop normal save' );
@@ -105,13 +115,22 @@ $fields = request_fixture(); $mode = 'after_read_fail';
 check_request( is_wp_error( egov_law_monitor_submit_withdrawal_request( $fields ) ) && $add_calls === 1, 'read failure after save is not reported as accepted' );
 $fields = request_fixture(); $_SERVER['REQUEST_METHOD'] = 'POST'; $_SERVER['REQUEST_URI'] = '/subdir/account/?tab=plan&egov_withdrawal_confirm=1'; $_POST = $fields + array( 'egov_withdrawal_request' => '1', 'redirect_to' => 'https://attacker.test/' );
 $redirect = egov_law_monitor_withdrawal_request_post( fn( $url, $code ) => array( $url, $code ) );
-check_request( $redirect === array( 'https://example.test/subdir/account/?tab=plan', 303 ) && $add_calls === 1, 'success 303 preserves account tab/subdirectory and ignores posted URL' );
+check_request( $redirect === array( 'https://example.test/subdir/account/?tab=plan#plan-status', 303 ) && $add_calls === 1, 'success 303 explicitly selects plan tab, preserves query/subdirectory and ignores posted URL' );
 egov_law_monitor_withdrawal_request_post( fn() => throw new LogicException( 'must not repeat redirect' ) );
 check_request( $add_calls === 1, 'same request processed once' );
 $_SERVER['REQUEST_METHOD'] = 'GET'; $_POST = array(); unset( $GLOBALS['egov_withdrawal_request_result'] );
 check_request( str_contains( egov_law_monitor_withdrawal_request_panel( 10 ), '退会申請を受け付けました' ) && $add_calls === 1, 'redirected GET receipt comes from storage, never replays POST' );
 $fields = request_fixture(); $_SERVER['REQUEST_METHOD'] = 'POST'; $_POST = $fields + array( 'egov_withdrawal_request' => '1' ); $mode = 'save_fail';
 check_request( is_wp_error( egov_law_monitor_withdrawal_request_post( fn() => throw new LogicException( 'failure redirected' ) ) ) && str_contains( egov_law_monitor_withdrawal_request_panel( 10 ), '保存を確認できません' ), 'failure stays on confirmation with error, not success' );
+check_withdrawal_plan_urls( egov_law_monitor_withdrawal_request_panel( 10 ), 'failed submission form and back link' );
+foreach ( array( 'free', 'standard' ) as $test_plan ) {
+    foreach ( array( '', '#plan-status', '#law-watch', '#plan-status#plan-status' ) as $fragment ) {
+        request_fixture(); $plan = $test_plan;
+        $_SERVER['REQUEST_URI'] = '/subdir/account/?tab=plan&keep=a%26b&egov_withdrawal_confirm=1&_wpnonce=discard' . $fragment;
+        $url = egov_law_monitor_withdrawal_request_url(); $p = parse_url( $url ); parse_str( $p['query'], $query );
+        check_request( $url === 'https://example.test/subdir/account/?tab=plan&keep=a%26b#plan-status' && $query === array( 'tab' => 'plan', 'keep' => 'a&b' ) && $p['fragment'] === 'plan-status', 'query preserved and fragment explicitly selected for ' . $test_plan . ' from ' . $fragment );
+    }
+}
 foreach ( array( '//attacker.test/', '/bad path', '/bad\\path', '' ) as $uri ) { request_fixture(); $_SERVER['REQUEST_URI'] = $uri; check_request( egov_law_monitor_withdrawal_request_url() === '', 'unsafe current URI rejected' ); }
 request_fixture(); $admin = false; ob_start(); egov_law_monitor_render_withdrawal_request_receipt( 10 ); $html = ob_get_clean(); check_request( $html === '', 'receipt admin display protected' );
 $admin = true; ob_start(); egov_law_monitor_render_withdrawal_request_receipt( 10 ); $html = ob_get_clean(); check_request( str_contains( $html, '記録なし' ), 'missing receipt keeps contact-based manual intake available' );
