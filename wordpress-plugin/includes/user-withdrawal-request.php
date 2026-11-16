@@ -104,7 +104,7 @@ function egov_law_monitor_withdrawal_request_panel( $user_id ) {
     if ( $url === '' ) { return $html . '<p>退会申請画面を確認できません。</p></section>'; }
     $confirm = ( $_GET['egov_withdrawal_confirm'] ?? null ) === '1' || isset( $_POST['egov_withdrawal_request'] );
     $guidance = $standard ? '退会を申請すると、Standardプランの解約も同時に申し込まれます。Standardプランは利用終了日までご利用いただけます。利用期間終了後、管理者が退会手続きを行います。' : '退会を希望される方は、以下のボタンからお申し込みください。お申し込み後、管理者が退会手続きを行います。';
-    if ( ! $confirm ) { return $html . '<p>' . $guidance . '</p><p><a class="egov-law-button" href="' . esc_url( add_query_arg( 'egov_withdrawal_confirm', '1', $url ) ) . '">' . ( $record !== null ? '受付内容を再照合する' : '退会を申請する' ) . '</a></p></section>'; }
+    if ( ! $confirm ) { return $html . '<p>' . $guidance . '</p><p><a data-egov-withdrawal-navigation class="egov-law-button" href="' . esc_url( add_query_arg( 'egov_withdrawal_confirm', '1', $url ) ) . '">' . ( $record !== null ? '受付内容を再照合する' : '退会を申請する' ) . '</a></p></section>'; }
     $html .= '<h4>退会申請の確認</h4><ul><li>申請後、管理者が退会手続きを行います。</li><li>退会完了後はアカウントが削除され、法令ウォッチやAI要約の個人履歴が利用できなくなります。</li>';
     if ( $standard ) { $html .= '<li>退会申請にはStandardプランの解約申請も含まれます。</li><li>Squareでの実際の解約・課金停止は管理者が行うため、申請時点では完了しません。</li><li>利用終了日まではStandardプランをご利用いただけます。</li>'; }
     $html .= '</ul><form method="post" action="' . esc_url( $url ) . '">';
@@ -113,7 +113,7 @@ function egov_law_monitor_withdrawal_request_panel( $user_id ) {
         ob_start(); wp_nonce_field( 'egov_standard_cancel_' . $user_id, 'withdrawal_cancel_nonce' ); $html .= ob_get_clean();
         $html .= '<input type="hidden" name="withdrawal_cancel_token" value="' . esc_html( $context['token'] ) . '">';
     }
-    return $html . '<input type="hidden" name="egov_withdrawal_request" value="1"><input type="hidden" name="withdrawal_request_user_id" value="' . esc_html( $user_id ) . '"><p><label><input type="checkbox" required name="confirm_withdrawal_request" value="1"> 上記を確認し、退会を申請します</label></p><p><button class="egov-law-button" type="submit">' . ( $record !== null ? '確認して再照合する' : '確定して退会を申請する' ) . '</button></p></form><p><a href="' . esc_url( $url ) . '">戻る</a></p></section>';
+    return $html . '<input type="hidden" name="egov_withdrawal_request" value="1"><input type="hidden" name="withdrawal_request_user_id" value="' . esc_html( $user_id ) . '"><p><label><input type="checkbox" required name="confirm_withdrawal_request" value="1"> 上記を確認し、退会を申請します</label></p><p><button class="egov-law-button" type="submit">' . ( $record !== null ? '確認して再照合する' : '確定して退会を申請する' ) . '</button></p></form><p><a data-egov-withdrawal-navigation href="' . esc_url( $url ) . '">戻る</a></p></section>';
 }
 
 function egov_law_monitor_render_withdrawal_request_receipt( $user_id ) {

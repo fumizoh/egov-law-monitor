@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    // Only withdrawal navigation bypasses competing tab/anchor click handlers.
+    document.addEventListener('click', (event) => {
+        if (event.button !== 0 || event.ctrlKey || event.shiftKey || event.altKey || event.metaKey) return;
+        const link = event.target.closest?.('a[data-egov-withdrawal-navigation]');
+        if (!link || link.hasAttribute('download') ||
+            (link.target && link.target.toLowerCase() !== '_self')) return;
+        const url = new URL(link.href, window.location.href);
+        if (url.origin !== new URL(window.location.href).origin || url.hash !== '#plan-status') return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        window.location.assign(url.href);
+    }, true);
+
     document.querySelectorAll('.egov-watch-mail-toggle').forEach((button) => {
         button.addEventListener('click', async () => {
             if (button.disabled) return;
