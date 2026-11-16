@@ -76,6 +76,10 @@ foreach ( array( 'free' ) as $test_plan ) {
     $_GET['egov_withdrawal_confirm'] = '1'; $html = egov_law_monitor_plan_status_shortcode();
     check_request( str_contains( $html, '退会申請の確認' ) && str_contains( $html, '申請後、管理者が退会手続きを行います。' ) && str_contains( $html, '退会完了後はアカウントが削除され、法令ウォッチやAI要約の個人履歴が利用できなくなります。' ) && ! str_contains( $html, 'Square' ) && str_contains( $html, 'withdrawal_request_nonce' ) && str_contains( $html, '確定して退会を申請する' ) && ! str_contains( $html, ' checked' ) && $add_calls === 0, 'Free confirmation explains consequences without Standard-only conditions or saves' );
     check_withdrawal_plan_urls( egov_law_monitor_withdrawal_request_panel( 10 ), 'Free form and back link' );
+    $_GET = array( 'keep' => 'a&b' );
+    $_SERVER['REQUEST_URI'] = '/account/?keep=a%26b';
+    $normal_html = egov_law_monitor_withdrawal_request_panel( 10 );
+    check_request( ! str_contains( $normal_html, '<form' ) && ! str_contains( $normal_html, '退会申請の確認' ) && str_contains( $normal_html, '>退会を申請する</a>' ), 'clean GET renders normal plan without stale server-generated confirmation form' );
     $before = $withdrawal_records; $saved = egov_law_monitor_submit_withdrawal_request( $fields );
     check_request( ! is_wp_error( $saved ) && $saved['status'] === 'received' && $saved['user_id'] === 10 && preg_match( '/Z\z/', $saved['requested_at'] ) && $withdrawal_records === $before, 'only receipt option persisted, not withdrawal phase' );
     check_request( egov_law_monitor_withdrawal_check_save( 10 ) === true && egov_law_monitor_withdrawal_checked_save( 10, fn() => update_user_meta( 10, 'normal-setting', 'kept' ) ) === 1, 'receipt does not stop normal save' );
