@@ -1,4 +1,43 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    // Gutenberg owns selection/focus; mirror only this mypage block's selected tab.
+    const planPanel = document.getElementById('plan-status');
+    const mypageTabs = planPanel?.closest('.wp-block-tabs');
+    const panelIds = ['law-watch', 'ai-summary', 'plan-status'];
+    if (mypageTabs && panelIds.every((id) =>
+        document.getElementById(id)?.closest('.wp-block-tabs') === mypageTabs)) {
+        const tabs = Array.from(mypageTabs.querySelectorAll('[role="tab"][aria-controls]'))
+            .filter((tab) => tab.closest('.wp-block-tabs') === mypageTabs &&
+                panelIds.includes(tab.getAttribute('aria-controls')));
+        if (tabs.length === 3 && new Set(tabs.map((tab) => tab.getAttribute('aria-controls'))).size === 3) {
+            let userSelection = false;
+            const syncHash = () => {
+                if (!userSelection) return;
+                const selected = tabs.filter((tab) => tab.getAttribute('aria-selected') === 'true');
+                if (selected.length !== 1) return;
+                const url = new URL(window.location.href);
+                const hash = '#' + selected[0].getAttribute('aria-controls');
+                if (url.hash === hash) return;
+                url.hash = hash;
+                window.history.replaceState(window.history.state, '', url.href);
+            };
+            const onSelection = (event) => {
+                if (event.type === 'click' && (event.button !== 0 || event.ctrlKey || event.shiftKey || event.altKey || event.metaKey)) return;
+                if (event.type === 'keydown' && !['Enter', ' '].includes(event.key)) return;
+                const tab = event.target.closest?.('[role="tab"]');
+                if (!tabs.includes(tab)) return;
+                userSelection = true;
+                window.requestAnimationFrame(syncHash);
+            };
+            mypageTabs.addEventListener('click', onSelection, true);
+            mypageTabs.addEventListener('keydown', onSelection, true);
+            // Selection may be rendered asynchronously by the Interactivity API.
+            const observer = new MutationObserver(syncHash);
+            tabs.forEach((tab) => observer.observe(tab, { attributes: true, attributeFilter: ['aria-selected'] }));
+            // Direct fragment navigation remains under Gutenberg's control.
+            window.addEventListener('hashchange', () => { userSelection = false; });
+        }
+    }
+
     // Only withdrawal navigation bypasses competing tab/anchor click handlers.
     document.addEventListener('click', (event) => {
         if (event.button !== 0 || event.ctrlKey || event.shiftKey || event.altKey || event.metaKey) return;
