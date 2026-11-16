@@ -3,6 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 require_once __DIR__ . '/terms-settings.php';
+require_once __DIR__ . '/standard-application-settings.php';
 
 function egov_law_monitor_standard_payment_url() {
     return 'https://square.link/u/30s16R3f';
@@ -55,7 +56,7 @@ add_action( 'template_redirect', 'egov_law_monitor_standard_consent_post', 9, 0 
 function egov_law_monitor_standard_application_allowed() {
     $user_id = (int) get_current_user_id();
     if ( ! is_user_logged_in() || $user_id < 1 ) { return false; }
-    if ( current_user_can( 'manage_options' ) || ( defined( 'EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC' ) && EGOV_LAW_MONITOR_STANDARD_APPLICATION_PUBLIC === true ) ) { return true; }
+    if ( current_user_can( 'manage_options' ) || egov_law_monitor_standard_application_public() ) { return true; }
     $ids = defined( 'EGOV_LAW_MONITOR_STANDARD_TEST_USER_IDS' ) ? EGOV_LAW_MONITOR_STANDARD_TEST_USER_IDS : array();
     return is_array( $ids ) && in_array( $user_id, $ids, true );
 }

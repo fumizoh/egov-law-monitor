@@ -2,7 +2,7 @@
 /** Offline Settings API registration/rendering and consent version regressions. */
 define( 'EGOV_LAW_MONITOR_SQUARE_ENVIRONMENT', 'production' );
 require __DIR__ . '/standard-plan-test-bootstrap.php';
-function register_setting( $group, $name, $args ) { $GLOBALS['terms_registered'] = array( $group, $name, $args ); }
+function register_setting( $group, $name, $args ) { if ( $name === 'egov_law_monitor_terms_version' ) { $GLOBALS['terms_registered'] = array( $group, $name, $args ); } }
 function add_settings_error( ...$args ) { $GLOBALS['terms_errors'][] = $args; }
 function settings_errors( $name ) {}
 function esc_attr( $value ) { return esc_html( $value ); }
