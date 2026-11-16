@@ -15,7 +15,11 @@ function esc_url( $value ) { return esc_html( $value ); }
 function wp_parse_url( $value ) { return parse_url( $value ); }
 function home_url( $path ) { return 'https://example.test' . $path; }
 function admin_url( $path ) { return 'https://example.test/wp-admin/' . $path; }
-function add_query_arg( $key, $value, $url ) { return $url . '?' . http_build_query( array( $key => $value ) ); }
+function add_query_arg( $key, $value, $url ) {
+    $parts = explode( '#', $url, 2 ); $base = explode( '?', $parts[0], 2 );
+    parse_str( $base[1] ?? '', $query ); $query[$key] = $value;
+    return $base[0] . '?' . http_build_query( $query ) . ( isset( $parts[1] ) ? '#' . $parts[1] : '' );
+}
 function wp_nonce_field( $action, $name ) { echo '<input name="' . esc_attr( $name ) . '" value="valid:' . esc_attr( $action ) . '">'; }
 function nocache_headers() {}
 function is_email( $email ) { return filter_var( $email, FILTER_VALIDATE_EMAIL ); }

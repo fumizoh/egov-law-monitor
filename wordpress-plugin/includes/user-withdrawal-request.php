@@ -53,13 +53,15 @@ function egov_law_monitor_submit_withdrawal_request( $fields, $factory = null ) 
     } catch ( Throwable $ignored ) { return new WP_Error( 'withdrawal_request_save', '退会申請の保存を確認できません。受付状況を再確認してください。' ); }
 }
 
-/** Same-site current page, preserving the existing account tab/query routing. */
+/** Same-site current page; Gutenberg selects the plan tab through its verified fragment. */
 function egov_law_monitor_withdrawal_request_url() {
     $home = wp_parse_url( home_url( '/' ) );
     $uri = $_SERVER['REQUEST_URI'] ?? '';
     if ( ! $home || ! in_array( $home['scheme'] ?? '', array( 'http', 'https' ), true ) || empty( $home['host'] ) || ! is_string( $uri ) || strlen( $uri ) > 2048 || ! preg_match( '~\A/(?!/)~', $uri ) || preg_match( '/[\x00-\x20\x7f\\\\]/', $uri ) ) { return ''; }
     $url = $home['scheme'] . '://' . $home['host'] . ( isset( $home['port'] ) ? ':' . $home['port'] : '' ) . $uri;
-    return remove_query_arg( array( 'egov_withdrawal_confirm', '_wpnonce' ), $url );
+    // Fragments are not sent with HTTP requests. Set it explicitly for links, forms and PRG.
+    $url = explode( '#', $url, 2 )[0];
+    return remove_query_arg( array( 'egov_withdrawal_confirm', '_wpnonce' ), $url ) . '#plan-status';
 }
 
 function egov_law_monitor_withdrawal_request_post( $redirect = null ) {
