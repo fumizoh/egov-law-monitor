@@ -49,6 +49,10 @@ function egov_law_monitor_start_withdrawal( $user_id, $fields, $factory = null )
     foreach ( egov_law_monitor_withdrawal_start_confirmations() as $key => $label ) { if ( ( $fields['confirm_' . $key] ?? null ) !== '1' ) { return new WP_Error( 'confirmation_required', 'すべての管理者確認が必要です。' ); } }
     $reason = $fields['withdrawal_reason'] ?? null;
     if ( ! is_string( $reason ) || strlen( $reason ) > 3000 || trim( sanitize_textarea_field( $reason ) ) === '' ) { return new WP_Error( 'reason_required', '本人確認・Square確認の根拠を入力してください。不要な個人情報は記載しないでください。' ); }
+    if ( function_exists( 'egov_law_monitor_withdrawal_request_start_check' ) ) {
+        $ready = egov_law_monitor_withdrawal_request_start_check( $user_id );
+        if ( is_wp_error( $ready ) ) { return $ready; }
+    }
     $db = null; $started = false; $committing = false;
     try {
         $tables = egov_law_monitor_square_plan_tables();
@@ -56,6 +60,10 @@ function egov_law_monitor_start_withdrawal( $user_id, $fields, $factory = null )
         if ( ! egov_law_monitor_square_plan_storage_ready( $db, $tables ) || ! egov_law_monitor_cancellation_storage_ready( $db ) || ! $db->begin() ) { throw new EGOV_Law_Monitor_Withdrawal_Start_Error( '保存先を確認できません。' ); }
         $started = true;
         if ( egov_law_monitor_withdrawal_lock( $db, $user_id ) !== null ) { throw new EGOV_Law_Monitor_Withdrawal_Start_Error( '既に退会処理が開始されています。再実行できません。' ); }
+        if ( function_exists( 'egov_law_monitor_withdrawal_request_start_check' ) ) {
+            $ready = egov_law_monitor_withdrawal_request_start_check( $user_id );
+            if ( is_wp_error( $ready ) ) { throw new EGOV_Law_Monitor_Withdrawal_Start_Error( $ready->get_error_message() ); }
+        }
         // Refresh target metadata after the existing users-row lock; no plan mutation.
         wp_cache_delete( $user_id, 'user_meta' );
         if ( ! egov_law_monitor_withdrawal_target( get_userdata( $user_id ) ) ) { throw new EGOV_Law_Monitor_Withdrawal_Start_Error( '対象アカウントが変更されています。' ); }

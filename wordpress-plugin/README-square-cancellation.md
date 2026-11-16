@@ -2,6 +2,8 @@
 
 Square Dashboardでの解約操作は管理者が行います。WordPressは申請・終了日・通知を管理し、Square API解約、Webhook、自動プラン変更、猶予期間は実装しません。
 
+Standard解約のみの場合は、利用終了後もアカウントをFreeとして継続利用します。Standardユーザーのアカウント退会申請では既存の解約申請処理も呼び、同じ承認ID・契約IDの申請があれば再利用します。終了日は変更しません。途中保存・結果不明・明示的な再照合については`README-user-withdrawal.md`を参照してください。Freeの退会申請は解約履歴を変更しません。
+
 ## 利用者と管理者の操作
 
 1. Standardユーザーはマイページの`[egov_plan_status]`から「Standardを解約する」を押します。既存の独立申込ページ`[egov_standard_application]`で確認画面を表示し、「確定して解約を申請する」を押した場合のみ保存します。JavaScriptは不要です。

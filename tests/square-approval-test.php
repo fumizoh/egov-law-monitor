@@ -11,7 +11,7 @@ class WP_Error {
 }
 function is_wp_error( $value ) { return $value instanceof WP_Error; }
 function current_user_can( $cap ) { return $GLOBALS['allowed']; }
-function get_userdata( $id ) { return isset( $GLOBALS['wpdb']->people[$id] ) ? (object) array( 'ID' => $id, 'user_login' => 'user' . $id, 'display_name' => 'User ' . $id, 'user_email' => 'user' . $id . '@example.test' ) : false; }
+function get_userdata( $id ) { return isset( $GLOBALS['wpdb']->people[$id] ) ? (object) array( 'ID' => $id, 'roles' => $GLOBALS['wpdb']->people[$id]['roles'] ?? array( 'subscriber' ), 'user_login' => 'user' . $id, 'display_name' => 'User ' . $id, 'user_email' => 'user' . $id . '@example.test' ) : false; }
 function get_current_user_id() { return $GLOBALS['checkout_user'] ?? 99; }
 function wp_verify_nonce( $nonce, $action ) { return $nonce === 'valid:' . $action; }
 function wp_salt( $scheme ) { return 'test-key'; }

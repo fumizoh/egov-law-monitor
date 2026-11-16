@@ -110,6 +110,10 @@ function egov_law_monitor_render_withdrawal_check() {
     echo '<p>各段階は個別の手動操作です。手順8で残存・保持情報を再確認してから明示的に退会完了を記録します。自動連続実行は行いません。</p>';
     // GET offers only operations supported by the freshly read state.
     $can_start = ! $errors && $progress === null;
+    if ( $can_start && function_exists( 'egov_law_monitor_withdrawal_request_start_check' ) ) {
+        $ready = egov_law_monitor_withdrawal_request_start_check( (int) $raw );
+        if ( is_wp_error( $ready ) ) { $can_start = false; echo '<p>開始条件：' . esc_html( $ready->get_error_message() ) . '</p>'; }
+    }
     try { egov_law_monitor_withdrawal_start_evidence( $data ); } catch ( Throwable $error ) { $can_start = false; echo '<p>開始条件：' . esc_html( $error->getMessage() ) . '</p>'; }
     if ( $can_start ) { echo '<form method="post">'; wp_nonce_field( 'egov_withdrawal_start_' . $raw, 'withdrawal_nonce' ); echo '<input type="hidden" name="withdrawal_action" value="start">'; }
     echo '<section><h2>1. 退会申請・本人確認</h2><p>問い合わせ窓口の退会申請と本人の意思を確認してください。サービス用アカウントでないことも確認してください。</p></section>';
