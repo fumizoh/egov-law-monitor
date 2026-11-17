@@ -231,6 +231,15 @@ tools/*
 !tools/inspect/
 tools/inspect/*
 !tools/inspect/test_summary_pipeline.py
+!tools/inspect/inspect_watch_email.py
+!tools/inspect/inspect_watch_notifications.py
+!tools/inspect/inspect_wp_excerpt.py
+!tools/inspect/test_egov_api.py
+!tools/inspect/test_law_api.py
+!tools/inspect/test_pipeline_no_ai.py
+!tools/inspect/test_revision_effective_date.py
+!tools/inspect/test_watch_users.py
+!tools/inspect/README.md
 
 # Environmental variables
 .env
