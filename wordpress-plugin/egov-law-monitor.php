@@ -590,6 +590,11 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-menu.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-ai-summary-cache.php';
 
 
+require_once plugin_dir_path( __FILE__ ) . 'includes/ondemand-service.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/ondemand-api-client.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/ondemand-rest.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/ondemand-page.php';
+
 register_activation_hook(
     __FILE__,
     function () {

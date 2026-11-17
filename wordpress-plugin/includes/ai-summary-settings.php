@@ -653,6 +653,7 @@ function egov_law_monitor_ai_settings_page() {
         <?php egov_law_monitor_render_terms_settings(); ?>
         <?php egov_law_monitor_render_standard_application_settings(); ?>
         <?php egov_law_monitor_render_withdrawal_settings(); ?>
+        <?php egov_ondemand_render_settings(); ?>
     </div>
     <?php
 }
