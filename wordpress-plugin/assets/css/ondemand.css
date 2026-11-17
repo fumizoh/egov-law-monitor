@@ -1,0 +1,11 @@
+.egov-ondemand { max-width: 960px; }
+.egov-ondemand form { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; }
+.egov-ondemand label { display: flex; flex-direction: column; gap: .3rem; }
+.egov-ondemand button, .egov-ondemand input, .egov-ondemand select { min-height: 44px; padding: .5rem .8rem; }
+.egov-ondemand button { cursor: pointer; }
+.egov-ondemand button:disabled { cursor: wait; opacity: .6; }
+.egov-ondemand :focus-visible { outline: 3px solid #2271b1; outline-offset: 3px; }
+.egov-ondemand li { margin-bottom: 1rem; overflow-wrap: anywhere; }
+.egov-ondemand [data-selected] { border: 1px solid #c3c4c7; padding: 1rem; overflow-wrap: anywhere; }
+.egov-ondemand .is-error { color: #b32d2e; }
+.egov-ondemand [hidden] { display: none !important; }
