@@ -228,6 +228,9 @@ data/xml/
 tools/*
 !tools/recovery/
 !tools/recovery/*.py
+!tools/inspect/
+tools/inspect/*
+!tools/inspect/test_summary_pipeline.py
 
 # Environmental variables
 .env
