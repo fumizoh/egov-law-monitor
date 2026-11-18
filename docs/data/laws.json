@@ -1,704 +1,306 @@
 [
   {
-    "law_id": "420M60000010048",
-    "law_no": "平成二十年法務省令第四十八号",
-    "law_name": "一般社団法人等登記規則",
+    "law_id": "357M50002040001",
+    "law_no": "昭和五十七年大蔵省・労働省令第一号",
+    "law_name": "労働金庫法施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/420M60000010048",
+    "url": "https://laws.e-gov.go.jp/law/357M50002040001",
     "updates": [
       {
-        "law_data_id": 651124,
-        "sub_revision": "1",
-        "published_date": "2008-08-01",
-        "effective_date": "2026-12-01",
+        "law_data_id": 638508,
+        "sub_revision": "3",
+        "published_date": "1982-03-31",
+        "effective_date": "2027-04-01",
         "effective_comment": "",
-        "amend_name": "商業登記規則等の一部を改正する省令",
-        "amend_no": "令和八年法務省令第五十一号",
-        "amendment_id": "508M60000010051",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/420M60000010048/20261201_508M60000010051?occasion_date=20261201&tab=compare",
+        "amend_name": "労働金庫法施行規則の一部を改正する命令",
+        "amend_no": "令和八年内閣府・厚生労働省令第八号",
+        "amendment_id": "508M60000102008",
+        "amend_published_date": "2026-06-12",
+        "compare_url": "https://laws.e-gov.go.jp/law/357M50002040001/20270401_508M60000102008?occasion_date=20270401&tab=compare",
         "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "423M60000040003",
-    "law_no": "平成二十三年財務省令第三号",
-    "law_name": "個人向け国債の発行等に関する省令第七条第三項の臨時特例に関する省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/423M60000040003",
-    "updates": [
+      },
       {
-        "law_data_id": 651141,
-        "sub_revision": "1",
-        "published_date": "2011-03-15",
-        "effective_date": "2026-11-02",
+        "law_data_id": 641212,
+        "sub_revision": "2",
+        "published_date": "1982-03-31",
+        "effective_date": "2026-12-11",
         "effective_comment": "",
-        "amend_name": "個人向け国債の発行等に関する省令第七条第三項の臨時特例に関する省令の一部を改正する省令",
-        "amend_no": "令和八年財務省令第六十五号",
-        "amendment_id": "508M60000040065",
-        "amend_published_date": "2026-11-02",
-        "compare_url": "https://laws.e-gov.go.jp/law/423M60000040003/20261102_508M60000040065?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "415M60000002076",
-    "law_no": "平成十五年内閣府令第七十六号",
-    "law_name": "南海トラフ地震に係る地震防災対策の推進に関する特別措置法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/415M60000002076",
-    "updates": [
-      {
-        "law_data_id": 651110,
-        "sub_revision": "1",
-        "published_date": "2003-07-24",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/415M60000002076/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "333M50000002059",
-    "law_no": "昭和三十三年総理府令第五十九号",
-    "law_name": "台風常襲地帯の指定基準に関する政令第一号に規定する期間を定める防災庁令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/333M50000002059",
-    "updates": [
-      {
-        "law_data_id": 651106,
-        "sub_revision": "1",
-        "published_date": "1958-07-11",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/333M50000002059/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "339M50000010046",
-    "law_no": "昭和三十九年法務省令第四十六号",
-    "law_name": "各種法人等登記規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/339M50000010046",
-    "updates": [
-      {
-        "law_data_id": 651126,
-        "sub_revision": "1",
-        "published_date": "1964-03-31",
-        "effective_date": "2026-12-01",
-        "effective_comment": "",
-        "amend_name": "商業登記規則等の一部を改正する省令",
-        "amend_no": "令和八年法務省令第五十一号",
-        "amendment_id": "508M60000010051",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/339M50000010046/20261201_508M60000010051?occasion_date=20261201&tab=compare",
+        "amend_name": "労働金庫法施行規則の一部を改正する命令",
+        "amend_no": "令和八年内閣府・厚生労働省令第十一号",
+        "amendment_id": "508M60000102011",
+        "amend_published_date": "2026-07-09",
+        "compare_url": "https://laws.e-gov.go.jp/law/357M50002040001/20261211_508M60000102011?occasion_date=20261211&tab=compare",
         "pending": true
+      },
+      {
+        "law_data_id": 650389,
+        "sub_revision": "1",
+        "published_date": "1982-03-31",
+        "effective_date": "2026-09-30",
+        "effective_comment": "",
+        "amend_name": "労働金庫法施行規則の一部を改正する命令",
+        "amend_no": "令和八年内閣府・厚生労働省令第十七号",
+        "amendment_id": "508M60000102017",
+        "amend_published_date": "2026-09-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/357M50002040001/20260930_508M60000102017?occasion_date=20260930&tab=compare",
+        "pending": false
       }
     ]
   },
   {
-    "law_id": "339M50000010023",
-    "law_no": "昭和三十九年法務省令第二十三号",
-    "law_name": "商業登記規則",
+    "law_id": "323M40000100034",
+    "law_no": "昭和二十三年厚生省令第三十四号",
+    "law_name": "医療情報基盤・診療報酬審査支払機構法施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/339M50000010023",
+    "url": "https://laws.e-gov.go.jp/law/323M40000100034",
     "updates": [
       {
-        "law_data_id": 651125,
+        "law_data_id": 650466,
         "sub_revision": "1",
-        "published_date": "1964-03-11",
-        "effective_date": "2026-12-01",
+        "published_date": "1948-07-31",
+        "effective_date": "2026-10-01",
         "effective_comment": "",
-        "amend_name": "商業登記規則等の一部を改正する省令",
-        "amend_no": "令和八年法務省令第五十一号",
-        "amendment_id": "508M60000010051",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/339M50000010023/20261201_508M60000010051?occasion_date=20261201&tab=compare",
+        "amend_name": "医療法等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備に関する省令",
+        "amend_no": "令和八年厚生労働省令第百四十四号",
+        "amendment_id": "508M60000100144",
+        "amend_published_date": "2026-09-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/323M40000100034/20261001_508M60000100144?occasion_date=20261001&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "327M50000100032",
+    "law_no": "昭和二十七年厚生省令第三十二号",
+    "law_name": "母体保護法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/327M50000100032",
+    "updates": [
+      {
+        "law_data_id": 650493,
+        "sub_revision": "1",
+        "published_date": "1952-08-04",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "母体保護法施行規則の一部を改正する内閣府令",
+        "amend_no": "令和八年内閣府令第九十一号",
+        "amendment_id": "508M60000002091",
+        "amend_published_date": "2026-10-01",
+        "compare_url": "https://laws.e-gov.go.jp/law/327M50000100032/20261001_508M60000002091?occasion_date=20261001&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "423M60000100144",
+    "law_no": "平成二十三年厚生労働省令第百四十四号",
+    "law_name": "特定Ｂ型肝炎ウイルス感染者給付金等の支給に関する特別措置法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/423M60000100144",
+    "updates": [
+      {
+        "law_data_id": 650374,
+        "sub_revision": "1",
+        "published_date": "2011-12-16",
+        "effective_date": "2027-05-20",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備等に関する省令",
+        "amend_no": "令和八年厚生労働省令第百四十二号",
+        "amendment_id": "508M60000100142",
+        "amend_published_date": "2026-09-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/423M60000100144/20270520_508M60000100142?occasion_date=20270520&tab=compare",
         "pending": true
+      },
+      {
+        "law_data_id": 650441,
+        "sub_revision": "1",
+        "published_date": "2011-12-16",
+        "effective_date": "2026-10-01",
+        "effective_comment": "",
+        "amend_name": "医療法等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備に関する省令",
+        "amend_no": "令和八年厚生労働省令第百四十四号",
+        "amendment_id": "508M60000100144",
+        "amend_published_date": "2026-09-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/423M60000100144/20261001_508M60000100144?occasion_date=20261001&tab=compare",
+        "pending": false
       }
     ]
   },
   {
-    "law_id": "415M60000008006",
-    "law_no": "平成十五年総務省令第六号",
-    "law_name": "国際郵便規則",
+    "law_id": "430M60001FCA001",
+    "law_no": "平成三十年内閣府・総務省・財務省・文部科学省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第一号",
+    "law_name": "産業競争力強化法施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/415M60000008006",
+    "url": "https://laws.e-gov.go.jp/law/430M60001FCA001",
     "updates": [
       {
-        "law_data_id": 651094,
+        "law_data_id": 641520,
         "sub_revision": "1",
-        "published_date": "2003-01-14",
-        "effective_date": "2026-12-01",
+        "published_date": "2018-07-06",
+        "effective_date": "2026-07-31",
         "effective_comment": "",
-        "amend_name": "郵便法施行規則等の一部を改正する省令",
-        "amend_no": "令和八年総務省令第百二十四号",
-        "amendment_id": "508M60000008124",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/415M60000008006/20261201_508M60000008124?occasion_date=20261201&tab=compare",
+        "amend_name": "産業競争力強化法施行規則及び産業競争力強化法に基づく認定技術等情報漏えい防止措置認証機関に関する命令の一部を改正する命令",
+        "amend_no": "令和八年内閣府・総務省・財務省・文部科学省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第四号",
+        "amendment_id": "508M60001FCA004",
+        "amend_published_date": "2026-07-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/430M60001FCA001/20260731_508M60001FCA004?occasion_date=20260731&tab=compare",
+        "pending": false
+      },
+      {
+        "law_data_id": 640829,
+        "sub_revision": "1",
+        "published_date": "2018-07-06",
+        "effective_date": "2026-07-01",
+        "effective_comment": "",
+        "amend_name": "産業競争力強化法施行規則の一部を改正する命令",
+        "amend_no": "令和八年内閣府・総務省・財務省・文部科学省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第三号",
+        "amendment_id": "508M60001FCA003",
+        "amend_published_date": "2026-06-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/430M60001FCA001/20260701_508M60001FCA003?occasion_date=20260701&tab=compare",
+        "pending": false
+      },
+      {
+        "law_data_id": 627543,
+        "sub_revision": "2",
+        "published_date": "2018-07-06",
+        "effective_date": "2026-05-25",
+        "effective_comment": "",
+        "amend_name": "産業競争力強化法施行規則の一部を改正する命令",
+        "amend_no": "令和七年内閣府・総務省・財務省・文部科学省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第八号",
+        "amendment_id": "507M60001FCA008",
+        "amend_published_date": "2025-07-02",
+        "compare_url": "https://laws.e-gov.go.jp/law/430M60001FCA001/20260525_507M60001FCA008?occasion_date=20260525&tab=compare",
+        "pending": false
+      },
+      {
+        "law_data_id": 637142,
+        "sub_revision": "1",
+        "published_date": "2018-07-06",
+        "effective_date": "2026-04-01",
+        "effective_comment": "",
+        "amend_name": "産業競争力強化法施行規則の一部を改正する命令",
+        "amend_no": "令和八年内閣府・総務省・財務省・文部科学省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第二号",
+        "amendment_id": "508M60001FCA002",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/430M60001FCA001/20260401_508M60001FCA002?occasion_date=20260401&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "422M60000040022",
+    "law_no": "平成二十二年財務省令第二十二号",
+    "law_name": "租税特別措置の適用状況の透明化等に関する法律施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/422M60000040022",
+    "updates": [
+      {
+        "law_data_id": 637943,
+        "sub_revision": "1",
+        "published_date": "2010-03-31",
+        "effective_date": "2026-07-31",
+        "effective_comment": "",
+        "amend_name": "租税特別措置の適用状況の透明化等に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和八年財務省令第四十一号",
+        "amendment_id": "508M60000040041",
+        "amend_published_date": "2026-04-14",
+        "compare_url": "https://laws.e-gov.go.jp/law/422M60000040022/20260731_508M60000040041?occasion_date=20260731&tab=compare",
+        "pending": false
+      },
+      {
+        "law_data_id": 637942,
+        "sub_revision": "1",
+        "published_date": "2010-03-31",
+        "effective_date": "2026-04-14",
+        "effective_comment": "",
+        "amend_name": "租税特別措置の適用状況の透明化等に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和八年財務省令第四十一号",
+        "amendment_id": "508M60000040041",
+        "amend_published_date": "2026-04-14",
+        "compare_url": "https://laws.e-gov.go.jp/law/422M60000040022/20260414_508M60000040041?occasion_date=20260414&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "507M60000040031",
+    "law_no": "令和七年財務省令第三十一号",
+    "law_name": "防衛特別法人税に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/507M60000040031",
+    "updates": [
+      {
+        "law_data_id": 637941,
+        "sub_revision": "1",
+        "published_date": "2025-03-31",
+        "effective_date": "2028-01-01",
+        "effective_comment": "",
+        "amend_name": "防衛特別法人税に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省令第四十二号",
+        "amendment_id": "508M60000040042",
+        "amend_published_date": "2026-04-14",
+        "compare_url": "https://laws.e-gov.go.jp/law/507M60000040031/20280101_508M60000040042?occasion_date=20280101&tab=compare",
         "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "429M60001F48002",
-    "law_no": "平成二十九年総務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第二号",
-    "law_name": "地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第三十三条に規定する承認連携支援事業に関する省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/429M60001F48002",
-    "updates": [
+      },
       {
-        "law_data_id": 651099,
-        "sub_revision": "1",
-        "published_date": "2017-07-31",
-        "effective_date": "2026-11-02",
+        "law_data_id": 636918,
+        "sub_revision": "2",
+        "published_date": "2025-03-31",
+        "effective_date": "2027-09-01",
         "effective_comment": "",
-        "amend_name": "地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第十八条に規定する承認地域経済牽引事業に関する省令及び地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第三十三条に規定する承認連携支援事業に関する省令の一部を改正する省令",
-        "amend_no": "令和八年総務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第二号",
-        "amendment_id": "508M60001F48002",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/429M60001F48002/20261102_508M60001F48002?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "429M60001F48001",
-    "law_no": "平成二十九年総務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第一号",
-    "law_name": "地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第十八条に規定する承認地域経済牽引事業に関する省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/429M60001F48001",
-    "updates": [
-      {
-        "law_data_id": 651098,
-        "sub_revision": "1",
-        "published_date": "2017-07-31",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第十八条に規定する承認地域経済牽引事業に関する省令及び地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第三十三条に規定する承認連携支援事業に関する省令の一部を改正する省令",
-        "amend_no": "令和八年総務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第二号",
-        "amendment_id": "508M60001F48002",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/429M60001F48001/20261102_508M60001F48002?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "355M50000002027",
-    "law_no": "昭和五十五年総理府令第二十七号",
-    "law_name": "地震防災対策強化地域における地震対策緊急整備事業に係る国の財政上の特別措置に関する法律施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/355M50000002027",
-    "updates": [
-      {
-        "law_data_id": 651108,
-        "sub_revision": "1",
-        "published_date": "1980-06-26",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/355M50000002027/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "417M60000002051",
-    "law_no": "平成十七年内閣府令第五十一号",
-    "law_name": "地震防災対策特別措置法施行令第二条第二項の額の算定に関する防災庁令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/417M60000002051",
-    "updates": [
-      {
-        "law_data_id": 651111,
-        "sub_revision": "1",
-        "published_date": "2005-04-01",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/417M60000002051/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "354M50000002038",
-    "law_no": "昭和五十四年総理府令第三十八号",
-    "law_name": "大規模地震対策特別措置法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/354M50000002038",
-    "updates": [
-      {
-        "law_data_id": 651107,
-        "sub_revision": "1",
-        "published_date": "1979-08-06",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/354M50000002038/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "425M60000002051",
-    "law_no": "平成二十五年内閣府令第五十一号",
-    "law_name": "大規模災害からの復興に関する法律施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/425M60000002051",
-    "updates": [
-      {
-        "law_data_id": 651113,
-        "sub_revision": "1",
-        "published_date": "2013-08-19",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/425M60000002051/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "410M50000010047",
-    "law_no": "平成十年法務省令第四十七号",
-    "law_name": "投資事業有限責任組合契約及び有限責任事業組合契約登記規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/410M50000010047",
-    "updates": [
-      {
-        "law_data_id": 651128,
-        "sub_revision": "1",
-        "published_date": "1998-10-20",
-        "effective_date": "2026-12-01",
-        "effective_comment": "",
-        "amend_name": "商業登記規則等の一部を改正する省令",
-        "amend_no": "令和八年法務省令第五十一号",
-        "amendment_id": "508M60000010051",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/410M50000010047/20261201_508M60000010051?occasion_date=20261201&tab=compare",
+        "amend_name": "国税関係法令に係る情報通信技術を活用した行政の推進等に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省令第三十号",
+        "amendment_id": "508M60000040030",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/507M60000040031/20270901_508M60000040030?occasion_date=20270901&tab=compare",
         "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "410M50000010051",
-    "law_no": "平成十年法務省令第五十一号",
-    "law_name": "投資法人登記規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/410M50000010051",
-    "updates": [
+      },
       {
-        "law_data_id": 651130,
+        "law_data_id": 637940,
         "sub_revision": "1",
-        "published_date": "1998-11-27",
-        "effective_date": "2026-12-01",
+        "published_date": "2025-03-31",
+        "effective_date": "2026-12-11",
         "effective_comment": "",
-        "amend_name": "商業登記規則等の一部を改正する省令",
-        "amend_no": "令和八年法務省令第五十一号",
-        "amendment_id": "508M60000010051",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/410M50000010051/20261201_508M60000010051?occasion_date=20261201&tab=compare",
+        "amend_name": "防衛特別法人税に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省令第四十二号",
+        "amendment_id": "508M60000040042",
+        "amend_published_date": "2026-04-14",
+        "compare_url": "https://laws.e-gov.go.jp/law/507M60000040031/20261211_508M60000040042?occasion_date=20261211&tab=compare",
         "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "423M60000802008",
-    "law_no": "平成二十三年内閣府・国土交通省令第八号",
-    "law_name": "指定避難施設の管理及び協定避難施設の管理協定に関する命令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/423M60000802008",
-    "updates": [
+      },
       {
-        "law_data_id": 651123,
+        "law_data_id": 637939,
         "sub_revision": "1",
-        "published_date": "2011-12-26",
-        "effective_date": "2026-11-02",
+        "published_date": "2025-03-31",
+        "effective_date": "2026-04-14",
         "effective_comment": "",
-        "amend_name": "指定避難施設の管理及び協定避難施設の管理協定に関する命令の一部を改正する命令",
-        "amend_no": "令和八年内閣府・国土交通省令第七号",
-        "amendment_id": "508M60000802007",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/423M60000802008/20261102_508M60000802007?occasion_date=20261102&tab=compare",
+        "amend_name": "防衛特別法人税に関する省令の一部を改正する省令",
+        "amend_no": "令和八年財務省令第四十二号",
+        "amendment_id": "508M60000040042",
+        "amend_published_date": "2026-04-14",
+        "compare_url": "https://laws.e-gov.go.jp/law/507M60000040031/20260414_508M60000040042?occasion_date=20260414&tab=compare",
         "pending": false
       }
     ]
   },
   {
-    "law_id": "417M60000002092",
-    "law_no": "平成十七年内閣府令第九十二号",
-    "law_name": "日本海溝・千島海溝周辺海溝型地震に係る地震防災対策の推進に関する特別措置法施行規則",
+    "law_id": "419M60000100129",
+    "law_no": "平成十九年厚生労働省令第百二十九号",
+    "law_name": "高齢者の医療の確保に関する法律施行規則",
     "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/417M60000002092",
+    "url": "https://laws.e-gov.go.jp/law/419M60000100129",
     "updates": [
       {
-        "law_data_id": 651112,
+        "law_data_id": 650452,
         "sub_revision": "1",
-        "published_date": "2005-08-31",
-        "effective_date": "2026-11-02",
+        "published_date": "2007-10-22",
+        "effective_date": "2026-10-01",
         "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/417M60000002092/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "423M60000002069",
-    "law_no": "平成二十三年内閣府令第六十九号",
-    "law_name": "東日本大震災復興特別区域法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/423M60000002069",
-    "updates": [
-      {
-        "law_data_id": 651087,
-        "sub_revision": "1",
-        "published_date": "2011-12-22",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "東日本大震災復興特別区域法施行規則の一部を改正する庁令",
-        "amend_no": "令和八年復興庁令第六号",
-        "amendment_id": "508M60000004006",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/423M60000002069/20261102_508M60000004006?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "425M60000002069",
-    "law_no": "平成二十五年内閣府令第六十九号",
-    "law_name": "武力攻撃事態等における国民の保護のための措置に関する法律の規定による処分に係る公用令書等の様式を定める防災庁令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/425M60000002069",
-    "updates": [
-      {
-        "law_data_id": 651120,
-        "sub_revision": "1",
-        "published_date": "2013-10-01",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/425M60000002069/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "415M60000008027",
-    "law_no": "平成十五年総務省令第二十七号",
-    "law_name": "民間事業者による信書の送達に関する法律施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/415M60000008027",
-    "updates": [
-      {
-        "law_data_id": 651095,
-        "sub_revision": "1",
-        "published_date": "2003-01-24",
-        "effective_date": "2026-12-01",
-        "effective_comment": "",
-        "amend_name": "郵便法施行規則等の一部を改正する省令",
-        "amend_no": "令和八年総務省令第百二十四号",
-        "amendment_id": "508M60000008124",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/415M60000008027/20261201_508M60000008124?occasion_date=20261201&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "427M60000002071",
-    "law_no": "平成二十七年内閣府令第七十一号",
-    "law_name": "活動火山対策特別措置法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/427M60000002071",
-    "updates": [
-      {
-        "law_data_id": 651116,
-        "sub_revision": "1",
-        "published_date": "2015-12-09",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/427M60000002071/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "337M50000002052",
-    "law_no": "昭和三十七年総理府令第五十二号",
-    "law_name": "災害対策基本法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/337M50000002052",
-    "updates": [
-      {
-        "law_data_id": 651104,
-        "sub_revision": "1",
-        "published_date": "1962-09-21",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/337M50000002052/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "501M60000002022",
-    "law_no": "令和元年内閣府令第二十二号",
-    "law_name": "災害弔慰金の支給等に関する法律の規定に基づく災害援護資金の償還免除に関する防災庁令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/501M60000002022",
-    "updates": [
-      {
-        "law_data_id": 651118,
-        "sub_revision": "1",
-        "published_date": "2019-07-19",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/501M60000002022/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "430M60000002057",
-    "law_no": "平成三十年内閣府令第五十七号",
-    "law_name": "災害救助法に基づく救助実施市に関する防災庁令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/430M60000002057",
-    "updates": [
-      {
-        "law_data_id": 651117,
-        "sub_revision": "1",
-        "published_date": "2018-12-28",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/430M60000002057/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "425M60000002068",
-    "law_no": "平成二十五年内閣府令第六十八号",
-    "law_name": "災害救助法施行令第一条第一項第三号の防災庁令で定める特別の事情等を定める防災庁令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/425M60000002068",
-    "updates": [
-      {
-        "law_data_id": 651114,
-        "sub_revision": "1",
-        "published_date": "2013-10-01",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/425M60000002068/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "322M4000094A001",
-    "law_no": "昭和二十二年総理庁・厚生省・内務省・大蔵省・運輸省令第一号",
-    "law_name": "災害救助法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/322M4000094A001",
-    "updates": [
-      {
-        "law_data_id": 651105,
-        "sub_revision": "1",
-        "published_date": "1947-10-30",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/322M4000094A001/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "410M50000010037",
-    "law_no": "平成十年法務省令第三十七号",
-    "law_name": "特定目的会社登記規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/410M50000010037",
-    "updates": [
-      {
-        "law_data_id": 651129,
-        "sub_revision": "1",
-        "published_date": "1998-08-07",
-        "effective_date": "2026-12-01",
-        "effective_comment": "",
-        "amend_name": "商業登記規則等の一部を改正する省令",
-        "amend_no": "令和八年法務省令第五十一号",
-        "amendment_id": "508M60000010051",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/410M50000010037/20261201_508M60000010051?occasion_date=20261201&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "410M50000002068",
-    "law_no": "平成十年総理府令第六十八号",
-    "law_name": "被災者生活再建支援法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/410M50000002068",
-    "updates": [
-      {
-        "law_data_id": 651109,
-        "sub_revision": "1",
-        "published_date": "1998-11-06",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/410M50000002068/20261102_508M60000002093?occasion_date=20261102&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "415M60000008005",
-    "law_no": "平成十五年総務省令第五号",
-    "law_name": "郵便法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/415M60000008005",
-    "updates": [
-      {
-        "law_data_id": 651093,
-        "sub_revision": "1",
-        "published_date": "2003-01-14",
-        "effective_date": "2026-12-01",
-        "effective_comment": "",
-        "amend_name": "郵便法施行規則等の一部を改正する省令",
-        "amend_no": "令和八年総務省令第百二十四号",
-        "amendment_id": "508M60000008124",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/415M60000008005/20261201_508M60000008124?occasion_date=20261201&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "419M60000002052",
-    "law_no": "平成十九年内閣府令第五十二号",
-    "law_name": "金融商品取引業等に関する内閣府令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/419M60000002052",
-    "updates": [
-      {
-        "law_data_id": 651122,
-        "sub_revision": "1",
-        "published_date": "2007-08-06",
-        "effective_date": "2026-10-30",
-        "effective_comment": "",
-        "amend_name": "金融商品取引業等に関する内閣府令の一部を改正する内閣府令",
-        "amend_no": "令和八年内閣府令第九十五号",
-        "amendment_id": "508M60000002095",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/419M60000002052/20261030_508M60000002095?occasion_date=20261030&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "412M50000010028",
-    "law_no": "平成十二年法務省令第二十八号",
-    "law_name": "電気通信回線による登記情報の提供に関する法律施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/412M50000010028",
-    "updates": [
-      {
-        "law_data_id": 651127,
-        "sub_revision": "1",
-        "published_date": "2000-05-15",
-        "effective_date": "2026-12-01",
-        "effective_comment": "",
-        "amend_name": "商業登記規則等の一部を改正する省令",
-        "amend_no": "令和八年法務省令第五十一号",
-        "amendment_id": "508M60000010051",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/412M50000010028/20261201_508M60000010051?occasion_date=20261201&tab=compare",
-        "pending": true
-      }
-    ]
-  },
-  {
-    "law_id": "425M60000002075",
-    "law_no": "平成二十五年内閣府令第七十五号",
-    "law_name": "首都直下地震対策特別措置法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/425M60000002075",
-    "updates": [
-      {
-        "law_data_id": 651115,
-        "sub_revision": "1",
-        "published_date": "2013-12-26",
-        "effective_date": "2026-11-02",
-        "effective_comment": "",
-        "amend_name": "防災庁設置法及び防災庁設置法の施行に伴う関係法律の整備等に関する法律等の施行に伴う内閣府本府関係内閣府令の整備等に関する内閣府令",
-        "amend_no": "令和八年内閣府令第九十三号",
-        "amendment_id": "508M60000002093",
-        "amend_published_date": "2026-10-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/425M60000002075/20261102_508M60000002093?occasion_date=20261102&tab=compare",
+        "amend_name": "医療法等の一部を改正する法律の一部の施行に伴う厚生労働省関係省令の整備に関する省令",
+        "amend_no": "令和八年厚生労働省令第百四十四号",
+        "amendment_id": "508M60000100144",
+        "amend_published_date": "2026-09-30",
+        "compare_url": "https://laws.e-gov.go.jp/law/419M60000100129/20261001_508M60000100144?occasion_date=20261001&tab=compare",
         "pending": false
       }
     ]
