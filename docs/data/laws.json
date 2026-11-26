@@ -1,313 +1,124 @@
 [
   {
-    "law_id": "325AC1000000095",
-    "law_no": "昭和二十五年法律第九十五号",
-    "law_name": "一般職の職員の給与に関する法律",
+    "law_id": "419AC0000000023",
+    "law_no": "平成十九年法律第二十三号",
+    "law_name": "特別会計に関する法律",
     "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/325AC1000000095",
+    "url": "https://laws.e-gov.go.jp/law/419AC0000000023",
     "updates": [
       {
-        "law_data_id": 650694,
+        "law_data_id": 601276,
+        "sub_revision": "23",
+        "published_date": "2007-03-31",
+        "effective_date": "2117-12-31",
+        "effective_comment": "協定の効力発生の日",
+        "amend_name": "経済協力開発機構金融支援基金への加盟に伴う措置に関する法律",
+        "amend_no": "昭和五十一年法律第三十八号",
+        "amendment_id": "351AC0000000038",
+        "amend_published_date": "1976-05-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/419AC0000000023/21171231_351AC0000000038?occasion_date=21171231&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "431CO0000000148",
+    "law_no": "平成三十一年政令第百四十八号",
+    "law_name": "シナイ半島国際平和協力隊の設置等に関する政令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/431CO0000000148",
+    "updates": [
+      {
+        "law_data_id": 651473,
         "sub_revision": "1",
-        "published_date": "1950-04-03",
+        "published_date": "2019-04-05",
+        "effective_date": "2026-11-11",
+        "effective_comment": "",
+        "amend_name": "シナイ半島国際平和協力隊の設置等に関する政令の一部を改正する政令",
+        "amend_no": "令和八年政令第三百四十八号",
+        "amendment_id": "508CO0000000348",
+        "amend_published_date": "2026-11-11",
+        "compare_url": "https://laws.e-gov.go.jp/law/431CO0000000148/20261111_508CO0000000348?occasion_date=20261111&tab=compare",
+        "pending": false
+      }
+    ]
+  },
+  {
+    "law_id": "419CO0000000325",
+    "law_no": "平成十九年政令第三百二十五号",
+    "law_name": "前期高齢者交付金及び後期高齢者医療の国庫負担金の算定等に関する政令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/419CO0000000325",
+    "updates": [
+      {
+        "law_data_id": 651469,
+        "sub_revision": "1",
+        "published_date": "2007-10-31",
         "effective_date": "2027-04-01",
         "effective_comment": "",
-        "amend_name": "一般職の職員の給与に関する法律等の一部を改正する法律",
-        "amend_no": "令和八年法律第七十九号",
-        "amendment_id": "508AC0000000079",
-        "amend_published_date": "2026-11-18",
-        "compare_url": "https://laws.e-gov.go.jp/law/325AC1000000095/20270401_508AC0000000079?occasion_date=20270401&tab=compare",
+        "amend_name": "健康保険法等の一部を改正する法律の施行に伴う関係政令の整備等に関する政令",
+        "amend_no": "令和八年政令第三百四十七号",
+        "amendment_id": "508CO0000000347",
+        "amend_published_date": "2026-11-11",
+        "compare_url": "https://laws.e-gov.go.jp/law/419CO0000000325/20270401_508CO0000000347?occasion_date=20270401&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "334CO0000000041",
+    "law_no": "昭和三十四年政令第四十一号",
+    "law_name": "国民健康保険の国庫負担金等の算定に関する政令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/334CO0000000041",
+    "updates": [
+      {
+        "law_data_id": 651472,
+        "sub_revision": "1",
+        "published_date": "1959-03-24",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "健康保険法等の一部を改正する法律の施行に伴う関係政令の整備等に関する政令",
+        "amend_no": "令和八年政令第三百四十七号",
+        "amendment_id": "508CO0000000347",
+        "amend_published_date": "2026-11-11",
+        "compare_url": "https://laws.e-gov.go.jp/law/334CO0000000041/20270401_508CO0000000347?occasion_date=20270401&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "333CO0000000362",
+    "law_no": "昭和三十三年政令第三百六十二号",
+    "law_name": "国民健康保険法施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/333CO0000000362",
+    "updates": [
+      {
+        "law_data_id": 641408,
+        "sub_revision": "2",
+        "published_date": "1958-12-27",
+        "effective_date": "2027-08-01",
+        "effective_comment": "",
+        "amend_name": "健康保険法施行令等の一部を改正する政令",
+        "amend_no": "令和八年政令第二百四十号",
+        "amendment_id": "508CO0000000240",
+        "amend_published_date": "2026-07-29",
+        "compare_url": "https://laws.e-gov.go.jp/law/333CO0000000362/20270801_508CO0000000240?occasion_date=20270801&tab=compare",
         "pending": true
       },
       {
-        "law_data_id": 650654,
+        "law_data_id": 651471,
         "sub_revision": "1",
-        "published_date": "1950-04-03",
-        "effective_date": "2026-11-18",
-        "effective_comment": "",
-        "amend_name": "一般職の職員の給与に関する法律等の一部を改正する法律",
-        "amend_no": "令和八年法律第七十九号",
-        "amendment_id": "508AC0000000079",
-        "amend_published_date": "2026-11-18",
-        "compare_url": "https://laws.e-gov.go.jp/law/325AC1000000095/20261118_508AC0000000079?occasion_date=20261118&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "402AC1000000049",
-    "law_no": "平成二年法律第四十九号",
-    "law_name": "国会議員の秘書の給与等に関する法律",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/402AC1000000049",
-    "updates": [
-      {
-        "law_data_id": 651549,
-        "sub_revision": "1",
-        "published_date": "1990-06-27",
+        "published_date": "1958-12-27",
         "effective_date": "2027-04-01",
         "effective_comment": "",
-        "amend_name": "国会議員の秘書の給与等に関する法律の一部を改正する法律",
-        "amend_no": "令和八年法律第八十一号",
-        "amendment_id": "508AC1000000081",
-        "amend_published_date": "2026-11-18",
-        "compare_url": "https://laws.e-gov.go.jp/law/402AC1000000049/20270401_508AC1000000081?occasion_date=20270401&tab=compare",
+        "amend_name": "健康保険法等の一部を改正する法律の施行に伴う関係政令の整備等に関する政令",
+        "amend_no": "令和八年政令第三百四十七号",
+        "amendment_id": "508CO0000000347",
+        "amend_published_date": "2026-11-11",
+        "compare_url": "https://laws.e-gov.go.jp/law/333CO0000000362/20270401_508CO0000000347?occasion_date=20270401&tab=compare",
         "pending": true
-      },
-      {
-        "law_data_id": 651548,
-        "sub_revision": "1",
-        "published_date": "1990-06-27",
-        "effective_date": "2026-11-18",
-        "effective_comment": "",
-        "amend_name": "国会議員の秘書の給与等に関する法律の一部を改正する法律",
-        "amend_no": "令和八年法律第八十一号",
-        "amendment_id": "508AC1000000081",
-        "amend_published_date": "2026-11-18",
-        "compare_url": "https://laws.e-gov.go.jp/law/402AC1000000049/20261118_508AC1000000081?occasion_date=20261118&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "329AC0000000119",
-    "law_no": "昭和二十九年法律第百十九号",
-    "law_name": "土地区画整理法",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/329AC0000000119",
-    "updates": [
-      {
-        "law_data_id": 636641,
-        "sub_revision": "1",
-        "published_date": "1954-05-20",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "都市再生特別措置法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二十三号",
-        "amendment_id": "508AC0000000023",
-        "amend_published_date": "2026-05-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/329AC0000000119/20261124_508AC0000000023?occasion_date=20261124&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "420AC0000000040",
-    "law_no": "平成二十年法律第四十号",
-    "law_name": "地域における歴史的風致の維持及び向上に関する法律",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/420AC0000000040",
-    "updates": [
-      {
-        "law_data_id": 636642,
-        "sub_revision": "1",
-        "published_date": "2008-05-23",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "都市再生特別措置法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二十三号",
-        "amendment_id": "508AC0000000023",
-        "amend_published_date": "2026-05-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/420AC0000000040/20261124_508AC0000000023?occasion_date=20261124&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "325AC0000000226",
-    "law_no": "昭和二十五年法律第二百二十六号",
-    "law_name": "地方税法",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/325AC0000000226",
-    "updates": [
-      {
-        "law_data_id": 631197,
-        "sub_revision": "1",
-        "published_date": "1950-07-31",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "地方税法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二号",
-        "amendment_id": "508AC0000000002",
-        "amend_published_date": "2026-03-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/325AC0000000226/20261124_508AC0000000002?occasion_date=20261124&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "409AC0000000049",
-    "law_no": "平成九年法律第四十九号",
-    "law_name": "密集市街地における防災街区の整備の促進に関する法律",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/409AC0000000049",
-    "updates": [
-      {
-        "law_data_id": 636624,
-        "sub_revision": "1",
-        "published_date": "1997-05-09",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "都市再生特別措置法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二十三号",
-        "amendment_id": "508AC0000000023",
-        "amend_published_date": "2026-05-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/409AC0000000049/20261124_508AC0000000023?occasion_date=20261124&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "419AC0000000052",
-    "law_no": "平成十九年法律第五十二号",
-    "law_name": "広域的地域活性化のための基盤整備に関する法律",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/419AC0000000052",
-    "updates": [
-      {
-        "law_data_id": 636638,
-        "sub_revision": "1",
-        "published_date": "2007-05-18",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "都市再生特別措置法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二十三号",
-        "amendment_id": "508AC0000000023",
-        "amend_published_date": "2026-05-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/419AC0000000052/20261124_508AC0000000023?occasion_date=20261124&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "325AC0000000201",
-    "law_no": "昭和二十五年法律第二百一号",
-    "law_name": "建築基準法",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/325AC0000000201",
-    "updates": [
-      {
-        "law_data_id": 636643,
-        "sub_revision": "1",
-        "published_date": "1950-05-24",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "都市再生特別措置法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二十三号",
-        "amendment_id": "508AC0000000023",
-        "amend_published_date": "2026-05-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/325AC0000000201/20261124_508AC0000000023?occasion_date=20261124&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "416AC0000000110",
-    "law_no": "平成十六年法律第百十号",
-    "law_name": "景観法",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/416AC0000000110",
-    "updates": [
-      {
-        "law_data_id": 636636,
-        "sub_revision": "1",
-        "published_date": "2004-06-18",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "都市再生特別措置法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二十三号",
-        "amendment_id": "508AC0000000023",
-        "amend_published_date": "2026-05-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/416AC0000000110/20261124_508AC0000000023?occasion_date=20261124&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "414AC0000000022",
-    "law_no": "平成十四年法律第二十二号",
-    "law_name": "都市再生特別措置法",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/414AC0000000022",
-    "updates": [
-      {
-        "law_data_id": 636644,
-        "sub_revision": "1",
-        "published_date": "2002-04-05",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "都市再生特別措置法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二十三号",
-        "amendment_id": "508AC0000000023",
-        "amend_published_date": "2026-05-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/414AC0000000022/20261124_508AC0000000023?occasion_date=20261124&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "344AC0000000038",
-    "law_no": "昭和四十四年法律第三十八号",
-    "law_name": "都市再開発法",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/344AC0000000038",
-    "updates": [
-      {
-        "law_data_id": 636637,
-        "sub_revision": "1",
-        "published_date": "1969-06-03",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "都市再生特別措置法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二十三号",
-        "amendment_id": "508AC0000000023",
-        "amend_published_date": "2026-05-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/344AC0000000038/20261124_508AC0000000023?occasion_date=20261124&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "343AC0000000100",
-    "law_no": "昭和四十三年法律第百号",
-    "law_name": "都市計画法",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/343AC0000000100",
-    "updates": [
-      {
-        "law_data_id": 636645,
-        "sub_revision": "1",
-        "published_date": "1968-06-15",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "都市再生特別措置法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二十三号",
-        "amendment_id": "508AC0000000023",
-        "amend_published_date": "2026-05-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/343AC0000000100/20261124_508AC0000000023?occasion_date=20261124&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "341AC0000000020",
-    "law_no": "昭和四十一年法律第二十号",
-    "law_name": "都市開発資金の貸付けに関する法律",
-    "law_type": "法律",
-    "url": "https://laws.e-gov.go.jp/law/341AC0000000020",
-    "updates": [
-      {
-        "law_data_id": 636640,
-        "sub_revision": "1",
-        "published_date": "1966-03-31",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "都市再生特別措置法等の一部を改正する法律",
-        "amend_no": "令和八年法律第二十三号",
-        "amendment_id": "508AC0000000023",
-        "amend_published_date": "2026-05-27",
-        "compare_url": "https://laws.e-gov.go.jp/law/341AC0000000020/20261124_508AC0000000023?occasion_date=20261124&tab=compare",
-        "pending": false
       }
     ]
   },
@@ -319,126 +130,326 @@
     "url": "https://laws.e-gov.go.jp/law/325CO0000000245",
     "updates": [
       {
-        "law_data_id": 636173,
-        "sub_revision": "3",
+        "law_data_id": 641706,
+        "sub_revision": "2",
         "published_date": "1950-07-31",
-        "effective_date": "2026-11-24",
+        "effective_date": "2117-12-31",
+        "effective_comment": "日本国の自衛隊とオランダ王国の軍隊との間における物品又は役務の相互の提供に関する日本国政府とオランダ王国政府との間の協定の効力発生の日",
+        "amend_name": "地方税法施行令の一部を改正する政令",
+        "amend_no": "令和八年政令第二百五十一号",
+        "amendment_id": "508CO0000000251",
+        "amend_published_date": "2026-08-07",
+        "compare_url": "https://laws.e-gov.go.jp/law/325CO0000000245/21171231_508CO0000000251?occasion_date=21171231&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 636168,
+        "sub_revision": "4",
+        "published_date": "1950-07-31",
+        "effective_date": "2029-04-01",
         "effective_comment": "",
         "amend_name": "地方税法施行令等の一部を改正する政令",
         "amend_no": "令和八年政令第八十三号",
         "amendment_id": "508CO0000000083",
         "amend_published_date": "2026-03-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/325CO0000000245/20261124_508CO0000000083?occasion_date=20261124&tab=compare",
-        "pending": false
+        "compare_url": "https://laws.e-gov.go.jp/law/325CO0000000245/20290401_508CO0000000083?occasion_date=20290401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 636171,
+        "sub_revision": "4",
+        "published_date": "1950-07-31",
+        "effective_date": "2029-01-01",
+        "effective_comment": "金融商品取引法及び資金決済に関する法律の一部を改正する法律（令和八年法律第六十四号）の施行の日の属する年の翌々年の一月一日",
+        "amend_name": "地方税法施行令等の一部を改正する政令",
+        "amend_no": "令和八年政令第八十三号",
+        "amendment_id": "508CO0000000083",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/325CO0000000245/20290101_508CO0000000083?occasion_date=20290101&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 636167,
+        "sub_revision": "4",
+        "published_date": "1950-07-31",
+        "effective_date": "2028-04-01",
+        "effective_comment": "",
+        "amend_name": "地方税法施行令等の一部を改正する政令",
+        "amend_no": "令和八年政令第八十三号",
+        "amendment_id": "508CO0000000083",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/325CO0000000245/20280401_508CO0000000083?occasion_date=20280401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 636166,
+        "sub_revision": "4",
+        "published_date": "1950-07-31",
+        "effective_date": "2028-01-01",
+        "effective_comment": "",
+        "amend_name": "地方税法施行令等の一部を改正する政令",
+        "amend_no": "令和八年政令第八十三号",
+        "amendment_id": "508CO0000000083",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/325CO0000000245/20280101_508CO0000000083?occasion_date=20280101&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 636169,
+        "sub_revision": "4",
+        "published_date": "1950-07-31",
+        "effective_date": "2027-06-18",
+        "effective_comment": "産業技術力強化法の一部を改正する法律（令和八年法律第四十一号）の施行の日",
+        "amend_name": "地方税法施行令等の一部を改正する政令",
+        "amend_no": "令和八年政令第八十三号",
+        "amendment_id": "508CO0000000083",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/325CO0000000245/20270618_508CO0000000083?occasion_date=20270618&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 636170,
+        "sub_revision": "4",
+        "published_date": "1950-07-31",
+        "effective_date": "2027-05-26",
+        "effective_comment": "都市再生特別措置法等の一部を改正する法律（令和八年法律第二十三号）附則第一条第二号に掲げる規定の施行の日",
+        "amend_name": "地方税法施行令等の一部を改正する政令",
+        "amend_no": "令和八年政令第八十三号",
+        "amendment_id": "508CO0000000083",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/325CO0000000245/20270526_508CO0000000083?occasion_date=20270526&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 651468,
+        "sub_revision": "1",
+        "published_date": "1950-07-31",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "健康保険法等の一部を改正する法律の施行に伴う関係政令の整備等に関する政令",
+        "amend_no": "令和八年政令第三百四十七号",
+        "amendment_id": "508CO0000000347",
+        "amend_published_date": "2026-11-11",
+        "compare_url": "https://laws.e-gov.go.jp/law/325CO0000000245/20270401_508CO0000000347?occasion_date=20270401&tab=compare",
+        "pending": true
       }
     ]
   },
   {
-    "law_id": "332CO0000000043",
-    "law_no": "昭和三十二年政令第四十三号",
-    "law_name": "租税特別措置法施行令",
+    "law_id": "322CO0000000016",
+    "law_no": "昭和二十二年政令第十六号",
+    "law_name": "地方自治法施行令",
     "law_type": "政令",
-    "url": "https://laws.e-gov.go.jp/law/332CO0000000043",
+    "url": "https://laws.e-gov.go.jp/law/322CO0000000016",
     "updates": [
       {
-        "law_data_id": 636255,
+        "law_data_id": 603795,
+        "sub_revision": "49",
+        "published_date": "1947-05-03",
+        "effective_date": "2117-12-31",
+        "effective_comment": "環太平洋パートナーシップ協定が日本国について効力を生ずる日の前日",
+        "amend_name": "畜産物の価格安定に関する法律施行令等の一部を改正する政令",
+        "amend_no": "平成二十九年政令第七号",
+        "amendment_id": "429CO0000000007",
+        "amend_published_date": "2017-01-25",
+        "compare_url": "https://laws.e-gov.go.jp/law/322CO0000000016/21171231_429CO0000000007?occasion_date=21171231&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 636153,
+        "sub_revision": "6",
+        "published_date": "1947-05-03",
+        "effective_date": "2028-04-01",
+        "effective_comment": "",
+        "amend_name": "地方税法施行令等の一部を改正する政令",
+        "amend_no": "令和八年政令第八十三号",
+        "amendment_id": "508CO0000000083",
+        "amend_published_date": "2026-03-31",
+        "compare_url": "https://laws.e-gov.go.jp/law/322CO0000000016/20280401_508CO0000000083?occasion_date=20280401&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 640333,
+        "sub_revision": "4",
+        "published_date": "1947-05-03",
+        "effective_date": "2027-05-20",
+        "effective_comment": "",
+        "amend_name": "医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律等の一部を改正する法律の一部の施行に伴う関係政令の整備等に関する政令",
+        "amend_no": "令和八年政令第二百十号",
+        "amendment_id": "508CO0000000210",
+        "amend_published_date": "2026-06-24",
+        "compare_url": "https://laws.e-gov.go.jp/law/322CO0000000016/20270520_508CO0000000210?occasion_date=20270520&tab=compare",
+        "pending": true
+      },
+      {
+        "law_data_id": 651467,
+        "sub_revision": "1",
+        "published_date": "1947-05-03",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "健康保険法等の一部を改正する法律の施行に伴う関係政令の整備等に関する政令",
+        "amend_no": "令和八年政令第三百四十七号",
+        "amendment_id": "508CO0000000347",
+        "amend_published_date": "2026-11-11",
+        "compare_url": "https://laws.e-gov.go.jp/law/322CO0000000016/20270401_508CO0000000347?occasion_date=20270401&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "426CO0000000213",
+    "law_no": "平成二十六年政令第二百十三号",
+    "law_name": "子ども・子育て支援法施行令",
+    "law_type": "政令",
+    "url": "https://laws.e-gov.go.jp/law/426CO0000000213",
+    "updates": [
+      {
+        "law_data_id": 651470,
+        "sub_revision": "1",
+        "published_date": "2014-06-13",
+        "effective_date": "2027-04-01",
+        "effective_comment": "",
+        "amend_name": "健康保険法等の一部を改正する法律の施行に伴う関係政令の整備等に関する政令",
+        "amend_no": "令和八年政令第三百四十七号",
+        "amendment_id": "508CO0000000347",
+        "amend_published_date": "2026-11-11",
+        "compare_url": "https://laws.e-gov.go.jp/law/426CO0000000213/20270401_508CO0000000347?occasion_date=20270401&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "429M60001F48002",
+    "law_no": "平成二十九年総務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第二号",
+    "law_name": "地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第三十三条に規定する承認連携支援事業に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/429M60001F48002",
+    "updates": [
+      {
+        "law_data_id": 651475,
+        "sub_revision": "1",
+        "published_date": "2017-07-31",
+        "effective_date": "2026-12-04",
+        "effective_comment": "経済社会情勢の変化を踏まえた企業の事業活動の持続的な発展を図るための産業競争力強化法等の一部を改正する法律附則第一条第二号に掲げる規定の施行の日",
+        "amend_name": "地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第三十三条に規定する承認連携支援事業に関する省令の一部を改正する省令",
+        "amend_no": "令和八年総務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省・環境省令第三号",
+        "amendment_id": "508M60001F48003",
+        "amend_published_date": "2026-11-09",
+        "compare_url": "https://laws.e-gov.go.jp/law/429M60001F48002/20261204_508M60001F48003?occasion_date=20261204&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "502M60000400077",
+    "law_no": "令和二年経済産業省令第七十七号",
+    "law_name": "地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第十三条第三項第五号ハの経済産業省令で定める事項を定める省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/502M60000400077",
+    "updates": [
+      {
+        "law_data_id": 651474,
+        "sub_revision": "1",
+        "published_date": "2020-09-16",
+        "effective_date": "2026-12-04",
+        "effective_comment": "経済社会情勢の変化を踏まえた企業の事業活動の持続的な発展を図るための産業競争力強化法等の一部を改正する法律附則第一条第二号に掲げる規定の施行の日",
+        "amend_name": "地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第十三条第三項第三号ハの経済産業省令で定める事項を定める省令の一部を改正する省令",
+        "amend_no": "令和八年経済産業省令第七十九号",
+        "amendment_id": "508M60000400079",
+        "amend_published_date": "2026-11-06",
+        "compare_url": "https://laws.e-gov.go.jp/law/502M60000400077/20261204_508M60000400079?occasion_date=20261204&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "508M60000400080",
+    "law_no": "令和八年経済産業省令第八十号",
+    "law_name": "地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第十二条の四に規定する承認地域経済牽引事業用地整備に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/508M60000400080",
+    "updates": [
+      {
+        "law_data_id": 651479,
+        "sub_revision": "1",
+        "published_date": "2026-11-11",
+        "effective_date": "2026-12-04",
+        "effective_comment": "経済社会情勢の変化を踏まえた企業の事業活動の持続的な発展を図るための産業競争力強化法等の一部を改正する法律（令和八年法律第二十九号）附則第一条第二号に掲げる規定の施行の日",
+        "amend_name": "新規制定",
+        "amend_no": "",
+        "amendment_id": null,
+        "amend_published_date": "2026-11-11",
+        "compare_url": null,
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "419M60000F48001",
+    "law_no": "平成十九年総務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省令第一号",
+    "law_name": "地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第四条第一項に規定する基本計画等に関する省令",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/419M60000F48001",
+    "updates": [
+      {
+        "law_data_id": 651478,
+        "sub_revision": "1",
+        "published_date": "2007-06-11",
+        "effective_date": "2026-12-04",
+        "effective_comment": "経済社会情勢の変化を踏まえた企業の事業活動の持続的な発展を図るための産業競争力強化法等の一部を改正する法律（令和八年法律第二十九号）附則第一条第二号に掲げる規定の施行の日",
+        "amend_name": "地域経済牽引事業の促進による地域の成長発展の基盤強化に関する法律第四条第一項に規定する基本計画等に関する省令の一部を改正する省令",
+        "amend_no": "令和八年総務省・財務省・厚生労働省・農林水産省・経済産業省・国土交通省令第一号",
+        "amendment_id": "508M60000F48001",
+        "amend_published_date": "2026-11-10",
+        "compare_url": "https://laws.e-gov.go.jp/law/419M60000F48001/20261204_508M60000F48001?occasion_date=20261204&tab=compare",
+        "pending": true
+      }
+    ]
+  },
+  {
+    "law_id": "327M50010000079",
+    "law_no": "昭和二十七年農林省令第七十九号",
+    "law_name": "農地法施行規則",
+    "law_type": "府省令",
+    "url": "https://laws.e-gov.go.jp/law/327M50010000079",
+    "updates": [
+      {
+        "law_data_id": 650565,
         "sub_revision": "2",
-        "published_date": "1957-03-31",
-        "effective_date": "2026-11-24",
+        "published_date": "1952-10-20",
+        "effective_date": "2027-04-01",
         "effective_comment": "",
-        "amend_name": "租税特別措置法施行令の一部を改正する政令",
-        "amend_no": "令和八年政令第九十八号",
-        "amendment_id": "508CO0000000098",
-        "amend_published_date": "2026-03-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/332CO0000000043/20261124_508CO0000000098?occasion_date=20261124&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "504M60000800093",
-    "law_no": "令和四年国土交通省令第九十三号",
-    "law_name": "国土交通省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく供給確保計画の認定等に関する省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/504M60000800093",
-    "updates": [
+        "amend_name": "農地法施行規則及び農林漁業の健全な発展と調和のとれた再生可能エネルギー電気の発電の促進に関する法律施行規則の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第七十二号",
+        "amendment_id": "508M60000200072",
+        "amend_published_date": "2026-10-09",
+        "compare_url": "https://laws.e-gov.go.jp/law/327M50010000079/20270401_508M60000200072?occasion_date=20270401&tab=compare",
+        "pending": true
+      },
       {
-        "law_data_id": 650157,
+        "law_data_id": 651477,
         "sub_revision": "1",
-        "published_date": "2022-12-28",
-        "effective_date": "2026-09-18",
-        "effective_comment": "",
-        "amend_name": "国土交通省関係経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律に基づく供給確保計画の認定等に関する省令の一部を改正する省令",
-        "amend_no": "令和八年国土交通省令第七十三号",
-        "amendment_id": "508M60000800073",
-        "amend_published_date": "2026-09-17",
-        "compare_url": "https://laws.e-gov.go.jp/law/504M60000800093/20260918_508M60000800073?occasion_date=20260918&tab=compare",
+        "published_date": "1952-10-20",
+        "effective_date": "2026-11-26",
+        "effective_comment": "都市再生特別措置法等の一部を改正する法律の施行の日",
+        "amend_name": "農地法施行規則の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第七十四号",
+        "amendment_id": "508M60000200074",
+        "amend_published_date": "2026-11-09",
+        "compare_url": "https://laws.e-gov.go.jp/law/327M50010000079/20261126_508M60000200074?occasion_date=20261126&tab=compare",
         "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "508M60000008051",
-    "law_no": "令和八年総務省令第五十一号",
-    "law_name": "地方公共団体情報システムの標準化に関する法律第二条第一項に規定する標準化対象事務を定める政令に規定するデジタル庁令・総務省令で定める事務を定める命令第六条各号に規定する事務の処理に係るシステムに必要とされる機能等に関する標準化基準を定める省令",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/508M60000008051",
-    "updates": [
+      },
       {
-        "law_data_id": 641851,
+        "law_data_id": 651476,
         "sub_revision": "1",
-        "published_date": "2026-03-31",
-        "effective_date": "2026-08-31",
+        "published_date": "1952-10-20",
+        "effective_date": "2026-11-09",
         "effective_comment": "",
-        "amend_name": "地方公共団体情報システムの標準化に関する法律第二条第一項に規定する標準化対象事務を定める政令に規定するデジタル庁令・総務省令で定める事務を定める命令第六条各号に規定する事務の処理に係るシステムに必要とされる機能等に関する標準化基準を定める省令の一部を改正する省令",
-        "amend_no": "令和八年総務省令第百八号",
-        "amendment_id": "508M60000008108",
-        "amend_published_date": "2026-08-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/508M60000008051/20260831_508M60000008108?occasion_date=20260831&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "337M5000008A001",
-    "law_no": "昭和三十七年総理府・文部省・自治省令第一号",
-    "law_name": "地方公務員等共済組合法施行規程",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/337M5000008A001",
-    "updates": [
-      {
-        "law_data_id": 650392,
-        "sub_revision": "1",
-        "published_date": "1962-09-08",
-        "effective_date": "2026-10-01",
-        "effective_comment": "",
-        "amend_name": "地方公務員等共済組合法施行規程の一部を改正する命令",
-        "amend_no": "令和八年内閣府・総務省・文部科学省令第五号",
-        "amendment_id": "508M6000008A005",
-        "amend_published_date": "2026-09-30",
-        "compare_url": "https://laws.e-gov.go.jp/law/337M5000008A001/20261001_508M6000008A005?occasion_date=20261001&tab=compare",
-        "pending": false
-      }
-    ]
-  },
-  {
-    "law_id": "329M50000002023",
-    "law_no": "昭和二十九年総理府令第二十三号",
-    "law_name": "地方税法施行規則",
-    "law_type": "府省令",
-    "url": "https://laws.e-gov.go.jp/law/329M50000002023",
-    "updates": [
-      {
-        "law_data_id": 637207,
-        "sub_revision": "3",
-        "published_date": "1954-05-13",
-        "effective_date": "2026-11-24",
-        "effective_comment": "",
-        "amend_name": "地方税法施行規則の一部を改正する省令",
-        "amend_no": "令和八年総務省令第四十六号",
-        "amendment_id": "508M60000008046",
-        "amend_published_date": "2026-03-31",
-        "compare_url": "https://laws.e-gov.go.jp/law/329M50000002023/20261124_508M60000008046?occasion_date=20261124&tab=compare",
+        "amend_name": "農地法施行規則の一部を改正する省令",
+        "amend_no": "令和八年農林水産省令第七十四号",
+        "amendment_id": "508M60000200074",
+        "amend_published_date": "2026-11-09",
+        "compare_url": "https://laws.e-gov.go.jp/law/327M50010000079/20261109_508M60000200074?occasion_date=20261109&tab=compare",
         "pending": false
       }
     ]
